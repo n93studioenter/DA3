@@ -1,0 +1,2334 @@
+VERSION 5.00
+Begin VB.Form FrmOptions 
+   AutoRedraw      =   -1  'True
+   BackColor       =   &H00FFFFC0&
+   BorderStyle     =   3  'Fixed Dialog
+   Caption         =   "Th«ng tin doanh nghiÖp"
+   ClientHeight    =   7845
+   ClientLeft      =   660
+   ClientTop       =   915
+   ClientWidth     =   10320
+   ClipControls    =   0   'False
+   FillColor       =   &H00FFFFC0&
+   BeginProperty Font 
+      Name            =   "VK Sans Serif"
+      Size            =   9.75
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   ForeColor       =   &H00FFFFC0&
+   Icon            =   "Frmopt.frx":0000
+   KeyPreview      =   -1  'True
+   LinkTopic       =   "Form1"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
+   PaletteMode     =   1  'UseZOrder
+   Picture         =   "Frmopt.frx":57E2
+   ScaleHeight     =   7845
+   ScaleWidth      =   10320
+   ShowInTaskbar   =   0   'False
+   Tag             =   "Options"
+   Begin VB.CheckBox Chbanthuoc 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "§Æt thï ngµnh d­îc"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   120
+      TabIndex        =   105
+      Top             =   6840
+      Width           =   2895
+   End
+   Begin VB.CommandButton active 
+      Caption         =   "Active"
+      Height          =   375
+      Left            =   9120
+      TabIndex        =   104
+      Top             =   6840
+      Width           =   1095
+   End
+   Begin VB.TextBox Text 
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FFFFC0&
+      Height          =   285
+      Index           =   4
+      Left            =   7440
+      MaxLength       =   300
+      TabIndex        =   103
+      Text            =   "0"
+      Top             =   6120
+      Width           =   1335
+   End
+   Begin VB.TextBox Text 
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   285
+      Index           =   27
+      Left            =   4080
+      MaxLength       =   30
+      TabIndex        =   92
+      Text            =   "..."
+      Top             =   1560
+      Width           =   1215
+   End
+   Begin VB.Frame Frame 
+      BackColor       =   &H00FFFFC0&
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   4215
+      Index           =   0
+      Left            =   0
+      TabIndex        =   56
+      Top             =   120
+      Width           =   9075
+      Begin VB.Frame Frame1 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Frame1"
+         Height          =   1935
+         Left            =   3840
+         TabIndex        =   115
+         Top             =   2160
+         Width           =   5055
+         Begin VB.TextBox Text2 
+            Height          =   360
+            Left            =   2400
+            TabIndex        =   119
+            Top             =   480
+            Width           =   1335
+         End
+         Begin VB.TextBox Text1 
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   9.75
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   360
+            Left            =   480
+            TabIndex        =   118
+            Top             =   720
+            Width           =   1695
+         End
+         Begin VB.OptionButton Option2 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Theo n¨m"
+            Height          =   240
+            Left            =   360
+            TabIndex        =   117
+            Top             =   360
+            Width           =   1215
+         End
+         Begin VB.OptionButton Option1 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Kh«ng giíi h¹n."
+            Height          =   240
+            Left            =   360
+            TabIndex        =   116
+            Top             =   1440
+            Width           =   1935
+         End
+         Begin VB.Label Label1 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Sè l­îng chøng tõ"
+            Height          =   255
+            Left            =   2880
+            TabIndex        =   120
+            Top             =   360
+            Width           =   855
+         End
+      End
+      Begin VB.ComboBox Combo 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   3
+         ItemData        =   "Frmopt.frx":AFC4
+         Left            =   9120
+         List            =   "Frmopt.frx":AFDC
+         Style           =   2  'Dropdown List
+         TabIndex        =   12
+         Top             =   840
+         Visible         =   0   'False
+         Width           =   735
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   28
+         Left            =   7080
+         MaxLength       =   30
+         TabIndex        =   112
+         Text            =   "..."
+         Top             =   4800
+         Width           =   1575
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   13
+         Left            =   1800
+         MaxLength       =   2
+         TabIndex        =   110
+         Text            =   "2"
+         Top             =   3840
+         Width           =   255
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   26
+         Left            =   1800
+         MaxLength       =   500
+         TabIndex        =   102
+         Text            =   "..."
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   7215
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   28
+         Left            =   2280
+         TabIndex        =   88
+         Top             =   3840
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "B¸o c¸o néi bé"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   55
+         Left            =   9120
+         TabIndex        =   95
+         Top             =   0
+         Visible         =   0   'False
+         Width           =   255
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   9
+         Left            =   9360
+         MaxLength       =   20
+         TabIndex        =   16
+         Text            =   "..."
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   510
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "CDT"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   27
+         Left            =   9120
+         TabIndex        =   15
+         Top             =   1920
+         Visible         =   0   'False
+         Width           =   735
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   26
+         Left            =   2280
+         MaskColor       =   &H00FFFFFF&
+         TabIndex        =   14
+         Top             =   3840
+         Visible         =   0   'False
+         Width           =   255
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   25
+         Left            =   2280
+         MaskColor       =   &H00FFFFFF&
+         TabIndex        =   13
+         Top             =   3840
+         Visible         =   0   'False
+         Width           =   255
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   17
+         Left            =   9120
+         MaxLength       =   30
+         TabIndex        =   23
+         Text            =   "..."
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   11
+         Left            =   1800
+         MaxLength       =   1
+         TabIndex        =   20
+         Text            =   "2"
+         Top             =   3360
+         Width           =   255
+      End
+      Begin VB.ComboBox Combo 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   1
+         ItemData        =   "Frmopt.frx":B040
+         Left            =   9120
+         List            =   "Frmopt.frx":B06B
+         Style           =   2  'Dropdown List
+         TabIndex        =   18
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   615
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   18
+         Left            =   3360
+         MaxLength       =   1
+         TabIndex        =   22
+         Text            =   "2"
+         Top             =   3360
+         Width           =   255
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   12
+         Left            =   2520
+         MaxLength       =   1
+         TabIndex        =   21
+         Text            =   "2"
+         Top             =   3360
+         Width           =   255
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   23
+         Left            =   7680
+         MaxLength       =   3
+         TabIndex        =   2
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         HideSelection   =   0   'False
+         Index           =   0
+         Left            =   1800
+         MaxLength       =   500
+         TabIndex        =   0
+         Text            =   "..."
+         Top             =   240
+         Width           =   7215
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   1
+         Left            =   8520
+         MaxLength       =   50
+         TabIndex        =   1
+         Text            =   "..."
+         Top             =   240
+         Width           =   495
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   2
+         Left            =   1800
+         MaxLength       =   500
+         TabIndex        =   3
+         Text            =   "..."
+         Top             =   650
+         Width           =   7215
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   3
+         Left            =   1800
+         MaxLength       =   50
+         TabIndex        =   6
+         Text            =   "0"
+         Top             =   1395
+         Width           =   1695
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   5
+         Left            =   1800
+         MaxLength       =   5000
+         TabIndex        =   9
+         Text            =   "..."
+         Top             =   1800
+         Width           =   7215
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   6
+         Left            =   1800
+         MaxLength       =   50
+         TabIndex        =   10
+         Text            =   "..."
+         Top             =   3000
+         Width           =   1695
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   7
+         Left            =   1800
+         MaxLength       =   20
+         TabIndex        =   11
+         Text            =   "..."
+         Top             =   1020
+         Width           =   1695
+      End
+      Begin VB.ComboBox Combo 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   0
+         ItemData        =   "Frmopt.frx":B096
+         Left            =   4080
+         List            =   "Frmopt.frx":B098
+         Style           =   2  'Dropdown List
+         TabIndex        =   17
+         Top             =   1005
+         Width           =   1215
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   14
+         Left            =   9360
+         MaxLength       =   2
+         TabIndex        =   19
+         Text            =   "0"
+         Top             =   120
+         Visible         =   0   'False
+         Width           =   615
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   16
+         Left            =   7560
+         MaxLength       =   30
+         TabIndex        =   8
+         Text            =   "..."
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   495
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   15
+         Left            =   6000
+         MaxLength       =   30
+         TabIndex        =   7
+         Text            =   "..."
+         Top             =   1390
+         Width           =   3015
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   19
+         Left            =   1800
+         MaxLength       =   30
+         TabIndex        =   4
+         Text            =   "..."
+         Top             =   2280
+         Width           =   1695
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   20
+         Left            =   1800
+         MaxLength       =   500
+         TabIndex        =   5
+         Text            =   "..."
+         Top             =   2640
+         Width           =   1695
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Sè ch÷ sè thËp ph©n"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   15
+         Left            =   120
+         TabIndex        =   111
+         Top             =   3840
+         Width           =   1695
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "LÜnh vùc H§"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   12
+         Left            =   8880
+         TabIndex        =   85
+         Tag             =   "Activities"
+         Top             =   1320
+         Visible         =   0   'False
+         Width           =   975
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Lo¹i h×nh DN"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   11
+         Left            =   8880
+         TabIndex        =   84
+         Tag             =   "Class"
+         Top             =   1680
+         Visible         =   0   'False
+         Width           =   975
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "H¹ch to¸n theo:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   21
+         Left            =   75
+         TabIndex        =   78
+         Tag             =   "Send data to default addr"
+         Top             =   2280
+         Width           =   1575
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "chi"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   22
+         Left            =   2160
+         TabIndex        =   77
+         Top             =   3360
+         Width           =   255
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "UNC"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   14
+         Left            =   2880
+         TabIndex        =   76
+         Top             =   3360
+         Width           =   375
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Sè lÇn in mçi phiÕu thu"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   13
+         Left            =   80
+         TabIndex        =   75
+         Top             =   3360
+         Width           =   1695
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Tªn c«ng ty: "
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   500
+         TabIndex        =   68
+         Tag             =   "Company"
+         Top             =   250
+         Width           =   975
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "§Þa chØ:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   2
+         Left            =   500
+         TabIndex        =   67
+         Tag             =   "Address"
+         Top             =   650
+         Width           =   855
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "§iÖn tho¹i:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   3
+         Left            =   500
+         TabIndex        =   66
+         Tag             =   "Tel"
+         Top             =   1440
+         Width           =   900
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Fax"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   4
+         Left            =   3720
+         TabIndex        =   65
+         Top             =   1440
+         Width           =   375
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Tµi kho¶n VN§:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   5
+         Left            =   500
+         TabIndex        =   64
+         Tag             =   "Bank VND Account"
+         Top             =   1850
+         Width           =   1215
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Sè ®Þa ®iÓm kinh doanh:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   80
+         TabIndex        =   63
+         Tag             =   "Bank F.C. Account"
+         Top             =   3000
+         Width           =   1815
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "M· sè thuÕ:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   7
+         Left            =   500
+         TabIndex        =   62
+         Tag             =   "Tax Code"
+         Top             =   1065
+         Width           =   975
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "N¨m"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   8
+         Left            =   3720
+         TabIndex        =   61
+         Tag             =   "Year"
+         Top             =   1050
+         Width           =   375
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Lo¹i h×nh ho¹t ®éng:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   9
+         Left            =   75
+         TabIndex        =   60
+         Tag             =   "From month"
+         Top             =   2640
+         Width           =   1575
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Ngµy ®Çu th¸ng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   17
+         Left            =   9240
+         TabIndex        =   59
+         Tag             =   "Month from Date"
+         Top             =   360
+         Visible         =   0   'False
+         Width           =   375
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Email"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   19
+         Left            =   5520
+         TabIndex        =   58
+         Top             =   1440
+         Width           =   495
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "SMTP"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   20
+         Left            =   6960
+         TabIndex        =   57
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   495
+      End
+   End
+   Begin VB.Frame Frame 
+      BackColor       =   &H00FFFFC0&
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   3465
+      Index           =   1
+      Left            =   0
+      TabIndex        =   69
+      Top             =   4320
+      Width           =   9050
+      Begin VB.CheckBox ChkVT 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Luü kÕ theo ngµy chØ kª vËt t­ cã ph¸t sinh"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   120
+         TabIndex        =   114
+         Top             =   3000
+         Width           =   3735
+      End
+      Begin VB.CheckBox ChkVT 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "KiÓm kª tån kho theo ngµy"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   5
+         Left            =   120
+         TabIndex        =   113
+         Top             =   3240
+         Width           =   2895
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "NhËt ký chung"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   10
+         Left            =   4440
+         TabIndex        =   108
+         Top             =   1800
+         Value           =   1  'Checked
+         Width           =   1455
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "CT ghi sæ"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   11
+         Left            =   4440
+         TabIndex        =   107
+         Top             =   2040
+         Value           =   1  'Checked
+         Width           =   1095
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "NK chøng tõ"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   12
+         Left            =   4440
+         TabIndex        =   106
+         Top             =   2280
+         Value           =   1  'Checked
+         Width           =   1455
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Cho nhËp trïng sè hiÖu chøng tõ kh¸c th¸ng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   38
+         Left            =   5520
+         TabIndex        =   101
+         Top             =   5280
+         Visible         =   0   'False
+         Width           =   4095
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "NhËp theo tªn"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   37
+         Left            =   1680
+         TabIndex        =   100
+         Top             =   840
+         Visible         =   0   'False
+         Width           =   1335
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "TÝnh gi¸ vèn hµng nhËp khÈu"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   36
+         Left            =   5520
+         TabIndex        =   98
+         Top             =   5040
+         Visible         =   0   'False
+         Width           =   3135
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   25
+         Left            =   9360
+         MaxLength       =   2
+         TabIndex        =   97
+         Text            =   "0"
+         Top             =   4200
+         Visible         =   0   'False
+         Width           =   495
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Sè th«ng tin chøng tõ bæ sung cÇn theo dâi"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   35
+         Left            =   5520
+         TabIndex        =   96
+         Top             =   4800
+         Visible         =   0   'False
+         Width           =   3495
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "ChiÕt khÊu ®Çu ra theo mÆt hµng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   34
+         Left            =   120
+         TabIndex        =   93
+         Top             =   2040
+         Width           =   3495
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "§¬n gi¸ hµng ho¸ vµ ho¸ ®¬n sö dông USD"
+         Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   33
+         Left            =   120
+         TabIndex        =   91
+         Top             =   4920
+         Visible         =   0   'False
+         Width           =   3735
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Ph©n quyÒn theo tµi kho¶n"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   32
+         Left            =   600
+         TabIndex        =   90
+         Top             =   3960
+         Width           =   2415
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "C«ng nî theo ho¸ ®¬n"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   31
+         Left            =   5520
+         TabIndex        =   89
+         Top             =   3600
+         Width           =   3015
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Sö dông c¸c b¸o c¸o qu¶n trÞ"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   30
+         Left            =   5520
+         TabIndex        =   87
+         Top             =   4560
+         Width           =   3015
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "T¸ch chøc n¨ng in phiÕu"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   29
+         Left            =   5520
+         TabIndex        =   86
+         Top             =   4320
+         Width           =   3015
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Theo dâi nh©n viªn b¸n hµng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   24
+         Left            =   5520
+         TabIndex        =   83
+         Top             =   4080
+         Width           =   3015
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Sö dung chøc n¨ng in b¸o gi¸"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   23
+         Left            =   120
+         TabIndex        =   82
+         Top             =   4680
+         Visible         =   0   'False
+         Width           =   3015
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   10
+         Left            =   9120
+         MaxLength       =   20
+         TabIndex        =   81
+         Text            =   "..."
+         Top             =   2280
+         Visible         =   0   'False
+         Width           =   975
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Gi¸ thµnh s¶n xuÊt"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   22
+         Left            =   120
+         TabIndex        =   33
+         Top             =   1800
+         Width           =   1695
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Tû gi¸ b×nh qu©n"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   21
+         Left            =   120
+         TabIndex        =   32
+         Top             =   5160
+         Width           =   1695
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   24
+         Left            =   3120
+         MaxLength       =   2
+         TabIndex        =   79
+         Tag             =   "0"
+         Text            =   "0"
+         Top             =   3720
+         Visible         =   0   'False
+         Width           =   495
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Cho sö dông chøc n¨ng tæng hîp sè liÖu"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   20
+         Left            =   5520
+         TabIndex        =   74
+         Top             =   3840
+         Width           =   3615
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Cho phÐp ®iÒu chØnh tªn chi nh¸nh"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   19
+         Left            =   120
+         TabIndex        =   73
+         Top             =   4440
+         Width           =   3015
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   22
+         Left            =   3960
+         MaxLength       =   20
+         TabIndex        =   51
+         Text            =   "8.0"
+         Top             =   4440
+         Width           =   975
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   21
+         Left            =   4200
+         MaxLength       =   20
+         TabIndex        =   50
+         Text            =   "0"
+         Top             =   4080
+         Width           =   975
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Theo dâi tû gi¸ tõng chøng tõ víi tû gi¸ ®Çu n¨m lµ"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   18
+         Left            =   120
+         TabIndex        =   49
+         Top             =   4200
+         Width           =   3975
+      End
+      Begin VB.ComboBox Combo 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         Index           =   2
+         ItemData        =   "Frmopt.frx":B09A
+         Left            =   3960
+         List            =   "Frmopt.frx":B09C
+         Style           =   2  'Dropdown List
+         TabIndex        =   53
+         Top             =   5040
+         Width           =   1095
+      End
+      Begin VB.Frame Frame 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Ph­¬ng ph¸p tÝnh gi¸ xuÊt kho"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   1305
+         Index           =   2
+         Left            =   4320
+         TabIndex        =   70
+         Top             =   240
+         Width           =   3975
+         Begin VB.CheckBox ChkVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "In barcode"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   4
+            Left            =   6120
+            TabIndex        =   99
+            Top             =   360
+            Visible         =   0   'False
+            Width           =   1095
+         End
+         Begin VB.CheckBox ChkVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "KiÓm kª tån kho theo ngµy"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   120
+            TabIndex        =   94
+            Top             =   1440
+            Visible         =   0   'False
+            Width           =   2895
+         End
+         Begin VB.OptionButton OptVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Gi¸ b×nh qu©n"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   0
+            Left            =   120
+            TabIndex        =   34
+            Top             =   240
+            Value           =   -1  'True
+            Width           =   1455
+         End
+         Begin VB.OptionButton OptVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "XuÊt ®Ých danh"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   1
+            Left            =   120
+            TabIndex        =   35
+            Top             =   480
+            Width           =   1575
+         End
+         Begin VB.OptionButton OptVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "FIFO"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   2
+            Left            =   120
+            TabIndex        =   36
+            Top             =   720
+            Width           =   975
+         End
+         Begin VB.OptionButton OptVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "LIFO"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   120
+            TabIndex        =   37
+            Top             =   960
+            Width           =   975
+         End
+         Begin VB.CheckBox ChkVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Cè ®Þnh gi¸ xuÊt"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   0
+            Left            =   2040
+            TabIndex        =   38
+            Top             =   240
+            Value           =   1  'Checked
+            Visible         =   0   'False
+            Width           =   1575
+         End
+         Begin VB.CheckBox ChkVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Sö dông gi¸ HT"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   1
+            Left            =   2040
+            TabIndex        =   39
+            Top             =   480
+            Value           =   1  'Checked
+            Visible         =   0   'False
+            Width           =   1575
+         End
+         Begin VB.CheckBox ChkVT 
+            BackColor       =   &H00FFFFC0&
+            Caption         =   "Luü kÕ theo ngµy chØ kª vËt t­ cã ph¸t sinh"
+            BeginProperty Font 
+               Name            =   "VK Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   2
+            Left            =   120
+            TabIndex        =   40
+            Top             =   1680
+            Visible         =   0   'False
+            Width           =   3735
+         End
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Theo dâi chi tiÕt vËt t­, hµng ho¸"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   0
+         Left            =   120
+         TabIndex        =   24
+         Top             =   120
+         Value           =   1  'Checked
+         Width           =   2895
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Theo dâi chi tiÕt tµi s¶n cè ®Þnh"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         TabIndex        =   25
+         Top             =   360
+         Value           =   1  'Checked
+         Width           =   2895
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Theo dâi chi tiÕt c«ng nî"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   2
+         Left            =   120
+         TabIndex        =   26
+         Top             =   600
+         Value           =   1  'Checked
+         Width           =   2775
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "H¹ch to¸n kÐp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   3
+         Left            =   120
+         TabIndex        =   27
+         Top             =   840
+         Value           =   1  'Checked
+         Width           =   2775
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Tù ®éng xuÊt gi¸ vèn hµng b¸n"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   4
+         Left            =   120
+         TabIndex        =   28
+         Top             =   1080
+         Value           =   1  'Checked
+         Width           =   2655
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "TËp hîp gi¸ thµnh theo ®èi t­îng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   5
+         Left            =   120
+         TabIndex        =   30
+         Top             =   1320
+         Value           =   1  'Checked
+         Width           =   2775
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Trõ lïi thuÕ GTGT trªn ho¸ ®¬n "
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   6
+         Left            =   120
+         TabIndex        =   42
+         Top             =   2280
+         Width           =   3615
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "In chi tiÕt mÆt hµng trªn b¶ng kª"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   7
+         Left            =   2880
+         TabIndex        =   43
+         Top             =   5040
+         Width           =   2655
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "KiÓm tra tû lÖ thuÕ c¸c mÆt hµng cïng ho¸ ®¬n"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   8
+         Left            =   2880
+         TabIndex        =   44
+         Top             =   5280
+         Width           =   3735
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "In b¸o c¸o thuÕ cã m· v¹ch"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   9
+         Left            =   120
+         TabIndex        =   41
+         Top             =   5400
+         Width           =   2415
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "§Þnh møc thµnh phÈm theo th¸ng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   13
+         Left            =   120
+         TabIndex        =   31
+         Top             =   1560
+         Width           =   2775
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Song ng÷"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   14
+         Left            =   3240
+         TabIndex        =   52
+         Top             =   4560
+         Width           =   1095
+      End
+      Begin VB.ComboBox CTGS 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   315
+         ItemData        =   "Frmopt.frx":B09E
+         Left            =   2880
+         List            =   "Frmopt.frx":B0C6
+         Style           =   2  'Dropdown List
+         TabIndex        =   29
+         Top             =   1080
+         Visible         =   0   'False
+         Width           =   975
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Qu¶n lý quyÒn xem tõng b¸o c¸o"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   15
+         Left            =   120
+         TabIndex        =   45
+         Top             =   3720
+         Width           =   2775
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Cho sö dông chøc n¨ng ®æi font"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   16
+         Left            =   120
+         TabIndex        =   46
+         Top             =   2760
+         Width           =   2775
+      End
+      Begin VB.CheckBox Check 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Ch­¬ng tr×nh söa ®æi theo doanh nghiÖp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   17
+         Left            =   120
+         TabIndex        =   47
+         Top             =   3960
+         Width           =   3255
+      End
+      Begin VB.TextBox Text 
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   285
+         Index           =   8
+         Left            =   3480
+         MaxLength       =   50
+         TabIndex        =   48
+         Text            =   "..."
+         Top             =   3840
+         Width           =   2295
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Sö dông c¸c sæ:"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   18
+         Left            =   4440
+         TabIndex        =   109
+         Top             =   1560
+         Width           =   1335
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Sè m¸y truy cËp tèi ®a trªn m¹ng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   24
+         Left            =   600
+         TabIndex        =   80
+         Top             =   3720
+         Visible         =   0   'False
+         Width           =   2535
+         WordWrap        =   -1  'True
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "Rev."
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   16
+         Left            =   3120
+         TabIndex        =   72
+         Top             =   3960
+         Width           =   375
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00E0E0E0&
+         Caption         =   "H¹ch to¸n b»ng"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   10
+         Left            =   3960
+         TabIndex        =   71
+         Top             =   4800
+         Width           =   1575
+      End
+   End
+   Begin VB.CommandButton Command 
+      BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   1
+      Left            =   9120
+      Picture         =   "Frmopt.frx":B0F1
+      Style           =   1  'Graphical
+      TabIndex        =   55
+      Tag             =   "&Return"
+      Top             =   6360
+      Width           =   1095
+   End
+   Begin VB.CommandButton Command 
+      BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   0
+      Left            =   9120
+      Picture         =   "Frmopt.frx":C513
+      Style           =   1  'Graphical
+      TabIndex        =   54
+      Tag             =   "&Save"
+      Top             =   5880
+      Width           =   1095
+   End
+End
