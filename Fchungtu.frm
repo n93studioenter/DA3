@@ -3279,6 +3279,7 @@ Option Explicit
 Private Declare Function SetTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long) As Long
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
+ 
 
 Dim nknl As Integer
 Dim bakParentId As Integer
@@ -3397,18 +3398,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938520
-Attribute ctgoc.VB_VarUserMemId = 1073938520
-Attribute TenNX.VB_VarUserMemId = 1073938520
-Attribute DiaChiNX.VB_VarUserMemId = 1073938520
-Attribute TenBH.VB_VarUserMemId = 1073938520
-Attribute DiaChiBH.VB_VarUserMemId = 1073938520
-Attribute MSTBH.VB_VarUserMemId = 1073938520
-Attribute unc1.VB_VarUserMemId = 1073938520
-Attribute unc2.VB_VarUserMemId = 1073938520
-Attribute unc3.VB_VarUserMemId = 1073938520
-Attribute MaKHBH.VB_VarUserMemId = 1073938520
-Attribute HanTT.VB_VarUserMemId = 1073938520
+Attribute DiachiTC.VB_VarUserMemId = 1073938522
+Attribute ctgoc.VB_VarUserMemId = 1073938522
+Attribute TenNX.VB_VarUserMemId = 1073938522
+Attribute DiaChiNX.VB_VarUserMemId = 1073938522
+Attribute TenBH.VB_VarUserMemId = 1073938522
+Attribute DiaChiBH.VB_VarUserMemId = 1073938522
+Attribute MSTBH.VB_VarUserMemId = 1073938522
+Attribute unc1.VB_VarUserMemId = 1073938522
+Attribute unc2.VB_VarUserMemId = 1073938522
+Attribute unc3.VB_VarUserMemId = 1073938522
+Attribute MaKHBH.VB_VarUserMemId = 1073938522
+Attribute HanTT.VB_VarUserMemId = 1073938522
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -3448,7 +3449,16 @@ Dim hien_bang_tinh As Boolean
 Attribute hien_bang_tinh.VB_VarUserMemId = 1073938537
 Public tongtientruoc As Double
 Attribute tongtientruoc.VB_VarUserMemId = 1073938538
- 
+Public Sub Autonhapkho()
+    Dim Query As String
+    'Goi table Import
+    Query = "SELECT * FROM tbNhapkhotp WHERE Status = '" & "0" & "'"
+    Set rs_importNK = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
+
+    If Not rs_importNK.EOF Then
+        Nhapkhotong
+    End If
+End Sub
 
 Public Sub AutoCLickLoai()
     OptLoai(0).Value = True
@@ -3456,7 +3466,7 @@ Public Sub AutoCLickLoai()
     RFocus CboThang
     DisplayFileImportList
 End Sub
-Public Sub AddImportData(ByVal id As String, ByVal Name As String, ByVal mst As String, ByVal sohd As String, ByVal khHD As String, ByVal ngay As Date, ByVal types As String, ByVal path As String, ByVal tkno As String, ByVal TkCo As String, ByVal tkThue As String, ByVal diengiai As String, ByVal tongtien As String, ByVal VAT As String, ByVal sohieutp As String, ByVal TgTCThue As String, ByVal TgTThue As String, ByVal Ishaschild As String)
+Public Sub AddImportData(ByVal id As String, ByVal Name As String, ByVal mst As String, ByVal sohd As String, ByVal khHD As String, ByVal ngay As Date, ByVal types As String, ByVal path As String, ByVal tkno As String, ByVal TkCo As String, ByVal tkThue As String, ByVal diengiai As String, ByVal TongTien As String, ByVal VAT As String, ByVal sohieutp As String, ByVal TgTCThue As String, ByVal TgTThue As String, ByVal Ishaschild As String)
     Dim fileImport As ClsFileImport
     Set fileImport = New ClsFileImport
 
@@ -3473,7 +3483,7 @@ Public Sub AddImportData(ByVal id As String, ByVal Name As String, ByVal mst As 
     fileImport.notk = tkno
     fileImport.ThueTK = tkThue
     fileImport.diengiai = diengiai
-    fileImport.tongtien = Replace(tongtien, ",", ".")
+    fileImport.TongTien = Replace(TongTien, ",", ".")
     fileImport.TgTCThue = Replace(TgTCThue, ",", ".")
     fileImport.TgTThue = Replace(TgTThue, ",", ".")
     fileImport.VAT = VAT
@@ -3624,13 +3634,13 @@ Public Sub DoSubNganhang()
     MedNgay(0).Text = Format(rs_ktraNH!NgayGD, "dd/mm/yy")
     MedNgay(1).Text = Format(rs_ktraNH!NgayGD, "dd/mm/yy")
     txt(1).Text = rs_ktraNH!diengiai
-    If rs_ktraNH!tongtien <> 0 Then
+    If rs_ktraNH!TongTien <> 0 Then
         txtchungtu(0).Text = rs_ktraNH!TkCo
         txtChungtu_LostFocus 0
         RFocus txtchungtu(1)
         txtChungtu_LostFocus 1
         RFocus txtchungtu(6)
-        txtchungtu(6).Text = rs_ktraNH!tongtien
+        txtchungtu(6).Text = rs_ktraNH!TongTien
         txtChungtu_KeyPress 6, 13
 
         If rs_ktraNH!makh <> "" Then
@@ -3755,7 +3765,7 @@ Private Sub btnImport_Click()
         ' Duy?t qua t?t c? các b?n ghi
         Do While Not rs_ktra.EOF
             ' L?y s? lu?ng tru?ng
-            AddImportData rs_ktra!id, rs_ktra!Ten, rs_ktra!mst, rs_ktra!SHDon, rs_ktra!KHHDon, rs_ktra!NLap, "", "", rs_ktra!tkno, rs_ktra!TkCo, rs_ktra!tkThue, rs_ktra!noidung, rs_ktra!tongtien, rs_ktra!VAT, rs_ktra!sohieutp, rs_ktra!TgTCThue, rs_ktra!TgTThue, rs_ktra!Ishaschild
+            AddImportData rs_ktra!id, rs_ktra!Ten, rs_ktra!mst, rs_ktra!SHDon, rs_ktra!KHHDon, rs_ktra!NLap, "", "", rs_ktra!tkno, rs_ktra!TkCo, rs_ktra!tkThue, rs_ktra!noidung, rs_ktra!TongTien, rs_ktra!VAT, rs_ktra!sohieutp, rs_ktra!TgTCThue, rs_ktra!TgTThue, rs_ktra!Ishaschild
             rs_ktra.MoveNext
         Loop
     End If
@@ -3960,7 +3970,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
             Else
                 txtchungtu(2).Text = rs_ktra152!sohieu
                 txtChungtu_LostFocus (2)
-                txtchungtu(3).Text = rs_ktra152!soluong
+                txtchungtu(3).Text = rs_ktra152!SoLuong
                 txtChungtu_LostFocus (3)
                 RFocus txtchungtu(4)
                 RFocus txtchungtu(6)
@@ -3994,7 +4004,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
                         txtChungtu_LostFocus (1)
                     End If
                     RFocus txtchungtu(6)
-                    txtchungtu(6).Text = .tongtien
+                    txtchungtu(6).Text = .TongTien
                     txtChungtu_KeyPress 6, 13
                 End With
             End If
@@ -4037,7 +4047,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
             If Not rs_check.EOF Then
             Else
                 RFocus txtchungtu(2)
-                txtchungtu(5).Text = item.tongtien
+                txtchungtu(5).Text = item.TongTien
                 txtChungtu_LostFocus (5)
                 RFocus txtchungtu(6)
                 txtChungtu_KeyPress 6, 13
@@ -4102,7 +4112,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
             txtChungtu_LostFocus (0)
             txtchungtu(2).Text = rs_ktra152!sohieu
             txtChungtu_LostFocus (2)
-            txtchungtu(3).Text = rs_ktra152!soluong
+            txtchungtu(3).Text = rs_ktra152!SoLuong
             txtChungtu_LostFocus (3)
             RFocus txtchungtu(4)
 
@@ -4479,8 +4489,8 @@ Private Sub XuLy15Childhd()
         txtChungtu_LostFocus (0)
         txtchungtu(2).Text = rs_ktra152!sohieu
         txtChungtu_LostFocus (2)
-        txtchungtu(3).Text = rs_ktra152!soluong
-        bakSL = rs_ktra152!soluong
+        txtchungtu(3).Text = rs_ktra152!SoLuong
+        bakSL = rs_ktra152!SoLuong
         txtChungtu_LostFocus (3)
         RFocus txtchungtu(4)
         txtchungtu(5).Text = rs_ktra152!ttien
@@ -4510,7 +4520,7 @@ Private Sub XuLy15Childhd()
         txtChungtu_LostFocus (1)
         txtchungtu(5) = 0
         RFocus txtchungtu(6)
-        txtchungtu(6).Text = rs_import!tongtien
+        txtchungtu(6).Text = rs_import!TongTien
         txtChungtu_KeyPress 6, 13
         Command_Click 1
         timerNext.Enabled = True
@@ -4526,11 +4536,11 @@ Private Sub Xuly15Child()
         If rs_ktra152!tkno Like "15*" Then
 
             'Neu la ko la 711
-            If rs_ktra152!TkCo <> "711" Or (rs_ktra152!TkCo = "711" And rs_ktra152!dongia <> 0 And rs_ktra152!soluong <> 0) Then
+            If rs_ktra152!TkCo <> "711" Or (rs_ktra152!TkCo = "711" And rs_ktra152!dongia <> 0 And rs_ktra152!SoLuong <> 0) Then
                 txtchungtu(0).Text = rs_ktra152!tkno
                 txtChungtu_LostFocus (0)
                 'Neu co 711 va co so luong don gia
-                If rs_ktra152!TkCo = "711" And rs_ktra152!dongia <> 0 And rs_ktra152!soluong <> 0 Then
+                If rs_ktra152!TkCo = "711" And rs_ktra152!dongia <> 0 And rs_ktra152!SoLuong <> 0 Then
                     run711 = True
                     sum711 = sum711 + rs_ktra152!ttien
                 End If
@@ -4543,7 +4553,7 @@ Private Sub Xuly15Child()
                 Else
                     txtchungtu(2).Text = rs_ktra152!sohieu
                     txtChungtu_LostFocus (2)
-                    txtchungtu(3).Text = rs_ktra152!soluong
+                    txtchungtu(3).Text = rs_ktra152!SoLuong
                     txtChungtu_LostFocus (3)
                     RFocus txtchungtu(4)
                 End If
@@ -4663,7 +4673,7 @@ Private Sub Xuly15Child()
         End If
 
         txtchungtu(0) = rs_import!TkCo
-        txtchungtu(6) = rs_import!tongtien
+        txtchungtu(6) = rs_import!TongTien
         txtChungtu_LostFocus (0)
         txtChungtu_KeyPress 6, 13
 
@@ -4703,7 +4713,7 @@ Private Sub Xuly51CTChild()
     txtchungtu(0) = rs_import!tkno
     txtChungtu_LostFocus (0)
     RFocus txtchungtu(5)
-    txtchungtu(5).Text = rs_import!tongtien
+    txtchungtu(5).Text = rs_import!TongTien
     txtChungtu_KeyPress 6, 13
     timerNext.Enabled = True
 End Sub
@@ -4736,7 +4746,7 @@ Private Sub Xuly51None()
     txtchungtu(0) = rs_import!tkno
     txtChungtu_LostFocus (0)
     RFocus txtchungtu(5)
-    txtchungtu(5).Text = rs_import!tongtien
+    txtchungtu(5).Text = rs_import!TongTien
     If stt51none = 1 Then
         txtChungtu_KeyPress 6, 13
     End If
@@ -4780,7 +4790,7 @@ Private Sub Xuly51Child()
             If Not rs_ktraVattu.EOF And rs_ktra152!TkCo <> 5113 Then
                 txtchungtu(2).Text = rs_ktra152!sohieu
                 txtChungtu_LostFocus (2)
-                txtchungtu(3).Text = rs_ktra152!soluong
+                txtchungtu(3).Text = rs_ktra152!SoLuong
                 txtChungtu_LostFocus (3)
             Else
                 ' Không có d? li?u trong recordset
@@ -4862,7 +4872,7 @@ Private Sub Xuly51Child()
         txtchungtu(0) = rs_import!tkno
         txtChungtu_LostFocus (0)
         RFocus txtchungtu(5)
-        txtchungtu(5).Text = rs_import!tongtien
+        txtchungtu(5).Text = rs_import!TongTien
         txtChungtu_KeyPress 6, 13
         timerNext.Enabled = True
     End If
@@ -4929,7 +4939,7 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     'RFocus txtchungtu(6)
     txtchungtu(0).Text = rs_import!TkCo
     txtChungtu_LostFocus (0)
-    txtchungtu(6).Text = rs_import!tongtien
+    txtchungtu(6).Text = rs_import!TongTien
     If rs_import!TkCo Like "331*" Then
         txtChungtu_KeyPress 6, 13
         t331.Enabled = True
@@ -5473,8 +5483,8 @@ End Sub
 
 Private Sub Chk_Click()
     txt_LostFocus 0
-    CmdPhieu(1).Caption = IIf(chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
-    CmdPhieu(1).tag = chk.Value
+    CmdPhieu(1).Caption = IIf(Chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
+    CmdPhieu(1).tag = Chk.Value
 End Sub
 
 Private Sub ChkXT_Click()
@@ -5637,7 +5647,7 @@ Public Sub CmdChitiet_chon()
         Exit Sub
     End If
 
-    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And chk.Value = 0 And Me.Visible Then
+    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And Chk.Value = 0 And Me.Visible Then
         'MsgBox "§· xuÊt qu¸ l­îng tån!", vbCritical, App.ProductName
         'Exit Sub
         If IsImport = False Then
@@ -5778,7 +5788,7 @@ Public Sub CmdChitiet_chon()
         CmdPhieu(0).Visible = True
     End If
 
-    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04") Then
+    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04") Then
         If co > 0 Then FThuChi.tag = 1
         If MaSoCT = 0 And hdcount >= 0 And TenTC = "..." Then
             TenTC = HD(0).TenKH
@@ -6369,8 +6379,8 @@ B:
         frmMain.Rpt.Formulas(3) = "SoPhieu='" + LaySH(txt(0).Text, 1) + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiachiTC + "'"
         frmMain.Rpt.Formulas(5) = "CTGoc='" + ctgoc + "'"
-        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.lbCty(2).Caption + "'"
-        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.lbCty(3).Caption + "'"
+        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.LbCty(2).Caption + "'"
+        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.LbCty(3).Caption + "'"
         frmMain.Rpt.Formulas(44) = "Ngay='Ngµy " + Format(ngay(1), Mask_DR) + "'"
         frmMain.Rpt.Formulas(45) = "BangChu='" + sotien + "'"
         frmMain.Rpt.Formulas(46) = "TenNV='" + TenTC + "'"
@@ -6852,10 +6862,10 @@ Sub In_hoa_don2(sotien As String, i As Integer, k As Integer, xxx As String, sod
             frmMain.Rpt.Formulas(15) = "MaKH='" + xxx + "'"
         End If
         '     frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.lbCty(2).Caption + "'"
+        frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.LbCty(2).Caption + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiaChiBH + "'"
-        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.lbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.LbCty(8).Caption + "'"
         frmMain.Rpt.Formulas(7) = "MS2='" + MSTBH + "'"
         frmMain.Rpt.Formulas(8) = "TenNN='" + txtVT(1).Text + "'"
         frmMain.Rpt.Formulas(10) = "HTTT='" + HTTT + "'"
@@ -6966,7 +6976,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
     frmMain.Rpt.Formulas(405) = "hantt= '" + thoihanthanhtoan.Text + " " + "'"
     frmMain.Rpt.Formulas(406) = "sophieu= '" + sochungtu.Text + " " + "'"
     frmMain.Rpt.Formulas(550) = "thanhtoan = '" + hinhthucthanhtoan.Text + "'"
-    frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+    frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
 
     CoPSTK "521", -1, v521
     If sodu = 0 Then
@@ -7000,11 +7010,11 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
         dem1 = 100
         dem = 90
         Dim g, kk As Integer
-        Dim tongtien As Double
+        Dim TongTien As Double
         Dim thoat As Boolean
         thoat = True
         kk = 1
-        tongtien = 0
+        TongTien = 0
         Dim mang_stt(100) As String
         Dim mang_diengiai(100) As String
         Dim mang_dvt(100) As String
@@ -7057,7 +7067,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
                 mang_diengiai(hhh) = CStr(chitiet_sp!diengiai)
 
                 mang_dvt(hhh) = CStr(chitiet_sp!dvt)
-                mang_soluong(hhh) = chuyenso(chitiet_sp!soluong)
+                mang_soluong(hhh) = chuyenso(chitiet_sp!SoLuong)
                 mang_dongia(hhh) = chuyenso(chitiet_sp!dongia)
                 mang_thanhtien(hhh) = chuyenso(chitiet_sp!ThanhTien)
                 hhh = hhh + 1
@@ -7526,7 +7536,7 @@ Public Sub Command_Click(Index As Integer)
             MaCT = MaSoCT
             MaSoCT = 0
         Else
-            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
+            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And Chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
         End If
 
         bg = Fix(SoPSConLai * Mask_N) <> 0 And loaict = 7
@@ -7673,8 +7683,8 @@ Public Sub Command_Click(Index As Integer)
                     End If
                     If pTygia > 0 Then chungtu.tygia = Cdbl5(txtchungtu(7).Text)
                     If loaict = 8 And pNVBH > 0 Then chungtu.MaNV = txt(3).tag
-                    If loaict = 8 And chk.Value = 1 Then chungtu.maloai = 7
-                    If loaict = 7 And chk.Value = 0 Then chungtu.maloai = 8
+                    If loaict = 8 And Chk.Value = 1 Then chungtu.maloai = 7
+                    If loaict = 7 And Chk.Value = 0 Then chungtu.maloai = 8
                     If loaict = 8 And (chungtu.tkno.tk_id = TKGT_ID And chungtu.MaVattu = 0) Then
                         .col = 3
                         chungtu.TLCK = Cdbl5(.Text)
@@ -7783,7 +7793,7 @@ Public Sub Command_Click(Index As Integer)
 
 
         If loaict > 8 Then GhiChungtuTS MaCT
-        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And chk.Value = 0 Then XoaPhieu pMaBG
+        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And Chk.Value = 0 Then XoaPhieu pMaBG
 
         'tat ca da ghi xong dua so so va han dung vao trong database
         Dim stt_dong As Integer
@@ -9062,11 +9072,11 @@ Public Sub NhapkhoTPChitiet()
         txtchungtu(2).Text = rs_importNKDetail!sohieu
         txtChungtu_LostFocus (2)
         RFocus txtchungtu(3)
-        txtchungtu(3).Text = rs_importNKDetail!soluong
+        txtchungtu(3).Text = rs_importNKDetail!SoLuong
         txtChungtu_LostFocus (3)
         RFocus txtchungtu(4)
         txtchungtu(4).Text = "0"
-        txtchungtu(5).Text = val(rs_importNKDetail!soluong) * val(rs_importNKDetail!dongia)
+        txtchungtu(5).Text = val(rs_importNKDetail!SoLuong) * val(rs_importNKDetail!dongia)
         txtChungtu_LostFocus (5)
         RFocus txtchungtu(6)
         txtChungtu_KeyPress 6, 13
@@ -9155,14 +9165,7 @@ End Sub
 Public Sub OptLoai_Click(Index As Integer)
 
     If Index = 6 Then
-        Dim Query As String
-        'Goi table Import
-        Query = "SELECT * FROM tbNhapkhotp WHERE Status = '" & "0" & "'"
-        Set rs_importNK = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
-
-        If Not rs_importNK.EOF Then
-            Nhapkhotong
-        End If
+        Autonhapkho
 
         Exit Sub
     End If
@@ -9382,7 +9385,7 @@ Private Sub Xuly154()
         Else
             txtchungtu(2).Text = rs_ktra154c!sohieu
             txtChungtu_LostFocus (2)
-            txtchungtu(3).Text = rs_ktra154c!soluong
+            txtchungtu(3).Text = rs_ktra154c!SoLuong
             txtChungtu_LostFocus (3)
             RFocus txtchungtu(4)
 
@@ -9512,7 +9515,7 @@ Private Sub Timer4_Timer()
                     RFocus txtchungtu(2)
                     txtchungtu(2).Text = rs_ktra152!sohieu
                     txtChungtu_LostFocus (2)
-                    txtchungtu(3).Text = rs_ktra152!soluong
+                    txtchungtu(3).Text = rs_ktra152!SoLuong
                     txtChungtu_LostFocus (3)
                     RFocus txtchungtu(4)
 
@@ -9550,7 +9553,7 @@ Private Sub Timer4_Timer()
             RFocus txtchungtu(1)
             txtchungtu(1).Text = rs_ktra152!Ten
             RFocus txtchungtu(5)
-            txtchungtu(5).Text = rs_ktra152!soluong * rs_ktra152!dongia
+            txtchungtu(5).Text = rs_ktra152!SoLuong * rs_ktra152!dongia
             txtChungtu_LostFocus (5)
             'RFocus txtchungtu(6)
             txtChungtu_KeyPress 6, 13
@@ -9723,7 +9726,7 @@ Private Sub txt_LostFocus(Index As Integer)
         If Len(txt(Index).Text) = 0 Then
             txt(Index).Text = "..."
         Else
-            sh = IIf(chk.Value = 1, "P", "")
+            sh = IIf(Chk.Value = 1, "P", "")
             L = Len(txt(0).Text)
             If Index = 0 And L > 0 And MaSoCT = 0 Then
                 If Not IsNumeric(txt(0).Text) Then
@@ -11121,8 +11124,8 @@ Public Sub SetLoaiChungtu(loai As Integer)
     chkXT.Visible = (loai = 1) And pDTTP <> 0
 
     vis = (loai = 7 Or loai = 8) And (pBaoGia = 1) And ((frmMain.Command(4).Visible And pPhieu = 1) Or (Not frmMain.Command(4).Visible And pPhieu = 0))
-    chk.Visible = vis
-    chk.Value = 0
+    Chk.Visible = vis
+    Chk.Value = 0
     pMaBG = 0
 
     vis = ((loai = 7 Or loai = 8) And pNVBH = 1)
@@ -11291,7 +11294,7 @@ Private Sub XoaPhieuTrenManHinh()
     Command(2).Enabled = True
     Label(22).Enabled = False
     txtchungtu(8).Enabled = False
-    chk.Value = 0
+    Chk.Value = 0
     pMaBG = 0
 
     txtchungtu(7).Text = Format(pRate, Mask_2)
@@ -11327,7 +11330,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     XoaPhieuTrenManHinh
     loaict = rs_chungtu!maloai
     SetListIndex CboThang, rs_chungtu!ThangCT
-    chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
+    Chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
     pMaBG = IIf(rs_chungtu!maloai = 7, ma, 0)
     ngay(0) = rs_chungtu!NgayCT
     ngay(1) = rs_chungtu!NgayGS
@@ -11429,7 +11432,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
                         .sohd = rs_chungtu!shd
                         .NgayPH = rs_chungtu!NgayPH
                         .MatHang = rs_chungtu!MatHang
-                        .soluong = rs_chungtu!soluong
+                        .SoLuong = rs_chungtu!SoLuong
                         .ThanhTien = rs_chungtu!ThanhTien
                         .TyLe = rs_chungtu!TyLe
                         .HD = rs_chungtu!HD
@@ -11457,7 +11460,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
             If rs_chungtu!sops <> 0 Or taikhoan.tk_id = GTGTKT_ID Or taikhoan.tk_id = GTGTPN_ID Or taikhoan.tk_id = TTDB_ID Or taikhoan.tk_id = TKVT_ID Or ((taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And rs_chungtu!MaKHC > 0) Then
                 If Not CmdPhieu(0).Visible Then CmdPhieu(0).Visible = (Left(taikhoan.sohieu, Len(TM)) = TM)
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If (((taikhoan.tk_id <> TKVT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> GTGTKT_ID) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> TKGT_ID) And (taikhoan.tk_id <> TSCD_ID)) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then         ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, -1, rs_chungtu!sops, rs_chungtu!SoPS2No, rs_chungtu!makh)
@@ -11602,7 +11605,7 @@ KT1:
                         .sohd = rs_chungtu!shd
                         .NgayPH = rs_chungtu!NgayPH
                         .MatHang = rs_chungtu!MatHang
-                        .soluong = rs_chungtu!soluong
+                        .SoLuong = rs_chungtu!SoLuong
                         .ThanhTien = rs_chungtu!ThanhTien
                         .TyLe = rs_chungtu!TyLe
                         .HD = rs_chungtu!HD
@@ -11640,7 +11643,7 @@ KT1:
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
                 If Not CmdPhieu(2).Visible Then CmdPhieu(2).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH Or taikhoan.tk_id2 = CLng(NH))
                 CmdPhieu(2).tag = taikhoan.sohieu
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If ((taikhoan.tk_id <> TKVT_ID And taikhoan.tk_id <> TKDT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> GTGTPN_ID) And (taikhoan.tk_id <> TTDB_ID) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then       ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, 1, rs_chungtu!sops, rs_chungtu!SoPS2Co, rs_chungtu!MaKHC)
@@ -11865,7 +11868,7 @@ Private Function KiemTraChungtu() As Boolean
         RFocus txtchungtu(0)
         Exit Function
     End If
-    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or chk.Value = 0) Then
+    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or Chk.Value = 0) Then
         If Not PSTuDong(SoPSConLai) Then
             MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
             hasError = True
@@ -12823,7 +12826,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
         Set tkxt = New ClsTaikhoan
         tkxt.InitTaikhoanSohieu txtsh(0).Text
         txtsh(0).tag = IIf(tkxt.MaSo > 0 And tkxt.tkcon = 0, tkxt.MaSo, 0)
-        Lb(0).Caption = tkxt.Ten
+        lb(0).Caption = tkxt.Ten
         vis = (tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID Or (tkxt.loai = 6 And pDTTP <> 0))
         If Left(txtsh(0).Text, 3) = "154" Then
             vis = True
@@ -12831,7 +12834,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
 
         Label(19).Enabled = vis
         txtsh(1).Enabled = vis
-        Lb(1).Enabled = vis
+        lb(1).Enabled = vis
         cmd(1).Enabled = vis
         cmd(0).tag = IIf(tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID, 1, IIf(tkxt.loai = 6 And pDTTP <> 0, 2, 0))
         Set tkxt = Nothing
@@ -12840,14 +12843,14 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set khxt = New ClsKhachHang
             khxt.InitKhachHangSohieu txtsh(1).Text
             txtsh(1).tag = khxt.MaSo
-            Lb(1).Caption = khxt.Ten
+            lb(1).Caption = khxt.Ten
             Set khxt = Nothing
         End If
         If cmd(0).tag = 2 Then
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -12855,7 +12858,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
