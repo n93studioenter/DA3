@@ -450,19 +450,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "24/09/25"
+            TextSave        =   "25/09/25"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2145,6 +2149,13 @@ Private Declare Function FindNextFile Lib "Kernel32" Alias "FindNextFileA" _
 Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
 Private Declare Function FindClose Lib "Kernel32" (ByVal hFindFile As Long) As Long
+
+
+Private Const SPI_GETNONCLIENTMETRICS As Long = 41
+Private Const SPI_SETNONCLIENTMETRICS As Long = 42
+Private Const SPIF_UPDATEINIFILE As Long = &H1
+Private Const SPIF_SENDCHANGE As Long = &H2
+
 Private Type WIN32_FIND_DATA
     dwFileAttributes As Long
     ftCreationTime As Currency
@@ -2522,39 +2533,86 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     '            End
     '    End If
 End Sub
-
+Private Function GetFontName(fontFace As String) As String
+    On Error Resume Next
+    Dim nullPos As Long
+    nullPos = InStr(fontFace, vbNullChar)
+    If nullPos > 0 Then
+        GetFontName = Left$(fontFace, nullPos - 1)
+    Else
+        GetFontName = fontFace
+    End If
+End Function
 Private Sub Form_Load()
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
 
     If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
 
-
         PostMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
-
         DoEvents
 
-        m_nonClientMetrics.cbSize = Len(m_nonClientMetrics)
-        ret = SystemParametersInfo(SPI_GETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
-        ret = SystemParametersInfo(SPI_GETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
+        ' ?? S?A L?I: Ð?t cbSize an toàn tru?c khi dùng Len()
+        m_nonClientMetrics.cbSize = 500    ' Giá tr? t?m th?i
 
-        m_fontCaption = m_nonClientMetrics.lfCaptionFont.lfFaceName
-        m_fontSmCaption = m_nonClientMetrics.lfSmCaptionFont.lfFaceName
-        m_fontMenu = m_nonClientMetrics.lfMenuFont.lfFaceName
-        m_fontMessage = m_nonClientMetrics.lfMessageFont.lfFaceName
-        m_fontStatus = m_nonClientMetrics.lfStatusFont.lfFaceName
-        m_fontIcon = m_logFont.lfFaceName
+        ' ?? S?A L?I: Thêm ki?m tra và x? lý l?i
+        Dim ret1 As Long, ret2 As Long
 
-        m_nonClientMetrics.lfCaptionFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfSmCaptionFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfMenuFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfStatusFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfMessageFont.lfFaceName = sFONTNAME & vbNullChar
+        ' Th? l?y NONCLIENTMETRICS v?i kích thu?c d?y d?
+        ret1 = SystemParametersInfo(SPI_GETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
+
+        If ret1 = 0 Then
+            ' Th? v?i c?u trúc nh? hon (tuong thích Windows cu)
+            m_nonClientMetrics.cbSize = Len(m_nonClientMetrics) - Len(m_nonClientMetrics.lfMessageFont)
+            ret1 = SystemParametersInfo(SPI_GETNONCLIENTMETRICS, m_nonClientMetrics.cbSize, m_nonClientMetrics, 0)
+        End If
+
+        If ret1 = 0 Then
+            ' MsgBox "Kh«ng thÓ lÊy th«ng sè hÖ thèng. Font kh«ng ®­îc thay ®æi.", vbExclamation
+
+        End If
+
+        ' L?y font icon
+        ret2 = SystemParametersInfo(SPI_GETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
+
+        ' Luu font g?c
+        m_fontCaption = GetFontName(m_nonClientMetrics.lfCaptionFont.lfFaceName)
+        m_fontSmCaption = GetFontName(m_nonClientMetrics.lfSmCaptionFont.lfFaceName)
+        m_fontMenu = GetFontName(m_nonClientMetrics.lfMenuFont.lfFaceName)
+        m_fontMessage = GetFontName(m_nonClientMetrics.lfMessageFont.lfFaceName)
+        m_fontStatus = GetFontName(m_nonClientMetrics.lfStatusFont.lfFaceName)
+        m_fontIcon = GetFontName(m_logFont.lfFaceName)
+
+        ' ?? S?A L?I: Ð?t font name dúng cách (tránh dùng tr?c ti?p vbNullChar)
+        m_nonClientMetrics.lfCaptionFont.lfFaceName = Left$(sFONTNAME & String$(32, 0), 32)
+        m_nonClientMetrics.lfSmCaptionFont.lfFaceName = Left$(sFONTNAME & String$(32, 0), 32)
+        m_nonClientMetrics.lfMenuFont.lfFaceName = Left$(sFONTNAME & String$(32, 0), 32)
+        m_nonClientMetrics.lfStatusFont.lfFaceName = Left$(sFONTNAME & String$(32, 0), 32)
+        m_nonClientMetrics.lfMessageFont.lfFaceName = Left$(sFONTNAME & String$(32, 0), 32)
+
         Debug.Print "red 0"
-        ret = SystemParametersInfo(SPI_SETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
-        Debug.Print "red 1"
-        m_logFont.lfFaceName = sFONTNAME & vbNullChar
-        ret = SystemParametersInfo(SPI_SETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
-        Debug.Print "red 2"
+
+        ' ?? S?A L?I: Thêm flags d? áp d?ng thay d?i
+        ret1 = SystemParametersInfo(SPI_SETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, _
+                                    SPIF_UPDATEINIFILE Or SPIF_SENDCHANGE)
+
+        Debug.Print "red 1: " & ret1
+
+        ' Ð?t font icon
+        m_logFont.lfFaceName = Left$(sFONTNAME & String$(32, 0), 32)
+        ret2 = SystemParametersInfo(SPI_SETICONTITLELOGFONT, Len(m_logFont), m_logFont, _
+                                    SPIF_UPDATEINIFILE Or SPIF_SENDCHANGE)
+
+        Debug.Print "red 2: " & ret2
+
+        ' Thông báo thay d?i font
+        PostMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
+        DoEvents
+
+        If ret1 <> 0 And ret2 <> 0 Then
+            MsgBox "Ðã thay d?i font h? th?ng thành: " & sFONTNAME, vbInformation
+        Else
+            MsgBox "Thay ®æi font kh«ng hoµn toµn thµnh c«ng.", vbExclamation
+        End If
     End If
 
     If pVersion = 2 Then
@@ -3434,7 +3492,7 @@ KT:
     Me.MousePointer = 0
 End Sub
 Private Sub XKTheoNgay()
-'Lay danh sach chung tu dau thang den hien tai
+    'Lay danh sach chung tu dau thang den hien tai
 
     Dim ngayCTList As String
     ngayCTList = ""
