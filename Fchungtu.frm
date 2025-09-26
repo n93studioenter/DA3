@@ -3522,7 +3522,7 @@ Private Sub DuyetItemList(ByVal fname As String)
         If Not dlhDonNode Is Nothing Then
             ' txtID.Text = dlhDonNode.Attributes.getNamedItem("Id").Text
         Else
-            MsgBox "Không tìm th?y DLHDon."
+            msgBox "Không tìm th?y DLHDon."
         End If
 
         If Not ttChungNode Is Nothing Then
@@ -3557,7 +3557,7 @@ Private Sub DuyetItemList(ByVal fname As String)
                     txtVT(9).Text = mstNode.Text
                     GetcustomerByMST txtVT(9).Text, tenNode.Text, DChiNode.Text
                 Else
-                    MsgBox "Không tìm th?y MST."
+                    msgBox "Không tìm th?y MST."
                 End If
                 With fileImportList(IdDuyet)
                     txt(1).Text = .diengiai
@@ -3605,17 +3605,17 @@ Private Sub DuyetItemList(ByVal fname As String)
                 stt = stt + 1
 
             Else
-                MsgBox "Không tìm th?y SHDon."
+                msgBox "Không tìm th?y SHDon."
             End If
         Else
-            MsgBox "Không tìm th?y TTChung."
+            msgBox "Không tìm th?y TTChung."
         End If
 
         If Not ndhDonNode Is Nothing Then
             ' X? lý ndhDonNode n?u c?n
         End If
     Else
-        MsgBox "L?i khi t?i file XML: " & xmlDoc.parseError.reason
+        msgBox "L?i khi t?i file XML: " & xmlDoc.parseError.reason
     End If
 End Sub
 
@@ -3774,7 +3774,7 @@ Private Sub btnImport_Click()
 
     'Neu list rong thi ko thuc hien
     If fileImportList.count = 0 Then
-        MsgBox "Khong co data can xu ly!"
+        msgBox "Khong co data can xu ly!"
         Exit Sub
     End If
 
@@ -4274,7 +4274,7 @@ Private Sub XylyHoaDonTong(ByRef rs_import As Recordset)
         XulyAddHeader rs_import
         XulyMiddle rs_import
     Else
-        MsgBox "®· xö lý xong c¸c ho¸ ®¬n"
+        msgBox "®· xö lý xong c¸c ho¸ ®¬n"
         btnReset_Click
     End If
 End Sub
@@ -4353,7 +4353,7 @@ Private Sub XulyAddHeader(ByRef rs_import As Recordset)
     Exit Sub
 
 ErrorHandler:
-    MsgBox "Lçi ngµy th¸ng kh«ng hîp lÖ"
+    msgBox "Lçi ngµy th¸ng kh«ng hîp lÖ"
 End Sub
 
 Private Sub timer331_Timer(Index As Integer)
@@ -5117,7 +5117,7 @@ Private Sub timerNext_Timer()
         'MsgBox "Hóa don loi, se xu lý hóa don tiep theo"
         Dim response As Integer
 
-        response = MsgBox("Ho¸ ®¬n t¶i bÞ lçi, chän Yes ®Ó söa tay, chän No ®Ó bá qua.", vbYesNo + vbQuestion, "Xác nh?n")
+        response = msgBox("Ho¸ ®¬n t¶i bÞ lçi, chän Yes ®Ó söa tay, chän No ®Ó bá qua.", vbYesNo + vbQuestion, "Xác nh?n")
 
         If response = vbYes Then
 
@@ -5158,7 +5158,7 @@ Private Sub btnImportXML_Click()
 
         'Kiem tra 1 buoc nua trong hoa don
         Dim qrhoadon As String
-        qrhoadon = "SELECT * FROM HoaDon WHERE KyHieu='" & rs_import!KHHDon & "' AND SoHD='" & rs_import!SHDon & "'"
+        qrhoadon = "SELECT * FROM HoaDon WHERE KyHieu='" & rs_import!KHHDon & "' AND SoHD='" & rs_import!SHDon & "' AND NgayPH=#" & Format(rs_import!NLap, "yyyy-mm-dd") & "#"
         Dim rs_hd As Recordset
         Set rs_hd = DBKetoan.OpenRecordset(qrhoadon, dbOpenSnapshot)
         If rs_hd.EOF Then
@@ -5174,6 +5174,11 @@ Private Sub btnImportXML_Click()
 
             'Di chuyen den phan tu tiep theo neu co
             'rs_import.MoveNext
+        Else
+            'MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
+            Dim msgBox As frmMessageBox
+            Set msgBox = New frmMessageBox
+            msgBox.Show vbModal
         End If
 
     End If
@@ -5198,7 +5203,7 @@ Private Sub btnOpenexe_Click()
 
     ' Ki?m tra handle có h?p l? hay không
     If hWndApp = 0 Then
-        MsgBox "Không tìm th?y ?ng d?ng."
+        msgBox "Không tìm th?y ?ng d?ng."
     Else
         ' Ð?i m?t chút tru?c khi ki?m tra l?i
         Sleep 1000
@@ -5491,8 +5496,8 @@ End Sub
 
 Private Sub Chk_Click()
     txt_LostFocus 0
-    CmdPhieu(1).Caption = IIf(chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
-    CmdPhieu(1).tag = chk.Value
+    CmdPhieu(1).Caption = IIf(Chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
+    CmdPhieu(1).tag = Chk.Value
 End Sub
 
 Private Sub ChkXT_Click()
@@ -5594,21 +5599,21 @@ Public Sub CmdChitiet_chon()
 
     If pPQTK > 0 Then
         If Not taikhoan.ChoNhap Then
-            MsgBox "Ch­a ®¨ng ký ng­êi sö dông cho tµi kho¶n nµy!", vbExclamation, App.ProductName
+            msgBox "Ch­a ®¨ng ký ng­êi sö dông cho tµi kho¶n nµy!", vbExclamation, App.ProductName
             RFocus txtchungtu(0)
             GoTo KT
         End If
     End If
 
     If (loaict <> 1 And loaict <> 2 And loaict <> 4 And loaict <> 9) And (taikhoan.tk_id = TKVT_ID) And STDetail Then
-        MsgBox "Kh«ng nhËp trùc tiÕp ph¸t sinh cho tµi kho¶n vËt t­, hµng hãa. H·y vµo nhËp xuÊt !", vbExclamation, App.ProductName
+        msgBox "Kh«ng nhËp trùc tiÕp ph¸t sinh cho tµi kho¶n vËt t­, hµng hãa. H·y vµo nhËp xuÊt !", vbExclamation, App.ProductName
         RFocus txtchungtu(0)
         Exit Sub
     End If
 
     If (loaict = 1) And (taikhoan.tk_id = TKVT_ID) And (co <> 0) Then
         If FThuChi.FThuChiForm = 0 Then
-            MsgBox "Ghi ph¸t sinh nî khi nhËp vËt t­ !", vbExclamation, App.ProductName
+            msgBox "Ghi ph¸t sinh nî khi nhËp vËt t­ !", vbExclamation, App.ProductName
             hasError = True
         End If
         If FThuChi.FThuChiForm <> 4 Then
@@ -5619,7 +5624,7 @@ Public Sub CmdChitiet_chon()
     End If
 
     If pDTTP <> 0 And (Left(taikhoan.sohieu, 3) = "621" Or Left(taikhoan.sohieu, 3) = "622" Or Left(taikhoan.sohieu, 3) = "623" Or Left(taikhoan.sohieu, 3) = "627") And (tp.MaSo = 0) Then
-        If MsgBox("Kh«ng cã m· sè c«ng tr×nh, tiÕp tôc?", vbCritical + vbYesNo, App.ProductName) = vbNo Then
+        If msgBox("Kh«ng cã m· sè c«ng tr×nh, tiÕp tôc?", vbCritical + vbYesNo, App.ProductName) = vbNo Then
             RFocus txtchungtu(2)
             Exit Sub
         End If
@@ -5627,7 +5632,7 @@ Public Sub CmdChitiet_chon()
 
     If pDTTP <> 0 And (Left(taikhoan.sohieu, 3) = "621" Or Left(taikhoan.sohieu, 3) = "622" Or Left(taikhoan.sohieu, 3) = "623" Or Left(taikhoan.sohieu, 3) = "627") And (tp.MaSo > 0) Then
         If tp.SoDT(pThangDauKy, thang) > 0 And tp.GiaThanhCK(thang) = 0 And tp.ChiPhiTP(thang) > 0 Then
-            If MsgBox("C«ng tr×nh hoÆc s¶n phÈm ®· kÕt chuyÓn gi¸ thµnh, tiÕp tôc?", vbCritical + vbYesNo, App.ProductName) = vbNo Then
+            If msgBox("C«ng tr×nh hoÆc s¶n phÈm ®· kÕt chuyÓn gi¸ thµnh, tiÕp tôc?", vbCritical + vbYesNo, App.ProductName) = vbNo Then
                 RFocus txtchungtu(5)
                 Exit Sub
             End If
@@ -5635,7 +5640,7 @@ Public Sub CmdChitiet_chon()
     End If
 
     If (loaict = 2) And (taikhoan.tk_id = TKVT_ID) And (no <> 0) And (vattu.MaSo > 0) Then
-        MsgBox "Ghi ph¸t sinh cã khi xuÊt vËt t­ !", vbExclamation, App.ProductName
+        msgBox "Ghi ph¸t sinh cã khi xuÊt vËt t­ !", vbExclamation, App.ProductName
         RFocus txtchungtu(6)
         hasError = True
         Exit Sub
@@ -5655,11 +5660,11 @@ Public Sub CmdChitiet_chon()
         Exit Sub
     End If
 
-    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And chk.Value = 0 And Me.Visible Then
+    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And Chk.Value = 0 And Me.Visible Then
         'MsgBox "§· xuÊt qu¸ l­îng tån!", vbCritical, App.ProductName
         'Exit Sub
         If IsImport = False Then
-            If MsgBox("§· xuÊt qu¸ l­îng tån! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+            If msgBox("§· xuÊt qu¸ l­îng tån! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
                 RFocus txtchungtu(3)
                 hasError = True
                 Exit Sub
@@ -5669,7 +5674,7 @@ Public Sub CmdChitiet_chon()
     End If
 
     If (loaict = 2) And (taikhoan.tk_id = TKVT_ID) And (txtchungtu(3).tag = 0 And txtchungtu(6).tag = 0) And (nt = 0) And STDetail Then
-        If MsgBox("VËt t­ kh«ng cã tån kho! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+        If msgBox("VËt t­ kh«ng cã tån kho! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
             RFocus txtchungtu(2)
             Exit Sub
         End If
@@ -5677,14 +5682,14 @@ Public Sub CmdChitiet_chon()
 
     If (loaict = 1 Or loaict = 2) And (taikhoan.tk_id = TKVT_ID) And (vattu.TonMin > 0 Or vattu.TonMax > 0) And STDetail Then
         If (loaict = 1) And (vattu.TonMax > 0) And (txtchungtu(3).tag + nt > vattu.TonMax) Then
-            If MsgBox("§· nhËp qu¸ l­îng tån kho tèi ®a cho phÐp! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+            If msgBox("§· nhËp qu¸ l­îng tån kho tèi ®a cho phÐp! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
                 RFocus txtchungtu(3)
                 Exit Sub
             End If
         End If
 
         If (loaict = 2) And (vattu.TonMin > 0) And (txtchungtu(3).tag - nt < vattu.TonMin) Then
-            If MsgBox("§· xuÊt qu¸ l­îng tån tèi thiÓu cho phÐp! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+            If msgBox("§· xuÊt qu¸ l­îng tån tèi thiÓu cho phÐp! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
                 RFocus txtchungtu(3)
                 Exit Sub
             End If
@@ -5692,14 +5697,14 @@ Public Sub CmdChitiet_chon()
     End If
 
     If pVAT2 > 0 And loaict = 8 And vattu.MaSo > 0 And vBH > 0 And vattu.VAT > 0 And vBH <> vattu.VAT Then
-        If MsgBox("MÆt hµng kh«ng cïng thuÕ suÊt VAT! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+        If msgBox("MÆt hµng kh«ng cïng thuÕ suÊt VAT! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
             RFocus txtchungtu(2)
             Exit Sub
         End If
     End If
 
     If KhongNhapTS And FADetail And (taikhoan.tk_id = TSCD_ID Or taikhoan.tk_id = KHTSCD_ID) Then
-        MsgBox "Kh«ng nhËp trùc tiÕp ph¸t sinh vµo tµi kho¶n TSC§ !", vbInformation, App.ProductName
+        msgBox "Kh«ng nhËp trùc tiÕp ph¸t sinh vµo tµi kho¶n TSC§ !", vbInformation, App.ProductName
         RFocus txtchungtu(0)
         Exit Sub
     End If
@@ -5721,7 +5726,7 @@ Public Sub CmdChitiet_chon()
                 If CLng5(.Text) = taikhoan.MaSo Then
                     .col = 18
                     If (vattu.MaSo = 0 And ckh.MaSo = 0) And (CInt5(.Text) < 0) And taikhoan.loai <> 6 Then
-                        MsgBox "Chi tiÕt ®· cã ph¸t sinh trong chøng tõ !", vbExclamation, App.ProductName
+                        msgBox "Chi tiÕt ®· cã ph¸t sinh trong chøng tõ !", vbExclamation, App.ProductName
                         RFocus txtchungtu(0)
                         Exit Sub
                     End If
@@ -5732,7 +5737,7 @@ Public Sub CmdChitiet_chon()
 
     If (no = 0 And taikhoan.tk_id <> GTGTKT_ID And taikhoan.tk_id <> TKVT_ID) And (co = 0 And taikhoan.tk_id <> GTGTPN_ID And taikhoan.tk_id <> TKVT_ID And taikhoan.tk_id <> TKDT_ID And Left(taikhoan.sohieu, 5) <> "33332") Then
         If FThuChi.FThuChiForm = 0 Then
-            MsgBox "ThiÕu sè ph¸t sinh !", vbExclamation, App.ProductName
+            msgBox "ThiÕu sè ph¸t sinh !", vbExclamation, App.ProductName
             RFocus txtchungtu(5)
             Exit Sub
         Else
@@ -5746,7 +5751,7 @@ Public Sub CmdChitiet_chon()
     End If
 
     If no <> 0 And co <> 0 Then
-        MsgBox "ChØ ghi ph¸t sinh nî hoÆc cã !", vbExclamation, App.ProductName
+        msgBox "ChØ ghi ph¸t sinh nî hoÆc cã !", vbExclamation, App.ProductName
         RFocus txtchungtu(5)
         Exit Sub
     End If
@@ -5757,7 +5762,7 @@ Public Sub CmdChitiet_chon()
         If n - c < co And IsImport = False Then
             If FThuChi.FThuChiForm <> 1 And FThuChi.FThuChiForm <> 2 And FThuChi.FThuChiForm <> 3 Then
 
-                If MsgBox("Chi v­ît sè d­! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+                If msgBox("Chi v­ît sè d­! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
                     RFocus txtchungtu(6)
                     Exit Sub
                 End If
@@ -5766,7 +5771,7 @@ Public Sub CmdChitiet_chon()
     End If
 
     If (taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And ckh.MaSo > 0 And Left(ckh.sohieu, 1) = "#" Then
-        MsgBox "Kh«ng nhËp ph¸t sinh cho kh¸ch v·ng lai!", vbCritical, App.ProductName
+        msgBox "Kh«ng nhËp ph¸t sinh cho kh¸ch v·ng lai!", vbCritical, App.ProductName
         RFocus txtchungtu(2)
         Exit Sub
     End If
@@ -5779,7 +5784,7 @@ Public Sub CmdChitiet_chon()
     If ckh.MaSo > 0 And no > 0 And ckh.DuMax > 0 And taikhoan.tk_id = TKCNKH_ID Then
         ckh.SoDuKH ThangCuoiNamTC, n, c, X
         If n - c + no > ckh.DuMax Then
-            If MsgBox("V­ît qu¸ h¹n møc sè d­! TiÕp tôc ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then
+            If msgBox("V­ît qu¸ h¹n møc sè d­! TiÕp tôc ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then
                 RFocus txtchungtu(5)
                 Exit Sub
             End If
@@ -5796,7 +5801,7 @@ Public Sub CmdChitiet_chon()
         CmdPhieu(0).Visible = True
     End If
 
-    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04") Then
+    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04") Then
         If co > 0 Then FThuChi.tag = 1
         If MaSoCT = 0 And hdcount >= 0 And TenTC = "..." Then
             TenTC = HD(0).TenKH
@@ -6226,7 +6231,7 @@ Public Sub CmdChitiet_Click()
 
                 Next
             Else
-                MsgBox "B¹n ph¶i nhËp sè l« vµ h¹n dïng cña mÆt hµng nµy!"
+                msgBox "B¹n ph¶i nhËp sè l« vµ h¹n dïng cña mÆt hµng nµy!"
             End If
 
         Else
@@ -6387,8 +6392,8 @@ B:
         frmMain.Rpt.Formulas(3) = "SoPhieu='" + LaySH(txt(0).Text, 1) + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiachiTC + "'"
         frmMain.Rpt.Formulas(5) = "CTGoc='" + ctgoc + "'"
-        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.lbCty(2).Caption + "'"
-        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.lbCty(3).Caption + "'"
+        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.LbCty(2).Caption + "'"
+        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.LbCty(3).Caption + "'"
         frmMain.Rpt.Formulas(44) = "Ngay='Ngµy " + Format(ngay(1), Mask_DR) + "'"
         frmMain.Rpt.Formulas(45) = "BangChu='" + sotien + "'"
         frmMain.Rpt.Formulas(46) = "TenNV='" + TenTC + "'"
@@ -6870,10 +6875,10 @@ Sub In_hoa_don2(sotien As String, i As Integer, k As Integer, xxx As String, sod
             frmMain.Rpt.Formulas(15) = "MaKH='" + xxx + "'"
         End If
         '     frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.lbCty(2).Caption + "'"
+        frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.LbCty(2).Caption + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiaChiBH + "'"
-        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.lbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.LbCty(8).Caption + "'"
         frmMain.Rpt.Formulas(7) = "MS2='" + MSTBH + "'"
         frmMain.Rpt.Formulas(8) = "TenNN='" + txtVT(1).Text + "'"
         frmMain.Rpt.Formulas(10) = "HTTT='" + HTTT + "'"
@@ -6984,7 +6989,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
     frmMain.Rpt.Formulas(405) = "hantt= '" + thoihanthanhtoan.Text + " " + "'"
     frmMain.Rpt.Formulas(406) = "sophieu= '" + sochungtu.Text + " " + "'"
     frmMain.Rpt.Formulas(550) = "thanhtoan = '" + hinhthucthanhtoan.Text + "'"
-    frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+    frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
 
     CoPSTK "521", -1, v521
     If sodu = 0 Then
@@ -7134,7 +7139,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
             ' chitiet_sp.MoveNext
             If kk > 13 Then
                 'thoat = False
-                MsgBox "B¹n ®· v­ît qu¸ sè dßng quy ®Þnh cña hãa ®¬n."
+                msgBox "B¹n ®· v­ît qu¸ sè dßng quy ®Þnh cña hãa ®¬n."
                 Exit For
             End If
         Next
@@ -7523,7 +7528,7 @@ Public Sub Command_Click(Index As Integer)
         End If
         If Not KiemTraChungtu Then
             If FThuChi.FThuChiForm = 0 Then
-                MsgBox "Cã tµi kho¶n chi tiÕt"
+                msgBox "Cã tµi kho¶n chi tiÕt"
             End If
             GoTo XongCT
         End If
@@ -7548,7 +7553,7 @@ Public Sub Command_Click(Index As Integer)
             MaCT = MaSoCT
             MaSoCT = 0
         Else
-            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
+            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And Chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
         End If
 
         bg = Fix(SoPSConLai * Mask_N) <> 0 And loaict = 7
@@ -7600,7 +7605,7 @@ Public Sub Command_Click(Index As Integer)
                         GhiChu = "..."
                         mtc2 = CInt5(.Text)
                         If mtc2 = -1 Then
-                            MsgBox "Kh«ng x¸c ®Þnh ®­îc ®èi øng !", vbExclamation, App.ProductName
+                            msgBox "Kh«ng x¸c ®Þnh ®­îc ®èi øng !", vbExclamation, App.ProductName
                             GoTo XongCT
                         End If
                         .col = 13
@@ -7695,8 +7700,8 @@ Public Sub Command_Click(Index As Integer)
                     End If
                     If pTygia > 0 Then chungtu.tygia = Cdbl5(txtchungtu(7).Text)
                     If loaict = 8 And pNVBH > 0 Then chungtu.MaNV = txt(3).tag
-                    If loaict = 8 And chk.Value = 1 Then chungtu.maloai = 7
-                    If loaict = 7 And chk.Value = 0 Then chungtu.maloai = 8
+                    If loaict = 8 And Chk.Value = 1 Then chungtu.maloai = 7
+                    If loaict = 7 And Chk.Value = 0 Then chungtu.maloai = 8
                     If loaict = 8 And (chungtu.tkno.tk_id = TKGT_ID And chungtu.MaVattu = 0) Then
                         .col = 3
                         chungtu.TLCK = Cdbl5(.Text)
@@ -7805,7 +7810,7 @@ Public Sub Command_Click(Index As Integer)
 
 
         If loaict > 8 Then GhiChungtuTS MaCT
-        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And chk.Value = 0 Then XoaPhieu pMaBG
+        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And Chk.Value = 0 Then XoaPhieu pMaBG
 
         'tat ca da ghi xong dua so so va han dung vao trong database
         Dim stt_dong As Integer
@@ -7952,13 +7957,13 @@ Public Sub Command_Click(Index As Integer)
         If MaSoCT > 0 Then
             If loaict = 1 And chkXT.Value = 0 Then
                 If Not XoaCTOK(MaSoCT) Then
-                    MsgBox "V©t t­ nhËp ®· xuÊt hÕt, kh«ng xo¸ chøng tõ!", vbCritical, App.ProductName
+                    msgBox "V©t t­ nhËp ®· xuÊt hÕt, kh«ng xo¸ chøng tõ!", vbCritical, App.ProductName
                     GoTo XongCT
                 End If
             End If
             Dim isxoa As Integer
             If msgXoa = 0 Or countDete = 1 Then
-                If MsgBox("B¹n ®· ch¾c ch¾n xãa chøng tõ nµy ?", vbYesNo + vbCritical, App.ProductName) = vbYes Then
+                If msgBox("B¹n ®· ch¾c ch¾n xãa chøng tõ nµy ?", vbYesNo + vbCritical, App.ProductName) = vbYes Then
                     isxoa = 1
                     countDete = 0
                 End If
@@ -7977,7 +7982,7 @@ Public Sub Command_Click(Index As Integer)
                                 If rs_chungtu!MaVattu > 0 And rs_chungtu!SoPS2Co > 0 Then
                                     rs_chungtu.Close
                                     Set rs_chungtu = Nothing
-                                    MsgBox "Chøng tõ nhËp ®· tÝnh gi¸ xuÊt, kh«ng xãa !", vbExclamation, App.ProductName
+                                    msgBox "Chøng tõ nhËp ®· tÝnh gi¸ xuÊt, kh«ng xãa !", vbExclamation, App.ProductName
                                     GoTo XongCT
                                 Else
                                     rs_chungtu.MoveNext
@@ -8294,7 +8299,7 @@ Dim FilePath As String
         If Not dlhDonNode Is Nothing Then
             ' txtID.Text = dlhDonNode.Attributes.getNamedItem("Id").Text
         Else
-            MsgBox "Không tìm th?y DLHDon."
+            msgBox "Không tìm th?y DLHDon."
         End If
 
         If Not ttChungNode Is Nothing Then
@@ -8329,7 +8334,7 @@ Dim FilePath As String
                     txtVT(9).Text = mstNode.Text
                     GetcustomerByMST txtVT(9).Text, tenNode.Text, DChiNode.Text
                 Else
-                    MsgBox "Không tìm th?y MST."
+                    msgBox "Không tìm th?y MST."
                 End If
                 txt(1).Text = "Noi dung chi phi quan ly"
                 txtchungtu(0).Text = 6422
@@ -8353,10 +8358,10 @@ Dim FilePath As String
                 txtChungtu_LostFocus (0)
 
             Else
-                MsgBox "Không tìm th?y SHDon."
+                msgBox "Không tìm th?y SHDon."
             End If
         Else
-            MsgBox "Không tìm th?y TTChung."
+            msgBox "Không tìm th?y TTChung."
         End If
 
         If Not ndhDonNode Is Nothing Then
@@ -8364,7 +8369,7 @@ Dim FilePath As String
         End If
 
     Else
-        MsgBox "L?i khi t?i file XML: " & xmlDoc.parseError.reason
+        msgBox "L?i khi t?i file XML: " & xmlDoc.parseError.reason
     End If
 
 End Sub
@@ -8420,7 +8425,7 @@ If hasError = False Then
     rs_ktraNH.MoveNext
     timerNganhang.Enabled = True
     Else
-      MsgBox "Hóa don loi, se xu lý hóa don tiep theo"
+      msgBox "Hóa don loi, se xu lý hóa don tiep theo"
       hasError = False
         Command_Click 0
          'Command6_Click
@@ -9479,7 +9484,7 @@ Private Sub Timer2_Timer()
         DuyetItemList item2.patTH
     Else
         ' Code to execute if the condition is not met
-        MsgBox "Duyet xong"
+        msgBox "Duyet xong"
         FThuChi.FThuChiForm = 0
         
     End If
@@ -9499,7 +9504,7 @@ Private Sub Timer3_Timer()
     Else
         ' Code to execute if the condition is not met
         If FThuChi.FThuChiForm <> 3 Then
-            MsgBox "Duyet xong"
+            msgBox "Duyet xong"
             FThuChi.FThuChiForm = 0
         End If
     End If
@@ -9750,7 +9755,7 @@ Private Sub txt_LostFocus(Index As Integer)
         If Len(txt(Index).Text) = 0 Then
             txt(Index).Text = "..."
         Else
-            sh = IIf(chk.Value = 1, "P", "")
+            sh = IIf(Chk.Value = 1, "P", "")
             L = Len(txt(0).Text)
             If Index = 0 And L > 0 And MaSoCT = 0 Then
                 If Not IsNumeric(txt(0).Text) Then
@@ -9780,7 +9785,7 @@ Private Sub txt_LostFocus(Index As Integer)
         If Len(Replace(Trim(txtVT(1).Text), ".", "")) <= 0 Then txtVT(1).Text = "..."
         ' moi them vao
         If Len(Replace(txt(Index).Text, ".", "")) = 0 Then
-            MsgBox "B¹n ph¶i nhËp sè hãa ®¬n hoÆc sè hiÖu b¹n tù lËp"
+            msgBox "B¹n ph¶i nhËp sè hãa ®¬n hoÆc sè hiÖu b¹n tù lËp"
             RFocus txt(Index)
 
         End If
@@ -11148,8 +11153,8 @@ Public Sub SetLoaiChungtu(loai As Integer)
     chkXT.Visible = (loai = 1) And pDTTP <> 0
 
     vis = (loai = 7 Or loai = 8) And (pBaoGia = 1) And ((frmMain.Command(4).Visible And pPhieu = 1) Or (Not frmMain.Command(4).Visible And pPhieu = 0))
-    chk.Visible = vis
-    chk.Value = 0
+    Chk.Visible = vis
+    Chk.Value = 0
     pMaBG = 0
 
     vis = ((loai = 7 Or loai = 8) And pNVBH = 1)
@@ -11224,7 +11229,7 @@ TTS:
             tscount = tscount + 1
             MaTS(tscount) = pMaTaiSan
             If loai = 9 And MaSoCT = 0 And tscount < 9 Then
-                If MsgBox("NhËp bæ sung tµi s¶n cïng chøng tõ?", vbYesNo + vbInformation, App.ProductName) = vbYes Then
+                If msgBox("NhËp bæ sung tµi s¶n cïng chøng tõ?", vbYesNo + vbInformation, App.ProductName) = vbYes Then
                     pMaTaiSan = 0
                     GoTo TTS
                 End If
@@ -11318,7 +11323,7 @@ Private Sub XoaPhieuTrenManHinh()
     Command(2).Enabled = True
     Label(22).Enabled = False
     txtchungtu(8).Enabled = False
-    chk.Value = 0
+    Chk.Value = 0
     pMaBG = 0
 
     txtchungtu(7).Text = Format(pRate, Mask_2)
@@ -11345,7 +11350,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     sql = "SELECT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon ,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN KhachHang ON ChungTu" + sh + ".MaKH =KhachHang.MaSo WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " ORDER BY Chungtu" + sh + ".MaSo DESC"
     Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     If rs_chungtu.recordCount = 0 Then
-        MsgBox "PhiÕu ®· bÞ xo¸!", vbCritical, App.ProductName
+        msgBox "PhiÕu ®· bÞ xo¸!", vbCritical, App.ProductName
         HienPhieuTrenManHinh = -1
         GoTo KetThuc
     End If
@@ -11354,7 +11359,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     XoaPhieuTrenManHinh
     loaict = rs_chungtu!maloai
     SetListIndex CboThang, rs_chungtu!ThangCT
-    chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
+    Chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
     pMaBG = IIf(rs_chungtu!maloai = 7, ma, 0)
     ngay(0) = rs_chungtu!NgayCT
     ngay(1) = rs_chungtu!NgayGS
@@ -11484,7 +11489,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
             If rs_chungtu!sops <> 0 Or taikhoan.tk_id = GTGTKT_ID Or taikhoan.tk_id = GTGTPN_ID Or taikhoan.tk_id = TTDB_ID Or taikhoan.tk_id = TKVT_ID Or ((taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And rs_chungtu!MaKHC > 0) Then
                 If Not CmdPhieu(0).Visible Then CmdPhieu(0).Visible = (Left(taikhoan.sohieu, Len(TM)) = TM)
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If (((taikhoan.tk_id <> TKVT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> GTGTKT_ID) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> TKGT_ID) And (taikhoan.tk_id <> TSCD_ID)) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then         ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, -1, rs_chungtu!sops, rs_chungtu!SoPS2No, rs_chungtu!makh)
@@ -11667,7 +11672,7 @@ KT1:
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
                 If Not CmdPhieu(2).Visible Then CmdPhieu(2).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH Or taikhoan.tk_id2 = CLng(NH))
                 CmdPhieu(2).tag = taikhoan.sohieu
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If ((taikhoan.tk_id <> TKVT_ID And taikhoan.tk_id <> TKDT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> GTGTPN_ID) And (taikhoan.tk_id <> TTDB_ID) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then       ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, 1, rs_chungtu!sops, rs_chungtu!SoPS2Co, rs_chungtu!MaKHC)
@@ -11892,30 +11897,30 @@ Private Function KiemTraChungtu() As Boolean
         RFocus txtchungtu(0)
         Exit Function
     End If
-    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or chk.Value = 0) Then
+    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or Chk.Value = 0) Then
         If Not PSTuDong(SoPSConLai) Then
-            MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
+            msgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
             hasError = True
             RFocus txtchungtu(0)
             Exit Function
         End If
     End If
     If loaict = 3 And nhieunoco Then
-        MsgBox "Kh«ng nhËp chøng tõ kÕt chuyÓn nhiÒu nî, nhiÒu cã !", vbInformation, App.ProductName
+        msgBox "Kh«ng nhËp chøng tõ kÕt chuyÓn nhiÒu nî, nhiÒu cã !", vbInformation, App.ProductName
         RFocus txtchungtu(0)
         Exit Function
     End If
     If loaict = 8 And (Not (CoPSTK("5", 0) Or CoPSTK("33", 0))) Then
-        MsgBox "Chøng tõ b¸n hµng kh«ng cã tµi kho¶n doanh thu !", vbInformation, App.ProductName
+        msgBox "Chøng tõ b¸n hµng kh«ng cã tµi kho¶n doanh thu !", vbInformation, App.ProductName
         Exit Function
     End If
     If loaict = 3 And (Not (CoPSTK("9") Or CoPSTK("8") Or CoPSTK("7") Or CoPSTK("6") Or CoPSTK("5") Or CoPSTK("142") Or CoPSTK("421") Or CoPSTK(pVATV))) Then
-        MsgBox "ChØ nhËp chøng tõ kÕt chuyÓn trong ph©n lo¹i chøng tõ nµy!", vbInformation, App.ProductName
+        msgBox "ChØ nhËp chøng tõ kÕt chuyÓn trong ph©n lo¹i chøng tõ nµy!", vbInformation, App.ProductName
         Exit Function
     End If
     If User_Right <> 0 Then
         If SelectSQL("SELECT Lock" + CStr(CboThang.ItemData(CboThang.ListIndex)) + " Mod 10 AS F1 FROM License") > 0 Then
-            MsgBox "Th¸ng ®· bÞ kho¸ kh«ng cho nhËp sè liÖu!", vbCritical, App.ProductName
+            msgBox "Th¸ng ®· bÞ kho¸ kh«ng cho nhËp sè liÖu!", vbCritical, App.ProductName
             Exit Function
         End If
     End If
@@ -11923,7 +11928,7 @@ Private Function KiemTraChungtu() As Boolean
         st = CStr(CThangDB(CboThang.ItemData(CboThang.ListIndex)))
         sodu = SelectSQL("SELECT Sum(IIF(Loai=1 OR Loai=2,DuNo_" + st + "-DuCo_" + st + ",0)) AS F1,Sum(IIF(Loai=3 OR Loai=4,DuNo_" + st + "-DuCo_" + st + ",0)) AS F2 FROM HethongTK WHERE Cap=0", sodu2)
         If sodu = sodu2 Then
-            If MsgBox("Th¸ng ®· kÕt chuyÓn, cho nhËp chøng tõ?", vbCritical + vbYesNo, App.ProductName) = vbNo Then Exit Function
+            If msgBox("Th¸ng ®· kÕt chuyÓn, cho nhËp chøng tõ?", vbCritical + vbYesNo, App.ProductName) = vbNo Then Exit Function
         End If
     End If
     If chkXT.Value = 1 Then
@@ -12850,7 +12855,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
         Set tkxt = New ClsTaikhoan
         tkxt.InitTaikhoanSohieu txtsh(0).Text
         txtsh(0).tag = IIf(tkxt.MaSo > 0 And tkxt.tkcon = 0, tkxt.MaSo, 0)
-        Lb(0).Caption = tkxt.Ten
+        lb(0).Caption = tkxt.Ten
         vis = (tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID Or (tkxt.loai = 6 And pDTTP <> 0))
         If Left(txtsh(0).Text, 3) = "154" Then
             vis = True
@@ -12858,7 +12863,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
 
         Label(19).Enabled = vis
         txtsh(1).Enabled = vis
-        Lb(1).Enabled = vis
+        lb(1).Enabled = vis
         cmd(1).Enabled = vis
         cmd(0).tag = IIf(tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID, 1, IIf(tkxt.loai = 6 And pDTTP <> 0, 2, 0))
         Set tkxt = Nothing
@@ -12867,14 +12872,14 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set khxt = New ClsKhachHang
             khxt.InitKhachHangSohieu txtsh(1).Text
             txtsh(1).tag = khxt.MaSo
-            Lb(1).Caption = khxt.Ten
+            lb(1).Caption = khxt.Ten
             Set khxt = Nothing
         End If
         If cmd(0).tag = 2 Then
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -12882,7 +12887,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -13183,7 +13188,7 @@ E1:
     Me.MousePointer = 0
     Exit Sub
 E:
-    MsgBox Err.Description
+    msgBox Err.Description
 KT:
     Me.MousePointer = 0
 End Sub
