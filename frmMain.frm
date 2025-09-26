@@ -450,23 +450,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "25/09/25"
-            Key             =   ""
+            TextSave        =   "26/09/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2478,7 +2474,7 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyD Then
         ChDir pCurDir + "DATA"
-        Recycle "K*" + "_" + CStr(lbCty(0).tag) + ".SAS"
+        Recycle "K*" + "_" + CStr(LbCty(0).tag) + ".SAS"
     End If
 
     If (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyF Then
@@ -2694,7 +2690,7 @@ Private Sub Form_Load()
     ExecuteSQL_them_query "DanhSachVatTu", sqqq
 
 
-    lbCty(4).Visible = False
+    LbCty(4).Visible = False
     'If Year(DateTime.Date) < 2018 Then
     'Label3(12).Caption = "ß¨n vﬁ tri”n khai: L™ V®n L∏y"
     'Label3(13).Caption = "SË Æi÷n thoπi: 093 3415 959"
@@ -2897,9 +2893,9 @@ Private Sub mnDL_Click(Index As Integer)
                 If rs_ktra!Type = 2 Then
                     Dim resultArray() As String
                     resultArray = Split(rs_ktra!Year, "|")
-                    Dim chk As Integer
-                    chk = (CInt(resultArray(0)) - 1) + CInt(resultArray(1)) - pNamTC
-                    If chk <= 0 Then
+                    Dim Chk As Integer
+                    Chk = (CInt(resultArray(0)) - 1) + CInt(resultArray(1)) - pNamTC
+                    If Chk <= 0 Then
                         MsgBox "G„i d˜ li÷u theo n®m Æ∑ h’t, vui lﬂng li™n h÷ Æ” Æ≠Óc chuy”n sang n®m mÌi"
                         Me.MousePointer = 0
                         Exit Sub
@@ -2941,7 +2937,7 @@ Private Sub mnDL_Click(Index As Integer)
 
             HienThongBao "Chuy”n sË d≠ cuËi k˙ ...  Xin vui lﬂng chÍ !", 1
             ChuyenNamMoi
-            lbCty(7).Caption = CStr(pNamTC)
+            LbCty(7).Caption = CStr(pNamTC)
             LietKeNam
         End If
         '            Else
@@ -2965,7 +2961,7 @@ Private Sub mnDL_Click(Index As Integer)
     Case 19: If KtraMKAdmin Then FrmE.Show 1
     Case 21:
         If KtraMKAdmin Then
-            sql = FrmDB.ChonTepLuu(frmMain.lbCty(8).Caption, pNamTC)
+            sql = FrmDB.ChonTepLuu(frmMain.LbCty(8).Caption, pNamTC)
             If Len(sql) > 0 Then
                 CloseUp 1
                 OpenDB sql
@@ -3099,12 +3095,12 @@ X1:
         ChonTenTep "", 0, "", 3
     Case 9:    ' Dat may in
         ChonTenTep "", cdlCFBoth, "", 4
-        If Len(dlgCommonDialog.FontName) > 1 And (LoaiFont(dlgCommonDialog.FontName) = FontFlag Or KiemTraMaSoThue(lbCty(8).Caption, "03")) Then
+        If Len(dlgCommonDialog.FontName) > 1 And (LoaiFont(dlgCommonDialog.FontName) = FontFlag Or KiemTraMaSoThue(LbCty(8).Caption, "03")) Then
             pFontName = dlgCommonDialog.FontName
             pFontSize = dlgCommonDialog.FontSize
             ExecuteSQL5 "UPDATE License SET FontName='" + pFontName + "', FontSize=" + CStr(pFontSize)
-            lbCty(0).FontName = pFontName
-            lbCty(1).FontName = pFontName
+            LbCty(0).FontName = pFontName
+            LbCty(1).FontName = pFontName
             mnHT(10).Caption = IIf(FontFlag <> 2, "Chuy”n ÆÊi CSDL sang font ABC", "Chuy”n ÆÊi CSDL sang font VNI")
             SetFont Me
         End If
@@ -3131,10 +3127,10 @@ X1:
         FrmMatkhau.tag = 1
         FrmMatkhau.Show 1
     Case 16:
-        If (Not IsNumeric(Left(lbCty(8).Caption, 2))) Then GoTo KT
-        If CInt(Left(lbCty(8).Caption, 3)) = 0 Then GoTo KT
-        If (Len(pMST) > 0 And Left(lbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
-        If FrmGetStr.GetMK(lbCty(8).Caption) Then
+        If (Not IsNumeric(Left(LbCty(8).Caption, 2))) Then GoTo KT
+        If CInt(Left(LbCty(8).Caption, 3)) = 0 Then GoTo KT
+        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
+        If FrmGetStr.GetMK(LbCty(8).Caption) Then
 B:
             UpDateDB
             GetLicense
@@ -3188,7 +3184,7 @@ Private Sub mnNam_Click(Index As Integer)
     Next
     pNamTC = CInt5(mnNam(Index).Caption)
     
-    lbCty(7).Caption = CStr(pNamTC)
+    LbCty(7).Caption = CStr(pNamTC)
     Me.MousePointer = 0
 End Sub
 
@@ -3355,7 +3351,7 @@ Public Sub mnVT_Click(Index As Integer)
 
     Case 3:
         FrmLuuChuyen.Show 1
-    Case 19:
+    Case 4:
         FrmThanhPham.Show 1
     Case 2:
         FrmNguon.Show 1
@@ -3399,7 +3395,7 @@ Public Sub mnVT_Click(Index As Integer)
             Do While Len(st) > 0
                 mv = SoHieu2MaSo(st, "Vattu")
                 If mv > 0 Then Exit Do
-                 st = FrmGetStr.GetString("SË hi÷u vÀt t≠ c«n t›nh lπi (Æ” trËng n’u t›nh lπi toµn bÈ):", "T›nh gi∏ xu t kho")
+                st = FrmGetStr.GetString("SË hi÷u vÀt t≠ c«n t›nh lπi (Æ” trËng n’u t›nh lπi toµn bÈ):", "T›nh gi∏ xu t kho")
             Loop
 
             If OutCost <> 2 Then
@@ -3471,7 +3467,7 @@ Public Sub mnVT_Click(Index As Integer)
         FVTDauKy.tag = 1
         FVTDauKy.Show 1
     Case 7:
-        KiemKeN.Show vbModal
+        If ChoDieuChinhDauKy Then FVTDauKy.Show 1
     Case 19:
         'Load frmPhanLoaiVT
         frmPhanLoaiVT.tag = 3
@@ -3480,12 +3476,20 @@ Public Sub mnVT_Click(Index As Integer)
         FrmTP.Show 1
     Case 11:
         If KtraMKAdmin Then DatTKDTTP
+    Case 12:
+        frmPhanLoaiVT.tag = 3
+        frmPhanLoaiVT.Show 1
     Case 13:
+        FrmTP.Show 1
+    Case 14:
+        If KtraMKAdmin Then DatTKDTTP
+    Case 16:
         If KtraMKAdmin Then DatTKVT
     Case 15    ', 16:
         FrmVattu.Show 1
         ' CPGV.tag = Index - 15
         'CPGV.Show 1
+
     End Select
 KT:
     HienThongBao "", 1
@@ -3852,53 +3856,53 @@ Private Sub GetLicense()
     pTenCty = rs_license!TenCty
     pTenCn = rs_license!tencn
 
-    lbCty(2).Caption = rs_license!DiaChi
-    lbCty(3).Caption = rs_license!Tel
-    lbCty(4).Caption = rs_license!Fax
-    lbCty(5).Caption = rs_license!TaiKhoanVN
-    lbCty(6).Caption = rs_license!TaiKhoanNT
+    LbCty(2).Caption = rs_license!DiaChi
+    LbCty(3).Caption = rs_license!Tel
+    LbCty(4).Caption = rs_license!Fax
+    LbCty(5).Caption = rs_license!TaiKhoanVN
+    LbCty(6).Caption = rs_license!TaiKhoanNT
     pNamTC = rs_license!NamTC
     pThangDauKy = rs_license!thang
-    lbCty(7).Caption = CStr(pNamTC)
-    lbCty(8).Caption = rs_license!masothue
-    lbCty(13).Caption = rs_license!email
-    lbCty(14).Caption = rs_license!sofax
+    LbCty(7).Caption = CStr(pNamTC)
+    LbCty(8).Caption = rs_license!masothue
+    LbCty(13).Caption = rs_license!email
+    LbCty(14).Caption = rs_license!sofax
     pBaoGia = (rs_license!Flag1 Mod 1000) \ 100
     pNVBH = (rs_license!Flag1 Mod 10000) \ 1000
 
     For i = 5 To 7
         mnCN(i).Visible = (pNVBH > 0)
     Next
-    Lb(0).tag = "Model"
+    lb(0).tag = "Model"
     SetFont Me
     i = (rs_license!Flag1 Mod 1000000000) \ 100000000
-    Lb(0).tag = i
+    lb(0).tag = i
     If (i < 3 Or i = 5) And pVersion = 0 Then ExecuteSQL5 "UPDATE License SET Flag1=400000000+Flag1 Mod 100000000", False
     Select Case i
-    Case 1: Lb(1).Caption = "Doanh nghi÷p Nhµ n≠Ìc"
-        Lb(0).Caption = "10.1."
-    Case 2: Lb(1).Caption = "CÊ ph«n - Li™n doanh"
-        Lb(0).Caption = "10.1."
-    Case 3: Lb(1).Caption = "C´ng ty TNHH"
-        Lb(0).Caption = "10.1"
-    Case 4: Lb(1).Caption = "Doanh nghi÷p t≠ nh©n"
-        Lb(0).Caption = "10.1"
-    Case 5: Lb(1).Caption = "C¨ sÎ Æµo tπo"
-        Lb(0).Caption = "10.1"
+    Case 1: lb(1).Caption = "Doanh nghi÷p Nhµ n≠Ìc"
+        lb(0).Caption = "10.1."
+    Case 2: lb(1).Caption = "CÊ ph«n - Li™n doanh"
+        lb(0).Caption = "10.1."
+    Case 3: lb(1).Caption = "C´ng ty TNHH"
+        lb(0).Caption = "10.1"
+    Case 4: lb(1).Caption = "Doanh nghi÷p t≠ nh©n"
+        lb(0).Caption = "10.1"
+    Case 5: lb(1).Caption = "C¨ sÎ Æµo tπo"
+        lb(0).Caption = "10.1"
     Case 6:
-        Lb(1).Caption = "Hµnh ch›nh s˘ nghi÷p"
-        Lb(0).Caption = "10.1"
+        lb(1).Caption = "Hµnh ch›nh s˘ nghi÷p"
+        lb(0).Caption = "10.1"
         Label(24).Visible = False
         Label(25).Visible = False
         Frame(1).Visible = False
     Case Else
-        Lb(0).Caption = "10.1"
+        lb(0).Caption = "10.1"
     End Select
-    If pVersion <> 3 Then Lb(0).Caption = Lb(0).Caption    ' + IIf((rs_license!Flag1 Mod 100000000) \ 10000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 10000000) \ 1000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 1000000) \ 100000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 100000) \ 10000 > 0, "1", "0")
-    chk(0).Value = (rs_license!Flag1 Mod 100000000) \ 10000000
-    chk(1).Value = (rs_license!Flag1 Mod 10000000) \ 1000000
-    chk(2).Value = (rs_license!Flag1 Mod 1000000) \ 100000
-    chk(3).Value = (rs_license!Flag1 Mod 100000) \ 10000
+    If pVersion <> 3 Then lb(0).Caption = lb(0).Caption    ' + IIf((rs_license!Flag1 Mod 100000000) \ 10000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 10000000) \ 1000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 1000000) \ 100000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 100000) \ 10000 > 0, "1", "0")
+    Chk(0).Value = (rs_license!Flag1 Mod 100000000) \ 10000000
+    Chk(1).Value = (rs_license!Flag1 Mod 10000000) \ 1000000
+    Chk(2).Value = (rs_license!Flag1 Mod 1000000) \ 100000
+    Chk(3).Value = (rs_license!Flag1 Mod 100000) \ 10000
 
     Command(6).Visible = ((rs_license!Flag1 Mod 1000000) \ 100000 > 0)
 
@@ -3930,8 +3934,8 @@ Private Sub GetLicense()
     pNhapDoiTuong = (rs_license!Lock2 Mod 10000) \ 1000
     pTrungSoHieuKhacThang = (rs_license!Lock2 Mod 100000) \ 10000
 
-    mnVT(14).Visible = (pNhapKhau > 0)
-    mnVT(15).Visible = (pNhapKhau > 0)
+    'mnVT(14).Visible = (pNhapKhau > 0)
+    'mnVT(15).Visible = (pNhapKhau > 0)
 
     pTien = 0
     pTien = rs_license!loaitien
@@ -3945,11 +3949,11 @@ Private Sub GetLicense()
     CTGS_GV = rs_license!CTGS_GV
     pFontName = rs_license!FontName
     pFontSize = rs_license!FontSize
-    lbCty(0).FontName = pFontName
-    lbCty(1).FontName = pFontName
-    lbCty(10).Caption = rs_license!Quan
-    lbCty(11).Caption = rs_license!ThanhPho
-    frmMain.lbCty(9).Caption = rs_license!email
+    LbCty(0).FontName = pFontName
+    LbCty(1).FontName = pFontName
+    LbCty(10).Caption = rs_license!Quan
+    LbCty(11).Caption = rs_license!ThanhPho
+    frmMain.LbCty(9).Caption = rs_license!email
     pSoKT = rs_license!SoKT
     mnDL(13).Visible = (pSoKT Mod 100 >= 10)
     '    mnDL(14).Visible = (pSoKT Mod 100 >= 10)
@@ -3973,7 +3977,7 @@ Private Sub GetLicense()
 
     pNN = i
     mnVT(4).Visible = (OutCost = 0 Or OutCost = 1 Or OutCost = 2)
-    mnVT(7).Visible = (pKiemKeNgay > 0)
+    mnVT(10).Visible = (pKiemKeNgay > 0)
     For i = 8 To 11
         mnVT(i).Visible = (pDTTP <> 0)
     Next
@@ -4039,9 +4043,9 @@ Private Sub GetLicense()
         pSHPT = "131"
     End If
 
-    lbCty(0).tag = rs_license!TenCty_ID
-    lbCty(0).Caption = pTenCty
-    lbCty(1).Caption = pTenCn
+    LbCty(0).tag = rs_license!TenCty_ID
+    LbCty(0).Caption = pTenCty
+    LbCty(1).Caption = pTenCn
     Frame(0).Visible = pSongNgu
 
     mnXoa(0).tag = 0
@@ -4274,9 +4278,9 @@ Private Function StationList() As Integer
         End If
     Next
     If miLoop > 1 Then
-        lbCty(12).Caption = "C∏c m∏y trπm: " + sql
+        LbCty(12).Caption = "C∏c m∏y trπm: " + sql
     Else
-        lbCty(12).Caption = ""
+        LbCty(12).Caption = ""
     End If
     
     StationList = miLoop
