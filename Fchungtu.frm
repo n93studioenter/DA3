@@ -3279,7 +3279,7 @@ Option Explicit
 Private Declare Function SetTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long) As Long
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
- 
+
 
 Dim nknl As Integer
 Dim bakParentId As Integer
@@ -3329,7 +3329,7 @@ Const MB_ICONINFORMATION As Long = &H40
 Const MB_OK As Long = &H0
 Const IDOK As Long = 1
 
-
+Dim bakThangNK As Integer
 ' Bi?n toàn c?c d? luu handle c?a c?a s? ?ng d?ng dã m?
 Dim hWndApp As Long
 Dim isGhi As Boolean
@@ -3447,8 +3447,16 @@ Attribute dathuchien.VB_VarUserMemId = 1073938536
 
 Dim hien_bang_tinh As Boolean
 Attribute hien_bang_tinh.VB_VarUserMemId = 1073938537
+
 Public tongtientruoc As Double
 Attribute tongtientruoc.VB_VarUserMemId = 1073938538
+Function Getmonthbynl() As Integer
+    If Not rs_importNK.EOF Then
+        Getmonthbynl = bakThangNK
+    Else
+        Getmonthbynl = 0
+    End If
+End Function
 Public Sub Autonhapkho()
     Dim Query As String
     'Goi table Import
@@ -3456,6 +3464,7 @@ Public Sub Autonhapkho()
     Set rs_importNK = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
 
     If Not rs_importNK.EOF Then
+        bakThangNK = Month(rs_importNK!NgayLap)
         Nhapkhotong
     End If
 End Sub
@@ -5177,9 +5186,9 @@ Private Sub btnImportXML_Click()
             'Di chuyen den phan tu tiep theo neu co
             'rs_import.MoveNext
         Else
-            'MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
+            MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
             'Dim msgBox As frmMessageBox
-           ' Set msgBox = New frmMessageBox
+            ' Set msgBox = New frmMessageBox
             'msgBox.SetText "Kh«ng cßn ho¸ ®¬n ®Ó import"
             'msgBox.Show vbModal
         End If
