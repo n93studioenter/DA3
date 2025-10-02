@@ -450,23 +450,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "30/09/25"
-            Key             =   ""
+            TextSave        =   "01/10/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2414,7 +2410,7 @@ Private Sub AuToNhapTP()
     Dim X As Integer
     Dim Query As String
     Dim monthCurrent As Integer
-    monthCurrent = Month(Date)    ' L?y tháng hi?n t?i
+    monthCurrent = month(Date)    ' L?y tháng hi?n t?i
     X = monthCurrent
 
 
@@ -2452,7 +2448,7 @@ Private Sub Form_Activate()    ' viet menu
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN TaiKhoanVN TEXT(200)")
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN DiaChi TEXT(255)")
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN FAX TEXT(200)")
-    ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
+    'ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
     mnDuLieu.Caption = "Xö lý"
 
     StationList
@@ -3420,7 +3416,7 @@ Public Sub mnVT_Click(Index As Integer)
         If OutCost = 0 Then
             k = CInt5(FrmGetStr.GetString("NhËp sè 1 ®Ó tÝnh b×nh qu©n di ®éng, sè 2 ®Ó tÝnh b×nh qu©n cuèi kú (tÝnh theo th¸ng)", "TÝnh l¹i gi¸ vèn"))
             If k < 1 And k > 2 Then GoTo KT
-            TinhGVBHBQ Month(d1), Month(d2), i, mv, k
+            TinhGVBHBQ month(d1), month(d2), i, mv, k
         Else
             TinhGVBH d1, d2, i, mv
         End If
@@ -3470,7 +3466,7 @@ Private Sub XKTheoNgay()
     Dim currentDate As String
 
     ' L?y ngày d?u tháng
-    firstDate = Format(DateSerial(Year(Date), Month(Date), 1), "yyyy-mm-dd")
+    firstDate = Format(DateSerial(Year(Date), month(Date), 1), "yyyy-mm-dd")
 
     ' L?y ngày hi?n t?i
     currentDate = Format(Date, "yyyy-mm-dd")
@@ -3485,9 +3481,9 @@ Private Sub XKTheoNgay()
         ' B?t d?u vòng l?p While
         While Not rs_chungtu.EOF
             If ngayCTList = "" Then
-                ngayCTList = Format(rs_chungtu!NgayCT, "dd/MM/yyyy")
+                ngayCTList = Format(rs_chungtu!ngayct, "dd/MM/yyyy")
             Else
-                ngayCTList = ngayCTList & "," & Format(rs_chungtu!NgayCT, "dd/MM/yyyy")
+                ngayCTList = ngayCTList & "," & Format(rs_chungtu!ngayct, "dd/MM/yyyy")
 
             End If
             rs_chungtu.MoveNext
@@ -3636,7 +3632,7 @@ Private Sub XKTheoThang()
     Dim currentDate As String
 
     ' L?y ngày d?u tháng
-    firstDate = Format(DateSerial(Year(Date), Month(Date), 1), "yyyy-mm-dd")
+    firstDate = Format(DateSerial(Year(Date), month(Date), 1), "yyyy-mm-dd")
 
     ' L?y ngày hi?n t?i
     currentDate = Format(Date, "yyyy-mm-dd")
@@ -3661,11 +3657,11 @@ Private Sub mnVTdt_Click(Index As Integer)
         XKTheoThang
     End If
 End Sub
-Function IsThanhPham(ByVal number As Integer, ByVal MaSo As Integer) As Boolean
+Function IsThanhPham(ByVal number As Integer, ByVal maSo As Integer) As Boolean
 'Lay ma phan loai truoc
     Dim getMPL As Integer
     getMPL = CInt(SelectSQL("SELECT MaSo as f1 FROM PhanLoaiVattu WHERE SoHieu='TP'"))
-    If getMPL = MaSo Then
+    If getMPL = maSo Then
         IsThanhPham = True
     Else
         IsThanhPham = False
@@ -4106,7 +4102,7 @@ Private Sub DatTKCN()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK theo dâi chi tiÕt")
     If Len(shtk) = 0 Then GoTo KT
     TK.InitTaikhoanSohieu shtk
-    If TK.MaSo = 0 Then GoTo KT
+    If TK.maSo = 0 Then GoTo KT
     If TK.tk_id = TKVT_ID Or TK.tk_id = TSCD_ID Or TK.tk_id = KHTSCD_ID Or TK.tk_id = TKThue_ID Or TK.tk_id = TKDT_ID Then Exit Sub
     If TK.TkCoPS(0, 0) Or TK.NoDauKy <> 0 Or TK.CoDauKy <> 0 Then
         Me.MousePointer = 11
@@ -4132,7 +4128,7 @@ Private Sub DatTKVT()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK theo dâi chi tiÕt")
     If Len(shtk) = 0 Then Exit Sub
     TK.InitTaikhoanSohieu shtk
-    If TK.MaSo = 0 Then GoTo KT
+    If TK.maSo = 0 Then GoTo KT
     If TK.tk_id = TKCNKH_ID Or TK.tk_id = TKCNPT_ID Or TK.tk_id = TSCD_ID Or TK.tk_id = KHTSCD_ID Or TK.tk_id = TKThue_ID Or TK.tk_id = TKDT_ID Then Exit Sub
     If TK.TkCoPS(0, 0) Or TK.NoDauKy <> 0 Or TK.CoDauKy <> 0 Then
         MsgBox "Tµi kho¶n cã ph¸t sinh hoÆc ®Çu kú, kh«ng chuyÓn ®æi ®­îc!", vbCritical, App.ProductName
@@ -4151,7 +4147,7 @@ Private Sub DatTKDTTP()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK h¹ch to¸n doanh thu")
     If Len(shtk) = 0 Then GoTo KT
     TK.InitTaikhoanSohieu shtk
-    If TK.MaSo = 0 Or Left(TK.sohieu, 2) <> "51" Then GoTo KT
+    If TK.maSo = 0 Or Left(TK.sohieu, 2) <> "51" Then GoTo KT
     If TK.TkCoPS(0, 0) Then
         MsgBox "Tµi kho¶n cã ph¸t sinh, kh«ng chuyÓn ®æi ®­îc!", vbCritical, App.ProductName
         GoTo KT
@@ -4168,7 +4164,7 @@ Private Sub DatTKTS()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK theo dâi chi tiÕt")
     If Len(shtk) = 0 Then Exit Sub
     TK.InitTaikhoanSohieu shtk
-    If TK.MaSo = 0 Then GoTo KT
+    If TK.maSo = 0 Then GoTo KT
     ExecuteSQL5 "UPDATE HethongTK SET TK_ID2=" + IIf(TK.tk_id2 = TKCPSX_ID, "0", CStr(TKCPSX_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
 KT:
     Set TK = Nothing

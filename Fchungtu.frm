@@ -45,8 +45,8 @@ Begin VB.Form FrmChungtu
    Begin VB.Timer timerNhapkhotp 
       Enabled         =   0   'False
       Interval        =   50
-      Left            =   1200
-      Top             =   4560
+      Left            =   1320
+      Top             =   4920
    End
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
@@ -3451,11 +3451,7 @@ Attribute hien_bang_tinh.VB_VarUserMemId = 1073938537
 Public tongtientruoc As Double
 Attribute tongtientruoc.VB_VarUserMemId = 1073938538
 Function Getmonthbynl() As Integer
-    If Not rs_importNK.EOF Then
-        Getmonthbynl = bakThangNK
-    Else
-        Getmonthbynl = 0
-    End If
+    Getmonthbynl = bakThangNK
 End Function
 Public Sub Autonhapkho()
     Dim Query As String
@@ -3464,7 +3460,7 @@ Public Sub Autonhapkho()
     Set rs_importNK = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
 
     If Not rs_importNK.EOF Then
-        bakThangNK = Month(rs_importNK!NgayLap)
+        bakThangNK = month(rs_importNK!NgayLap)
         Nhapkhotong
     End If
 End Sub
@@ -3553,8 +3549,8 @@ Private Sub DuyetItemList(ByVal fname As String)
                     cbbThang = CboThang.Text    ' L?y giá tr? du?c ch?n t? ComboBox
                     Dim monthValue As Integer
                     Dim monthValue2 As Integer
-                    monthValue = Month(CDate(cbbThang))
-                    monthValue2 = Month(CDate(convertedDate))
+                    monthValue = month(CDate(cbbThang))
+                    monthValue2 = month(CDate(convertedDate))
                     ' So sánh tháng l?y du?c v?i tháng hi?n t?i
                     If monthValue <> monthValue2 Then
                         Dim dateString As String
@@ -3639,7 +3635,7 @@ Public Sub DoSubNganhang()
     myDate = CDate(rs_ktraNH!NgayGD)
     txt(0).Text = rs_ktraNH!SHDon
 
-    CboThang.Text = Month(myDate) & "/" & Year(myDate)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(rs_ktraNH!NgayGD, "dd/mm/yy")
     MedNgay(1).Text = Format(rs_ktraNH!NgayGD, "dd/mm/yy")
     txt(1).Text = rs_ktraNH!diengiai
@@ -3854,7 +3850,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
     txt(0).Text = item.sohd
     txtVT(1).Text = item.khHD
 
-    CboThang.Text = Month(myDate) & "/" & Year(myDate)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(item.ngay, "dd/mm/yy")
 
     ' If Month(myDate) <> Month(Date) Then
@@ -4325,7 +4321,7 @@ Private Sub XulyAddHeader(ByRef rs_import As Recordset)
     txtVT(1).Text = rs_import!KHHDon
 
 
-    CboThang.Text = Month(myDate) & "/" & Year(myDate)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(myDate, "dd/mm/yy")
     MedNgay(1).Text = Format(myDate, "dd/mm/yy")
 
@@ -4626,7 +4622,7 @@ Private Sub Xuly15Child()
         sum711 = 0
         Dim myDate As Date
         myDate = CDate(rs_import!NLap)
-        CboThang.Text = Month(myDate) & "/" & Year(myDate)
+        CboThang.Text = month(myDate) & "/" & Year(myDate)
         MedNgay(0).Text = Format(myDate, "dd/mm/yy")
         MedNgay(1).Text = Format(myDate, "dd/mm/yy")
 
@@ -4708,7 +4704,7 @@ Private Sub Xuly51CTChild()
     'fill tk thue
     Dim myDate As Date
     myDate = CDate(rs_import!NLap)
-    CboThang.Text = Month(myDate) & "/" & Year(myDate)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(myDate, "dd/mm/yy")
     MedNgay(1).Text = Format(myDate, "dd/mm/yy")
 
@@ -4740,7 +4736,7 @@ Private Sub Xuly51None()
 
     Dim myDate As Date
     myDate = CDate(rs_import!NLap)
-    CboThang.Text = Month(myDate) & "/" & Year(myDate)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(myDate, "dd/mm/yy")
     MedNgay(1).Text = Format(myDate, "dd/mm/yy")
 
@@ -4825,7 +4821,7 @@ Private Sub Xuly51Child()
 
         Dim myDate As Date
         myDate = CDate(rs_import!NLap)
-        CboThang.Text = Month(myDate) & "/" & Year(myDate)
+        CboThang.Text = month(myDate) & "/" & Year(myDate)
         MedNgay(0).Text = Format(myDate, "dd/mm/yy")
         MedNgay(1).Text = Format(myDate, "dd/mm/yy")
 
@@ -5471,7 +5467,7 @@ Private Sub CboThang_LostFocus()
     Dim st As String
     st = Day(Now)
     If (st > 28) Then
-        If (Month("01/0" + CboThang.Text) = 2) Then
+        If (month("01/0" + CboThang.Text) = 2) Then
             If (Year("01/0" + CboThang.Text) Mod 4 = 0) Then
                 st = 29
             Else
@@ -6951,7 +6947,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
 
     frmMain.Rpt.Formulas(11) = "NAMHD='" + str(Year(ngay_hd)) + "'"
     frmMain.Rpt.Formulas(12) = "NGAYHD= '" + str(Day(ngay_hd)) + "'"
-    frmMain.Rpt.Formulas(13) = "THANGHD='" + str(Month(ngay_hd)) + "'"
+    frmMain.Rpt.Formulas(13) = "THANGHD='" + str(month(ngay_hd)) + "'"
 
 
     frmMain.Rpt.Formulas(14) = "mavach='" + "" + "'"
@@ -7436,8 +7432,157 @@ End Function
 '====================================================================================================
 ' C¸c chøc n¨ng thªm, ghi, xãa
 '====================================================================================================
+Public Sub TuDongNhapKho()
+'Kiem tra xem license có tu dong nhap kho không
+    Dim ktauto As Integer
+    ktauto = SelectSQL("SELECT AutoNK as f1 from License")
+    If ktauto <> 1 Then
+        Exit Sub
+    End If
+
+    'lay danh sach chung tu moi tim dc
+    'Lay mã chung tu moi nhat
+    Dim lastMact As Integer
+    lastMact = SelectSQL("SELECT top 1 MaCT as f1 from ChungTu order by MaCT desc")
+    Dim rs_ct As Recordset
+    Dim Query As String
+    Query = "SELECT * FROM ChungTu WHERE MaCT = " & lastMact - 1 & " AND SoHieu NOT LIKE '%GV%' AND MaVattu <> 0"
+    Set rs_ct = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
+
+    ExecuteSQL5 "UPDATE License SET Lock12=10+ Lock12 Mod 10 + Lock12 \100"
+
+
+    If Not rs_ct.EOF Then
+        Do While Not rs_ct.EOF
+            Dim sohieunk As String
+            sohieunk = "NKTP_" & rs_ct!sohieu
+
+            Dim noidungnk As String
+            noidungnk = "Nhaäp kho TP hoaù ñôn_" & rs_ct!sohieu
+            Dim ngayct As Date
+            ngayct = CDate(rs_ct!ngayct)
+            Dim newMaCT As Integer
+            newMaCT = lastMact + 1  ' Tính toán tru?c giá tr?
+            Dim sql As String
+
+            Dim sops As Double
+
+            sops = rs_ct!sops * 0.8
+
+            Dim sopsno As Double
+            sopsno = rs_ct!SoPS2Co
+
+            sql = "INSERT INTO Chungtu (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3, MaKH, CTGS, MaKHC, MaTP, DVT, User_ID, MaNV, HanTT, SH1, T1, TLCK, CK, MAUSOHD, LOAIHoaDon, SoLo, HanDung, phantramchietkhau, sotienchietkhau) " & _
+                  "VALUES (" & newMaCT & ", 1, '" & sohieunk & "', " & rs_ct!ThangCT & ", #" & Format(ngayct, "MM/DD/YYYY") & "#, #" & Format(ngayct, "MM/DD/YYYY") & "#, 8, 2, '" & noidungnk & "', 38, 37, " & sops & "," & sopsno & ", 0, 38, 37,'" & rs_ct!MaVattu & "', '...', 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '...', 0, 0, 0, '0', '01GTKT', '', #" & Format(ngayct, "MM/DD/YYYY") & "#, '0', '0')"
+            'ExecuteSQL5 sql
+
+            Dim sotien As Double
+            sotien = sops    ' Giá tr? c?n c?p nh?t
+
+            Dim soTienTru As Double
+            soTienTru = -sops    ' Giá tr? âm cho các tru?ng
+
+            Dim maSo1 As String
+            maSo1 = "38, 1, 0"    ' Các giá tr? MaSo cho câu l?nh d?u tiên
+
+            Dim maSo2 As String
+            maSo2 = "37, 1, 0"    ' Các giá tr? MaSo cho câu l?nh th? hai
+
+            Dim month As Integer
+            Dim currentMonth As Integer
+
+            currentMonth = 12
+            month = rs_ct!ThangCT
+            sql = "UPDATE HethongTK SET "
+            sql = sql & "No_" & month & " = No_" & month & " + " & sotien & ", " & _
+                  "DuNo_" & month & " = DuNo_" & month & " + " & sotien & ", " & _
+                  "DuCo_" & month & " = DuCo_" & month & " + 0, "
+            For month = rs_ct!ThangCT + 1 To 12
+                If month <= currentMonth Then
+                    sql = sql & "DuNo_" & month & " = DuNo_" & month & " + " & sotien & ", " & _
+                          "DuCo_" & month & " = DuCo_" & month & " + 0, "
+                End If
+            Next month
+
+            sql = Left(sql, Len(sql) - 2)
+
+            sql = sql & " WHERE MaSo = 38 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            Debug.Print sql
+            month = rs_ct!ThangCT
+            ' Câu l?nh th? hai
+            sql = "UPDATE HethongTK SET "
+
+            For month = 1 To 12
+                sql = sql & "DuNo_" & month & "=IIF(DuNo_" & month & ">=DuCo_" & month & ",DuNo_" & month & "-DuCo_" & month & ",0), " & _
+                      "DuCo_" & month & "=IIF(DuNo_" & month & "<DuCo_" & month & ",DuCo_" & month & "-DuNo_" & month & ",0), "
+            Next month
+
+            ' Lo?i b? d?u ph?y cu?i cùng
+            sql = Left(sql, Len(sql) - 2)    ' Xóa d?u ph?y và kho?ng tr?ng cu?i cùng
+
+            sql = sql & " MaSo = 38 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            Debug.Print sql    ' In ra câu l?nh SQL d? ki?m tra
+
+            month = rs_ct!ThangCT
+            ' Câu l?nh th? ba
+            sql = "UPDATE HethongTK SET "
+
+            sql = sql & "Co_" & month & " = Co_" & month & " + " & sotien & ", " & _
+                  "DuNo_" & month & " = DuNo_" & month & " + " & soTienTru & ", " & _
+                  "DuCo_" & month & " = DuCo_" & month & " + 0, "
+            For month = rs_ct!ThangCT + 1 To 12
+                If month <= 12 Then
+                    sql = sql & "DuNo_" & month & " = DuNo_" & month & " + " & soTienTru & ", " & _
+                          "DuCo_" & month & " = DuCo_" & month & " + 0, "
+                End If
+            Next month
+
+            sql = Left(sql, Len(sql) - 2)
+            sql = sql & " WHERE MaSo = 37 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            Debug.Print sql
+
+            month = rs_ct!ThangCT
+            ' Câu l?nh th? 4
+            sql = "UPDATE HethongTK SET "
+
+            For month = 1 To 12
+                sql = sql & "DuNo_" & month & "=IIF(DuNo_" & month & ">=DuCo_" & month & ",DuNo_" & month & "-DuCo_" & month & ",0), " & _
+                      "DuCo_" & month & "=IIF(DuNo_" & month & "<DuCo_" & month & ",DuCo_" & month & "-DuNo_" & month & ",0), "
+            Next month
+
+            sql = Left(sql, Len(sql) - 2)
+            sql = sql & " MaSo = 37 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            Debug.Print sql
+
+            ' Câu l?nh th? 5
+            sql = "UPDATE TonKho SET "
+            month = rs_ct!ThangCT
+            sql = sql & "Luong_Nhap_" & month & " = Luong_Nhap_" & month & " + " & sopsno & ", " & _
+                  "Tien_Nhap_" & month & " = Tien_Nhap_" & month & " + " & sotien & ", " & _
+                  "Luong_" & month & " = Luong_" & month & " + " & sopsno & ", " & _
+                  "Tien_" & month & " = Tien_" & month & " + " & sotien & ", "
+            For month = rs_ct!ThangCT + 1 To 12
+                If month <= currentMonth Then
+                    sql = sql & "Luong_" & month & " = Luong_" & month & " + " & sopsno & ", " & _
+                          "Tien_" & month & " = Tien_" & month & " + " & sotien & ", "
+                End If
+            Next month
+
+            ' Lo?i b? d?u ph?y cu?i cùng
+            sql = Left(sql, Len(sql) - 2)    ' Xóa d?u ph?y và kho?ng tr?ng cu?i cùng
+
+            sql = sql & " WHERE MaSoKho=2 AND MaTaiKhoan=38 AND MaVatTu= " & rs_ct!MaVattu & ""
+            Debug.Print sql    ' In ra câu l?nh SQL d? ki?m tra
+            rs_ct.MoveNext
+        Loop
+    End If
+
+    ExecuteSQL5 "UPDATE License SET Lock12=10+ Lock12 Mod 10 + Lock12 \100"
+End Sub
 Public Sub Command_Click(Index As Integer)
 
+    TuDongNhapKho
+    Exit Sub
     If hasError = True Then
         Exit Sub
     End If
@@ -7473,7 +7618,7 @@ Public Sub Command_Click(Index As Integer)
 
                 Dim myDate As Date
                 myDate = CDate(rs_importNK!NgayLap)
-                CboThang.Text = Month(myDate) & "/" & Year(myDate)
+                CboThang.Text = month(myDate) & "/" & Year(myDate)
             End If
         End If
     End If
@@ -7746,7 +7891,7 @@ Public Sub Command_Click(Index As Integer)
                     If pSoVV > 1 And CboVV(1).ListIndex >= 0 Then chungtu.MaDT2 = CboVV(1).ItemData(CboVV(1).ListIndex)
                     If pSoVV > 2 And CboVV(2).ListIndex >= 0 Then chungtu.MaDT3 = CboVV(2).ItemData(CboVV(2).ListIndex)
                     If FThuChi.FThuChiForm = 0 Then
-                        chungtu.NgayCT = MedNgay(0).Text
+                        chungtu.ngayct = MedNgay(0).Text
                         chungtu.NgayGS = MedNgay(1).Text
 
                     End If
@@ -7878,7 +8023,7 @@ Public Sub Command_Click(Index As Integer)
         Dim Query64 As String
         Query64 = "SELECT * FROM tbimport WHERE SHDon='" & chungtu.sohieu & _
                   "' AND KHHDon='" & txtVT(1).Text & _
-                  "' AND CDate(NLap) = #" & Format(chungtu.NgayCT, "dd/MM/yyyy") & "#"
+                  "' AND CDate(NLap) = #" & Format(chungtu.ngayct, "dd/MM/yyyy") & "#"
         Set rs_kiemtra = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
 
         If Not rs_kiemtra.EOF Then
@@ -7970,12 +8115,17 @@ Public Sub Command_Click(Index As Integer)
 
 
         If pPhieu = 0 And pGhi > 0 Then Me.Hide
+
+        'Thuc hien viec nhap kho tu dong
+
     Case 2:
         If MaSoCT > 0 Then
             If loaict = 1 And chkXT.Value = 0 Then
-                If Not XoaCTOK(MaSoCT) Then
-                    MsgBox "V©t t­ nhËp ®· xuÊt hÕt, kh«ng xo¸ chøng tõ!", vbCritical, App.ProductName
-                    GoTo XongCT
+                If FThuChi.FThuChiForm = 0 Then
+                    If Not XoaCTOK(MaSoCT) Then
+                        MsgBox "V©t t­ nhËp ®· xuÊt hÕt, kh«ng xo¸ chøng tõ!", vbCritical, App.ProductName
+                        GoTo XongCT
+                    End If
                 End If
             End If
             Dim isxoa As Integer
@@ -8338,8 +8488,8 @@ Dim FilePath As String
                     cbbThang = CboThang.Text    ' L?y giá tr? du?c ch?n t? ComboBox
                     Dim monthValue As Integer
                     Dim monthValue2 As Integer
-                    monthValue = Month(CDate(cbbThang))
-                    monthValue2 = Month(CDate(convertedDate))
+                    monthValue = month(CDate(cbbThang))
+                    monthValue2 = month(CDate(convertedDate))
                     ' So sánh tháng l?y du?c v?i tháng hi?n t?i
                     If monthValue <> monthValue2 Then
                         Dim dateString As String
@@ -9064,7 +9214,7 @@ Private Sub MedNgay_LostFocus(Index As Integer)
             'MsgBox "Ngµy chøng tõ kh¸c n¨m tµi chÝnh !", vbExclamation, App.ProductName
             '            If Index = 1 Then RFocus txtVT(1)
         Else
-            If (Month(MedNgay(Index).Text) <> Month(Ngaykt)) Then
+            If (month(MedNgay(Index).Text) <> month(Ngaykt)) Then
                 Label(26).Caption = "Ngµy chøng tõ kh¸c ngµy ghi sæ !"
                 Ngaykt = "01/" + CboThang.Text
                 MedNgay(1).Text = Ngaykt
@@ -9199,7 +9349,7 @@ Public Sub Nhapkhotong()
     Dim myDate As Date
     myDate = CDate(rs_importNK!NgayLap)
     txt(0).Text = rs_importNK!sohieu
-    CboThang.Text = Month(myDate) & "/" & Year(myDate)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(myDate, "dd/mm/yy")
     MedNgay(1).Text = Format(myDate, "dd/mm/yy")
     
@@ -9212,6 +9362,7 @@ End Sub
 Public Sub OptLoai_Click(Index As Integer)
 
     If Index = 6 Then
+        FThuChi.FThuChiForm = 1
         Autonhapkho
         Exit Sub
     End If
@@ -9463,11 +9614,11 @@ Private Sub timer154_Timer()
 
             Dim myDate As Date
             myDate = CDate(.ngay)
-            CboThang.Text = Month(myDate) & "/" & Year(myDate)
+            CboThang.Text = month(myDate) & "/" & Year(myDate)
             MedNgay(0).Text = .ngay
             MedNgay(0).Text = .ngay
-            If Month(myDate) <> Month(Now) Then
-                MedNgay(1).Text = DateSerial(Year(Date), Month(Date), 1)
+            If month(myDate) <> month(Now) Then
+                MedNgay(1).Text = DateSerial(Year(Date), month(Date), 1)
             Else
                 MedNgay(1).Text = Format(.ngay, "dd/mm/yy")
             End If
@@ -9649,11 +9800,11 @@ Private Sub Timer4_Timer()
 
             Dim myDate As Date
             myDate = CDate(.ngay)
-            CboThang.Text = Month(myDate) & "/" & Year(myDate)
+            CboThang.Text = month(myDate) & "/" & Year(myDate)
             MedNgay(0).Text = .ngay
             MedNgay(0).Text = .ngay
-            If Month(myDate) <> Month(Now) Then
-                MedNgay(1).Text = DateSerial(Year(Date), Month(Date), 1)
+            If month(myDate) <> month(Now) Then
+                MedNgay(1).Text = DateSerial(Year(Date), month(Date), 1)
             Else
                 MedNgay(1).Text = Format(.ngay, "dd/mm/yy")
             End If
@@ -11378,7 +11529,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     SetListIndex CboThang, rs_chungtu!ThangCT
     Chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
     pMaBG = IIf(rs_chungtu!maloai = 7, ma, 0)
-    ngay(0) = rs_chungtu!NgayCT
+    ngay(0) = rs_chungtu!ngayct
     ngay(1) = rs_chungtu!NgayGS
     MedNgay(0).Text = Format(ngay(0), Mask_D)
     MedNgay(1).Text = Format(ngay(1), Mask_D)

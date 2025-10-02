@@ -2243,13 +2243,13 @@ Begin VB.Form FrmOptions
       End
       Begin VB.Label Label2 
          BackColor       =   &H00FFFFC0&
-         Caption         =   "Tù ®éng xuÊt kho"
+         Caption         =   "Tù ®éng nhap,  xuÊt kho"
          ForeColor       =   &H00000000&
-         Height          =   375
+         Height          =   615
          Left            =   4680
          TabIndex        =   125
          Top             =   2640
-         Width           =   1815
+         Width           =   2175
       End
       Begin MSForms.CheckBox CheckBox1 
          Height          =   255
