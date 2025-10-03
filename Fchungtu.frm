@@ -7432,6 +7432,141 @@ End Function
 '====================================================================================================
 ' C¸c chøc n¨ng thªm, ghi, xãa
 '====================================================================================================
+
+Public Sub TuDongXuatkhonguyenlieu(ByVal lastMact As Integer, ByVal idtp As Integer, ByVal sohieuhd As String, ByVal ngayct As Date, ByVal sops As Double)
+'Lay ra danh sách nguyen lieu tu tp
+    Dim getsh As String
+    getsh = SelectSQL("SELECT SoHieu as f1 from Vattu where MaSo=" & idtp & " ")
+
+    'Lay du lieu tu bang tbNguyenLieuThanhPham
+    Dim rs_ct As Recordset
+    Dim Query As String
+    Query = "SELECT * FROM tbNguyenLieuThanhPham WHERE TPSoHieu = '" & getsh & "' "
+    Set rs_ct = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
+    If Not rs_ct.EOF Then
+        Do While Not rs_ct.EOF
+            Dim sohieuxk As String
+            sohieuxk = "XKNL_" & sohieuhd
+            Dim noidungxk As String
+            noidungxk = "Xu?t kho nguyên li?u hoá don_" & sohieuhd
+
+            Dim ThangCT As Integer
+            ThangCT = month(ngayct)
+
+            Dim newsops As Double
+            newsops = sops * rs_ct!TiLe / 100
+            'Tim gia nhap trong ky
+            Dim gianhap As Double
+            Dim sql As String
+            Dim rs_fct As Recordset
+            Dim sopsno As Double
+            Query = "SELECT TOP 1 * FROM ChungTu WHERE MaVattu = " & rs_ct!IDNguyenLieu & " AND SoPS2No <> 0 ORDER BY MaCT DESC"
+            Set rs_fct = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
+            If Not rs_fct.EOF Then
+                gianhap = rs_fct!sops / rs_fct!SoPS2No
+                sopsno = newsops / gianhap
+            End If
+
+            sql = "INSERT INTO Chungtu (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3, MaKH, CTGS, MaKHC, MaTP, DVT, User_ID, MaNV, HanTT, SH1, T1, TLCK, CK, MAUSOHD, LOAIHoaDon, SoLo, HanDung, phantramchietkhau, sotienchietkhau) " & _
+                  "VALUES (" & lastMact & ",2, '" & sohieuxk & "', " & ThangCT & ", #" & Format(ngayct, "MM/DD/YYYY") & "#, #" & Format(ngayct, "MM/DD/YYYY") & "#, 8, 2, '" & noidungxk & "', 37, 32, " & newsops & ",0," & sopsno & ", 37, 32,'" & rs_ct!IDNguyenLieu & "', '...', 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '...', 0, 0, 0, '0', '01GTKT', '', #" & Format(ngayct, "MM/DD/YYYY") & "#, '0', '0')"
+            ExecuteSQL5 sql
+
+
+            Dim currentMonth As Integer
+            currentMonth = 12
+            Dim months As Integer
+            months = ThangCT
+            sql = "UPDATE HethongTK SET "
+            Dim sotien As Double
+            sotien = newsops
+            Dim soTienTru As Double
+            soTienTru = -newsops
+            sql = sql & "No_" & months & " = No_" & months & " + " & sotien & ", " & _
+                  "DuNo_" & months & " = DuNo_" & months & " + " & sotien & ", " & _
+                  "DuCo_" & months & " = DuCo_" & months & " + 0, "
+            For months = ThangCT + 1 To 12
+                If months <= currentMonth Then
+                    sql = sql & "DuNo_" & months & " = DuNo_" & months & " + " & sotien & ", " & _
+                          "DuCo_" & months & " = DuCo_" & months & " + 0, "
+                End If
+            Next months
+
+            sql = Left(sql, Len(sql) - 2)
+
+            sql = sql & " WHERE MaSo = 37 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            Debug.Print sql
+            ExecuteSQL5 sql
+
+            months = ThangCT
+            ' Câu l?nh th? hai
+            sql = "UPDATE HethongTK SET "
+
+            For months = 1 To 12
+                sql = sql & "DuNo_" & months & "=IIF(DuNo_" & months & ">=DuCo_" & months & ",DuNo_" & months & "-DuCo_" & months & ",0), " & _
+                      "DuCo_" & months & "=IIF(DuNo_" & months & "<DuCo_" & months & ",DuCo_" & months & "-DuNo_" & months & ",0), "
+            Next months
+
+            ' Lo?i b? d?u ph?y cu?i cùng
+            sql = Left(sql, Len(sql) - 2)    ' Xóa d?u ph?y và kho?ng tr?ng cu?i cùng
+
+            sql = sql & "WHERE MaSo = 37 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            Debug.Print sql
+            ExecuteSQL5 sql
+
+            months = ThangCT
+            ' Câu l?nh th? ba
+            sql = "UPDATE HethongTK SET "
+
+            sql = sql & "Co_" & months & " = Co_" & months & " + " & sotien & ", " & _
+                  "DuNo_" & months & " = DuNo_" & months & " + " & soTienTru & ", " & _
+                  "DuCo_" & months & " = DuCo_" & months & " + 0, "
+            For months = ThangCT + 1 To 12
+                If months <= 12 Then
+                    sql = sql & "DuNo_" & months & " = DuNo_" & months & " + " & soTienTru & ", " & _
+                          "DuCo_" & months & " = DuCo_" & months & " + 0, "
+                End If
+            Next months
+
+            sql = Left(sql, Len(sql) - 2)
+            sql = sql & " WHERE MaSo = 32 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            ExecuteSQL5 sql
+
+            months = ThangCT
+            ' Câu l?nh th? 4
+            sql = "UPDATE HethongTK SET "
+
+            For months = 1 To 12
+                sql = sql & "DuNo_" & months & "=IIF(DuNo_" & months & ">=DuCo_" & months & ",DuNo_" & months & "-DuCo_" & months & ",0), " & _
+                      "DuCo_" & months & "=IIF(DuNo_" & months & "<DuCo_" & months & ",DuCo_" & months & "-DuNo_" & months & ",0), "
+            Next months
+
+            sql = Left(sql, Len(sql) - 2)
+            sql = sql & "WHERE MaSo = 32 OR MaSo = 1 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0 OR MaSo = 0"
+            ExecuteSQL5 sql
+
+            ' Câu l?nh th? 5
+            sql = "UPDATE TonKho SET "
+            months = ThangCT
+            sql = sql & "Luong_Nhap_" & months & " = Luong_Nhap_" & months & " + " & sopsno & ", " & _
+                  "Tien_Nhap_" & months & " = Tien_Nhap_" & months & " + " & sotien & ", " & _
+                  "Luong_" & months & " = Luong_" & months & " + " & sopsno & ", " & _
+                  "Tien_" & months & " = Tien_" & months & " + " & sotien & ", "
+            For months = ThangCT + 1 To 12
+                If months <= currentMonth Then
+                    sql = sql & "Luong_" & months & " = Luong_" & months & " + " & sopsno & ", " & _
+                          "Tien_" & months & " = Tien_" & months & " + " & sotien & ", "
+                End If
+            Next months
+
+            ' Lo?i b? d?u ph?y cu?i cùng
+            sql = Left(sql, Len(sql) - 2)    ' Xóa d?u ph?y và kho?ng tr?ng cu?i cùng
+
+            sql = sql & " WHERE MaSoKho=2 AND MaTaiKhoan=32 AND MaVatTu= " & rs_ct!IDNguyenLieu & ""
+            ExecuteSQL5 sql
+            rs_ct.MoveNext
+        Loop
+    End If
+End Sub
 Public Sub TuDongNhapKho()
 'Kiem tra xem license có tu dong nhap kho không
     Dim ktauto As Integer
@@ -7585,6 +7720,9 @@ Public Sub TuDongNhapKho()
                 sql = sql & " WHERE MaSoKho=2 AND MaTaiKhoan=38 AND MaVatTu= " & rs_ct!MaVattu & ""
                 ExecuteSQL5 sql
             End If
+
+            'Xuat kho nguyen lieu
+            TuDongXuatkhonguyenlieu lastMact + 2, rs_ct!MaVattu, rs_ct!sohieu, ngayct, sops
             rs_ct.MoveNext
         Loop
     End If
@@ -7592,9 +7730,7 @@ Public Sub TuDongNhapKho()
     ExecuteSQL5 "UPDATE License SET Lock12=10+ Lock12 Mod 10 + Lock12 \100"
 End Sub
 Public Sub Command_Click(Index As Integer)
-
-'TuDongNhapKho
-'Exit Sub
+ 
     If hasError = True Then
         Exit Sub
     End If
