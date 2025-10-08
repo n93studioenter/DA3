@@ -778,7 +778,7 @@ Dim ckh As New ClsKhachHang
         ckh.mst = T(9).Text
        ' ckh.Tel = "000-00"
        ' ckh.Fax = "000-00"
-        ckh.sohieu = "#" + CStr(Year(Date) - 2000) + CStr(Month(Date)) + CStr(Day(Date)) + CStr(Hour(Now)) + CStr(Minute(Now)) + CStr(Second(Now))
+        ckh.sohieu = "#" + CStr(Year(Date) - 2000) + CStr(month(Date)) + CStr(Day(Date)) + CStr(Hour(Now)) + CStr(Minute(Now)) + CStr(Second(Now))
         ckh.MaPhanLoai = SelectSQL("SELECT MaSo AS F1 FROM PhanLoaiKhachHang WHERE LEFT(SoHieu,1)='#'")
         If ckh.GhiKhachHang <> 0 Then GoTo Er 'Luu khach hang moi la #
     Else
@@ -981,11 +981,7 @@ Public Sub GetPhieu(ttdb As Boolean)
     T(1).Text = h.KyHieu
     T(2).Text = h.sohd
     If h.ThanhTien <> 0 Then T(5).Text = Format(h.ThanhTien, Mask_0)
-    If FThuChi.FThuChiForm = 3 Then
-        T(3).Text = "Nhaäp kho " & LCase(h.MatHang)
-    Else
-        T(3).Text = h.MatHang
-    End If
+    T(3).Text = h.MatHang
     T(4).Text = Format(h.SoLuong, Mask_2)
     T(6).Text = CStr(Abs(h.TyLe))
     T(11).Text = h.HTTT

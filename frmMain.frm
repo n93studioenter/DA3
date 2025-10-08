@@ -462,7 +462,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "01/10/25"
+            TextSave        =   "07/10/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -1986,6 +1986,10 @@ Begin VB.Form frmMain
             Index           =   2
          End
       End
+      Begin VB.Menu mnVT 
+         Caption         =   "Xo¸ vËt t­ thõa"
+         Index           =   22
+      End
    End
    Begin VB.Menu mnCongno 
       Caption         =   "C«n&g nî"
@@ -2037,9 +2041,14 @@ Begin VB.Form frmMain
          Index           =   11
          Tag             =   "Set Account"
       End
+      Begin VB.Menu mnCN 
+         Caption         =   "Xo¸ c«ng nî thõa"
+         Index           =   12
+      End
    End
    Begin VB.Menu mnTSCD 
       Caption         =   "Tµi &s¶n cè ®Þnh"
+      Index           =   12
       Tag             =   "Fixed &Assets"
       Begin VB.Menu mnTS 
          Caption         =   "Ph©n lo¹i &tµi s¶n..."
@@ -2759,34 +2768,45 @@ End Sub
 
 
 Public Sub mnCn_Click(Index As Integer)
+    If Index = 12 Then
+        Dim response As Integer
+        response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ c«ng nî kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
+        If response = vbYes Then
+            Dim sql As String
+            sql = "Delete FROM KhachHang WHERE MaSo NOT IN (SELECT ChungTuLQ.MaKH FROM chungtu INNER JOIN ChungTuLQ ON chungtu.MaCT = ChungTuLQ.MaCT where ChungTuLQ.MaKH <>0)"
+            ExecuteSQL5 sql
+            MsgBox "Xo¸ thµnh c«ng !"
+        End If
+        Exit Sub
+    End If
     If Index = 3 Or Index = 9 Then
         If Not KtraMKAdmin Then Exit Sub
     End If
     Select Case Index
-        Case 0:
-            frmPhanLoaiVT.tag = 2
-            frmPhanLoaiVT.Show 1
-        Case 1:
-            FrmKhachHang.Show vbModal
-        Case 3:
-            If ChoDieuChinhDauKy Then
-                If pCongNoHD = 0 Then
-                    FKHDauKy.Show vbModal
-                Else
-                    FKHDauKy2.Show vbModal
-                End If
+    Case 0:
+        frmPhanLoaiVT.tag = 2
+        frmPhanLoaiVT.Show 1
+    Case 1:
+        FrmKhachHang.Show vbModal
+    Case 3:
+        If ChoDieuChinhDauKy Then
+            If pCongNoHD = 0 Then
+                FKHDauKy.Show vbModal
+            Else
+                FKHDauKy2.Show vbModal
             End If
-        Case 4:
-            FrmHD.Show vbModal
-        Case 6:
-            frmPhanLoaiVT.tag = 4
-            frmPhanLoaiVT.Show 1
-        Case 7:
-            FrmNhanVien.Show 1
-        Case 9:
-            If KtraMKAdmin Then FrmLS.Show 1
-        Case 11:
-            If KtraMKAdmin Then DatTKCN
+        End If
+    Case 4:
+        FrmHD.Show vbModal
+    Case 6:
+        frmPhanLoaiVT.tag = 4
+        frmPhanLoaiVT.Show 1
+    Case 7:
+        FrmNhanVien.Show 1
+    Case 9:
+        If KtraMKAdmin Then FrmLS.Show 1
+    Case 11:
+        If KtraMKAdmin Then DatTKCN
     End Select
     HienThongBao "", 1
 End Sub
@@ -3275,7 +3295,18 @@ Private Sub mnviet_Click()
 End Sub
 
 Public Sub mnVT_Click(Index As Integer)
-
+        
+    If Index = 22 Then
+        Dim response As Integer
+        response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ vËt t­ kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
+        If response = vbYes Then
+            Dim sql As String
+            sql = "DELETE FROM Vattu WHERE MaSo NOT IN (SELECT MaVatTu FROM TonKho)"
+            ExecuteSQL5 sql
+            MsgBox "Xo¸ thµnh c«ng !"
+        End If
+        Exit Sub
+    End If
 
     Dim st As String, i As Integer, TK As String, d1 As Date, d2 As Date, j As Integer, k As Integer, mv As Long
 
@@ -3541,8 +3572,8 @@ Private Sub XKTheoNgay()
                     Dim getSHVT As Integer
                     getSHVT = CInt(SelectSQL("SELECT MaPhanLoai as f1 from Vattu where MaSo=" & rs_chungtu!MaVattu))
 
-                    Dim getSH As String
-                    getSH = SelectSQL("SELECT SoHieu as f1 from Vattu where MaSo=" & rs_chungtu!MaVattu)
+                    Dim getsh As String
+                    getsh = SelectSQL("SELECT SoHieu as f1 from Vattu where MaSo=" & rs_chungtu!MaVattu)
 
                     Dim getTenVT As String
                     getTenVT = SelectSQL("SELECT TenVattu as f1 from Vattu where MaSo=" & rs_chungtu!MaVattu)
@@ -3557,20 +3588,20 @@ Private Sub XKTheoNgay()
                         'Kiem tra sohieu nay da dc luu chua
                         Dim rs_check As Recordset
                         Dim sql As String
-                        Query = "SELECT * FROM tbNhapkhotpChitiet WHERE SoHieu = '" & getSH & "' AND ParentID = " & CInt(maxMact)
+                        Query = "SELECT * FROM tbNhapkhotpChitiet WHERE SoHieu = '" & getsh & "' AND ParentID = " & CInt(maxMact)
                         Set rs_check = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
                         If rs_check.EOF Then
                             sql = "INSERT INTO tbNhapkhotpChitiet (SoHieu, SoLuong, DonGia, ParentID) " & _
-                                  "VALUES ('" & getSH & "', " & rs_chungtu!SoPS2Co & ", " & dongia & ", '" & CInt(maxMact) & "')"
+                                  "VALUES ('" & getsh & "', " & rs_chungtu!SoPS2Co & ", " & dongia & ", '" & CInt(maxMact) & "')"
                             ExecuteSQL5 sql
                         Else
-                            sql = "UPDATE tbNhapkhotpChitiet SET SoLuong = SoLuong + " & rs_chungtu!SoPS2Co & " WHERE SoHieu = '" & getSH & "' AND ParentID = " & CInt(maxMact)
+                            sql = "UPDATE tbNhapkhotpChitiet SET SoLuong = SoLuong + " & rs_chungtu!SoPS2Co & " WHERE SoHieu = '" & getsh & "' AND ParentID = " & CInt(maxMact)
                             ExecuteSQL5 sql
                         End If
 
                         'Lay ra dong thanh pham vua luu
 
-                        Query = "SELECT * FROM tbNhapkhotpChitiet WHERE SoHieu = '" & getSH & "' AND ParentID = " & CInt(maxMact)
+                        Query = "SELECT * FROM tbNhapkhotpChitiet WHERE SoHieu = '" & getsh & "' AND ParentID = " & CInt(maxMact)
                         Set rs_check = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
                         Dim tt As Double
                         If Not rs_check.EOF Then
@@ -3580,7 +3611,7 @@ Private Sub XKTheoNgay()
 
                         'Nhap kho nguyen lieu
                         'Loc danh sach   nguyen lieu co trong thanh pham
-                        Query = "SELECT * FROM tbNguyenLieuThanhPham WHERE TPSoHieu = '" & getSH & "'"
+                        Query = "SELECT * FROM tbNguyenLieuThanhPham WHERE TPSoHieu = '" & getsh & "'"
 
                         Set rs_check = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
                         If Not rs_check.EOF Then
@@ -3657,11 +3688,11 @@ Private Sub mnVTdt_Click(Index As Integer)
         XKTheoThang
     End If
 End Sub
-Function IsThanhPham(ByVal number As Integer, ByVal maSo As Integer) As Boolean
+Function IsThanhPham(ByVal number As Integer, ByVal MaSo As Integer) As Boolean
 'Lay ma phan loai truoc
     Dim getMPL As Integer
     getMPL = CInt(SelectSQL("SELECT MaSo as f1 FROM PhanLoaiVattu WHERE SoHieu='TP'"))
-    If getMPL = maSo Then
+    If getMPL = MaSo Then
         IsThanhPham = True
     Else
         IsThanhPham = False
@@ -4089,7 +4120,7 @@ Public Sub SetUserRight()
     'mnKC(4).Enabled = (User_Right = 0)
     
     mnVatTu.Enabled = (Me.tag Mod 100 >= 10) Or (Me.tag Mod 1000 >= 100)
-    mnTSCD.Enabled = (Me.tag Mod 10000 >= 1000)
+    'mnTSCD.Enabled = (Me.tag Mod 10000 >= 1000)
     mnCongno.Enabled = (Me.tag Mod 100000 >= 10000)
     Command(2).Enabled = (User_Right <> 1) And (Me.tag Mod 10 >= 1)
     Command(6).Enabled = (User_Right <> 1) And (Me.tag Mod 10 >= 1)
@@ -4102,7 +4133,7 @@ Private Sub DatTKCN()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK theo dâi chi tiÕt")
     If Len(shtk) = 0 Then GoTo KT
     TK.InitTaikhoanSohieu shtk
-    If TK.maSo = 0 Then GoTo KT
+    If TK.MaSo = 0 Then GoTo KT
     If TK.tk_id = TKVT_ID Or TK.tk_id = TSCD_ID Or TK.tk_id = KHTSCD_ID Or TK.tk_id = TKThue_ID Or TK.tk_id = TKDT_ID Then Exit Sub
     If TK.TkCoPS(0, 0) Or TK.NoDauKy <> 0 Or TK.CoDauKy <> 0 Then
         Me.MousePointer = 11
@@ -4128,7 +4159,7 @@ Private Sub DatTKVT()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK theo dâi chi tiÕt")
     If Len(shtk) = 0 Then Exit Sub
     TK.InitTaikhoanSohieu shtk
-    If TK.maSo = 0 Then GoTo KT
+    If TK.MaSo = 0 Then GoTo KT
     If TK.tk_id = TKCNKH_ID Or TK.tk_id = TKCNPT_ID Or TK.tk_id = TSCD_ID Or TK.tk_id = KHTSCD_ID Or TK.tk_id = TKThue_ID Or TK.tk_id = TKDT_ID Then Exit Sub
     If TK.TkCoPS(0, 0) Or TK.NoDauKy <> 0 Or TK.CoDauKy <> 0 Then
         MsgBox "Tµi kho¶n cã ph¸t sinh hoÆc ®Çu kú, kh«ng chuyÓn ®æi ®­îc!", vbCritical, App.ProductName
@@ -4147,7 +4178,7 @@ Private Sub DatTKDTTP()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK h¹ch to¸n doanh thu")
     If Len(shtk) = 0 Then GoTo KT
     TK.InitTaikhoanSohieu shtk
-    If TK.maSo = 0 Or Left(TK.sohieu, 2) <> "51" Then GoTo KT
+    If TK.MaSo = 0 Or Left(TK.sohieu, 2) <> "51" Then GoTo KT
     If TK.TkCoPS(0, 0) Then
         MsgBox "Tµi kho¶n cã ph¸t sinh, kh«ng chuyÓn ®æi ®­îc!", vbCritical, App.ProductName
         GoTo KT
@@ -4164,7 +4195,7 @@ Private Sub DatTKTS()
     shtk = FrmGetStr.GetString("Sè hiÖu TK", "§Æt/Bá TK theo dâi chi tiÕt")
     If Len(shtk) = 0 Then Exit Sub
     TK.InitTaikhoanSohieu shtk
-    If TK.maSo = 0 Then GoTo KT
+    If TK.MaSo = 0 Then GoTo KT
     ExecuteSQL5 "UPDATE HethongTK SET TK_ID2=" + IIf(TK.tk_id2 = TKCPSX_ID, "0", CStr(TKCPSX_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
 KT:
     Set TK = Nothing

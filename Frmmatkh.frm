@@ -476,6 +476,7 @@ Private Sub Command_Click(Index As Integer)
     End Select
 End Sub
 
+
 Private Sub Form_Activate()
     Left = frmMain.ScaleWidth * 30 / 100
     Top = frmMain.ScaleHeight * 40 / 100
@@ -548,7 +549,7 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
     Else
         KiemTraMatKhau = False
         On Error GoTo SaiMK
-        KiemTraMatKhau = (CInt5(pstr_psw) = Day(Date) + Month(Date) + pNamTC)
+        KiemTraMatKhau = (CInt5(pstr_psw) = Day(Date) + month(Date) + pNamTC)
         On Error GoTo 0
     End If
 
@@ -571,7 +572,7 @@ Private Function KiemTraMatKhau2(pstr_psw As String) As Boolean
     Else
         KiemTraMatKhau2 = False
         On Error GoTo SaiMK
-        KiemTraMatKhau2 = (CInt5(pstr_psw) = Day(Date) + Month(Date) + pNamTC)
+        KiemTraMatKhau2 = (CInt5(pstr_psw) = Day(Date) + month(Date) + pNamTC)
         On Error GoTo 0
     End If
   
@@ -590,14 +591,19 @@ End Function
 ' Xö lý phÝm nãng
 '====================================================================================================
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+' Ki?m tra xem Alt du?c nh?n cùng v?i phím S
+     If Shift = 4 And KeyCode = 18 Then
+        SaveSetting IniPath, "Environment", "Path", ""
+         
+    End If
     If (Shift And vbAltMask) > 0 Then
         Select Case KeyCode
-            Case vbKeyV:
-                RFocus Command(1)
-                Command_Click 1
-            Case vbKeyN:
-                RFocus Command(0)
-                Command_Click 0
+        Case vbKeyV:
+            RFocus Command(1)
+            Command_Click 1
+        Case vbKeyN:
+            RFocus Command(0)
+            Command_Click 0
         End Select
     End If
     If KeyCode = vbKeyEscape Then Unload Me

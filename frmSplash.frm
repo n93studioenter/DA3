@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
 Begin VB.Form frmSplash 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFFF&
@@ -242,7 +242,7 @@ Public Sub StartSAS()
         pDataPath = dlgCommonDialog.fileName
     Loop
 
-    pThang = Month(Date)
+    pThang = month(Date)
     pWinDir = GetWinDir
 
     Select Case UCase(App.EXEName)
@@ -262,6 +262,7 @@ Private Sub Form_Load()
     Me.Width = 8250
     dlgCommonDialog.InitDir = pCurDir + "DATA"
     If DEMO = 1 Then LbAbout(4).Caption = "Training Version"
+    
 End Sub
 
 Private Sub Label2_Click()

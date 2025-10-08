@@ -3281,6 +3281,7 @@ Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEv
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 
 
+Dim bakThangTinhGiavon As Integer
 Dim nknl As Integer
 Dim bakParentId As Integer
 Dim bakPerentDate As Date
@@ -3398,18 +3399,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938522
-Attribute ctgoc.VB_VarUserMemId = 1073938522
-Attribute TenNX.VB_VarUserMemId = 1073938522
-Attribute DiaChiNX.VB_VarUserMemId = 1073938522
-Attribute TenBH.VB_VarUserMemId = 1073938522
-Attribute DiaChiBH.VB_VarUserMemId = 1073938522
-Attribute MSTBH.VB_VarUserMemId = 1073938522
-Attribute unc1.VB_VarUserMemId = 1073938522
-Attribute unc2.VB_VarUserMemId = 1073938522
-Attribute unc3.VB_VarUserMemId = 1073938522
-Attribute MaKHBH.VB_VarUserMemId = 1073938522
-Attribute HanTT.VB_VarUserMemId = 1073938522
+Attribute DiachiTC.VB_VarUserMemId = 1073938523
+Attribute ctgoc.VB_VarUserMemId = 1073938523
+Attribute TenNX.VB_VarUserMemId = 1073938523
+Attribute DiaChiNX.VB_VarUserMemId = 1073938523
+Attribute TenBH.VB_VarUserMemId = 1073938523
+Attribute DiaChiBH.VB_VarUserMemId = 1073938523
+Attribute MSTBH.VB_VarUserMemId = 1073938523
+Attribute unc1.VB_VarUserMemId = 1073938523
+Attribute unc2.VB_VarUserMemId = 1073938523
+Attribute unc3.VB_VarUserMemId = 1073938523
+Attribute MaKHBH.VB_VarUserMemId = 1073938523
+Attribute HanTT.VB_VarUserMemId = 1073938523
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -4281,6 +4282,11 @@ Private Sub XylyHoaDonTong(ByRef rs_import As Recordset)
     Else
         MsgBox "®· xö lý xong c¸c ho¸ ®¬n"
         btnReset_Click
+        Dim ktauto As Integer
+        ktauto = SelectSQL("SELECT AutoNK as f1 from License")
+        If ktauto = 1 Then
+            TinhGXKBQ bakThangTinhGiavon, bakThangTinhGiavon, "", ""
+        End If
     End If
 End Sub
 Private Sub XulyAddHeader(ByRef rs_import As Recordset)
@@ -5143,8 +5149,7 @@ Private Sub timerNext_Timer()
         End If
 
     End If
-
-
+ 
 End Sub
 Private Sub btnImportXML_Click()
 
@@ -7433,7 +7438,7 @@ End Function
 ' C¸c chøc n¨ng thªm, ghi, xãa
 '====================================================================================================
 
-Public Sub TuDongXuatkhonguyenlieu(ByVal lastMact As Integer, ByVal idtp As Integer, ByVal sohieuhd As String, ByVal ngayct As Date, ByVal sops As Double)
+Public Sub TuDongXuatkhonguyenlieu(ByVal lastMact As Double, ByVal idtp As Integer, ByVal sohieuhd As String, ByVal ngayct As Date, ByVal sops As Double)
 'Lay ra danh sách nguyen lieu tu tp
     Dim getsh As String
     getsh = SelectSQL("SELECT SoHieu as f1 from Vattu where MaSo=" & idtp & " ")
@@ -7448,7 +7453,7 @@ Public Sub TuDongXuatkhonguyenlieu(ByVal lastMact As Integer, ByVal idtp As Inte
             Dim sohieuxk As String
             sohieuxk = "XKNL_" & sohieuhd
             Dim noidungxk As String
-            noidungxk = "Xu?t kho nguyên li?u hoá don_" & sohieuhd
+            noidungxk = "Xuaát kho nguyeân lieäu hoaù ñôn_" & sohieuhd
 
             Dim ThangCT As Integer
             ThangCT = month(ngayct)
@@ -7580,7 +7585,7 @@ Public Sub TuDongNhapKho()
     Dim mapl As Integer
     mapl = SelectSQL("SELECT MaSo as f1 from PhanLoaiVattu where SoHieu='TP'")
 
-    Dim lastMact As Integer
+    Dim lastMact As Double
     lastMact = SelectSQL("SELECT top 1 MaCT as f1 from ChungTu order by MaCT desc")
     Dim rs_ct As Recordset
     Dim Query As String
@@ -7604,7 +7609,7 @@ Public Sub TuDongNhapKho()
                 noidungnk = "Nhaäp kho TP hoaù ñôn_" & rs_ct!sohieu
                 Dim ngayct As Date
                 ngayct = CDate(rs_ct!ngayct)
-                Dim newMaCT As Integer
+                Dim newMaCT As Double
                 newMaCT = lastMact + 1  ' Tính toán tru?c giá tr?
                 Dim sql As String
 
@@ -7614,7 +7619,7 @@ Public Sub TuDongNhapKho()
 
                 Dim sopsno As Double
                 sopsno = rs_ct!SoPS2Co
-
+                bakThangTinhGiavon = rs_ct!ThangCT
                 sql = "INSERT INTO Chungtu (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3, MaKH, CTGS, MaKHC, MaTP, DVT, User_ID, MaNV, HanTT, SH1, T1, TLCK, CK, MAUSOHD, LOAIHoaDon, SoLo, HanDung, phantramchietkhau, sotienchietkhau) " & _
                       "VALUES (" & newMaCT & ", 1, '" & sohieunk & "', " & rs_ct!ThangCT & ", #" & Format(ngayct, "MM/DD/YYYY") & "#, #" & Format(ngayct, "MM/DD/YYYY") & "#, 8, 2, '" & noidungnk & "', 38, 37, " & sops & "," & sopsno & ", 0, 38, 37,'" & rs_ct!MaVattu & "', '...', 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, '...', 0, 0, 0, '0', '01GTKT', '', #" & Format(ngayct, "MM/DD/YYYY") & "#, '0', '0')"
                 ExecuteSQL5 sql
@@ -7722,7 +7727,7 @@ Public Sub TuDongNhapKho()
             End If
 
             'Xuat kho nguyen lieu
-            TuDongXuatkhonguyenlieu lastMact + 2, rs_ct!MaVattu, rs_ct!sohieu, ngayct, sops
+            TuDongXuatkhonguyenlieu newMaCT + 1, rs_ct!MaVattu, rs_ct!sohieu, ngayct, sops
             rs_ct.MoveNext
         Loop
     End If
@@ -7730,7 +7735,7 @@ Public Sub TuDongNhapKho()
     ExecuteSQL5 "UPDATE License SET Lock12=10+ Lock12 Mod 10 + Lock12 \100"
 End Sub
 Public Sub Command_Click(Index As Integer)
- 
+
     If hasError = True Then
         Exit Sub
     End If
@@ -8265,7 +8270,12 @@ Public Sub Command_Click(Index As Integer)
         If pPhieu = 0 And pGhi > 0 Then Me.Hide
 
         'Thuc hien viec nhap kho tu dong
-        TuDongNhapKho
+        '
+        Dim ktauto As Integer
+        ktauto = SelectSQL("SELECT AutoNK as f1 from License")
+        If ktauto = 1 Then
+            TuDongNhapKho
+        End If
     Case 2:
         If MaSoCT > 0 Then
             If loaict = 1 And chkXT.Value = 0 Then
@@ -11700,7 +11710,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     If rs.recordCount > 0 Then
         Mo_thong_tin
         txtVT(1).Text = rs!kyhieuhoadon
-         txtVT(9).Text = rs!mst
+        txtVT(9).Text = rs!mst
         txtVT(0).Text = CStr(rs!sohieu)
         txtVT(7).Text = rs!Ten
 
@@ -11709,7 +11719,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
         End If
 
         txtVT(8).Text = rs!DiaChi
-       
+
         If rs_chungtu!MauSoHD <> "" Then
             txtVT(2).Text = rs_chungtu!MauSoHD
         End If

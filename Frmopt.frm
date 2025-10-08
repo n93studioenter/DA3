@@ -2243,7 +2243,7 @@ Begin VB.Form FrmOptions
       End
       Begin VB.Label Label2 
          BackColor       =   &H00FFFFC0&
-         Caption         =   "Tù ®éng nhap,  xuÊt kho"
+         Caption         =   "Tù ®éng nhËp, xuÊt kho"
          ForeColor       =   &H00000000&
          Height          =   615
          Left            =   4680
