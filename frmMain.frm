@@ -462,7 +462,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "07/10/25"
+            TextSave        =   "09/10/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2551,7 +2551,7 @@ End Function
 Private Sub Form_Load()
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
 
-    If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
+    If findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
         SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
         DoEvents
 
@@ -2772,8 +2772,13 @@ Public Sub mnCn_Click(Index As Integer)
         Dim response As Integer
         response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ c«ng nî kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
         If response = vbYes Then
+            'Kiem tra cong no khach hang
+
             Dim sql As String
-            sql = "Delete FROM KhachHang WHERE MaSo NOT IN (SELECT ChungTuLQ.MaKH FROM chungtu INNER JOIN ChungTuLQ ON chungtu.MaCT = ChungTuLQ.MaCT where ChungTuLQ.MaKH <>0)"
+            sql = "Delete FROM KhachHang  WHERE MaSo NOT IN (SELECT MaKhachHang FROM HoaDon) AND MaSo NOT IN (SELECT MaKhachHang FROM SoDuKhachHang)"
+            ExecuteSQL5 sql
+
+            sql = "Delete FROM KhachHang  WHERE MaSo NOT IN (SELECT MaKhachHang FROM HoaDon) AND MaSo IN (SELECT MaKhachHang FROM SoDuKhachHang where DuNo_0=0 and DuCo_0=0)"
             ExecuteSQL5 sql
             MsgBox "Xo¸ thµnh c«ng !"
         End If

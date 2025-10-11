@@ -5163,7 +5163,7 @@ Private Sub btnImportXML_Click()
 
 
     'Goi table Import
-    Query = "select * from tbimport where Status = 0 ORDER BY Val(SHDon)"
+    Query = "SELECT * FROM tbimport WHERE Status = 0 ORDER BY CDate(NLap)"
     Set rs_import = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     sttHD = 1
     If Not rs_import.EOF Then
