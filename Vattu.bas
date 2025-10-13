@@ -391,8 +391,8 @@ Public Function GiaXuatKho(mk As Long, mtk As Long, mvt As Long, ngay As Date, S
     
     tien2 = 0
     If OutCost = 0 Then
-        luong = SoTonKho(ThangTruoc(Month(ngay)), mk, mtk, mvt, tien, tien2)
-        luong = luong + SoNhapKho(mk, mtk, mvt, NgayDauThang(pNamTC, Month(ngay)), NgayCuoiThang(pNamTC, Month(ngay)), tien1, t2)
+        luong = SoTonKho(ThangTruoc(month(ngay)), mk, mtk, mvt, tien, tien2)
+        luong = luong + SoNhapKho(mk, mtk, mvt, NgayDauThang(pNamTC, month(ngay)), NgayCuoiThang(pNamTC, month(ngay)), tien1, t2)
         tien = tien + tien1
         tien2 = tien2 + t2
         If luong > 0 Then
@@ -429,7 +429,7 @@ Public Function GiaXuatKhoBQCK(mk As Long, mtk As Long, mvt As Long, thang As In
 End Function
 
 Public Sub GhiXuatNVL(mct As Long, n As Date, thang As Integer, xk As Integer, tp As Cls154, Optional ktra As Integer = 0, Optional tygia As Double = 1)
-    Dim rs As Recordset, tien As Double, mtk As Long, tongtien As Double, rs2 As Recordset, st As String, n0 As Date
+    Dim rs As Recordset, tien As Double, mtk As Long, TongTien As Double, rs2 As Recordset, st As String, n0 As Date
     Dim ct As New ClsChungtu, MaCT As Long, dgia As Double, luong As Double, thangdm As Integer, sh As String, i As Integer, tcp As Double
         
     n0 = NgayDauThang(pNamTC, thang)
@@ -449,7 +449,7 @@ Public Sub GhiXuatNVL(mct As Long, n As Date, thang As Integer, xk As Integer, t
                     tien = GiaXuatKho(rs!MaKhoNVL, mtk, rs2!MaNVL, rs!ngay, rs2!luong)
                     If tien <> 0 Then
                         If rs2!luong <> 0 Then dgia = tien / rs2!luong Else dgia = 0
-                        tongtien = tongtien + tien
+                        TongTien = TongTien + tien
                         ct.InitChungtu 0, 2, "CPNVLTT" + tp.sohieu + rs!sohieu, thang, rs!ngay, rs!ngay, 0, rs!MaKhoNVL, ABCtoVNI("XuÊt nguyªn vËt liÖu cho s¶n xuÊt"), rs!MaTKCP, mtk, tien, _
                             0, rs2!luong, rs2!MaNVL, "Taäp hôïp töï ñoäng", 0, "", "", "", ""
                         ct.CT_ID = 610000000 + mct
@@ -535,20 +535,20 @@ Public Sub GhiXuatNVL(mct As Long, n As Date, thang As Integer, xk As Integer, t
     If pDTTP = 0 Then
         tcp = PSTKCP("627", thang, thang)
         If SelectSQL("SELECT Fix(0.5+Sum(CPSXC)) AS F1 FROM ThanhPham WHERE Thang=" + CStr(thang)) <> tcp Then
-            tongtien = SelectSQL("SELECT Fix(0.5+Sum(CPNC)) AS F1 FROM ThanhPham WHERE Thang=" + CStr(thang))
-            If tongtien > 0 Then
+            TongTien = SelectSQL("SELECT Fix(0.5+Sum(CPNC)) AS F1 FROM ThanhPham WHERE Thang=" + CStr(thang))
+            If TongTien > 0 Then
                 thangdm = SelectSQL("SELECT Count(MaSo) AS F1 FROM ThanhPham WHERE Thang=" + CStr(thang))
-                ExecuteSQL5 "UPDATE ThanhPham SET CPSXC=CPNC/" + DoiDau(tongtien) + " WHERE Thang=" + CStr(thang)
+                ExecuteSQL5 "UPDATE ThanhPham SET CPSXC=CPNC/" + DoiDau(TongTien) + " WHERE Thang=" + CStr(thang)
                 Set rs = DBKetoan.OpenRecordset("SELECT * FROM ThanhPham WHERE Thang=" + CStr(thang) + " ORDER BY CPSXC", dbOpenSnapshot)
                 i = 0
-                tongtien = 0
+                TongTien = 0
                 Do While Not rs.EOF
                     i = i + 1
                     If i < thangdm Then
                         tien = Fix(0.5 + tcp * rs!cpsxc)
-                        tongtien = tongtien + tien
+                        TongTien = TongTien + tien
                     Else
-                        tien = tcp - tongtien
+                        tien = tcp - TongTien
                     End If
                     ExecuteSQL5 "UPDATE ThanhPham SET CPSXC=" + CStr(tien) + " WHERE MaSo=" + CStr(rs!MaSo)
                     rs.MoveNext
@@ -945,7 +945,7 @@ Public Function GiaNVLTheoDM(mtp As Long, sl As Double, mk As Long, ngay As Date
     Dim rs As Recordset
     Dim thangdm As Integer
     
-    thangdm = SelectSQL("SELECT  TOP 1 Thang AS F1 FROM DinhMuc WHERE MaNVL>0 AND MaTP=" + CStr(mtp) + " AND " + WThang("Thang", 0, Month(ngay)) + " ORDER BY Thang DESC")
+    thangdm = SelectSQL("SELECT  TOP 1 Thang AS F1 FROM DinhMuc WHERE MaNVL>0 AND MaTP=" + CStr(mtp) + " AND " + WThang("Thang", 0, month(ngay)) + " ORDER BY Thang DESC")
        
     Set rs = DBKetoan.OpenRecordset("SELECT MaNVL,SoLuong FROM DinhMuc WHERE MaNVL>0 AND MaTP=" + CStr(mtp) + " AND Thang=" + CStr(thangdm), dbOpenSnapshot)
     Do While Not rs.EOF
@@ -1721,6 +1721,92 @@ Public Sub TinhGXKBQ(tdau As Integer, tcuoi As Integer, shvt As String, tkno As 
     rs.Close
     Set rs = Nothing
     
+    If mv > 0 And ktra = 0 Then
+        KiemTraTaiKhoan 1
+        KiemTraVatTu 1
+    End If
+    HienThongBao "", 1
+    'Beep
+End Sub
+Public Sub TinhGXKBQ2(tdau As Integer, tcuoi As Integer, shvt As String, tkno As String, Optional ktra As Integer = 0)
+    Dim rs As Recordset, ms As Long, tien As Double, luong As Double, sql As String, i As Integer
+    Dim mk As Long, mv As Long, mt As Long, thang As Integer, n As Date, tienx As Double, luongx As Double, tien2 As Double, tienx2 As Double, dgia As Double, dgia2 As Double
+    Dim soct As Long, Counter As Long
+
+    If shvt = "0" Then shvt = ""
+
+    ExecuteSQL5 "UPDATE " + ChungTu2TKNC(0) + " SET MaTKNo=MaTKCo,MaTKTCNo=MaTKTCCo WHERE MaLoai=4 AND HethongTK.Cap=0 AND HethongTK.Loai=0 AND TK.Loai>0"
+    ExecuteSQL5 "UPDATE ChungTu SET SoPS=Fix(IIF(SoPS>=0,0.5,-0.5)+SoPS), SoPS2Co=Fix(IIF(SoPS2Co>=0,0.5,-0.5)+SoPS2Co*" + CStr(Mask_N) + ")/" + CStr(Mask_N)
+
+    If OutCost > 0 Then Exit Sub
+
+    If Len(tkno) > 0 Then
+        sql = "SELECT DISTINCTROW ChungTu.MaSo,ThangCT,NgayGS,MaCT,MaKho,MaVattu,MaTKCo,SoPS,SoPS2Co" + IIf(pGiaUSD > 0, ",PSUSD", "") + " FROM (" + ChungTu2TKNC(0) + ") INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo WHERE HethongTK.SoHieu LIKE '" + tkno + "*' AND (MaLoai=2 OR MaLoai=4) AND MaVattu>0 AND MaTKNo>0 AND TK.TK_ID=" + CStr(TKVT_ID) + " AND SoPS2Co>0 AND " + WThang("ThangCT", tdau, tcuoi) + IIf(Len(shvt) > 0, " AND Vattu.SoHieu='" + shvt + "'", "") + " ORDER BY MaKho,MaTKCo,MaVattu,ThangCT,NgayGS,ChungTu.MaCT"
+    Else
+        ' sql = "SELECT DISTINCTROW ChungTu.MaSo,ThangCT,NgayGS,MaCT,MaKho,MaVattu,MaTKCo,SoPS,SoPS2Co" + IIf(pGiaUSD > 0, ",PSUSD", "") + " FROM (" + ChungTu2TKNC(1) + ") INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo WHERE (MaLoai=2 OR MaLoai=4) AND MaVattu>0 AND HethongTK.TK_ID=" + CStr(TKVT_ID) + " AND SoPS2Co>0 AND " + WThang("ThangCT", tdau, tcuoi) + IIf(Len(shvt) > 0, " AND Vattu.SoHieu='" + shvt + "'", "") + " ORDER BY MaKho,MaTKCo,MaVattu,ThangCT,NgayGS,ChungTu.MaCT"
+        sql = "SELECT DISTINCTROW ChungTu.MaSo, ThangCT, NgayGS, MaCT, MaKho, MaVattu, MaTKCo, SoPS, SoPS2Co" & _
+              IIf(pGiaUSD > 0, ", PSUSD", "") & _
+            " FROM ((" & ChungTu2TKNC(1) & ") " & _
+            " INNER JOIN Vattu ON ChungTu.MaVattu = Vattu.MaSo) " & _
+            " INNER JOIN PhanLoaiVattu ON Vattu.MaPhanLoai = PhanLoaiVattu.MaSo " & _
+            " WHERE (MaLoai = 2 OR MaLoai = 4) " & _
+            " AND MaVattu > 0 " & _
+            " AND HethongTK.TK_ID = " & CStr(TKVT_ID) & " " & _
+            " AND SoPS2Co > 0 " & _
+            " AND " & WThang("ThangCT", tdau, tcuoi) & " " & _
+              IIf(Len(shvt) > 0, " AND Vattu.SoHieu = '" & shvt & "' ", "") & _
+            " AND PhanLoaiVattu.SoHieu = 'TP' " & _
+            " ORDER BY MaKho, MaTKCo, MaVattu, ThangCT, NgayGS, ChungTu.MaCT"
+    End If
+
+    Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+    If Not rs.EOF Then
+        rs.MoveLast
+        soct = rs.recordCount
+        rs.MoveFirst
+    End If
+    Do While Not rs.EOF
+        Counter = Counter + 1
+        If mk <> rs!MaKho Or mt <> rs!MaTkCo Or mv <> rs!MaVattu Or thang <> rs!ThangCT Then
+            Idle
+            n = rs!NgayGS
+            mk = rs!MaKho
+            mt = rs!MaTkCo
+            mv = rs!MaVattu
+            thang = rs!ThangCT
+            luong = SoTonKho(ThangTruoc(thang), mk, mt, mv, tien, tien2)
+            luong = luong + SoNhapKhoThang(mk, mt, mv, thang, thang, tienx, tienx2)
+            tien = tien + tienx
+            tien2 = tien2 + tienx2
+            If luong <> 0 Then dgia = Abs(tien / luong) Else dgia = 0
+            If luong <> 0 Then dgia2 = Abs(tien2 / luong) Else dgia2 = 0
+        End If
+
+        If Abs(luong - rs!SoPS2Co) < (1 / Mask_N) Then
+            tienx = tien
+            luong = 0
+        Else
+            luong = luong - rs!SoPS2Co
+            tienx = RoundMoney(dgia * rs!SoPS2Co)
+        End If
+        tien = tien - tienx
+        If tienx <> rs!sops Then ExecuteSQL5 "UPDATE ChungTu SET SoPS=" + DoiDau(tienx) + " WHERE MaSo=" + CStr(rs!MaSo)
+
+        If pGiaUSD > 0 Then
+            If luong - rs!SoPS2Co < (1 / Mask_N) Then
+                tienx2 = tien2
+            Else
+                tienx2 = RoundMoney(dgia2 * rs!SoPS2Co)
+            End If
+            tien2 = tien2 - tienx2
+            If tienx2 <> rs!PSUSD Then ExecuteSQL5 "UPDATE ChungTu SET PSUSD=" + DoiDau(tienx2) + " WHERE MaSo=" + CStr(rs!MaSo)
+        End If
+        If Counter Mod 100 = 0 Then HienThongBao "§· xö lý " + CStr(Fix(100 * Counter / soct)) + "% tæng sè chøng tõ", 1
+        rs.MoveNext
+    Loop
+    rs.Close
+    Set rs = Nothing
+
     If mv > 0 And ktra = 0 Then
         KiemTraTaiKhoan 1
         KiemTraVatTu 1

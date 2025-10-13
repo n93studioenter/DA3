@@ -462,7 +462,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "09/10/25"
+            TextSave        =   "13/10/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -3300,7 +3300,7 @@ Private Sub mnviet_Click()
 End Sub
 
 Public Sub mnVT_Click(Index As Integer)
-        
+
     If Index = 22 Then
         Dim response As Integer
         response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ vËt t­ kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
@@ -3413,19 +3413,7 @@ Public Sub mnVT_Click(Index As Integer)
                 If Tudongtinhgiavon = False Then
                     TinhGXKBQ i, j, st, TK
                 Else
-                    'Lay danh sach san pham thuoc thanh pham
-                    Dim Query As String
-                    Query = "SELECT MaPhanLoai,SoHieu  from Vattu "
-                    Dim rs_vattu As Recordset
-                    Set rs_vattu = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
-                    If Not rs_vattu.EOF Then
-                        While Not rs_vattu.EOF
-                            If IsThanhPham(rs_vattu!MaPhanLoai, rs_vattu!MaPhanLoai) = True Then
-                                TinhGXKBQ i, j, rs_vattu!sohieu, TK
-                            End If
-                            rs_vattu.MoveNext
-                        Wend
-                    End If
+                    TinhGXKBQ2 i, j, st, TK
                     MsgBox "Da tinh xong gia von"
                 End If
             End If
