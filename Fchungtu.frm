@@ -3281,6 +3281,7 @@ Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEv
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 
 
+Dim bakNgayimp As String
 Dim bakThangTinhGiavon As Integer
 Dim nknl As Integer
 Dim bakParentId As Integer
@@ -4899,8 +4900,8 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     txtChungtu_LostFocus (0)
     If rs_import!TPhi = 0 Then
         txtchungtu(5).Text = rs_import!TgTCThue
-        Else
-         txtchungtu(5).Text = val(rs_import!TgTCThue) + val(rs_import!TPhi)
+    Else
+        txtchungtu(5).Text = val(rs_import!TgTCThue) + val(rs_import!TPhi)
     End If
     RFocus txtchungtu(6)
     txtChungtu_KeyPress 6, 13
@@ -4919,11 +4920,18 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
         End If
     End If
 
+    If IsNull(rs_import!TgTCThue1) Then
+        bakTongtien = rs_import!TgTThue
+    Else
+        bakTongtien = rs_import!TgTCThue1
+    End If
+
     txtChungtu_LostFocus (5)
     RFocus txtchungtu(6)
     txtChungtu_KeyPress 6, 13
 
     If rs_import!VAT2 <> 0 Then
+        bakTongtien2 = rs_import!TgTCThue2
         txtchungtu(0).Text = rs_import!tkThue
         txtChungtu_LostFocus (0)
         txtchungtu(2).Text = rs_import!VAT2
@@ -5134,8 +5142,13 @@ Private Sub timerNext_Timer()
 
         If response = vbYes Then
 
+            Dim myDate As Date
+            myDate = CDate(bakNgayimp)
+            MedNgay(0).Text = Format(myDate, "dd/mm/yy")
+            MedNgay(1).Text = Format(myDate, "dd/mm/yy")
             hasError = False
             btnReset_Click
+
             ' Ngu?i dùng ch?n "No"
             'UpdateImportStatus 1
             Exit Sub
@@ -5149,7 +5162,7 @@ Private Sub timerNext_Timer()
         End If
 
     End If
- 
+
 End Sub
 Private Sub btnImportXML_Click()
 
@@ -12227,6 +12240,10 @@ Private Function KiemTraChungtu() As Boolean
         If Not PSTuDong(SoPSConLai) Then
             MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
             hasError = True
+            If FThuChi.FThuChiForm <> 0 Then
+                bakNgayimp = rs_import!NLap
+            End If
+
             RFocus txtchungtu(0)
             Exit Function
         End If

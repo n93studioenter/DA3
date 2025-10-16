@@ -462,7 +462,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "13/10/25"
+            TextSave        =   "14/10/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2551,7 +2551,7 @@ End Function
 Private Sub Form_Load()
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
 
-    If findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
+    If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
         SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
         DoEvents
 
