@@ -137,7 +137,7 @@ Begin VB.Form FBcTC
          Width           =   1575
       End
       Begin VB.ComboBox CTGS 
-         Height          =   330
+         Height          =   315
          ItemData        =   "Fbctc.frx":57E2
          Left            =   240
          List            =   "Fbctc.frx":57E9
@@ -788,7 +788,7 @@ Begin VB.Form FBcTC
          Width           =   4215
       End
       Begin VB.ComboBox CboTL 
-         Height          =   330
+         Height          =   315
          ItemData        =   "Fbctc.frx":AD0F
          Left            =   4680
          List            =   "Fbctc.frx":AD37
@@ -1639,7 +1639,7 @@ Begin VB.Form FBcTC
          Width           =   1335
       End
       Begin VB.ComboBox CboTT 
-         Height          =   330
+         Height          =   315
          Index           =   2
          Left            =   1560
          Style           =   2  'Dropdown List
@@ -1662,7 +1662,7 @@ Begin VB.Form FBcTC
          Width           =   1335
       End
       Begin VB.ComboBox CboTT 
-         Height          =   330
+         Height          =   315
          Index           =   1
          Left            =   1560
          Style           =   2  'Dropdown List
@@ -1685,7 +1685,7 @@ Begin VB.Form FBcTC
          Width           =   1335
       End
       Begin VB.ComboBox CboTT 
-         Height          =   330
+         Height          =   315
          Index           =   0
          Left            =   1560
          Style           =   2  'Dropdown List
@@ -1758,7 +1758,7 @@ Begin VB.Form FBcTC
       Top             =   2520
       Width           =   1575
       Begin VB.ComboBox CboThang 
-         Height          =   330
+         Height          =   315
          Index           =   0
          ItemData        =   "Fbctc.frx":B186
          Left            =   240
@@ -1769,7 +1769,7 @@ Begin VB.Form FBcTC
          Width           =   1095
       End
       Begin VB.ComboBox CboThang 
-         Height          =   330
+         Height          =   315
          Index           =   1
          ItemData        =   "Fbctc.frx":B19B
          Left            =   240
@@ -1937,7 +1937,7 @@ Begin VB.Form FBcTC
       Width           =   2295
    End
    Begin VB.ComboBox CboNK 
-      Height          =   330
+      Height          =   315
       Index           =   1
       ItemData        =   "Fbctc.frx":B1B0
       Left            =   1920
@@ -2067,7 +2067,7 @@ Begin VB.Form FBcTC
       Width           =   735
    End
    Begin VB.ComboBox CboVV 
-      Height          =   330
+      Height          =   315
       Left            =   6000
       Style           =   2  'Dropdown List
       TabIndex        =   9
@@ -2500,7 +2500,7 @@ If OptTG(0).Value = False Then
                         OptTG(1).Value = True
                         For i = 1 To 5
                             ngay(1) = ngay(0) + 6
-                            If Month(ngay(1)) <> tcuoi Then ngay(1) = NgayCuoiThang(pNamTC, tcuoi)
+                            If month(ngay(1)) <> tcuoi Then ngay(1) = NgayCuoiThang(pNamTC, tcuoi)
                             
                             'Command_Click Index
                             If taikhoan.loai < 5 Or taikhoan.kieu < 0 Then
@@ -2515,7 +2515,7 @@ If OptTG(0).Value = False Then
                                     SetRptInfo
                                 End If
                             End If
-                            If Month(ngay(0) + 7) = tdau Then
+                            If month(ngay(0) + 7) = tdau Then
                                 ngay(0) = ngay(0) + 7
                             Else
                                 Exit For
