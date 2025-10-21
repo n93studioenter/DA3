@@ -3286,7 +3286,7 @@ Private Declare Function SetTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEve
 Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long) As Long
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 
-
+Dim isimportnk As Boolean
 Dim tk154 As String
 Dim bakNgayimp As String
 Dim bakThangTinhGiavon As Integer
@@ -3408,18 +3408,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938526
-Attribute ctgoc.VB_VarUserMemId = 1073938526
-Attribute TenNX.VB_VarUserMemId = 1073938526
-Attribute DiaChiNX.VB_VarUserMemId = 1073938526
-Attribute TenBH.VB_VarUserMemId = 1073938526
-Attribute DiaChiBH.VB_VarUserMemId = 1073938526
-Attribute MSTBH.VB_VarUserMemId = 1073938526
-Attribute unc1.VB_VarUserMemId = 1073938526
-Attribute unc2.VB_VarUserMemId = 1073938526
-Attribute unc3.VB_VarUserMemId = 1073938526
-Attribute MaKHBH.VB_VarUserMemId = 1073938526
-Attribute HanTT.VB_VarUserMemId = 1073938526
+Attribute DiachiTC.VB_VarUserMemId = 1073938527
+Attribute ctgoc.VB_VarUserMemId = 1073938527
+Attribute TenNX.VB_VarUserMemId = 1073938527
+Attribute DiaChiNX.VB_VarUserMemId = 1073938527
+Attribute TenBH.VB_VarUserMemId = 1073938527
+Attribute DiaChiBH.VB_VarUserMemId = 1073938527
+Attribute MSTBH.VB_VarUserMemId = 1073938527
+Attribute unc1.VB_VarUserMemId = 1073938527
+Attribute unc2.VB_VarUserMemId = 1073938527
+Attribute unc3.VB_VarUserMemId = 1073938527
+Attribute MaKHBH.VB_VarUserMemId = 1073938527
+Attribute HanTT.VB_VarUserMemId = 1073938527
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -5294,34 +5294,43 @@ Private Sub btnImportXML_Click()
     Query = "SELECT * FROM tbimport WHERE Status = 0 ORDER BY CDate(NLap)"
     Set rs_import = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     sttHD = 1
+    Dim isloop As Boolean
+    isloop = True
     If Not rs_import.EOF Then
+        While isloop
+            'Kiem tra 1 buoc nua trong hoa don
+            Dim qrhoadon As String
+            qrhoadon = "SELECT * FROM HoaDon WHERE KyHieu='" & rs_import!KHHDon & _
+                       "' AND SoHD='" & rs_import!SHDon & _
+                       "' AND Format(NgayPH, 'dd/MM/yy') = '" & Format(rs_import!NLap, "dd/MM/yy") & "'"
+            Dim rs_hd As Recordset
+            Set rs_hd = DBKetoan.OpenRecordset(qrhoadon, dbOpenSnapshot)
+            If rs_hd.EOF Then
+                isloop = False
+                'Di chuyen cuoi de lay Totals
+                rs_import.MoveLast
+                totals = rs_import.recordCount
 
-        'Kiem tra 1 buoc nua trong hoa don
-        Dim qrhoadon As String
-        qrhoadon = "SELECT * FROM HoaDon WHERE KyHieu='" & rs_import!KHHDon & "' AND SoHD='" & rs_import!SHDon & "' AND NgayPH=#" & Format(rs_import!NLap, "yyyy-mm-dd") & "#"
-        Dim rs_hd As Recordset
-        Set rs_hd = DBKetoan.OpenRecordset(qrhoadon, dbOpenSnapshot)
-        If rs_hd.EOF Then
-            'Di chuyen cuoi de lay Totals
-            rs_import.MoveLast
-            totals = rs_import.recordCount
+                'Quay lai phan tu dau tien
+                rs_import.MoveFirst
+                'Xu ly add header
+                XylyHoaDonTong rs_import
+                'MsgBox rs_import!SHDon
 
-            'Quay lai phan tu dau tien
-            rs_import.MoveFirst
-            'Xu ly add header
-            XylyHoaDonTong rs_import
-            'MsgBox rs_import!SHDon
+                'Di chuyen den phan tu tiep theo neu co
+                'rs_import.MoveNext
+            Else
+                'MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
+                'Dim msgBox As frmMessageBox
+                ' Set msgBox = New frmMessageBox
+                'msgBox.SetText "Kh«ng cßn ho¸ ®¬n ®Ó import"
+                'msgBox.Show vbModal
+                rs_import.MoveNext
 
-            'Di chuyen den phan tu tiep theo neu co
-            'rs_import.MoveNext
-        Else
-            MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
-            'Dim msgBox As frmMessageBox
-            ' Set msgBox = New frmMessageBox
-            'msgBox.SetText "Kh«ng cßn ho¸ ®¬n ®Ó import"
-            'msgBox.Show vbModal
-        End If
-
+            End If
+        Wend
+    Else
+        MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
     End If
 End Sub
 
@@ -7894,7 +7903,7 @@ Public Sub Command_Click(Index As Integer)
         End If
         If Not rs_importNK Is Nothing Then
             If Not rs_importNK.EOF Then
-               ngay(0) = rs_importNK!NgayLap
+                ngay(0) = rs_importNK!NgayLap
                 ngay(1) = rs_importNK!NgayLap
 
                 Dim myDate As Date
@@ -8302,9 +8311,16 @@ Public Sub Command_Click(Index As Integer)
         'Cap nhat trang thai cho tbimport neu co
         Dim rs_kiemtra As Recordset
         Dim Query64 As String
-        Query64 = "SELECT * FROM tbimport WHERE SHDon='" & chungtu.sohieu & _
+        Dim shi As String
+        shi = chungtu.sohieu
+
+        If shi Like "*GV*" Then
+            shi = Replace(shi, "GV", "")
+        End If
+
+        Query64 = "SELECT * FROM tbimport WHERE SHDon='" & shi & _
                   "' AND KHHDon='" & txtVT(1).Text & _
-                  "' AND CDate(NLap) = #" & Format(chungtu.NgayCT, "dd/MM/yyyy") & "#"
+                  "' AND Format(NLap, 'dd/MM/yyyy') = '" & Format(chungtu.NgayCT, "dd/MM/yyyy") & "'"
         Set rs_kiemtra = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
 
         If Not rs_kiemtra.EOF Then
@@ -8331,7 +8347,7 @@ Public Sub Command_Click(Index As Integer)
                 Grid2.AddItem txt(0).Text + Chr(9) + Format(MedNgay(0).Text, Mask_D) + Chr(9) _
                             + Format(MedNgay(1).Text, Mask_D) + Chr(9) + txt(1).Text + Chr(9) + Format(tong_tien_, Mask_0) + Chr(9) + CStr(chungtu.MaCT) + Chr(9) + "0" + Chr(9) + "0", 0
             Else
-                If Not rs_import Is Nothing Then
+                If Not rs_import Is Nothing And isimportnk = False Then
                     Grid2.AddItem txt(0).Text + Chr(9) + Format(rs_import!NLap, Mask_D) + Chr(9) _
                                 + Format(rs_import!NLap, Mask_D) + Chr(9) + txt(1).Text + Chr(9) + Format(tong_tien_, Mask_0) + Chr(9) + CStr(chungtu.MaCT) + Chr(9) + "0" + Chr(9) + "0", 0
                 End If
@@ -8888,6 +8904,7 @@ End If
 End Sub
 
 Private Sub Form_Activate()
+    isimportnk = False
     ExecuteSQL5_Themmoi ("ALTER TABLE tbRegister  ADD tk154 text")
     tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
     isPopup = 0
@@ -9650,10 +9667,12 @@ Public Sub Nhapkhotong()
     Set rs_importNKDetail = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     NhapkhoTPChitiet
 End Sub
+
 Public Sub OptLoai_Click(Index As Integer)
 
     If Index = 6 Then
         FThuChi.FThuChiForm = 1
+        isimportnk = True
         Autonhapkho
         Exit Sub
     End If
