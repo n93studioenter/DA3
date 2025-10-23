@@ -7,7 +7,7 @@ Begin VB.Form FrmChungtu
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "NhÀp ch¯ng tı"
-   ClientHeight    =   9015
+   ClientHeight    =   9120
    ClientLeft      =   60
    ClientTop       =   540
    ClientWidth     =   18180
@@ -18,15 +18,57 @@ Begin VB.Form FrmChungtu
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   ScaleHeight     =   9015
+   ScaleHeight     =   9120
    ScaleWidth      =   18180
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
+   Begin VB.CommandButton Command8 
+      BackColor       =   &H0080FF80&
+      Caption         =   "Export tÍ khai"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   315
+      Left            =   1800
+      TabIndex        =   180
+      Top             =   8520
+      Width           =   1815
+   End
+   Begin VB.TextBox txtchungtu 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BackColor       =   &H00C0FFC0&
+      BeginProperty DataFormat 
+         Type            =   1
+         Format          =   "#,##0"
+         HaveTrueFalseNull=   0
+         FirstDayOfWeek  =   0
+         FirstWeekOfYear =   0
+         LCID            =   1033
+         SubFormatType   =   1
+      EndProperty
+      Height          =   315
+      Index           =   6
+      Left            =   11475
+      MaxLength       =   20
+      TabIndex        =   18
+      Tag             =   "14"
+      Text            =   "0"
+      ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
+      Top             =   2080
+      Width           =   1650
+   End
    Begin VB.Timer Timer154c 
       Enabled         =   0   'False
-      Interval        =   250
+      Interval        =   200
       Left            =   13800
       Top             =   4560
    End
@@ -56,7 +98,7 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
-      Caption         =   "Import NhÀp kho"
+      Caption         =   "Import thµnh ph»m"
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   8.25
@@ -122,12 +164,13 @@ Begin VB.Form FrmChungtu
       Width           =   1080
    End
    Begin VB.CommandButton btnReset 
+      BackColor       =   &H00C0C0C0&
       Caption         =   "Reset"
       Height          =   375
-      Left            =   120
+      Left            =   12360
       Picture         =   "Fchungtu.frx":6CC4
       TabIndex        =   176
-      Top             =   8640
+      Top             =   8280
       Width           =   855
    End
    Begin VB.CommandButton Command6 
@@ -259,7 +302,7 @@ Begin VB.Form FrmChungtu
       TabIndex        =   167
       Tag             =   "35"
       ToolTipText     =   "Depreciation"
-      Top             =   3030
+      Top             =   3110
       Width           =   1575
    End
    Begin VB.Timer timer3311 
@@ -935,32 +978,8 @@ Begin VB.Form FrmChungtu
       TabIndex        =   20
       Tag             =   "14"
       ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
+      Top             =   2080
       Width           =   1180
-   End
-   Begin VB.TextBox txtchungtu 
-      Alignment       =   1  'Right Justify
-      Appearance      =   0  'Flat
-      BackColor       =   &H00C0FFC0&
-      BeginProperty DataFormat 
-         Type            =   1
-         Format          =   "#,##0"
-         HaveTrueFalseNull=   0
-         FirstDayOfWeek  =   0
-         FirstWeekOfYear =   0
-         LCID            =   1033
-         SubFormatType   =   1
-      EndProperty
-      Height          =   315
-      Index           =   6
-      Left            =   11480
-      MaxLength       =   20
-      TabIndex        =   18
-      Tag             =   "14"
-      Text            =   "0"
-      ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
-      Width           =   1650
    End
    Begin VB.TextBox txtchungtu 
       Alignment       =   1  'Right Justify
@@ -983,7 +1002,7 @@ Begin VB.Form FrmChungtu
       Tag             =   "14"
       Text            =   "0"
       ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
+      Top             =   2080
       Width           =   1695
    End
    Begin VB.TextBox txtchungtu 
@@ -1007,7 +1026,7 @@ Begin VB.Form FrmChungtu
       Tag             =   "14"
       Text            =   "0"
       ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
+      Top             =   2080
       Width           =   1590
    End
    Begin VB.TextBox txtchungtu 
@@ -1031,8 +1050,8 @@ Begin VB.Form FrmChungtu
       Tag             =   "14"
       Text            =   "0"
       ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
-      Width           =   1090
+      Top             =   2080
+      Width           =   1095
    End
    Begin VB.CommandButton Command2 
       BackColor       =   &H8000000B&
@@ -1545,7 +1564,7 @@ Begin VB.Form FrmChungtu
       TabIndex        =   19
       Tag             =   "0"
       Text            =   "0"
-      Top             =   2040
+      Top             =   2080
       Width           =   915
    End
    Begin VB.CommandButton CmdPhieu 
@@ -1980,20 +1999,6 @@ Begin VB.Form FrmChungtu
       Width           =   1080
    End
    Begin VB.TextBox txtchungtu 
-      Alignment       =   1  'Right Justify
-      Appearance      =   0  'Flat
-      BackColor       =   &H00C0FFC0&
-      Height          =   315
-      Index           =   2
-      Left            =   5835
-      MaxLength       =   20
-      TabIndex        =   14
-      Tag             =   "0"
-      ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
-      Width           =   1340
-   End
-   Begin VB.TextBox txtchungtu 
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
       Height          =   315
@@ -2005,21 +2010,8 @@ Begin VB.Form FrmChungtu
       Tag             =   "21"
       Text            =   "?"
       ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
-      Top             =   2040
-      Width           =   795
-   End
-   Begin VB.TextBox txtchungtu 
-      Appearance      =   0  'Flat
-      BackColor       =   &H00C0FFC0&
-      Height          =   315
-      Index           =   1
-      Left            =   2760
-      LinkItem        =   "T™n tµi kho∂n ho∆c chi ti’t"
-      MaxLength       =   50
-      TabIndex        =   31
-      TabStop         =   0   'False
-      Top             =   2040
-      Width           =   3195
+      Top             =   2080
+      Width           =   900
    End
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
@@ -2096,13 +2088,13 @@ Begin VB.Form FrmChungtu
    End
    Begin MSGrid.Grid Grid2 
       Height          =   3015
-      Left            =   3720
+      Left            =   3600
       TabIndex        =   135
       Tag             =   "1"
-      Top             =   5280
-      Width           =   9795
+      Top             =   5160
+      Width           =   9915
       _Version        =   65536
-      _ExtentX        =   17277
+      _ExtentX        =   17489
       _ExtentY        =   5318
       _StockProps     =   77
       BackColor       =   16777215
@@ -2130,16 +2122,62 @@ Begin VB.Form FrmChungtu
       Visible         =   0   'False
       Width           =   975
    End
+   Begin VB.CommandButton btnImportXML 
+      BackColor       =   &H0080FF80&
+      Caption         =   "Import h„a Æ¨n"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   120
+      Style           =   1  'Graphical
+      TabIndex        =   172
+      Top             =   3540
+      Width           =   1575
+   End
+   Begin VB.TextBox txtchungtu 
+      Alignment       =   1  'Right Justify
+      Appearance      =   0  'Flat
+      BackColor       =   &H00C0FFC0&
+      Height          =   315
+      Index           =   2
+      Left            =   5940
+      MaxLength       =   20
+      TabIndex        =   14
+      Tag             =   "0"
+      ToolTipText     =   "Nh n ph›m ? ho∆c click Æ” hi÷n th´ng tin"
+      Top             =   2080
+      Width           =   1260
+   End
+   Begin VB.TextBox txtchungtu 
+      Appearance      =   0  'Flat
+      BackColor       =   &H00C0FFC0&
+      Height          =   315
+      Index           =   1
+      Left            =   3000
+      LinkItem        =   "T™n tµi kho∂n ho∆c chi ti’t"
+      MaxLength       =   50
+      TabIndex        =   31
+      TabStop         =   0   'False
+      Top             =   2085
+      Width           =   2955
+   End
    Begin MSGrid.Grid GrdChungtu 
-      Height          =   2220
+      Height          =   2235
       Left            =   1800
       TabIndex        =   160
       Tag             =   "20"
-      Top             =   2355
-      Width           =   11655
+      Top             =   2400
+      Width           =   11325
       _Version        =   65536
-      _ExtentX        =   20558
-      _ExtentY        =   3916
+      _ExtentX        =   19976
+      _ExtentY        =   3942
       _StockProps     =   77
       BackColor       =   16777215
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2157,9 +2195,12 @@ Begin VB.Form FrmChungtu
       HighLight       =   0   'False
       MousePointer    =   1
    End
-   Begin VB.CommandButton btnImportXML 
-      BackColor       =   &H0080FF80&
-      Caption         =   "Import h„a Æ¨n"
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "Ti“n CK"
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   8.25
@@ -2169,12 +2210,158 @@ Begin VB.Form FrmChungtu
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00404040&
       Height          =   375
-      Left            =   120
-      Style           =   1  'Graphical
-      TabIndex        =   172
-      Top             =   3480
-      Width           =   1575
+      Index           =   24
+      Left            =   13920
+      TabIndex        =   70
+      Top             =   1800
+      Width           =   1185
+      WordWrap        =   -1  'True
+   End
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "Ph∏t sinh c„"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00404040&
+      Height          =   375
+      Index           =   10
+      Left            =   11475
+      TabIndex        =   45
+      Tag             =   "Credit"
+      Top             =   1800
+      Width           =   1650
+   End
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "Ph∏t sinh nÓ"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00404040&
+      Height          =   375
+      Index           =   9
+      Left            =   9795
+      TabIndex        =   134
+      Tag             =   "Debit"
+      Top             =   1800
+      Width           =   1695
+   End
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "Tµi kho∂n"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H80000008&
+      Height          =   345
+      Index           =   5
+      Left            =   2160
+      TabIndex        =   41
+      Tag             =   "Account"
+      Top             =   1800
+      Width           =   900
+   End
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "Di‘n gi∂i"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00404040&
+      Height          =   300
+      Index           =   6
+      Left            =   3000
+      TabIndex        =   42
+      Tag             =   "Description"
+      Top             =   1800
+      Width           =   2955
+   End
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "M∑ sË"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00404040&
+      Height          =   375
+      Index           =   7
+      Left            =   5910
+      TabIndex        =   43
+      Tag             =   "Code"
+      Top             =   1800
+      Width           =   1260
+   End
+   Begin VB.Label Label 
+      Alignment       =   2  'Center
+      Appearance      =   0  'Flat
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   1  'Fixed Single
+      Caption         =   "SË l≠Óng"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00404040&
+      Height          =   375
+      Index           =   8
+      Left            =   7155
+      TabIndex        =   44
+      Tag             =   "Quantity"
+      Top             =   1800
+      Width           =   1095
    End
    Begin VB.Label lblThongbao 
       BackColor       =   &H00E0E0E0&
@@ -2188,10 +2375,11 @@ Begin VB.Form FrmChungtu
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   375
-      Left            =   3720
+      Height          =   255
+      Left            =   3840
       TabIndex        =   174
       Top             =   8400
+      Visible         =   0   'False
       Width           =   3495
    End
    Begin VB.Label Label3 
@@ -2248,11 +2436,11 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   255
       Index           =   28
-      Left            =   9840
+      Left            =   9120
       TabIndex        =   157
       Tag             =   "Month"
       Top             =   8400
-      Width           =   2295
+      Width           =   1935
    End
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
@@ -2268,7 +2456,7 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   255
       Index           =   27
-      Left            =   12360
+      Left            =   11160
       TabIndex        =   156
       Tag             =   "Month"
       Top             =   8400
@@ -2288,7 +2476,7 @@ Begin VB.Form FrmChungtu
       FontPitchAndFamily=   2
    End
    Begin VB.Label Label1 
-      BackColor       =   &H00FF8080&
+      BackColor       =   &H00FFFFC0&
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   8.25
@@ -2348,7 +2536,7 @@ Begin VB.Form FrmChungtu
       Width           =   255
    End
    Begin VB.Label Label1 
-      BackColor       =   &H00FF8080&
+      BackColor       =   &H00FFFFC0&
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   8.25
@@ -2359,7 +2547,7 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00000000&
-      Height          =   600
+      Height          =   615
       Index           =   8
       Left            =   -120
       TabIndex        =   52
@@ -2453,7 +2641,7 @@ Begin VB.Form FrmChungtu
       Width           =   495
    End
    Begin VB.Label Label1 
-      BackColor       =   &H00FF8080&
+      BackColor       =   &H00FFFFC0&
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   8.25
@@ -2690,31 +2878,7 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "Ti“n CK"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   24
-      Left            =   13920
-      TabIndex        =   70
-      Top             =   1800
-      Width           =   1180
-      WordWrap        =   -1  'True
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
+      BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "CK"
       BeginProperty Font 
@@ -2726,8 +2890,8 @@ Begin VB.Form FrmChungtu
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
+      ForeColor       =   &H00404040&
+      Height          =   495
       Index           =   23
       Left            =   13110
       TabIndex        =   68
@@ -2760,7 +2924,7 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
+      BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "STT"
       BeginProperty Font 
@@ -2772,7 +2936,7 @@ Begin VB.Form FrmChungtu
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00FFFFFF&
+      ForeColor       =   &H00404040&
       Height          =   255
       Index           =   20
       Left            =   1800
@@ -2816,7 +2980,7 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
+      BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "ß¨n gi∏"
       BeginProperty Font 
@@ -2828,7 +2992,7 @@ Begin VB.Form FrmChungtu
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00FFFFFF&
+      ForeColor       =   &H00404040&
       Height          =   255
       Index           =   13
       Left            =   8235
@@ -2981,150 +3145,6 @@ Begin VB.Form FrmChungtu
       Visible         =   0   'False
       Width           =   15
       WordWrap        =   -1  'True
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "Ph∏t sinh c„"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   10
-      Left            =   11480
-      TabIndex        =   45
-      Tag             =   "Credit"
-      Top             =   1800
-      Width           =   1650
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "Ph∏t sinh nÓ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   9
-      Left            =   9795
-      TabIndex        =   134
-      Tag             =   "Debit"
-      Top             =   1800
-      Width           =   1695
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "SË l≠Óng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   8
-      Left            =   7155
-      TabIndex        =   44
-      Tag             =   "Quantity"
-      Top             =   1800
-      Width           =   1095
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "M∑ sË"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   7
-      Left            =   5835
-      TabIndex        =   43
-      Tag             =   "Code"
-      Top             =   1800
-      Width           =   1335
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "Di‘n gi∂i"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   6
-      Left            =   2940
-      TabIndex        =   42
-      Tag             =   "Description"
-      Top             =   1800
-      Width           =   2955
-   End
-   Begin VB.Label Label 
-      Alignment       =   2  'Center
-      Appearance      =   0  'Flat
-      BackColor       =   &H00FF8080&
-      BorderStyle     =   1  'Fixed Single
-      Caption         =   "Tµi kho∂n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      ForeColor       =   &H00FFFFFF&
-      Height          =   255
-      Index           =   5
-      Left            =   2160
-      TabIndex        =   41
-      Tag             =   "Account"
-      Top             =   1800
-      Width           =   795
    End
    Begin VB.Menu mnPU 
       Caption         =   "&Danh Æi”m"
@@ -4418,7 +4438,7 @@ Private Sub Command7_MouseMove(Button As Integer, Shift As Integer, X As Single,
      Command6.BackColor = &H80FF80
     
     Dim i
-    For i = 0 To 5
+    For i = 0 To 6
         If OptLoai(i).Value = False Then OptLoai(i).BackColor = &H80FF80       ' &H80000003
     Next
     For i = 8 To 12
@@ -4447,16 +4467,365 @@ Private Sub Command6_MouseMove(Button As Integer, Shift As Integer, X As Single,
      Command7.BackColor = &H80FF80
      btnImportXML.BackColor = &H80FF80
     Dim i
-    For i = 0 To 5
+    For i = 0 To 6
         If OptLoai(i).Value = False Then OptLoai(i).BackColor = &H80FF80       ' &H80000003
     Next
     For i = 8 To 12
         If OptLoai(i).Value = False Then OptLoai(i).BackColor = &H80FF80       '&H80000003
     Next
 End Sub
+ 
+Private Sub CreateTaxXMLFull()
+    On Error GoTo ErrorHandler
+    
+    Dim xmlDoc As MSXML2.DOMDocument
+    Dim rootElement As IXMLDOMElement
+    Dim processingInstruction As IXMLDOMProcessingInstruction
+    Dim parentElement As IXMLDOMElement
+    Dim childElement As IXMLDOMElement
+    Dim attr As IXMLDOMAttribute
+    
+    ' T?o document XML
+    Set xmlDoc = New MSXML2.DOMDocument
+    xmlDoc.async = False
+    xmlDoc.preserveWhiteSpace = True
+    
+    ' ThÍm processing instruction v?i standalone="no"
+    Set processingInstruction = xmlDoc.createProcessingInstruction("xml", "version=""1.0"" encoding=""UTF-8"" standalone=""no""")
+    xmlDoc.appendChild processingInstruction
+    
+    ' T?o root element v?i namespace
+    Set rootElement = xmlDoc.createElement("HSoThueDTu")
+    rootElement.setAttribute "xmlns", "http://kekhaithue.gdt.gov.vn/TKhaiThue"
+    rootElement.setAttribute "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance"
+    rootElement.setAttribute "xmlns:ds", "http://www.w3.org/2000/09/xmldsig#"  ' ThÍm namespace ds
+    xmlDoc.appendChild rootElement
+    
+    '=== HSO KHAI THUE ===
+    Set parentElement = xmlDoc.createElement("HSoKhaiThue")
+    parentElement.setAttribute "id", "ID_1"
+    rootElement.appendChild parentElement
+    
+    '=== THONG TIN CHUNG ===
+    Set childElement = xmlDoc.createElement("TTinChung")
+    parentElement.appendChild childElement
+    
+    ' ThÙng tin d?ch v?
+    Call AddTTinDVu(xmlDoc, childElement)
+    
+    ' ThÙng tin t? khai thu?
+    Call AddTTinTKhaiThue(xmlDoc, childElement)
+    
+    '=== CHI TIEU TO KHAI CHINH ===
+    Call AddCTieuTKhaiChinh(xmlDoc, parentElement)
+     
+    '=== PHU LUC ===
+    Call AddPLuc(xmlDoc, parentElement)
+    
+    '=== CHU KY SO ===
+    Call AddCKyDTu(xmlDoc, rootElement)
+    
+    ' Luu file
+    Dim FilePath As String
+    FilePath = App.path & "\KhaiThue_GTGT_" & Format(Now, "yyyy-mm-dd") & ".xml"
+    
+    ' –?m b?o encoding l‡ UTF-8
+    xmlDoc.Save FilePath
+    
+    ' Ki?m tra file
+    If Dir(FilePath) <> "" Then
+        MsgBox "File XML d„ du?c t?o th‡nh cÙng!" & vbCrLf & "–u?ng d?n: " & FilePath, vbInformation
+    Else
+        MsgBox "CÛ l?i khi t?o file XML!", vbExclamation
+    End If
+    
+    Exit Sub
+    
+ErrorHandler:
+    MsgBox "L?i khi t?o file XML: " & Err.Description, vbExclamation
+End Sub
+' H‡m thÍm Chi tiÍu t? khai chÌnh
+Private Sub AddCTieuTKhaiChinh(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
+    Dim childElement As IXMLDOMElement
+    Dim subElement As IXMLDOMElement
+    Dim subSubElement As IXMLDOMElement
+    
+    Set childElement = xmlDoc.createElement("CTieuTKhaiChinh")
+    parentElement.appendChild childElement
+    
+    AddElement xmlDoc, childElement, "ma_NganhNghe", "00"
+    AddElement xmlDoc, childElement, "ten_NganhNghe", "Ho?t d?ng s?n xu?t kinh doanh thÙng thu?ng"
+    AddElement xmlDoc, childElement, "tieuMucHachToan", "1701"
+    
+    ' Header
+    Set subElement = xmlDoc.createElement("Header")
+    childElement.appendChild subElement
+    
+    AddElement xmlDoc, subElement, "ct09", ""
+    AddElement xmlDoc, subElement, "ct10", ""
+    
+    Set subSubElement = xmlDoc.createElement("DiaChiHDSXKDKhacTinhNDTSC")
+    subElement.appendChild subSubElement
+    
+    AddElement xmlDoc, subSubElement, "ct11a_phuongXa_ma", ""
+    AddElement xmlDoc, subSubElement, "ct11a_phuongXa_ten", ""
+    AddElement xmlDoc, subSubElement, "ct11b_quanHuyen_ma", ""
+    AddElement xmlDoc, subSubElement, "ct11b_quanHuyen_ten", ""
+    AddElement xmlDoc, subSubElement, "ct11c_tinhTP_ma", ""
+    AddElement xmlDoc, subSubElement, "ct11c_tinhTP_ten", ""
+    
+    ' C·c ch? tiÍu ti?p theo
+    AddElement xmlDoc, childElement, "ct21", "0"
+    AddElement xmlDoc, childElement, "ct22", "0"
+    
+    ' Gi· tr? v‡ thu? GTGT h‡ng hÛa d?ch v? mua v‡o
+    Set subElement = xmlDoc.createElement("GiaTriVaThueGTGTHHDVMuaVao")
+    childElement.appendChild subElement
+    AddElement xmlDoc, subElement, "ct23", "2350225375"
+    AddElement xmlDoc, subElement, "ct24", "186865844"
+    
+    ' H‡ng hÛa d?ch v? nh?p kh?u
+    Set subElement = xmlDoc.createElement("HangHoaDichVuNhapKhau")
+    childElement.appendChild subElement
+    AddElement xmlDoc, subElement, "ct23a", "0"
+    AddElement xmlDoc, subElement, "ct24a", "0"
+    
+    ' C·c ch? tiÍu ti?p theo
+    AddElement xmlDoc, childElement, "ct25", "186865844"
+    AddElement xmlDoc, childElement, "ct26", "0"
+    
+    ' H‡ng hÛa d?ch v? b·n ra ch?u thu? GTGT
+    Set subElement = xmlDoc.createElement("HHDVBRaChiuThueGTGT")
+    childElement.appendChild subElement
+    AddElement xmlDoc, subElement, "ct27", "2723295480"
+    AddElement xmlDoc, subElement, "ct28", "217966718"
+    
+    AddElement xmlDoc, childElement, "ct29", "0"
+    
+    ' H‡ng hÛa d?ch v? b·n ra ch?u thu? su?t 5%
+    Set subElement = xmlDoc.createElement("HHDVBRaChiuTSuat5")
+    childElement.appendChild subElement
+    AddElement xmlDoc, subElement, "ct30", "0"
+    AddElement xmlDoc, subElement, "ct31", "0"
+    
+    ' H‡ng hÛa d?ch v? b·n ra ch?u thu? su?t 10%
+    Set subElement = xmlDoc.createElement("HHDVBRaChiuTSuat10")
+    childElement.appendChild subElement
+    AddElement xmlDoc, subElement, "ct32", "2723295480"
+    AddElement xmlDoc, subElement, "ct33", "217966718"
+    
+    AddElement xmlDoc, childElement, "ct32a", "0"
+    
+    ' T?ng doanh thu v‡ thu? GTGT h‡ng hÛa d?ch v? b·n ra
+    Set subElement = xmlDoc.createElement("TongDThuVaThueGTGTHHDVBRa")
+    childElement.appendChild subElement
+    AddElement xmlDoc, subElement, "ct34", "2723295480"
+    AddElement xmlDoc, subElement, "ct35", "217966718"
+    
+    ' C·c ch? tiÍu cu?i
+    AddElement xmlDoc, childElement, "ct36", "31100874"
+    AddElement xmlDoc, childElement, "ct37", "0"
+    AddElement xmlDoc, childElement, "ct38", "0"
+    AddElement xmlDoc, childElement, "ct39a", "0"
+    AddElement xmlDoc, childElement, "ct40a", "31100874"
+    AddElement xmlDoc, childElement, "ct40b", "0"
+    AddElement xmlDoc, childElement, "ct40", "31100874"
+    AddElement xmlDoc, childElement, "ct41", "0"
+    AddElement xmlDoc, childElement, "ct42", "0"
+    AddElement xmlDoc, childElement, "ct43", "0"
+End Sub
 
+' H‡m thÍm Ph? l?c
+Private Sub AddPLuc(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
+    Dim childElement As IXMLDOMElement
+    Dim subElement As IXMLDOMElement
+    Dim subSubElement As IXMLDOMElement
+    Dim bangKeElement As IXMLDOMElement
+    
+    Set childElement = xmlDoc.createElement("PLuc")
+    parentElement.appendChild childElement
+    
+    Set subElement = xmlDoc.createElement("PL_NQ142_GTGT")
+    childElement.appendChild subElement
+    
+    ' H‡ng hÛa d?ch v? mua v‡o trong k?
+    Set subSubElement = xmlDoc.createElement("HH_DV_MuaVaoTrongKy")
+    subElement.appendChild subSubElement
+    
+    ' B?ng kÍ 1
+    Set bangKeElement = xmlDoc.createElement("BangKeTenHHDV")
+    bangKeElement.setAttribute "ID", "ID_1"
+    subSubElement.appendChild bangKeElement
+    AddElement xmlDoc, bangKeElement, "tenHHDVMuaVao", "Son, b?t trÈt"
+    AddElement xmlDoc, bangKeElement, "giaTriHHDVMuaVao", "2357914513"
+    AddElement xmlDoc, bangKeElement, "thueGTGTHHDV", "188633164"
+    
+    ' B?ng kÍ 2
+    Set bangKeElement = xmlDoc.createElement("BangKeTenHHDV")
+    bangKeElement.setAttribute "ID", "ID_2"
+    subSubElement.appendChild bangKeElement
+    AddElement xmlDoc, bangKeElement, "tenHHDVMuaVao", "Xang"
+    AddElement xmlDoc, bangKeElement, "giaTriHHDVMuaVao", "5359199"
+    AddElement xmlDoc, bangKeElement, "thueGTGTHHDV", "428736"
+    
+    ' B?ng kÍ 3
+    Set bangKeElement = xmlDoc.createElement("BangKeTenHHDV")
+    bangKeElement.setAttribute "ID", "ID_3"
+    subSubElement.appendChild bangKeElement
+    AddElement xmlDoc, bangKeElement, "tenHHDVMuaVao", "S?a ch?a, b?o du?ng xe Ù tÙ"
+    AddElement xmlDoc, bangKeElement, "giaTriHHDVMuaVao", "16370370"
+    AddElement xmlDoc, bangKeElement, "thueGTGTHHDV", "1309630"
+    
+    ' B?ng kÍ 4
+    Set bangKeElement = xmlDoc.createElement("BangKeTenHHDV")
+    bangKeElement.setAttribute "ID", "ID_4"
+    subSubElement.appendChild bangKeElement
+    AddElement xmlDoc, bangKeElement, "tenHHDVMuaVao", "Gia h?n ch? k˝ s?"
+    AddElement xmlDoc, bangKeElement, "giaTriHHDVMuaVao", "4744444"
+    AddElement xmlDoc, bangKeElement, "thueGTGTHHDV", "379556"
+    
+    ' B?ng kÍ 5
+    Set bangKeElement = xmlDoc.createElement("BangKeTenHHDV")
+    bangKeElement.setAttribute "ID", "ID_5"
+    subSubElement.appendChild bangKeElement
+    AddElement xmlDoc, bangKeElement, "tenHHDVMuaVao", "C? lan"
+    AddElement xmlDoc, bangKeElement, "giaTriHHDVMuaVao", "23446346"
+    AddElement xmlDoc, bangKeElement, "thueGTGTHHDV", "1875708"
+    
+    ' T?ng c?ng mua v‡o
+    AddElement xmlDoc, subSubElement, "tongCongGiaTriHHDVMuaVao", "2407834872"
+    AddElement xmlDoc, subSubElement, "tongCongThueGTGTHHDV", "192626794"
+    
+    ' H‡ng hÛa d?ch v? b·n ra trong k?
+    Set subSubElement = xmlDoc.createElement("HH_DV_BanRaTrongKy")
+    subElement.appendChild subSubElement
+    
+    ' B?ng kÍ b·n ra
+    Set bangKeElement = xmlDoc.createElement("BangKeTenHHDV")
+    bangKeElement.setAttribute "ID", "ID_1"
+    subSubElement.appendChild bangKeElement
+    AddElement xmlDoc, bangKeElement, "tenHHDV", "Son, b?t trÈt"
+    AddElement xmlDoc, bangKeElement, "giaTriHHDV", "2718141480"
+    AddElement xmlDoc, bangKeElement, "thueSuatTheoQuyDinh", "10"
+    AddElement xmlDoc, bangKeElement, "thueSuatSauGiam", "8"
+    AddElement xmlDoc, bangKeElement, "thueGTGTDuocGiam", "54362830"
+    
+    ' T?ng c?ng b·n ra
+    AddElement xmlDoc, subSubElement, "tongCongGiaTriHHDV", "2718141480"
+    AddElement xmlDoc, subSubElement, "tongCongThueGTGTDuocGiam", "54362830"
+    
+    ' ChÍnh l?ch
+    Set subSubElement = xmlDoc.createElement("ChenhLech")
+    subElement.appendChild subSubElement
+    AddElement xmlDoc, subSubElement, "ct9", "-138263964"
+End Sub
+' H‡m thÍm ThÙng tin d?ch v?
+Private Sub AddTTinDVu(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
+    Dim childElement As IXMLDOMElement
+    Dim subElement As IXMLDOMElement
+    
+    Set childElement = xmlDoc.createElement("TTinDVu")
+    parentElement.appendChild childElement
+    
+    AddElement xmlDoc, childElement, "maDVu", "HTKK"
+    AddElement xmlDoc, childElement, "tenDVu", "H? TR? K  KHAI THU?"
+    AddElement xmlDoc, childElement, "pbanDVu", "5.4.5"
+    AddElement xmlDoc, childElement, "ttinNhaCCapDVu", "33A52A87ECC4AD58652D8FF252B604F5"
+End Sub
+' H‡m thÍm ThÙng tin t? khai thu?
+Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
+    Dim childElement As IXMLDOMElement
+    Dim subElement As IXMLDOMElement
+    Dim subSubElement As IXMLDOMElement
+    
+    Set childElement = xmlDoc.createElement("TTinTKhaiThue")
+    parentElement.appendChild childElement
+    
+    ' T? khai thu?
+    Set subElement = xmlDoc.createElement("TKhaiThue")
+    childElement.appendChild subElement
+    
+    AddElement xmlDoc, subElement, "maTKhai", "842"
+    AddElement xmlDoc, subElement, "tenTKhai", "T? KHAI THU? GI¡ TR? GIA TANG (M?u s? 01/GTGT)"
+    AddElement xmlDoc, subElement, "moTaBMau", "(Ban h‡nh kËm theo ThÙng tu s? 80/2021/TT-BTC ng‡y 29 th·ng 9 nam 2021 c?a B? tru?ng B? T‡i chÌnh)"
+    AddElement xmlDoc, subElement, "pbanTKhaiXML", "2.8.3"
+    AddElement xmlDoc, subElement, "loaiTKhai", "C"
+    AddElement xmlDoc, subElement, "soLan", "0"
+    
+    ' K? kÍ khai thu?
+    Set subSubElement = xmlDoc.createElement("KyKKhaiThue")
+    subElement.appendChild subSubElement
+    
+    AddElement xmlDoc, subSubElement, "kieuKy", "Q"
+    AddElement xmlDoc, subSubElement, "kyKKhai", "3/2025"
+    AddElement xmlDoc, subSubElement, "kyKKhaiTuNgay", "01/07/2025"
+    AddElement xmlDoc, subSubElement, "kyKKhaiDenNgay", "30/09/2025"
+    AddElement xmlDoc, subSubElement, "kyKKhaiTuThang", ""
+    AddElement xmlDoc, subSubElement, "kyKKhaiDenThang", ""
+    
+    ' ThÙng tin ti?p theo
+    AddElement xmlDoc, subElement, "maCQTNoiNop", "71701"
+    AddElement xmlDoc, subElement, "tenCQTNoiNop", "Thu? co s? 24 Th‡nh ph? H? ChÌ Minh"
+    AddElement xmlDoc, subElement, "ngayLapTKhai", "2025-10-10"
+    
+    ' Gia h?n
+    Set subSubElement = xmlDoc.createElement("GiaHan")
+    subElement.appendChild subSubElement
+    AddElement xmlDoc, subSubElement, "maLyDoGiaHan", ""
+    AddElement xmlDoc, subSubElement, "lyDoGiaHan", ""
+    
+    ' ThÙng tin ti?p
+    AddElement xmlDoc, subElement, "nguoiKy", "Vu –Ïnh D‚n"
+    AddElement xmlDoc, subElement, "ngayKy", "2025-10-10"
+    AddElement xmlDoc, subElement, "nganhNgheKD", ""
+    
+    ' Ngu?i n?p thu?
+    Set subElement = xmlDoc.createElement("NNT")
+    childElement.appendChild subElement
+    
+    AddElement xmlDoc, subElement, "mst", "3500779171"
+    AddElement xmlDoc, subElement, "tenNNT", "CÙng ty TNHH Thuong m?i X‚y d?ng –?i Th‡nh CÙng"
+    AddElement xmlDoc, subElement, "dchiNNT", "31 –?i C?n"
+    AddElement xmlDoc, subElement, "phuongXa", ""
+    AddElement xmlDoc, subElement, "maHuyenNNT", "71701"
+    AddElement xmlDoc, subElement, "tenHuyenNNT", ""
+    AddElement xmlDoc, subElement, "maTinhNNT", "701"
+    AddElement xmlDoc, subElement, "tenTinhNNT", "Th‡nh ph? H? ChÌ Minh"
+    AddElement xmlDoc, subElement, "dthoaiNNT", ""
+    AddElement xmlDoc, subElement, "faxNNT", ""
+    AddElement xmlDoc, subElement, "emailNNT", ""
+End Sub
+' H‡m thÍm Ch? k˝ s? (d„ s?a l?i namespace)
+Private Sub AddCKyDTu(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
+    Dim childElement As IXMLDOMElement
+    Dim signatureElement As IXMLDOMElement
+    
+    Set childElement = xmlDoc.createElement("CKyDTu")
+    parentElement.appendChild childElement
+    
+    ' T?o ph?n ch? k˝ s? v?i namespace d„ du?c d?nh nghia
+    Set signatureElement = xmlDoc.createElement("ds:Signature")
+    signatureElement.setAttribute "xmlns:ds", "http://www.w3.org/2000/09/xmldsig#"
+    childElement.appendChild signatureElement
+    
+    ' C·c ph?n kh·c c?a ch? k˝ s? cÛ th? du?c thÍm ? d‚y
+    ' Tuy nhiÍn, ph?n n‡y thu?ng du?c t?o t? d?ng b?i h? th?ng ch? k˝ s?
+End Sub
 
+' H‡m ph? d? thÍm element
+Private Sub AddElement(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement, elementName As String, elementValue As String)
+    Dim childElement As IXMLDOMElement
+    Dim textNode As IXMLDOMText
+    
+    Set childElement = xmlDoc.createElement(elementName)
+    Set textNode = xmlDoc.createTextNode(elementValue)
+    childElement.appendChild textNode
+    parentElement.appendChild childElement
+End Sub
 
+Private Sub Command8_Click()
+    CreateTaxXMLFull
+End Sub
 
 Private Sub timerReadyNKNL_Timer()
     timerReadyNKNL.Enabled = False
@@ -4919,7 +5288,13 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     'Xu ly tkNo
     bakTongtien = rs_import!TgTCThue
     txtchungtu(0).Text = rs_import!tkno
+ 
     txtChungtu_LostFocus (0)
+
+    If rs_import!tkno Like "338*" Then
+        txtchungtu(2).Text = txtVT(0).Text
+    End If
+      txtChungtu_LostFocus (2)
     If rs_import!TPhi = 0 Then
         txtchungtu(5).Text = rs_import!TgTCThue
     Else
@@ -5081,13 +5456,25 @@ End Sub
 Private Sub Xuly154Child(ByRef rs_import As Recordset)
 'Kiem tra xem co con khong
 
-    Dim Query2 As String
-    Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
-    Set rs_ktchild154 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
-    If Not rs_ktchild154.EOF Then
-        Timer154c.Enabled = True
-        Exit Sub
+    Dim countchild As Integer
+    countchild = SelectSQL("SELECT COUNT(*) AS F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'")
+
+    If countchild > 1 Then
+        Dim QueryDistinct As String
+        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' GROUP BY MaCT"
+        Dim countgroup As Integer
+        countgroup = SelectSQL(QueryDistinct)
+        If countgroup <> countchild Then
+            Dim Query2 As String
+            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Set rs_ktchild154 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
+            If Not rs_ktchild154.EOF Then
+                Timer154c.Enabled = True
+                Exit Sub
+            End If
+        End If
     End If
+
     'Xu ly tkNo
     txtchungtu(0).Text = rs_import!tkno
     txtChungtu_LostFocus (0)
@@ -5169,7 +5556,7 @@ End Sub
 Private Sub XulyMiddle(ByRef rs_import As Recordset)
 
 'Xu ly hoa don tong hop
-    If (rs_import!tkno Like "64*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
+    If (rs_import!tkno Like "64*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "338*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
         FThuChi.FThuChiForm = 1
         Dim Query64 As String
         Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
@@ -5195,7 +5582,7 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
             XuLy15Childhd
         End If
     End If
-    
+
     'Xu ly cho cong trinh 154
     If rs_import!tkno Like "154*" Then
         FThuChi.FThuChiForm = 1
@@ -5282,6 +5669,7 @@ End Sub
 Private Sub btnImportXML_Click()
 
 'IsImport = True
+    lblThongbao.Visible = True
     Command_Click 0
     stt51 = 0
     sttTongHop = 0
@@ -9669,8 +10057,10 @@ Public Sub Nhapkhotong()
 End Sub
 
 Public Sub OptLoai_Click(Index As Integer)
+    OptLoai(5).Value = False
 
     If Index = 6 Then
+        tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
         FThuChi.FThuChiForm = 1
         isimportnk = True
         Autonhapkho
@@ -9822,7 +10212,7 @@ Private Sub OptLoai_MouseMove(Index As Integer, Button As Integer, Shift As Inte
     '        If OptLoai(i).Value = False Then OptLoai(i).BackColor = &HC0FFC0    '&H80000003
     '
     '        Next
-    For i = 0 To 5
+    For i = 0 To 6
         If OptLoai(i).Value = False Then OptLoai(i).BackColor = &H80FF80       ' &H80000003
     Next
     For i = 8 To 12
