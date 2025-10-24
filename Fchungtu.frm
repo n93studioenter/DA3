@@ -24,6 +24,14 @@ Begin VB.Form FrmChungtu
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
+   Begin VB.CommandButton Command9 
+      Caption         =   "Command9"
+      Height          =   375
+      Left            =   7560
+      TabIndex        =   181
+      Top             =   7920
+      Width           =   1575
+   End
    Begin VB.CommandButton Command8 
       BackColor       =   &H0080FF80&
       Caption         =   "Export tê khai"
@@ -3306,6 +3314,18 @@ Private Declare Function SetTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEve
 Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long) As Long
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
 
+Private Declare Function WideCharToMultiByte Lib "Kernel32" ( _
+                                             ByVal CodePage As Long, _
+                                             ByVal dwFlags As Long, _
+                                             ByVal lpWideCharStr As Long, _
+                                             ByVal cchWideChar As Long, _
+                                             ByVal lpMultiByteStr As Long, _
+                                             ByVal cchMultiByte As Long, _
+                                             ByVal lpDefaultChar As Long, _
+                                             ByVal lpUsedDefaultChar As Long) As Long
+
+Private Const CP_UTF8 As Long = 65001
+
 Dim isimportnk As Boolean
 Dim tk154 As String
 Dim bakNgayimp As String
@@ -4474,77 +4494,76 @@ Private Sub Command6_MouseMove(Button As Integer, Shift As Integer, X As Single,
         If OptLoai(i).Value = False Then OptLoai(i).BackColor = &H80FF80       '&H80000003
     Next
 End Sub
- 
+
 Private Sub CreateTaxXMLFull()
     On Error GoTo ErrorHandler
-    
+
     Dim xmlDoc As MSXML2.DOMDocument
     Dim rootElement As IXMLDOMElement
     Dim processingInstruction As IXMLDOMProcessingInstruction
     Dim parentElement As IXMLDOMElement
     Dim childElement As IXMLDOMElement
     Dim attr As IXMLDOMAttribute
-    
+
     ' T?o document XML
     Set xmlDoc = New MSXML2.DOMDocument
     xmlDoc.async = False
     xmlDoc.preserveWhiteSpace = True
-    
+
     ' Thêm processing instruction v?i standalone="no"
     Set processingInstruction = xmlDoc.createProcessingInstruction("xml", "version=""1.0"" encoding=""UTF-8"" standalone=""no""")
     xmlDoc.appendChild processingInstruction
-    
+
     ' T?o root element v?i namespace
     Set rootElement = xmlDoc.createElement("HSoThueDTu")
     rootElement.setAttribute "xmlns", "http://kekhaithue.gdt.gov.vn/TKhaiThue"
     rootElement.setAttribute "xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance"
     rootElement.setAttribute "xmlns:ds", "http://www.w3.org/2000/09/xmldsig#"  ' Thêm namespace ds
     xmlDoc.appendChild rootElement
-    
+
     '=== HSO KHAI THUE ===
     Set parentElement = xmlDoc.createElement("HSoKhaiThue")
     parentElement.setAttribute "id", "ID_1"
     rootElement.appendChild parentElement
-    
+
     '=== THONG TIN CHUNG ===
     Set childElement = xmlDoc.createElement("TTinChung")
     parentElement.appendChild childElement
-    
+
     ' Thông tin d?ch v?
     Call AddTTinDVu(xmlDoc, childElement)
-    
+
     ' Thông tin t? khai thu?
     Call AddTTinTKhaiThue(xmlDoc, childElement)
-    
+
     '=== CHI TIEU TO KHAI CHINH ===
     Call AddCTieuTKhaiChinh(xmlDoc, parentElement)
-     
+
     '=== PHU LUC ===
     Call AddPLuc(xmlDoc, parentElement)
-    
+
     '=== CHU KY SO ===
     Call AddCKyDTu(xmlDoc, rootElement)
-    
+
     ' Luu file
     Dim FilePath As String
     FilePath = App.path & "\KhaiThue_GTGT_" & Format(Now, "yyyy-mm-dd") & ".xml"
     
     ' Ð?m b?o encoding là UTF-8
     xmlDoc.Save FilePath
-    
+
     ' Ki?m tra file
     If Dir(FilePath) <> "" Then
         MsgBox "File XML dã du?c t?o thành công!" & vbCrLf & "Ðu?ng d?n: " & FilePath, vbInformation
     Else
         MsgBox "Có l?i khi t?o file XML!", vbExclamation
     End If
-    
+
     Exit Sub
-    
+
 ErrorHandler:
     MsgBox "L?i khi t?o file XML: " & Err.Description, vbExclamation
-End Sub
-' Hàm thêm Chi tiêu t? khai chính
+End Sub    ' Hàm thêm Chi tiêu t? khai chính
 Private Sub AddCTieuTKhaiChinh(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
     Dim childElement As IXMLDOMElement
     Dim subElement As IXMLDOMElement
@@ -4737,54 +4756,54 @@ Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXML
     Dim childElement As IXMLDOMElement
     Dim subElement As IXMLDOMElement
     Dim subSubElement As IXMLDOMElement
-    
+
     Set childElement = xmlDoc.createElement("TTinTKhaiThue")
     parentElement.appendChild childElement
-    
+
     ' T? khai thu?
     Set subElement = xmlDoc.createElement("TKhaiThue")
     childElement.appendChild subElement
-    
     AddElement xmlDoc, subElement, "maTKhai", "842"
-    AddElement xmlDoc, subElement, "tenTKhai", "T? KHAI THU? GIÁ TR? GIA TANG (M?u s? 01/GTGT)"
+    AddElement xmlDoc, subElement, "tenTKhai", "T?GIÁ TR? GIA TANG (M?U S? 01/GTGT)"
     AddElement xmlDoc, subElement, "moTaBMau", "(Ban hành kèm theo Thông tu s? 80/2021/TT-BTC ngày 29 tháng 9 nam 2021 c?a B? tru?ng B? Tài chính)"
     AddElement xmlDoc, subElement, "pbanTKhaiXML", "2.8.3"
     AddElement xmlDoc, subElement, "loaiTKhai", "C"
     AddElement xmlDoc, subElement, "soLan", "0"
-    
+
     ' K? kê khai thu?
     Set subSubElement = xmlDoc.createElement("KyKKhaiThue")
     subElement.appendChild subSubElement
-    
+
     AddElement xmlDoc, subSubElement, "kieuKy", "Q"
     AddElement xmlDoc, subSubElement, "kyKKhai", "3/2025"
     AddElement xmlDoc, subSubElement, "kyKKhaiTuNgay", "01/07/2025"
     AddElement xmlDoc, subSubElement, "kyKKhaiDenNgay", "30/09/2025"
     AddElement xmlDoc, subSubElement, "kyKKhaiTuThang", ""
     AddElement xmlDoc, subSubElement, "kyKKhaiDenThang", ""
-    
+
     ' Thông tin ti?p theo
     AddElement xmlDoc, subElement, "maCQTNoiNop", "71701"
     AddElement xmlDoc, subElement, "tenCQTNoiNop", "Thu? co s? 24 Thành ph? H? Chí Minh"
     AddElement xmlDoc, subElement, "ngayLapTKhai", "2025-10-10"
-    
+
     ' Gia h?n
     Set subSubElement = xmlDoc.createElement("GiaHan")
     subElement.appendChild subSubElement
     AddElement xmlDoc, subSubElement, "maLyDoGiaHan", ""
     AddElement xmlDoc, subSubElement, "lyDoGiaHan", ""
-    
+
     ' Thông tin ti?p
     AddElement xmlDoc, subElement, "nguoiKy", "Vu Ðình Dân"
     AddElement xmlDoc, subElement, "ngayKy", "2025-10-10"
     AddElement xmlDoc, subElement, "nganhNgheKD", ""
-    
+
     ' Ngu?i n?p thu?
     Set subElement = xmlDoc.createElement("NNT")
     childElement.appendChild subElement
-    
+
     AddElement xmlDoc, subElement, "mst", "3500779171"
-    AddElement xmlDoc, subElement, "tenNNT", "Công ty TNHH Thuong m?i Xây d?ng Ð?i Thành Công"
+    AddElement xmlDoc, subElement, "tenNNT", VNItoUNICODE(frmMain.LbCty(0).Caption)
+
     AddElement xmlDoc, subElement, "dchiNNT", "31 Ð?i C?n"
     AddElement xmlDoc, subElement, "phuongXa", ""
     AddElement xmlDoc, subElement, "maHuyenNNT", "71701"
@@ -4795,6 +4814,152 @@ Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXML
     AddElement xmlDoc, subElement, "faxNNT", ""
     AddElement xmlDoc, subElement, "emailNNT", ""
 End Sub
+Function VNItoUNICODE(vniText As String) As String
+    Dim strResult As String
+    Dim i As Integer
+    Dim charCode As Integer
+
+    ' Chuy?n d?i t?ng ký t?
+    For i = 1 To Len(vniText)
+        charCode = Asc(Mid(vniText, i, 1))
+
+        ' Chuy?n d?i ký t? VNI sang Unicode
+        Select Case charCode
+        Case 192    ' À
+            strResult = strResult & ChrW(&H410)    ' À
+        Case 193    ' Á
+            strResult = strResult & ChrW(&H1EA0)    ' Á
+        Case 194    ' Â
+            strResult = strResult & ChrW(&H1EA4)    ' Â
+        Case 195    ' Ã
+            strResult = strResult & ChrW(&H1EA6)    ' Ã
+        Case 196    ' Ä
+            strResult = strResult & ChrW(&H1EB0)    ' Ä
+        Case 197    ' Å
+            strResult = strResult & ChrW(&H1EB2)    ' Å
+        Case 198    ' Æ
+            strResult = strResult & ChrW(&H1EB4)    ' Æ
+        Case 199    ' Ç
+            strResult = strResult & ChrW(&H1EA8)    ' Ç
+        Case 200    ' È
+            strResult = strResult & ChrW(&H1EC0)    ' È
+        Case 201    ' É
+            strResult = strResult & ChrW(&H1EC2)    ' É
+        Case 202    ' Ê
+            strResult = strResult & ChrW(&H1EC4)    ' Ê
+        Case 203    ' Ë
+            strResult = strResult & ChrW(&H1EC6)    ' Ë
+        Case 204    ' Ì
+            strResult = strResult & ChrW(&H1EC8)    ' Ì
+        Case 205    ' Í
+            strResult = strResult & ChrW(&H1ECA)    ' Í
+        Case 206    ' Î
+            strResult = strResult & ChrW(&H1ECC)    ' Î
+        Case 207    ' Ï
+            strResult = strResult & ChrW(&H1ECE)    ' Ï
+        Case 208    ' Ð
+            strResult = strResult & ChrW(&H110)  ' Ð
+        Case 209    ' Ñ
+            strResult = strResult & ChrW(&H1ED8)    ' Ñ
+        Case 210    ' Ò
+            strResult = strResult & ChrW(&H1ED0)    ' Ò
+        Case 211    ' Ó
+            strResult = strResult & ChrW(&H1ED2)    ' Ó
+        Case 212    ' Ô
+            strResult = strResult & ChrW(&H1ED4)    ' Ô
+        Case 213    ' Õ
+            strResult = strResult & ChrW(&H1ED6)    ' Õ
+        Case 214    ' Ö
+            strResult = strResult & ChrW(&H1EDC)    ' Ö
+        Case 215    ' ×
+            strResult = strResult & ChrW(&HD7)   ' ×
+        Case 216    ' Ø
+            strResult = strResult & ChrW(&HD8)   ' Ø
+        Case 217    ' Ù
+            strResult = strResult & ChrW(&H1EE0)    ' Ù
+        Case 218    ' Ú
+            strResult = strResult & ChrW(&H1EE2)    ' Ú
+        Case 219    ' Û
+            strResult = strResult & ChrW(&H1EE4)    ' Û
+        Case 220    ' Ü
+            strResult = strResult & ChrW(&H1EE6)    ' Ü
+        Case 221    ' Ý
+            strResult = strResult & ChrW(&H1EF2)    ' Ý
+        Case 222    ' Þ
+            strResult = strResult & ChrW(&HDE)   ' Þ
+        Case 223    ' ß
+            strResult = strResult & ChrW(&HDF)   ' ß
+        Case 224    ' à
+            strResult = strResult & ChrW(&H1EA1)    ' ?
+        Case 225    ' á
+            strResult = strResult & ChrW(&H1EA3)    ' á
+        Case 226    ' â
+            strResult = strResult & ChrW(&H1EA5)    ' â
+        Case 227    ' ã
+            strResult = strResult & ChrW(&H1EA7)    ' ã
+        Case 228    ' ä
+            strResult = strResult & ChrW(&H1EB1)    ' ä
+        Case 229    ' å
+            strResult = strResult & ChrW(&H1EB3)    ' å
+        Case 230    ' æ
+            strResult = strResult & ChrW(&H1EB5)    ' æ
+        Case 231    ' ç
+            strResult = strResult & ChrW(&H1EAB)    ' ç
+        Case 232    ' è
+            strResult = strResult & ChrW(&H1EC1)    ' è
+        Case 233    ' é
+            strResult = strResult & ChrW(&H1EC3)    ' é
+        Case 234    ' ê
+            strResult = strResult & ChrW(&H1EC5)    ' ê
+        Case 235    ' ë
+            strResult = strResult & ChrW(&H1EC7)    ' ë
+        Case 236    ' ì
+            strResult = strResult & ChrW(&H1EC9)    ' ì
+        Case 237    ' í
+            strResult = strResult & ChrW(&H1ECB)    ' í
+        Case 238    ' î
+            strResult = strResult & ChrW(&H1ECD)    ' î
+        Case 239    ' ï
+            strResult = strResult & ChrW(&H1ECF)    ' ï
+        Case 240    ' ð
+            strResult = strResult & ChrW(&H111)  ' d
+        Case 241    ' ñ
+            strResult = strResult & ChrW(&H1ED9)    ' ñ
+        Case 242    ' ò
+            strResult = strResult & ChrW(&H1ED1)    ' ò
+        Case 243    ' ó
+            strResult = strResult & ChrW(&H1ED3)    ' ó
+        Case 244    ' ô
+            strResult = strResult & ChrW(&H1ED5)    ' ô
+        Case 245    ' õ
+            strResult = strResult & ChrW(&H1ED7)    ' õ
+        Case 246    ' ö
+            strResult = strResult & ChrW(&H1EDD)    ' ö
+        Case 247    ' ÷
+            strResult = strResult & ChrW(&HF7)   ' ÷
+        Case 248    ' ø
+            strResult = strResult & ChrW(&HF8)   ' ø
+        Case 249    ' ù
+            strResult = strResult & ChrW(&H1EE1)    ' ù
+        Case 250    ' ú
+            strResult = strResult & ChrW(&H1EE3)    ' ú
+        Case 251    ' û
+            strResult = strResult & ChrW(&H1EE5)    ' û
+        Case 252    ' ü
+            strResult = strResult & ChrW(&H1EE7)    ' ü
+        Case 253    ' ý
+            strResult = strResult & ChrW(&H1EF3)    ' ý
+        Case 254    ' þ
+            strResult = strResult & ChrW(&HFE)   ' þ
+        Case 255    ' ÿ
+            strResult = strResult & ChrW(&HFF)   ' ÿ
+        Case Else
+            strResult = strResult & Mid(vniText, i, 1)    ' Gi? nguyên ký t? không chuy?n d?i
+        End Select
+    Next i
+
+    VNItoUNICODE = strResult
+End Function
 ' Hàm thêm Ch? ký s? (dã s?a l?i namespace)
 Private Sub AddCKyDTu(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
     Dim childElement As IXMLDOMElement
@@ -4824,8 +4989,171 @@ Private Sub AddElement(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMEle
 End Sub
 
 Private Sub Command8_Click()
-    CreateTaxXMLFull
+    'CreateTaxXMLFull
+    OpenXMl
 End Sub
+
+Private Sub Command9_Click()
+    On Error GoTo ErrorHandler
+
+    ' T?o n?i dung XML du?i d?ng chu?i tr?c ti?p
+    Dim xmlContent As String
+    xmlContent = BuildXMLContent()
+
+    ' Luu file v?i UTF-8 có BOM
+    Dim FilePath As String
+    FilePath = App.path & "\KhaiThue_GTGT_" & Format(Now, "yyyy-mm-dd") & ".xml"
+
+    Call SaveUTF8File(xmlContent, FilePath)
+
+    ' Ki?m tra file
+    If Dir(FilePath) <> "" Then
+        MsgBox "File XML dã du?c t?o thành công!" & vbCrLf & "Ðu?ng d?n: " & FilePath, vbInformation
+    Else
+        MsgBox "Có l?i khi t?o file XML!", vbExclamation
+    End If
+
+    Exit Sub
+
+ErrorHandler:
+    MsgBox "L?i khi t?o file XML: " & Err.Description, vbExclamation
+End Sub
+Private Sub SaveUTF8File(content As String, FilePath As String)
+    On Error GoTo ErrorHandler
+
+    Dim utf8Bytes() As Byte
+    Dim bom(2) As Byte
+    Dim finalBytes() As Byte
+    Dim FileNum As Integer
+    Dim i As Long
+
+    ' Thêm BOM
+    bom(0) = &HEF
+    bom(1) = &HBB
+    bom(2) = &HBF
+
+    ' Chuy?n n?i dung sang UTF-8
+    utf8Bytes = StringToUTF8(content)
+
+    ' K?t h?p BOM và n?i dung
+    ReDim finalBytes(UBound(bom) + UBound(utf8Bytes) + 1)
+
+    For i = 0 To UBound(bom)
+        finalBytes(i) = bom(i)
+    Next i
+
+    For i = 0 To UBound(utf8Bytes)
+        finalBytes(UBound(bom) + i + 1) = utf8Bytes(i)
+    Next i
+
+    ' Ghi file
+    FileNum = FreeFile
+    Open FilePath For Binary As FileNum
+    Put FileNum, , finalBytes
+    Close FileNum
+
+    Exit Sub
+
+ErrorHandler:
+    MsgBox "L?i khi luu file: " & Err.Description, vbExclamation
+End Sub
+Private Function StringToUTF8(str As String) As Byte()
+    Dim Buffer() As Byte
+    Dim bufferSize As Long
+    Dim result As Long
+
+    ' L?y kích thu?c buffer c?n thi?t
+    bufferSize = WideCharToMultiByte(CP_UTF8, 0, StrPtr(str), Len(str), 0, 0, 0, 0)
+ 
+    If bufferSize > 0 Then
+        ReDim Buffer(bufferSize - 1)
+
+        ' Chuy?n d?i sang UTF-8
+        result = WideCharToMultiByte(CP_UTF8, 0, StrPtr(str), Len(str), VarPtr(Buffer(0)), bufferSize, 0, 0)
+
+        If result > 0 Then
+            StringToUTF8 = Buffer
+        End If
+    End If
+End Function
+Private Function BuildXMLContent() As String
+    Dim xml As String
+
+    ' XML Declaration
+    xml = "<?xml version=""1.0"" encoding=""UTF-8"" standalone=""no""?>" & vbCrLf
+
+    ' Root element v?i namespaces
+    xml = xml & "<HSoThueDTu xmlns=""http://kekhaithue.gdt.gov.vn/TKhaiThue""" & _
+        " xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance""" & _
+        " xmlns:ds=""http://www.w3.org/2000/09/xmldsig#"">" & vbCrLf
+
+    ' HSoKhaiThue
+    xml = xml & "  <HSoKhaiThue id=""ID_1"">" & vbCrLf
+    xml = xml & "    <TTinChung>" & vbCrLf
+
+    ' G?i các hàm con d? thêm n?i dung
+    xml = xml & BuildTTinDVu()
+    xml = xml & BuildTTinTKhaiThue()
+
+    xml = xml & "    </TTinChung>" & vbCrLf
+
+    ' Chi ti?t t? khai chính
+    xml = xml & BuildCTieuTKhaiChinh()
+
+    ' Ph? l?c
+    xml = xml & BuildPLuc()
+
+    xml = xml & "  </HSoKhaiThue>" & vbCrLf
+
+    ' Ch? ký s?
+    xml = xml & BuildCKyDTu()
+
+    ' K?t thúc root element
+    xml = xml & "</HSoThueDTu>"
+
+    BuildXMLContent = xml
+End Function
+Private Function BuildTTinDVu() As String
+    Dim content As String
+    content = "      <TTinDVu>" & vbCrLf
+    content = content & "        <TenDVu>D?ch v? kê khai thu?</TenDVu>" & vbCrLf
+    content = content & "        <MaDVu>01</MaDVu>" & vbCrLf
+    content = content & "      </TTinDVu>" & vbCrLf
+    BuildTTinDVu = content
+End Function
+
+Private Function BuildTTinTKhaiThue() As String
+    Dim content As String
+    content = "      <TTinTKhaiThue>" & vbCrLf
+    content = content & "        <TenDoanhNghiep>Công ty TNHH Thành ph? H? Chí Minh</TenDoanhNghiep>" & vbCrLf
+    content = content & "        <DiaChi>123 Ðu?ng Lê L?i, Qu?n 1, Thành ph? H? Chí Minh</DiaChi>" & vbCrLf
+    content = content & "      </TTinTKhaiThue>" & vbCrLf
+    BuildTTinTKhaiThue = content
+End Function
+
+Private Function BuildCTieuTKhaiChinh() As String
+    Dim content As String
+    content = "    <CTieuTKhaiChinh>" & vbCrLf
+    content = content & "      <ChiTieu id=""CT1"">Giá tr? gia tang</ChiTieu>" & vbCrLf
+    content = content & "    </CTieuTKhaiChinh>" & vbCrLf
+    BuildCTieuTKhaiChinh = content
+End Function
+
+Private Function BuildPLuc() As String
+    Dim content As String
+    content = "    <PLuc>" & vbCrLf
+    content = content & "      <PhuLuc id=""PL1"">Ph? l?c kê khai</PhuLuc>" & vbCrLf
+    content = content & "    </PLuc>" & vbCrLf
+    BuildPLuc = content
+End Function
+
+Private Function BuildCKyDTu() As String
+    Dim content As String
+    content = "  <CKyDTu>" & vbCrLf
+    content = content & "    <ChuKy>Ch? ký s? placeholder</ChuKy>" & vbCrLf
+    content = content & "  </CKyDTu>" & vbCrLf
+    BuildCKyDTu = content
+End Function
 
 Private Sub timerReadyNKNL_Timer()
     timerReadyNKNL.Enabled = False
@@ -5720,6 +6048,34 @@ Private Sub btnImportXML_Click()
     Else
         MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
     End If
+End Sub
+Private Sub OpenXMl()
+    Dim exePath As String
+    exePath = App.path & "\\Tools\\net8.0-windows\\TaxXml.exe"
+
+    ' Shell d? m? ?ng d?ng
+    Shell exePath, vbNormalFocus
+    Dim FilePath As String
+    Dim fileNumber As Integer
+    fileNumber = FreeFile    ' L?y s? file t? d?ng
+
+    Dim pathHoadon As String
+    pathHoadon = App.path & "\Hoadon"    ' S?a d?u "\" d? d?m b?o du?ng d?n dúng
+    FilePath = App.path & "\Hoadon\dpPath.txt"
+
+    ' M? file d? ghi (n?u file dã t?n t?i, nó s? b? ghi dè)
+    Open FilePath For Output As #fileNumber
+
+    ' Ghi n?i dung vào file
+    Print #fileNumber, pDataPath
+
+    ' Ðóng file
+    Close #fileNumber
+    Dim rs As Recordset
+    Dim sql As String
+    Dim hoadonPathValue As String
+    hoadonPathValue = App.path & "\Hoadon"    ' Ðu?ng d?n m?i cho hoadonpath
+
 End Sub
 
 Private Sub btnOpenexe_Click()

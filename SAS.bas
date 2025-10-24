@@ -382,7 +382,8 @@ End Function
 '======================================================================================
 Public Function SelectSQL(sql As String, Optional SoPhu As Variant = 0, Optional SoPhu2 As Variant = 0, Optional SoPhu3 As Variant = 0, Optional SoPhu4 As Variant = 0) As Variant
     Dim rs As Recordset
-    
+    Debug.Print "rp  -   " & sql
+
     'On Error Resume Next
     SoPhu = 0
     SoPhu2 = 0
@@ -390,19 +391,19 @@ Public Function SelectSQL(sql As String, Optional SoPhu As Variant = 0, Optional
     SoPhu4 = 0
     Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     If rs.recordCount > 0 Then
-            If IsNull(rs!f1) Then
-                SelectSQL = 0
-            Else
-                SelectSQL = rs!f1
-                On Error Resume Next
-                SoPhu = rs!F2
-                SoPhu2 = rs!F3
-                SoPhu3 = rs!F4
-                SoPhu4 = rs!f5
-                On Error GoTo 0
-            End If
-    Else
+        If IsNull(rs!f1) Then
             SelectSQL = 0
+        Else
+            SelectSQL = rs!f1
+            On Error Resume Next
+            SoPhu = rs!F2
+            SoPhu2 = rs!F3
+            SoPhu3 = rs!F4
+            SoPhu4 = rs!f5
+            On Error GoTo 0
+        End If
+    Else
+        SelectSQL = 0
     End If
     rs.Close
     Set rs = Nothing
@@ -622,7 +623,7 @@ Public Sub KiemTraTaiKhoan(Optional ktracn As Integer = 0)
       ' KiÓm tra cÊu tróc tµi kho¶n vµ sè ph¸t sinh
       Set rs_taikhoan = DBKetoan.OpenRecordset("SELECT MaSo, TKCon, TKCha0 FROM HethongTK ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
       Do While Not rs_taikhoan.EOF
-            st2 = CStr(rs_taikhoan!maSo)
+            st2 = CStr(rs_taikhoan!MaSo)
             If rs_taikhoan!tkcon > 0 Then
                 Set rs_ktra = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTk WHERE TkCha0 = " + st2, dbOpenSnapshot)
                 If rs_ktra.recordCount = 0 Then ExecuteSQL5 "UPDATE HethongTk SET TkCon=0 WHERE MaSo=" + st2
@@ -747,7 +748,7 @@ Public Sub KiemTraTaiKhoan(Optional ktracn As Integer = 0)
             Set rs_ktra = DBKetoan.OpenRecordset("SELECT DISTINCTROW MaSo, MaTaiKhoan,MaKhachHang FROM CNDauNam ORDER BY MaTaiKhoan,MaKhachHang", dbOpenSnapshot)
             Do While Not rs_ktra.EOF
                   If rs_ktra!MaTaiKhoan = m And rs_ktra!MaKhachHang = n Then
-                      ExecuteSQL5 "DELETE * FROM CNDauNam WHERE MaSo=" + CStr(rs_ktra!maSo)
+                      ExecuteSQL5 "DELETE * FROM CNDauNam WHERE MaSo=" + CStr(rs_ktra!MaSo)
                   Else
                       n = rs_ktra!MaKhachHang
                       If m <> rs_ktra!MaTaiKhoan Then
@@ -824,7 +825,7 @@ d:
                m = SelectSQL("SELECT MaSo AS F1 FROM CNDauNam WHERE MaTaiKhoan=" + CStr(rs_ktra!MaTkNo) + " AND MaKhachHang=" + CStr(rs_ktra!makh) + " ORDER BY HanTT DESC")
                If m > 0 Then
                    ExecuteSQL5 "UPDATE CNDauNam SET SoXuat=SoXuat+" + CStr(rs_ktra!sops) + " WHERE MaSo=" + CStr(m)
-                   ExecuteSQL5 "UPDATE ChungTu SET CT_ID=" + CStr(-(2000000000 - m)) + " WHERE MaSo=" + CStr(rs_ktra!maSo)
+                   ExecuteSQL5 "UPDATE ChungTu SET CT_ID=" + CStr(-(2000000000 - m)) + " WHERE MaSo=" + CStr(rs_ktra!MaSo)
                End If
            Else
                ExecuteSQL5 "UPDATE CNDauNam SET SoXuat=SoXuat+" + CStr(rs_ktra!sops) + " WHERE MaSo=" + CStr(m)
@@ -840,7 +841,7 @@ d:
                m = SelectSQL("SELECT MaSo AS F1 FROM CNDauNam WHERE MaTaiKhoan=" + CStr(rs_ktra!MaTkCo) + " AND MaKhachHang=" + CStr(rs_ktra!MaKHC) + " ORDER BY HanTT DESC")
                If m > 0 Then
                    ExecuteSQL5 "UPDATE CNDauNam SET SoXuat=SoXuat+" + DoiDau(rs_ktra!sops) + " WHERE MaSo=" + CStr(m)
-                   ExecuteSQL5 "UPDATE ChungTu SET CT_ID=" + CStr(-(2000000000 - m)) + " WHERE MaSo=" + CStr(rs_ktra!maSo)
+                   ExecuteSQL5 "UPDATE ChungTu SET CT_ID=" + CStr(-(2000000000 - m)) + " WHERE MaSo=" + CStr(rs_ktra!MaSo)
                End If
            Else
                ExecuteSQL5 "UPDATE CNDauNam SET SoXuat=SoXuat+" + CStr(rs_ktra!sops) + " WHERE MaSo=" + CStr(m)
@@ -939,14 +940,14 @@ Private Sub LapCanDoiThu()
     Next
     Set rs_taikhoan = DBKetoan.OpenRecordset("SELECT * FROM HethongTK WHERE Cap>0 AND TkCon>0 ORDER BY SoHieu DESC", dbOpenSnapshot, dbForwardOnly)
     Do While Not rs_taikhoan.EOF
-        Set rs_sub = DBKetoan.OpenRecordset(sql + " FROM HethongTK WHERE HethongTK.TkCha0 = " + CStr(rs_taikhoan!maSo), dbOpenSnapshot)
+        Set rs_sub = DBKetoan.OpenRecordset(sql + " FROM HethongTK WHERE HethongTK.TkCha0 = " + CStr(rs_taikhoan!MaSo), dbOpenSnapshot)
         sql2 = "UPDATE HethongTK SET HethongTK.DuNo_0 = " + DoiDau(rs_sub!DN_0) + ", HethongTK.DuCo_0 = " + DoiDau(Format(rs_sub!DC_0, Mask_2))
         For i = 1 To 12
             st2 = CStr(i)
             sql2 = sql2 + ", HeThongTK.No_" + st2 + " = " + DoiDau(rs_sub.Fields("N_" + st2)) + ", HeThongTK.Co_" + st2 + " = " + DoiDau(rs_sub.Fields("C_" + st2)) _
                     + ", HeThongTK.DuNo_" + st2 + " = " + DoiDau(rs_sub.Fields("DN_" + st2)) + ", HeThongTK.DuCo_" + st2 + " = " + DoiDau(rs_sub.Fields("DC_" + st2))
         Next
-        ExecuteSQL5 sql2 + " WHERE MaSo = " + CStr(rs_taikhoan!maSo)
+        ExecuteSQL5 sql2 + " WHERE MaSo = " + CStr(rs_taikhoan!MaSo)
         rs_taikhoan.MoveNext
     Loop
     
@@ -965,14 +966,14 @@ Private Sub LapCanDoiThu()
     Next
     
     Do While Not rs_taikhoan.EOF
-        Set rs_sub = DBKetoan.OpenRecordset(sql + " FROM HethongTK WHERE ((HeThongTK.TKCha0=" + CStr(rs_taikhoan!maSo) + "))", dbOpenSnapshot)
+        Set rs_sub = DBKetoan.OpenRecordset(sql + " FROM HethongTK WHERE ((HeThongTK.TKCha0=" + CStr(rs_taikhoan!MaSo) + "))", dbOpenSnapshot)
         sql2 = "UPDATE HethongTK SET HethongTK.DuNo_0 = " + DoiDau(rs_sub!DN_0) + ", HethongTK.DuCo_0 = " + DoiDau(Format(rs_sub!DC_0, Mask_2))
         For i = 1 To 12
             st2 = CStr(i)
             sql2 = sql2 + ", HeThongTK.No_" + st2 + " = " + DoiDau(rs_sub.Fields("N_" + st2)) + ", HeThongTK.Co_" + st2 + " = " + DoiDau(rs_sub.Fields("C_" + st2)) _
                     + ", HeThongTK.DuNo_" + st2 + " = " + DoiDau(rs_sub.Fields("DN_" + st2)) + ", HeThongTK.DuCo_" + st2 + " = " + DoiDau(rs_sub.Fields("DC_" + st2))
         Next
-        ExecuteSQL5 sql2 + " WHERE MaSo = " + CStr(rs_taikhoan!maSo)
+        ExecuteSQL5 sql2 + " WHERE MaSo = " + CStr(rs_taikhoan!MaSo)
         rs_taikhoan.MoveNext
     Loop
     
@@ -1138,14 +1139,14 @@ KC1:
         Set rskh = DBKetoan.OpenRecordset("SELECT *  FROM tp154", dbOpenSnapshot)
             Do While Not rskh.EOF
                 tondautp = rskh!dk
-                duno = tondautp + SelectSQL("select sum(sops)  as f1 from chungtu where MaTKTCNo =" + CStr(TK.maSo) + "  and  month(ngaygs) <=" + CStr(thang))
-                duco = SelectSQL("select sum(sops)  as f1 from chungtu where MaTKTCCo =" + CStr(TK.maSo) + "  and month(ngaygs) <=" + CStr(thang))
+                duno = tondautp + SelectSQL("select sum(sops)  as f1 from chungtu where MaTKTCNo =" + CStr(TK.MaSo) + "  and  month(ngaygs) <=" + CStr(thang))
+                duco = SelectSQL("select sum(sops)  as f1 from chungtu where MaTKTCCo =" + CStr(TK.MaSo) + "  and month(ngaygs) <=" + CStr(thang))
                 duno = duno - duco
                 If duno > 0 Then
                     mtkn = rs!tk2
                     mtkc = k
                     mk1 = 0
-                    mk2 = rskh!maSo
+                    mk2 = rskh!MaSo
               
                 oct.InitChungtu 0, 3, "KC_" + CStr(rs!stt), thang, NgayCuoiThang(pNamTC, thang), NgayCuoiThang(pNamTC, thang), 0, 0, rs!diengiai, mtkn, mtkc, duno, IIf(mtkn = k, nt, 0), IIf(mtkc = k, nt, 0), 0, "...", 1, "", "", "", ""
                 oct.MaCT = MaCT + rs!stt
@@ -1275,7 +1276,7 @@ Public Sub PhanBoCP(tdau As Integer, tcuoi As Integer, shtk As String, tentk As 
         If MsgBox(shtk + " ®· ®­îc kÕt chuyÓn, thùc hiÖn l¹i ?", vbYesNo + vbCritical, App.ProductName) = vbNo Then GoTo KT
     End If
     Do While Not rs.EOF
-        ctu.InitChungtu rs!maSo, 0, "", 0, Date, Date, 0, 0, "", 0, 0, 0, 0, 0, 0, "", 0, "", "", "", "'"
+        ctu.InitChungtu rs!MaSo, 0, "", 0, Date, Date, 0, 0, "", 0, 0, 0, 0, 0, 0, "", 0, "", "", "", "'"
         ctu.XoaChungtu
         rs.MoveNext
     Loop
@@ -1306,7 +1307,7 @@ Public Sub PhanBoCP(tdau As Integer, tcuoi As Integer, shtk As String, tentk As 
                 tongcp = rs!CP - tongpb
             End If
             If tongcp <> 0 Then
-                ctu.InitChungtu 0, 3, "PBCP_" + shtk, tcuoi, NgayCuoiThang(pNamTC, tcuoi), NgayCuoiThang(pNamTC, tcuoi), 0, 0, ABCtoVNI("Ph©n bæ ") + tentk, rsct!maSo, rs!maSo, tongcp, 0, 0, 0, "...", 1, "", "", "", ""
+                ctu.InitChungtu 0, 3, "PBCP_" + shtk, tcuoi, NgayCuoiThang(pNamTC, tcuoi), NgayCuoiThang(pNamTC, tcuoi), 0, 0, ABCtoVNI("Ph©n bæ ") + tentk, rsct!MaSo, rs!MaSo, tongcp, 0, 0, 0, "...", 1, "", "", "", ""
                 ctu.MaCT = MaCT
                 ctu.CT_ID = 400000000 + CLng5(shtk)
                 ctu.GhiChungtu
@@ -1385,7 +1386,7 @@ Public Sub PhanBoCP2(tdau As Integer, tcuoi As Integer, tc As Integer)
             tongcp = CP - tongpb
             tongcpkh = cpkh - tongpbkh
         End If
-        ExecuteSQL5 "UPDATE TP154 SET CPSXC_" + CStr(CThangDB(tcuoi)) + "=" + DoiDau(tongcp) + ",CPKH_" + CStr(CThangDB(tcuoi)) + "=" + DoiDau(tongcpkh) + " WHERE MaSo=" + CStr(rsct!maSo)
+        ExecuteSQL5 "UPDATE TP154 SET CPSXC_" + CStr(CThangDB(tcuoi)) + "=" + DoiDau(tongcp) + ",CPKH_" + CStr(CThangDB(tcuoi)) + "=" + DoiDau(tongcpkh) + " WHERE MaSo=" + CStr(rsct!MaSo)
         rsct.MoveNext
     Loop
     rsct.Close
@@ -1419,50 +1420,50 @@ Public Function InChiPhi(tdau As Integer, tcuoi As Integer, msg As Boolean, nn A
         If rs_tk!CoCon = 0 Then
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE (TK_ID = " + CStr(TKCPVL_ID) + " OR TK_ID = " + CStr(TKVT_ID) + ") AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
             Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = Kq1 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = Kq1 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
             Loop
             
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPNC_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
             Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq2 = Kq2 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq2 = Kq2 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
             Loop
                         
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPTB_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
             Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq7 = Kq7 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq7 = Kq7 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
             Loop
             
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPSX_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
             Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq3 = Kq3 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq3 = Kq3 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
             Loop
             
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPSX_ID) + " AND TK_ID2 = " + CStr(TKCPSX_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
             Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq4 = Kq4 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq4 = Kq4 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
             Loop
             
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE ((TK_ID = " + CStr(TKCPGIA_ID) + " OR TK_ID2 = " + CStr(TKCPGIA_ID) + ") OR (SoHieu LIKE '" + ShTkTP + "*')) AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
             Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq6 = Kq6 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, 1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq6 = Kq6 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, 1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
             Loop
         Else
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT SUM(Kq1) As SKq1, SUM(Kq2) As SKq2, SUM(Kq3) As SKq3," _
-                & " SUM(Kq4) As SKq4, SUM(Kq5) As SKq5, SUM(Kq6) As SKq6, SUM(Kq7) As SKq7, SUM(Kq8) As SKq8 FROM BaoCaoCP WHERE MaCha = " + CStr(rs_tk!maSo), dbOpenSnapshot, dbForwardOnly)
+                & " SUM(Kq4) As SKq4, SUM(Kq5) As SKq5, SUM(Kq6) As SKq6, SUM(Kq7) As SKq7, SUM(Kq8) As SKq8 FROM BaoCaoCP WHERE MaCha = " + CStr(rs_tk!MaSo), dbOpenSnapshot, dbForwardOnly)
             ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = " + DoiDau(rs_tktc!SKq1) + ", Kq2 = " + DoiDau(rs_tktc!SKq2) + ", Kq3 = " + DoiDau(rs_tktc!SKq3) _
-                & ", Kq4 = " + DoiDau(rs_tktc!SKq4) + ", Kq5 = " + DoiDau(rs_tktc!SKq5) + ", Kq6 = " + DoiDau(rs_tktc!SKq6) + ", Kq7 = " + DoiDau(rs_tktc!SKq7) + ", Kq8 = " + DoiDau(rs_tktc!SKq8) + " WHERE MaSo = " + CStr(rs_tk!maSo)
+                & ", Kq4 = " + DoiDau(rs_tktc!SKq4) + ", Kq5 = " + DoiDau(rs_tktc!SKq5) + ", Kq6 = " + DoiDau(rs_tktc!SKq6) + ", Kq7 = " + DoiDau(rs_tktc!SKq7) + ", Kq8 = " + DoiDau(rs_tktc!SKq8) + " WHERE MaSo = " + CStr(rs_tk!MaSo)
         End If
         rs_tktc.Close
         rs_tk.MoveNext
@@ -1527,7 +1528,7 @@ Public Function InChiPhi3(tdau As Integer, tcuoi As Integer, nn As Integer) As B
     
     Set rs = DBKetoan.OpenRecordset("SELECT MaSo FROM TP154", dbOpenSnapshot)
     Do While Not rs.EOF
-        tp.InitTPMaSo rs!maSo
+        tp.InitTPMaSo rs!MaSo
         HienThongBao tp.TenVattu, 1
         tp.XDDauKy tdau
         tp.GhiCPTT tdau, tcuoi
@@ -1598,7 +1599,7 @@ Public Function InKetQua3(tdau As Integer, tcuoi As Integer, loaibc As Integer, 
     
     Set rs = DBKetoan.OpenRecordset("SELECT MaSo FROM TP154", dbOpenSnapshot)
     Do While Not rs.EOF
-        tp.InitTPMaSo rs!maSo
+        tp.InitTPMaSo rs!MaSo
         HienThongBao tp.TenVattu, 1
         tp.XDDauKy IIf(loaibc = 0, tdau, pThangDauKy)
         tp.GhiCPTT IIf(loaibc = 0, tdau, pThangDauKy), tcuoi
@@ -1667,56 +1668,56 @@ Public Function InKetQua(tdau As Integer, tcuoi As Integer, tag As Integer, msg 
         If rs_tk!CoCon = 0 Then
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE (TK_ID = " + CStr(TKCPGIA_ID) + " OR SoHieu LIKE '635*') AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = Kq1 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = Kq1 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
            
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPBT_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = Kq1 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = Kq1 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
                 
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPQL_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq2 = Kq2 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq2 = Kq2 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
                 
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKCPBH_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq3 = Kq3 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                    & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq3 = Kq3 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                    & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
             
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE (TK_ID = " + CStr(TKDT_ID) + " OR SoHieu LIKE '515*') AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq4 = Kq4 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, 1)) _
-                     & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq4 = Kq4 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, 1)) _
+                     & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
            
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE TK_ID = " + CStr(TKTNBT_ID) + " AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq4 = Kq4 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, 1)) _
-                     & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq4 = Kq4 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, 1)) _
+                     & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
            Set rs_tktc = DBKetoan.OpenRecordset("SELECT MaSo FROM HethongTK WHERE SoHieu LIKE '635*' AND MaTC = MaSo", dbOpenSnapshot, dbForwardOnly)
            Do While Not rs_tktc.EOF
-                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq5 = Kq5 + " + DoiDau(PhatSinhDu(rs_tk!maSo, rs_tktc!maSo, tdau, tcuoi, -1)) _
-                     & " WHERE MaSo = " + CStr(rs_tk!maSo)
+                ExecuteSQL5 "UPDATE BaoCaoCP SET Kq5 = Kq5 + " + DoiDau(PhatSinhDu(rs_tk!MaSo, rs_tktc!MaSo, tdau, tcuoi, -1)) _
+                     & " WHERE MaSo = " + CStr(rs_tk!MaSo)
                 rs_tktc.MoveNext
            Loop
         Else
             Set rs_tktc = DBKetoan.OpenRecordset("SELECT SUM(Kq1) As SKq1, SUM(Kq2) As SKq2, SUM(Kq3) As SKq3," _
-                & " SUM(Kq4) As SKq4, SUM(Kq5) As SKq5 FROM BaoCaoCP WHERE MaCha = " + CStr(rs_tk!maSo), dbOpenSnapshot, dbForwardOnly)
+                & " SUM(Kq4) As SKq4, SUM(Kq5) As SKq5 FROM BaoCaoCP WHERE MaCha = " + CStr(rs_tk!MaSo), dbOpenSnapshot, dbForwardOnly)
             ExecuteSQL5 "UPDATE BaoCaoCP SET Kq1 = " + DoiDau(rs_tktc!SKq1) + ", Kq2 = " + DoiDau(rs_tktc!SKq2) + ", Kq3 = " + DoiDau(rs_tktc!SKq3) _
-                & ", Kq4 = " + DoiDau(rs_tktc!SKq4) + ", Kq5 = " + DoiDau(rs_tktc!SKq5) + " WHERE MaSo = " + CStr(rs_tk!maSo)
+                & ", Kq4 = " + DoiDau(rs_tktc!SKq4) + ", Kq5 = " + DoiDau(rs_tktc!SKq5) + " WHERE MaSo = " + CStr(rs_tk!MaSo)
         End If
         rs_tktc.Close
         rs_tk.MoveNext
@@ -1957,7 +1958,7 @@ Public Sub UpDateDB()
         
         Set rel = DBKetoan.CreateRelation("DVTVT", "Vattu", "DVTVattu", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaVattu"
+        rel.Fields!MaSo.ForeignName = "MaVattu"
         DBKetoan.Relations.Append rel
         
         ExecuteSQL5 "INSERT INTO DVTVattu (MaSo,MaVattu,DonVi,TyLeQD) SELECT " + CStr(Lng_MaxValue("MaSo", "DVTVattu") + 1) + ",MaSo,DonVi2,TyLeQD FROM Vattu WHERE Dvt2=1"
@@ -1988,7 +1989,7 @@ Public Sub UpDateDB()
         
         Set rel = DBKetoan.CreateRelation("PLNV", "PhanLoaiNhanVien", "NhanVien", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaPhanLoai"
+        rel.Fields!MaSo.ForeignName = "MaPhanLoai"
         DBKetoan.Relations.Append rel
     End If
     
@@ -2014,11 +2015,11 @@ Public Sub UpDateDB()
         
         Set rel = DBKetoan.CreateRelation("CNDK2", "HethongTK", "CNDauNam", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaTaiKhoan"
+        rel.Fields!MaSo.ForeignName = "MaTaiKhoan"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTDK4", "KhachHang", "CNDauNam", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaKhachHang"
+        rel.Fields!MaSo.ForeignName = "MaKhachHang"
         DBKetoan.Relations.Append rel
     End If
     CopyTable2 "CNDauNam", "CNDauNam2"
@@ -2038,7 +2039,7 @@ Public Sub UpDateDB()
 
         Set rel = DBKetoan.CreateRelation("CTGS", "CTGhiSo", "ChungTu", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "CTGS"
+        rel.Fields!MaSo.ForeignName = "CTGS"
         DBKetoan.Relations.Append rel
     End If
         
@@ -2048,7 +2049,7 @@ Public Sub UpDateDB()
             
             Set rel = DBKetoan.CreateRelation("DM1", "Vattu", "DinhMuc", dbRelationDeleteCascade)
             rel.Fields.Append rel.CreateField("MaSo")
-            rel.Fields!maSo.ForeignName = "MaTP"
+            rel.Fields!MaSo.ForeignName = "MaTP"
             DBKetoan.Relations.Append rel
         End If
             
@@ -2062,15 +2063,15 @@ Public Sub UpDateDB()
             
             Set rel = DBKetoan.CreateRelation("MK1", "KhoHang", "ThanhPham", dbRelationDeleteCascade)
             rel.Fields.Append rel.CreateField("MaSo")
-            rel.Fields!maSo.ForeignName = "MaKhoTP"
+            rel.Fields!MaSo.ForeignName = "MaKhoTP"
             DBKetoan.Relations.Append rel
             Set rel = DBKetoan.CreateRelation("MK2", "KhoHang", "ThanhPham", dbRelationDeleteCascade)
             rel.Fields.Append rel.CreateField("MaSo")
-            rel.Fields!maSo.ForeignName = "MaKhoNVL"
+            rel.Fields!MaSo.ForeignName = "MaKhoNVL"
             DBKetoan.Relations.Append rel
             Set rel = DBKetoan.CreateRelation("MVT", "Vattu", "ThanhPham", dbRelationDeleteCascade)
             rel.Fields.Append rel.CreateField("MaSo")
-            rel.Fields!maSo.ForeignName = "MaVattu"
+            rel.Fields!MaSo.ForeignName = "MaVattu"
             DBKetoan.Relations.Append rel
         End If
     
@@ -2099,7 +2100,7 @@ Public Sub UpDateDB()
                     
             Set rel = DBKetoan.CreateRelation("PLTP", "PhanLoai154", "TP154", dbRelationDeleteCascade)
             rel.Fields.Append rel.CreateField("MaSo")
-            rel.Fields!maSo.ForeignName = "MaPhanLoai"
+            rel.Fields!MaSo.ForeignName = "MaPhanLoai"
             DBKetoan.Relations.Append rel
         Else
             For i = 1 To 12
@@ -2129,15 +2130,15 @@ Public Sub UpDateDB()
         
         Set rel = DBKetoan.CreateRelation("VTDK1", "KhoHang", "VTDauNam", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaSoKho"
+        rel.Fields!MaSo.ForeignName = "MaSoKho"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTDK2", "HethongTK", "VTDauNam", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaTaiKhoan"
+        rel.Fields!MaSo.ForeignName = "MaTaiKhoan"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTDK3", "Vattu", "VTDauNam", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaVattu"
+        rel.Fields!MaSo.ForeignName = "MaVattu"
         DBKetoan.Relations.Append rel
         
         ExecuteSQL5 "INSERT INTO VTDauNam (MaSo,MaSoKho,MaTaiKhoan,MaVattu,Tien_0,Luong_0,SoXuat) SELECT MaSo,MaSoKho,MaTaiKhoan,MaVattu,Tien_0,Luong_0,SoXuat FROM TonKho WHERE Tien_0<>0 OR Luong_0<>0"
@@ -2148,15 +2149,15 @@ Public Sub UpDateDB()
         
         Set rel = DBKetoan.CreateRelation("VTKK1", "KhoHang", "KiemKe", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaSoKho"
+        rel.Fields!MaSo.ForeignName = "MaSoKho"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTKK2", "HethongTK", "KiemKe", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaTaiKhoan"
+        rel.Fields!MaSo.ForeignName = "MaTaiKhoan"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTKK3", "Vattu", "KiemKe", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaVattu"
+        rel.Fields!MaSo.ForeignName = "MaVattu"
         DBKetoan.Relations.Append rel
     End If
     
@@ -2165,15 +2166,15 @@ Public Sub UpDateDB()
         
         Set rel = DBKetoan.CreateRelation("VTKKN1", "KhoHang", "KiemKeN", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaSoKho"
+        rel.Fields!MaSo.ForeignName = "MaSoKho"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTKKN2", "HethongTK", "KiemKeN", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaTaiKhoan"
+        rel.Fields!MaSo.ForeignName = "MaTaiKhoan"
         DBKetoan.Relations.Append rel
         Set rel = DBKetoan.CreateRelation("VTKKN3", "Vattu", "KiemKeN", dbRelationDeleteCascade)
         rel.Fields.Append rel.CreateField("MaSo")
-        rel.Fields!maSo.ForeignName = "MaVattu"
+        rel.Fields!MaSo.ForeignName = "MaVattu"
         DBKetoan.Relations.Append rel
     End If
     
@@ -2201,23 +2202,23 @@ Public Sub UpDateDB()
     
     If pVersion = 3 Then GoTo E
     TK.InitTaikhoanSohieu "6234"
-    If TK.maSo = 0 Then
+    If TK.MaSo = 0 Then
         TK.InitTaikhoanSohieu "623"
-        If TK.maSo > 0 Then
+        If TK.MaSo > 0 Then
             TK.ThemTKCon "4", ABCtoVNI("Chi phÝ khÊu hao TSC§"), "Depreciation of fixed assets", 0, 3003
             ExecuteSQL5 "UPDATE HethongTK SET MaTC=MaSo WHERE Cap=2 AND SoHieu LIKE '623*'"
             ExecuteSQL5 "UPDATE HethongTK SET MaTC=0 WHERE Cap=1 AND SoHieu LIKE '623*'"
         End If
     End If
     TK.InitTaikhoanSohieu "621"
-    If TK.maSo = 0 Then
+    If TK.MaSo = 0 Then
         ExecuteSQL5 "UPDATE Cdts SET MaTk2=82 WHERE MaSo=114"
         ExecuteSQL5 "UPDATE Cdts SET MaTk2=18 WHERE MaSo=312"
         ExecuteSQL5 "UPDATE Kqkd SET MaSoCha=30 WHERE MaSo=20"
         GoTo B
     End If
     TK.InitTaikhoanSohieu "515"
-    If TK.maSo > 0 Then GoTo B
+    If TK.MaSo > 0 Then GoTo B
     
     If MsgBox("Bæ sung c¸c tµi kho¶n 242, 515, 635 vµ ®iÒu chØnh mÉu b¸o c¸o Tµi chÝnh ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo B
     
@@ -2240,7 +2241,7 @@ Public Sub UpDateDB()
 B:
     ExecuteSQL5 "UPDATE HethongTK SET Ten='" + ABCtoVNI("Doanh thu ch­a thùc hiÖn") + "' WHERE SoHieu='3387'"
     TK.InitTaikhoanSohieu "337"
-    If TK.maSo > 0 Then GoTo c
+    If TK.MaSo > 0 Then GoTo c
     If MsgBox("Bæ sung c¸c tµi kho¶n 337, 343 vµ ®iÒu chØnh mÉu b¸o c¸o Tµi chÝnh ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo c
     
     ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0, TkCha1, MaTC) VALUES (12000,'337',1,'" + ABCtoVNI("Thanh to¸n theo tiÕn ®é kÕ ho¹ch hîp ®ång x©y dùng") + "',3,1,79,0,12000)"
@@ -2256,10 +2257,10 @@ B:
     ExecuteSQL5 "INSERT INTO Cdts (Maso,TaiSan,DienGiai,MaTK1,MaTK2,NhomCha) VALUES (323,1,'    3. Tr¸i phiÕu ph¸t hµnh',12001,0,320)"
 c:
     TK.InitTaikhoanSohieu "4131"
-    If TK.maSo > 0 Then GoTo d
+    If TK.MaSo > 0 Then GoTo d
     If MsgBox("Bæ sung c¸c tµi kho¶n 4131, 4132, 4133 ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo d
     TK.InitTaikhoanSohieu "413"
-    If TK.maSo > 0 Then
+    If TK.MaSo > 0 Then
         TK.ThemTKCon "1", ABCtoVNI("Chªnh lÖch tû gi¸ ®¸nh gi¸ l¹i cuèi n¨m tµi chÝnh"), "...", 0, 0
         TK.ThemTKCon "2", ABCtoVNI("Chªnh lÖch tû gi¸ trong giai ®o¹n ®Çu t­ c¬ b¶n"), "...", 0, 0
         TK.ThemTKCon "3", ABCtoVNI("Chªnh lÖch tû gi¸ tõ chuyÓn ®æi b¸o c¸o tµi chÝnh"), "...", 0, 0
@@ -2270,12 +2271,12 @@ c:
 d:
     If frmMain.lb(0).tag < 3 Then
         TK.InitTaikhoanSohieu "1385"
-        If TK.maSo > 0 Then GoTo E
+        If TK.MaSo > 0 Then GoTo E
         If MsgBox("Bæ sung c¸c tµi kho¶n 1385, 3385, 417, 419 ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo E
         TK.InitTaikhoanSohieu "138"
-        If TK.maSo > 0 Then TK.ThemTKCon "5", ABCtoVNI("Ph¶i thu vÒ cæ phÇn ho¸"), "...", 0, 0
+        If TK.MaSo > 0 Then TK.ThemTKCon "5", ABCtoVNI("Ph¶i thu vÒ cæ phÇn ho¸"), "...", 0, 0
         TK.InitTaikhoanSohieu "338"
-        If TK.maSo > 0 Then TK.ThemTKCon "5", ABCtoVNI("Ph¶i tr¶ vÒ cæ phÇn ho¸"), "...", 0, 0
+        If TK.MaSo > 0 Then TK.ThemTKCon "5", ABCtoVNI("Ph¶i tr¶ vÒ cæ phÇn ho¸"), "...", 0, 0
         ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0, TkCha1, MaTC) VALUES (13000,'417',1,'" + ABCtoVNI("Quü hç trî s¾p xÕp vµ cæ phÇn ho¸ DNNN") + "',4,1,105,0,13000)"
         ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0, TkCha1, MaTC) VALUES (13001,'419',1,'" + ABCtoVNI("Cæ phiÕu mua l¹i") + "',4,1,105,0,13001)"
         ExecuteSQL5 "INSERT INTO Cdts (Maso,TaiSan,DienGiai,MaTK1,MaTK2,NhomCha) VALUES (428,1,'    6. Quü hç trî s¾p xÕp vµ cæ phÇn ho¸ DNNN',13000,0,420)"
@@ -2283,7 +2284,7 @@ d:
     End If
 E:
     TK.InitTaikhoanSohieu "217"
-    If TK.maSo > 0 Then GoTo f
+    If TK.MaSo > 0 Then GoTo f
     
     If MsgBox("Bæ sung c¸c tµi kho¶n 217, 2147, 5117, 1567, 223 vµ ®iÒu chØnh mÉu b¸o c¸o Tµi chÝnh ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo f
    
@@ -2299,7 +2300,7 @@ E:
         'cap nhat QD 15/2006/QD-BTC
 f:
     TK.InitTaikhoanSohieu "1281"
-    If TK.maSo > 0 Then GoTo k
+    If TK.MaSo > 0 Then GoTo k
      If MsgBox("Bæ sung theo Q§ Sè 15/2006/Q§-BTC,B¹n muèn cËp nhËp kh«ng?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo m
 m:
    frmXuly.Show
@@ -2327,7 +2328,7 @@ Public Sub XoaCTTheoID(thang As Integer, id As Long, ml As Integer, Optional nda
         + IIf(thang > 0, "ThangCT=" + CStr(thang), WNgay("NgayGS", ndau, ncuoi)) _
         + IIf(ml > 0, " AND MaLoai=" + CStr(ml), "") + IIf(ml2 > 0, " AND MaLoai<>" + CStr(ml2), ""), dbOpenSnapshot)
     Do While Not rs.EOF
-        oct.InitChungtu rs!maSo, 0, "", 0, Date, Date, 0, 0, "", 0, 0, 0, 0, 0, 0, "", 0, "", "", "", ""
+        oct.InitChungtu rs!MaSo, 0, "", 0, Date, Date, 0, 0, "", 0, 0, 0, 0, 0, 0, "", 0, "", "", "", ""
         oct.XoaChungtu
         rs.MoveNext
     Loop
@@ -2362,7 +2363,7 @@ Public Sub UpdateAcount()
         'them con
          frmXuly.Gau.Value = 1
         TK.InitTaikhoanSohieu "1281"
-        If TK.maSo > 0 Then GoTo t2
+        If TK.MaSo > 0 Then GoTo t2
           ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0, MaTC) VALUES (14028,'1281',2,'" + ABCtoVNI("TiÒn göi cã kú h¹n") + "',1,-1,16,14028)"
 t2:
        frmXuly.Gau.Value = 2
@@ -2374,7 +2375,7 @@ t2:
         
         If rs.recordCount <> 0 Then
           TK.InitTaikhoanSohieu "5117"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
             ExecuteSQL5 "Update HethongTK set TKcon=1, cap=2, TKCha0=123,TKcha1=122 where sohieu='5117'"
              End If
             ExecuteSQL5 "Update HethongTK set ten='Doanh thu trôï caáp, trôï giaù' where sohieu='5114'"
@@ -2383,7 +2384,7 @@ t2:
 T:
   frmXuly.Gau.Value = 3
        TK.InitTaikhoanSohieu "1288"
-       If TK.maSo > 0 Then GoTo h
+       If TK.MaSo > 0 Then GoTo h
           ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0, MaTC) VALUES (14029,'1288',2,'" + ABCtoVNI("§Çu t­ ng¾n h¹n kh¸c") + "',1,-1,16,14029)"
         End If
 h:
@@ -2394,7 +2395,7 @@ h:
          Loop
        If rs.recordCount > 0 Then
         TK.InitTaikhoanSohieu "1385"
-        If TK.maSo > 0 Then GoTo h1
+        If TK.MaSo > 0 Then GoTo h1
         ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,Tkcha1, MaTC,TK_ID2) VALUES (14007,'1385',2,'" + ABCtoVNI("Ph¶i thu vÒ cæ phÇn ho¸") + "',1,-1,22,1,14007,1310)"
        End If
        frmXuly.Gau.Value = 4
@@ -2407,11 +2408,11 @@ h1:
         frmXuly.Gau.Value = 5
         If rs.recordCount <> 0 Then
         TK.InitTaikhoanSohieu "1421"
-          If TK.maSo > 0 Then
+          If TK.MaSo > 0 Then
            'ExecuteSQL5 "Delete * from HethongTK where Sohieu= '1421'"
           End If
         TK.InitTaikhoanSohieu "1422"
-          If TK.maSo > 0 Then
+          If TK.MaSo > 0 Then
           ' ExecuteSQL5 "Delete * from HethongTK where Sohieu= '1422'"
           End If
          ExecuteSQL5 "Update HethongTK set TKcon=1 where Sohieu='142'"
@@ -2424,15 +2425,15 @@ h1:
         frmXuly.Gau.Value = 6
         If rs.recordCount <> 0 Then
         TK.InitTaikhoanSohieu "1531"
-         If TK.maSo > 0 Then
+         If TK.MaSo > 0 Then
            ExecuteSQL5 "Delete * from HethongTK where Sohieu= '1531'"
          End If
         TK.InitTaikhoanSohieu "1532"
-         If TK.maSo > 0 Then
+         If TK.MaSo > 0 Then
           ExecuteSQL5 "Delete * from HethongTK where Sohieu= '1532'"
          End If
         TK.InitTaikhoanSohieu "1533"
-         If TK.maSo > 0 Then
+         If TK.MaSo > 0 Then
           ExecuteSQL5 "Delete * from HethongTK where Sohieu= '1533'"
          End If
          ExecuteSQL5 "Update HethongTK set TKcon=0 where Sohieu='153'"
@@ -2445,7 +2446,7 @@ h1:
          Loop
          If rs.recordCount = 0 Then
           TK.InitTaikhoanSohieu "158"
-         If TK.maSo > 0 Then GoTo h2
+         If TK.MaSo > 0 Then GoTo h2
           ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0, MaTC) VALUES (14008,'158',1,'" + ABCtoVNI("Hµng ho¸ kho b¶o thuÕ") + "',1,-1,1,14008)"
          End If
         'loai 2
@@ -2459,15 +2460,15 @@ h2:
          If rs.recordCount <> 0 Then
          'do update sub  acount of acount to sub acount
           TK.InitTaikhoanSohieu "2211*"
-         If TK.maSo > 0 Then
+         If TK.MaSo > 0 Then
           ExecuteSQL5 "Update HethongTK set TKcon=2 where Sohieu='2211*'"
           End If
          TK.InitTaikhoanSohieu "2211"
-         If TK.maSo > 0 Then
+         If TK.MaSo > 0 Then
           ExecuteSQL5 "Delete * from HethongTK where Sohieu='2211'"
          End If
          TK.InitTaikhoanSohieu "2212"
-         If TK.maSo > 0 Then
+         If TK.MaSo > 0 Then
           ExecuteSQL5 "Delete * from HethongTK where Sohieu='2212'"
          End If
           ExecuteSQL5 "Update HethongTK set TKcon=1 where Sohieu='153'"
@@ -2480,15 +2481,15 @@ h2:
         frmXuly.Gau.Value = 8
          If rs.recordCount <> 0 Then
          TK.InitTaikhoanSohieu "2281"
-         If TK.maSo > 0 Then GoTo H3
+         If TK.MaSo > 0 Then GoTo H3
            ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14009,'2281',2,'" + ABCtoVNI("Cå phiÕu") + "',2,-1,72,47,14009)"
 H3:
          TK.InitTaikhoanSohieu "2282"
-         If TK.maSo > 0 Then GoTo H4
+         If TK.MaSo > 0 Then GoTo H4
            ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14010,'2282',2,'" + ABCtoVNI("Tr¸i phiÕu") + "',2,-1,72,47,14010)"
 H4:
          TK.InitTaikhoanSohieu "2288"
-         If TK.maSo > 0 Then GoTo H5
+         If TK.MaSo > 0 Then GoTo H5
            ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14011,'2288',2,'" + ABCtoVNI("§Çu t­ dµi h¹n kh¸c") + "',2,-1,72,47,14011)"
            'ExecuteSQL5 "Update HeThongTK set TKcon = 1, TKcha=47 where Sohieu ='228'"
            ExecuteSQL5 "Update HethongTK set TKcon= 1, TKcha0=47 where Sohieu='228'"
@@ -2503,7 +2504,7 @@ H5:
         Loop
          If rs.recordCount < 0 Then
            TK.InitTaikhoanSohieu "243"
-            If TK.maSo > 0 Then GoTo H6
+            If TK.MaSo > 0 Then GoTo H6
              ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14012,'243',1,'" + ABCtoVNI("Tµi s¶n thuÕ thu nhËp ho¶n l¹i") + "',2,-1,47,0,14012)"
          End If
          frmXuly.Gau.Value = 10
@@ -2516,11 +2517,11 @@ H6:
         Loop
         If rs.recordCount <> 0 Then
         TK.InitTaikhoanSohieu "3311"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
             ExecuteSQL5 "Delete * from HethongTK where Sohieu='3311'"
            End If
          TK.InitTaikhoanSohieu "3312"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
             ExecuteSQL5 "Delete * from HethongTK where Sohieu='3312'"
            End If
         
@@ -2533,7 +2534,7 @@ H6:
         Loop
        If rs.recordCount <> 0 Then
         TK.InitTaikhoanSohieu "3348"
-           If TK.maSo > 0 Then GoTo H7
+           If TK.MaSo > 0 Then GoTo H7
             ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC,TK_ID,TK_ID2) VALUES (14013,'3348',2,'" + ABCtoVNI("Ph¶i tr¶ ng­êi lao ®éng kh¸c") + "',3,1,82,79,14013,3310,1310)"
             ExecuteSQL5 "Update HethongTK set Ten='" + ABCtoVNI("Ph¶i tr¶ ng­êi lao ®éng") + "'where sohieu='334'"
           End If
@@ -2546,12 +2547,12 @@ H7:
         Loop
         If rs.recordCount > 0 Then
          TK.InitTaikhoanSohieu "3385"
-           If TK.maSo > 0 Then GoTo H8
+           If TK.MaSo > 0 Then GoTo H8
             ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC,TK_ID2) VALUES (14014,'3385',2,'" + ABCtoVNI("Ph¶i tr¶ vÒ cæ phÇn ho¸") + "',3,1,96,79,14014,1310)"
            End If
 H8:
         TK.InitTaikhoanSohieu "3386"
-           If TK.maSo > 0 Then GoTo H9
+           If TK.MaSo > 0 Then GoTo H9
              ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC,TK_ID2) VALUES (14015,'3386',2,'" + ABCtoVNI("NhËt ký quü, ký c­îc ng¾n h¹n") + "',3,1,96,79,14015,1310)"
         
 H9:
@@ -2562,7 +2563,7 @@ H9:
         Loop
         If rs.recordCount = 0 Then
         TK.InitTaikhoanSohieu "347"
-           If TK.maSo > 0 Then GoTo H10
+           If TK.MaSo > 0 Then GoTo H10
           ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14016,'347',1,'" + ABCtoVNI("ThuÕ thu nhËp ho¶n l¹i ph¶i tr¶") + "',3,1,79,0,14016)"
         End If
         frmXuly.Gau.Value = 12
@@ -2573,7 +2574,7 @@ H10:
         Loop
         If rs.recordCount = 0 Then
          TK.InitTaikhoanSohieu "351"
-           If TK.maSo > 0 Then GoTo H11
+           If TK.MaSo > 0 Then GoTo H11
           ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14017,'351',1,'" + ABCtoVNI("Quü dù phßng trî cÊp mÊt viÖc") + "',3,1,79,0,14017)"
         End If
 H11:
@@ -2583,7 +2584,7 @@ H11:
         Loop
         If rs.recordCount = 0 Then
           TK.InitTaikhoanSohieu "352"
-           If TK.maSo > 0 Then GoTo H12
+           If TK.MaSo > 0 Then GoTo H12
           ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14018,'352',1,'" + ABCtoVNI("Dù phßng ph¶i tr¶") + "',3,1,79,0,14018)"
          End If
 H12:
@@ -2594,7 +2595,7 @@ H12:
         Loop
         If rs.recordCount <> 0 Then
           TK.InitTaikhoanSohieu "4118"
-           If TK.maSo > 0 Then GoTo H13
+           If TK.MaSo > 0 Then GoTo H13
              ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14019,'4118',2,'" + ABCtoVNI("Vèn kh¸c") + "',4,1,117,105,14019)"
         End If
         frmXuly.Gau.Value = 13
@@ -2606,28 +2607,28 @@ H13:
         Loop
         If rs.recordCount <> 0 Then
           TK.InitTaikhoanSohieu "411101"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='411101'"
            End If
              TK.InitTaikhoanSohieu "411102"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='411102'"
                
            End If
              TK.InitTaikhoanSohieu "411201"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='411201'"
            End If
              TK.InitTaikhoanSohieu "411202"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
              ExecuteSQL5 "Delete * from HethongTK where Sohieu='411202'"
            End If
              TK.InitTaikhoanSohieu "4111"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
              ExecuteSQL5 "Update HethongTK set ten='Voán ñaàu tö cuûa chuû sôû höõu', MaTC =0  where sohieu='4111'"
            End If
            TK.InitTaikhoanSohieu "4112"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
              ExecuteSQL5 "Update HethongTK set ten='Thaëng dö voán coå phaàn', MaTC = 0  where sohieu='4112'"
            End If
         End If
@@ -2639,11 +2640,11 @@ H13:
         Loop
         If rs.recordCount <> 0 Then
           TK.InitTaikhoanSohieu "4121"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='4121'"
            End If
            TK.InitTaikhoanSohieu "4122"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='4122'"
            End If
              ExecuteSQL5 "Update HethongTK set TKcon=1 where sohieu='412'"
@@ -2655,7 +2656,7 @@ H13:
         Loop
         If rs.recordCount <> 0 Then
           TK.InitTaikhoanSohieu "4133"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='4133'"
            End If
         End If
@@ -2666,11 +2667,11 @@ H13:
         Loop
         If rs.recordCount <> 0 Then
            TK.InitTaikhoanSohieu "4141"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='4141'"
            End If
            TK.InitTaikhoanSohieu "4142"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='4142'"
            End If
            ExecuteSQL5 "Update HethongTK set TKcon=1 where sohieu='414'"
@@ -2683,11 +2684,11 @@ H13:
         Loop
         If rs.recordCount <> 0 Then
            TK.InitTaikhoanSohieu "416"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='416'"
            End If
            TK.InitTaikhoanSohieu "417"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
                ExecuteSQL5 "Delete * from HethongTK where Sohieu='417'"
            End If
         End If
@@ -2698,7 +2699,7 @@ H13:
         Loop
         If rs.recordCount = 0 Then
             TK.InitTaikhoanSohieu "418"
-           If TK.maSo > 0 Then GoTo H14
+           If TK.MaSo > 0 Then GoTo H14
             ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14020,'418',1,'" + ABCtoVNI("C¸c quü kh¸c thuéc vèn chñ së h÷u") + "',4,1,0,0,14020)"
          End If
          frmXuly.Gau.Value = 16
@@ -2710,7 +2711,7 @@ H14:
         Loop
         If rs.recordCount = 0 Then
             TK.InitTaikhoanSohieu "419"
-           If TK.maSo > 0 Then GoTo H15
+           If TK.MaSo > 0 Then GoTo H15
             ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TKCha1, MaTC) VALUES (14021,'419',1,'" + ABCtoVNI("Cæ phiÕu quü") + "',4,1,0,0,14021)"
          End If
     
@@ -2733,7 +2734,7 @@ H15:
         Loop
         If rs.recordCount <> 0 Then
             TK.InitTaikhoanSohieu "4314"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='4314'"
            End If
         End If
@@ -2744,11 +2745,11 @@ H15:
         Loop
         If rs.recordCount <> 0 Then
             TK.InitTaikhoanSohieu "4411"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='4411'"
            End If
             TK.InitTaikhoanSohieu "4412"
-           If TK.maSo > 0 Then
+           If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='4412'"
            End If
            ExecuteSQL5 "Update HethongTK set TKcon=1 where sohieu='441'"
@@ -2761,7 +2762,7 @@ H15:
         Loop
         If rs.recordCount <> 0 Then
             TK.InitTaikhoanSohieu "451"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='451'"
            End If
         End If
@@ -2773,15 +2774,15 @@ H15:
          Loop
           If rs.recordCount <> 0 Then
             TK.InitTaikhoanSohieu "5211"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='5211'"
            End If
             TK.InitTaikhoanSohieu "5212"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='5212'"
            End If
             TK.InitTaikhoanSohieu "5213"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='5213'"
            End If
              ExecuteSQL5 "Update HethongTK set TKcon=1 where sohieu='521'"
@@ -2802,11 +2803,11 @@ H15:
         Loop
         If rs.recordCount <> 0 Then
           TK.InitTaikhoanSohieu "6237"
-            If TK.maSo > 0 Then GoTo H16
+            If TK.MaSo > 0 Then GoTo H16
             ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TK_ID,TKCha1, MaTC) VALUES (14022,'6237',2,'" + ABCtoVNI("Chi phÝ dÞch vô mua ngoµi") + "',6,-1,5126,3010,137,14022)"
 H16:
             TK.InitTaikhoanSohieu "6238"
-            If TK.maSo > 0 Then GoTo H17
+            If TK.MaSo > 0 Then GoTo H17
             ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TK_ID,TKCha1, MaTC) VALUES (14023,'6238',2,'" + ABCtoVNI("Chi phÝ b»ng tiÒn kh¸c") + "',6,-1,5126,3010,137,14023)"
        End If
 H17:
@@ -2817,7 +2818,7 @@ H17:
         Loop
         If rs.recordCount <> 0 Then
            TK.InitTaikhoanSohieu "63501"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
             '  ExecuteSQL5 "Delete * from HethongTK where Sohieu='63501'"
            End If
           ExecuteSQL5 "Update HethongTK set TKcon=1 where sohieu='635'"
@@ -2829,7 +2830,7 @@ H17:
         Loop
         If rs.recordCount = 0 Then
            TK.InitTaikhoanSohieu "821"
-            If TK.maSo > 0 Then GoTo h18
+            If TK.MaSo > 0 Then GoTo h18
              ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TK_ID,TKCha1, MaTC) VALUES (14024,'821',1,'" + ABCtoVNI("Chi phÝ thuÕ thu nhËp doanh nghiÖp") + "',8,-1,0,0,0,1024)"
         End If
         frmXuly.Gau.Value = 20
@@ -2841,11 +2842,11 @@ h18:
         Loop
         If rs.recordCount > 0 Then
            TK.InitTaikhoanSohieu "8211"
-            If TK.maSo > 0 Then GoTo H19
+            If TK.MaSo > 0 Then GoTo H19
              ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TK_ID,TKCha1, MaTC) VALUES (14025,'8211',2,'" + ABCtoVNI("Chi phÝ thuÕ TNDN hiÖn hµnh") + "',8,-1,0,0,0,14025)"
 H19:
             TK.InitTaikhoanSohieu "8212"
-            If TK.maSo > 0 Then GoTo h20
+            If TK.MaSo > 0 Then GoTo h20
              ExecuteSQL5 "INSERT INTO HethongTK (MaSo,SoHieu,Cap,Ten,Loai,Kieu,TkCha0,TK_ID,TKCha1, MaTC) VALUES (14026,'8212',2,'" + ABCtoVNI("Chi phÝ thuÕ TNDN ho·n l¹i") + "',8,-1,0,0,0,14026)"
 
         End If
@@ -2857,11 +2858,11 @@ h20:
         Loop
         If rs.recordCount > 0 Then
            TK.InitTaikhoanSohieu "0081"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='0081'"
            End If
            TK.InitTaikhoanSohieu "0082"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='0082'"
               
            End If
@@ -2875,7 +2876,7 @@ h20:
         frmXuly.Gau.Value = 21
         If rs.recordCount > 0 Then
            TK.InitTaikhoanSohieu "00701"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='00701'"
            End If
             ExecuteSQL5 "Update HethongTK set TKcon=1 where sohieu='007'"
@@ -2887,7 +2888,7 @@ h20:
         Loop
         If rs.recordCount > 0 Then
             TK.InitTaikhoanSohieu "009"
-            If TK.maSo > 0 Then
+            If TK.MaSo > 0 Then
               ExecuteSQL5 "Delete * from HethongTK where Sohieu='009'"
            End If
         End If
@@ -2925,16 +2926,16 @@ End Function
 Private Sub ChuyenCTTKCap1(sh1 As String, sh2 As String)
     Dim TK As New ClsTaikhoan
     TK.InitTaikhoanSohieu sh1
-    If TK.maSo = 0 Or TK.tkcon = 0 Then Exit Sub
+    If TK.MaSo = 0 Or TK.tkcon = 0 Then Exit Sub
     TK.InitTaikhoanSohieu sh2
-    If TK.maSo = 0 Then Exit Sub
+    If TK.MaSo = 0 Then Exit Sub
     ExecuteSQL5 "UPDATE HethongTK SET TKCon=1 WHERE SoHieu='" + sh2 + "'"
     ExecuteSQL5 "UPDATE HethongTK SET SoHieu='" + sh2 + "'+RIGHT(SoHieu,Len(Sohieu)-3),Loai=" + CStr(TK.loai) + ",MaTC=" + CStr(TK.MaTC) + " WHERE Cap>1 AND SoHieu LIKE '" + sh1 + "*'"
-    ExecuteSQL5 "UPDATE HethongTK SET TKCha0=" + CStr(TK.maSo) + ",TKCha1=" + CStr(TK.TkCha0) + " WHERE Cap=2 AND SoHieu LIKE '" + sh2 + "*'"
-    ExecuteSQL5 "UPDATE HethongTK SET TKCha1=" + CStr(TK.maSo) + ",TKCha2=" + CStr(TK.TkCha0) + " WHERE Cap=3 AND SoHieu LIKE '" + sh2 + "*'"
-    ExecuteSQL5 "UPDATE HethongTK SET TKCha2=" + CStr(TK.maSo) + ",TKCha3=" + CStr(TK.TkCha0) + " WHERE Cap=4 AND SoHieu LIKE '" + sh2 + "*'"
-    ExecuteSQL5 "UPDATE HethongTK SET TKCha3=" + CStr(TK.maSo) + ",TKCha4=" + CStr(TK.TkCha0) + " WHERE Cap=5 AND SoHieu LIKE '" + sh2 + "*'"
-    ExecuteSQL5 "UPDATE HethongTK SET TKCha4=" + CStr(TK.maSo) + ",TKCha5=" + CStr(TK.TkCha0) + " WHERE Cap=6 AND SoHieu LIKE '" + sh2 + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TKCha0=" + CStr(TK.MaSo) + ",TKCha1=" + CStr(TK.TkCha0) + " WHERE Cap=2 AND SoHieu LIKE '" + sh2 + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TKCha1=" + CStr(TK.MaSo) + ",TKCha2=" + CStr(TK.TkCha0) + " WHERE Cap=3 AND SoHieu LIKE '" + sh2 + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TKCha2=" + CStr(TK.MaSo) + ",TKCha3=" + CStr(TK.TkCha0) + " WHERE Cap=4 AND SoHieu LIKE '" + sh2 + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TKCha3=" + CStr(TK.MaSo) + ",TKCha4=" + CStr(TK.TkCha0) + " WHERE Cap=5 AND SoHieu LIKE '" + sh2 + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TKCha4=" + CStr(TK.MaSo) + ",TKCha5=" + CStr(TK.TkCha0) + " WHERE Cap=6 AND SoHieu LIKE '" + sh2 + "*'"
     Set TK = Nothing
 End Sub
 
@@ -3009,7 +3010,7 @@ Public Sub PhanBoCP3(tdau As Integer, tcuoi As Integer, tc As Integer, shtk As S
         Else
             tongcp = CP - tongpb
         End If
-        ExecuteSQL5 "UPDATE TP154 SET " + f + CStr(tcuoi) + "=" + DoiDau(tongcp) + " WHERE MaSo=" + CStr(rsct!maSo)
+        ExecuteSQL5 "UPDATE TP154 SET " + f + CStr(tcuoi) + "=" + DoiDau(tongcp) + " WHERE MaSo=" + CStr(rsct!MaSo)
         rsct.MoveNext
     Loop
     rsct.Close
@@ -3058,7 +3059,7 @@ Public Sub PhanBoCP64(tdau As Integer, tcuoi As Integer, tc As Integer, shtk As 
         Else
             tongcp = CP - tongpb
         End If
-        ExecuteSQL5 "UPDATE TP154 SET " + f + CStr(tcuoi) + "=" + DoiDau(tongcp) + " WHERE MaSo=" + CStr(rsct!maSo)
+        ExecuteSQL5 "UPDATE TP154 SET " + f + CStr(tcuoi) + "=" + DoiDau(tongcp) + " WHERE MaSo=" + CStr(rsct!MaSo)
         rsct.MoveNext
     Loop
 End Sub
@@ -3370,7 +3371,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
             For i = 1 To 10
                 If Len(rs_cdts.Fields("ShTK" + CStr(i))) > 0 Then
                     TK.InitTaikhoanSohieu rs_cdts.Fields("ShTK" + CStr(i))
-                    If TK.maSo > 0 Then
+                    If TK.MaSo > 0 Then
                         TK.SoDuTK ThangTruoc(tdau), dn1, dc1, nt
                         TK.SoDuTK tcuoi, dn2, dc2, nt
                         
@@ -3396,7 +3397,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
                     End If
                 End If
             Next
-            ExecuteSQL5 "UPDATE Cdts SET DauNam = " + DoiDau(SoDK) + ", CuoiKy=" + DoiDau(sodu) + " WHERE MaSo=" + CStr(rs_cdts!maSo)
+            ExecuteSQL5 "UPDATE Cdts SET DauNam = " + DoiDau(SoDK) + ", CuoiKy=" + DoiDau(sodu) + " WHERE MaSo=" + CStr(rs_cdts!MaSo)
             rs_cdts.MoveNext
         Loop
         rs_cdts.Close
@@ -3471,7 +3472,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
                     sodu = sodu - rs_cdts!CCo3
                 End If
             End If
-            ExecuteSQL5 "UPDATE Cdts SET DauNam = " + DoiDau(SoDK) + ", CuoiKy=" + DoiDau(sodu) + " WHERE MaSo=" + CStr(rs_cdts!maSo)
+            ExecuteSQL5 "UPDATE Cdts SET DauNam = " + DoiDau(SoDK) + ", CuoiKy=" + DoiDau(sodu) + " WHERE MaSo=" + CStr(rs_cdts!MaSo)
             'If GauGe.Value < GauGe.Max - 1 Then GauGe.Value = GauGe.Value + 1
             rs_cdts.MovePrevious
         Loop
@@ -3494,8 +3495,8 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
     ' Cong don
     Set rs_cdts = DBKetoan.OpenRecordset("SELECT MaSo FROM CdTs WHERE CoChiTiet=1 ORDER BY MaSo DESC", dbOpenSnapshot, dbForwardOnly)
     Do While Not rs_cdts.EOF
-        Set rs = DBKetoan.OpenRecordset("SELECT SUM(DauNam) as dn,SUM(CuoiKy) as ck FROM CdTs WHERE NhomCha=" + CStr(rs_cdts!maSo), dbOpenSnapshot)
-        ExecuteSQL5 "UPDATE Cdts SET DauNam=" + DoiDau(rs!dn) + ",CuoiKy=" + DoiDau(rs!CK) + " WHERE MaSo=" + CStr(rs_cdts!maSo)
+        Set rs = DBKetoan.OpenRecordset("SELECT SUM(DauNam) as dn,SUM(CuoiKy) as ck FROM CdTs WHERE NhomCha=" + CStr(rs_cdts!MaSo), dbOpenSnapshot)
+        ExecuteSQL5 "UPDATE Cdts SET DauNam=" + DoiDau(rs!dn) + ",CuoiKy=" + DoiDau(rs!CK) + " WHERE MaSo=" + CStr(rs_cdts!MaSo)
         rs.Close
         'If GauGe.Value < GauGe.Max - 1 Then GauGe.Value = GauGe.Value + 1
         rs_cdts.MoveNext
@@ -3603,7 +3604,7 @@ Public Sub InKqkd(tdau As Integer, tcuoi As Integer, cap As Integer, nn As Integ
             
             Set rs = DBKetoan.OpenRecordset("SELECT * FROM KQKD911 WHERE MaTK=0 AND MaSo > 10", dbOpenSnapshot)
             Do While Not rs.EOF
-                ExecuteSQL5 "INSERT INTO KQKD911 (Ma, MaSo, Ten, TenE, SHTKNo, SHTKCo, MaTK, Cap, TongHop, MaSoCha) SELECT " + CStr(rs!ma * 100000) + "+MaSo, " + CStr(rs!maSo) + " AS MS, Space(4*(Cap-1))+Ten, Space(4*(Cap-1))+TenE, IIF(LEFT('" + rs!shtkno + "',3)='911',SoHieu,'" + rs!shtkno + "'), IIF(LEFT('" + rs!shtkco + "',3)='911',SoHieu,'" + rs!shtkco + "'), MaSo, Cap," + CStr(rs!TongHop) + "," + CStr(rs!MaSoCha) + " FROM HethongTK WHERE SoHieu LIKE '911*' AND Cap>1 AND Cap<=" + CStr(cap)
+                ExecuteSQL5 "INSERT INTO KQKD911 (Ma, MaSo, Ten, TenE, SHTKNo, SHTKCo, MaTK, Cap, TongHop, MaSoCha) SELECT " + CStr(rs!ma * 100000) + "+MaSo, " + CStr(rs!MaSo) + " AS MS, Space(4*(Cap-1))+Ten, Space(4*(Cap-1))+TenE, IIF(LEFT('" + rs!shtkno + "',3)='911',SoHieu,'" + rs!shtkno + "'), IIF(LEFT('" + rs!shtkco + "',3)='911',SoHieu,'" + rs!shtkco + "'), MaSo, Cap," + CStr(rs!TongHop) + "," + CStr(rs!MaSoCha) + " FROM HethongTK WHERE SoHieu LIKE '911*' AND Cap>1 AND Cap<=" + CStr(cap)
                 rs.MoveNext
             Loop
             rs.Close
@@ -3682,7 +3683,7 @@ Public Sub XemBaoCao(sh As String, ndau As Date, ncuoi As Date)
 
     Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     Do While Not rs.EOF
-            ExecuteSQL5 "UPDATE KQKD BaoCao KyTruoc=" + DoiDau(IIf(IsNull(rs!kqua1), 0, rs!kqua1)) + ", KyNay = " + DoiDau(IIf(IsNull(rs!kqua2), 0, rs!kqua2)) + " WHERE MaSo=" + CStr(rs!maSo)
+            ExecuteSQL5 "UPDATE KQKD BaoCao KyTruoc=" + DoiDau(IIf(IsNull(rs!kqua1), 0, rs!kqua1)) + ", KyNay = " + DoiDau(IIf(IsNull(rs!kqua2), 0, rs!kqua2)) + " WHERE MaSo=" + CStr(rs!MaSo)
             rs.MoveNext
     Loop
     
@@ -3692,7 +3693,7 @@ Public Sub XemBaoCao(sh As String, ndau As Date, ncuoi As Date)
         
     Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     Do While Not rs.EOF
-            ExecuteSQL5 "UPDATE BaoCao SET KyTruoc = KyTruoc - " + DoiDau(IIf(IsNull(rs!kqua1), 0, rs!kqua1)) + ", KyNay = KyNay - " + DoiDau(IIf(IsNull(rs!kqua2), 0, rs!kqua2)) + " WHERE MaSo=" + CStr(rs!maSo)
+            ExecuteSQL5 "UPDATE BaoCao SET KyTruoc = KyTruoc - " + DoiDau(IIf(IsNull(rs!kqua1), 0, rs!kqua1)) + ", KyNay = KyNay - " + DoiDau(IIf(IsNull(rs!kqua2), 0, rs!kqua2)) + " WHERE MaSo=" + CStr(rs!MaSo)
             rs.MoveNext
     Loop
             
@@ -3716,7 +3717,7 @@ Public Sub KtraCongNo()
     Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     Do While Not rs.EOF
         m = SelectSQL("SELECT MaCT AS F1 FROM ChungTu WHERE ThangCT=" + CStr(rs!T1) + " AND SoHieu='" + rs!sh1 + "' AND ((MaKH>0 AND MaKH=" + CStr(rs!MaKHC) + ") OR (MaKHC>0 AND MaKHC=" + CStr(rs!makh) + "))")
-        ExecuteSQL5 "UPDATE ChungTu SET CT_ID=" + CStr(-m) + " WHERE MaSo=" + CStr(rs!maSo)
+        ExecuteSQL5 "UPDATE ChungTu SET CT_ID=" + CStr(-m) + " WHERE MaSo=" + CStr(rs!MaSo)
         rs.MoveNext
     Loop
     rs.Close
@@ -3876,8 +3877,8 @@ Public Sub CongDDVT(FrmDB As Database, masocu As Long, tencn As String, tachsh A
             ExecuteSQL5 "INSERT INTO KhoHang (MaSo,TenKho) VALUES (" + CStr(Lng_MaxValue("MaSo", "TenKho") + 1) + ",'" + sh + "')"
             mcha = SelectSQL("SELECT MaSo AS F1 FROM KhoHang WHERE TenKho='" + sh + "'")
         End If
-        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaKho=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaKho=" + CStr(rs!maSo) + " AND MaLoai<>4 AND MaKho>0 AND MaSo>" + CStr(masocu)
-        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaNguon=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaNguon=" + CStr(rs!maSo) + " AND MaLoai=4 AND MaSo>" + CStr(masocu)
+        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaKho=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaKho=" + CStr(rs!MaSo) + " AND MaLoai<>4 AND MaKho>0 AND MaSo>" + CStr(masocu)
+        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaNguon=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaNguon=" + CStr(rs!MaSo) + " AND MaLoai=4 AND MaSo>" + CStr(masocu)
         rs.MoveNext
     Loop
     
@@ -3898,7 +3899,7 @@ Public Sub CongDDVT(FrmDB As Database, masocu As Long, tencn As String, tachsh A
             ExecuteSQL5 "INSERT INTO NguonNhapXuat (MaSo,SoHieu,DienGiai) VALUES (" + CStr(Lng_MaxValue("MaSo", "NguonNhapXuat") + 1) + ",'" + sh + "','" + rs!diengiai + "-" + CStr(i) + "')"
             mcha = SoHieu2MaSo(sh, "NguonNhapXuat")
         End If
-        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaNguon=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaNguon=" + CStr(rs!maSo) + " AND MaLoai<>4 AND MaNguon>0 AND MaSo>" + CStr(masocu)
+        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaNguon=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaNguon=" + CStr(rs!MaSo) + " AND MaLoai<>4 AND MaNguon>0 AND MaSo>" + CStr(masocu)
         rs.MoveNext
     Loop
     
@@ -3943,7 +3944,7 @@ Public Sub CongDDVT(FrmDB As Database, masocu As Long, tencn As String, tachsh A
                 + ",'" + sh + "','" + rs!TenVattu + "','" + CStr(rs!DonVi) + "'," + DoiDau(rs!TonMin) + "," + DoiDau(rs!TonMax) + "," + DoiDau(rs!GiaDuPhong) + "," + DoiDau(rs!GiaHT) + "," + CStr(rs!Dvt2) + ",'" + rs!DonVi2 + "'," + DoiDau(rs!TyLeQD) + ",'" + rs!GhiChu + "')"
             mcha = SoHieu2MaSo(sh, "Vattu")
         End If
-        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaVattu=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaVattu=" + CStr(rs!maSo) + " AND MaSo>" + CStr(masocu)
+        If cnct Then ExecuteSQL5 "UPDATE ChungTu SET MaVattu=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaVattu=" + CStr(rs!MaSo) + " AND MaSo>" + CStr(masocu)
         rs.MoveNext
     Loop
     rs.Close
@@ -3997,9 +3998,9 @@ Public Sub CongDDCN(FrmDB As Database, masocu As Long, tachsh As Integer, cnct A
             mcha = SoHieu2MaSo(sh, "KhachHang")
         End If
         If cnct Then
-            ExecuteSQL5 "UPDATE ChungTu SET MaKH=" + CStr(mcha) + ", U=1 WHERE U=0 AND MaKH=" + CStr(rs!maSo) + " AND MaSo>" + CStr(masocu)
-            ExecuteSQL5 "UPDATE ChungTu SET MaKHC=" + CStr(mcha) + ", U2=1 WHERE U2=0 AND MaKHC=" + CStr(rs!maSo) + " AND MaSo>" + CStr(masocu)
-            ExecuteSQL5 "UPDATE HoaDon SET MaKhachHang=" + CStr(mcha) + " WHERE MaKH1=" + CStr(rs!maSo) + " AND MaSo>" + CStr(masocu)
+            ExecuteSQL5 "UPDATE ChungTu SET MaKH=" + CStr(mcha) + ", U=1 WHERE U=0 AND MaKH=" + CStr(rs!MaSo) + " AND MaSo>" + CStr(masocu)
+            ExecuteSQL5 "UPDATE ChungTu SET MaKHC=" + CStr(mcha) + ", U2=1 WHERE U2=0 AND MaKHC=" + CStr(rs!MaSo) + " AND MaSo>" + CStr(masocu)
+            ExecuteSQL5 "UPDATE HoaDon SET MaKhachHang=" + CStr(mcha) + " WHERE MaKH1=" + CStr(rs!MaSo) + " AND MaSo>" + CStr(masocu)
         End If
         rs.MoveNext
     Loop
@@ -4028,8 +4029,8 @@ Public Sub CongDDTS(FrmDB As Database, mactcu As Long, tencn As String, tachsh A
             mcha = SoHieu2MaSo(sh, "LoaiChungTu")
         End If
         If cnct Then
-            ExecuteSQL5 "UPDATE CTTaiSan SET MaLoai=" + CStr(mcha) + ", U=1 WHERE U=0 AND ML=" + CStr(rs!maSo) + " AND MaCTKT>" + CStr(mactcu)
-            ExecuteSQL5 "UPDATE CTTaiSan SET MaNhom=" + CStr(mcha) + ", U2=1 WHERE U2=0 AND MN=" + CStr(rs!maSo) + " AND MaCTKT>" + CStr(mactcu)
+            ExecuteSQL5 "UPDATE CTTaiSan SET MaLoai=" + CStr(mcha) + ", U=1 WHERE U=0 AND ML=" + CStr(rs!MaSo) + " AND MaCTKT>" + CStr(mactcu)
+            ExecuteSQL5 "UPDATE CTTaiSan SET MaNhom=" + CStr(mcha) + ", U2=1 WHERE U2=0 AND MN=" + CStr(rs!MaSo) + " AND MaCTKT>" + CStr(mactcu)
         End If
         rs.MoveNext
     Loop
@@ -4111,7 +4112,7 @@ Public Sub CongDDTS(FrmDB As Database, mactcu As Long, tencn As String, tachsh A
                 + CStr(rs!NamSX) + "," + CStr(rs!NamSD) + "," + CStr(SoHieu2MaSo(rs!SHT, "LoaiTaiSan")) + "," + CStr(SoHieu2MaSo(rs!SHL, "LoaiTaiSan")) _
                 + "," + CStr(SoHieu2MaSo(IIf(IsNull(rs!SHN), "", rs!SHN), "LoaiTaiSan")) + "," + CStr(rs!ThangTang) + "," + CStr(rs!ThangGiam) + "," + CStr(rs!NamKH) + ")"
             mcha = SoHieu2MaSo(sh, "TaiSan")
-            Set rs2 = FrmDB.OpenRecordset("SELECT CTTaiSan.*,LoaiChungTu.SoHieu AS SHL,LCT.SoHieu AS SHN FROM (CTTaiSan INNER JOIN LoaiChungTu ON CTTaiSan.MaLoai=LoaiChungTu.MaSo) INNER JOIN LoaiChungTu AS LCT ON CTTaiSan.MaNhom=LCT.MaSo WHERE (Thang=0) AND MaTS=" + CStr(rs!maSo), dbOpenSnapshot)
+            Set rs2 = FrmDB.OpenRecordset("SELECT CTTaiSan.*,LoaiChungTu.SoHieu AS SHL,LCT.SoHieu AS SHN FROM (CTTaiSan INNER JOIN LoaiChungTu ON CTTaiSan.MaLoai=LoaiChungTu.MaSo) INNER JOIN LoaiChungTu AS LCT ON CTTaiSan.MaNhom=LCT.MaSo WHERE (Thang=0) AND MaTS=" + CStr(rs!MaSo), dbOpenSnapshot)
             If rs2.recordCount > 0 Then
                 ExecuteSQL5 "INSERT INTO CTTaiSan (MaSo,SoHieu, Thang, VaoSo, NgayGhi, DienGiai, " _
                     & "MaLoai, MaNhom, MaTS, NG_NS, NG_TBS, NG_CNK, NG_TD, " _
@@ -4122,7 +4123,7 @@ Public Sub CongDDTS(FrmDB As Database, mactcu As Long, tencn As String, tachsh A
                     + DoiDau(rs2!CL_NS) + "," + DoiDau(rs2!CL_TBS) + "," + DoiDau(rs2!CL_CNK) + "," + DoiDau(rs2!CL_TD) + ")"
             End If
             rs2.Close
-            Set rs2 = FrmDB.OpenRecordset("SELECT ThongSo.*,HethongTK.SoHieu AS SHTK,DTQLy.Ten AS QL,TinhTrang.Ten AS TT FROM ((ThongSo INNER JOIN HethongTK ON ThongSo.MaDTSD=HethongTK.MaSo) INNER JOIN DTQLy ON ThongSo.MaDTQL=DTQLy.MaSo) INNER JOIN TinhTrang ON ThongSo.MaTTSD=TinhTrang.MaSo WHERE MaTS=" + CStr(rs!maSo), dbOpenSnapshot, dbForwardOnly)
+            Set rs2 = FrmDB.OpenRecordset("SELECT ThongSo.*,HethongTK.SoHieu AS SHTK,DTQLy.Ten AS QL,TinhTrang.Ten AS TT FROM ((ThongSo INNER JOIN HethongTK ON ThongSo.MaDTSD=HethongTK.MaSo) INNER JOIN DTQLy ON ThongSo.MaDTQL=DTQLy.MaSo) INNER JOIN TinhTrang ON ThongSo.MaTTSD=TinhTrang.MaSo WHERE MaTS=" + CStr(rs!MaSo), dbOpenSnapshot, dbForwardOnly)
             Do While Not rs2.EOF
                 ExecuteSQL5 "INSERT INTO ThongSo ( MaSo, MaTS, Thang, NG_NS, NG_TBS, NG_CNK, NG_TD, CL_NS, CL_TBS, CL_CNK, CL_TD, " _
                     & "KH_NS, KH_TBS, KH_CNK, KH_TD, MaDTQL, MaDTSD, MaTTSD ) " _
@@ -4132,7 +4133,7 @@ Public Sub CongDDTS(FrmDB As Database, mactcu As Long, tencn As String, tachsh A
                 rs2.MoveNext
             Loop
         End If
-        If cnct Then ExecuteSQL5 "UPDATE CTTaiSan SET MaTS=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaTS=" + CStr(rs!maSo) + " AND MaCTKT>" + CStr(mactcu)
+        If cnct Then ExecuteSQL5 "UPDATE CTTaiSan SET MaTS=" + CStr(mcha) + ",U=1 WHERE U=0 AND MaTS=" + CStr(rs!MaSo) + " AND MaCTKT>" + CStr(mactcu)
         rs.MoveNext
     Loop
     
@@ -4304,7 +4305,7 @@ Public Sub XuLyChungtu()
     
     Set rs_chungtu = DBKetoan.OpenRecordset("SELECT MaSo FROM ChungTu WHERE XuLy=1 ORDER BY MaCT, MaSo", dbOpenSnapshot, dbForwardOnly)
     Do While Not rs_chungtu.EOF
-        chungtu.InitChungtu rs_chungtu!maSo, 0, "", 0, n1, n2, 0, 0, "", 0, 0, 0, 0, 0, 0, "", 0, "", "", "", ""
+        chungtu.InitChungtu rs_chungtu!MaSo, 0, "", 0, n1, n2, 0, 0, "", 0, 0, 0, 0, 0, 0, "", 0, "", "", "", ""
         chungtu.XuLyCT
         rs_chungtu.MoveNext
     Loop
