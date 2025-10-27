@@ -322,6 +322,56 @@ Public Sub CreateLicense()
 
     End If
 End Sub
+Public Sub CheckAndCreateToKhaiThueTable()
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim tableExists As Boolean
+    Dim tableName As String
+
+    tableName = "ToKhaiThue"    ' Tên b?ng
+    tableExists = False
+
+    ' Ki?m tra t?n t?i b?ng
+    For Each tdf In DBKetoan.TableDefs
+        If tdf.Name = tableName Then
+            tableExists = True
+            Exit For
+        End If
+    Next tdf
+
+    If Not tableExists Then
+        ' T?o b?ng n?u chua t?n t?i
+        Set tdf = DBKetoan.CreateTableDef(tableName)
+
+        ' T?o các tru?ng s? t? N11 d?n N43
+        Dim i As Integer
+        For i = 11 To 43
+            Set fld = tdf.CreateField("N" & i, dbDouble)
+            tdf.Fields.Append fld
+        Next i
+
+        ' Thêm b?ng vào co s? d? li?u
+        DBKetoan.TableDefs.Append tdf
+        
+        Dim sqlInsert As String
+        ' Chèn m?t b?n ghi m?i v?i t?t c? các tru?ng = 0
+        sqlInsert = "INSERT INTO ToKhaiThue ("
+        For i = 11 To 43
+            sqlInsert = sqlInsert & "N" & i & ", "
+        Next i
+        sqlInsert = Left(sqlInsert, Len(sqlInsert) - 2) ' Lo?i b? d?u ph?y cu?i
+        sqlInsert = sqlInsert & ") VALUES ("
+        For i = 11 To 43
+            sqlInsert = sqlInsert & "0, "
+        Next i
+        sqlInsert = Left(sqlInsert, Len(sqlInsert) - 2) ' Lo?i b? d?u ph?y cu?i
+        sqlInsert = sqlInsert & ");"
+        
+        DBKetoan.Execute sqlInsert
+    Else
+        'MsgBox "B?ng ToKhaiThue dã t?n t?i!"
+    End If
+End Sub
 Public Sub CheckAndCreateTable()
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
@@ -481,6 +531,7 @@ Private Sub Form_Activate()
     Left = frmMain.ScaleWidth * 30 / 100
     Top = frmMain.ScaleHeight * 40 / 100
     CheckAndCreateTable
+    CheckAndCreateToKhaiThueTable
     CreateLicense
     'Kiem tra neu chua co dong nao thi insert dong mac dinh
     Dim countrow As Integer
