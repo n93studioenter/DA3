@@ -24,6 +24,42 @@ Begin VB.Form FrmChungtu
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
+   Begin VB.CommandButton Command15 
+      Caption         =   "Q4"
+      Height          =   255
+      Index           =   3
+      Left            =   1920
+      TabIndex        =   185
+      Top             =   8520
+      Width           =   375
+   End
+   Begin VB.CommandButton Command13 
+      Caption         =   "Q3"
+      Height          =   255
+      Index           =   2
+      Left            =   1440
+      TabIndex        =   184
+      Top             =   8520
+      Width           =   375
+   End
+   Begin VB.CommandButton Command12 
+      Caption         =   "Q2"
+      Height          =   255
+      Index           =   1
+      Left            =   960
+      TabIndex        =   183
+      Top             =   8520
+      Width           =   375
+   End
+   Begin VB.CommandButton Command11 
+      Caption         =   "Q1"
+      Height          =   255
+      Index           =   0
+      Left            =   480
+      TabIndex        =   182
+      Top             =   8520
+      Width           =   375
+   End
    Begin VB.CommandButton Command9 
       Caption         =   "Command9"
       Height          =   375
@@ -45,9 +81,10 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   315
-      Left            =   1800
+      Left            =   13680
       TabIndex        =   180
-      Top             =   8520
+      Top             =   8400
+      Visible         =   0   'False
       Width           =   1815
    End
    Begin VB.TextBox txtchungtu 
@@ -5645,7 +5682,7 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
         End If
     End If
 
-    If IsNull(rs_import!TgTCThue1) Then
+    If IsNull(rs_import!TgTCThue1) Or rs_import!TgTCThue1 = 0 Then
         bakTongtien = rs_import!TgTThue
     Else
         bakTongtien = rs_import!TgTCThue1

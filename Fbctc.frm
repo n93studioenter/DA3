@@ -6875,16 +6875,16 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     Dim sql As String, vr As Double, VV As Double, vvx As Double
     Dim KT As Double, shct As String, Fx As Integer
     Dim dkn As Double, dkc As Double, dknt As Double, TK As New ClsTaikhoan
-    
+
     Fx = IIf(Left(frmMain.LbCty(8).Caption, 2) = "35" Or Left(frmMain.LbCty(3).Caption, 2) = "64", 35, 0)
-    
+
     TK.InitTaikhoanSohieu "33312"
     If TK.tk_id = GTGTKT_ID Then
         sql = "DELETE HoaDon.*  FROM ((HoaDon INNER JOIN ChungTu ON HoaDon.MaSo=ChungTu.MaSo) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo) LEFT JOIN HethongTK AS TK ON ChungTu.MaTKCo=TK.MaSo " _
             & " WHERE (HethongTK.SoHieu LIKE '" + pVATV + "*') AND (TK.SoHieu LIKE '33312*'  OR InStr(ChungTu.GhiChu,'33312')>0) AND HoaDon.Loai=-1"
         ExecuteSQL5 sql
     End If
-    
+
     GauGe.Max = 6
     frmMain.Rpt.Formulas(3) = "Thang = " + CStr(tdau)
     frmMain.Rpt.Formulas(4) = "ThangCuoi = " + CStr(tcuoi)
@@ -6896,24 +6896,45 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     End If
     frmMain.Rpt.Formulas(6) = "MSThue = '" + frmMain.LbCty(8).Caption + "'"
     frmMain.Rpt.Formulas(7) = "SoHieuTK = '" + vatr + "'"
-    
+
     frmMain.Rpt.Formulas(30) = "Quan = '" + frmMain.LbCty(10).Caption + "'"
     frmMain.Rpt.Formulas(31) = "TP = '" + frmMain.LbCty(11).Caption + "'"
     frmMain.Rpt.Formulas(32) = "Tel = '" + frmMain.LbCty(3).Caption + "'"
     frmMain.Rpt.Formulas(33) = "Fax = '" + frmMain.LbCty(4).Caption + "'"
     frmMain.Rpt.Formulas(34) = "Email = '" + frmMain.LbCty(9).Caption + "'"
-    
+
     shct = taikhoan.SHChiTiet()
     vr = SelectSQL("SELECT SUM(ThanhTien) AS F1 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND DC=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "'")
     frmMain.Rpt.Formulas(8) = "DTKCT=" + DoiDau(vr)
-    
+
     GauGe.Value = 1
     frmMain.Rpt.Formulas(23) = "Vat0DT=" + DoiDau(SelectSQL("SELECT Sum(ThanhTien) AS F1,SUM(IIF(TK_ID=" + CStr(GTGTPN_ID) + ",SoPS,-SoPS)) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "' AND TyLe=0", VV))
     frmMain.Rpt.Formulas(24) = "Vat0=" + DoiDau(VV)
     frmMain.Rpt.Formulas(11) = "Vat5DT=" + DoiDau(SelectSQL("SELECT Sum(ThanhTien) AS F1,SUM(IIF(TK_ID=" + CStr(GTGTPN_ID) + ",SoPS,-SoPS)) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "' AND TyLe=5", VV))
     frmMain.Rpt.Formulas(12) = "Vat5=" + DoiDau(VV)
-    frmMain.Rpt.Formulas(13) = "Vat10DT=" + DoiDau(SelectSQL("SELECT Sum(ThanhTien) AS F1,SUM(IIF(TK_ID=" + CStr(GTGTPN_ID) + ",SoPS,-SoPS)) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "' AND TyLe=10", VV))
-    frmMain.Rpt.Formulas(14) = "Vat10=" + DoiDau(VV)
+
+    Dim pl1 As Double
+    Dim pl2 As Double
+    pl1 = DoiDau(SelectSQL("SELECT Sum(ThanhTien) AS F1,SUM(IIF(TK_ID=" + CStr(GTGTPN_ID) + ",SoPS,-SoPS)) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "' AND TyLe=8", VV))
+    pl2 = DoiDau(VV)
+
+    Dim Vat10DT As Double
+    Dim Vat10 As Double
+    Vat10DT = DoiDau(SelectSQL("SELECT Sum(ThanhTien) AS F1,SUM(IIF(TK_ID=" + CStr(GTGTPN_ID) + ",SoPS,-SoPS)) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "' AND TyLe=10", VV))
+    Vat10DT = Vat10DT + pl1
+
+    Vat10 = DoiDau(VV)
+    Vat10 = Vat10 + pl2
+
+    frmMain.Rpt.Formulas(13) = "Vat10DT=" + CStr(Vat10DT)
+    frmMain.Rpt.Formulas(14) = "Vat10=" + CStr(Vat10)
+
+    'frmMain.Rpt.Formulas(13) = "Vat10DT=" + DoiDau(SelectSQL("SELECT Sum(ThanhTien) AS F1,SUM(IIF(TK_ID=" + CStr(GTGTPN_ID) + ",SoPS,-SoPS)) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "' AND TyLe=10", VV))
+    'frmMain.Rpt.Formulas(14) = "Vat10=" + DoiDau(VV)
+
+
+
+
     'Dieu chinh
     sql = "SELECT Sum(ThanhTien) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKHD(1) + " WHERE HoaDon.Loai=1 AND DC=1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "'"
     vr = SelectSQL(sql, VV)
@@ -6924,9 +6945,9 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
         frmMain.Rpt.Formulas(37) = "RaG=" + DoiDau(Abs(vr))
         frmMain.Rpt.Formulas(38) = "RaGV=" + DoiDau(Abs(VV))
     End If
-    
+
     GauGe.Value = 2
-    KT = 0 'SoNKChuaThue(tdau, tcuoi, shct)
+    KT = 0    'SoNKChuaThue(tdau, tcuoi, shct)
     If Len(shct) > 0 Then
         sql = "SELECT SUM(ThanhTien) AS F1 FROM " + ChungTu2TKHD(-1) + " WHERE HoaDon.Loai=-1 AND HD=1 AND DC=0 AND KCT=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "'"
     Else
@@ -6941,11 +6962,11 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     End If
     vvx = SelectSQL(sql, VV) + KT
     frmMain.Rpt.Formulas(19) = "TongVao=" + DoiDau(vvx)
-    
+
     sql = "SELECT SUM(SoPS) AS F1 FROM " + ChungTu2TKNC(0) _
-            & " WHERE (HethongTK.SoHieu LIKE '142*' OR HethongTK.SoHieu LIKE '242*' OR HethongTK.SoHieu LIKE '6*') AND (TK.SoHieu LIKE '" + pVATV + "*') AND RIGHT(TK.SoHieu," + CStr(Len(shct)) + ")='" + shct + "' AND " + WThang("ThangCT", tdau, tcuoi)
+        & " WHERE (HethongTK.SoHieu LIKE '142*' OR HethongTK.SoHieu LIKE '242*' OR HethongTK.SoHieu LIKE '6*') AND (TK.SoHieu LIKE '" + pVATV + "*') AND RIGHT(TK.SoHieu," + CStr(Len(shct)) + ")='" + shct + "' AND " + WThang("ThangCT", tdau, tcuoi)
     frmMain.Rpt.Formulas(17) = "TongVATV=" + DoiDau(VV - SelectSQL(sql))
-    
+
     If TK.tk_id = GTGTKT_ID Then
         SetSQL "MienTru", "SELECT MaCT FROM " + ChungTu2TKNC(-1) + " WHERE (HethongTK.SoHieu LIKE '521*' OR HethongTK.SoHieu LIKE '531*') AND " + WThang("ThangCT", tdau, tcuoi)
         sql = "SELECT SUM(SoPS) AS F1 FROM (" + ChungTu2TKNC(0) + ") LEFT JOIN MienTru ON ChungTu.MaCT=MienTru.MaCT " _
@@ -6987,19 +7008,114 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     vvx = SelectSQL(sql, VV)
     frmMain.Rpt.Formulas(41) = "TS=" + DoiDau(vvx)
     frmMain.Rpt.Formulas(42) = "TSV=" + DoiDau(VV)
-    
+
     KT = DKToKhai(tdau, shct)
     If KT > 0 Then frmMain.Rpt.Formulas(20) = "KyTruoc=" + DoiDau(KT)
-    
+
     sql = "SELECT SUM(SoPS) AS F1 FROM " + ChungTu2TKNC(0) _
         & " WHERE (TK.SoHieu LIKE '" + pVATV + "112*' OR TK.SoHieu LIKE '" + pVATV + "212*') AND RIGHT(TK.SoHieu," + CStr(Len(shct)) + ")='" + shct + "' AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HethongTK.SoHieu LIKE '336*' OR HethongTK.SoHieu LIKE '11*' OR HethongTK.SoHieu LIKE '138*')"
     VV = SelectSQL(sql)
     frmMain.Rpt.Formulas(44) = "HoanTra=" + DoiDau(VV)
-    
+
     RptSetDate NgayCuoiThang(pNamTC, tcuoi), nn
     GauGe.Value = 4
-    
+
     frmMain.Rpt.ReportFileName = "TOKHAI.RPT"
+    Dim NValues(11 To 43) As Double
+
+    If frmMain.Rpt.Formulas(20) <> "" Then
+        NValues(11) = CLng(Replace(frmMain.Rpt.Formulas(20), "KyTruoc=", ""))
+    Else
+        NValues(11) = 0
+    End If
+    Dim formulaValue As String
+
+    ' L?y giá tr? t? frmMain
+    formulaValue = Replace(frmMain.Rpt.Formulas(19), "TongVao=", "")
+    formulaValue = Replace(formulaValue, ",", "")    ' Xóa d?u ph?y
+
+    ' Ki?m tra xem giá tr? có ph?i s? hay không
+
+    NValues(12) = CDbl(Replace(frmMain.Rpt.Formulas(19), "TongVao=", ""))
+    NValues(13) = CDbl(Replace(frmMain.Rpt.Formulas(18), "TongVATx=", ""))
+    NValues(16) = CDbl(Replace(frmMain.Rpt.Formulas(39), "NK=", ""))
+    NValues(17) = CLng(Replace(frmMain.Rpt.Formulas(40), "NKV=", ""))
+    NValues(14) = CDbl(12) - NValues(16)
+    NValues(15) = NValues(13) - NValues(17)
+
+    If frmMain.Rpt.Formulas(35) Like "VaoT*" Then
+        NValues(18) = CLng(Replace(frmMain.Rpt.Formulas(35), "VaoT=", ""))
+        NValues(19) = CLng(Replace(frmMain.Rpt.Formulas(36), "VaoTV=", ""))
+    Else
+        NValues(20) = CLng(Replace(frmMain.Rpt.Formulas(35), "VaoG=", ""))
+        NValues(21) = CLng(Replace(frmMain.Rpt.Formulas(36), "VaoGV=", ""))
+    End If
+    NValues(22) = CLng(Replace(frmMain.Rpt.Formulas(17), "TongVATV=", ""))
+
+    NValues(26) = CLng(Replace(frmMain.Rpt.Formulas(8), "DTKCT=", ""))
+    NValues(29) = CLng(Replace(frmMain.Rpt.Formulas(23), "Vat0DT=", ""))
+    NValues(30) = CLng(Replace(frmMain.Rpt.Formulas(11), "Vat5DT=", ""))
+    NValues(31) = CLng(Replace(frmMain.Rpt.Formulas(12), "Vat5=", ""))
+    NValues(32) = CDbl(Replace(frmMain.Rpt.Formulas(13), "Vat10DT=", ""))
+    NValues(33) = CDbl(Replace(frmMain.Rpt.Formulas(14), "Vat10=", ""))
+
+    'NValues(32) = NValues(32) + pl1
+    'NValues(33) = NValues(33) + pl2
+
+
+    NValues(27) = NValues(29) + NValues(30) + NValues(32)
+    NValues(28) = NValues(31) + NValues(33)
+    NValues(24) = NValues(26) + NValues(27)
+    NValues(25) = NValues(28)
+
+
+    If frmMain.Rpt.Formulas(37) Like "RaT*" Then
+        NValues(34) = CLng(Replace(frmMain.Rpt.Formulas(37), "RaT=", ""))
+        NValues(35) = CLng(Replace(frmMain.Rpt.Formulas(38), "RaTV=", ""))
+    Else
+        NValues(36) = CLng(Replace(frmMain.Rpt.Formulas(37), "RaG=", ""))
+        NValues(37) = CLng(Replace(frmMain.Rpt.Formulas(38), "RaGV=", ""))
+    End If
+
+
+
+    Dim QueryUpdate As String
+    QueryUpdate = "UPDATE ToKhaiThue SET "
+    Dim i As Integer
+    For i = 11 To 43
+        QueryUpdate = QueryUpdate & "N" & i & " = " & NValues(i) & ", "
+    Next i
+
+    ' Lo?i b? d?u ph?y cu?i
+    QueryUpdate = Left(QueryUpdate, Len(QueryUpdate) - 2)
+
+    ExecuteSQL5 QueryUpdate
+
+    Dim result As String
+    If tdau = tcuoi Then
+        result = "T" & tdau
+    End If
+
+    If tdau = 1 And tcuoi = 3 Then
+        result = "Q1"
+    End If
+    If tdau = 4 And tcuoi = 6 Then
+        result = "Q2"
+    End If
+    If tdau = 7 And tcuoi = 9 Then
+        result = "Q3"
+    End If
+    If tdau = 10 And tcuoi = 12 Then
+        result = "Q4"
+    End If
+    Dim URL As String
+
+    ' T?o URL
+    URL = "http://localhost:8081/?path=" & Replace(pDataPath, "\", "/") & "&ky=" & result
+
+    ' M? URL trong trình duy?t
+    Shell "explorer.exe """ & URL & """", vbNormalFocus
+
     Set TK = Nothing
 End Sub
 

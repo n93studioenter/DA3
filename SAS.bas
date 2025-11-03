@@ -447,7 +447,7 @@ End Function
 '====================================================================================================
 
 Public Sub SetSQL(qname As String, sql As String)
-    'Debug.Print Now & ": " & sql
+    Debug.Print Now & ": " & sql
     'sql = "select * from KhachHang"
     AddQuery qname, sql
     On Error GoTo QueryErr

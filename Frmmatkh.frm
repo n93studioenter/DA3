@@ -137,6 +137,56 @@ Public Function GetMacAddress() As String
     End If
     GetMacAddress = sRetVal
 End Function
+Public Sub CheckAndCreateTableThongTinToKhai()
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim tableExists As Boolean
+    Dim tableName As String
+
+    tableName = "tbThongTinToKhai"    ' Thay d?i tên b?ng c?a b?n ? dây
+    tableExists = False
+
+    ' Ki?m tra t?n t?i b?ng
+    For Each tdf In DBKetoan.TableDefs
+        If tdf.Name = tableName Then
+            tableExists = True
+            Exit For
+        End If
+    Next tdf
+
+    If Not tableExists Then
+        ' T?o b?ng n?u chua t?n t?i
+        Set tdf = DBKetoan.CreateTableDef(tableName)
+
+        Set fld = tdf.CreateField("ID", dbLong)
+        fld.Attributes = dbAutoIncrField    ' Thi?t l?p thu?c tính t? d?ng tang
+        tdf.Fields.Append fld
+
+        ' T?o tru?ng Name
+        Set fld = tdf.CreateField("Quy1", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("Quy2", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("Quy3", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("Quy4", dbDouble)
+        tdf.Fields.Append fld
+        Dim i As Integer
+
+        For i = 1 To 12
+            Set fld = tdf.CreateField("T" & i, dbDouble)    ' dbInteger cho ki?u s?
+            ' Ho?c có th? dùng dbDouble, dbSingle, dbCurrency tùy nhu c?u
+            tdf.Fields.Append fld
+        Next i
+        Set fld = tdf.CreateField("NguoiKy", dbText, 255)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("Nam", dbInteger, 255)
+        tdf.Fields.Append fld
+        ' Thêm b?ng vào co s? d? li?u
+        DBKetoan.TableDefs.Append tdf
+
+    End If
+End Sub
 Public Sub CheckAndCreateTableDinhDanh()
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
@@ -172,6 +222,43 @@ Public Sub CheckAndCreateTableDinhDanh()
         Set fld = tdf.CreateField("TKCo", dbText, 255)
         tdf.Fields.Append fld
         Set fld = tdf.CreateField("TKThue", dbText, 255)
+        tdf.Fields.Append fld
+        ' Thêm b?ng vào co s? d? li?u
+        DBKetoan.TableDefs.Append tdf
+
+    End If
+End Sub
+Public Sub CheckAndCreateTablePL1()
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim tableExists As Boolean
+    Dim tableName As String
+
+    tableName = "tbPL1"    ' Thay d?i tên b?ng c?a b?n ? dây
+    tableExists = False
+
+    ' Ki?m tra t?n t?i b?ng
+    For Each tdf In DBKetoan.TableDefs
+        If tdf.Name = tableName Then
+            tableExists = True
+            Exit For
+        End If
+    Next tdf
+
+    If Not tableExists Then
+        ' T?o b?ng n?u chua t?n t?i
+        Set tdf = DBKetoan.CreateTableDef(tableName)
+
+        Set fld = tdf.CreateField("ID", dbLong)
+        fld.Attributes = dbAutoIncrField    ' Thi?t l?p thu?c tính t? d?ng tang
+        tdf.Fields.Append fld
+
+        ' T?o tru?ng Name
+        Set fld = tdf.CreateField("TenHH", dbText, 255)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("GT1", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("GT2", dbDouble)
         tdf.Fields.Append fld
         ' Thêm b?ng vào co s? d? li?u
         DBKetoan.TableDefs.Append tdf
@@ -540,6 +627,7 @@ Private Sub Form_Activate()
     If countrow = 0 Then
         ExecuteSQL5 ("insert into tbLicensekey(Type,Year,Totals) values(0,0,0)")
     End If
+    CheckAndCreateTableThongTinToKhai
     'CheckAndCreateTableDinhDanh
     'CheckAndCreateTableImport
     'CheckAndCreateTableImportDetail
