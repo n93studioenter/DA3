@@ -9,7 +9,7 @@ Begin VB.Form FrmChungtu
    Caption         =   "NhËp chøng tõ"
    ClientHeight    =   9120
    ClientLeft      =   60
-   ClientTop       =   540
+   ClientTop       =   495
    ClientWidth     =   18180
    ClipControls    =   0   'False
    Icon            =   "Fchungtu.frx":0000
@@ -28,9 +28,9 @@ Begin VB.Form FrmChungtu
       Caption         =   "Q4"
       Height          =   255
       Index           =   3
-      Left            =   1920
+      Left            =   1800
       TabIndex        =   185
-      Top             =   8520
+      Top             =   8640
       Width           =   375
    End
    Begin VB.CommandButton Command13 
@@ -39,33 +39,34 @@ Begin VB.Form FrmChungtu
       Index           =   2
       Left            =   1440
       TabIndex        =   184
-      Top             =   8520
+      Top             =   8640
       Width           =   375
    End
    Begin VB.CommandButton Command12 
       Caption         =   "Q2"
       Height          =   255
       Index           =   1
-      Left            =   960
+      Left            =   1080
       TabIndex        =   183
-      Top             =   8520
+      Top             =   8640
       Width           =   375
    End
    Begin VB.CommandButton Command11 
       Caption         =   "Q1"
       Height          =   255
       Index           =   0
-      Left            =   480
+      Left            =   720
       TabIndex        =   182
-      Top             =   8520
+      Top             =   8640
       Width           =   375
    End
    Begin VB.CommandButton Command9 
       Caption         =   "Command9"
       Height          =   375
-      Left            =   7560
+      Left            =   15240
       TabIndex        =   181
-      Top             =   7920
+      Top             =   5160
+      Visible         =   0   'False
       Width           =   1575
    End
    Begin VB.CommandButton Command8 
@@ -2239,6 +2240,15 @@ Begin VB.Form FrmChungtu
       FixedRows       =   0
       HighLight       =   0   'False
       MousePointer    =   1
+   End
+   Begin VB.Label Label4 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Quý"
+      Height          =   255
+      Left            =   240
+      TabIndex        =   186
+      Top             =   8640
+      Width           =   375
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -4479,6 +4489,26 @@ Private Sub Dohoadon()
 
 End Sub
 
+Private Sub Command11_Click(Index As Integer)
+    CboThang1(1).ListIndex = 0
+     CboThang1(2).ListIndex = 2
+End Sub
+
+Private Sub Command12_Click(Index As Integer)
+    CboThang1(1).ListIndex = 3
+    CboThang1(2).ListIndex = 5
+End Sub
+
+Private Sub Command13_Click(Index As Integer)
+ CboThang1(1).ListIndex = 6
+    CboThang1(2).ListIndex = 8
+End Sub
+
+Private Sub Command15_Click(Index As Integer)
+    CboThang1(1).ListIndex = 9
+    CboThang1(2).ListIndex = 11
+End Sub
+
 Private Sub Command6_Click()
     DoNganhang
 End Sub
@@ -5683,7 +5713,7 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     End If
 
     If IsNull(rs_import!TgTCThue1) Or rs_import!TgTCThue1 = 0 Then
-        bakTongtien = rs_import!TgTThue
+        bakTongtien = rs_import!TgTCThue
     Else
         bakTongtien = rs_import!TgTCThue1
     End If
@@ -6041,47 +6071,26 @@ Private Sub btnImportXML_Click()
     'Khai bao
     FThuChi.FThuChiForm = 1
     Dim Query As String
-
-
     'Goi table Import
-    Query = "SELECT * FROM tbimport WHERE Status = 0 ORDER BY CDate(NLap)"
+    Query = "SELECT t.* FROM tbimport AS t " & _
+            "WHERE t.Status = 0 " & _
+            "AND NOT EXISTS (" & _
+            "SELECT 1 FROM HoaDon AS h " & _
+            "WHERE t.KHHDon = h.KyHieu " & _
+            "AND t.SHDon = h.SoHD " & _
+            "AND Format(t.NLap, 'dd/MM/yy') = Format(h.NgayPH, 'dd/MM/yy'))"
     Set rs_import = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     sttHD = 1
     Dim isloop As Boolean
     isloop = True
     If Not rs_import.EOF Then
-        While isloop
-            'Kiem tra 1 buoc nua trong hoa don
-            Dim qrhoadon As String
-            qrhoadon = "SELECT * FROM HoaDon WHERE KyHieu='" & rs_import!KHHDon & _
-                       "' AND SoHD='" & rs_import!SHDon & _
-                       "' AND Format(NgayPH, 'dd/MM/yy') = '" & Format(rs_import!NLap, "dd/MM/yy") & "'"
-            Dim rs_hd As Recordset
-            Set rs_hd = DBKetoan.OpenRecordset(qrhoadon, dbOpenSnapshot)
-            If rs_hd.EOF Then
-                isloop = False
-                'Di chuyen cuoi de lay Totals
-                rs_import.MoveLast
-                totals = rs_import.recordCount
+        rs_import.MoveLast
+        totals = rs_import.recordCount
 
-                'Quay lai phan tu dau tien
-                rs_import.MoveFirst
-                'Xu ly add header
-                XylyHoaDonTong rs_import
-                'MsgBox rs_import!SHDon
-
-                'Di chuyen den phan tu tiep theo neu co
-                'rs_import.MoveNext
-            Else
-                'MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
-                'Dim msgBox As frmMessageBox
-                ' Set msgBox = New frmMessageBox
-                'msgBox.SetText "Kh«ng cßn ho¸ ®¬n ®Ó import"
-                'msgBox.Show vbModal
-                rs_import.MoveNext
-
-            End If
-        Wend
+        'Quay lai phan tu dau tien
+        rs_import.MoveFirst
+        'Xu ly add header
+        XylyHoaDonTong rs_import
     Else
         MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
     End If

@@ -265,6 +265,43 @@ Public Sub CheckAndCreateTablePL1()
 
     End If
 End Sub
+Public Sub CheckAndCreateTablePL2()
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim tableExists As Boolean
+    Dim tableName As String
+
+    tableName = "tbPL2"    ' Thay d?i tên b?ng c?a b?n ? dây
+    tableExists = False
+
+    ' Ki?m tra t?n t?i b?ng
+    For Each tdf In DBKetoan.TableDefs
+        If tdf.Name = tableName Then
+            tableExists = True
+            Exit For
+        End If
+    Next tdf
+
+    If Not tableExists Then
+        ' T?o b?ng n?u chua t?n t?i
+        Set tdf = DBKetoan.CreateTableDef(tableName)
+
+        Set fld = tdf.CreateField("ID", dbLong)
+        fld.Attributes = dbAutoIncrField    ' Thi?t l?p thu?c tính t? d?ng tang
+        tdf.Fields.Append fld
+
+        ' T?o tru?ng Name
+        Set fld = tdf.CreateField("TenHH", dbText, 255)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("GT1", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("GT2", dbDouble)
+        tdf.Fields.Append fld
+        ' Thêm b?ng vào co s? d? li?u
+        DBKetoan.TableDefs.Append tdf
+
+    End If
+End Sub
 Public Sub CheckAndCreateTableImport()
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
@@ -628,6 +665,32 @@ Private Sub Form_Activate()
         ExecuteSQL5 ("insert into tbLicensekey(Type,Year,Totals) values(0,0,0)")
     End If
     CheckAndCreateTableThongTinToKhai
+    CheckAndCreateTablePL1
+    CheckAndCreateTablePL2
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k1 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k2 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k3 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k4 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k5 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k6 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k7 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k8 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k9 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k10 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k11 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD k12 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml1 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml2 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml3 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml4 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml5 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml6 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml7 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml8 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml9 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml10 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml11 MEMO")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbThongTinToKhai ADD xml12 MEMO")
     'CheckAndCreateTableDinhDanh
     'CheckAndCreateTableImport
     'CheckAndCreateTableImportDetail
