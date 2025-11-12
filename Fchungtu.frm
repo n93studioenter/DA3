@@ -28,36 +28,36 @@ Begin VB.Form FrmChungtu
       Caption         =   "Q4"
       Height          =   255
       Index           =   3
-      Left            =   1800
+      Left            =   3000
       TabIndex        =   185
-      Top             =   8640
+      Top             =   5880
       Width           =   375
    End
    Begin VB.CommandButton Command13 
       Caption         =   "Q3"
       Height          =   255
       Index           =   2
-      Left            =   1440
+      Left            =   2640
       TabIndex        =   184
-      Top             =   8640
+      Top             =   5880
       Width           =   375
    End
    Begin VB.CommandButton Command12 
       Caption         =   "Q2"
       Height          =   255
       Index           =   1
-      Left            =   1080
+      Left            =   2280
       TabIndex        =   183
-      Top             =   8640
+      Top             =   5880
       Width           =   375
    End
    Begin VB.CommandButton Command11 
       Caption         =   "Q1"
       Height          =   255
       Index           =   0
-      Left            =   720
+      Left            =   1920
       TabIndex        =   182
-      Top             =   8640
+      Top             =   5880
       Width           =   375
    End
    Begin VB.CommandButton Command9 
@@ -252,13 +252,13 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Timer timerNext 
       Enabled         =   0   'False
-      Interval        =   100
+      Interval        =   2
       Left            =   8160
       Top             =   8400
    End
    Begin VB.Timer timerDetail 
       Enabled         =   0   'False
-      Interval        =   50
+      Interval        =   2
       Left            =   7680
       Top             =   8400
    End
@@ -2245,9 +2245,10 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00E0E0E0&
       Caption         =   "Quý"
       Height          =   255
-      Left            =   240
+      Left            =   120
       TabIndex        =   186
       Top             =   8640
+      Visible         =   0   'False
       Width           =   375
    End
    Begin VB.Label Label 
@@ -3547,6 +3548,7 @@ Attribute hien_bang_tinh.VB_VarUserMemId = 1073938537
 
 Public tongtientruoc As Double
 Attribute tongtientruoc.VB_VarUserMemId = 1073938538
+
 Function Getmonthbynl() As Integer
     Getmonthbynl = bakThangNK
 End Function
@@ -4490,23 +4492,27 @@ Private Sub Dohoadon()
 End Sub
 
 Private Sub Command11_Click(Index As Integer)
-    CboThang1(1).ListIndex = 0
+     CboThang1(1).ListIndex = 0
      CboThang1(2).ListIndex = 2
+     Command3_Click
 End Sub
 
 Private Sub Command12_Click(Index As Integer)
     CboThang1(1).ListIndex = 3
     CboThang1(2).ListIndex = 5
+    Command3_Click
 End Sub
 
 Private Sub Command13_Click(Index As Integer)
  CboThang1(1).ListIndex = 6
     CboThang1(2).ListIndex = 8
+    Command3_Click
 End Sub
 
 Private Sub Command15_Click(Index As Integer)
     CboThang1(1).ListIndex = 9
     CboThang1(2).ListIndex = 11
+    Command3_Click
 End Sub
 
 Private Sub Command6_Click()
@@ -5228,6 +5234,11 @@ Private Sub timerReadyNKNL_Timer()
     OptLoai_LostFocus 0
     txt(0).Text = rs_importNK!SoHieu2
     txt(1).Text = rs_importNK!GhiChu2
+    Dim myDate As Date
+    myDate = CDate(rs_importNK!NgayLap)
+    CboThang.Text = month(myDate) & "/" & Year(myDate)
+    txt(0).Text = rs_importNK!sohieu
+
     NhapkhoNLChitiet
 End Sub
 
@@ -6061,6 +6072,14 @@ Private Sub timerNext_Timer()
     End If
 
 End Sub
+Function RemoveLeadingZeros(ByVal str As String) As String
+    Dim i As Integer
+    i = 1
+    While i <= Len(str) And Mid(str, i, 1) = "0"
+        i = i + 1
+    Wend
+    RemoveLeadingZeros = Mid(str, i)
+End Function
 Private Sub btnImportXML_Click()
 
 'IsImport = True
@@ -6073,11 +6092,11 @@ Private Sub btnImportXML_Click()
     Dim Query As String
     'Goi table Import
     Query = "SELECT t.* FROM tbimport AS t " & _
-            "WHERE t.Status = 0 " & _
+            "WHERE t.IsImport = 1 " & _
+            "AND t.Status = 0 " & _
             "AND NOT EXISTS (" & _
             "SELECT 1 FROM HoaDon AS h " & _
-            "WHERE t.KHHDon = h.KyHieu " & _
-            "AND t.SHDon = h.SoHD " & _
+            "WHERE t.SHDon = h.SoHD " & _
             "AND Format(t.NLap, 'dd/MM/yy') = Format(h.NgayPH, 'dd/MM/yy'))"
     Set rs_import = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     sttHD = 1
@@ -6367,7 +6386,7 @@ End Sub
 Private Sub cboThang_Click()
     Label(26).Caption = ""
     If loaict = 2 Or loaict = 6 Then
-        ClearGrid GrdChungtu, GrdChungtu.tag
+        'ClearGrid GrdChungtu, GrdChungtu.tag
         MaSoCT = 0
         If vattu.MaSo > 0 Then txtChungtu_LostFocus 2
     End If
@@ -9694,6 +9713,7 @@ End If
 End Sub
 
 Private Sub Form_Activate()
+      
     isimportnk = False
     ExecuteSQL5_Themmoi ("ALTER TABLE tbRegister  ADD tk154 text")
     tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
