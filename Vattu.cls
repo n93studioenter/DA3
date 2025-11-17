@@ -39,12 +39,12 @@ Public ThueNK As Double
 '======================================================================================
 Public Sub InitVattuMaSo(mvt As Long)
     Dim rs_vattu As Recordset
-    
+
     If mvt > 0 Then
         Set rs_vattu = DBKetoan.OpenRecordset("SELECT Vattu.*" _
-            & " FROM Vattu" _
-            & " WHERE Vattu.MaSo=" + CStr(mvt), dbOpenSnapshot)
-        If rs_vattu.RecordCount = 0 Then GoTo iv
+                                            & " FROM Vattu" _
+                                            & " WHERE Vattu.MaSo=" + CStr(mvt), dbOpenSnapshot)
+        If rs_vattu.recordCount = 0 Then GoTo iv
         MaSo = rs_vattu!MaSo
         MaPhanLoai = rs_vattu!MaPhanLoai
         sohieu = rs_vattu!sohieu
@@ -53,11 +53,23 @@ Public Sub InitVattuMaSo(mvt As Long)
         TonMin = rs_vattu!TonMin
         TonMax = rs_vattu!TonMax
         GiaHT = rs_vattu!GiaHT
-        Dvt2 = rs_vattu!Dvt2
+        If IsNull(rs_vattu!Dvt2) Then
+            Dvt2 = 0
+        Else
+            Dvt2 = rs_vattu!Dvt2
+        End If
         DonVi2 = rs_vattu!DonVi2
-        TyLeQD = rs_vattu!TyLeQD
+        If IsNull(rs_vattu!TyLeQD) Then
+            TyLeQD = 0
+        Else
+            TyLeQD = rs_vattu!TyLeQD
+        End If
         GhiChu = rs_vattu!GhiChu
-        VAT = rs_vattu!VAT
+        If IsNull(rs_vattu!VAT) Then
+            VAT = 0
+        Else
+            VAT = rs_vattu!VAT
+        End If
         GiaBan1 = rs_vattu!GiaBan1
         GiaBan2 = rs_vattu!GiaBan2
         GiaBan3 = rs_vattu!GiaBan3

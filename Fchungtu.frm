@@ -24,6 +24,23 @@ Begin VB.Form FrmChungtu
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
+   Begin VB.CommandButton Command10 
+      Caption         =   "KiÓm tra hÖ thèng"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   7080
+      TabIndex        =   187
+      Top             =   8400
+      Width           =   1575
+   End
    Begin VB.CommandButton Command15 
       Caption         =   "Q4"
       Height          =   255
@@ -4474,17 +4491,33 @@ Private Sub btnReset_Click()
     hasError = False
 End Sub
 
- 
+
 
 Private Sub Command10_Click()
-    Dim Query As String
-    Query = "select * from tableHoadonvao"
-    Set rs_ktraHoadon = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
-    If Not rs_ktraHoadon.EOF Then
-          OptLoai(1).Value = True
-          OptLoai_LostFocus 0
-          RFocus CboThang
-          txt(1).Text = ""
+    Dim exePath As String
+    exePath = App.path & "\\Tools\\Debug\\SaovietTax.exe"
+
+    ' Shell d? m? ?ng d?ng
+    Shell exePath, vbNormalFocus
+    
+    Exit Sub
+    DoEvents  ' Ð? d?m b?o ?ng d?ng có th?i gian kh?i d?ng
+
+    ' L?y handle c?a c?a s? ?ng d?ng
+    hWndApp = 0  ' Kh?i t?o bi?n hWndApp
+
+    While hWndApp = 0
+        hWndApp = FindWindow(vbNullString, "frmMain")  ' Thay d?i tiêu d? c?a ?ng d?ng
+        DoEvents  ' Cho phép x? lý s? ki?n khác
+    Wend
+
+    ' Ki?m tra handle có h?p l? hay không
+    If hWndApp = 0 Then
+        MsgBox "Không tìm th?y ?ng d?ng."
+    Else
+        ' Ð?i m?t chút tru?c khi ki?m tra l?i
+        Sleep 1000
+        CheckWindow
     End If
 End Sub
 Private Sub Dohoadon()
@@ -5091,7 +5124,7 @@ Private Sub Command9_Click()
 ErrorHandler:
     MsgBox "L?i khi t?o file XML: " & Err.Description, vbExclamation
 End Sub
-Private Sub SaveUTF8File(content As String, FilePath As String)
+Private Sub SaveUTF8File(Content As String, FilePath As String)
     On Error GoTo ErrorHandler
 
     Dim utf8Bytes() As Byte
@@ -5106,7 +5139,7 @@ Private Sub SaveUTF8File(content As String, FilePath As String)
     bom(2) = &HBF
 
     ' Chuy?n n?i dung sang UTF-8
-    utf8Bytes = StringToUTF8(content)
+    utf8Bytes = StringToUTF8(Content)
 
     ' K?t h?p BOM và n?i dung
     ReDim finalBytes(UBound(bom) + UBound(utf8Bytes) + 1)
@@ -5187,45 +5220,45 @@ Private Function BuildXMLContent() As String
     BuildXMLContent = xml
 End Function
 Private Function BuildTTinDVu() As String
-    Dim content As String
-    content = "      <TTinDVu>" & vbCrLf
-    content = content & "        <TenDVu>D?ch v? kê khai thu?</TenDVu>" & vbCrLf
-    content = content & "        <MaDVu>01</MaDVu>" & vbCrLf
-    content = content & "      </TTinDVu>" & vbCrLf
-    BuildTTinDVu = content
+    Dim Content As String
+    Content = "      <TTinDVu>" & vbCrLf
+    Content = Content & "        <TenDVu>D?ch v? kê khai thu?</TenDVu>" & vbCrLf
+    Content = Content & "        <MaDVu>01</MaDVu>" & vbCrLf
+    Content = Content & "      </TTinDVu>" & vbCrLf
+    BuildTTinDVu = Content
 End Function
 
 Private Function BuildTTinTKhaiThue() As String
-    Dim content As String
-    content = "      <TTinTKhaiThue>" & vbCrLf
-    content = content & "        <TenDoanhNghiep>Công ty TNHH Thành ph? H? Chí Minh</TenDoanhNghiep>" & vbCrLf
-    content = content & "        <DiaChi>123 Ðu?ng Lê L?i, Qu?n 1, Thành ph? H? Chí Minh</DiaChi>" & vbCrLf
-    content = content & "      </TTinTKhaiThue>" & vbCrLf
-    BuildTTinTKhaiThue = content
+    Dim Content As String
+    Content = "      <TTinTKhaiThue>" & vbCrLf
+    Content = Content & "        <TenDoanhNghiep>Công ty TNHH Thành ph? H? Chí Minh</TenDoanhNghiep>" & vbCrLf
+    Content = Content & "        <DiaChi>123 Ðu?ng Lê L?i, Qu?n 1, Thành ph? H? Chí Minh</DiaChi>" & vbCrLf
+    Content = Content & "      </TTinTKhaiThue>" & vbCrLf
+    BuildTTinTKhaiThue = Content
 End Function
 
 Private Function BuildCTieuTKhaiChinh() As String
-    Dim content As String
-    content = "    <CTieuTKhaiChinh>" & vbCrLf
-    content = content & "      <ChiTieu id=""CT1"">Giá tr? gia tang</ChiTieu>" & vbCrLf
-    content = content & "    </CTieuTKhaiChinh>" & vbCrLf
-    BuildCTieuTKhaiChinh = content
+    Dim Content As String
+    Content = "    <CTieuTKhaiChinh>" & vbCrLf
+    Content = Content & "      <ChiTieu id=""CT1"">Giá tr? gia tang</ChiTieu>" & vbCrLf
+    Content = Content & "    </CTieuTKhaiChinh>" & vbCrLf
+    BuildCTieuTKhaiChinh = Content
 End Function
 
 Private Function BuildPLuc() As String
-    Dim content As String
-    content = "    <PLuc>" & vbCrLf
-    content = content & "      <PhuLuc id=""PL1"">Ph? l?c kê khai</PhuLuc>" & vbCrLf
-    content = content & "    </PLuc>" & vbCrLf
-    BuildPLuc = content
+    Dim Content As String
+    Content = "    <PLuc>" & vbCrLf
+    Content = Content & "      <PhuLuc id=""PL1"">Ph? l?c kê khai</PhuLuc>" & vbCrLf
+    Content = Content & "    </PLuc>" & vbCrLf
+    BuildPLuc = Content
 End Function
 
 Private Function BuildCKyDTu() As String
-    Dim content As String
-    content = "  <CKyDTu>" & vbCrLf
-    content = content & "    <ChuKy>Ch? ký s? placeholder</ChuKy>" & vbCrLf
-    content = content & "  </CKyDTu>" & vbCrLf
-    BuildCKyDTu = content
+    Dim Content As String
+    Content = "  <CKyDTu>" & vbCrLf
+    Content = Content & "    <ChuKy>Ch? ký s? placeholder</ChuKy>" & vbCrLf
+    Content = Content & "  </CKyDTu>" & vbCrLf
+    BuildCKyDTu = Content
 End Function
 
 Private Sub timerReadyNKNL_Timer()
@@ -5694,15 +5727,18 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     'Xu ly tkNo
     bakTongtien = rs_import!TgTCThue
     txtchungtu(0).Text = rs_import!tkno
- 
+
     txtChungtu_LostFocus (0)
 
     If rs_import!tkno Like "338*" Then
         txtchungtu(2).Text = txtVT(0).Text
     End If
-      txtChungtu_LostFocus (2)
+    txtChungtu_LostFocus (2)
     If rs_import!TPhi = 0 Then
         txtchungtu(5).Text = rs_import!TgTCThue
+        If rs_import!TgTCThue = 0 Then
+        txtchungtu(5).Text = rs_import!TongTien
+        End If
     Else
         txtchungtu(5).Text = val(rs_import!TgTCThue) + val(rs_import!TPhi)
     End If
@@ -6166,8 +6202,40 @@ Private Sub btnOpenexe_Click()
     Else
         ' Ð?i m?t chút tru?c khi ki?m tra l?i
         Sleep 1000
-        CheckWindow
+        'CheckWindow
     End If
+End Sub
+Private Sub GhiChutxt(ByVal Content As Integer)
+    Dim FilePath As String
+    FilePath = App.path & "\\Hoadon\\status.txt"
+
+    Dim FileNum As Integer
+    FileNum = FreeFile  ' L?y s? file tr?ng
+
+    Dim lineText As String
+    Dim allText As String
+
+    ' M? file d? d?c
+    Open FilePath For Input As #FileNum
+
+    ' Ð?c t?ng dòng d?n h?t file
+    Do Until EOF(FileNum)
+        Line Input #FileNum, lineText
+        allText = allText & lineText & vbCrLf  ' N?i dòng và xu?ng dòng
+    Loop
+
+    ' Ðóng file
+    Close #FileNum
+
+    ' M? file d? ghi dè n?i dung
+    FileNum = FreeFile    ' L?y l?i s? file tr?ng
+
+    ' M? file d? ghi
+    Open FilePath For Output As #FileNum
+    Print #FileNum, Content  ' Ghi n?i dung m?i (tham s? integer) vào file
+
+    ' Ðóng file
+    Close #FileNum
 End Sub
 
 Private Sub CheckWindow()
@@ -10492,6 +10560,7 @@ Public Sub OptLoai_Click(Index As Integer)
     txtPhanloaichungtu.Text = Index
     ' chon nut khau hao
     If Index = 5 Then
+        GhiChutxt 1
         btnOpenexe_Click
     End If
     txtVT(2).Text = ""
