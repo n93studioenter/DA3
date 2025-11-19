@@ -45,6 +45,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Dim plct As Integer
 Private Sub Form_Load()
 
     Dim mypath As String
@@ -55,8 +56,48 @@ Private Sub Form_Load()
     Else
         LoaiHD = "\HDRa"
     End If
-    mypath = mypath & LoaiHD & "\" & Month(CDate(FrmChungtu.CboThang.Text)) & "\" & FrmChungtu.txt(0).Text & "_" & FrmChungtu.txtVT(1).Text & ".html"
-    'MsgBox FrmChungtu.txt(0).Text
+    Dim kyhhd As String
+    kyhhd = FrmChungtu.txtVT(1).Text
+    If Left(kyhhd, 1) = "1" Then
+        kyhhd = Mid(kyhhd, 2)    ' B? di ký t? d?u tiên
+    End If
+
+    Dim sohd As String
+    sohd = FrmChungtu.txt(0).Text
+    Do While Left(sohd, 1) = "0" And sohd <> ""
+        sohd = Mid(sohd, 2)
+    Loop
+
+    mypath = mypath & LoaiHD & "\" & month(CDate(FrmChungtu.CboThang.Text)) & "\" & sohd & "_" & kyhhd & ".html"
+    'MsgBox FrmChungtu.
+
+
+    ' Ki?m tra file có t?n t?i không
+    If Dir(mypath) = "" Then
+
+        Dim txtPath As String
+        Dim FileNum As Integer
+
+        txtPath = App.path & "\Hoadon\hdlink.txt"
+        FileNum = FreeFile    ' L?y s? file còn tr?ng
+
+        ' M? t?p d? ghi dè n?i dung
+        Open txtPath For Output As #FileNum
+
+
+
+        Print #FileNum, FrmChungtu.txtVT(9).Text & "_" & FrmChungtu.txtPhanloaichungtu & "_" & sohd & "_" & kyhhd & "_" & month(CDate(FrmChungtu.CboThang.Text))
+        Close #FileNum
+        Dim exePath As String
+        exePath = App.path & "\\Tools\\Debug\\SaovietTax.exe"
+
+        ' Shell d? m? ?ng d?ng
+        Shell exePath, vbMinimizedNoFocus
+    End If
+    While Dir(mypath) = ""
+        ' Có th? thêm m?t th?i gian ch? nh? d? tránh vi?c l?p quá nhanh
+        DoEvents
+    Wend
     Dim FilePath As String
     FilePath = mypath
     WebBrowser1.Navigate FilePath

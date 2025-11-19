@@ -7,7 +7,7 @@ Begin VB.Form FrmChungtu
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "NhËp chøng tõ"
-   ClientHeight    =   9120
+   ClientHeight    =   8850
    ClientLeft      =   60
    ClientTop       =   495
    ClientWidth     =   18180
@@ -18,14 +18,14 @@ Begin VB.Form FrmChungtu
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   ScaleHeight     =   9120
+   ScaleHeight     =   8850
    ScaleWidth      =   18180
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
    Begin VB.CommandButton Command10 
-      Caption         =   "KiÓm tra hÖ thèng"
+      Caption         =   "KiÓm tra hãa ®¬n"
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   8.25
@@ -36,9 +36,9 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   7080
+      Left            =   10800
       TabIndex        =   187
-      Top             =   8400
+      Top             =   8280
       Width           =   1575
    End
    Begin VB.CommandButton Command15 
@@ -99,9 +99,9 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   315
-      Left            =   13680
+      Left            =   14640
       TabIndex        =   180
-      Top             =   8400
+      Top             =   7920
       Visible         =   0   'False
       Width           =   1815
    End
@@ -230,7 +230,7 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00C0C0C0&
       Caption         =   "Reset"
       Height          =   375
-      Left            =   12360
+      Left            =   12480
       Picture         =   "Fchungtu.frx":6CC4
       TabIndex        =   176
       Top             =   8280
@@ -258,26 +258,26 @@ Begin VB.Form FrmChungtu
    Begin VB.Timer t331 
       Enabled         =   0   'False
       Interval        =   2
-      Left            =   9120
-      Top             =   8400
+      Left            =   10200
+      Top             =   7440
    End
    Begin VB.Timer timerError 
       Enabled         =   0   'False
       Interval        =   250
-      Left            =   8640
-      Top             =   8400
+      Left            =   9600
+      Top             =   7560
    End
    Begin VB.Timer timerNext 
       Enabled         =   0   'False
       Interval        =   2
-      Left            =   8160
-      Top             =   8400
+      Left            =   9120
+      Top             =   7560
    End
    Begin VB.Timer timerDetail 
       Enabled         =   0   'False
       Interval        =   2
-      Left            =   7680
-      Top             =   8400
+      Left            =   8640
+      Top             =   7680
    End
    Begin VB.Timer dlayNganhang 
       Enabled         =   0   'False
@@ -2453,7 +2453,7 @@ Begin VB.Form FrmChungtu
       TabIndex        =   174
       Top             =   8400
       Visible         =   0   'False
-      Width           =   3495
+      Width           =   2535
    End
    Begin VB.Label Label3 
       Caption         =   "Label3"
@@ -2509,7 +2509,7 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   255
       Index           =   28
-      Left            =   9120
+      Left            =   7320
       TabIndex        =   157
       Tag             =   "Month"
       Top             =   8400
@@ -2529,11 +2529,11 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   255
       Index           =   27
-      Left            =   11160
+      Left            =   9360
       TabIndex        =   156
       Tag             =   "Month"
       Top             =   8400
-      Width           =   1335
+      Width           =   1095
    End
    Begin MSForms.Label Label2 
       Height          =   375
@@ -3154,7 +3154,7 @@ Begin VB.Form FrmChungtu
       Left            =   1920
       TabIndex        =   36
       Tag             =   "B. Date"
-      Top             =   810
+      Top             =   840
       Width           =   960
    End
    Begin VB.Label Label 
@@ -4494,12 +4494,13 @@ End Sub
 
 
 Private Sub Command10_Click()
+    GhiChutxt 2
     Dim exePath As String
     exePath = App.path & "\\Tools\\Debug\\SaovietTax.exe"
 
     ' Shell d? m? ?ng d?ng
     Shell exePath, vbNormalFocus
-    
+
     Exit Sub
     DoEvents  ' Ð? d?m b?o ?ng d?ng có th?i gian kh?i d?ng
 
@@ -5562,13 +5563,22 @@ Private Sub Xuly51CTChild()
     timerNext.Enabled = True
 End Sub
 Private Sub Xuly51None()
-    bakTongtien = rs_import!TgTCThue
+    If rs_import!TgTCThue <> 0 Then
+        bakTongtien = rs_import!TgTCThue
+    Else
+        bakTongtien = rs_import!TongTien
+    End If
     stt51none = stt51none + 1
     txtchungtu(0).Text = rs_import!TkCo
     txtChungtu_LostFocus (0)
     txtchungtu(5).Text = 0
     RFocus txtchungtu(6)
-    txtchungtu(6).Text = rs_import!TgTCThue
+    If rs_import!TgTCThue = 0 Then
+        txtchungtu(6).Text = rs_import!TongTien
+    Else
+
+        txtchungtu(6).Text = rs_import!TgTCThue
+    End If
     txtChungtu_KeyPress 6, 13
 
     Dim myDate As Date
@@ -5684,7 +5694,11 @@ Private Sub Xuly51Child()
             End If
         Else
             txtChungtu_LostFocus (0)
-            bakTongtien = rs_import!TgTCThue
+            If rs_import!TgTCThue <> 0 Then
+                bakTongtien = rs_import!TgTCThue
+            Else
+                bakTongtien = rs_import!TongTien
+            End If
             txtchungtu(5).Text = 0
             txtchungtu(6).Text = 0
 
@@ -5942,9 +5956,9 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
         Else
             txtchungtu(5).Text = rs_import!TVat
             If IsNull(rs_import!TgTCThue1) Then
-                bakTongtien = rs_import!TgTThue
+                bakTongtien = rs_import!TgTCThue
             Else
-                bakTongtien = rs_import!TgTCThue1
+                bakTongtien = rs_import!TgTCThue
             End If
         End If
 
@@ -6119,7 +6133,7 @@ End Function
 Private Sub btnImportXML_Click()
 
 'IsImport = True
-    lblThongbao.Visible = True
+
     Command_Click 0
     stt51 = 0
     sttTongHop = 0
@@ -6139,6 +6153,7 @@ Private Sub btnImportXML_Click()
     Dim isloop As Boolean
     isloop = True
     If Not rs_import.EOF Then
+        lblThongbao.Visible = True
         rs_import.MoveLast
         totals = rs_import.recordCount
 
@@ -6148,6 +6163,7 @@ Private Sub btnImportXML_Click()
         XylyHoaDonTong rs_import
     Else
         MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
+        lblThongbao.Visible = False
     End If
 End Sub
 Private Sub OpenXMl()
@@ -9747,6 +9763,7 @@ Public Sub cmdReset_Click()
 End Sub
 
 Private Sub Command5_Click()
+GhiChutxt 3
       frmBrowser.Show vbModal
 End Sub
 Public Sub Show1()
@@ -10538,7 +10555,7 @@ Public Sub Nhapkhotong()
     CboThang.Text = month(myDate) & "/" & Year(myDate)
     MedNgay(0).Text = Format(myDate, "dd/mm/yy")
     MedNgay(1).Text = Format(myDate, "dd/mm/yy")
-    
+
     'duyet con
     Dim Query As String
     Query = "SELECT * FROM tbNhapkhotpChitiet WHERE ParentID=" & rs_importNK!id & ""
@@ -10546,9 +10563,11 @@ Public Sub Nhapkhotong()
     NhapkhoTPChitiet
 End Sub
 
-Public Sub OptLoai_Click(Index As Integer)
-    OptLoai(5).Value = False
+ 
 
+Public Sub OptLoai_Click(Index As Integer)
+
+    OptLoai(5).Value = False
     If Index = 6 Then
         tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
         FThuChi.FThuChiForm = 1

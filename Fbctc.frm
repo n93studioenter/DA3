@@ -7053,8 +7053,8 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     NValues(22) = CLng(Replace(frmMain.Rpt.Formulas(17), "TongVATV=", ""))
 
     NValues(26) = CLng(Replace(frmMain.Rpt.Formulas(8), "DTKCT=", ""))
-    NValues(29) = CLng(Replace(frmMain.Rpt.Formulas(23), "Vat0DT=", ""))
-    NValues(30) = CLng(Replace(frmMain.Rpt.Formulas(11), "Vat5DT=", ""))
+    NValues(29) = CDbl(Replace(frmMain.Rpt.Formulas(23), "Vat0DT=", ""))
+    NValues(30) = CDbl(Replace(frmMain.Rpt.Formulas(11), "Vat5DT=", ""))
     NValues(31) = CLng(Replace(frmMain.Rpt.Formulas(12), "Vat5=", ""))
     NValues(32) = CDbl(Replace(frmMain.Rpt.Formulas(13), "Vat10DT=", ""))
     NValues(33) = CDbl(Replace(frmMain.Rpt.Formulas(14), "Vat10=", ""))
