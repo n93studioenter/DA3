@@ -3449,104 +3449,115 @@ End Function
 '====================================================================================================
 Private Function InVATDauVao2(tdau As Integer, tcuoi As Integer, tl As Integer, HD As Integer, TK As ClsTaikhoan) As Boolean
     Dim sql As String, tk2 As New ClsTaikhoan, Fx As Integer
-    
+
     Fx = IIf(Left(frmMain.LbCty(8).Caption, 2) = "35" Or Left(frmMain.LbCty(3).Caption, 2) = "64", 35, 0)
-    
+
     tk2.InitTaikhoanSohieu "33312"
     If tk2.tk_id = GTGTKT_ID Then
         sql = "DELETE HoaDon.*  FROM ((HoaDon INNER JOIN ChungTu ON HoaDon.MaSo=ChungTu.MaSo) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo) LEFT JOIN HethongTK AS TK ON ChungTu.MaTKCo=TK.MaSo " _
             & " WHERE (HethongTK.SoHieu LIKE '" + pVATV + "*') AND (TK.SoHieu LIKE '33312*'  OR InStr(ChungTu.GhiChu,'33312')>0) AND HoaDon.Loai=-1"
         ExecuteSQL5 sql
     End If
-    
+
     GauGe.Max = 1
     'ChungTu.MauSoHD as
     If TK.MaSo = 0 Then
         Select Case tl
-            Case -3:
-                If Fx = 0 Then
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                Else
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                End If
-            Case -2:
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-            Case -1:
-                If Fx = 0 Then
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                Else
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                End If
-            Case 30:
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-            Case Else
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        Case -3:
+            If Fx = 0 Then
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            Else
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            End If
+        Case -2:
+            SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        Case -1:
+            If Fx = 0 Then
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            Else
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu, SoHD, ChungTu.NgayCT AS NgayPH, MatHang, SoLuong, ThanhTien, " & _
+                                  "KhachHang.Ten, KhachHang.MST, ChungTu.SoHieu, SoPS, KhachHang.DiaChi, TyLe, " & _
+                                  "IIF(HoaDon.HTTT='1', '1. Haøng hoaù, dòch vuï duøng rieâng cho SXKD chòu thueá GTGT (' & TyLe & '%)', " & _
+                                  "IIF(HoaDon.HTTT='...', '1. Haøng hoaù, dòch vuï duøng rieâng cho SXKD chòu thueá GTGT (' & TyLe & '%)', " & _
+                                  "IIF(HoaDon.HTTT='3', '3. Haøng hoaù, dv duøng chung cho KD chòu thueá vaø ko chòu thueá ñuû ñk khaáu tröø', 'Khong xac dinh'))) AS HTTT, " & _
+                                  "MauSo, MaCT, HoaDon.MaSo, KCT " & _
+                                  "FROM " & ChungTu2TKHD(10) & " " & _
+                                  "WHERE Loai=-1 AND HD <>0 AND " & WThang("ThangCT", tdau, tcuoi) & " " & _
+                                  "AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) " & _
+                                  "ORDER BY NgayPH, MaCT"
+
+                SetSQL "QTest", "select * from KhachHang"
+            End If
+        Case 30:
+            SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        Case Else
+            SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
         End Select
         frmMain.Rpt.Formulas(5) = "DiaChi = '" + frmMain.LbCty(2).Caption + "'"
     Else
         Select Case tl
-            Case -3:
-                If Fx = 0 Then
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                Else
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                End If
-            Case -2:
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-            Case -1:
-                If Fx = 0 Then
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                Else
-                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-                End If
-            Case 30:
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-            Case Else
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        Case -3:
+            If Fx = 0 Then
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            Else
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            End If
+        Case -2:
+            SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        Case -1:
+            If Fx = 0 Then
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            Else
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+            End If
+        Case 30:
+            SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        Case Else
+            SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND HethongTK.Sohieu LIKE '" + TK.sohieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
         End Select
-'    If TK.MaSo = 0 Then
-'        Select Case tl
-'            Case -3:
-'                If Fx = 0 Then
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                Else
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                End If
-'            Case -2:
-'                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'            Case -1:
-'                If Fx = 0 Then
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                Else
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                End If
-'            Case 30:
-'                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'            Case Else
-'                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'        End Select
-'        frmMain.Rpt.Formulas(5) = "DiaChi = '" + frmMain.LbCty(2).Caption + "'"
-'    Else
-'        Select Case tl
-'            Case -3:
-'                If Fx = 0 Then
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                Else
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                End If
-'            Case -2:
-'                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'            Case -1:
-'                If Fx = 0 Then
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                Else
-'                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'                End If
-'            Case 30:
-'                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'            Case Else
-'                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
-'        End Select
+        '    If TK.MaSo = 0 Then
+        '        Select Case tl
+        '            Case -3:
+        '                If Fx = 0 Then
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                Else
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                End If
+        '            Case -2:
+        '                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '            Case -1:
+        '                If Fx = 0 Then
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                Else
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                End If
+        '            Case 30:
+        '                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '            Case Else
+        '                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '        End Select
+        '        frmMain.Rpt.Formulas(5) = "DiaChi = '" + frmMain.LbCty(2).Caption + "'"
+        '    Else
+        '        Select Case tl
+        '            Case -3:
+        '                If Fx = 0 Then
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND HDBL=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                Else
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND HDBL=1 AND KCT=1 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                End If
+        '            Case -2:
+        '                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=1 AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '            Case -1:
+        '                If Fx = 0 Then
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                Else
+        '                    SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '                End If
+        '            Case 30:
+        '                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '            Case Else
+        '                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM (" + ChungTu2TKHD(10) + ") INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo WHERE HoaDon.Loai=-1 AND TyLe=" + CStr(tl) + " AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND HDBL=0 AND HethongTK.Sohieu LIKE '" + TK.SoHieu + "*' AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
+        '        End Select
         frmMain.Rpt.Formulas(1) = "TenCn='" + TK.Ten + "'"
         frmMain.Rpt.Formulas(5) = "DiaChi = '" + TK.GhiChu + "'"
     End If
@@ -3559,31 +3570,31 @@ Private Function InVATDauVao2(tdau As Integer, tcuoi As Integer, tl As Integer, 
             frmMain.Rpt.ReportFileName = "BANGKEV4.RPT"
         Else
             If GetSetting(IniPath, "Invoice", "ListDetail", 0) = 1 Then
-            
+
                 SetSQL "MienTru", "SELECT MaCT FROM " + ChungTu2TKHD(0) + " WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND HoaDon.Loai=-1 GROUP BY MaCT"
                 SetSQL "QCdt", "SELECT MaCT FROM ChungTu WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND MaVattu>0 AND MaLoai=1 GROUP BY MaCT HAVING Count(MaVattu)>1"
                 SetSQL "QDuPhong", "SELECT ChungTu.MaCT,TenVattu,SoPS2No AS SL,SoPS AS TT FROM (((ChungTu INNER JOIN MienTru ON ChungTu.MaCT=MienTru.MaCT) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo) INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN QCdt ON ChungTu.MaCT=QCdt.MaCT WHERE (TK_ID=" + CStr(TKVT_ID) + " OR HethongTK.Loai=6)"
                 SetSQL "QChitiet", "SELECT QNhatKy.*,TenVattu,SL,TT FROM QNhatKy LEFT JOIN QDuPhong ON QNhatKy.MaCT=QDuPhong.MaCT ORDER BY TyLe,NgayPH,SoHD"
-            
+
                 'Dim rs As Recordset
                 '
-               ' SetSQL "MienTru", "SELECT MaCT FROM " + ChungTu2TKHD(0) + " WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND HoaDon.Loai=-1 GROUP BY MaCT"
+                ' SetSQL "MienTru", "SELECT MaCT FROM " + ChungTu2TKHD(0) + " WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND HoaDon.Loai=-1 GROUP BY MaCT"
                 'ExecuteSQL5 "DELETE * FROM BaoCaoCP2"
-               ' SetSQL "QCdt", "SELECT MaCT FROM ChungTu WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND MaVattu>0 AND MaLoai=1 GROUP BY MaCT HAVING Count(MaVattu)>1"
-               ' ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,Ten,Kq1,Kq2,MK) SELECT ChungTu.MaSo,Cstr(ChungTu.MaSo),ChungTu.MaCT,TenVattu,SoPS2No,SoPS,MaVattu FROM (((ChungTu INNER JOIN MienTru ON ChungTu.MaCT=MienTru.MaCT) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo) INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN QCdt ON ChungTu.MaCT=QCdt.MaCT WHERE (TK_ID=" + CStr(TKVT_ID) + " OR HethongTK.Loai=6) ORDER BY ChungTu.MaCT,ChungTu.MaSo"
-               ' Set rs = DBKetoan.OpenRecordset("SELECT MaCT,ChungTu.MaSo FROM " + ChungTu2TKHD(0) + " WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND HoaDon.Loai=-1 ORDER BY ChungTu.MaSo", dbOpenSnapshot)
-               ' Do While Not rs.EOF
-               '     ExecuteSQL5 "UPDATE BaoCaoCP2 SET BC_ID=" + CStr(rs!MaSo) + " WHERE BC_ID=0 AND MaCha=" + CStr(rs!MaCT) '+ " AND MaSo>=" + CStr(rs!MaSo)
-               '     rs.MoveNext
-               ' Loop
-               ' rs.Close
-               ' Set rs = Nothing
-              '
-              '  SetSQL "QDuPhong", "SELECT BC_ID,First(Ten) AS TenVattu,Sum(Kq1) AS SL,Sum(Kq2) AS TT FROM BaoCaoCP2 GROUP BY BC_ID,MK"
-              '  SetSQL "QChitiet", "SELECT QNhatKy.*,TenVattu,SL,TT FROM QNhatKy LEFT JOIN QDuPhong ON QNhatKy.MaSo=QDuPhong.BC_ID ORDER BY TyLe,NgayPH,MaSo"
+                ' SetSQL "QCdt", "SELECT MaCT FROM ChungTu WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND MaVattu>0 AND MaLoai=1 GROUP BY MaCT HAVING Count(MaVattu)>1"
+                ' ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,Ten,Kq1,Kq2,MK) SELECT ChungTu.MaSo,Cstr(ChungTu.MaSo),ChungTu.MaCT,TenVattu,SoPS2No,SoPS,MaVattu FROM (((ChungTu INNER JOIN MienTru ON ChungTu.MaCT=MienTru.MaCT) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo) INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN QCdt ON ChungTu.MaCT=QCdt.MaCT WHERE (TK_ID=" + CStr(TKVT_ID) + " OR HethongTK.Loai=6) ORDER BY ChungTu.MaCT,ChungTu.MaSo"
+                ' Set rs = DBKetoan.OpenRecordset("SELECT MaCT,ChungTu.MaSo FROM " + ChungTu2TKHD(0) + " WHERE " + WThang("ThangCT", tdau, tcuoi) + " AND HoaDon.Loai=-1 ORDER BY ChungTu.MaSo", dbOpenSnapshot)
+                ' Do While Not rs.EOF
+                '     ExecuteSQL5 "UPDATE BaoCaoCP2 SET BC_ID=" + CStr(rs!MaSo) + " WHERE BC_ID=0 AND MaCha=" + CStr(rs!MaCT) '+ " AND MaSo>=" + CStr(rs!MaSo)
+                '     rs.MoveNext
+                ' Loop
+                ' rs.Close
+                ' Set rs = Nothing
+                '
+                '  SetSQL "QDuPhong", "SELECT BC_ID,First(Ten) AS TenVattu,Sum(Kq1) AS SL,Sum(Kq2) AS TT FROM BaoCaoCP2 GROUP BY BC_ID,MK"
+                '  SetSQL "QChitiet", "SELECT QNhatKy.*,TenVattu,SL,TT FROM QNhatKy LEFT JOIN QDuPhong ON QNhatKy.MaSo=QDuPhong.BC_ID ORDER BY TyLe,NgayPH,MaSo"
                 frmMain.Rpt.ReportFileName = "BANGKEV6.RPT"
             Else
-                frmMain.Rpt.ReportFileName = "BANGKEV2.RPT"
+                frmMain.Rpt.ReportFileName = "bangkev2.RPT"
             End If
         End If
     End If

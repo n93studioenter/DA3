@@ -6,10 +6,10 @@ Begin VB.Form FVAT
    BackColor       =   &H00E0E0E0&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Th«ng tin ho¸ ®¬n"
-   ClientHeight    =   6015
+   ClientHeight    =   6960
    ClientLeft      =   4680
    ClientTop       =   3165
-   ClientWidth     =   6120
+   ClientWidth     =   6180
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    Icon            =   "FVAT.frx":0000
@@ -17,10 +17,31 @@ Begin VB.Form FVAT
    LinkTopic       =   "Detail Invoice Informaion"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   6015
-   ScaleWidth      =   6120
+   ScaleHeight     =   6960
+   ScaleWidth      =   6180
    ShowInTaskbar   =   0   'False
    Tag             =   "0"
+   Begin VB.CheckBox ChkV 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Ho¸ ®¬n b¸n hµng"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   6
+      Left            =   3720
+      TabIndex        =   43
+      Tag             =   "Retail Bill"
+      Top             =   3720
+      UseMaskColor    =   -1  'True
+      Width           =   2175
+   End
    Begin VB.TextBox T 
       Alignment       =   1  'Right Justify
       Height          =   285
@@ -47,10 +68,10 @@ Begin VB.Form FVAT
       EndProperty
       Height          =   255
       Index           =   5
-      Left            =   2520
+      Left            =   6600
       TabIndex        =   16
       Tag             =   "Adjustment"
-      Top             =   3840
+      Top             =   4920
       Visible         =   0   'False
       Width           =   1095
    End
@@ -110,10 +131,10 @@ Begin VB.Form FVAT
    Begin VB.TextBox T 
       Height          =   285
       Index           =   11
-      Left            =   4560
+      Left            =   7200
       MaxLength       =   20
       TabIndex        =   13
-      Top             =   3720
+      Top             =   4680
       Visible         =   0   'False
       Width           =   1335
    End
@@ -487,10 +508,10 @@ Begin VB.Form FVAT
       EndProperty
       Height          =   255
       Index           =   13
-      Left            =   2880
+      Left            =   6960
       TabIndex        =   35
       Tag             =   "Payment Type"
-      Top             =   3720
+      Top             =   5400
       Visible         =   0   'False
       Width           =   1575
    End
@@ -769,20 +790,48 @@ Option Explicit
 Dim ngay As Date
 Dim ckh As New ClsKhachHang
 
- Public Sub Command_Click()
+Private blnInEvent As Boolean ' Khai báo ? d?u Module/Form
+
+Private Sub ChkV_Click(Index As Integer)
+    If blnInEvent Then Exit Sub
+    blnInEvent = True
+    If Index = 0 Or Index = 2 Or Index = 6 Then
+        Select Case Index
+        Case 0
+            ChkV(0).Value = vbChecked
+            ChkV(2).Value = vbUnchecked
+            ChkV(6).Value = vbUnchecked
+            OptChon(0).Value = True
+        Case 2
+            ChkV(2).Value = vbChecked
+            ChkV(0).Value = vbUnchecked
+            ChkV(6).Value = vbUnchecked
+        Case 6
+            ChkV(6).Value = vbChecked
+            ChkV(0).Value = vbUnchecked
+            ChkV(2).Value = vbUnchecked
+            OptChon(2).Value = True
+
+        End Select
+    End If
+
+    blnInEvent = False
+End Sub
+
+Public Sub Command_Click()
     Dim i As Integer
-       
-    If KHDetail And ckh.MaSo = 0 And Left(T(0).Text, 1) = "#" Then 'neu khach hang la dau thang
+
+    If KHDetail And ckh.MaSo = 0 And Left(T(0).Text, 1) = "#" Then    'neu khach hang la dau thang
         ckh.Ten = T(7).Text
         ckh.DiaChi = T(8).Text
         ckh.mst = T(9).Text
-       ' ckh.Tel = "000-00"
-       ' ckh.Fax = "000-00"
+        ' ckh.Tel = "000-00"
+        ' ckh.Fax = "000-00"
         ckh.sohieu = "#" + CStr(Year(Date) - 2000) + CStr(month(Date)) + CStr(Day(Date)) + CStr(Hour(Now)) + CStr(Minute(Now)) + CStr(Second(Now))
         ckh.MaPhanLoai = SelectSQL("SELECT MaSo AS F1 FROM PhanLoaiKhachHang WHERE LEFT(SoHieu,1)='#'")
-        If ckh.GhiKhachHang <> 0 Then GoTo Er 'Luu khach hang moi la #
+        If ckh.GhiKhachHang <> 0 Then GoTo Er    'Luu khach hang moi la #
     Else
-    Dim maso_khachhang
+        Dim maso_khachhang
         ' kiem tra khach hang do da co chua
         maso_khachhang = SelectSQL("SELECT TOP 1 Maso AS F1 FROM KhachHang WHERE sohieu = '" + Trim(T(0).Text) + "'")
         If (maso_khachhang = 0) Then
@@ -790,14 +839,14 @@ Dim ckh As New ClsKhachHang
             ckh.Ten = T(7).Text
             ckh.DiaChi = T(8).Text
             ckh.mst = T(9).Text
-            
+
             ckh.Tel = "000"
             ckh.Fax = "0000"
             ckh.email = "000"
             ckh.MaPhanLoai = FrmChungtu.CboLoai.ItemData(FrmChungtu.CboLoai.ListIndex)
-            If ckh.GhiKhachHang <> 0 Then GoTo Er 'Luu khach hang moi la #
-            Else
-             ckh.MaSo = maso_khachhang
+            If ckh.GhiKhachHang <> 0 Then GoTo Er    'Luu khach hang moi la #
+        Else
+            ckh.MaSo = maso_khachhang
         End If
     End If
     If KHDetail And ckh.MaSo = 0 Then
@@ -805,7 +854,13 @@ Er:
         RFocus T(0)
         Exit Sub
     End If
-    With h ' neu khach hang da co roi , thi lay thong tin dua vao class khach hang h
+    Dim gethd As Integer
+    gethd = ChkV(0).Value
+    If ChkV(6).Value = 1 Then
+        gethd = 3
+    End If
+
+    With h    ' neu khach hang da co roi , thi lay thong tin dua vao class khach hang h
         .MaKhachHang = ckh.MaSo
         .KyHieu = IIf(Len(T(1).Text) > 0, T(1).Text, "...")
         .sohd = IIf(Len(T(2).Text) > 0, T(2).Text, "...")
@@ -814,7 +869,7 @@ Er:
         .SoLuong = Cdbl5(T(4).Text)
         .ThanhTien = Cdbl5(T(5).Text)
         .TyLe = CInt5(T(6).Text)
-        .HD = ChkV(0).Value
+        .HD = gethd
         .KCT = ChkV(1).Value
         .HDBL = ChkV(2).Value
         .NK = ChkV(3).Value
@@ -989,7 +1044,12 @@ Public Sub GetPhieu(ttdb As Boolean)
     T(13).Text = FrmChungtu.txtVT(3).Text    ' Format(h.tygia, Mask_0)
     ngay = FrmChungtu.MedNgay(0).Text    'h.NgayPH
     MedNgay.Text = FrmChungtu.MedNgay(0).Text    'h.NgayPH 'FrmChungtu.MedNgay(0).Text ' Format(ngay, Mask_D)
-    ChkV(0).Value = h.HD
+    If h.HD <> 3 Then
+        ChkV(0).Value = h.HD
+    Else
+        ChkV(0).Value = 0
+        ChkV(6).Value = 1
+    End If
     ChkV(2).Value = h.HDBL
     ChkV(1).Value = h.KCT
     ChkV(1).Enabled = (h.TyLe = 0)

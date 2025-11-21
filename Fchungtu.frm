@@ -12725,7 +12725,23 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     Dim sql
 
     'sql = "SELECT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN KhachHang ON ChungTu" + sh + ".MaKH=KhachHang.MaSo WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " ORDER BY Chungtu" + sh + ".MaSo DESC"
-    sql = "SELECT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon ,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN KhachHang ON ChungTu" + sh + ".MaKH =KhachHang.MaSo WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " ORDER BY Chungtu" + sh + ".MaSo DESC"
+    'sql = "SELECT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon ,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN KhachHang ON ChungTu" + sh + ".MaKH =KhachHang.MaSo WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " ORDER BY Chungtu" + sh + ".MaSo DESC"
+     sql = "SELECT DISTINCT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG " & _
+          "FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) " & _
+          "LEFT JOIN KhachHang ON KhachHang.MaSo=ChungTu" + sh + ".MaKHC " & _
+          "WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + " AND ChungTu" + sh + ".MaKHC<>0 " & IIf(pProcessMode = 1, " AND XuLy<2", "") & _
+        " UNION " & _
+          "SELECT DISTINCT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG " & _
+          "FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) " & _
+          "LEFT JOIN KhachHang ON KhachHang.MaSo=ChungTu" + sh + ".MaKH " & _
+          "WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + " AND ChungTu" + sh + ".MaKHC=0 AND ChungTu" + sh + ".MaKH<>0 " & IIf(pProcessMode = 1, " AND XuLy<2", "") & _
+        " UNION " & _
+          "SELECT DISTINCT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG " & _
+          "FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) " & _
+          "LEFT JOIN KhachHang ON KhachHang.MaSo=HoaDon" + sh + ".MaKhachHang " & _
+          "WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + " AND ChungTu" + sh + ".MaKHC=0 AND ChungTu" + sh + ".MaKH=0 " & IIf(pProcessMode = 1, " AND XuLy<2", "") & _
+        " ORDER BY MaSo DESC"
+    Debug.Print "select chung tu la : " & sql
     Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     If rs_chungtu.recordCount = 0 Then
         MsgBox "PhiÕu ®· bÞ xo¸!", vbCritical, App.ProductName
