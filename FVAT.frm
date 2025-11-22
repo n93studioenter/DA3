@@ -21,6 +21,14 @@ Begin VB.Form FVAT
    ScaleWidth      =   6180
    ShowInTaskbar   =   0   'False
    Tag             =   "0"
+   Begin VB.TextBox Text1 
+      Height          =   285
+      Left            =   4800
+      TabIndex        =   44
+      Text            =   "Text1"
+      Top             =   1200
+      Width           =   735
+   End
    Begin VB.CheckBox ChkV 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Ho¸ ®¬n b¸n hµng"
@@ -1058,6 +1066,10 @@ Public Sub GetPhieu(ttdb As Boolean)
     ChkV(3).Value = h.NK
     ChkV(4).Value = h.ts
     ChkV(5).Value = h.DC
+
+    If Text1.Text = "1" Then
+        ChkV(6).Value = vbChecked
+    End If
 
     If ttdb Then
         If h.ThanhTien <> 0 Then

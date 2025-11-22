@@ -3477,9 +3477,9 @@ Private Function InVATDauVao2(tdau As Integer, tcuoi As Integer, tl As Integer, 
             Else
                 SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu, SoHD, ChungTu.NgayCT AS NgayPH, MatHang, SoLuong, ThanhTien, " & _
                                   "KhachHang.Ten, KhachHang.MST, ChungTu.SoHieu, SoPS, KhachHang.DiaChi, TyLe, " & _
-                                  "IIF(HoaDon.HTTT='1', '1. Haøng hoaù, dòch vuï duøng rieâng cho SXKD chòu thueá GTGT (' & TyLe & '%)', " & _
-                                  "IIF(HoaDon.HTTT='...', '1. Haøng hoaù, dòch vuï duøng rieâng cho SXKD chòu thueá GTGT (' & TyLe & '%)', " & _
-                                  "IIF(HoaDon.HTTT='3', '3. Haøng hoaù, dv duøng chung cho KD chòu thueá vaø ko chòu thueá ñuû ñk khaáu tröø', 'Khong xac dinh'))) AS HTTT, " & _
+                                  "IIf(HoaDon.HTTT='1', '1', " & _
+                                  "IIf(HoaDon.HTTT='...', '1', " & _
+                                  "IIf(HoaDon.HTTT='3', '3', NULL))) AS HTTT, " & _
                                   "MauSo, MaCT, HoaDon.MaSo, KCT " & _
                                   "FROM " & ChungTu2TKHD(10) & " " & _
                                   "WHERE Loai=-1 AND HD <>0 AND " & WThang("ThangCT", tdau, tcuoi) & " " & _

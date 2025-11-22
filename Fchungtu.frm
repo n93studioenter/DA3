@@ -5483,7 +5483,11 @@ Private Sub Xuly15Child()
             End If
 
         Else
-            bakTongtien = rs_import!TgTCThue
+            If rs_import!TgTCThue <> 0 Then
+                bakTongtien = rs_import!TgTCThue
+            Else
+                bakTongtien = rs_import!TongTien
+            End If
             txtchungtu(0) = rs_import!tkThue
             txtChungtu_LostFocus (0)
             txtchungtu(2).Text = 0
@@ -5897,9 +5901,13 @@ Private Sub XuLy154Child2()
     txtchungtu(0).Text = rs_ktchild154!tkno
     txtChungtu_LostFocus (0)
     RFocus txtchungtu(2)
-    txtchungtu(2).Text = rs_ktchild154!MaCT
+    If rs_ktchild154!MaCT <> "" Then
+        txtchungtu(2).Text = rs_ktchild154!MaCT
+        Else
+         txtchungtu(2).Text = rs_ktchild154!sohieu
+    End If
     txtChungtu_LostFocus (2)
-    
+
     RFocus txtchungtu(5)
     txtchungtu(5).Text = rs_ktchild154!ttien
     bakTongtien = rs_ktchild154!ttien
@@ -5929,6 +5937,7 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
                 Exit Sub
             End If
         End If
+        'Kiem tra xem có 15 khác ngoài 154 không
     End If
 
     'Xu ly tkNo
@@ -7005,6 +7014,14 @@ htp:
                 If h.MaKhachHang > 0 Then    'neu da co khach hang do roi(da co hoa don)
                     FVAT.GetPhieu taikhoan.tk_id = TTDB_ID    ' mo form Fvat da duoc lap day thong tin
                 Else    'chua co hoa don,
+                    If FThuChi.FThuChiForm <> 0 Then
+                        If rs_import!hdon = "02" Then
+                            FVAT.Text1.Text = "1"
+                        Else
+                            FVAT.Text1.Text = "0"
+                        End If
+                    End If
+
                     FVAT.GetPhieu True
                     If cho_hien_vat = False Then FVAT.Command_Click
 
