@@ -131,7 +131,7 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Timer Timer154c 
       Enabled         =   0   'False
-      Interval        =   200
+      Interval        =   50
       Left            =   13800
       Top             =   4560
    End
@@ -5373,7 +5373,7 @@ Private Sub Xuly15Child()
         If rs_ktra152!tkno Like "15*" Then
 
             'Neu la ko la 711
-            If rs_ktra152!TkCo <> "711" Or (rs_ktra152!TkCo = "711" And rs_ktra152!dongia <> 0 And rs_ktra152!SoLuong <> 0) Then
+            If rs_ktra152!TkCo <> "711" Or (rs_ktra152!TkCo = "711" And rs_ktra152!dongia <> 0 And rs_ktra152!SoLuong <> 0 And rs_ktra152!dvt <> "") Then
                 txtchungtu(0).Text = rs_ktra152!tkno
                 txtChungtu_LostFocus (0)
                 'Neu co 711 va co so luong don gia
@@ -5833,8 +5833,11 @@ End Sub
 Private Sub Timer154c_Timer()
     Timer154c.Enabled = False
     If Not rs_ktchild154.EOF Then
-
-        XuLy154Child2
+        If rs_ktchild154!tkno Like "154*" Then
+            XuLy154Child2
+        Else
+            XuLy154Child3
+        End If
     Else
         'Xu ly tk thue
         'Xu ly lan 1
@@ -5898,25 +5901,67 @@ Private Sub Timer154c_Timer()
     End If
 End Sub
 Private Sub XuLy154Child2()
-    txtchungtu(0).Text = rs_ktchild154!tkno
-    txtChungtu_LostFocus (0)
-    RFocus txtchungtu(2)
-    If rs_ktchild154!MaCT <> "" Then
-        txtchungtu(2).Text = rs_ktchild154!MaCT
+    If rs_ktchild154!TkCo <> "711" Then
+        txtchungtu(0).Text = rs_ktchild154!tkno
+        txtChungtu_LostFocus (0)
+        RFocus txtchungtu(2)
+        If rs_ktchild154!MaCT <> "" Then
+            txtchungtu(2).Text = rs_ktchild154!MaCT
         Else
-         txtchungtu(2).Text = rs_ktchild154!sohieu
-    End If
-    txtChungtu_LostFocus (2)
+            If Not rs_ktchild154!tkno Like "154*" Then
+                txtchungtu(2).Text = rs_ktchild154!sohieu
+            End If
+        End If
+        txtChungtu_LostFocus (2)
 
-    RFocus txtchungtu(5)
-    txtchungtu(5).Text = rs_ktchild154!ttien
-    bakTongtien = rs_ktchild154!ttien
-    txtChungtu_LostFocus (5)
-    RFocus txtchungtu(6)
-    txtChungtu_KeyPress 6, 13
+        RFocus txtchungtu(5)
+        txtchungtu(5).Text = rs_ktchild154!ttien
+        bakTongtien = rs_ktchild154!ttien
+        txtChungtu_LostFocus (5)
+        RFocus txtchungtu(6)
+        txtChungtu_KeyPress 6, 13
+    Else
+        txtchungtu(0).Text = rs_ktchild154!TkCo
+        txtChungtu_LostFocus (0)
+        RFocus txtchungtu(6)
+        txtchungtu(6).Text = rs_ktchild154!ttien
+        txtChungtu_KeyPress 6, 13
+    End If
+
     rs_ktchild154.MoveNext
     Timer154c.Enabled = True
 End Sub
+Private Sub XuLy154Child3()
+'Truong hop khac 711
+    If rs_ktchild154!TkCo <> "711" Then
+        txtchungtu(0).Text = rs_ktchild154!tkno
+        txtChungtu_LostFocus (0)
+        RFocus txtchungtu(2)
+        txtchungtu(2).Text = rs_ktchild154!sohieu
+        txtChungtu_LostFocus (2)
+        txtchungtu(3).Text = rs_ktchild154!SoLuong
+        txtChungtu_LostFocus (3)
+        RFocus txtchungtu(4)
+
+        RFocus txtchungtu(5)
+        txtchungtu(5).Text = rs_ktchild154!ttien
+        bakTongtien = rs_ktchild154!ttien
+        txtChungtu_LostFocus (5)
+        RFocus txtchungtu(6)
+        txtChungtu_KeyPress 6, 13
+        rs_ktchild154.MoveNext
+        Timer154c.Enabled = True
+    Else
+        txtchungtu(0).Text = rs_ktchild154!TkCo
+        txtChungtu_LostFocus (0)
+        RFocus txtchungtu(6)
+        txtchungtu(6).Text = rs_ktchild154!ttien
+        txtChungtu_KeyPress 6, 13
+        rs_ktchild154.MoveNext
+        Timer154c.Enabled = True
+    End If
+End Sub
+
 Private Sub Xuly154Child(ByRef rs_import As Recordset)
 'Kiem tra xem co con khong
 
@@ -5928,7 +5973,11 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
         QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' GROUP BY MaCT"
         Dim countgroup As Integer
         countgroup = SelectSQL(QueryDistinct)
-        If countgroup <> countchild Then
+        'Kiem tra xem có 15 khác ngoài 154 không
+        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' AND (LEFT(TKNo, 3) <> '154' OR TKCo='711')"
+        Dim count154 As Integer
+        count154 = SelectSQL(QueryDistinct)
+        If countgroup <> countchild Or count154 >= 1 Then
             Dim Query2 As String
             Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
             Set rs_ktchild154 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
@@ -5937,7 +5986,7 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
                 Exit Sub
             End If
         End If
-        'Kiem tra xem có 15 khác ngoài 154 không
+
     End If
 
     'Xu ly tkNo
@@ -5946,8 +5995,13 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
     RFocus txtchungtu(2)
     txtchungtu(2).Text = rs_import!sohieutp
     txtChungtu_LostFocus (2)
-    txtchungtu(5).Text = rs_import!TgTCThue
-    bakTongtien = rs_import!TgTCThue
+    If rs_import!TgTCThue <> 0 Then
+        txtchungtu(5).Text = rs_import!TgTCThue
+        bakTongtien = rs_import!TgTCThue
+    Else
+        txtchungtu(5).Text = rs_import!TongTien
+        bakTongtien = rs_import!TongTien
+    End If
     txtChungtu_LostFocus (5)
     RFocus txtchungtu(6)
     txtChungtu_KeyPress 6, 13

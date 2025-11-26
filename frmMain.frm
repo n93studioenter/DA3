@@ -450,23 +450,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "12/11/25"
-            Key             =   ""
+            TextSave        =   "25/11/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2440,12 +2436,12 @@ Private Sub AuToNhapTP()
     End If
 End Sub
 Private Sub Form_Activate()    ' viet menu
-    'Tudongtinhgiavon = True
-    'Kiemtraphienban
-    ' FindLatestExe
-    
-    
-    
+'Tudongtinhgiavon = True
+'Kiemtraphienban
+' FindLatestExe
+
+
+
     Image1.Left = (Me.ScaleWidth * 87 / 100)
     Image1.Top = (Me.ScaleHeight * 5 / 100)
     Command1.Left = (Me.ScaleWidth * 90 / 100)
@@ -2461,6 +2457,8 @@ Private Sub Form_Activate()    ' viet menu
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN TaiKhoanVN TEXT(200)")
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN DiaChi TEXT(255)")
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN FAX TEXT(200)")
+    ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711 text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711ra text")
     'ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
     mnDuLieu.Caption = "Xö lý"
 
