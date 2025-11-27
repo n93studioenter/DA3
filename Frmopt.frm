@@ -5,10 +5,10 @@ Begin VB.Form FrmOptions
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Th«ng tin doanh nghiÖp"
-   ClientHeight    =   7845
+   ClientHeight    =   7770
    ClientLeft      =   660
    ClientTop       =   915
-   ClientWidth     =   10530
+   ClientWidth     =   10905
    ClipControls    =   0   'False
    FillColor       =   &H00FFFFC0&
    BeginProperty Font 
@@ -28,8 +28,8 @@ Begin VB.Form FrmOptions
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    Picture         =   "Frmopt.frx":57E2
-   ScaleHeight     =   7845
-   ScaleWidth      =   10530
+   ScaleHeight     =   7770
+   ScaleWidth      =   10905
    ShowInTaskbar   =   0   'False
    Tag             =   "Options"
    Begin VB.Frame Frame 
@@ -43,7 +43,7 @@ Begin VB.Form FrmOptions
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   3585
+      Height          =   5625
       Index           =   1
       Left            =   0
       TabIndex        =   69
@@ -148,7 +148,7 @@ Begin VB.Form FrmOptions
          Width           =   1455
       End
       Begin VB.CheckBox Check 
-         BackColor       =   &H00E0E0E0&
+         BackColor       =   &H00FFFFC0&
          Caption         =   "Cho nhËp trïng sè hiÖu chøng tõ kh¸c th¸ng"
          BeginProperty Font 
             Name            =   "VK Sans Serif"
@@ -161,10 +161,9 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   255
          Index           =   38
-         Left            =   5520
+         Left            =   120
          TabIndex        =   101
-         Top             =   5280
-         Visible         =   0   'False
+         Top             =   2520
          Width           =   4095
       End
       Begin VB.CheckBox Check 
@@ -2583,17 +2582,17 @@ Private Sub Form_Activate()
     End If
 
 
-    Dim col711 As Integer
+    Dim col711 As String
     col711 = SelectSQL("select col711 AS f1 from  License")
-    If col711 = 1 Then
+    If col711 = "1" Then
         CheckBox1(2).Value = 1
     Else
         CheckBox1(2).Value = 0
     End If
 
-    Dim col711ra As Integer
+    Dim col711ra As String
     col711ra = SelectSQL("select col711ra AS f1 from  License")
-    If col711ra = 1 Then
+    If col711ra = "1" Then
         CheckBox1(3).Value = 1
     Else
         CheckBox1(3).Value = 0
