@@ -5621,7 +5621,12 @@ Private Sub Xuly51Child()
             txtchungtu(0).Text = rs_ktra152!tkno
             txtChungtu_LostFocus (0)
         Else
-            txtchungtu(0).Text = rs_ktra152!TkCo
+            If rs_ktra152!TkCo <> "" Then
+                txtchungtu(0).Text = rs_ktra152!TkCo
+            Else
+                txtchungtu(0).Text = rs_ktra152!tkno
+            End If
+
             txtChungtu_LostFocus (0)
         End If
 
@@ -5645,7 +5650,7 @@ Private Sub Xuly51Child()
 
             Query = "SELECT * FROM Vattu WHERE SoHieu='" & rs_ktra152!sohieu & "'"
             Set rs_ktraVattu = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
-            If Not rs_ktraVattu.EOF And rs_ktra152!TkCo <> 5113 Then
+            If Not rs_ktraVattu.EOF And rs_ktra152!TkCo <> 5113 And rs_ktra152!TkCo <> "" Then
                 txtchungtu(2).Text = rs_ktra152!sohieu
                 txtChungtu_LostFocus (2)
                 txtchungtu(3).Text = rs_ktra152!SoLuong
@@ -5658,7 +5663,11 @@ Private Sub Xuly51Child()
             If rs_ktra152!tkno Like "521*" Then
                 txtchungtu(5).Text = rs_ktra152!ttien
             Else
-                txtchungtu(6).Text = rs_ktra152!ttien
+                If rs_ktra152!TkCo <> "" Then
+                    txtchungtu(6).Text = rs_ktra152!ttien
+                Else
+                    txtchungtu(5).Text = rs_ktra152!ttien
+                End If
             End If
 
             txtChungtu_KeyPress 6, 13
@@ -5777,10 +5786,10 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
         End If
     End If
 
-    If IsNull(rs_import!TgTCThue1) Or rs_import!TgTCThue1 = 0 Then
+    If rs_import!TgTCThue <> 0 Then
         bakTongtien = rs_import!TgTCThue
     Else
-        bakTongtien = rs_import!TgTCThue1
+        bakTongtien = rs_import!TongTien
     End If
 
     txtChungtu_LostFocus (5)
@@ -5851,10 +5860,8 @@ Private Sub Timer154c_Timer()
                 bakTongtien = rs_import!TgTCThue
             Else
                 txtchungtu(5).Text = rs_import!TVat
-                If IsNull(rs_import!TgTCThue1) Then
+                If bakTongtien = 0 Then
                     bakTongtien = rs_import!TgTThue
-                Else
-                    bakTongtien = rs_import!TgTCThue1
                 End If
             End If
 
@@ -5916,7 +5923,12 @@ Private Sub XuLy154Child2()
 
         RFocus txtchungtu(5)
         txtchungtu(5).Text = rs_ktchild154!ttien
-        bakTongtien = rs_ktchild154!ttien
+        'bakTongtien = rs_ktchild154!TongTien
+        If rs_import!TgTCThue <> 0 Then
+            bakTongtien = rs_import!TgTCThue
+        Else
+            bakTongtien = rs_import!TongTien
+        End If
         txtChungtu_LostFocus (5)
         RFocus txtchungtu(6)
         txtChungtu_KeyPress 6, 13

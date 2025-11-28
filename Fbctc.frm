@@ -3475,18 +3475,7 @@ Private Function InVATDauVao2(tdau As Integer, tcuoi As Integer, tl As Integer, 
             If Fx = 0 Then
                 SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
             Else
-                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu, SoHD, ChungTu.NgayCT AS NgayPH, MatHang, SoLuong, ThanhTien, " & _
-                                  "KhachHang.Ten, KhachHang.MST, ChungTu.SoHieu, SoPS, KhachHang.DiaChi, TyLe, " & _
-                                  "IIf(HoaDon.HTTT='1', '1', " & _
-                                  "IIf(HoaDon.HTTT='...', '1', " & _
-                                  "IIf(HoaDon.HTTT='3', '3', NULL))) AS HTTT, " & _
-                                  "MauSo, MaCT, HoaDon.MaSo, KCT " & _
-                                  "FROM " & ChungTu2TKHD(10) & " " & _
-                                  "WHERE Loai=-1 AND HD <>0 AND " & WThang("ThangCT", tdau, tcuoi) & " " & _
-                                  "AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) " & _
-                                  "ORDER BY NgayPH, MaCT"
-
-                SetSQL "QTest", "select * from KhachHang"
+                SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND (HDBL=0 OR KCT=0) AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
             End If
         Case 30:
             SetSQL "QNhatky", "SELECT DISTINCTROW KyHieu,SoHD,ChungTu.NgayCT as NgayPH,MatHang,SoLuong,ThanhTien,KhachHang.Ten,KhachHang.MST,ChungTu.SoHieu,SoPS,KhachHang.DiaChi,TyLe,HTTT,MauSo,MaCT,HoaDon.MaSo,KCT FROM " + ChungTu2TKHD(10) + " WHERE Loai=-1 AND (TyLe=5 OR TyLe=10) AND HD=" + CStr(HD) + " AND " + WThang("ThangCT", tdau, tcuoi) + " AND KCT=0 AND (HoaDon.DC=0 OR HD=1) ORDER BY NgayPH,MaCT"
