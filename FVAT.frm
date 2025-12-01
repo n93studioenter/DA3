@@ -797,8 +797,9 @@ Option Explicit
 
 Dim ngay As Date
 Dim ckh As New ClsKhachHang
+Dim Typehd As Integer
 
-Private blnInEvent As Boolean ' Khai báo ? d?u Module/Form
+Private blnInEvent As Boolean    ' Khai báo ? d?u Module/Form
 
 Private Sub ChkV_Click(Index As Integer)
     If blnInEvent Then Exit Sub
@@ -818,7 +819,7 @@ Private Sub ChkV_Click(Index As Integer)
             ChkV(6).Value = vbChecked
             ChkV(0).Value = vbUnchecked
             ChkV(2).Value = vbUnchecked
-            OptChon(2).Value = True
+            OptChon(4).Value = True
 
         End Select
     End If
@@ -865,7 +866,7 @@ Er:
     Dim gethd As Integer
     gethd = ChkV(0).Value
     If ChkV(6).Value = 1 Then
-        gethd = 3
+        gethd = 1
     End If
 
     With h    ' neu khach hang da co roi , thi lay thong tin dua vao class khach hang h
@@ -1067,7 +1068,7 @@ Public Sub GetPhieu(ttdb As Boolean)
     ChkV(4).Value = h.ts
     ChkV(5).Value = h.DC
 
-    If Text1.Text = "1" Then
+    If Text1.Text = "1" Or h.HTTT = "5" Then
         ChkV(6).Value = vbChecked
     End If
 

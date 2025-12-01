@@ -5320,7 +5320,7 @@ End Sub
 Private Sub XuLy15Childhd()
 
     If Not rs_ktra152.EOF Then
- 
+
         bakTen = rs_ktra152!Ten
         txtchungtu(0).Text = rs_ktra152!tkno
         txtChungtu_LostFocus (0)
@@ -5345,7 +5345,6 @@ Private Sub XuLy15Childhd()
         'txtChungtu_KeyPress 6
         FVAT.GetPhieu True
         FVAT.Show vbModal
-
         demThumua = demThumua + 1
         rs_ktra152.MoveNext
 
@@ -5764,7 +5763,7 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     If rs_import!TPhi = 0 Then
         txtchungtu(5).Text = rs_import!TgTCThue
         If rs_import!TgTCThue = 0 Then
-        txtchungtu(5).Text = rs_import!TongTien
+            txtchungtu(5).Text = rs_import!TongTien
         End If
     Else
         txtchungtu(5).Text = val(rs_import!TgTCThue) + val(rs_import!TPhi)
@@ -5787,7 +5786,11 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     End If
 
     If rs_import!TgTCThue <> 0 Then
-        bakTongtien = rs_import!TgTCThue
+        If rs_import!VAT2 <> 0 Then
+            bakTongtien = rs_import!TgTCThue1
+        Else
+            bakTongtien = rs_import!TgTCThue
+        End If
     Else
         bakTongtien = rs_import!TongTien
     End If
@@ -5980,7 +5983,7 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
     Dim countchild As Integer
     countchild = SelectSQL("SELECT COUNT(*) AS F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'")
 
-    If countchild > 1 Then
+    If countchild > 0 Then
         Dim QueryDistinct As String
         QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' GROUP BY MaCT"
         Dim countgroup As Integer
@@ -6033,7 +6036,12 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
             If IsNull(rs_import!TgTCThue1) Then
                 bakTongtien = rs_import!TgTCThue
             Else
-                bakTongtien = rs_import!TgTCThue
+                If IsNull(rs_import!TgTCThue2) Or rs_import!TgTCThue2 = 0 Then
+                    bakTongtien = rs_import!TgTCThue
+                Else
+                    bakTongtien = rs_import!TgTCThue1
+                End If
+
             End If
         End If
 
@@ -6087,6 +6095,11 @@ End Sub
 Private Sub XulyMiddle(ByRef rs_import As Recordset)
 
 'Xu ly hoa don tong hop
+    If rs_import!hdon = "02" Then
+        FVAT.Text1 = "1"
+    Else
+        FVAT.Text1 = "0"
+    End If
     If (rs_import!tkno Like "64*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "338*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
         FThuChi.FThuChiForm = 1
         Dim Query64 As String
