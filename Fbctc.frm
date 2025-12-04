@@ -2372,7 +2372,7 @@ Dim letter As String
 Dim Text1 As String
 Dim Text2 As String
 Dim MapNum As String
-Dim i, pos, item, TLen
+Dim i, Pos, item, TLen
     ' Assign content of input Textbox to Text1
     'Text1 = TextBox1(0).Text
     If IsNull(chuoi) Then
@@ -2411,13 +2411,13 @@ Dim i, pos, item, TLen
         Else
            ' get here if encounter a "&", obtain the position of the Unicode vowel
            ' Note that there'll be a bug if the text string contains genuine "|" character
-           pos = val(Mid(Text1, i + 1, 3))
-           If pos = 0 Then
+           Pos = val(Mid(Text1, i + 1, 3))
+           If Pos = 0 Then
                Text2 = Text2 & letter
                i = i + 1
            Else
              ' get the Unicode vowel for output
-               Text2 = Text2 & Mid(UVowels, pos, 1)
+               Text2 = Text2 & Mid(UVowels, Pos, 1)
                i = i + 4
            End If
         End If
@@ -6958,7 +6958,9 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     If Len(shct) > 0 Then
         sql = "SELECT SUM(ThanhTien) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKHD(-1) + " WHERE HoaDon.Loai=-1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi) + " AND RIGHT(HethongTK.SoHieu," + CStr(Len(shct)) + ") = '" + shct + "'"
     Else
-        sql = "SELECT SUM(ThanhTien) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKHD(0) + " WHERE HoaDon.Loai=-1 AND DC=0 AND " + WThang("ThangCT", tdau, tcuoi)
+        sql = "SELECT SUM(ThanhTien) AS F1, SUM(SoPS) AS F2 FROM " + ChungTu2TKHD(0) + _
+            " WHERE HoaDon.Loai=-1 AND DC=0 AND HD=1 AND KCT=0 AND HoaDon.httt <> '5' AND " + _
+              WThang("ThangCT", tdau, tcuoi)
     End If
     vvx = SelectSQL(sql, VV) + KT
     frmMain.Rpt.Formulas(19) = "TongVao=" + DoiDau(vvx)
