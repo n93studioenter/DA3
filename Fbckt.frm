@@ -8,9 +8,9 @@ Begin VB.Form FBcKt
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Sæ chi tiÕt "
-   ClientHeight    =   6855
+   ClientHeight    =   6720
    ClientLeft      =   3090
-   ClientTop       =   3810
+   ClientTop       =   3855
    ClientWidth     =   10185
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -28,7 +28,7 @@ Begin VB.Form FBcKt
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   ScaleHeight     =   6855
+   ScaleHeight     =   6720
    ScaleWidth      =   10185
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
@@ -252,124 +252,124 @@ Begin VB.Form FBcKt
       TabCaption(1)   =   "VËt t­, thµnh phÈm"
       TabPicture(1)   =   "Fbckt.frx":57FE
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "LbTenVT(0)"
-      Tab(1).Control(1)=   "LbTenTk(4)"
-      Tab(1).Control(2)=   "LbTenTk(10)"
-      Tab(1).Control(3)=   "LbTenTk(11)"
-      Tab(1).Control(4)=   "LbCT(0)"
-      Tab(1).Control(5)=   "LbCT(1)"
-      Tab(1).Control(6)=   "Line(4)"
-      Tab(1).Control(7)=   "Line(6)"
-      Tab(1).Control(8)=   "txtShTk(4)"
-      Tab(1).Control(9)=   "ChkDu(3)"
-      Tab(1).Control(10)=   "CboLoai(0)"
-      Tab(1).Control(11)=   "ChkDu(2)"
-      Tab(1).Control(12)=   "OptBC(10)"
-      Tab(1).Control(13)=   "OptBC(11)"
-      Tab(1).Control(14)=   "OptBC(12)"
-      Tab(1).Control(15)=   "OptBC(13)"
-      Tab(1).Control(16)=   "OptBC(14)"
-      Tab(1).Control(17)=   "OptBC(15)"
-      Tab(1).Control(18)=   "OptBC(16)"
-      Tab(1).Control(19)=   "cmdtk(4)"
-      Tab(1).Control(20)=   "OptBC(33)"
-      Tab(1).Control(21)=   "CboVV(0)"
-      Tab(1).Control(22)=   "ChkDu(4)"
-      Tab(1).Control(23)=   "CboLoai(1)"
-      Tab(1).Control(24)=   "cmdtk(10)"
-      Tab(1).Control(25)=   "ChkDu(7)"
-      Tab(1).Control(26)=   "OptBC(44)"
-      Tab(1).Control(27)=   "cmdtk(11)"
-      Tab(1).Control(28)=   "txtShTk(11)"
-      Tab(1).Control(29)=   "OptBC(46)"
-      Tab(1).Control(30)=   "OptBC(50)"
-      Tab(1).Control(31)=   "OptBC(51)"
-      Tab(1).Control(32)=   "OptBC(52)"
-      Tab(1).Control(33)=   "OptBC(59)"
-      Tab(1).Control(34)=   "cmdCT(0)"
-      Tab(1).Control(35)=   "OptBC(60)"
-      Tab(1).Control(36)=   "txtShVT(0)"
-      Tab(1).Control(37)=   "OptBC(64)"
-      Tab(1).Control(38)=   "OptBC(65)"
-      Tab(1).Control(39)=   "cmdvt(0)"
-      Tab(1).Control(40)=   "OptBC(54)"
-      Tab(1).Control(41)=   "Frame(5)"
-      Tab(1).Control(42)=   "txtShTk(10)"
-      Tab(1).Control(43)=   "OptBC(43)"
-      Tab(1).Control(44)=   "OptBC(74)"
-      Tab(1).Control(45)=   "OptBC(77)"
-      Tab(1).Control(46)=   "cmdCT(1)"
-      Tab(1).Control(47)=   "txtCT(1)"
-      Tab(1).Control(48)=   "txtCT(0)"
-      Tab(1).Control(49)=   "CboHD"
+      Tab(1).Control(0)=   "CboHD"
+      Tab(1).Control(1)=   "txtCT(0)"
+      Tab(1).Control(2)=   "txtCT(1)"
+      Tab(1).Control(3)=   "cmdCT(1)"
+      Tab(1).Control(4)=   "OptBC(77)"
+      Tab(1).Control(5)=   "OptBC(74)"
+      Tab(1).Control(6)=   "OptBC(43)"
+      Tab(1).Control(7)=   "txtShTk(10)"
+      Tab(1).Control(8)=   "Frame(5)"
+      Tab(1).Control(9)=   "OptBC(54)"
+      Tab(1).Control(10)=   "cmdvt(0)"
+      Tab(1).Control(11)=   "OptBC(65)"
+      Tab(1).Control(12)=   "OptBC(64)"
+      Tab(1).Control(13)=   "txtShVT(0)"
+      Tab(1).Control(14)=   "OptBC(60)"
+      Tab(1).Control(15)=   "cmdCT(0)"
+      Tab(1).Control(16)=   "OptBC(59)"
+      Tab(1).Control(17)=   "OptBC(52)"
+      Tab(1).Control(18)=   "OptBC(51)"
+      Tab(1).Control(19)=   "OptBC(50)"
+      Tab(1).Control(20)=   "OptBC(46)"
+      Tab(1).Control(21)=   "txtShTk(11)"
+      Tab(1).Control(22)=   "cmdtk(11)"
+      Tab(1).Control(23)=   "OptBC(44)"
+      Tab(1).Control(24)=   "ChkDu(7)"
+      Tab(1).Control(25)=   "cmdtk(10)"
+      Tab(1).Control(26)=   "CboLoai(1)"
+      Tab(1).Control(27)=   "ChkDu(4)"
+      Tab(1).Control(28)=   "CboVV(0)"
+      Tab(1).Control(29)=   "OptBC(33)"
+      Tab(1).Control(30)=   "cmdtk(4)"
+      Tab(1).Control(31)=   "OptBC(16)"
+      Tab(1).Control(32)=   "OptBC(15)"
+      Tab(1).Control(33)=   "OptBC(14)"
+      Tab(1).Control(34)=   "OptBC(13)"
+      Tab(1).Control(35)=   "OptBC(12)"
+      Tab(1).Control(36)=   "OptBC(11)"
+      Tab(1).Control(37)=   "OptBC(10)"
+      Tab(1).Control(38)=   "ChkDu(2)"
+      Tab(1).Control(39)=   "CboLoai(0)"
+      Tab(1).Control(40)=   "ChkDu(3)"
+      Tab(1).Control(41)=   "txtShTk(4)"
+      Tab(1).Control(42)=   "Line(6)"
+      Tab(1).Control(43)=   "Line(4)"
+      Tab(1).Control(44)=   "LbCT(1)"
+      Tab(1).Control(45)=   "LbCT(0)"
+      Tab(1).Control(46)=   "LbTenTk(11)"
+      Tab(1).Control(47)=   "LbTenTk(10)"
+      Tab(1).Control(48)=   "LbTenTk(4)"
+      Tab(1).Control(49)=   "LbTenVT(0)"
       Tab(1).ControlCount=   50
       TabCaption(2)   =   "Doanh thu - C«ng nî"
       TabPicture(2)   =   "Fbckt.frx":581A
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Label(3)"
-      Tab(2).Control(1)=   "LbTenVT(1)"
-      Tab(2).Control(2)=   "lbkh(1)"
-      Tab(2).Control(3)=   "lbkh(0)"
-      Tab(2).Control(4)=   "Line(1)"
-      Tab(2).Control(5)=   "Line(9)"
-      Tab(2).Control(6)=   "Line(10)"
-      Tab(2).Control(7)=   "txtHan"
-      Tab(2).Control(8)=   "OptBC(17)"
-      Tab(2).Control(9)=   "OptBC(34)"
-      Tab(2).Control(10)=   "OptBC(35)"
-      Tab(2).Control(11)=   "Frame(3)"
-      Tab(2).Control(12)=   "OptBC(36)"
-      Tab(2).Control(13)=   "OptBC(37)"
-      Tab(2).Control(14)=   "OptBC(38)"
-      Tab(2).Control(15)=   "cmdvt(1)"
-      Tab(2).Control(16)=   "txtShVT(1)"
-      Tab(2).Control(17)=   "OptBC(120)"
-      Tab(2).Control(18)=   "OptBC(49)"
+      Tab(2).Control(0)=   "Frame(4)"
+      Tab(2).Control(1)=   "cmdkh(0)"
+      Tab(2).Control(2)=   "txtshkh(1)"
+      Tab(2).Control(3)=   "txtshkh(0)"
+      Tab(2).Control(4)=   "cmdkh(1)"
+      Tab(2).Control(5)=   "ChkDu(14)"
+      Tab(2).Control(6)=   "OptBC(84)"
+      Tab(2).Control(7)=   "OptBC(82)"
+      Tab(2).Control(8)=   "OptBC(81)"
+      Tab(2).Control(9)=   "OptBC(80)"
+      Tab(2).Control(10)=   "OptBC(78)"
+      Tab(2).Control(11)=   "MedNgay(0)"
+      Tab(2).Control(12)=   "OptBC(70)"
+      Tab(2).Control(13)=   "OptBC(53)"
+      Tab(2).Control(14)=   "OptBC(67)"
+      Tab(2).Control(15)=   "OptBC(66)"
+      Tab(2).Control(16)=   "OptBC(63)"
+      Tab(2).Control(17)=   "OptBC(62)"
+      Tab(2).Control(18)=   "OptBC(58)"
       Tab(2).Control(19)=   "OptBC(57)"
-      Tab(2).Control(20)=   "OptBC(58)"
-      Tab(2).Control(21)=   "OptBC(62)"
-      Tab(2).Control(22)=   "OptBC(63)"
-      Tab(2).Control(23)=   "OptBC(66)"
-      Tab(2).Control(24)=   "OptBC(67)"
-      Tab(2).Control(25)=   "OptBC(53)"
-      Tab(2).Control(26)=   "OptBC(70)"
-      Tab(2).Control(27)=   "MedNgay(0)"
-      Tab(2).Control(28)=   "OptBC(78)"
-      Tab(2).Control(29)=   "OptBC(80)"
-      Tab(2).Control(30)=   "OptBC(81)"
-      Tab(2).Control(31)=   "OptBC(82)"
-      Tab(2).Control(32)=   "OptBC(84)"
-      Tab(2).Control(33)=   "ChkDu(14)"
-      Tab(2).Control(34)=   "cmdkh(1)"
-      Tab(2).Control(35)=   "txtshkh(0)"
-      Tab(2).Control(36)=   "txtshkh(1)"
-      Tab(2).Control(37)=   "cmdkh(0)"
-      Tab(2).Control(38)=   "Frame(4)"
+      Tab(2).Control(20)=   "OptBC(49)"
+      Tab(2).Control(21)=   "OptBC(120)"
+      Tab(2).Control(22)=   "txtShVT(1)"
+      Tab(2).Control(23)=   "cmdvt(1)"
+      Tab(2).Control(24)=   "OptBC(38)"
+      Tab(2).Control(25)=   "OptBC(37)"
+      Tab(2).Control(26)=   "OptBC(36)"
+      Tab(2).Control(27)=   "Frame(3)"
+      Tab(2).Control(28)=   "OptBC(35)"
+      Tab(2).Control(29)=   "OptBC(34)"
+      Tab(2).Control(30)=   "OptBC(17)"
+      Tab(2).Control(31)=   "txtHan"
+      Tab(2).Control(32)=   "Line(10)"
+      Tab(2).Control(33)=   "Line(9)"
+      Tab(2).Control(34)=   "Line(1)"
+      Tab(2).Control(35)=   "lbkh(0)"
+      Tab(2).Control(36)=   "lbkh(1)"
+      Tab(2).Control(37)=   "LbTenVT(1)"
+      Tab(2).Control(38)=   "Label(3)"
       Tab(2).ControlCount=   39
       TabCaption(3)   =   "Tµi s¶n cè ®Þnh"
       TabPicture(3)   =   "Fbckt.frx":5836
       Tab(3).ControlEnabled=   0   'False
-      Tab(3).Control(0)=   "OptBC(79)"
-      Tab(3).Control(1)=   "OptBC(71)"
-      Tab(3).Control(2)=   "OptBC(68)"
-      Tab(3).Control(3)=   "OptBC(61)"
-      Tab(3).Control(4)=   "OptBC(45)"
-      Tab(3).Control(5)=   "Frame(2)"
-      Tab(3).Control(6)=   "OptBC(31)"
-      Tab(3).Control(7)=   "OptBC(30)"
-      Tab(3).Control(8)=   "OptBC(29)"
-      Tab(3).Control(9)=   "OptBC(28)"
+      Tab(3).Control(0)=   "Line(11)"
+      Tab(3).Control(1)=   "OptBC(18)"
+      Tab(3).Control(2)=   "OptBC(19)"
+      Tab(3).Control(3)=   "OptBC(20)"
+      Tab(3).Control(4)=   "OptBC(21)"
+      Tab(3).Control(5)=   "OptBC(22)"
+      Tab(3).Control(6)=   "OptBC(23)"
+      Tab(3).Control(7)=   "OptBC(24)"
+      Tab(3).Control(8)=   "OptBC(25)"
+      Tab(3).Control(9)=   "OptBC(26)"
       Tab(3).Control(10)=   "OptBC(27)"
-      Tab(3).Control(11)=   "OptBC(26)"
-      Tab(3).Control(12)=   "OptBC(25)"
-      Tab(3).Control(13)=   "OptBC(24)"
-      Tab(3).Control(14)=   "OptBC(23)"
-      Tab(3).Control(15)=   "OptBC(22)"
-      Tab(3).Control(16)=   "OptBC(21)"
-      Tab(3).Control(17)=   "OptBC(20)"
-      Tab(3).Control(18)=   "OptBC(19)"
-      Tab(3).Control(19)=   "OptBC(18)"
-      Tab(3).Control(20)=   "Line(11)"
+      Tab(3).Control(11)=   "OptBC(28)"
+      Tab(3).Control(12)=   "OptBC(29)"
+      Tab(3).Control(13)=   "OptBC(30)"
+      Tab(3).Control(14)=   "OptBC(31)"
+      Tab(3).Control(15)=   "Frame(2)"
+      Tab(3).Control(16)=   "OptBC(45)"
+      Tab(3).Control(17)=   "OptBC(61)"
+      Tab(3).Control(18)=   "OptBC(68)"
+      Tab(3).Control(19)=   "OptBC(71)"
+      Tab(3).Control(20)=   "OptBC(79)"
       Tab(3).ControlCount=   21
       Begin VB.PictureBox Picture1 
          Height          =   15
@@ -4310,7 +4310,7 @@ End Sub
 Private Sub txtsh_LostFocus(Index As Integer)
     Dim ms As Long
     
-    Lb(Index).Caption = TenNV(txtsh(Index).Text, ms)
+    lb(Index).Caption = TenNV(txtsh(Index).Text, ms)
     txtsh(Index).tag = ms
 End Sub
 
@@ -4590,7 +4590,7 @@ End Sub
 '===================================================================================================
 Private Sub InLuyKe(mkho As Long, shtk As String, mloai As Long, tdau As Integer, tcuoi As Integer, Optional T As Boolean = True, Optional loailk As Integer = 0)
     Dim sql As String, st As String, sqlln As String, sqllx As String, sqltn As String, sqltx As String, i As Integer, sqltn2 As String, sqltx2 As String
-    
+
     GauGe.Max = 3
     For i = CThangDB(tdau) To CThangDB(tcuoi)
         st = CStr(i)
@@ -4605,7 +4605,7 @@ Private Sub InLuyKe(mkho As Long, shtk As String, mloai As Long, tdau As Integer
     st = CStr(CThangDB(tcuoi))
     XDTyLeQD 0
     If mkho > 0 Then
-    'neu dua , HethongTK.SoHieu  vao group no se tinh rieng tung tai khoan
+        'neu dua , HethongTK.SoHieu  vao group no se tinh rieng tung tai khoan
         sql = "SELECT DISTINCTROW  Sum(TonKho.Tien_" + st + ")  AS SHTK, First(HeThongTK.Ten" + IIf(nn > 0, "E", "") + ") AS TenTK, First(PhanLoaiVattu.PLCha) AS PLCha3," _
             & " First(PhanLoaiVattu.SoHieu) AS SHPL3, First(PhanLoaiVattu.TenPhanLoai) AS TenPL3, Vattu.SoHieu, Vattu.TenVattu, Vattu.DonVi, Sum(TonKho.Tien_" + CStr(CThangDB(ThangTruoc(tdau))) + ") AS DkTien," _
             & " Sum(TonKho.Luong_" + CStr(CThangDB(ThangTruoc(tdau))) + ") AS DkLuong, Sum(" + sqltn + ") AS TienNhap, Sum(" + sqlln + ") AS LuongNhap, Sum(" + sqltx + ") AS TienXuat," _
@@ -4620,7 +4620,7 @@ Private Sub InLuyKe(mkho As Long, shtk As String, mloai As Long, tdau As Integer
     Else
         ExecuteSQL5 "DELETE * FROM BaoCaoCP2"
         ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,BC_ID,MK,Kq1,Kq2) SELECT First(MaSo),First(Cstr(MaSo)),MaTKNo,MaVattu,MaKho,Sum(SoPS2No),Sum(SoPS) " _
-            & "FROM ChungTu WHERE MaLoai=4 AND MaTKNo=MaTKCo AND " + WThang("ThangCT", tdau, tcuoi) + " GROUP BY MaKho,MaTKNo,MaVattu"
+                  & "FROM ChungTu WHERE MaLoai=4 AND MaTKNo=MaTKCo AND " + WThang("ThangCT", tdau, tcuoi) + " GROUP BY MaKho,MaTKNo,MaVattu"
         sql = "SELECT DISTINCTROW First(HeThongTK.SoHieu) AS SHTK, First(HeThongTK.Ten" + IIf(nn > 0, "E", "") + ") AS TenTK, First(PhanLoaiVattu.PLCha) AS PLCha3," _
             & " First(PhanLoaiVattu.SoHieu) AS SHPL3, First(PhanLoaiVattu.TenPhanLoai) AS TenPL3, Vattu.SoHieu, Vattu.TenVattu, Vattu.DonVi, Sum(TonKho.Tien_" + CStr(CThangDB(ThangTruoc(tdau))) + ") AS DkTien," _
             & " Sum(TonKho.Luong_" + CStr(CThangDB(ThangTruoc(tdau))) + ") AS DkLuong, Sum(" + sqltn + "-iif(isnull(Kq2),0,Kq2)) AS TienNhap, Sum(" + sqlln + "-iif(isnull(Kq1),0,Kq1)) AS LuongNhap, Sum(" + sqltx + "-iif(isnull(Kq2),0,Kq2)) AS TienXuat," _
@@ -4632,29 +4632,30 @@ Private Sub InLuyKe(mkho As Long, shtk As String, mloai As Long, tdau As Integer
             + " Having Sum(TonKho.Luong_" + st + ")<>0 OR Sum(TonKho.Tien_" + st + ")<>0 OR SUM(" + sqlln + ")<>0 OR SUM(" + sqltn + ")<>0 OR SUM(" + sqllx + ")<>0 OR SUM(" + sqltx + ")<>0" + IIf(pGiaUSD > 0, " OR Sum(TonKho.USDTien_" + st + ")<>0 OR SUM(" + sqltn2 + ")<>0 OR SUM(" + sqltx2 + ")<>0", "") _
             + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") _
             + IIf(mloai <> 0, " AND PhanLoaiVattu.SoHieu LIKE '" + MaSo2SoHieu(mloai, "PhanLoaiVattu") + "*'", "") + " ORDER BY Vattu.SoHieu"
+
     End If
     SetSQL "QChitiet", sql
     sql = "SELECT QChitiet.*,PhanLoaiVattu.SoHieu AS SHPL2,TenPhanLoai AS TenPL2,PhanLoaiVattu.PLCha AS PLCha2 FROM QChitiet LEFT JOIN PhanLoaiVattu ON QChitiet.PLCha3=PhanLoaiVattu.MaSo"
     SetSQL "QDuPhong", sql
     sql = "SELECT QDuPhong.*,PhanLoaiVattu.SoHieu AS SHPL1,TenPhanLoai AS TenPL1 FROM QDuPhong LEFT JOIN PhanLoaiVattu ON QDuPhong.PLCha2=PhanLoaiVattu.MaSo ORDER BY QDuPhong.Sohieu"
     SetSQL "QLuyKe", sql
-    
-   Dim thong_bao
-   thong_bao = ""
-   Dim rs_chungtu As Recordset
-   sql = "select * from QLuyKe where (ckluong < 0 or cktien < 0) or (ckluong <= 0 and  cktien > 0) "
-   Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+
+    Dim thong_bao
+    thong_bao = ""
+    Dim rs_chungtu As Recordset
+    sql = "select * from QLuyKe where (ckluong < 0 or cktien < 0) or (ckluong <= 0 and  cktien > 0) "
+    Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     Do While Not rs_chungtu.EOF
         thong_bao = thong_bao + rs_chungtu!sohieu + " : SL " + str(rs_chungtu!ckluong) + "  Tong tien: " + Format(rs_chungtu!cktien, Mask_2) + Chr(13)
-     rs_chungtu.MoveNext
+        rs_chungtu.MoveNext
     Loop
-       rs_chungtu.Close
+    rs_chungtu.Close
     If (Len(thong_bao) > 0) Then
-    thong_bao = "B¹n cÇn kiÓm tra l¹i s¶n phÈm: " + Chr(13) + thong_bao
+        thong_bao = "B¹n cÇn kiÓm tra l¹i s¶n phÈm: " + Chr(13) + thong_bao
         MsgBox (thong_bao)
     End If
 
-    
+
     GauGe.Value = 2
     frmMain.Rpt.Formulas(3) = "TenKho='" + IIf(mkho > 0, "Kho: " + CboKho(0).Text, "") + "'"
     frmMain.Rpt.Formulas(4) = "ThoiGian='" + ThoiGian(tdau, tcuoi, nn) + "'"
@@ -4663,7 +4664,7 @@ Private Sub InLuyKe(mkho As Long, shtk As String, mloai As Long, tdau As Integer
     Else
         frmMain.Rpt.ReportFileName = "LUYKEL" + IIf(pGiaUSD > 0, "X", "") + ".RPT"
     End If
-'    ExecuteSQL5 "update QLuyKe set SHTK = '111' "
+    '    ExecuteSQL5 "update QLuyKe set SHTK = '111' "
     RptSetDate NgayCuoiThang(pNamTC, tcuoi), nn
     GauGe.Value = 3
 End Sub
@@ -4703,7 +4704,7 @@ Private Function InCTNoQuaHan(ngayh As Date, songay As Integer, mpl As Long) As 
     Dim dk As Boolean
     
     ExecuteSQL5 "DELETE FROM BaoCaoCP"
-    i = CThangDB(Month(ngayh))
+    i = CThangDB(month(ngayh))
     Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten " _
         & " FROM ((KhachHang INNER JOIN SoDuKhachHang ON KhachHang.MaSo=SoDuKhachHang.MaKhachHang) INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo) INNER JOIN PhanLoaiKhachHang ON KhachHang.MaPhanLoai=PhanLoaiKhachHang.MaSo " _
         & " WHERE TK_ID=" + CStr(TKCNKH_ID) + " AND (SoDuKhachHang.DuNo_" + CStr(i - 1) + ">0 OR SoDuKhachHang.No_" + CStr(i) + ">0) " + IIf(mpl > 0, " AND PhanLoaiKhachHang.SoHieu LIKE '" + MaSo2SoHieu(mpl, "PhanLoaiKhachHang") + "*'", "") + " ORDER BY KhachHang.SoHieu DESC", dbOpenSnapshot)
@@ -4767,7 +4768,7 @@ Private Function InCTNoQuaHan(ngayh As Date, songay As Integer, mpl As Long) As 
         frmMain.Rpt.ReportFileName = "CNQH.RPT"
         RptSetDate ngayh
         frmMain.Rpt.Formulas(5) = "ThoiGian = 'TÝnh ®Õn ngµy " + Format(ngayh, "dd/mm/yy") + " víi thêi h¹n " + CStr(songay) + " ngµy " + IIf(mpl > 0, " - " + CboKH.Text, "") + "'"
-        frmMain.Rpt.Formulas(6) = "NgayHan = Date(" + CStr(Year(ngayh)) + "," + CStr(Month(ngayh)) + "," + CStr(Day(ngayh)) + ")"
+        frmMain.Rpt.Formulas(6) = "NgayHan = Date(" + CStr(Year(ngayh)) + "," + CStr(month(ngayh)) + "," + CStr(Day(ngayh)) + ")"
     Else
         InCTNoQuaHan = False
         MsgBox "Kh«ng cã nî qu¸ h¹n !", vbInformation, App.ProductName
@@ -5532,40 +5533,40 @@ End Sub
 
 Private Sub InLuyKeN(mkho As Long, shtk As String, mloai As Long, ndau As Date, ncuoi As Date, Optional T As Boolean = True, Optional loailk As Integer = 0)
     Dim sql As String
-    
+
     ExecuteSQL5 "DELETE * FROM BaoCaoCP"
-    
+
     GauGe.Max = 3
     ExecuteSQL5 "INSERT INTO BaoCaoCP (MaSo,SoHieu,MaCha,BC_ID,MK,Kq1,Kq2) SELECT First(TonKho.MaSo),Cstr(First(TonKho.MaSo)),MaTaiKhoan,MaVattu,MaSoKho,Sum(Luong_0),Sum(Tien_0) FROM (TonKho INNER JOIN Vattu ON TonKho.MaVattu=Vattu.MaSo) INNER JOIN HethongTK ON TonKho.MaTaiKhoan=HethongTK.MaSo WHERE (TRUE)" _
-        + IIf(mkho > 0, " AND MaSoKho=" + CStr(mkho), "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY MaSoKho,MaTaiKhoan,MaVattu"
-        
+              + IIf(mkho > 0, " AND MaSoKho=" + CStr(mkho), "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY MaSoKho,MaTaiKhoan,MaVattu"
+
     ' Tinh dau ky
     ExecuteSQL5 "DELETE * FROM BaoCaoCP2"
     ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,BC_ID,MK,Kq1,Kq2) SELECT First(ChungTu.MaSo),Cstr(First(ChungTu.MaSo)),MaTKNo,MaVattu,IIF(MaLoai=1,MaKho,MaNguon),Sum(SoPS2No),Sum(SoPS) FROM (ChungTu INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo " _
-        & " WHERE (MaLoai=1" + IIf(mkho > 0, " OR MaLoai=4)", ")") + " AND NgayGS<#" + Format(ndau, Mask_DB) + "#" _
-        + IIf(mkho > 0, " AND ((MaKho=" + CStr(mkho) + " AND MaLoai=1) OR (MaNguon=" + CStr(mkho) + " AND MaLoai=4))", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY IIF(MaLoai=1,MaKho,MaNguon),MaTKNo,MaVattu"
+              & " WHERE (MaLoai=1" + IIf(mkho > 0, " OR MaLoai=4)", ")") + " AND NgayGS<#" + Format(ndau, Mask_DB) + "#" _
+              + IIf(mkho > 0, " AND ((MaKho=" + CStr(mkho) + " AND MaLoai=1) OR (MaNguon=" + CStr(mkho) + " AND MaLoai=4))", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY IIF(MaLoai=1,MaKho,MaNguon),MaTKNo,MaVattu"
     ExecuteSQL5 "UPDATE BaoCaoCP INNER JOIN BaoCaoCP2 ON BaoCaoCP.MaCha=BaoCaoCP2.MaCha AND BaoCaoCP.BC_ID=BaoCaoCP2.BC_ID AND BaoCaoCP.MK=BaoCaoCP2.MK SET BaoCaoCP.Kq1=BaoCaoCP.Kq1+BaoCaoCP2.Kq1,BaoCaoCP.Kq2=BaoCaoCP.Kq2+BaoCaoCP2.Kq2"
-    
+
     ExecuteSQL5 "DELETE * FROM BaoCaoCP2"
     ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,BC_ID,MK,Kq1,Kq2) SELECT First(ChungTu.MaSo),Cstr(First(ChungTu.MaSo)),MaTKCo,MaVattu,MaKho,Sum(SoPS2Co),Sum(SoPS) FROM (ChungTu INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN HethongTK ON ChungTu.MaTKCo=HethongTK.MaSo " _
-        & " WHERE (MaLoai=2" + IIf(mkho > 0, " OR MaLoai=4)", ")") + " AND NgayGS<#" + Format(ndau, Mask_DB) + "#" _
-        + IIf(mkho > 0, " AND (MaKho=" + CStr(mkho) + ")", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY MaKho,MaTKCo,MaVattu"
+              & " WHERE (MaLoai=2" + IIf(mkho > 0, " OR MaLoai=4)", ")") + " AND NgayGS<#" + Format(ndau, Mask_DB) + "#" _
+              + IIf(mkho > 0, " AND (MaKho=" + CStr(mkho) + ")", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY MaKho,MaTKCo,MaVattu"
     ExecuteSQL5 "UPDATE BaoCaoCP INNER JOIN BaoCaoCP2 ON BaoCaoCP.MaCha=BaoCaoCP2.MaCha AND BaoCaoCP.BC_ID=BaoCaoCP2.BC_ID AND BaoCaoCP.MK=BaoCaoCP2.MK SET BaoCaoCP.Kq1=BaoCaoCP.Kq1-BaoCaoCP2.Kq1,BaoCaoCP.Kq2=BaoCaoCP.Kq2-BaoCaoCP2.Kq2"
-        
+
     ' Tinh tong so nhap xuat
     ExecuteSQL5 "DELETE * FROM BaoCaoCP2"
     ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,BC_ID,MK,Kq1,Kq2) SELECT First(ChungTu.MaSo),Cstr(First(ChungTu.MaSo)),MaTKNo,MaVattu,IIF(MaLoai=1,MaKho,MaNguon),Sum(SoPS2No),Sum(SoPS) FROM (ChungTu INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN HethongTK ON ChungTu.MaTKNo=HethongTK.MaSo " _
-        & " WHERE (MaLoai=1" + IIf(mkho > 0, " OR MaLoai=4)", " OR (MaLoai=4 AND MaTKNo<>MaTKCo))") + " AND " + WNgay("NgayGS", ndau, ncuoi) _
-        + IIf(mkho > 0, " AND ((MaKho=" + CStr(mkho) + " AND MaLoai=1) OR (MaNguon=" + CStr(mkho) + " AND MaLoai=4))", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY IIF(MaLoai=1,MaKho,MaNguon),MaTKNo,MaVattu"
+              & " WHERE (MaLoai=1" + IIf(mkho > 0, " OR MaLoai=4)", " OR (MaLoai=4 AND MaTKNo<>MaTKCo))") + " AND " + WNgay("NgayGS", ndau, ncuoi) _
+              + IIf(mkho > 0, " AND ((MaKho=" + CStr(mkho) + " AND MaLoai=1) OR (MaNguon=" + CStr(mkho) + " AND MaLoai=4))", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY IIF(MaLoai=1,MaKho,MaNguon),MaTKNo,MaVattu"
     ExecuteSQL5 "UPDATE BaoCaoCP INNER JOIN BaoCaoCP2 ON BaoCaoCP.MaCha=BaoCaoCP2.MaCha AND BaoCaoCP.BC_ID=BaoCaoCP2.BC_ID AND BaoCaoCP.MK=BaoCaoCP2.MK SET BaoCaoCP.Kq3=BaoCaoCP2.Kq1,BaoCaoCP.Kq4=BaoCaoCP2.Kq2"
-    
+
     ExecuteSQL5 "DELETE * FROM BaoCaoCP2"
     ExecuteSQL5 "INSERT INTO BaoCaoCP2 (MaSo,SoHieu,MaCha,BC_ID,MK,Kq1,Kq2) SELECT First(ChungTu.MaSo),Cstr(First(ChungTu.MaSo)),MaTKCo,MaVattu,MaKho,Sum(SoPS2Co),Sum(SoPS) FROM (ChungTu INNER JOIN Vattu ON ChungTu.MaVattu=Vattu.MaSo) INNER JOIN HethongTK ON ChungTu.MaTKCo=HethongTK.MaSo " _
-        & " WHERE (MaLoai=2" + IIf(mkho > 0, " OR MaLoai=4", " OR (MaLoai=4 AND MaTKNo<>MaTKCo)") + ") AND " + WNgay("NgayGS", ndau, ncuoi) _
-        + IIf(mkho > 0, " AND (MaKho=" + CStr(mkho) + ")", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY MaKho,MaTKCo,MaVattu"
+              & " WHERE (MaLoai=2" + IIf(mkho > 0, " OR MaLoai=4", " OR (MaLoai=4 AND MaTKNo<>MaTKCo)") + ") AND " + WNgay("NgayGS", ndau, ncuoi) _
+              + IIf(mkho > 0, " AND (MaKho=" + CStr(mkho) + ")", "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") + IIf(mloai > 0, " AND MaPhanLoai=" + CStr(mloai), "") + " GROUP BY MaKho,MaTKCo,MaVattu"
     ExecuteSQL5 "UPDATE BaoCaoCP INNER JOIN BaoCaoCP2 ON BaoCaoCP.MaCha=BaoCaoCP2.MaCha AND BaoCaoCP.BC_ID=BaoCaoCP2.BC_ID AND BaoCaoCP.MK=BaoCaoCP2.MK SET BaoCaoCP.Kq5=BaoCaoCP2.Kq1,BaoCaoCP.Kq6=BaoCaoCP2.Kq2"
-    
-     If GetSetting(IniPath, "Stock", "DailySummary", 0) = 0 Then
+
+    If GetSetting(IniPath, "Stock", "DailySummary", 0) = 0 Then
         ExecuteSQL5 "DELETE * FROM BaoCaoCP WHERE Kq1=0 AND Kq2=0 AND Kq3=0 AND Kq4=0 AND Kq5=0 AND Kq6=0"
     Else
         ExecuteSQL5 "DELETE * FROM BaoCaoCP WHERE Kq3=0 AND Kq4=0 AND Kq5=0 AND Kq6=0"
@@ -5573,7 +5574,8 @@ Private Sub InLuyKeN(mkho As Long, shtk As String, mloai As Long, ndau As Date, 
     ExecuteSQL5 "UPDATE BaoCaoCP SET Kq7=Kq1+Kq3-Kq5,Kq8=Kq2+Kq4-Kq6"
     XDTyLeQD 0
     GauGe.Value = 1
-    sql = "SELECT DISTINCTROW First(HeThongTK.SoHieu) AS SHTK, First(HeThongTK.Ten" + IIf(nn > 0, "E", "") + ") AS TenTK, First(PhanLoaiVattu.PLCha) AS PLCha3," _
+    Dim sql2 As String
+    sql2 = "SELECT DISTINCTROW First(HeThongTK.SoHieu) AS SHTK, First(HeThongTK.Ten" + IIf(nn > 0, "E", "") + ") AS TenTK, First(PhanLoaiVattu.PLCha) AS PLCha3," _
         & " First(PhanLoaiVattu.SoHieu) AS SHPL3, First(PhanLoaiVattu.TenPhanLoai) AS TenPL3, Vattu.SoHieu, Vattu.TenVattu, Vattu.DonVi, Sum(Kq2) AS DkTien," _
         & " Sum(Kq1) AS DkLuong, Sum(Kq4) AS TienNhap, Sum(Kq3) AS LuongNhap, Sum(Kq6) AS TienXuat," _
         & " Sum(Kq5) AS LuongXuat, Sum(Kq7) AS CkLuong, Sum(Kq8) AS CkTien, First(Vattu.MaSo) AS MVT " _
@@ -5583,6 +5585,56 @@ Private Sub InLuyKeN(mkho As Long, shtk As String, mloai As Long, ndau As Date, 
         + IIf(mkho <> 0, " AND TonKho.MaSoKho = " + CStr(mkho), "") + IIf(Len(shtk) > 0, " AND HethongTK.SoHieu LIKE '" + shtk + "*'", "") _
         + IIf(mloai <> 0, " AND PhanLoaiVattu.SoHieu LIKE '" + MaSo2SoHieu(mloai, "PhanLoaiVattu") + "*'", "") _
         + " ORDER BY HeThongTK.SoHieu, PhanLoaiVattu.SoHieu, Vattu.SoHieu"
+
+    sql = "SELECT DISTINCTROW " & _
+           "First(HeThongTK.SoHieu) AS SHTK, " & _
+           "First(HeThongTK.Ten) AS TenTK, " & _
+           "First(PhanLoaiVattu.PLCha) AS PLCha3, " & _
+           "First(PhanLoaiVattu.SoHieu) AS SHPL3, " & _
+           "First(PhanLoaiVattu.TenPhanLoai) AS TenPL3, " & _
+           "Vattu.SoHieu, " & _
+           "CStr(Vattu.TenVattu) AS TenVattu, " & _
+           "Vattu.DonVi, " & _
+           "Sum(Kq2) AS DkTien, " & _
+           "Sum(Kq1) AS DkLuong, " & _
+           "Sum(Kq4) AS TienNhap, " & _
+           "Sum(Kq3) AS LuongNhap, " & _
+           "Sum(Kq6) AS TienXuat, " & _
+           "Sum(Kq5) AS LuongXuat, " & _
+           "Sum(Kq7) AS CkLuong, " & _
+           "Sum(Kq8) AS CkTien, " & _
+           "First(Vattu.MaSo) AS MVT "
+
+    ' Ph?n FROM và JOIN
+    sql = sql & "FROM (HeThongTK " & _
+           "RIGHT JOIN ((PhanLoaiVattu " & _
+           "RIGHT JOIN Vattu ON PhanLoaiVattu.MaSo = Vattu.MaPhanLoai) " & _
+           "RIGHT JOIN TonKho ON Vattu.MaSo = TonKho.MaVatTu) " & _
+           "ON HeThongTK.MaSo = TonKho.MaTaiKhoan) " & _
+           "INNER JOIN BaoCaoCP " & _
+           "ON TonKho.MaSoKho = BaoCaoCP.MK " & _
+           "AND TonKho.MaTaiKhoan = BaoCaoCP.MaCha " & _
+           "AND TonKho.MaVattu = BaoCaoCP.BC_ID "
+
+    ' Ph?n GROUP BY, HAVING, ORDER BY
+    sql = sql & "GROUP BY " & _
+           "HeThongTK.MaSo, " & _
+           "HeThongTK.SoHieu, " & _
+           "HeThongTK.Ten, " & _
+           "PhanLoaiVattu.MaSo, " & _
+           "PhanLoaiVattu.SoHieu, " & _
+           "PhanLoaiVattu.TenPhanLoai, " & _
+           "Vattu.SoHieu, " & _
+           "CStr(Vattu.TenVattu), " & _
+           "Vattu.DonVi " & _
+           "HAVING (TRUE) " & _
+           "ORDER BY " & _
+           "HeThongTK.SoHieu, " & _
+           "PhanLoaiVattu.SoHieu, " & _
+           "Vattu.SoHieu"
+
+
+
     SetSQL "QChitiet", sql
     sql = "SELECT QChitiet.*,PhanLoaiVattu.SoHieu AS SHPL2,TenPhanLoai AS TenPL2,PhanLoaiVattu.PLCha AS PLCha2 FROM QChitiet LEFT JOIN PhanLoaiVattu ON QChitiet.PLCha3=PhanLoaiVattu.MaSo"
     SetSQL "QDuPhong", sql
@@ -7161,7 +7213,7 @@ Private Sub InBangThopCN_HN(ndau As Date, ncuoi As Date, taikhoan As ClsTaikhoan
     frmMain.Rpt.ReportFileName = pCurDir + "REPORTS\THSDCN5.RPT"
     
     frmMain.Rpt.Formulas(3) = "ThoiGian='Tõ ngµy " + Format(ndau, Mask_DR) + " ®Õn ngµy " + Format(ncuoi, Mask_DR) + "'"
-    frmMain.Rpt.Formulas(4) = "Ngay1=Date(" + CStr(Year(ncuoi)) + "," + CStr(Month(ncuoi)) + "," + CStr(Day(ncuoi)) + ")"
+    frmMain.Rpt.Formulas(4) = "Ngay1=Date(" + CStr(Year(ncuoi)) + "," + CStr(month(ncuoi)) + "," + CStr(Day(ncuoi)) + ")"
     RptSetDate ncuoi
     If taikhoan.sohieu <> "" Then
         frmMain.Rpt.Formulas(5) = "TenBaoCao = IF PageNumber() = 1 THEN '" + ABCtoVNI("Tµi kho¶n: ") + taikhoan.sohieu + " - " + LbTenTk(7).Caption + "'"
@@ -7191,7 +7243,7 @@ Private Sub InChitietCN_HN(mcn As Long, ndau As Date, ncuoi As Date, taikhoan As
     frmMain.Rpt.ReportFileName = pCurDir + "REPORTS\CTCN5.RPT"
     
     frmMain.Rpt.Formulas(3) = "ThoiGian='Tõ ngµy " + Format(ndau, Mask_DR) + " ®Õn ngµy " + Format(ncuoi, Mask_DR) + "'"
-    frmMain.Rpt.Formulas(4) = "Ngay1=Date(" + CStr(Year(ncuoi)) + "," + CStr(Month(ncuoi)) + "," + CStr(Day(ncuoi)) + ")"
+    frmMain.Rpt.Formulas(4) = "Ngay1=Date(" + CStr(Year(ncuoi)) + "," + CStr(month(ncuoi)) + "," + CStr(Day(ncuoi)) + ")"
     RptSetDate ncuoi
     If taikhoan.sohieu <> "" Then
         frmMain.Rpt.Formulas(5) = "TenBaoCao = IF PageNumber() = 1 THEN '" + ABCtoVNI("Tµi kho¶n: ") + taikhoan.sohieu + " - " + taikhoan.Ten + "'"
