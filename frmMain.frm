@@ -5,9 +5,9 @@ Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
 Begin VB.Form frmMain 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFC0C0&
-   ClientHeight    =   9690
+   ClientHeight    =   9585
    ClientLeft      =   3990
-   ClientTop       =   -2985
+   ClientTop       =   -2970
    ClientWidth     =   18900
    FillColor       =   &H00FD8866&
    ForeColor       =   &H00400000&
@@ -15,7 +15,7 @@ Begin VB.Form frmMain
    KeyPreview      =   -1  'True
    LinkTopic       =   "Sao Viet Accounting Software"
    Picture         =   "frmMain.frx":424A
-   ScaleHeight     =   9690
+   ScaleHeight     =   9585
    ScaleWidth      =   18900
    Tag             =   "11"
    WindowState     =   2  'Maximized
@@ -439,7 +439,7 @@ Begin VB.Form frmMain
       Height          =   390
       Left            =   0
       TabIndex        =   57
-      Top             =   9300
+      Top             =   9195
       Width           =   18900
       _ExtentX        =   33338
       _ExtentY        =   688
@@ -462,7 +462,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "03/12/25"
+            TextSave        =   "08/12/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty

@@ -13392,7 +13392,9 @@ Private Function KiemTraChungtu() As Boolean
             MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
             hasError = True
             If FThuChi.FThuChiForm <> 0 Then
-                bakNgayimp = rs_import!NLap
+                If Not rs_import Is Nothing Then
+                    bakNgayimp = rs_import!NLap
+                End If
             End If
 
             RFocus txtchungtu(0)
