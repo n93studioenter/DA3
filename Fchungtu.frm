@@ -5692,6 +5692,7 @@ Private Sub Xuly51Child()
             txtChungtu_LostFocus (0)
             txtchungtu(2).Text = rs_import!VAT
             txtChungtu_LostFocus (2)
+             txtchungtu(5).Text = "0"
             RFocus txtchungtu(6)
             If rs_import!TVat = 0 Then
                 txtchungtu(6).Text = rs_import!TgTThue
@@ -5741,6 +5742,7 @@ Private Sub Xuly51Child()
 
         txtchungtu(0) = rs_import!tkno
         txtChungtu_LostFocus (0)
+         txtchungtu(6).Text = "0"
         RFocus txtchungtu(5)
         txtchungtu(5).Text = rs_import!TongTien
         txtChungtu_KeyPress 6, 13
