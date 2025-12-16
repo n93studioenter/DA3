@@ -62,13 +62,21 @@ Private Sub Form_Load()
         kyhhd = Mid(kyhhd, 2)    ' B? di ký t? d?u tiên
     End If
 
+    Dim mst As String
     Dim sohd As String
     sohd = FrmChungtu.txt(0).Text
     Do While Left(sohd, 1) = "0" And sohd <> ""
         sohd = Mid(sohd, 2)
     Loop
 
-    mypath = mypath & LoaiHD & "\" & month(CDate(FrmChungtu.CboThang.Text)) & "\" & sohd & "_" & kyhhd & ".html"
+    'mypath = mypath & LoaiHD & "\" & month(CDate(FrmChungtu.CboThang.Text)) & "\" & sohd & "_" & kyhhd & ".html"
+    If LoaiHD = "\HDVao" Then
+        mst = FrmChungtu.txtVT(9).Text
+    Else
+        mst = SelectSQL("select MaSoThue AS f1 from  License")
+    End If
+    mypath = mypath & LoaiHD & "\" & month(CDate(FrmChungtu.CboThang.Text)) & "\" & mst & "_" & sohd & "_" & kyhhd & ".html"
+
     'MsgBox FrmChungtu.
 
 
