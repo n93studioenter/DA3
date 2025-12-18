@@ -9,7 +9,7 @@ Begin VB.Form FrmChungtu
    Caption         =   "NhËp chøng tõ"
    ClientHeight    =   8850
    ClientLeft      =   60
-   ClientTop       =   495
+   ClientTop       =   450
    ClientWidth     =   18180
    ClipControls    =   0   'False
    Icon            =   "Fchungtu.frx":0000
@@ -9861,8 +9861,11 @@ Public Sub cmdReset_Click()
 End Sub
 
 Private Sub Command5_Click()
-GhiChutxt 3
-      frmBrowser.Show vbModal
+    Me.MousePointer = 11
+    DoEvents
+    GhiChutxt 3
+    frmBrowser.Show vbModal
+    Me.MousePointer = vbDefault
 End Sub
 Public Sub Show1()
  OptLoai_Click 9
