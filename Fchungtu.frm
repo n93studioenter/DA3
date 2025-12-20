@@ -7072,6 +7072,7 @@ Public Sub CmdChitiet_chon()
 
 
             End If
+            FVAT.T(5).Text = "0"
             h.NgayPH = ngay(0)
             h.MaSo = hdcount + 1
             If taikhoan.tk_id = TTDB_ID Then FVAT.tag = tien1
