@@ -6010,7 +6010,10 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
     txtchungtu(0).Text = rs_import!tkno
     txtChungtu_LostFocus (0)
     RFocus txtchungtu(2)
-    txtchungtu(2).Text = rs_import!sohieutp
+    If rs_import!sohieutp <> Null Then
+        txtchungtu(2).Text = rs_import!sohieutp
+    End If
+
     txtChungtu_LostFocus (2)
     If rs_import!TgTCThue <> 0 Then
         txtchungtu(5).Text = rs_import!TgTCThue
