@@ -6010,7 +6010,7 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
     txtchungtu(0).Text = rs_import!tkno
     txtChungtu_LostFocus (0)
     RFocus txtchungtu(2)
-    If rs_import!sohieutp <> Null Then
+    If Not IsNull(rs_import!sohieutp) Then
         txtchungtu(2).Text = rs_import!sohieutp
     End If
 
@@ -6056,6 +6056,7 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
         txtChungtu_LostFocus (0)
         txtchungtu(2).Text = 0
         txtChungtu_LostFocus (2)
+        txtchungtu(5).Text = "0"
     End If
     txtChungtu_LostFocus (5)
     txtChungtu_KeyPress 6, 13
@@ -6089,6 +6090,9 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
     'Xu ly tk Co
     txtchungtu(0).Text = rs_import!TkCo
     txtChungtu_LostFocus (0)
+    If rs_import!TongTien < 0 Then
+        txtchungtu(5).Text = "0"
+    End If
     RFocus txtchungtu(6)
     txtchungtu(6).Text = rs_import!TongTien
     txtChungtu_KeyPress 6, 13
@@ -6194,7 +6198,9 @@ Private Sub timerNext_Timer()
         If response = vbYes Then
 
             Dim myDate As Date
-            myDate = CDate(bakNgayimp)
+            If bakNgayimp <> "" Then
+                myDate = CDate(bakNgayimp)
+            End If
             MedNgay(0).Text = Format(myDate, "dd/mm/yy")
             MedNgay(1).Text = Format(myDate, "dd/mm/yy")
             hasError = False
@@ -12831,7 +12837,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
 
     'sql = "SELECT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN KhachHang ON ChungTu" + sh + ".MaKH=KhachHang.MaSo WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " ORDER BY Chungtu" + sh + ".MaSo DESC"
     'sql = "SELECT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon ,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN KhachHang ON ChungTu" + sh + ".MaKH =KhachHang.MaSo WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " ORDER BY Chungtu" + sh + ".MaSo DESC"
-     sql = "SELECT DISTINCT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG " & _
+    sql = "SELECT DISTINCT ChungTu" + sh + ".*,HoaDon" + sh + ".MaKhachHang,HoaDon" + sh + ".KyHieu as kyhieuhoadon,HoaDon" + sh + ".Loai AS LoaiHD,KyHieu,HoaDon" + sh + ".SoHD AS SHD,NgayPH,MatHang,Soluong,Thanhtien,Tyle,HD,KCT,NK,TS,HoaDon" + sh + ".DC,HTTT,MauSo,KhachHang.Ten,KhachHang.DiaChi,KhachHang.MST,khachhang.sohieu as sohieukhachhang,HDBL,HoaDon" + sh + ".TyGia AS TG " & _
           "FROM (ChungTu" + sh + " LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) " & _
           "LEFT JOIN KhachHang ON KhachHang.MaSo=ChungTu" + sh + ".MaKHC " & _
           "WHERE Chungtu" + sh + ".MaCT=" + CStr(MaSoCT) + " AND ChungTu" + sh + ".MaKHC<>0 " & IIf(pProcessMode = 1, " AND XuLy<2", "") & _
@@ -12883,7 +12889,12 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     If rs.recordCount > 0 Then
         Mo_thong_tin
         txtVT(1).Text = rs!kyhieuhoadon
-        txtVT(9).Text = rs!mst
+        If Not IsNull(rs!mst) Then
+            txtVT(9).Text = rs!mst
+        Else
+            txtVT(9).Text = ""
+        End If
+
         txtVT(0).Text = CStr(rs!sohieu)
         txtVT(7).Text = rs!Ten
 
