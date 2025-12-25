@@ -4415,12 +4415,12 @@ Private Sub XulyAddHeader(ByRef rs_import As Recordset)
         RFocus CboThang
 
 
-    Case rs_import!tkno Like "64*"
+    Case rs_import!tkno Like "64*" And rs_import!Ishaschild = "0"
         OptLoai(0).Value = True
         OptLoai_LostFocus 0
         RFocus CboThang
 
-    Case rs_import!tkno Like "15*"
+    Case rs_import!tkno Like "15*" Or (rs_import!tkno Like "64*" And rs_import!Ishaschild = "1")
         OptLoai(1).Value = True
         OptLoai_LostFocus 0
         RFocus CboThang
@@ -6111,6 +6111,10 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
         t331.Enabled = True
     End If
 End Sub
+Private Sub XulyTongtopChild2(ByRef rs_import As Recordset)
+
+End Sub
+
 
 Private Sub XulyMiddle(ByRef rs_import As Recordset)
 
@@ -6125,7 +6129,15 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
         Dim Query64 As String
         Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
         Set rs_ktra164 = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
-        XulyTongtopChild rs_import
+        If rs_import!Ishaschild = "0" Then
+            XulyTongtopChild rs_import
+        Else
+            FThuChi.FThuChiForm = 2
+            Dim Query2 As String
+            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Set rs_ktra152 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
+            Xuly15Child
+        End If
     End If
 
     'Xu ly hoa don dau vao 15
@@ -6139,9 +6151,9 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
         End If
         If rs_import!Type = 3 Then
             FThuChi.FThuChiForm = 2
-            Dim Query2 As String
-            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
-            Set rs_ktra152 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
+            Dim Qus As String
+            Qus = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Set rs_ktra152 = DBKetoan.OpenRecordset(Qus, dbOpenSnapshot)
             demThumua = 0
             XuLy15Childhd
         End If

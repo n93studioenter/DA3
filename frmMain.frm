@@ -103,6 +103,14 @@ Begin VB.Form frmMain
          EndProperty
       EndProperty
    End
+   Begin VB.CommandButton Command2 
+      Caption         =   "Update"
+      Height          =   280
+      Left            =   15240
+      TabIndex        =   71
+      Top             =   720
+      Width           =   975
+   End
    Begin VB.Timer timerBackup 
       Interval        =   60000
       Left            =   9480
@@ -450,23 +458,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
             TextSave        =   "25/12/25"
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -489,13 +493,21 @@ Begin VB.Form frmMain
       WindowState     =   2
       PrintFileLinesPerPage=   60
    End
-   Begin VB.Label Label1 
+   Begin VB.Label Label2 
       Caption         =   "V1"
-      Height          =   375
+      Height          =   255
+      Left            =   14400
+      TabIndex        =   70
+      Top             =   720
+      Width           =   735
+   End
+   Begin VB.Label Label1 
+      Caption         =   "Current version"
+      Height          =   255
       Left            =   13080
       TabIndex        =   69
       Top             =   720
-      Width           =   1335
+      Width           =   1215
    End
    Begin VB.Image Image1 
       Height          =   1725
@@ -2324,6 +2336,10 @@ Private Sub Command1_MouseMove(Button As Integer, Shift As Integer, X As Single,
 Command1.BackColor = 8438015
 End Sub
 
+Private Sub Command2_Click()
+    Taifilecapnhat
+End Sub
+
 Private Sub CTTimer_Timer()
     If pProcessEnable Then
         pProcessEnable = False
@@ -2371,18 +2387,18 @@ End Function
 
 Private Function Kiemtraphienban() As String
     Dim processID As Long
-    Dim FilePath As String
+    Dim filePath As String
     Dim result As Long
     Dim fileName As String
     Dim baseName As String
 
     processID = GetCurrentProcessId()
 
-    FilePath = Space(260)    ' Duy trì kích thu?c cho tên file
-    result = GetModuleFileName(0, FilePath, Len(FilePath))
+    filePath = Space(260)    ' Duy trì kích thu?c cho tên file
+    result = GetModuleFileName(0, filePath, Len(filePath))
     If result > 0 Then
-        FilePath = Left(FilePath, result)    ' C?t tên file
-        fileName = Dir(FilePath)              ' L?y tên file t? du?ng d?n
+        filePath = Left(filePath, result)    ' C?t tên file
+        fileName = Dir(filePath)              ' L?y tên file t? du?ng d?n
         baseName = Left(fileName, InStrRev(fileName, ".") - 1)
     Else
         baseName = "Không th? l?y tên file."
@@ -2394,14 +2410,14 @@ End Function
 Private Sub FindLatestExe()
     Dim findData As WIN32_FIND_DATA
     Dim hFind As Long
-    Dim FilePath As String
+    Dim filePath As String
     Dim latestFile As String
     Dim latestDate As Currency
     Dim currentDate As Currency
 
-    FilePath = "\\192.168.1.90\Ke toan 2025 New\1 Copi vao dung\*.exe"    ' Ðu?ng d?n d?n thu m?c ch?a file EXE
+    filePath = "\\192.168.1.90\Ke toan 2025 New\1 Copi vao dung\*.exe"    ' Ðu?ng d?n d?n thu m?c ch?a file EXE
 
-    hFind = FindFirstFile(FilePath, findData)
+    hFind = FindFirstFile(filePath, findData)
 
     If hFind <> -1 Then
         Do
@@ -2608,8 +2624,61 @@ Private Function GetFontName(fontFace As String) As String
         GetFontName = fontFace
     End If
 End Function
-Private Sub Form_Load()
+Private Function ReadTxt(filePath As String) As String
+    Dim fileNumber As Integer
+    Dim content As String
 
+    On Error GoTo ErrorHandler
+
+    ' Ki?m tra file t?n t?i
+    If Dir(filePath) = "" Then
+        ReadTxt = "File không t?n t?i: " & filePath
+        Exit Function
+    End If
+
+    ' L?y file number
+    fileNumber = FreeFile
+
+    ' M? file d? d?c
+    Open filePath For Input As #fileNumber
+
+    ' Ð?c toàn b? n?i dung
+    If LOF(fileNumber) > 0 Then
+        content = Input$(LOF(fileNumber), #fileNumber)
+    End If
+
+    ' Ðóng file
+    Close #fileNumber
+
+    ' Tr? v? n?i dung
+    ReadTxt = content
+    Exit Function
+
+ErrorHandler:
+    ReadTxt = "L?i d?c file: " & Err.Description
+    On Error Resume Next
+    Close #fileNumber
+End Function
+Private Sub Kiemtraphienbanht()
+    Dim uncPath As String
+    uncPath = "\\192.168.1.90\Ke toan 2025 New\2 Copi vao dung 3"
+    Dim txtPath As String
+    txtPath = uncPath & "\" & "Tools\version.txt"
+    Dim content As String
+    content = ReadTxt(txtPath)
+    Dim originPath As String
+    originPath = App.path & "\Hoadon\version.txt"
+    Dim content2 As String
+    content2 = ReadTxt(originPath)
+    If content <> content2 Then
+        Command2.Visible = True
+    Else
+        Command2.Visible = False
+
+    End If
+End Sub
+Private Sub Form_Load()
+    Kiemtraphienbanht
     'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
     If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
