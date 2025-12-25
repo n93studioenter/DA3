@@ -450,19 +450,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "17/12/25"
+            TextSave        =   "25/12/25"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -484,6 +488,14 @@ Begin VB.Form frmMain
       _Version        =   348160
       WindowState     =   2
       PrintFileLinesPerPage=   60
+   End
+   Begin VB.Label Label1 
+      Caption         =   "V1"
+      Height          =   375
+      Left            =   13080
+      TabIndex        =   69
+      Top             =   720
+      Width           =   1335
    End
    Begin VB.Image Image1 
       Height          =   1725
@@ -2154,7 +2166,9 @@ Private Declare Function FindNextFile Lib "Kernel32" Alias "FindNextFileA" _
 Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
 Private Declare Function FindClose Lib "Kernel32" (ByVal hFindFile As Long) As Long
-
+Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" _
+                                      (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, _
+                                       ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
 Private Const SPI_GETNONCLIENTMETRICS As Long = 41
 Private Const SPI_SETNONCLIENTMETRICS As Long = 42
@@ -2192,7 +2206,7 @@ Dim pProcessEnable As Boolean
 Private Const MaxNamTC = 9
 Private Declare Function OSWinHelp% Lib "user32" Alias "WinHelpA" (ByVal hwnd&, ByVal HelpFile$, ByVal wCommand%, dwData As Any)
 
-Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
+
 Private Declare Function LDBUser_GetUsers Lib "MSLDBUSR.DLL" (lpszUserBuffer() As String, ByVal lpszFilename As String, ByVal nOptions As Long) As Integer
 
 Private Const OptLDBLoggedUsers = &H2
@@ -2435,12 +2449,54 @@ Private Sub AuToNhapTP()
         rs_tonkho.MoveNext
     End If
 End Sub
+Public Sub Taifilecapnhat()
+    Dim sourceFile As String
+    Dim destFolder As String
+    Dim destFile As String
+    sourceFile = "\\192.168.1.90\Ke toan 2025 New\2 Copi vao dung 3\update.exe"
+    destFolder = App.path & "\Hoadon"
+    ' Ðu?ng d?n file dích d?y d?
+    destFile = destFolder & "\update.exe"
+    On Error GoTo ErrorHandler
+
+    ' T?o thu m?c Hoadon n?u chua t?n t?i
+    If Dir(destFolder, vbDirectory) = "" Then
+        MkDir destFolder
+    End If
+
+    ' Copy file t? server v? (n?u file ngu?n t?n t?i và khác v?i file dích)
+    If Dir(sourceFile) <> "" Then
+        ' Ch? copy n?u file dích chua t?n t?i ho?c khác kích thu?c/ngày gi?
+        If Dir(destFile) = "" Then
+            FileCopy sourceFile, destFile
+            MsgBox "Ðã t?i update.exe v? thu m?c Hoadon thành công!", vbInformation
+        Else
+            ' So sánh kích thu?c d? tránh copy th?a (tùy ch?n nâng cao)
+            If FileLen(sourceFile) <> FileLen(destFile) Then
+                Kill destFile  ' Xóa file cu tru?c khi copy dè
+                FileCopy sourceFile, destFile
+                MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
+            Else
+                ' MsgBox "File update.exe dã là phiên b?n m?i nh?t.", vbInformation  ' Có th? b? n?u không mu?n thông báo
+            End If
+        End If
+    Else
+        MsgBox "Không tìm th?y file update.exe trên server!" & vbCrLf & sourceFile, vbExclamation
+    End If
+
+    ' Ti?p t?c ch?y chuong trình bình thu?ng
+    ' === CH?Y FILE UPDATE.EXE SAU KHI T?I XONG ===
+    Dim result As Long
+    result = ShellExecute(0, "open", destFile, "", destFolder, 0)
+ErrorHandler:
+    'MsgBox "L?i khi t?i file update.exe:" & vbCrLf & Err.Description, vbCritical
+End Sub
 Private Sub Form_Activate()    ' viet menu
 'Tudongtinhgiavon = True
 'Kiemtraphienban
 ' FindLatestExe
 
-
+   
 
     Image1.Left = (Me.ScaleWidth * 87 / 100)
     Image1.Top = (Me.ScaleHeight * 5 / 100)
@@ -2459,7 +2515,7 @@ Private Sub Form_Activate()    ' viet menu
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN FAX TEXT(200)")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711 text")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711ra text")
-    
+
     ' ExecuteSQL5 ("ALTER TABLE Vattu ALTER COLUMN TenVattu MEMO")
     'ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
     mnDuLieu.Caption = "Xö lý"
@@ -2553,10 +2609,9 @@ Private Function GetFontName(fontFace As String) As String
     End If
 End Function
 Private Sub Form_Load()
+
+    'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
-
-
-
     If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
         SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
         DoEvents

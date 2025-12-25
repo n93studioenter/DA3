@@ -5521,6 +5521,9 @@ Private Sub Xuly15Child()
         End If
 
         txtchungtu(0) = rs_import!TkCo
+        If rs_import!TongTien < 0 Then
+            txtchungtu(5).Text = "0"
+        End If
         txtchungtu(6) = rs_import!TongTien
         txtChungtu_LostFocus (0)
         txtChungtu_KeyPress 6, 13
@@ -5832,6 +5835,9 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     'RFocus txtchungtu(6)
     txtchungtu(0).Text = rs_import!TkCo
     txtChungtu_LostFocus (0)
+    If rs_import!TongTien < 0 Then
+        txtchungtu(5).Text = "0"
+    End If
     txtchungtu(6).Text = rs_import!TongTien
     If rs_import!TkCo Like "331*" Then
         txtChungtu_KeyPress 6, 13
@@ -6016,7 +6022,12 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
 
     txtChungtu_LostFocus (2)
     If rs_import!TgTCThue <> 0 Then
-        txtchungtu(5).Text = rs_import!TgTCThue
+        If rs_import!TPhi = 0 Then
+            txtchungtu(5).Text = rs_import!TgTCThue
+        Else
+            txtchungtu(5).Text = val(rs_import!TgTCThue) + val(rs_import!TPhi)
+        End If
+
         bakTongtien = rs_import!TgTCThue
     Else
         txtchungtu(5).Text = rs_import!TongTien
