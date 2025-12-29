@@ -5,10 +5,10 @@ Begin VB.Form FrmOptions
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Th«ng tin doanh nghiÖp"
-   ClientHeight    =   7770
+   ClientHeight    =   8325
    ClientLeft      =   660
    ClientTop       =   915
-   ClientWidth     =   10905
+   ClientWidth     =   11655
    ClipControls    =   0   'False
    FillColor       =   &H00FFFFC0&
    BeginProperty Font 
@@ -28,8 +28,8 @@ Begin VB.Form FrmOptions
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    Picture         =   "Frmopt.frx":57E2
-   ScaleHeight     =   7770
-   ScaleWidth      =   10905
+   ScaleHeight     =   8325
+   ScaleWidth      =   11655
    ShowInTaskbar   =   0   'False
    Tag             =   "Options"
    Begin VB.Frame Frame 
@@ -43,11 +43,11 @@ Begin VB.Form FrmOptions
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   5625
+      Height          =   3585
       Index           =   1
       Left            =   0
       TabIndex        =   69
-      Top             =   4200
+      Top             =   4680
       Width           =   9075
       Begin VB.CheckBox ChkVT 
          BackColor       =   &H00FFFFC0&
@@ -1394,12 +1394,28 @@ Begin VB.Form FrmOptions
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   4215
+      Height          =   4695
       Index           =   0
       Left            =   0
       TabIndex        =   56
       Top             =   0
       Width           =   9075
+      Begin VB.CommandButton Command1 
+         Height          =   375
+         Left            =   7920
+         TabIndex        =   134
+         Top             =   4560
+         Visible         =   0   'False
+         Width           =   735
+      End
+      Begin VB.TextBox Text3 
+         Height          =   360
+         Left            =   1800
+         TabIndex        =   133
+         Text            =   "Text3"
+         Top             =   4200
+         Width           =   7095
+      End
       Begin VB.Frame Frame1 
          BackColor       =   &H00FFFFC0&
          Caption         =   "Frame1"
@@ -2018,6 +2034,25 @@ Begin VB.Form FrmOptions
       End
       Begin VB.Label Label 
          BackColor       =   &H00FFFFC0&
+         Caption         =   "§Þa chØ cËp nhËt míi"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   25
+         Left            =   120
+         TabIndex        =   132
+         Top             =   4250
+         Width           =   2895
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
          Caption         =   "CCCD"
          BeginProperty Font 
             Name            =   "VK Sans Serif"
@@ -2500,19 +2535,55 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Type BROWSEINFO
+    hOwner As Long
+    pidlRoot As Long
+    pszDisplayName As String
+    lpszTitle As String
+    ulFlags As Long
+    lpfn As Long
+    lParam As Long
+    iImage As Long
+End Type
+
+Private Declare Function SHBrowseForFolder Lib "shell32.dll" _
+                                           (lpBrowseInfo As BROWSEINFO) As Long
+
+Private Declare Function SHGetPathFromIDList Lib "shell32.dll" _
+                                             (ByVal pidl As Long, ByVal pszPath As String) As Long
+
+
 
 Dim ttVT As Integer
 Dim mst As String
 Dim suatencn As Integer
 Dim kb As Integer
 Dim typeRegistry As Integer
+Public Function BrowseForFolder(ByVal sTitle As String) As String
+    Dim bi As BROWSEINFO
+    Dim pidl As Long
+    Dim path As String
+
+    path = Space(260)
+
+    bi.lpszTitle = sTitle
+    bi.ulFlags = &H1    ' BIF_RETURNONLYFSDIRS
+
+    pidl = SHBrowseForFolder(bi)
+
+    If pidl <> 0 Then
+        If SHGetPathFromIDList(pidl, path) Then
+            BrowseForFolder = Left(path, InStr(path, vbNullChar) - 1)
+        End If
+    End If
+End Function
 
 Private Sub active_Click()
 
     Dim st As String
     Dim rs As Recordset
     Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
- 
+
     If FrmGetStr.GetMK(Text(7).Text) Then
         st = rs!CMP
         ExecuteSQL5 "UPDATE license SET CMG = " + str(Int_StrToCodes(st)) + ",namcode = " + str(Int_StrToCodes(str(rs!nam)))
@@ -2559,7 +2630,63 @@ Private Sub Combo_Click(Index As Integer)
     If Index = 3 Then PhanChucNang Combo(Index).ListIndex + 1, Check(25).Value, Check(26).Value, Check(27).Value, Check(28).Value
 End Sub
 
+Private Sub Command1_Click()
+    Dim folderPath As String
+
+    folderPath = BrowseForFolder("Ch?n thu m?c luu file")
+
+    If folderPath <> "" Then
+        Text3.Text = folderPath
+    End If
+End Sub
+Private Function ReadTxt(filePath As String) As String
+    Dim fileNumber As Integer
+    Dim content As String
+
+    On Error GoTo ErrorHandler
+
+    ' Ki?m tra file t?n t?i
+    If Dir(filePath) = "" Then
+        ReadTxt = "File không t?n t?i: " & filePath
+        Exit Function
+    End If
+
+    ' L?y file number
+    fileNumber = FreeFile
+
+    ' M? file d? d?c
+    Open filePath For Input As #fileNumber
+
+    ' Ð?c toàn b? n?i dung
+    If LOF(fileNumber) > 0 Then
+        content = Input$(LOF(fileNumber), #fileNumber)
+    End If
+
+    ' Ðóng file
+    Close #fileNumber
+
+    ' Tr? v? n?i dung
+    ReadTxt = content
+    Exit Function
+
+ErrorHandler:
+    ReadTxt = "L?i d?c file: " & Err.Description
+    On Error Resume Next
+    Close #fileNumber
+End Function
 Private Sub Form_Activate()
+'Load thong tin folder server path
+    Dim originPath As String
+    Dim content As String
+    originPath = App.path
+    content = Text3.Text
+    Dim serverpath As String
+    serverpath = originPath & "\Hoadon\serverpath.txt"
+    If FileExists(serverpath) Then
+        Text3.Text = ReadTxt(serverpath)
+    End If
+
+
     Option1.Value = True
     ' Combo(0).Enabled = False
     If (SelectSQL("select count(*) as f1 from chungtu") > 0) Then Combo(0).Enabled = False
@@ -2728,8 +2855,77 @@ End Sub
 Private Sub OptVT_Click(Index As Integer)
     ttVT = Index
 End Sub
+' T?o file version.txt v?i n?i dung
+Public Function CreateVersionFile(filePath As String, content As String) As Boolean
+    Dim fileNumber As Integer
 
+    On Error GoTo ErrorHandler
+
+    ' L?y file number
+    fileNumber = FreeFile
+
+    ' T?o file m?i (Output mode s? t?o file n?u chua có)
+    Open filePath For Output As #fileNumber
+
+    ' Ghi n?i dung
+    Print #fileNumber, content
+
+    ' Ðóng file
+    Close #fileNumber
+
+    ' Ki?m tra file dã du?c t?o
+    CreateVersionFile = FileExists(filePath)
+
+    Exit Function
+
+ErrorHandler:
+    CreateVersionFile = False
+    On Error Resume Next
+    Close #fileNumber
+End Function
+Public Function FileExists(filePath As String) As Boolean
+    On Error GoTo ErrorHandler
+
+    If Dir(filePath) <> "" Then
+        FileExists = True
+    Else
+        FileExists = False
+    End If
+
+    Exit Function
+
+ErrorHandler:
+    FileExists = False
+End Function
 Private Sub Command_Click(Index As Integer)
+    Dim originPath As String
+    Dim content As String
+    originPath = App.path
+    content = Text3.Text
+    Dim serverpath As String
+    serverpath = originPath & "\Hoadon\serverpath.txt"
+    If Not FileExists(serverpath) Then
+        ' T?o file version.txt
+        If CreateVersionFile(serverpath, content) Then
+            'MsgBox "Ðã t?o file version.txt t?i:" & vbCrLf & filePath, vbInformation
+        Else
+            MsgBox "Không th? t?o file version.txt", vbExclamation
+        End If
+    Else
+        Dim fileNumber As Integer
+        fileNumber = FreeFile
+        On Error Resume Next
+        Open serverpath For Output As #fileNumber
+        If Err.number = 0 Then
+            Print #fileNumber, Text3.Text;
+            Close #fileNumber
+            'MsgBox "Ðã ghi dè file version.txt thành công!", vbInformation
+        Else
+            MsgBox "L?i khi ghi dè file!", vbExclamation
+        End If
+    End If
+
+
     Dim checkBoxValue As Integer
 
     checkBoxValue = CheckBox1(0).Value
@@ -3106,3 +3302,4 @@ Private Sub HienNoiBo()
         Check(55).Value = 0
     End If
 End Sub
+

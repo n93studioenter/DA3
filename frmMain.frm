@@ -459,23 +459,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "28/12/25"
-            Key             =   ""
+            TextSave        =   "29/12/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2335,7 +2331,7 @@ Dim fso As New FileSystemObject
       fso.CopyFile duong_dan + "\REPORTS\vietstar.exe", duong_dan + "\VietStar.exe"
       CreateShortCut duong_dan + "\VietStar.exe", "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
       MsgBox "B¹n ®· t¹o míi thµnh c«ng, icon ®· cã ngoµi mµn h×nh:" & vbNewLine & duong_dan
-      Shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
+      shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
 End Sub
 
 Private Sub Command1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -2483,7 +2479,7 @@ Private Sub Form_Activate()    ' viet menu
 'Kiemtraphienban
 ' FindLatestExe
 
-   
+
 
     Image1.Left = (Me.ScaleWidth * 87 / 100)
     Image1.Top = (Me.ScaleHeight * 5 / 100)
@@ -2595,15 +2591,15 @@ Private Function GetFontName(fontFace As String) As String
         GetFontName = fontFace
     End If
 End Function
-Private Function ReadTxt(FilePath As String) As String
+Private Function ReadTxt(filePath As String) As String
     Dim fileNumber As Integer
-    Dim Content As String
+    Dim content As String
 
     On Error GoTo ErrorHandler
 
     ' Ki?m tra file t?n t?i
-    If Dir(FilePath) = "" Then
-        ReadTxt = "File không t?n t?i: " & FilePath
+    If Dir(filePath) = "" Then
+        ReadTxt = "File không t?n t?i: " & filePath
         Exit Function
     End If
 
@@ -2611,18 +2607,18 @@ Private Function ReadTxt(FilePath As String) As String
     fileNumber = FreeFile
 
     ' M? file d? d?c
-    Open FilePath For Input As #fileNumber
+    Open filePath For Input As #fileNumber
 
     ' Ð?c toàn b? n?i dung
     If LOF(fileNumber) > 0 Then
-        Content = Input$(LOF(fileNumber), #fileNumber)
+        content = Input$(LOF(fileNumber), #fileNumber)
     End If
 
     ' Ðóng file
     Close #fileNumber
 
     ' Tr? v? n?i dung
-    ReadTxt = Content
+    ReadTxt = content
     Exit Function
 
 ErrorHandler:
@@ -2631,18 +2627,24 @@ ErrorHandler:
     Close #fileNumber
 End Function
 Private Sub Kiemtraphienbanht()
+    Dim originPaths As String
+    originPaths = App.path
+    Dim serverpath As String
+    serverpath = originPaths & "\Hoadon\serverpath.txt"
+
+
     Dim uncPath As String
-    uncPath = "\\192.168.1.90\Ke toan 2025 New\2 Copi vao dung 3"
+    uncPath = ReadTxt(serverpath)
     Dim txtPath As String
     txtPath = uncPath & "\" & "Tools\version.txt"
-    Dim Content As String
-    Content = ReadTxt(txtPath)
+    Dim content As String
+    content = ReadTxt(txtPath)
     Dim originPath As String
     originPath = App.path & "\Hoadon\version.txt"
     Dim content2 As String
     content2 = ReadTxt(originPath)
     'Label2.Caption = content2
-    If Content <> content2 Then
+    If content <> content2 Then
         Image2.Visible = True
     Else
         Image2.Visible = False
@@ -2651,10 +2653,10 @@ Private Sub Kiemtraphienbanht()
 End Sub
 
 Private Sub Form_Load()
-    'Kiemtraphienbanht
-    'Taifilecapnhat
+Kiemtraphienbanht
+'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
-    If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
+    If findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
         SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
         DoEvents
 
@@ -2679,7 +2681,6 @@ Private Sub Form_Load()
         m_logFont.lfFaceName = sFONTNAME & vbNullChar
         ret = SystemParametersInfo(SPI_SETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
     End If
-
     If pVersion = 2 Then
         Label(19).Visible = False
         '  img.Top = 3120
@@ -3351,59 +3352,59 @@ Public Sub mnTS_Click(Index As Integer)
 End Sub
 
 Private Sub mnuHLP_Click(Index As Integer)
-    
+
     Dim nRet As Integer
 
     Select Case Index
-        Case 0:                                             ' Noi dung
-   '         frmTonDauKhachHang.Show
-            On Error Resume Next
-            nRet = OSWinHelp(Me.hwnd, App.HelpFile, 3, 0)
-            If Err Then MsgBox Err.Description
-            On Error GoTo 0
-        Case 1:
-        
-        'frmTaiLieu.Show 1
-        Formimport.Show 1
-        
+    Case 0:    ' Noi dung
+        '         frmTonDauKhachHang.Show
+        On Error Resume Next
+        nRet = OSWinHelp(Me.hwnd, App.HelpFile, 3, 0)
+        If Err Then MsgBox Err.Description
+        On Error GoTo 0
+    Case 1:
+
+        frmTaiLieu.Show 1
+        'Formimport.Show 1
+
         ' Tra cuu
-     '   frmTonDauSanPham.Sh'ow
-      '      On Error Resume Next
-       '     nRet = OSWinHelp(Me.hwnd, App.HelpFile, 261, 0)
-       '     If Err Then MsgBox Err.Description
+        '   frmTonDauSanPham.Sh'ow
+        '      On Error Resume Next
+        '     nRet = OSWinHelp(Me.hwnd, App.HelpFile, 261, 0)
+        '     If Err Then MsgBox Err.Description
         'e    On Error GoTo 0
-        Case 3:
-      '  frmTonDauDaTaBaSE.Show ' Ban quyen
-      '   frmAbout.Show vbModal, Me
-      frmgioithieu.Show vbModal, Me
-        Case 4:
-          Dim fso As New FileSystemObject
-      '  MsgBox pCurDir + "DATA"
-      Dim duong_dan As String
-     ' duong_dan = Mid(pCurDir, 1, Len(pCurDir) - 1) + CStr(Minute(Now)) + CStr(Second(Now))
-      
-     duong_dan = Mid(Mid(pCurDir, 1, Len(pCurDir) - 1), 1, InStrRev(Mid(pCurDir, 1, Len(pCurDir) - 1), "\")) + "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
-     
-     MkDir duong_dan
-      MkDir duong_dan + "\data"
-     If Len(Dir(pCurDir + "REPORTS\QD48.MDB")) = 0 Then
-      fso.CopyFile pCurDir + "REPORTS\QD15.MDB", duong_dan + "\Data\QD15.mdb", True
-     Else
-      fso.CopyFile pCurDir + "REPORTS\QD48.MDB", duong_dan + "\Data\QD48.mdb", True
-     End If
-     
-      fso.CopyFolder pCurDir + "REPORTS", duong_dan + "\REPORTS"
-      fso.CopyFolder pCurDir + "Tailieu", duong_dan + "\Tailieu"
-      fso.CopyFile pCurDir + "Dummy.xml", duong_dan + "\Dummy.xml"
-      fso.CopyFile pCurDir + "UnicodeVowels.xml", duong_dan + "\UnicodeVowels.xml"
-      fso.CopyFile pCurDir + "VNIVowelMap.txt", duong_dan + "\VNIVowelMap.txt"
-    '  fso.CopyFile pCurDir + "VietStar.exe", duong_dan + "\VietStar.exe"
-      
-      fso.CopyFile duong_dan + "\REPORTS\vietstar.exe", duong_dan + "\VietStar.exe"
-      CreateShortCut duong_dan + "\VietStar.exe", "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
-      'MsgBox "B¹n ®· t¹o míi thµnh c«ng: " + duong_dan
-         MsgBox "B¹n ®· t¹o míi thµnh c«ng, icon ®· cã ngoµi mµn h×nh:" & vbNewLine & duong_dan
-      Shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
+    Case 3:
+        '  frmTonDauDaTaBaSE.Show ' Ban quyen
+        '   frmAbout.Show vbModal, Me
+        frmgioithieu.Show vbModal, Me
+    Case 4:
+        Dim fso As New FileSystemObject
+        '  MsgBox pCurDir + "DATA"
+        Dim duong_dan As String
+        ' duong_dan = Mid(pCurDir, 1, Len(pCurDir) - 1) + CStr(Minute(Now)) + CStr(Second(Now))
+
+        duong_dan = Mid(Mid(pCurDir, 1, Len(pCurDir) - 1), 1, InStrRev(Mid(pCurDir, 1, Len(pCurDir) - 1), "\")) + "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
+
+        MkDir duong_dan
+        MkDir duong_dan + "\data"
+        If Len(Dir(pCurDir + "REPORTS\QD48.MDB")) = 0 Then
+            fso.CopyFile pCurDir + "REPORTS\QD15.MDB", duong_dan + "\Data\QD15.mdb", True
+        Else
+            fso.CopyFile pCurDir + "REPORTS\QD48.MDB", duong_dan + "\Data\QD48.mdb", True
+        End If
+
+        fso.CopyFolder pCurDir + "REPORTS", duong_dan + "\REPORTS"
+        fso.CopyFolder pCurDir + "Tailieu", duong_dan + "\Tailieu"
+        fso.CopyFile pCurDir + "Dummy.xml", duong_dan + "\Dummy.xml"
+        fso.CopyFile pCurDir + "UnicodeVowels.xml", duong_dan + "\UnicodeVowels.xml"
+        fso.CopyFile pCurDir + "VNIVowelMap.txt", duong_dan + "\VNIVowelMap.txt"
+        '  fso.CopyFile pCurDir + "VietStar.exe", duong_dan + "\VietStar.exe"
+
+        fso.CopyFile duong_dan + "\REPORTS\vietstar.exe", duong_dan + "\VietStar.exe"
+        CreateShortCut duong_dan + "\VietStar.exe", "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
+        'MsgBox "B¹n ®· t¹o míi thµnh c«ng: " + duong_dan
+        MsgBox "B¹n ®· t¹o míi thµnh c«ng, icon ®· cã ngoµi mµn h×nh:" & vbNewLine & duong_dan
+        shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
     End Select
 
 End Sub
@@ -4335,7 +4336,7 @@ Private Sub RunCT()
     Dim pctpath As String
     
     pctpath = SelectSQL("SELECT App1Path AS F1 FROM License")
-    If Len(Dir(pctpath)) > 0 Then Shell pctpath, vbNormalFocus
+    If Len(Dir(pctpath)) > 0 Then shell pctpath, vbNormalFocus
 End Sub
 
 Public Function ChonTenTep(title As String, f As Long, mask As String, act As Integer) As String
