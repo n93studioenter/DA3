@@ -3391,6 +3391,7 @@ Private Declare Function WideCharToMultiByte Lib "Kernel32" ( _
 
 Private Const CP_UTF8 As Long = 65001
 
+Dim oldKeypress As String
 Dim isimportnk As Boolean
 Dim tk154 As String
 Dim bakNgayimp As String
@@ -3513,18 +3514,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938527
-Attribute ctgoc.VB_VarUserMemId = 1073938527
-Attribute TenNX.VB_VarUserMemId = 1073938527
-Attribute DiaChiNX.VB_VarUserMemId = 1073938527
-Attribute TenBH.VB_VarUserMemId = 1073938527
-Attribute DiaChiBH.VB_VarUserMemId = 1073938527
-Attribute MSTBH.VB_VarUserMemId = 1073938527
-Attribute unc1.VB_VarUserMemId = 1073938527
-Attribute unc2.VB_VarUserMemId = 1073938527
-Attribute unc3.VB_VarUserMemId = 1073938527
-Attribute MaKHBH.VB_VarUserMemId = 1073938527
-Attribute HanTT.VB_VarUserMemId = 1073938527
+Attribute DiachiTC.VB_VarUserMemId = 1073938528
+Attribute ctgoc.VB_VarUserMemId = 1073938528
+Attribute TenNX.VB_VarUserMemId = 1073938528
+Attribute DiaChiNX.VB_VarUserMemId = 1073938528
+Attribute TenBH.VB_VarUserMemId = 1073938528
+Attribute DiaChiBH.VB_VarUserMemId = 1073938528
+Attribute MSTBH.VB_VarUserMemId = 1073938528
+Attribute unc1.VB_VarUserMemId = 1073938528
+Attribute unc2.VB_VarUserMemId = 1073938528
+Attribute unc3.VB_VarUserMemId = 1073938528
+Attribute MaKHBH.VB_VarUserMemId = 1073938528
+Attribute HanTT.VB_VarUserMemId = 1073938528
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -6699,6 +6700,12 @@ End Sub
 ' Ghi dßng ph¸t sinh vµo Grid
 '====================================================================================================
 Public Sub CmdChitiet_chon()
+' Ki?m tra chu?i có ch?a "6422" b?t k? ? dâu
+    If oldKeypress Like "*642*" And txtchungtu(0).Text Like "*642*" And FThuChi.FThuChiForm <> 0 Then
+        oldKeypress = ""
+        Exit Sub
+    End If
+    oldKeypress = txtchungtu(0).Text
     If oldMa <> "" And txtchungtu(3).Text <> "" And FThuChi.FThuChiForm <> 0 And nknl <> 1 Then
         If oldMa = txtchungtu(2).Text And txtchungtu(3).Text = oldSL Then
             'Kiem tra them so luong neu co

@@ -106,9 +106,10 @@ Begin VB.Form frmMain
    Begin VB.CommandButton Command2 
       Caption         =   "Update"
       Height          =   280
-      Left            =   15240
-      TabIndex        =   71
-      Top             =   720
+      Left            =   16080
+      TabIndex        =   69
+      Top             =   2520
+      Visible         =   0   'False
       Width           =   975
    End
    Begin VB.Timer timerBackup 
@@ -458,19 +459,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "25/12/25"
+            TextSave        =   "28/12/25"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -493,26 +498,26 @@ Begin VB.Form frmMain
       WindowState     =   2
       PrintFileLinesPerPage=   60
    End
-   Begin VB.Label Label2 
-      Caption         =   "V1"
-      Height          =   255
-      Left            =   14400
-      TabIndex        =   70
-      Top             =   720
-      Width           =   735
-   End
    Begin VB.Label Label1 
-      Caption         =   "Current version"
+      Caption         =   "Version 2.6"
       Height          =   255
+      Left            =   0
+      TabIndex        =   70
+      Top             =   9000
+      Width           =   855
+   End
+   Begin VB.Image Image2 
+      Height          =   1155
       Left            =   13080
-      TabIndex        =   69
-      Top             =   720
-      Width           =   1215
+      Picture         =   "frmMain.frx":5A45AE
+      Stretch         =   -1  'True
+      Top             =   120
+      Width           =   2400
    End
    Begin VB.Image Image1 
       Height          =   1725
       Left            =   17040
-      Picture         =   "frmMain.frx":5A45AE
+      Picture         =   "frmMain.frx":5ACB8D
       Top             =   360
       Width           =   1500
    End
@@ -1163,51 +1168,51 @@ Begin VB.Form frmMain
       BeginProperty Images {0713E8C2-850A-101B-AFC0-4210102A8DA7} 
          NumListImages   =   12
          BeginProperty ListImage1 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5A5696
+            Picture         =   "frmMain.frx":5ADC75
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5A69A8
+            Picture         =   "frmMain.frx":5AEF87
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5A7CBA
+            Picture         =   "frmMain.frx":5B0299
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5A8FCC
+            Picture         =   "frmMain.frx":5B15AB
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5AA2DE
+            Picture         =   "frmMain.frx":5B28BD
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5AB5F0
+            Picture         =   "frmMain.frx":5B3BCF
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5AC242
+            Picture         =   "frmMain.frx":5B4821
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5ADD94
+            Picture         =   "frmMain.frx":5B6373
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5AEA46
+            Picture         =   "frmMain.frx":5B7025
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5AFE48
+            Picture         =   "frmMain.frx":5B8427
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B21BA
+            Picture         =   "frmMain.frx":5BA799
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B25AC
+            Picture         =   "frmMain.frx":5BAB8B
             Key             =   ""
          EndProperty
       EndProperty
@@ -2165,6 +2170,8 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
+Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Public Tudongtinhgiavon As Boolean
 
@@ -2200,8 +2207,7 @@ Private Type WIN32_FIND_DATA
     cAlternateFileName As String * 14
 End Type
 
-
-Private Declare Function GetCurrentProcessId Lib "Kernel32" () As Long
+ 
 Dim ret
 Dim m_nonClientMetrics As NONCLIENTMETRICS
 Dim m_logFont As LOGFONT
@@ -2383,65 +2389,25 @@ Private Function ParseJson(json As String, key As String) As String
     ParseJson = dict(key)
 End Function
 
+Public Function GetMacAddress() As String
+    Const OFFSET_LENGTH As Long = 400
+    Dim lSize As Long
+    Dim baBuffer() As Byte
+    Dim lIdx As Long
+    Dim sRetVal As String
 
-
-Private Function Kiemtraphienban() As String
-    Dim processID As Long
-    Dim filePath As String
-    Dim result As Long
-    Dim fileName As String
-    Dim baseName As String
-
-    processID = GetCurrentProcessId()
-
-    filePath = Space(260)    ' Duy trì kích thu?c cho tên file
-    result = GetModuleFileName(0, filePath, Len(filePath))
-    If result > 0 Then
-        filePath = Left(filePath, result)    ' C?t tên file
-        fileName = Dir(filePath)              ' L?y tên file t? du?ng d?n
-        baseName = Left(fileName, InStrRev(fileName, ".") - 1)
-    Else
-        baseName = "Không th? l?y tên file."
+    Call GetAdaptersInfo(ByVal 0, lSize)
+    If lSize <> 0 Then
+        ReDim baBuffer(0 To lSize - 1) As Byte
+        Call GetAdaptersInfo(baBuffer(0), lSize)
+        Call CopyMemory(lSize, baBuffer(OFFSET_LENGTH), 4)
+        For lIdx = OFFSET_LENGTH + 4 To OFFSET_LENGTH + 4 + lSize - 1
+            sRetVal = IIf(LenB(sRetVal) <> 0, sRetVal & ":", vbNullString) & Right$("0" & Hex$(baBuffer(lIdx)), 2)
+        Next
     End If
-    Kiemtraphienban = baseName  ' Tr? v? baseName
+    GetMacAddress = sRetVal
 End Function
 
-
-Private Sub FindLatestExe()
-    Dim findData As WIN32_FIND_DATA
-    Dim hFind As Long
-    Dim filePath As String
-    Dim latestFile As String
-    Dim latestDate As Currency
-    Dim currentDate As Currency
-
-    filePath = "\\192.168.1.90\Ke toan 2025 New\1 Copi vao dung\*.exe"    ' Ðu?ng d?n d?n thu m?c ch?a file EXE
-
-    hFind = FindFirstFile(filePath, findData)
-
-    If hFind <> -1 Then
-        Do
-            currentDate = findData.ftLastWriteTime
-            If currentDate > latestDate Then
-                latestDate = currentDate
-                latestFile = Left(findData.cFileName, InStrRev(findData.cFileName, ".") - 1)
-            End If
-        Loop While FindNextFile(hFind, findData) <> 0
-        FindClose hFind
-
-        If latestFile <> "" Then
-            Dim oldversion As String
-            oldversion = Kiemtraphienban
-            If oldversion <> latestFile Then
-            MsgBox "§· cã phiªn b¶n míi, vui lßng cËp nhËt"
-            End If
-        Else
-            MsgBox "Không tìm th?y file EXE nào."
-        End If
-    Else
-        MsgBox "Không th? truy c?p thu m?c."
-    End If
-End Sub
 
 Private Sub AuToNhapTP()
 
@@ -2506,6 +2472,11 @@ Public Sub Taifilecapnhat()
     result = ShellExecute(0, "open", destFile, "", destFolder, 0)
 ErrorHandler:
     'MsgBox "L?i khi t?i file update.exe:" & vbCrLf & Err.Description, vbCritical
+End Sub
+Private Sub Image2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ' Ð?i con tr? khi hover
+    Image2.MousePointer = vbSizeNS
+    ' Load icon t? file .ico ho?c .cur
 End Sub
 Private Sub Form_Activate()    ' viet menu
 'Tudongtinhgiavon = True
@@ -2624,15 +2595,15 @@ Private Function GetFontName(fontFace As String) As String
         GetFontName = fontFace
     End If
 End Function
-Private Function ReadTxt(filePath As String) As String
+Private Function ReadTxt(FilePath As String) As String
     Dim fileNumber As Integer
-    Dim content As String
+    Dim Content As String
 
     On Error GoTo ErrorHandler
 
     ' Ki?m tra file t?n t?i
-    If Dir(filePath) = "" Then
-        ReadTxt = "File không t?n t?i: " & filePath
+    If Dir(FilePath) = "" Then
+        ReadTxt = "File không t?n t?i: " & FilePath
         Exit Function
     End If
 
@@ -2640,18 +2611,18 @@ Private Function ReadTxt(filePath As String) As String
     fileNumber = FreeFile
 
     ' M? file d? d?c
-    Open filePath For Input As #fileNumber
+    Open FilePath For Input As #fileNumber
 
     ' Ð?c toàn b? n?i dung
     If LOF(fileNumber) > 0 Then
-        content = Input$(LOF(fileNumber), #fileNumber)
+        Content = Input$(LOF(fileNumber), #fileNumber)
     End If
 
     ' Ðóng file
     Close #fileNumber
 
     ' Tr? v? n?i dung
-    ReadTxt = content
+    ReadTxt = Content
     Exit Function
 
 ErrorHandler:
@@ -2664,21 +2635,23 @@ Private Sub Kiemtraphienbanht()
     uncPath = "\\192.168.1.90\Ke toan 2025 New\2 Copi vao dung 3"
     Dim txtPath As String
     txtPath = uncPath & "\" & "Tools\version.txt"
-    Dim content As String
-    content = ReadTxt(txtPath)
+    Dim Content As String
+    Content = ReadTxt(txtPath)
     Dim originPath As String
     originPath = App.path & "\Hoadon\version.txt"
     Dim content2 As String
     content2 = ReadTxt(originPath)
-    If content <> content2 Then
-        Command2.Visible = True
+    'Label2.Caption = content2
+    If Content <> content2 Then
+        Image2.Visible = True
     Else
-        Command2.Visible = False
+        Image2.Visible = False
 
     End If
 End Sub
+
 Private Sub Form_Load()
-    Kiemtraphienbanht
+    'Kiemtraphienbanht
     'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
     If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
@@ -2896,6 +2869,10 @@ Private Sub Form_Unload(Cancel As Integer)
 
 End Sub
 
+
+Private Sub Image2_Click()
+    Taifilecapnhat
+End Sub
 
 Public Sub mnCn_Click(Index As Integer)
     If Index = 12 Then
