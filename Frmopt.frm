@@ -2868,7 +2868,7 @@ Public Function CreateVersionFile(filePath As String, content As String) As Bool
     Open filePath For Output As #fileNumber
 
     ' Ghi n?i dung
-    Print #fileNumber, content
+    Print #fileNumber, content;
 
     ' Ðóng file
     Close #fileNumber

@@ -459,14 +459,17 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
@@ -495,7 +498,7 @@ Begin VB.Form frmMain
       PrintFileLinesPerPage=   60
    End
    Begin VB.Label Label1 
-      Caption         =   "Version 2.6"
+      Caption         =   "Version 3.1"
       Height          =   255
       Left            =   0
       TabIndex        =   70
@@ -2478,7 +2481,8 @@ Private Sub Form_Activate()    ' viet menu
 'Tudongtinhgiavon = True
 'Kiemtraphienban
 ' FindLatestExe
-
+    Label1.Left = 0
+    Label1.Top = (Me.ScaleHeight * 95 / 100)
 
 
     Image1.Left = (Me.ScaleWidth * 87 / 100)
@@ -2653,8 +2657,9 @@ Private Sub Kiemtraphienbanht()
 End Sub
 
 Private Sub Form_Load()
-Kiemtraphienbanht
-'Taifilecapnhat
+
+    Kiemtraphienbanht
+    'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
     If findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
         SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
@@ -2775,6 +2780,7 @@ Kiemtraphienbanht
             frmMain.txtdungthu.Caption = ""
         End If
     End If
+    
 End Sub
 Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional msg As Boolean = True) As Integer
       On Error GoTo ErrLock
