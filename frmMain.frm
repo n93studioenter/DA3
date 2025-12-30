@@ -459,22 +459,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            TextSave        =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "29/12/25"
+            TextSave        =   "30/12/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2334,7 +2331,7 @@ Dim fso As New FileSystemObject
       fso.CopyFile duong_dan + "\REPORTS\vietstar.exe", duong_dan + "\VietStar.exe"
       CreateShortCut duong_dan + "\VietStar.exe", "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
       MsgBox "B¹n ®· t¹o míi thµnh c«ng, icon ®· cã ngoµi mµn h×nh:" & vbNewLine & duong_dan
-      shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
+      Shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
 End Sub
 
 Private Sub Command1_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -2595,15 +2592,15 @@ Private Function GetFontName(fontFace As String) As String
         GetFontName = fontFace
     End If
 End Function
-Private Function ReadTxt(filePath As String) As String
+Private Function ReadTxt(FilePath As String) As String
     Dim fileNumber As Integer
     Dim content As String
 
     On Error GoTo ErrorHandler
 
     ' Ki?m tra file t?n t?i
-    If Dir(filePath) = "" Then
-        ReadTxt = "File không t?n t?i: " & filePath
+    If Dir(FilePath) = "" Then
+        ReadTxt = "File không t?n t?i: " & FilePath
         Exit Function
     End If
 
@@ -2611,7 +2608,7 @@ Private Function ReadTxt(filePath As String) As String
     fileNumber = FreeFile
 
     ' M? file d? d?c
-    Open filePath For Input As #fileNumber
+    Open FilePath For Input As #fileNumber
 
     ' Ð?c toàn b? n?i dung
     If LOF(fileNumber) > 0 Then
@@ -2661,7 +2658,7 @@ Private Sub Form_Load()
     Kiemtraphienbanht
     'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
-    If findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
+    If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
         SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
         DoEvents
 
@@ -2780,7 +2777,7 @@ Private Sub Form_Load()
             frmMain.txtdungthu.Caption = ""
         End If
     End If
-    
+
 End Sub
 Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional msg As Boolean = True) As Integer
       On Error GoTo ErrLock
@@ -3410,7 +3407,7 @@ Private Sub mnuHLP_Click(Index As Integer)
         CreateShortCut duong_dan + "\VietStar.exe", "VietStar_" + CStr(Minute(Now)) + CStr(Second(Now))
         'MsgBox "B¹n ®· t¹o míi thµnh c«ng: " + duong_dan
         MsgBox "B¹n ®· t¹o míi thµnh c«ng, icon ®· cã ngoµi mµn h×nh:" & vbNewLine & duong_dan
-        shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
+        Shell "EXPLORER.EXE " & duong_dan + "\VietStar.exe"
     End Select
 
 End Sub
@@ -4342,7 +4339,7 @@ Private Sub RunCT()
     Dim pctpath As String
     
     pctpath = SelectSQL("SELECT App1Path AS F1 FROM License")
-    If Len(Dir(pctpath)) > 0 Then shell pctpath, vbNormalFocus
+    If Len(Dir(pctpath)) > 0 Then Shell pctpath, vbNormalFocus
 End Sub
 
 Public Function ChonTenTep(title As String, f As Long, mask As String, act As Integer) As String
