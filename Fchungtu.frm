@@ -3391,6 +3391,7 @@ Private Declare Function WideCharToMultiByte Lib "Kernel32" ( _
 
 Private Const CP_UTF8 As Long = 65001
 
+Dim dshdloi As String
 Dim oldKeypress As String
 Dim isimportnk As Boolean
 Dim tk154 As String
@@ -3514,18 +3515,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938528
-Attribute ctgoc.VB_VarUserMemId = 1073938528
-Attribute TenNX.VB_VarUserMemId = 1073938528
-Attribute DiaChiNX.VB_VarUserMemId = 1073938528
-Attribute TenBH.VB_VarUserMemId = 1073938528
-Attribute DiaChiBH.VB_VarUserMemId = 1073938528
-Attribute MSTBH.VB_VarUserMemId = 1073938528
-Attribute unc1.VB_VarUserMemId = 1073938528
-Attribute unc2.VB_VarUserMemId = 1073938528
-Attribute unc3.VB_VarUserMemId = 1073938528
-Attribute MaKHBH.VB_VarUserMemId = 1073938528
-Attribute HanTT.VB_VarUserMemId = 1073938528
+Attribute DiachiTC.VB_VarUserMemId = 1073938529
+Attribute ctgoc.VB_VarUserMemId = 1073938529
+Attribute TenNX.VB_VarUserMemId = 1073938529
+Attribute DiaChiNX.VB_VarUserMemId = 1073938529
+Attribute TenBH.VB_VarUserMemId = 1073938529
+Attribute DiaChiBH.VB_VarUserMemId = 1073938529
+Attribute MSTBH.VB_VarUserMemId = 1073938529
+Attribute unc1.VB_VarUserMemId = 1073938529
+Attribute unc2.VB_VarUserMemId = 1073938529
+Attribute unc3.VB_VarUserMemId = 1073938529
+Attribute MaKHBH.VB_VarUserMemId = 1073938529
+Attribute HanTT.VB_VarUserMemId = 1073938529
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -4386,7 +4387,8 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
 
 End Sub
 Private Sub XylyHoaDonTong(ByRef rs_import As Recordset)
-
+    Dim skiperror As Integer
+    skiperror = SelectSQL("select skiperror AS f1 from  License")
     lblThongbao.Caption = "®ang  xö lý ho¸ ®¬n thø " & sttHD & " / " & totals
     If sttHD < totals Then
         sttHD = sttHD + 1
@@ -4402,6 +4404,10 @@ Private Sub XylyHoaDonTong(ByRef rs_import As Recordset)
         ktauto = SelectSQL("SELECT AutoNK as f1 from License")
         If ktauto = 1 Then
             TinhGXKBQ bakThangTinhGiavon, bakThangTinhGiavon, "", ""
+        End If
+
+        If dshdloi <> "" And skiperror = 1 Then
+            MsgBox "Danh sach hoa don loi" & " " & dshdloi
         End If
     End If
 End Sub
@@ -5126,7 +5132,7 @@ Private Sub Command9_Click()
 ErrorHandler:
     MsgBox "L?i khi t?o file XML: " & Err.Description, vbExclamation
 End Sub
-Private Sub SaveUTF8File(Content As String, FilePath As String)
+Private Sub SaveUTF8File(content As String, FilePath As String)
     On Error GoTo ErrorHandler
 
     Dim utf8Bytes() As Byte
@@ -5141,7 +5147,7 @@ Private Sub SaveUTF8File(Content As String, FilePath As String)
     bom(2) = &HBF
 
     ' Chuy?n n?i dung sang UTF-8
-    utf8Bytes = StringToUTF8(Content)
+    utf8Bytes = StringToUTF8(content)
 
     ' K?t h?p BOM và n?i dung
     ReDim finalBytes(UBound(bom) + UBound(utf8Bytes) + 1)
@@ -5222,45 +5228,45 @@ Private Function BuildXMLContent() As String
     BuildXMLContent = xml
 End Function
 Private Function BuildTTinDVu() As String
-    Dim Content As String
-    Content = "      <TTinDVu>" & vbCrLf
-    Content = Content & "        <TenDVu>D?ch v? kê khai thu?</TenDVu>" & vbCrLf
-    Content = Content & "        <MaDVu>01</MaDVu>" & vbCrLf
-    Content = Content & "      </TTinDVu>" & vbCrLf
-    BuildTTinDVu = Content
+    Dim content As String
+    content = "      <TTinDVu>" & vbCrLf
+    content = content & "        <TenDVu>D?ch v? kê khai thu?</TenDVu>" & vbCrLf
+    content = content & "        <MaDVu>01</MaDVu>" & vbCrLf
+    content = content & "      </TTinDVu>" & vbCrLf
+    BuildTTinDVu = content
 End Function
 
 Private Function BuildTTinTKhaiThue() As String
-    Dim Content As String
-    Content = "      <TTinTKhaiThue>" & vbCrLf
-    Content = Content & "        <TenDoanhNghiep>Công ty TNHH Thành ph? H? Chí Minh</TenDoanhNghiep>" & vbCrLf
-    Content = Content & "        <DiaChi>123 Ðu?ng Lê L?i, Qu?n 1, Thành ph? H? Chí Minh</DiaChi>" & vbCrLf
-    Content = Content & "      </TTinTKhaiThue>" & vbCrLf
-    BuildTTinTKhaiThue = Content
+    Dim content As String
+    content = "      <TTinTKhaiThue>" & vbCrLf
+    content = content & "        <TenDoanhNghiep>Công ty TNHH Thành ph? H? Chí Minh</TenDoanhNghiep>" & vbCrLf
+    content = content & "        <DiaChi>123 Ðu?ng Lê L?i, Qu?n 1, Thành ph? H? Chí Minh</DiaChi>" & vbCrLf
+    content = content & "      </TTinTKhaiThue>" & vbCrLf
+    BuildTTinTKhaiThue = content
 End Function
 
 Private Function BuildCTieuTKhaiChinh() As String
-    Dim Content As String
-    Content = "    <CTieuTKhaiChinh>" & vbCrLf
-    Content = Content & "      <ChiTieu id=""CT1"">Giá tr? gia tang</ChiTieu>" & vbCrLf
-    Content = Content & "    </CTieuTKhaiChinh>" & vbCrLf
-    BuildCTieuTKhaiChinh = Content
+    Dim content As String
+    content = "    <CTieuTKhaiChinh>" & vbCrLf
+    content = content & "      <ChiTieu id=""CT1"">Giá tr? gia tang</ChiTieu>" & vbCrLf
+    content = content & "    </CTieuTKhaiChinh>" & vbCrLf
+    BuildCTieuTKhaiChinh = content
 End Function
 
 Private Function BuildPLuc() As String
-    Dim Content As String
-    Content = "    <PLuc>" & vbCrLf
-    Content = Content & "      <PhuLuc id=""PL1"">Ph? l?c kê khai</PhuLuc>" & vbCrLf
-    Content = Content & "    </PLuc>" & vbCrLf
-    BuildPLuc = Content
+    Dim content As String
+    content = "    <PLuc>" & vbCrLf
+    content = content & "      <PhuLuc id=""PL1"">Ph? l?c kê khai</PhuLuc>" & vbCrLf
+    content = content & "    </PLuc>" & vbCrLf
+    BuildPLuc = content
 End Function
 
 Private Function BuildCKyDTu() As String
-    Dim Content As String
-    Content = "  <CKyDTu>" & vbCrLf
-    Content = Content & "    <ChuKy>Ch? ký s? placeholder</ChuKy>" & vbCrLf
-    Content = Content & "  </CKyDTu>" & vbCrLf
-    BuildCKyDTu = Content
+    Dim content As String
+    content = "  <CKyDTu>" & vbCrLf
+    content = content & "    <ChuKy>Ch? ký s? placeholder</ChuKy>" & vbCrLf
+    content = content & "  </CKyDTu>" & vbCrLf
+    BuildCKyDTu = content
 End Function
 
 Private Sub timerReadyNKNL_Timer()
@@ -6216,11 +6222,16 @@ Private Sub timerNext_Timer()
     Else
         'MsgBox "Hóa don loi, se xu lý hóa don tiep theo"
         Dim response As Integer
-
-        response = MsgBox("Ho¸ ®¬n t¶i bÞ lçi, chän Yes ®Ó söa tay, chän No ®Ó bá qua.", vbYesNo + vbQuestion, "Xác nh?n")
+        Dim skiperror As Integer
+        skiperror = SelectSQL("select skiperror AS f1 from  License")
+        If skiperror <> 1 Then
+            response = MsgBox("Ho¸ ®¬n t¶i bÞ lçi, chän Yes ®Ó söa tay, chän No ®Ó bá qua.", vbYesNo + vbQuestion, "Xác nh?n")
+        Else
+            dshdloi = dshdloi & rs_import!SHDon & ","
+            response = vbNo
+        End If
 
         If response = vbYes Then
-
             Dim myDate As Date
             If bakNgayimp <> "" Then
                 myDate = CDate(bakNgayimp)
@@ -6254,8 +6265,8 @@ Function RemoveLeadingZeros(ByVal str As String) As String
     RemoveLeadingZeros = Mid(str, i)
 End Function
 Private Sub btnImportXML_Click()
-
-'IsImport = True
+    dshdloi = ""
+    'IsImport = True
 
     Command_Click 0
     stt51 = 0
@@ -6344,7 +6355,7 @@ Private Sub btnOpenexe_Click()
         'CheckWindow
     End If
 End Sub
-Private Sub GhiChutxt(ByVal Content As Integer)
+Private Sub GhiChutxt(ByVal content As Integer)
     Dim FilePath As String
     FilePath = App.path & "\\Hoadon\\status.txt"
 
@@ -6371,7 +6382,7 @@ Private Sub GhiChutxt(ByVal Content As Integer)
 
     ' M? file d? ghi
     Open FilePath For Output As #FileNum
-    Print #FileNum, Content  ' Ghi n?i dung m?i (tham s? integer) vào file
+    Print #FileNum, content  ' Ghi n?i dung m?i (tham s? integer) vào file
 
     ' Ðóng file
     Close #FileNum
@@ -6700,7 +6711,9 @@ End Sub
 ' Ghi dßng ph¸t sinh vµo Grid
 '====================================================================================================
 Public Sub CmdChitiet_chon()
-' Ki?m tra chu?i có ch?a "6422" b?t k? ? dâu
+    Dim skiperror As Integer
+    skiperror = SelectSQL("select skiperror AS f1 from  License")
+    ' Ki?m tra chu?i có ch?a "6422" b?t k? ? dâu
     If oldKeypress Like "*642*" And txtchungtu(0).Text Like "*642*" And FThuChi.FThuChiForm <> 0 Then
         oldKeypress = ""
         Exit Sub
@@ -6773,6 +6786,7 @@ Public Sub CmdChitiet_chon()
 
     If pPQTK > 0 Then
         If Not taikhoan.ChoNhap Then
+
             MsgBox "Ch­a ®¨ng ký ng­êi sö dông cho tµi kho¶n nµy!", vbExclamation, App.ProductName
             RFocus txtchungtu(0)
             GoTo KT
@@ -6787,7 +6801,9 @@ Public Sub CmdChitiet_chon()
 
     If (loaict = 1) And (taikhoan.tk_id = TKVT_ID) And (co <> 0) Then
         If FThuChi.FThuChiForm = 0 Then
-            MsgBox "Ghi ph¸t sinh nî khi nhËp vËt t­ !", vbExclamation, App.ProductName
+            If skiperror <> 1 Then
+                MsgBox "Ghi ph¸t sinh nî khi nhËp vËt t­ !", vbExclamation, App.ProductName
+            End If
             hasError = True
         End If
         If FThuChi.FThuChiForm <> 4 Then
@@ -6814,21 +6830,27 @@ Public Sub CmdChitiet_chon()
     End If
 
     If (loaict = 2) And (taikhoan.tk_id = TKVT_ID) And (no <> 0) And (vattu.MaSo > 0) Then
-        MsgBox "Ghi ph¸t sinh cã khi xuÊt vËt t­ !", vbExclamation, App.ProductName
+        If skiperror <> 1 Then
+            MsgBox "Ghi ph¸t sinh cã khi xuÊt vËt t­ !", vbExclamation, App.ProductName
+        End If
         RFocus txtchungtu(6)
         hasError = True
         Exit Sub
     End If
 
     If (loaict = 1 Or loaict = 2) And (taikhoan.tk_id = TKVT_ID And vattu.MaSo = 0) And STDetail Then
-        ErrMsg er_SHVattu
+        If skiperror <> 1 Then
+            ErrMsg er_SHVattu
+        End If
         RFocus txtchungtu(2)
         hasError = True
         Exit Sub
     End If
 
     If (taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And ckh.MaSo = 0 And KHDetail Then
-        ErrMsg er_SHKhachHang
+        If skiperror <> 1 Then
+            ErrMsg er_SHKhachHang
+        End If
         RFocus txtchungtu(2)
         hasError = True
         Exit Sub
@@ -13423,7 +13445,9 @@ End Function
 '====================================================================================================
 Private Function KiemTraChungtu() As Boolean
     Dim sodu As Double, sodu2 As Double, st As String
-
+    Dim skiperror As Integer
+    skiperror = SelectSQL("select skiperror AS f1 from  License")
+    
     KiemTraChungtu = False
     If Len(txt(0).Text) = 0 Then txt(0).Text = "..."
     If (loaict = 1 Or loaict = 2 Or loaict = 8) And (CboNguon(0).ListIndex < 0 Or CboNguon(1).ListIndex < 0) Then
@@ -13439,7 +13463,10 @@ Private Function KiemTraChungtu() As Boolean
     End If
     If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or Chk.Value = 0) Then
         If Not PSTuDong(SoPSConLai) Then
-            MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
+
+            If skiperror <> 1 Then
+                MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
+            End If
             hasError = True
             If FThuChi.FThuChiForm <> 0 Then
                 If Not rs_import Is Nothing Then

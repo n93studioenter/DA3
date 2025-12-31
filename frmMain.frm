@@ -471,7 +471,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "30/12/25"
+            TextSave        =   "31/12/25"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2499,7 +2499,7 @@ Private Sub Form_Activate()    ' viet menu
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN FAX TEXT(200)")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711 text")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711ra text")
-
+    ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD skiperror text")
     ' ExecuteSQL5 ("ALTER TABLE Vattu ALTER COLUMN TenVattu MEMO")
     'ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
     mnDuLieu.Caption = "Xö lý"

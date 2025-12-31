@@ -5,10 +5,10 @@ Begin VB.Form FrmOptions
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   3  'Fixed Dialog
    Caption         =   "Th«ng tin doanh nghiÖp"
-   ClientHeight    =   8325
+   ClientHeight    =   8250
    ClientLeft      =   660
    ClientTop       =   915
-   ClientWidth     =   11655
+   ClientWidth     =   11925
    ClipControls    =   0   'False
    FillColor       =   &H00FFFFC0&
    BeginProperty Font 
@@ -28,8 +28,8 @@ Begin VB.Form FrmOptions
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    Picture         =   "Frmopt.frx":57E2
-   ScaleHeight     =   8325
-   ScaleWidth      =   11655
+   ScaleHeight     =   8250
+   ScaleWidth      =   11925
    ShowInTaskbar   =   0   'False
    Tag             =   "Options"
    Begin VB.Frame Frame 
@@ -43,12 +43,12 @@ Begin VB.Form FrmOptions
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   3585
+      Height          =   4425
       Index           =   1
       Left            =   0
       TabIndex        =   69
       Top             =   4680
-      Width           =   9075
+      Width           =   9070
       Begin VB.CheckBox ChkVT 
          BackColor       =   &H00FFFFC0&
          Caption         =   "Luü kÕ theo ngµy chØ kª vËt t­ cã ph¸t sinh"
@@ -1192,7 +1192,7 @@ Begin VB.Form FrmOptions
       End
       Begin VB.Label Label2 
          BackColor       =   &H00FFFFC0&
-         Caption         =   "Tù ®éng nhËp, xuÊt kho"
+         Caption         =   "Bá qua lçi import "
          ForeColor       =   &H00000000&
          Height          =   255
          Index           =   0
@@ -2639,15 +2639,15 @@ Private Sub Command1_Click()
         Text3.Text = folderPath
     End If
 End Sub
-Private Function ReadTxt(filePath As String) As String
+Private Function ReadTxt(FilePath As String) As String
     Dim fileNumber As Integer
     Dim content As String
 
     On Error GoTo ErrorHandler
 
     ' Ki?m tra file t?n t?i
-    If Dir(filePath) = "" Then
-        ReadTxt = "File không t?n t?i: " & filePath
+    If Dir(FilePath) = "" Then
+        ReadTxt = "File không t?n t?i: " & FilePath
         Exit Function
     End If
 
@@ -2655,7 +2655,7 @@ Private Function ReadTxt(filePath As String) As String
     fileNumber = FreeFile
 
     ' M? file d? d?c
-    Open filePath For Input As #fileNumber
+    Open FilePath For Input As #fileNumber
 
     ' Ð?c toàn b? n?i dung
     If LOF(fileNumber) > 0 Then
@@ -2701,7 +2701,7 @@ Private Sub Form_Activate()
     End If
 
     Dim AutoNK As Integer
-    AutoNK = SelectSQL("select AutoNK AS f1 from  License")
+    AutoNK = SelectSQL("select skiperror AS f1 from  License")
     If AutoNK = 1 Then
         CheckBox1(0).Value = 1
     Else
@@ -2856,7 +2856,7 @@ Private Sub OptVT_Click(Index As Integer)
     ttVT = Index
 End Sub
 ' T?o file version.txt v?i n?i dung
-Public Function CreateVersionFile(filePath As String, content As String) As Boolean
+Public Function CreateVersionFile(FilePath As String, content As String) As Boolean
     Dim fileNumber As Integer
 
     On Error GoTo ErrorHandler
@@ -2865,7 +2865,7 @@ Public Function CreateVersionFile(filePath As String, content As String) As Bool
     fileNumber = FreeFile
 
     ' T?o file m?i (Output mode s? t?o file n?u chua có)
-    Open filePath For Output As #fileNumber
+    Open FilePath For Output As #fileNumber
 
     ' Ghi n?i dung
     Print #fileNumber, content;
@@ -2874,7 +2874,7 @@ Public Function CreateVersionFile(filePath As String, content As String) As Bool
     Close #fileNumber
 
     ' Ki?m tra file dã du?c t?o
-    CreateVersionFile = FileExists(filePath)
+    CreateVersionFile = FileExists(FilePath)
 
     Exit Function
 
@@ -2883,10 +2883,10 @@ ErrorHandler:
     On Error Resume Next
     Close #fileNumber
 End Function
-Public Function FileExists(filePath As String) As Boolean
+Public Function FileExists(FilePath As String) As Boolean
     On Error GoTo ErrorHandler
 
-    If Dir(filePath) <> "" Then
+    If Dir(FilePath) <> "" Then
         FileExists = True
     Else
         FileExists = False
@@ -2931,9 +2931,9 @@ Private Sub Command_Click(Index As Integer)
     checkBoxValue = CheckBox1(0).Value
 
     If checkBoxValue <> 0 Then
-        ExecuteSQL5 "Update License set AutoNK=1"
+        ExecuteSQL5 "Update License set skiperror=1"
     Else
-        ExecuteSQL5 "Update License set AutoNK=0"
+        ExecuteSQL5 "Update License set skiperror=0"
     End If
     Dim checkBoxValue711 As Integer
 
