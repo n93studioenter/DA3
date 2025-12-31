@@ -662,7 +662,7 @@ End Function
 
 Public Sub RptSetDate(ngay As Date, Optional nn As Integer)
     If nn = 0 Then
-        frmMain.Rpt.Formulas(71) = "Ngay='Ngµy " + CStr(Day(ngay)) + " th¸ng " + CStr(Month(ngay)) + " n¨m " + CStr(Year(ngay)) + "'"
+        frmMain.Rpt.Formulas(71) = "Ngay='Ngµy " + CStr(Day(ngay)) + " th¸ng " + CStr(month(ngay)) + " n¨m " + CStr(Year(ngay)) + "'"
     Else
         frmMain.Rpt.Formulas(71) = "Ngay='" + Format(ngay, "dddd, mmm dd yyyy") + "'"
     End If
@@ -2384,7 +2384,7 @@ Public Sub XLSFooter(xls As Worksheet, Row As Integer, w As Integer, n As Date)
     xls.Range("A" + CStr(Row), XLSCol(w) + CStr(Row)).MergeCells = True
     xls.Range("A" + CStr(Row), XLSCol(w) + CStr(Row)).HorizontalAlignment = xlHAlignRight
     xls.Range("A" + CStr(Row), XLSCol(w) + CStr(Row)).Font.Italic = True
-    xls.Cells(Row, 1) = "Ngµy " + CStr(Day(n)) + " th¸ng " + CStr(Month(n)) + " n¨m " + CStr(Year(n))
+    xls.Cells(Row, 1) = "Ngµy " + CStr(Day(n)) + " th¸ng " + CStr(month(n)) + " n¨m " + CStr(Year(n))
     xls.Range("A" + CStr(Row + 1), XLSCol(w) + CStr(Row + 1)).MergeCells = True
     xls.Range("A" + CStr(Row + 1), XLSCol(w) + CStr(Row + 1)).HorizontalAlignment = xlHAlignCenter
     xls.Range("A" + CStr(Row + 1), XLSCol(w) + CStr(Row + 1)).Font.Bold = True
