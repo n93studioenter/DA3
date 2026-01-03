@@ -471,7 +471,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "31/12/25"
+            TextSave        =   "02/01/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2492,6 +2492,7 @@ Private Sub Form_Activate()    ' viet menu
     Label3(16).Left = (Me.ScaleWidth * 61.4 / 100)
     Label3(16).Top = (Me.ScaleHeight * 88 / 100)
 
+    ExecuteSQL5 "Update License set skiperror=0 where skiperror='...'"
     ExecuteSQL5_Themmoi ("ALTER TABLE HeThongTK DROP COLUMN KyHieu")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD tenhoadon text")
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN TaiKhoanVN TEXT(200)")
