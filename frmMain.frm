@@ -471,7 +471,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "02/01/26"
+            TextSave        =   "05/01/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2475,9 +2475,10 @@ Private Sub Image2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
     ' Load icon t? file .ico ho?c .cur
 End Sub
 Private Sub Form_Activate()    ' viet menu
-'Tudongtinhgiavon = True
-'Kiemtraphienban
-' FindLatestExe
+     
+    'Tudongtinhgiavon = True
+    'Kiemtraphienban
+    ' FindLatestExe
     Label1.Left = 0
     Label1.Top = (Me.ScaleHeight * 95 / 100)
 
@@ -2492,7 +2493,7 @@ Private Sub Form_Activate()    ' viet menu
     Label3(16).Left = (Me.ScaleWidth * 61.4 / 100)
     Label3(16).Top = (Me.ScaleHeight * 88 / 100)
 
-    ExecuteSQL5 "Update License set skiperror=0 where skiperror='...'"
+
     ExecuteSQL5_Themmoi ("ALTER TABLE HeThongTK DROP COLUMN KyHieu")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD tenhoadon text")
     ExecuteSQL5 ("ALTER TABLE license ALTER COLUMN TaiKhoanVN TEXT(200)")
@@ -2501,6 +2502,7 @@ Private Sub Form_Activate()    ' viet menu
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711 text")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD col711ra text")
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD skiperror text")
+    ExecuteSQL5 "Update License set skiperror=0 where skiperror='...'"
     ' ExecuteSQL5 ("ALTER TABLE Vattu ALTER COLUMN TenVattu MEMO")
     'ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
     mnDuLieu.Caption = "Xö lý"
