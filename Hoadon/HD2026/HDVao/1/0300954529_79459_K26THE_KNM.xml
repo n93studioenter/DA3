@@ -5,9 +5,9 @@
       <PBan>2.1.0</PBan>
       <THDon>Hóa đơn GTGT</THDon>
       <KHMSHDon>1</KHMSHDon>
-      <KHHDon>K26TDA</KHHDon>
-      <SHDon>105320</SHDon>
-      <NLap>02/01/26 12:00:00 AM</NLap>
+      <KHHDon>K26THE</KHHDon>
+      <SHDon>79459</SHDon>
+      <NLap>01/01/26 12:00:00 AM</NLap>
       <HDCTTChinh>0</HDCTTChinh>
       <DVTTe>VND</DVTTe>
       <TGia></TGia>
@@ -23,33 +23,33 @@
     </TTChung>
     <NDHDon>
       <NBan>
-        <Ten>CHI NHÁNH TỔNG CÔNG TY ĐIỆN LỰC THÀNH PHỐ HỒ CHÍ MINH TNHH - CÔNG TY ĐIỆN LỰC VŨNG TÀU</Ten>
-        <MST>0300951119-010</MST>
+        <Ten>CHI NHÁNH TẬP ĐOÀN BƯU CHÍNH VIỄN THÔNG VIỆT NAM (LOẠI HÌNH DOANH NGHIỆP: CÔNG TY TNHH) - VIỄN THÔNG THÀNH PHỐ HỒ CHÍ MINH</Ten>
+        <MST>0300954529</MST>
         <DChi></DChi>
         <SDThoai></SDThoai>
       </NBan>
       <NMua>
-        <Ten>CÔNG TY TNHH THE FORUM EDUCATION VIỆT NAM</Ten>
-        <MST>3502386218</MST>
+        <Ten>Công Ty TNHH Xây Dựng Đất Lợi</Ten>
+        <MST>3501790298</MST>
         <DChi></DChi>
-        <MKHang>PB15010054621</MKHang>
+        <MKHang>VTU-01-194894</MKHang>
         <HVTNMHang></HVTNMHang>
       </NMua>
       <DSHHDVu>
         <HHDVu>
           <TChat>0</TChat>
           <STT>1</STT>
-          <THHDVu>Khác</THHDVu>
-          <DVTinh>kWh</DVTinh>
-          <SLuong>1013</SLuong>
+          <THHDVu>Cước dịch vụ Viễn thông-Công nghệ thông tin tháng 12 năm 2025</THHDVu>
+          <DVTinh>Tháng</DVTinh>
+          <SLuong>1</SLuong>
           <DGia></DGia>
-          <TSuat>8</TSuat>
-          <ThTien>2254938</ThTien>
+          <TSuat>10</TSuat>
+          <ThTien>169816</ThTien>
           <TTKhac>
             <TTin>
               <TTruong>Amount</TTruong>
               <KDLieu>numeric</KDLieu>
-              <DLieu>2254938</DLieu>
+              <DLieu>169816</DLieu>
             </TTin>
             <TTin>
               <TTruong>VATAmount</TTruong>
@@ -79,15 +79,15 @@
         </TTKhac>
         <THTTLTSuat>
           <LTSuat>
-            <TSuat>8</TSuat>
-            <TThue>180395</TThue>
-            <ThTien>2435333</ThTien>
+            <TSuat>10</TSuat>
+            <TThue>16982</TThue>
+            <ThTien>186798</ThTien>
           </LTSuat>
         </THTTLTSuat>
-        <TgTCThue>2254938</TgTCThue>
-        <TgTThue>180395</TgTThue>
+        <TgTCThue>169816</TgTCThue>
+        <TgTThue>16982</TgTThue>
         <TTCKTMai></TTCKTMai>
-        <TgTTTBSo>2435333</TgTTTBSo>
+        <TgTTTBSo>186798</TgTTTBSo>
         <TgTTTBChu></TgTTTBChu>
       </TToan>
     </NDHDon>

@@ -6,7 +6,7 @@
       <THDon>Hóa đơn GTGT</THDon>
       <KHMSHDon>1</KHMSHDon>
       <KHHDon>K26THE</KHHDon>
-      <SHDon>124666</SHDon>
+      <SHDon>81242</SHDon>
       <NLap>01/01/26 12:00:00 AM</NLap>
       <HDCTTChinh>0</HDCTTChinh>
       <DVTTe>VND</DVTTe>
@@ -29,26 +29,27 @@
         <SDThoai></SDThoai>
       </NBan>
       <NMua>
-        <Ten>CÔNG TY TNHH THE FORUM EDUCATION VIỆT NAM</Ten>
-        <MST>3502386218</MST>
+        <Ten>Công Ty TNHH Xây Dựng Đất Lợi</Ten>
+        <MST>3501790298</MST>
         <DChi></DChi>
-        <MKHang>VTU-02-119078</MKHang>
+        <MKHang>VTU-01-214329</MKHang>
         <HVTNMHang></HVTNMHang>
       </NMua>
       <DSHHDVu>
         <HHDVu>
           <TChat>0</TChat>
           <STT>1</STT>
-          <THHDVu>Hoá đơn không nhận mã</THHDVu>
-          <SLuong></SLuong>
+          <THHDVu>Cước dịch vụ Viễn thông-Công nghệ thông tin tháng 12 năm 2025</THHDVu>
+          <DVTinh>Tháng</DVTinh>
+          <SLuong>1</SLuong>
           <DGia></DGia>
           <TSuat>10</TSuat>
-          <ThTien>2364737</ThTien>
+          <ThTien>164056</ThTien>
           <TTKhac>
             <TTin>
               <TTruong>Amount</TTruong>
               <KDLieu>numeric</KDLieu>
-              <DLieu>2364737</DLieu>
+              <DLieu>164056</DLieu>
             </TTin>
             <TTin>
               <TTruong>VATAmount</TTruong>
@@ -79,14 +80,14 @@
         <THTTLTSuat>
           <LTSuat>
             <TSuat>10</TSuat>
-            <TThue>236474</TThue>
-            <ThTien>2601211</ThTien>
+            <TThue>16406</TThue>
+            <ThTien>180462</ThTien>
           </LTSuat>
         </THTTLTSuat>
-        <TgTCThue>2364737</TgTCThue>
-        <TgTThue>236474</TgTThue>
+        <TgTCThue>164056</TgTCThue>
+        <TgTThue>16406</TgTThue>
         <TTCKTMai></TTCKTMai>
-        <TgTTTBSo>2601211</TgTTTBSo>
+        <TgTTTBSo>180462</TgTTTBSo>
         <TgTTTBChu></TgTTTBChu>
       </TToan>
     </NDHDon>
