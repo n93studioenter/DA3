@@ -106,7 +106,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Dim Counter As Integer
@@ -592,7 +592,7 @@ Private Sub Command_Click(Index As Integer)
 
     'Lay dia chi mac
 
-   
+
 
 
 
@@ -648,6 +648,22 @@ Private Sub Command_Click(Index As Integer)
             End If
         End Select
     End Select
+
+    'On Error Resume Next
+    'Unload frmToast          ' Gi?i phóng instance cu n?u có
+    'On Error GoTo 0
+    'Dim Duration As Double
+    'Duration = 200
+    'Load frmToast
+
+
+    ' C?u hình Duration n?u du?c ch? d?nh
+
+
+    'frmToast.Show vbModeless   ' Hi?n th? không block form chính
+    'frmToast.Refresh
+    'frmToast.ShowToast "Thành công!", "Ðã d?ng b? hóa don d?u vào thành công.", 6000
+
 End Sub
 
 

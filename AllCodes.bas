@@ -8,12 +8,64 @@ Attribute VB_Name = "AllCodes"
 'The Barcode() Function will print one character of sBar at a time in a loop
 'To add more Barcode types, just continue to build functions that make the appropriate sBar String
 Option Explicit
+Private Declare Function LoadStringW Lib "user32" ( _
+                                     ByVal hInstance As Long, ByVal uID As Long, _
+                                     ByVal lpBuffer As Long, ByVal nBufferMax As Long) As Long
+Declare Function MessageBoxW Lib "user32" ( _
+                             ByVal hwnd As Long, _
+                             ByVal lpText As Long, _
+                             ByVal lpCaption As Long, _
+                             ByVal wType As Long) As Long
 
+
+Public Const MIIM_STRING = &H40
+Public Const MIIM_FTYPE = &H100
+Public Const MFT_STRING = &H0
+Public Type MENUITEMINFOW
+    cbSize As Long
+    fMask As Long
+    fType As Long
+    fState As Long
+    wID As Long
+    hSubMenu As Long
+    hbmpChecked As Long
+    hbmpUnchecked As Long
+    dwItemData As Long
+    dwTypeData As Long   ' ?? B?T BU?C – THI?U LÀ H?NG
+    cch As Long
+End Type
+
+Public Declare Function SetMenuItemInfoW Lib "user32" _
+                                         (ByVal hMenu As Long, ByVal uItem As Long, _
+                                          ByVal fByPosition As Long, _
+                                          ByRef lpmii As MENUITEMINFOW) As Long
+
+Public Declare Function GetMenu Lib "user32" _
+                                (ByVal hwnd As Long) As Long
+
+Public Declare Function GetSubMenu Lib "user32" _
+                                   (ByVal hMenu As Long, ByVal nPos As Long) As Long
 'Public Const pBCode = 39
 Public LO_XXXX As String
 Public SL_XXXX As Double
 Dim sBar As String, i0 As Integer, i1 As Integer
-
+Attribute i0.VB_VarUserMemId = 1073741826
+Attribute i1.VB_VarUserMemId = 1073741826
+Public Function GetResString(ID As Long) As String
+    On Error Resume Next
+    Dim b() As Byte
+    b = LoadResData(ID, "CUSTOM")   ' type là CUSTOM (vi?t hoa)
+    If UBound(b) >= 0 Then
+        GetResString = StrConv(b, vbUnicode)   ' convert byte ? Unicode, gi? d?u d?p
+        ' Xóa null terminator n?u có
+        If Right(GetResString, 1) = Chr(0) Then GetResString = Left(GetResString, Len(GetResString) - 1)
+    End If
+End Function
+Private Function StrToUnicode(ByVal str As String) As Long
+    Dim byteArray() As Byte
+    byteArray = StrConv(str, vbUnicode)
+    StrToUnicode = VarPtr(byteArray(0))
+End Function
 Public Function Code39(strCode As String)
 Dim varBar1, varBar2
     varBar1 = Split("0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,-,., ,$,/,+,%,*", ",")

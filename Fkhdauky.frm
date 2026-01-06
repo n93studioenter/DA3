@@ -69,15 +69,6 @@ Begin VB.Form FKHDauKy
       _ExtentY        =   9763
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   30
       Cols            =   8
       FixedRows       =   0
@@ -664,7 +655,7 @@ Private Sub LietKeTonKho(mkho As Long)
         GrdVT.AddItem rs_ton!shtk + Chr(9) + rs_ton!sohieu + Chr(9) + rs_ton!Ten + Chr(9) + Format(rs_ton!duno, Mask_0) + Chr(9) + Format(rs_ton!duco, Mask_0) + Chr(9) + Format(rs_ton!dunt, Mask_2) + Chr(9) + CStr(rs_ton!MaSo) + Chr(9) + CStr(rs_ton!MaKhachHang), 0
         rs_ton.MoveNext
     Loop
-    GrdVT.Rows = IIf(rs_ton.RecordCount > GrdVT.tag, rs_ton.RecordCount, GrdVT.tag)
+    GrdVT.Rows = IIf(rs_ton.recordCount > GrdVT.tag, rs_ton.recordCount, GrdVT.tag)
     rs_ton.Close
     Set rs_ton = Nothing
     GrdVT.Row = 0
@@ -685,17 +676,41 @@ Private Sub TongTien()
 End Sub
 
 Private Sub xoa_Click()
-Dim sql
-If MsgBox("B¹n cã ch¾c ch¾n xãa tån ®Çu kh«ng?", vbYesNo + vbCritical, App.ProductName) = vbYes Then
+    Dim sql
+    Dim sMsg As String
+    Dim sCap As String
+    'If MsgBox("B¹n cã ch¾c ch¾n xãa tån ®Çu kh«ng?", vbYesNo + vbCritical, App.ProductName) = vbYes Then
+    sMsg = _
+    ChrW(66) & ChrW(7841) & ChrW(110) & " " & _
+           ChrW(99) & ChrW(243) & " " & _
+           ChrW(109) & ChrW(117) & ChrW(7889) & " " & _
+           ChrW(120) & ChrW(111) & ChrW(225) & " " & _
+           ChrW(116) & ChrW(7845) & ChrW(116) & " " & _
+           ChrW(99) & ChrW(7843) & " " & _
+           ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & " " & _
+           ChrW(110) & ChrW(7907) & " " & _
+           ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & _
+           ChrW(99) & ChrW(243) & " " & _
+           ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & _
+           ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & "?"
 
-sql = " UPDATE SoDuKhachHang "
-sql = sql + " set DuNo_0  = 0 "
-sql = sql + ",DuCo_0 = 0 "
-sql = sql + ",DuNT_0 = 0"
-DBKetoan.Execute sql
-         LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
-                DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '331*'"
-       DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '131*'"
-MsgBox "Xãa thµnh c«ng"
- End If
+    sCap = _
+    ChrW(88) & ChrW(225) & ChrW(99) & " " & _
+           ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110) & " " & _
+           ChrW(120) & ChrW(111) & ChrW(225)
+
+    ' Hi?n th? MsgBox v?i n?i dung sMsg
+    If MsgBox(sMsg, vbYesNo + vbCritical, sCap) = vbYes Then
+
+        sql = " UPDATE SoDuKhachHang "
+        sql = sql + " set DuNo_0  = 0 "
+        sql = sql + ",DuCo_0 = 0 "
+        sql = sql + ",DuNT_0 = 0"
+        DBKetoan.Execute sql
+        LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
+        DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '331*'"
+        DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '131*'"
+        MsgBox "Xãa thµnh c«ng"
+    End If
+
 End Sub

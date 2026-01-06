@@ -1,5 +1,10 @@
 Attribute VB_Name = "ModSAS"
 Option Explicit
+Public Declare Function MessageBoxW Lib "user32" ( _
+                                    ByVal hwnd As Long, _
+                                    ByVal lpText As Long, _
+                                    ByVal lpCaption As Long, _
+                                    ByVal wType As Long) As Long
 
 Public WSpace As Workspace
 Public DBKetoan As Database
@@ -96,9 +101,9 @@ Public Const Mask_DR = "dd/mm/yyyy"
 
 Public pFontName As String
 Public pFontSize As Integer
-Public sDecimal  As String
+Public sDecimal As String
 Public pSoKT As Integer
-Public pKhongDau  As Integer
+Public pKhongDau As Integer
 
 Public pNamTC As Integer
 Public IniPath As String
@@ -129,7 +134,9 @@ Public opotion_1 As String
 Public pFunction As Integer
 Public pCT_ID As Long
 Dim n1 As Date, n2 As Date
+Attribute n2.VB_VarUserMemId = 1073741899
 Public ban_quyen As Integer
+Attribute ban_quyen.VB_VarUserMemId = 1073741901
 Sub Main()
     opotion_1 = "1000"
     ban_quyen = 0
@@ -202,7 +209,11 @@ Public Function OpenDB(file_name As String, Optional chonluu As Integer = 0) As 
             file_name = pCurDir + "DATA\QD48.MDB"
         End If
     End If
-    s = GetAttr(file_name)
+    If file_name <> "" Then
+        s = GetAttr(file_name)
+    Else
+        GoTo KhongMo
+    End If
     If s Mod 2 = 1 Then
         msg = "T÷p d˜ li÷u bﬁ Æ∆t chÿ Æ‰c - Read Only !"
         GoTo KhongMo

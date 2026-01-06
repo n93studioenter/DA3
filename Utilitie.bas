@@ -166,8 +166,128 @@ Private Const KEY_QUERY_VALUE = &H1
 Private Const KEY_READ = ((STANDARD_RIGHTS_READ Or KEY_QUERY_VALUE Or KEY_ENUMERATE_SUB_KEYS Or KEY_NOTIFY) And (Not SYNCHRONIZE))
 Private Const HKEY_CURRENT_USER = &H80000001
 Public m_IgnoreEvents As Boolean
-
 Public Sub ErrMsg(errnum As Integer)
+    Dim msg As String
+
+    Select Case errnum
+    Case er_SoHieu
+        msg = ChrW(83) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
+        ' S? hi?u không h?p l? !
+
+    Case er_Ten
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(100) & ChrW(105) & ChrW(7877) & ChrW(110) & " " & ChrW(103) & ChrW(105) & ChrW(7843) & ChrW(105) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
+        ' Thi?u di?n gi?i ho?c không h?p l? !
+
+    Case er_PhanLoai
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & " " & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & " !"
+        ' Thi?u phân lo?i !
+
+    Case er_KhoHang
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(111) & " " & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(103) & " !"
+        ' Thi?u kho hàng !
+
+    Case er_NguonNX
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(110) & ChrW(103) & ChrW(117) & ChrW(7891) & ChrW(110) & " " & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & " " & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & " !"
+        ' Thi?u ngu?n nh?p xu?t !
+
+    Case er_SHKhachHang
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(225) & ChrW(99) & ChrW(104) & " " & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(103) & " !" & ChrW(32)
+        ' Thi?u s? hi?u khách hàng !222
+
+    Case er_SHTaiKhoan
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & "!"
+        ' Thi?u s? hi?u tài kho?n!
+
+    Case er_SHTaiKhoan1
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(99) & ChrW(243) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " !"
+        ' Thi?u s? hi?u tài kho?n ho?c tài kho?n có chi ti?t !
+
+    Case er_SHVattu
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
+        ' Thi?u s? hi?u v?t tu !
+
+    Case er_SHTaiSan
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(115) & ChrW(7843) & ChrW(110) & " !"
+        ' Thi?u s? hi?u tài s?n !
+
+    Case er_SHThanhPham
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & " " & ChrW(112) & ChrW(104) & ChrW(7849) & ChrW(109) & " !"
+        ' Thi?u s? hi?u thành ph?m !
+
+    Case er_SHTKVT
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
+        ' Thi?u s? hi?u tài kho?n theo dõi chi ti?t v?t tu !
+
+    Case er_SHTKCN
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(110) & ChrW(7907) & " !"
+        ' Thi?u s? hi?u tài kho?n theo dõi chi ti?t công n? !
+
+    Case er_SHChTu
+        msg = ChrW(83) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " !"
+        ' S? hi?u ch?ng t? dã có !
+
+    Case er_CoPS
+        msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
+        ' Ð?i tu?ng dã có phát sinh !
+
+    Case er_CoPS1
+        msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(100) & ChrW(432) & " " & ChrW(273) & ChrW(7847) & ChrW(117) & " " & ChrW(107) & ChrW(236) & " !"
+        ' Ð?i tu?ng dã có phát sinh ho?c s? du d?u k? !
+
+    Case er_KoPS
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
+        ' Không có phát sinh !
+
+    Case er_KoPS1
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(100) & ChrW(432) & " " & ChrW(273) & ChrW(7847) & ChrW(117) & " " & ChrW(107) & ChrW(236) & " !"
+        ' Không có phát sinh ho?c s? du d?u k? !
+
+    Case er_KoSD
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(113) & ChrW(117) & ChrW(7923) & ChrW(110) & " " & ChrW(115) & ChrW(7917) & " " & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(99) & " " & ChrW(110) & ChrW(259) & ChrW(110) & ChrW(103) & " " & ChrW(110) & ChrW(224) & ChrW(121) & " !"
+        ' Không có quy?n s? d?ng ch?c nang này !
+
+    Case er_KoVT
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(107) & ChrW(104) & ChrW(97) & ChrW(105) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
+        ' Không khai báo theo dõi chi ti?t v?t tu !
+
+    Case er_KoTS
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(107) & ChrW(104) & ChrW(97) & ChrW(105) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(115) & ChrW(7843) & ChrW(110) & " !"
+        ' Không khai báo theo dõi chi ti?t tài s?n !
+
+    Case er_KoXem
+        msg = ChrW(67) & ChrW(104) & ChrW(7881) & " " & ChrW(105) & ChrW(110) & " " & ChrW(114) & ChrW(97) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(105) & ChrW(110) & ChrW(44) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(120) & ChrW(101) & ChrW(109) & " " & ChrW(116) & ChrW(114) & ChrW(432) & ChrW(7899) & ChrW(99) & " !"
+        ' Ch? in ra máy in, không xem tru?c !
+
+    Case er_RWait
+        msg = ChrW(88) & ChrW(105) & ChrW(110) & " " & ChrW(99) & ChrW(104) & ChrW(7901) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & " " & ChrW(107) & ChrW(104) & ChrW(225) & ChrW(99) & " " & ChrW(116) & ChrW(114) & ChrW(111) & ChrW(110) & ChrW(103) & " " & ChrW(109) & ChrW(7841) & ChrW(110) & ChrW(103) & " " & ChrW(105) & ChrW(110) & " " & ChrW(115) & ChrW(111) & ChrW(110) & ChrW(103) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(99) & ChrW(225) & ChrW(111) & " " & ChrW(110) & ChrW(224) & ChrW(121) & " !"
+        ' Xin ch? máy tính khác trong m?ng in xong báo cáo này !
+
+    Case er_DBFile
+        msg = ChrW(84) & ChrW(7853) & ChrW(112) & " " & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
+        ' T?p d? li?u không h?p l? !
+
+    Case er_Connection
+        msg = ChrW(75) & ChrW(7871) & ChrW(116) & " " & ChrW(110) & ChrW(7891) & ChrW(105) & " " & ChrW(118) & ChrW(432) & ChrW(7907) & ChrW(116) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(99) & ChrW(104) & ChrW(111) & " " & ChrW(112) & ChrW(104) & ChrW(233) & ChrW(112) & " !"
+        ' K?t n?i vu?t s? máy cho phép !
+
+    Case er_VTKoTon
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(116) & ChrW(7891) & ChrW(110) & " " & ChrW(107) & ChrW(104) & ChrW(111) & " !"
+        ' Không có t?n kho !
+
+    Case er_NhieuCT
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(105) & ChrW(7875) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(7883) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(225) & " " & CStr(MaxGridRow) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & ChrW(44) & " " & ChrW(104) & ChrW(227) & ChrW(121) & " " & ChrW(108) & ChrW(7885) & ChrW(99) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(225) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & "!"
+        ' Không hi?n th? quá ... ch?ng t?, hãy l?c ch?ng t? theo tháng ho?c lo?i ch?ng t?!
+
+    Case er_Version
+        ' Không h? tr? trong phiên b?n này, liên h? Ban gi?i pháp cho kh?i doanh nghi?p Nhà nu?c, C? ph?n, Liên doanh
+
+    Case Else
+        msg = "L?i không xác d?nh!"
+    End Select
+    If pKhongDau = 1 Then msg = ABCtoKDau(msg)
+    MessageBoxW 0&, StrPtr(msg), StrPtr("Thông báo loi"), vbOKOnly + vbExclamation
+End Sub
+Public Sub ErrMsg2(errnum As Integer)
     Dim msg As String
     
     Select Case errnum
@@ -176,7 +296,7 @@ Public Sub ErrMsg(errnum As Integer)
         Case er_PhanLoai:     msg = "ThiÕu ph©n lo¹i !"
         Case er_KhoHang:        msg = "ThiÕu kho hµng !"
         Case er_NguonNX:        msg = "ThiÕu nguån nhËp xuÊt !"
-        Case er_SHKhachHang:        msg = "ThiÕu sè hiÖu kh¸ch hµng !"
+        Case er_SHKhachHang:        msg = "ThiÕu sè hiÖu kh¸ch hµng !222"
         Case er_SHTaiKhoan:        msg = "ThiÕu sè hiÖu tµi kho¶n!"
         Case er_SHTaiKhoan1:        msg = "ThiÕu sè hiÖu tµi kho¶n hoÆc tµi kho¶n cã chi tiÕt !"
         Case er_SHVattu:        msg = "ThiÕu sè hiÖu vËt t­ !"
@@ -213,7 +333,7 @@ End Sub
 '======================================================================================
 ' Ham liet ke item tu Recordset vao Combo hoac List co kem Ma so
 '======================================================================================
-Public Function Int_RecsetToCbo(pstr_sql As String, Cbo As Object, Optional id As Integer = 0) As Integer
+Public Function Int_RecsetToCbo(pstr_sql As String, Cbo As Object, Optional ID As Integer = 0) As Integer
     Dim recset As Recordset
     
     If IsNull(DBKetoan) Then
@@ -231,7 +351,7 @@ Public Function Int_RecsetToCbo(pstr_sql As String, Cbo As Object, Optional id A
             End If
             recset.MoveNext
         Loop
-        If Cbo.ListCount > 0 And id >= 0 Then Cbo.ListIndex = id
+        If Cbo.ListCount > 0 And ID >= 0 Then Cbo.ListIndex = ID
     End If
     recset.Close
     Set recset = Nothing
@@ -332,9 +452,9 @@ Public Sub SetRptInfo()
         
     frmMain.Rpt.Formulas(0) = "TenCty='" + pTenCty + "'"
     If Len(Trim(pTenCn)) = 0 Or Left(pTenCn, 1) = "." Then
-        frmMain.Rpt.Formulas(1) = "TenCn='MST: " + frmMain.LbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(1) = "TenCn='MST: " + frmMain.lbCty(8).Caption + "'"
     Else
-        frmMain.Rpt.Formulas(1) = "TenCn='" + pTenCn + " - MST: " + frmMain.LbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(1) = "TenCn='" + pTenCn + " - MST: " + frmMain.lbCty(8).Caption + "'"
     End If
     frmMain.Rpt.Formulas(2) = "Nam=" + CStr(pNamTC)
     For i = 3 To 128
@@ -774,12 +894,12 @@ Public Sub SetFont(frm As Form, Optional c As Integer = 0)
         End If
         For i = 0 To .Controls.count - 1
             If ((TypeOf .Controls(i) Is Grid Or TypeOf .Controls(i) Is Outline) And FontFlag > 0) Or TypeOf .Controls(i) Is TextBox Or TypeOf .Controls(i) Is ComboBox Or TypeOf .Controls(i) Is ListBox Then
-                .Controls(i).FontName = pFontName
+                .Controls(i).fontName = pFontName
                 .Controls(i).FontSize = pFontSize
             End If
             If IsNumeric(.Controls(i).tag) Then
                 If TypeOf .Controls(i) Is Label And .Controls(i).tag = 1 Then
-                    .Controls(i).FontName = pFontName
+                    .Controls(i).fontName = pFontName
                     .Controls(i).FontSize = pFontSize
                 End If
             End If
@@ -2515,12 +2635,12 @@ Public Function GetShortDateFormat() As String
    End If
 End Function
 
-Public Sub SearchObj(id As Integer, Optional o1 As ListBox, Optional o2 As Grid, Optional col As Integer = 0)
+Public Sub SearchObj(ID As Integer, Optional o1 As ListBox, Optional o2 As Grid, Optional col As Integer = 0)
     Dim st As String, i As Integer, k As Integer
     
     st = FrmGetStr.GetString("Tõ kho¸ cÇn t×m", "T×m kiÕm")
     If Len(st) > 0 Then
-        Select Case id
+        Select Case ID
             Case 0:
                 k = o1.ListIndex
                 For i = 0 To o1.ListCount - 1
@@ -2564,7 +2684,7 @@ End Sub
 
 Private Function Register(fname$, Value%) As Integer
     Dim regLib&, process&, succeed&
-    Dim h1&, xc&, id&
+    Dim h1&, xc&, ID&
     Dim p$
     
     Select Case Value
@@ -2586,7 +2706,7 @@ Private Function Register(fname$, Value%) As Integer
         Register = 2
     Else
         h1 = CreateThreadForRegister(ByVal 0&, 0&, _
-            ByVal process, ByVal 0&, 0&, id)
+            ByVal process, ByVal 0&, 0&, ID)
         If h1 = 0 Then
             Register = 3
         Else

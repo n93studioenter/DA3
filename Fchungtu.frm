@@ -12,6 +12,15 @@ Begin VB.Form FrmChungtu
    ClientTop       =   450
    ClientWidth     =   18180
    ClipControls    =   0   'False
+   BeginProperty Font 
+      Name            =   "VK Sans Serif"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
    Icon            =   "Fchungtu.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Voucher"
@@ -26,15 +35,6 @@ Begin VB.Form FrmChungtu
    WhatsThisHelp   =   -1  'True
    Begin VB.CommandButton Command10 
       Caption         =   "KiÓm tra hãa ®¬n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Left            =   10800
       TabIndex        =   187
@@ -43,6 +43,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command15 
       Caption         =   "Q4"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   3
       Left            =   3000
@@ -52,6 +61,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command13 
       Caption         =   "Q3"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   2
       Left            =   2640
@@ -61,6 +79,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command12 
       Caption         =   "Q2"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   1
       Left            =   2280
@@ -70,6 +97,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command11 
       Caption         =   "Q1"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   1920
@@ -79,6 +115,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command9 
       Caption         =   "Command9"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   15240
       TabIndex        =   181
@@ -89,15 +134,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton Command8 
       BackColor       =   &H0080FF80&
       Caption         =   "Export tê khai"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   315
       Left            =   14640
       TabIndex        =   180
@@ -117,6 +153,15 @@ Begin VB.Form FrmChungtu
          FirstWeekOfYear =   0
          LCID            =   1033
          SubFormatType   =   1
+      EndProperty
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
       Height          =   315
       Index           =   6
@@ -162,15 +207,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "Import thµnh phÈm"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   6
@@ -198,15 +234,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton Command7 
       BackColor       =   &H0080FF80&
       Caption         =   "Tµi s¶n cè ®Þnh"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Left            =   120
       Style           =   1  'Graphical
@@ -216,6 +243,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton btnDelete 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   5
       Left            =   5400
@@ -229,6 +265,15 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton btnReset 
       BackColor       =   &H00C0C0C0&
       Caption         =   "Reset"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   12480
       Picture         =   "Fchungtu.frx":6CC4
@@ -239,15 +284,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton Command6 
       BackColor       =   &H0080FF80&
       Caption         =   "Import Ng©n hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   435
       Left            =   120
       Style           =   1  'Graphical
@@ -293,15 +329,6 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command5 
       Caption         =   " Ho¸ ®¬n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Left            =   12240
       TabIndex        =   170
@@ -327,6 +354,15 @@ Begin VB.Form FrmChungtu
       Top             =   5280
    End
    Begin VB.TextBox txtNgaychungtu 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Left            =   11040
       TabIndex        =   169
@@ -336,6 +372,15 @@ Begin VB.Form FrmChungtu
       Width           =   1335
    End
    Begin VB.TextBox txtNgayghiso 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Left            =   11040
       TabIndex        =   168
@@ -347,15 +392,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "T¶i hãa ®¬n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   5
@@ -388,6 +424,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton btnOpenexe 
       Caption         =   "mt"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Left            =   12240
       TabIndex        =   166
@@ -403,6 +448,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton btnImport 
       Caption         =   "Import"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   11880
       TabIndex        =   165
@@ -411,6 +465,15 @@ Begin VB.Form FrmChungtu
       Width           =   1575
    End
    Begin VB.TextBox Text1 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   285
       Left            =   9360
       TabIndex        =   164
@@ -434,15 +497,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "B¶ng nhËp xuÊt tån"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Index           =   14
       Left            =   120
@@ -454,15 +508,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptVAT 
       BackColor       =   &H00E0E0E0&
       Caption         =   "B¶ng kª ho¸ ®¬n  ra"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   3
       Left            =   120
@@ -475,15 +520,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptVAT 
       BackColor       =   &H00E0E0E0&
       Caption         =   "B¶ng kª ho¸ ®¬n vµo"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   4
       Left            =   120
@@ -496,15 +532,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptVAT 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Tê khai thuÕ GTGT"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   5
       Left            =   120
@@ -515,6 +542,15 @@ Begin VB.Form FrmChungtu
       Width           =   1815
    End
    Begin VB.ComboBox CboThang 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       ItemData        =   "Fchungtu.frx":191E1
       Left            =   3120
@@ -527,15 +563,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "B¶ng c©n ®èi ph¸t sinh"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   9
       Left            =   120
@@ -547,15 +574,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Sæ nhËt ký chung"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   100
       Left            =   120
@@ -567,15 +585,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Sæ chi tiÕt c«ng nî "
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   36
       Left            =   120
@@ -585,6 +594,15 @@ Begin VB.Form FrmChungtu
       Width           =   1815
    End
    Begin VB.TextBox txtshkh 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   1920
@@ -596,6 +614,15 @@ Begin VB.Form FrmChungtu
       Width           =   1095
    End
    Begin VB.CommandButton cmdkh 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   3120
@@ -608,15 +635,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Sæ chi tiÕt vËt t­"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   12
       Left            =   120
@@ -626,6 +644,15 @@ Begin VB.Form FrmChungtu
       Width           =   1815
    End
    Begin VB.TextBox txtShVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   1920
@@ -637,6 +664,15 @@ Begin VB.Form FrmChungtu
       Width           =   1095
    End
    Begin VB.CommandButton cmdvt 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   3120
@@ -647,6 +683,15 @@ Begin VB.Form FrmChungtu
       Width           =   255
    End
    Begin VB.TextBox txtShTk 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   1920
@@ -661,15 +706,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Sæ chi tiÕt tµi kho¶n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   0
       Left            =   120
@@ -679,6 +715,15 @@ Begin VB.Form FrmChungtu
       Width           =   1815
    End
    Begin VB.CommandButton cmdtk 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   0
       Left            =   3120
@@ -689,6 +734,15 @@ Begin VB.Form FrmChungtu
       Width           =   255
    End
    Begin VB.ComboBox CboThang1 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       ItemData        =   "Fchungtu.frx":19F53
@@ -700,6 +754,15 @@ Begin VB.Form FrmChungtu
       Width           =   1095
    End
    Begin VB.ComboBox CboThang1 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       ItemData        =   "Fchungtu.frx":19F57
@@ -731,6 +794,15 @@ Begin VB.Form FrmChungtu
    Begin VB.ComboBox CboNT 
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       ItemData        =   "Fchungtu.frx":19F5B
@@ -746,6 +818,15 @@ Begin VB.Form FrmChungtu
    Begin VB.ComboBox CboNT 
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   3
       ItemData        =   "Fchungtu.frx":19F5F
@@ -762,6 +843,15 @@ Begin VB.Form FrmChungtu
    Begin VB.ComboBox CboNT 
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       ItemData        =   "Fchungtu.frx":19FB2
@@ -777,15 +867,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CheckBox Checkinbangkevahoadon 
       BackColor       =   &H00E0E0E0&
       Caption         =   "In  bang ke"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Left            =   13680
       TabIndex        =   130
@@ -797,15 +878,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CheckBox checkinbangke 
       BackColor       =   &H00E0E0E0&
       Caption         =   "In  bang ke"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Left            =   13680
       TabIndex        =   129
@@ -816,6 +888,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CheckBox CheckBox1 
       Caption         =   "Check3"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   14280
       TabIndex        =   127
@@ -825,6 +906,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CheckBox CheckBox2 
       Caption         =   "Check3"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   14400
       TabIndex        =   126
@@ -834,6 +924,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CheckBox CheckBox3 
       Caption         =   "Check3"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   15240
       TabIndex        =   125
@@ -842,6 +941,15 @@ Begin VB.Form FrmChungtu
       Width           =   135
    End
    Begin VB.TextBox sochungtu 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Left            =   14040
       LinkItem        =   "Sè hiÖu chøng tõ"
@@ -853,6 +961,15 @@ Begin VB.Form FrmChungtu
       Width           =   975
    End
    Begin VB.TextBox thoihanthanhtoan 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Left            =   14040
       LinkItem        =   "Sè hiÖu chøng tõ"
@@ -886,15 +1003,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CheckBox Check2 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Copy"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Left            =   14280
       TabIndex        =   121
@@ -906,15 +1014,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CheckBox Check1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "XuÊt th¼ng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Left            =   14040
       TabIndex        =   120
@@ -924,6 +1023,15 @@ Begin VB.Form FrmChungtu
       Width           =   1095
    End
    Begin VB.ComboBox Combo1 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00FF0000&
       Height          =   315
       Left            =   14520
@@ -934,6 +1042,15 @@ Begin VB.Form FrmChungtu
       Width           =   600
    End
    Begin VB.TextBox txtVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   18120
@@ -956,6 +1073,15 @@ Begin VB.Form FrmChungtu
          LCID            =   1033
          SubFormatType   =   1
       EndProperty
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Left            =   15120
       MaxLength       =   20
@@ -969,15 +1095,6 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.ComboBox CboNguon 
       Appearance      =   0  'Flat
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   315
       Index           =   3
       Left            =   6840
@@ -989,15 +1106,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "Ng©n hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   4
@@ -1034,6 +1142,15 @@ Begin VB.Form FrmChungtu
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   10
       Left            =   13920
@@ -1056,6 +1173,15 @@ Begin VB.Form FrmChungtu
          FirstWeekOfYear =   0
          LCID            =   1033
          SubFormatType   =   1
+      EndProperty
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
       EndProperty
       Height          =   315
       Index           =   5
@@ -1081,6 +1207,15 @@ Begin VB.Form FrmChungtu
          LCID            =   1033
          SubFormatType   =   1
       EndProperty
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   4
       Left            =   8230
@@ -1105,6 +1240,15 @@ Begin VB.Form FrmChungtu
          LCID            =   1033
          SubFormatType   =   1
       EndProperty
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   3
       Left            =   7155
@@ -1119,6 +1263,15 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton Command2 
       BackColor       =   &H8000000B&
       Caption         =   "Command2"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   14400
       TabIndex        =   106
@@ -1128,6 +1281,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command1 
       Caption         =   "Command1"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   14400
       TabIndex        =   105
@@ -1136,6 +1298,15 @@ Begin VB.Form FrmChungtu
       Width           =   615
    End
    Begin VB.TextBox txtVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   5040
@@ -1146,6 +1317,15 @@ Begin VB.Form FrmChungtu
       Width           =   1215
    End
    Begin VB.ComboBox CboLoai 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00FF0000&
       Height          =   315
       Left            =   8760
@@ -1155,6 +1335,15 @@ Begin VB.Form FrmChungtu
       Width           =   2145
    End
    Begin VB.TextBox txtVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   5040
@@ -1166,6 +1355,15 @@ Begin VB.Form FrmChungtu
       Width           =   1215
    End
    Begin VB.TextBox txtVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   7
       Left            =   3120
@@ -1177,6 +1375,15 @@ Begin VB.Form FrmChungtu
       Width           =   5400
    End
    Begin VB.TextBox txtVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   8
       Left            =   8760
@@ -1188,6 +1395,15 @@ Begin VB.Form FrmChungtu
       Width           =   4335
    End
    Begin VB.TextBox txtVT 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   9
       Left            =   6840
@@ -1201,6 +1417,15 @@ Begin VB.Form FrmChungtu
    Begin VB.Frame Frame1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Frame1"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   1695
       Left            =   14280
       TabIndex        =   72
@@ -1208,6 +1433,15 @@ Begin VB.Form FrmChungtu
       Visible         =   0   'False
       Width           =   2655
       Begin VB.TextBox txtVT 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   3
          Left            =   480
@@ -1221,6 +1455,15 @@ Begin VB.Form FrmChungtu
       Begin VB.CheckBox Chk 
          BackColor       =   &H80000013&
          Caption         =   "&B¸o gi¸"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Left            =   2640
          TabIndex        =   93
@@ -1231,6 +1474,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.TextBox txt 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   2
          Left            =   1320
@@ -1244,6 +1496,15 @@ Begin VB.Form FrmChungtu
       Begin VB.TextBox txtchungtu 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   7
          Left            =   1800
@@ -1258,6 +1519,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.ComboBox CboNguon 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   0
          Left            =   2160
@@ -1269,6 +1539,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.ComboBox CboNT 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
          ItemData        =   "Fchungtu.frx":1FC74
@@ -1285,6 +1564,15 @@ Begin VB.Form FrmChungtu
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   8
          Left            =   7560
@@ -1299,6 +1587,15 @@ Begin VB.Form FrmChungtu
       Begin VB.TextBox txtchungtu 
          Alignment       =   1  'Right Justify
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   285
          Index           =   11
          Left            =   4440
@@ -1313,6 +1610,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.ComboBox CboNguon 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
          Left            =   1200
@@ -1324,6 +1630,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.ComboBox CboVV 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   0
          Left            =   1200
@@ -1336,6 +1651,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.ComboBox CboVV 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   1
          Left            =   4440
@@ -1348,6 +1672,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.ComboBox CboVV 
          Appearance      =   0  'Flat
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   315
          Index           =   2
          Left            =   7680
@@ -1361,6 +1694,15 @@ Begin VB.Form FrmChungtu
       Begin VB.Label Label 
          BackColor       =   &H80000013&
          Caption         =   "Description"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   16
          Left            =   360
@@ -1373,6 +1715,15 @@ Begin VB.Form FrmChungtu
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
          Caption         =   "Tû gi¸"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   17
          Left            =   840
@@ -1386,6 +1737,15 @@ Begin VB.Form FrmChungtu
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
          Caption         =   "Ph©n lo¹i"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   1
          Left            =   600
@@ -1398,6 +1758,15 @@ Begin VB.Form FrmChungtu
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
          Caption         =   "§.v.t"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   12
          Left            =   600
@@ -1410,6 +1779,15 @@ Begin VB.Form FrmChungtu
          BackColor       =   &H80000013&
          Caption         =   "H¹n thanh to¸n"
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   22
          Left            =   6240
@@ -1421,6 +1799,15 @@ Begin VB.Form FrmChungtu
          Alignment       =   1  'Right Justify
          BackColor       =   &H80000013&
          Caption         =   "Ph¸t sinh USD"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   25
          Left            =   3120
@@ -1432,6 +1819,15 @@ Begin VB.Form FrmChungtu
       Begin VB.Label Label 
          BackColor       =   &H80000013&
          Caption         =   "Bé phËn"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   14
          Left            =   240
@@ -1443,6 +1839,15 @@ Begin VB.Form FrmChungtu
       Begin VB.Label LbTT 
          BackColor       =   &H80000013&
          Caption         =   "Th«ng tin 1"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   0
          Left            =   240
@@ -1455,6 +1860,15 @@ Begin VB.Form FrmChungtu
       Begin VB.Label LbTT 
          BackColor       =   &H80000013&
          Caption         =   "Th«ng tin 2"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   1
          Left            =   3480
@@ -1467,6 +1881,15 @@ Begin VB.Form FrmChungtu
       Begin VB.Label LbTT 
          BackColor       =   &H80000013&
          Caption         =   "Th«ng tin 3"
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   255
          Index           =   2
          Left            =   6720
@@ -1479,6 +1902,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Frame Frame 
       BackColor       =   &H00FFFFFF&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   975
       Left            =   2640
       TabIndex        =   58
@@ -1487,6 +1919,15 @@ Begin VB.Form FrmChungtu
       Width           =   7575
       Begin VB.CommandButton cmd 
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   1
          Left            =   3000
@@ -1498,6 +1939,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.TextBox txtsh 
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   300
          Index           =   1
          Left            =   1560
@@ -1509,6 +1959,15 @@ Begin VB.Form FrmChungtu
          Width           =   1335
       End
       Begin VB.CommandButton cmd 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   375
          Index           =   0
          Left            =   3000
@@ -1520,6 +1979,15 @@ Begin VB.Form FrmChungtu
          Width           =   375
       End
       Begin VB.TextBox txtsh 
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          Height          =   300
          Index           =   0
          Left            =   1560
@@ -1533,6 +2001,15 @@ Begin VB.Form FrmChungtu
       Begin VB.Label lb 
          BackColor       =   &H00FFFFFF&
          Enabled         =   0   'False
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   1
@@ -1544,6 +2021,15 @@ Begin VB.Form FrmChungtu
       End
       Begin VB.Label lb 
          BackColor       =   &H00FFFFFF&
+         BeginProperty Font 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   0
@@ -1557,15 +2043,6 @@ Begin VB.Form FrmChungtu
          BackColor       =   &H00FFFFFF&
          Caption         =   "C«ng tr×nh"
          Enabled         =   0   'False
-         BeginProperty Font 
-            Name            =   "VK Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   255
          Index           =   19
          Left            =   120
@@ -1578,15 +2055,6 @@ Begin VB.Form FrmChungtu
       Begin VB.Label Label 
          BackColor       =   &H00FFFFFF&
          Caption         =   "Ghi nî tµi kho¶n"
-         BeginProperty Font 
-            Name            =   "VK Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
          Height          =   255
          Index           =   18
          Left            =   120
@@ -1599,15 +2067,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton CmdBC 
       BackColor       =   &H00E0E0E0&
       Caption         =   "&Barcode"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Left            =   12600
       TabIndex        =   71
@@ -1620,6 +2079,15 @@ Begin VB.Form FrmChungtu
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   9
       Left            =   13020
@@ -1632,6 +2100,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton CmdPhieu 
       Caption         =   "&4 TCNH"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   3
       Left            =   10080
@@ -1642,6 +2119,15 @@ Begin VB.Form FrmChungtu
       Width           =   975
    End
    Begin VB.TextBox txt 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   3
       Left            =   15480
@@ -1656,15 +2142,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CheckBox chkXT 
       BackColor       =   &H00E0E0E0&
       Caption         =   "XuÊt c«ng tr×nh"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Left            =   2160
       TabIndex        =   57
@@ -1673,6 +2150,15 @@ Begin VB.Form FrmChungtu
       Width           =   1455
    End
    Begin VB.CommandButton CmdDanhSach 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   0
       Left            =   6600
@@ -1685,15 +2171,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton CmdPhieu 
       BackColor       =   &H00E0E0E0&
       Caption         =   "&3 UNC"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Index           =   2
       Left            =   11760
@@ -1705,6 +2182,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   4
       Left            =   4200
@@ -1716,6 +2202,15 @@ Begin VB.Form FrmChungtu
       Width           =   1080
    End
    Begin VB.CommandButton CmdDanhSach 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   1
       Left            =   16200
@@ -1729,15 +2224,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton CmdPhieu 
       BackColor       =   &H00E0E0E0&
       Caption         =   "&2 Ho¸ ®¬n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Index           =   1
       Left            =   9000
@@ -1750,15 +2236,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton CmdPhieu 
       BackColor       =   &H00E0E0E0&
       Caption         =   "&1 PhiÕu TC"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Index           =   0
       Left            =   10680
@@ -1771,15 +2248,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "&B¸n hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   8
@@ -1812,15 +2280,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "§¸nh gi¸ l¹&i"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   11
@@ -1837,15 +2296,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "Gi¶&m TSC§"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   10
@@ -1862,15 +2312,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "T¨ng T&SC§"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   9
@@ -1887,15 +2328,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   " Tæng &hîp"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   375
       HelpContextID   =   800
@@ -1911,15 +2343,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "&NhËp vËt t­"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   1
@@ -1934,15 +2357,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "X&uÊt vËt t­"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   2
@@ -1955,6 +2369,15 @@ Begin VB.Form FrmChungtu
       Width           =   1575
    End
    Begin VB.TextBox txt 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   5040
@@ -1966,6 +2389,15 @@ Begin VB.Form FrmChungtu
       Width           =   1215
    End
    Begin VB.TextBox txt 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   3120
@@ -1978,6 +2410,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.ComboBox CboNguon 
       Appearance      =   0  'Flat
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       ItemData        =   "Fchungtu.frx":23216
@@ -1992,15 +2433,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "&KÕt chuyÓn"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   390
       Index           =   3
@@ -2014,6 +2446,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   3
       Left            =   7800
@@ -2026,6 +2467,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   2
       Left            =   12120
@@ -2039,6 +2489,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   1
       Left            =   3000
@@ -2051,6 +2510,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   0
       Left            =   1800
@@ -2064,6 +2532,15 @@ Begin VB.Form FrmChungtu
    Begin VB.TextBox txtchungtu 
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   0
       Left            =   2160
@@ -2079,15 +2556,6 @@ Begin VB.Form FrmChungtu
    Begin VB.OptionButton OptLoai 
       BackColor       =   &H0080FF80&
       Caption         =   "TrÝch khÊu h&ao"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00400000&
       Height          =   395
       Index           =   12
@@ -2151,10 +2619,10 @@ Begin VB.Form FrmChungtu
    End
    Begin MSGrid.Grid Grid2 
       Height          =   3015
-      Left            =   3600
+      Left            =   2400
       TabIndex        =   135
       Tag             =   "1"
-      Top             =   5160
+      Top             =   5200
       Width           =   9915
       _Version        =   65536
       _ExtentX        =   17489
@@ -2178,6 +2646,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.CommandButton Command4 
       Caption         =   "Import"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Left            =   17160
       TabIndex        =   163
@@ -2188,15 +2665,6 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton btnImportXML 
       BackColor       =   &H0080FF80&
       Caption         =   "Import hãa ®¬n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   375
       Left            =   120
       Style           =   1  'Graphical
@@ -2208,6 +2676,15 @@ Begin VB.Form FrmChungtu
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   2
       Left            =   5940
@@ -2221,6 +2698,15 @@ Begin VB.Form FrmChungtu
    Begin VB.TextBox txtchungtu 
       Appearance      =   0  'Flat
       BackColor       =   &H00C0FFC0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   315
       Index           =   1
       Left            =   3000
@@ -2258,9 +2744,30 @@ Begin VB.Form FrmChungtu
       HighLight       =   0   'False
       MousePointer    =   1
    End
+   Begin VB.Label Label 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "§ang xö lý ho¸ ®¬n thø"
+      Height          =   255
+      Index           =   29
+      Left            =   3840
+      TabIndex        =   188
+      Tag             =   "Month"
+      Top             =   8450
+      Visible         =   0   'False
+      Width           =   1815
+   End
    Begin VB.Label Label4 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Quý"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   120
       TabIndex        =   186
@@ -2274,15 +2781,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "TiÒn CK"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   375
       Index           =   24
@@ -2298,15 +2796,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Ph¸t sinh cã"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   375
       Index           =   10
@@ -2322,15 +2811,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Ph¸t sinh nî"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   375
       Index           =   9
@@ -2346,15 +2826,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Tµi kho¶n"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H80000008&
       Height          =   345
       Index           =   5
@@ -2370,15 +2841,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "DiÔn gi¶i"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   300
       Index           =   6
@@ -2394,15 +2856,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "M· sè"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   375
       Index           =   7
@@ -2418,15 +2871,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "Sè l­îng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   375
       Index           =   8
@@ -2440,7 +2884,7 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00E0E0E0&
       Caption         =   "Label4"
       BeginProperty Font 
-         Name            =   "VK Sans Serif"
+         Name            =   "Tahoma"
          Size            =   8.25
          Charset         =   0
          Weight          =   400
@@ -2449,14 +2893,23 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   255
-      Left            =   3840
+      Left            =   5760
       TabIndex        =   174
-      Top             =   8400
+      Top             =   8450
       Visible         =   0   'False
-      Width           =   2535
+      Width           =   615
    End
    Begin VB.Label Label3 
       Caption         =   "Label3"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   495
       Left            =   5880
       TabIndex        =   173
@@ -2479,15 +2932,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label txttinh_gia_ban 
       BackColor       =   &H00E0E0E0&
       Caption         =   "0"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Left            =   16080
       TabIndex        =   161
@@ -2498,15 +2942,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Tæng sè chøng tõ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   28
       Left            =   7320
@@ -2518,15 +2953,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Sè dßng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   27
       Left            =   9360
@@ -2550,15 +2976,6 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label1 
       BackColor       =   &H00FFFFC0&
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00000000&
       Height          =   375
       Index           =   17
@@ -2571,15 +2988,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "®Õn"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   15
       Left            =   1560
@@ -2591,15 +2999,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Tõ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   14
       Left            =   200
@@ -2610,15 +3009,6 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label1 
       BackColor       =   &H00FFFFC0&
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00000000&
       Height          =   615
       Index           =   8
@@ -2631,15 +3021,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "M· h®"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   135
       Index           =   7
       Left            =   13680
@@ -2653,15 +3034,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00E0E0E0&
       Caption         =   "MÉu sè"
       Enabled         =   0   'False
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   6
       Left            =   18120
@@ -2674,15 +3046,6 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H000000FF&
       Height          =   255
       Index           =   26
@@ -2696,15 +3059,6 @@ Begin VB.Form FrmChungtu
       Alignment       =   1  'Right Justify
       BackColor       =   &H00E0E0E0&
       Caption         =   "CT GS"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   15
       Left            =   6300
@@ -2715,15 +3069,6 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label1 
       BackColor       =   &H00FFFFC0&
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00000000&
       Height          =   4575
       Index           =   5
@@ -2736,15 +3081,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label LbKho 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Thu chi"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   135
       Index           =   3
       Left            =   16500
@@ -2756,15 +3092,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "M· k.hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   16
       Left            =   4250
@@ -2776,15 +3103,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label LbKho 
       BackColor       =   &H00E0E0E0&
       Caption         =   "LiÖt kª chøng tõ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   135
       Index           =   2
       Left            =   14760
@@ -2795,6 +3113,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label1 
       Caption         =   "Thµnh tiÒn tr­íc thuÕ"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   9
       Left            =   3000
@@ -2805,6 +3132,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label1 
       Caption         =   "Tû lÖ thuÕ (%)"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   10
       Left            =   3120
@@ -2816,6 +3152,15 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       Alignment       =   1  'Right Justify
       Caption         =   "Gi¸ tÝnh thuÕ"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   12
       Left            =   4560
@@ -2827,6 +3172,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label Label1 
       Caption         =   "H×nh thøc thanh to¸n"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Index           =   13
       Left            =   4920
@@ -2838,15 +3192,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Ký hiÖu"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   4
       Left            =   4440
@@ -2858,15 +3203,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "§Þa chØ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   0
       Left            =   8760
@@ -2878,15 +3214,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Tªn kh¸ch hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   1
       Left            =   1890
@@ -2920,15 +3247,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label1 
       BackColor       =   &H00E0E0E0&
       Caption         =   "MST"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   3
       Left            =   6450
@@ -2939,6 +3257,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label LBNV 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00FF0000&
       Height          =   615
       Left            =   13440
@@ -2954,15 +3281,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "CK"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   495
       Index           =   23
@@ -2976,15 +3294,6 @@ Begin VB.Form FrmChungtu
       Alignment       =   1  'Right Justify
       BackColor       =   &H00E0E0E0&
       Caption         =   "NV B¸n hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   21
       Left            =   15480
@@ -3000,15 +3309,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "STT"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   255
       Index           =   20
@@ -3020,6 +3320,15 @@ Begin VB.Form FrmChungtu
    End
    Begin VB.Label LbUser 
       BackColor       =   &H00E0E0E0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       ForeColor       =   &H00FF0000&
       Height          =   255
       Left            =   14520
@@ -3032,15 +3341,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Ng­êi nhËp"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   15
       Index           =   11
       Left            =   14760
@@ -3056,15 +3356,6 @@ Begin VB.Form FrmChungtu
       BackColor       =   &H00FFFFC0&
       BorderStyle     =   1  'Fixed Single
       Caption         =   "§¬n gi¸"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       ForeColor       =   &H00404040&
       Height          =   255
       Index           =   13
@@ -3100,35 +3391,17 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Th¸ng nhËp "
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   0
-      Left            =   1925
+      Left            =   1920
       TabIndex        =   39
       Tag             =   "Month"
-      Top             =   100
+      Top             =   120
       Width           =   1095
    End
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Ngµy chøng tõ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   1
       Left            =   1920
@@ -3140,15 +3413,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Ngµy ghi sæ"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   2
       Left            =   1920
@@ -3160,15 +3424,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Sè hiÖu"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   255
       Index           =   3
       Left            =   4440
@@ -3180,15 +3435,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Néi dung"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   240
       Index           =   4
       Left            =   1920
@@ -3200,15 +3446,6 @@ Begin VB.Form FrmChungtu
    Begin VB.Label LbKho 
       BackColor       =   &H00E0E0E0&
       Caption         =   "Kho hµng"
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Height          =   15
       Index           =   0
       Left            =   13560
@@ -3589,12 +3826,12 @@ Public Sub AutoCLickLoai()
     RFocus CboThang
     DisplayFileImportList
 End Sub
-Public Sub AddImportData(ByVal id As String, ByVal Name As String, ByVal mst As String, ByVal sohd As String, ByVal khHD As String, ByVal ngay As Date, ByVal types As String, ByVal path As String, ByVal tkno As String, ByVal TkCo As String, ByVal tkThue As String, ByVal diengiai As String, ByVal TongTien As String, ByVal VAT As String, ByVal sohieutp As String, ByVal TgTCThue As String, ByVal TgTThue As String, ByVal Ishaschild As String)
+Public Sub AddImportData(ByVal ID As String, ByVal Name As String, ByVal mst As String, ByVal sohd As String, ByVal khHD As String, ByVal ngay As Date, ByVal types As String, ByVal path As String, ByVal tkno As String, ByVal TkCo As String, ByVal tkThue As String, ByVal diengiai As String, ByVal TongTien As String, ByVal VAT As String, ByVal sohieutp As String, ByVal TgTCThue As String, ByVal TgTThue As String, ByVal Ishaschild As String)
     Dim fileImport As ClsFileImport
     Set fileImport = New ClsFileImport
 
     ' Gán giá tr? cho các thu?c tính
-    fileImport.id = id
+    fileImport.ID = ID
     fileImport.Name = Name
     fileImport.mst = mst
     fileImport.sohd = sohd
@@ -3888,7 +4125,7 @@ Private Sub btnImport_Click()
         ' Duy?t qua t?t c? các b?n ghi
         Do While Not rs_ktra.EOF
             ' L?y s? lu?ng tru?ng
-            AddImportData rs_ktra!id, rs_ktra!Ten, rs_ktra!mst, rs_ktra!SHDon, rs_ktra!KHHDon, rs_ktra!NLap, "", "", rs_ktra!tkno, rs_ktra!TkCo, rs_ktra!tkThue, rs_ktra!noidung, rs_ktra!TongTien, rs_ktra!VAT, rs_ktra!sohieutp, rs_ktra!TgTCThue, rs_ktra!TgTThue, rs_ktra!Ishaschild
+            AddImportData rs_ktra!ID, rs_ktra!Ten, rs_ktra!mst, rs_ktra!SHDon, rs_ktra!KHHDon, rs_ktra!NLap, "", "", rs_ktra!tkno, rs_ktra!TkCo, rs_ktra!tkThue, rs_ktra!noidung, rs_ktra!TongTien, rs_ktra!VAT, rs_ktra!sohieutp, rs_ktra!TgTCThue, rs_ktra!TgTThue, rs_ktra!Ishaschild
             rs_ktra.MoveNext
         Loop
     End If
@@ -3920,7 +4157,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
 
     Dim QueryUpdate As String
     Dim rstUPdate As String
-    QueryUpdate = "UPDATE tbimport SET Status = 1 where ID= " & item.id & ""
+    QueryUpdate = "UPDATE tbimport SET Status = 1 where ID= " & item.ID & ""
     'Set rstUPdate = DBKetoan.OpenRecordset(QueryUpdate, dbOpenSnapshot)
     ExecuteSQL5 QueryUpdate
 
@@ -4036,7 +4273,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         txtChungtu_LostFocus (0)
         ' T?o truy v?n SQL d? l?y thông tin khách hàng theo MST
         With fileImportList(IndexFirst)
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT = 'Exception'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT = 'Exception'"
         End With
         Set rs_ktra711 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
         If Not rs_ktra711.EOF Then
@@ -4073,7 +4310,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         'txtChungtu_LostFocus (0)
         ' T?o truy v?n SQL d? l?y thông tin khách hàng theo MST
         With fileImportList(IndexFirst)
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT <> 'Exception'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT <> 'Exception'"
         End With
 
         ' M? Recordset d? l?y thông tin khách hàng
@@ -4162,7 +4399,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         Else
             'Kiem tra xem co con hay khogn
             With fileImportList(IndexFirst)
-                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "'"
+                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "'"
             End With
 
             Dim rs_check As Recordset
@@ -4205,7 +4442,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         Else
             'Xu ly1 con cua 154
             With fileImportList(IndexFirst)
-                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "'"
+                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "'"
             End With
             Set rs_ktra154c = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
 
@@ -4222,7 +4459,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         With fileImportList(IndexFirst)
             Dim ass As String
             ass = .Ishaschild
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT <> 'Exception' AND '" & ass & "' = '1'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT <> 'Exception' AND '" & ass & "' = '1'"
         End With
 
         ' M? Recordset d? l?y thông tin khách hàng
@@ -4387,9 +4624,13 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
 
 End Sub
 Private Sub XylyHoaDonTong(ByRef rs_import As Recordset)
+    Dim sMsg As String
+
     Dim skiperror As Integer
     skiperror = SelectSQL("select skiperror AS f1 from  License")
-    lblThongbao.Caption = "®ang  xö lý ho¸ ®¬n thø " & sttHD & " / " & totals
+    ' lblThongbao.Caption = "®ang  xö lý ho¸ ®¬n thø " & sttHD & " / " & totals
+    lblThongbao.Caption = sttHD & " / " & totals
+
     If sttHD < totals Then
         sttHD = sttHD + 1
     End If
@@ -4398,7 +4639,17 @@ Private Sub XylyHoaDonTong(ByRef rs_import As Recordset)
         XulyAddHeader rs_import
         XulyMiddle rs_import
     Else
-        MsgBox "®· xö lý xong c¸c ho¸ ®¬n"
+        'MsgBox "®· xö lý xong c¸c ho¸ ®¬n"
+        sMsg = ChrW(272) & ChrW(227) & " " & _
+               ChrW(120) & ChrW(7917) & " " & _
+               ChrW(108) & ChrW(253) & " " & _
+               ChrW(120) & ChrW(111) & ChrW(110) & ChrW(103) & " " & _
+               ChrW(99) & ChrW(225) & ChrW(99) & " " & _
+               ChrW(104) & ChrW(111) & ChrW(225) & " " & _
+               ChrW(273) & ChrW(417) & ChrW(110)
+        MessageBoxW Me.hwnd, StrPtr(sMsg), StrPtr("Thông báo"), vbInformation
+        Label(29).Visible = False
+        lblThongbao.Visible = False
         btnReset_Click
         Dim ktauto As Integer
         ktauto = SelectSQL("SELECT AutoNK as f1 from License")
@@ -4916,7 +5167,7 @@ Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXML
     childElement.appendChild subElement
 
     AddElement xmlDoc, subElement, "mst", "3500779171"
-    AddElement xmlDoc, subElement, "tenNNT", VNItoUNICODE(frmMain.LbCty(0).Caption)
+    AddElement xmlDoc, subElement, "tenNNT", VNItoUNICODE(frmMain.lbCty(0).Caption)
 
     AddElement xmlDoc, subElement, "dchiNNT", "31 Ð?i C?n"
     AddElement xmlDoc, subElement, "phuongXa", ""
@@ -5996,20 +6247,20 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
 'Kiem tra xem co con khong
 
     Dim countchild As Integer
-    countchild = SelectSQL("SELECT COUNT(*) AS F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'")
+    countchild = SelectSQL("SELECT COUNT(*) AS F1 FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'")
 
     If countchild > 0 Then
         Dim QueryDistinct As String
-        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' GROUP BY MaCT"
+        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "' GROUP BY MaCT"
         Dim countgroup As Integer
         countgroup = SelectSQL(QueryDistinct)
         'Kiem tra xem có 15 khác ngoài 154 không
-        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' AND (LEFT(TKNo, 3) <> '154' OR TKCo='711')"
+        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "' AND (LEFT(TKNo, 3) <> '154' OR TKCo='711')"
         Dim count154 As Integer
         count154 = SelectSQL(QueryDistinct)
         If countgroup <> countchild Or count154 >= 1 Then
             Dim Query2 As String
-            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
             Set rs_ktchild154 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
             If Not rs_ktchild154.EOF Then
                 Timer154c.Enabled = True
@@ -6134,14 +6385,14 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
     If (rs_import!tkno Like "64*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "338*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
         FThuChi.FThuChiForm = 1
         Dim Query64 As String
-        Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+        Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
         Set rs_ktra164 = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
         If rs_import!Ishaschild = "0" Then
             XulyTongtopChild rs_import
         Else
             FThuChi.FThuChiForm = 2
             Dim Query2 As String
-            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
             Set rs_ktra152 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
             Xuly15Child
         End If
@@ -6152,14 +6403,14 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
         If rs_import!Type = 1 Then
             FThuChi.FThuChiForm = 2
             Dim Query As String
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
             Set rs_ktra152 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
             Xuly15Child
         End If
         If rs_import!Type = 3 Then
             FThuChi.FThuChiForm = 2
             Dim Qus As String
-            Qus = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+            Qus = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
             Set rs_ktra152 = DBKetoan.OpenRecordset(Qus, dbOpenSnapshot)
             demThumua = 0
             XuLy15Childhd
@@ -6179,7 +6430,7 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
         If rs_import!sohieutp = "" Or IsNull(rs_import!sohieutp) Then
             'Truong hop co chi tiet
             If rs_import!Ishaschild = 1 Then
-                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
+                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
                 Set rs_ktra152 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
                 Xuly51Child
             Else
@@ -6204,7 +6455,7 @@ Private Sub UpdateImportStatus(ByRef Status As Integer)
 ' Ki?m tra xem rs_import có h?p l? không
     If Not rs_import.EOF Then
         ' Th?c hi?n c?p nh?t tr?ng thái
-        ExecuteSQL5 "UPDATE tbimport SET Status = " & Status & " WHERE ID = " & rs_import!id
+        ExecuteSQL5 "UPDATE tbimport SET Status = " & Status & " WHERE ID = " & rs_import!ID
     End If
 End Sub
 Private Sub timerNext_Timer()
@@ -6267,7 +6518,7 @@ End Function
 Private Sub btnImportXML_Click()
     dshdloi = ""
     'IsImport = True
-
+    Label(29).Visible = True
     Command_Click 0
     stt51 = 0
     sttTongHop = 0
@@ -6296,7 +6547,15 @@ Private Sub btnImportXML_Click()
         'Xu ly add header
         XylyHoaDonTong rs_import
     Else
-        MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
+        ' MsgBox "Kh«ng cßn ho¸ ®¬n ®Ó import"
+        Dim sMsg As String
+        sMsg = _
+        ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & _
+               ChrW(99) & ChrW(242) & ChrW(110) & " " & _
+               ChrW(104) & ChrW(111) & ChrW(225) & " " & _
+               ChrW(273) & ChrW(417) & ChrW(110) & " " & _
+               ChrW(273) & ChrW(7875) & " import"
+        MessageBoxW Me.hwnd, StrPtr(sMsg), StrPtr("Thông báo"), vbInformation
         lblThongbao.Visible = False
     End If
 End Sub
@@ -6673,8 +6932,8 @@ End Sub
 
 Private Sub Chk_Click()
     txt_LostFocus 0
-    CmdPhieu(1).Caption = IIf(Chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
-    CmdPhieu(1).tag = Chk.Value
+    CmdPhieu(1).Caption = IIf(chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
+    CmdPhieu(1).tag = chk.Value
 End Sub
 
 Private Sub ChkXT_Click()
@@ -6856,7 +7115,7 @@ Public Sub CmdChitiet_chon()
         Exit Sub
     End If
 
-    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And Chk.Value = 0 And Me.Visible Then
+    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And chk.Value = 0 And Me.Visible Then
         'MsgBox "§· xuÊt qu¸ l­îng tån!", vbCritical, App.ProductName
         'Exit Sub
         If IsImport = False Then
@@ -7000,7 +7259,7 @@ Public Sub CmdChitiet_chon()
         CmdPhieu(0).Visible = True
     End If
 
-    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04") Then
+    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04") Then
         If co > 0 Then FThuChi.tag = 1
         If MaSoCT = 0 And hdcount >= 0 And TenTC = "..." Then
             TenTC = HD(0).TenKH
@@ -7236,12 +7495,12 @@ htp:
     End If
 
     If loaict = 2 And taikhoan.loai > 0 And (OutCost = 2 Or OutCost = 3) And taikhoan.tk_id = TKVT_ID And vattu.MaSo > 0 Then
-        Dim luongx() As Double, tienx() As Double, id() As Long, cx As Integer, tienx2() As Double
+        Dim luongx() As Double, tienx() As Double, ID() As Long, cx As Integer, tienx2() As Double
 
         If OutCost = 2 Then
-            cx = GiaXuatKhoFIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, id, tienx2)
+            cx = GiaXuatKhoFIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, ID, tienx2)
         Else
-            cx = GiaXuatKhoLIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, id, tienx2)
+            cx = GiaXuatKhoLIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, ID, tienx2)
         End If
 
         For i = 1 To cx
@@ -7249,14 +7508,14 @@ htp:
             GrdChungtu.AddItem "" + Chr(9) + txtchungtu(0).Text + Chr(9) + txtchungtu(1).Text + Chr(9) + shnt _
                              + Chr(9) + Format(luongx(i), Mask_2) + Chr(9) + IIf(luongx(i) <> 0, Format(X, Mask_2), "") + Chr(9) + "" + Chr(9) + Format(tienx(i), msk) + Chr(9) _
                              + CStr(taikhoan.MaSo) + Chr(9) + CStr(vattu.MaSo) + Chr(9) + IIf(taikhoan.loai > 0, "0", "1") _
-                             + Chr(9) + CStr(taikhoan.MaTC) + Chr(9) + CStr(id(i)) + Chr(9) + CStr(taikhoan.tk_id) _
+                             + Chr(9) + CStr(taikhoan.MaTC) + Chr(9) + CStr(ID(i)) + Chr(9) + CStr(taikhoan.tk_id) _
                              + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "-1" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) _
                              + Format(tienx2(i), Mask_2), NewRowIndex(GrdChungtu, 1)    'NewRowIndex(GrdChungtu, 1)
         Next
         Erase luongx
         Erase tienx
         Erase tienx2
-        Erase id
+        Erase ID
 
         GoTo KT
     End If
@@ -7566,7 +7825,7 @@ C1:
                                     Else
                                         GoTo c
                                     End If
-                                    GoTo B
+                                    GoTo b
                                 End If
                             Next
 c:
@@ -7576,7 +7835,7 @@ c:
                             frmMain.Rpt.Formulas(7 + 2 * sodu) = "PSNo" + CStr(sodu) + "=" + DoiDau(tien)
                             .col = 19
                             .Text = CStr(sodu)
-B:
+b:
                         End If
                     End If
                 Next
@@ -7600,8 +7859,8 @@ B:
         frmMain.Rpt.Formulas(3) = "SoPhieu='" + LaySH(txt(0).Text, 1) + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiachiTC + "'"
         frmMain.Rpt.Formulas(5) = "CTGoc='" + ctgoc + "'"
-        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.LbCty(2).Caption + "'"
-        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.LbCty(3).Caption + "'"
+        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.lbCty(2).Caption + "'"
+        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.lbCty(3).Caption + "'"
         frmMain.Rpt.Formulas(44) = "Ngay='Ngµy " + Format(ngay(1), Mask_DR) + "'"
         frmMain.Rpt.Formulas(45) = "BangChu='" + sotien + "'"
         frmMain.Rpt.Formulas(46) = "TenNV='" + TenTC + "'"
@@ -8083,10 +8342,10 @@ Sub In_hoa_don2(sotien As String, i As Integer, k As Integer, xxx As String, sod
             frmMain.Rpt.Formulas(15) = "MaKH='" + xxx + "'"
         End If
         '     frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.LbCty(2).Caption + "'"
+        frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.lbCty(2).Caption + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiaChiBH + "'"
-        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.LbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.lbCty(8).Caption + "'"
         frmMain.Rpt.Formulas(7) = "MS2='" + MSTBH + "'"
         frmMain.Rpt.Formulas(8) = "TenNN='" + txtVT(1).Text + "'"
         frmMain.Rpt.Formulas(10) = "HTTT='" + HTTT + "'"
@@ -8197,7 +8456,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
     frmMain.Rpt.Formulas(405) = "hantt= '" + thoihanthanhtoan.Text + " " + "'"
     frmMain.Rpt.Formulas(406) = "sophieu= '" + sochungtu.Text + " " + "'"
     frmMain.Rpt.Formulas(550) = "thanhtoan = '" + hinhthucthanhtoan.Text + "'"
-    frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+    frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
 
     CoPSTK "521", -1, v521
     If sodu = 0 Then
@@ -9058,7 +9317,7 @@ Public Sub Command_Click(Index As Integer)
             MaCT = MaSoCT
             MaSoCT = 0
         Else
-            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And Chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
+            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
         End If
 
         bg = Fix(SoPSConLai * Mask_N) <> 0 And loaict = 7
@@ -9205,8 +9464,8 @@ Public Sub Command_Click(Index As Integer)
                     End If
                     If pTygia > 0 Then chungtu.tygia = Cdbl5(txtchungtu(7).Text)
                     If loaict = 8 And pNVBH > 0 Then chungtu.MaNV = txt(3).tag
-                    If loaict = 8 And Chk.Value = 1 Then chungtu.maloai = 7
-                    If loaict = 7 And Chk.Value = 0 Then chungtu.maloai = 8
+                    If loaict = 8 And chk.Value = 1 Then chungtu.maloai = 7
+                    If loaict = 7 And chk.Value = 0 Then chungtu.maloai = 8
                     If loaict = 8 And (chungtu.tkno.tk_id = TKGT_ID And chungtu.MaVattu = 0) Then
                         .col = 3
                         chungtu.TLCK = Cdbl5(.Text)
@@ -9315,7 +9574,7 @@ Public Sub Command_Click(Index As Integer)
 
 
         If loaict > 8 Then GhiChungtuTS MaCT
-        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And Chk.Value = 0 Then XoaPhieu pMaBG
+        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And chk.Value = 0 Then XoaPhieu pMaBG
 
         'tat ca da ghi xong dua so so va han dung vao trong database
         Dim stt_dong As Integer
@@ -9378,7 +9637,7 @@ Public Sub Command_Click(Index As Integer)
 
         If Not rs_kiemtra.EOF Then
             'MsgBox rs_kiemtra!id
-            ExecuteSQL5 "UPDATE tbimport SET Status = 1 WHERE ID = " & rs_kiemtra!id
+            ExecuteSQL5 "UPDATE tbimport SET Status = 1 WHERE ID = " & rs_kiemtra!ID
         End If
 
         UnlockDB
@@ -9484,12 +9743,25 @@ Public Sub Command_Click(Index As Integer)
                 End If
             End If
             Dim isxoa As Integer
-            If msgXoa = 0 Or countDete = 1 Then
-                If MsgBox("B¹n ®· ch¾c ch¾n xãa chøng tõ nµy ?", vbYesNo + vbCritical, App.ProductName) = vbYes Then
-                    isxoa = 1
-                    countDete = 0
-                End If
+            Dim sMsg As String
+            Dim sCap As String
 
+            sMsg = ChrW(66) & ChrW(7841) & ChrW(110) & " " & _
+                   ChrW(99) & ChrW(243) & " " & _
+                   ChrW(99) & ChrW(104) & ChrW(7855) & ChrW(99) & ChrW(32) & _
+                   ChrW(99) & ChrW(104) & ChrW(7855) & ChrW(110) & " " & _
+                   ChrW(109) & ChrW(117) & ChrW(7889) & ChrW(110) & " " & _
+                   ChrW(120) & ChrW(243) & ChrW(97) & " " & _
+                   ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & _
+                   ChrW(116) & ChrW(7915) & " " & _
+                   ChrW(110) & ChrW(224) & ChrW(121) & ChrW(63)
+
+            sCap = ChrW(88) & ChrW(225) & ChrW(99) & " " & _
+                   ChrW(110) & ChrW(104) & ChrW(226) & ChrW(769) & ChrW(110)
+
+            If MessageBoxW(Me.hwnd, StrPtr(sMsg), StrPtr("Xác nh?n"), vbYesNo + vbExclamation) = vbYes Then
+                isxoa = 1
+                countDete = 0
             End If
             If isxoa = 1 Or msgXoa = 1 Then
                 If pPhieu > 0 Or pMaBG > 0 Then
@@ -9581,7 +9853,13 @@ Public Sub Command_Click(Index As Integer)
         InBaoCaoRPT
     End Select
 XongCT:
-    Me.Caption = "NhËp chøng tõ kÕ to¸n" + " - " + CStr(pNamTC)
+    ' Me.Caption = "NhËp chøng tõ kÕ to¸n" + " - " + CStr(pNamTC)
+    'Me.Caption = ChrW(78) & ChrW(104) & ChrW(7853) & ChrW(112) & " " & _
+                 ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & _
+                 ChrW(116) & ChrW(7915) & " " & _
+                 ChrW(107) & ChrW(7871) & " " & _
+                 ChrW(116) & ChrW(111) & ChrW(225) & ChrW(110) & _
+               " - " & CStr(pNamTC)
     Me.MousePointer = 0
 KT:
     Set chungtu = Nothing
@@ -9946,7 +10224,7 @@ If hasError = False Then
     dlayNganhang.Enabled = False
     Command_Click 1
     'Cap status ngan hang
-    ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
+    ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!ID & ""
 
     rs_ktraNH.MoveNext
     timerNganhang.Enabled = True
@@ -9960,8 +10238,18 @@ If hasError = False Then
 End If
 End Sub
 
+Public Function MsgBoxU(ByVal sText As String, _
+                        Optional ByVal sCaption As String = "", _
+                        Optional ByVal uType As Long = vbOKOnly) As Long
+    MsgBoxU = MessageBoxW(0, StrPtr(sText), StrPtr(sCaption), uType)
+End Function
+
+
+
+
+
 Private Sub Form_Activate()
-      
+    
     isimportnk = False
     ExecuteSQL5_Themmoi ("ALTER TABLE tbRegister  ADD tk154 text")
     tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
@@ -10148,11 +10436,12 @@ Private Sub Grid2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
     End If
 End Sub
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
-    ' Ki?m tra n?u phím Shift dang du?c gi?
-     If GetAsyncKeyState(vbKeyControl) <> 0 Then
-       isshift = 1
+' Ki?m tra n?u phím Shift dang du?c gi?
+    Me.Caption = "asd"
+    If GetAsyncKeyState(vbKeyControl) <> 0 Then
+        isshift = 1
     Else
-       isshift = 0
+        isshift = 0
     End If
 
     Dim i As Integer
@@ -10187,7 +10476,7 @@ End Sub
 ' Khëi t¹o cöa sæ nhËp
 '====================================================================================================
 Private Sub Form_Load()
-    
+
     stt = 1
     ListReset
     ColumnSetUp Grid2, 0, 1300, 2
@@ -10295,8 +10584,7 @@ a:
 
     Command(1).Enabled = ChoNhapTiep
 
-    If pPhieu > 0 Then Me.Caption = IIf(pNN = 0, "NhËp phiÕu", "Template Voucher")
-
+    'If pPhieu > 0 Then Me.Caption = IIf(pNN = 0, "NhËp phiÕu", "Template Voucher")
     If frmMain.Command(4).Visible Then
         If pPhieu = 1 Then
             OptLoai(3).Enabled = False
@@ -10639,7 +10927,7 @@ Public Sub NhapkhoTPChitiet()
         txtChungtu_KeyPress 6, 13
         Command_Click 1
         'ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!id
-        bakParentId = rs_importNK!id
+        bakParentId = rs_importNK!ID
         bakPerentDate = rs_importNK!NgayLap
 
         'Chuan bi cho nhap kho nguyen lieu
@@ -10650,7 +10938,7 @@ Public Sub NhapkhoTPChitiet()
             timerReadyNKNL.Enabled = True
             nknl = 1
         Else
-            ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!id
+            ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!ID
             rs_importNK.MoveNext
             If Not rs_importNK.EOF Then
                 Nhapkhotong
@@ -10694,7 +10982,7 @@ Public Sub NhapkhoNLChitiet()
         txtChungtu_KeyPress 6, 13
         Command_Click 1
 
-        ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!id
+        ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!ID
         rs_importNK.MoveNext
         If Not rs_importNK.EOF Then
             Nhapkhotong
@@ -10721,7 +11009,7 @@ Public Sub Nhapkhotong()
 
     'duyet con
     Dim Query As String
-    Query = "SELECT * FROM tbNhapkhotpChitiet WHERE ParentID=" & rs_importNK!id & ""
+    Query = "SELECT * FROM tbNhapkhotpChitiet WHERE ParentID=" & rs_importNK!ID & ""
     Set rs_importNKDetail = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     NhapkhoTPChitiet
 End Sub
@@ -11136,7 +11424,7 @@ Private Sub Timer4_Timer()
         'Xu li tai khoan chiec khau .....
         Dim Query As String
         With fileImportList(IndexFirst)
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT = 'Exception' ORDER BY DonGia ASC"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT = 'Exception' ORDER BY DonGia ASC"
         End With
         Set rs_ktra152 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
         If Not rs_ktra152.EOF Then
@@ -11296,7 +11584,7 @@ Private Sub txt_LostFocus(Index As Integer)
         If Len(txt(Index).Text) = 0 Then
             txt(Index).Text = "..."
         Else
-            sh = IIf(Chk.Value = 1, "P", "")
+            sh = IIf(chk.Value = 1, "P", "")
             L = Len(txt(0).Text)
             If Index = 0 And L > 0 And MaSoCT = 0 Then
                 If Not IsNumeric(txt(0).Text) Then
@@ -12694,8 +12982,8 @@ Public Sub SetLoaiChungtu(loai As Integer)
     chkXT.Visible = (loai = 1) And pDTTP <> 0
 
     vis = (loai = 7 Or loai = 8) And (pBaoGia = 1) And ((frmMain.Command(4).Visible And pPhieu = 1) Or (Not frmMain.Command(4).Visible And pPhieu = 0))
-    Chk.Visible = vis
-    Chk.Value = 0
+    chk.Visible = vis
+    chk.Value = 0
     pMaBG = 0
 
     vis = ((loai = 7 Or loai = 8) And pNVBH = 1)
@@ -12819,7 +13107,7 @@ Private Sub XoaPhieuTrenManHinh()
     pNghiepVu = 0
     pMaTaiSan = 0
 
-    Me.Caption = "NhËp chøng tõ kÕ to¸n"
+    'Me.Caption = "NhËp chøng tõ kÕ to¸n"
     ClearText Me
     ClearGrid GrdChungtu, GrdChungtu.tag
     taikhoan.InitTaikhoanMaSo 0
@@ -12864,7 +13152,7 @@ Private Sub XoaPhieuTrenManHinh()
     Command(2).Enabled = True
     Label(22).Enabled = False
     txtchungtu(8).Enabled = False
-    Chk.Value = 0
+    chk.Value = 0
     pMaBG = 0
 
     txtchungtu(7).Text = Format(pRate, Mask_2)
@@ -12879,7 +13167,7 @@ End Sub
 '====================================================================================================
 Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     Dim rs_chungtu, thongtinkhachhang As Recordset
-    Dim sh As String, i As Integer, sodong As Integer, ps As Double, ThemDong As Boolean, mct As Long, mts As Long, uid As Long
+    Dim sh As String, i As Integer, sodong As Integer, ps As Double, ThemDong As Boolean, mct As Long, mts As Long, uID As Long
     Dim ma As Long, diengiai As String, ms As Long, tl As Integer, mvt As Long, mk As Long, mtp As Long, psnt As Double, dgia As Double, luong As Double, st As String
 
     ma = MaSoCT
@@ -12916,7 +13204,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     XoaPhieuTrenManHinh
     loaict = rs_chungtu!maloai
     SetListIndex CboThang, rs_chungtu!ThangCT
-    Chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
+    chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
     pMaBG = IIf(rs_chungtu!maloai = 7, ma, 0)
     ngay(0) = rs_chungtu!NgayCT
     ngay(1) = rs_chungtu!NgayGS
@@ -12971,8 +13259,8 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
 
     If pSongNgu Then txt(2).Text = rs_chungtu!DienGiaiE
     SetListIndex CboNguon(3), rs_chungtu!CTGS
-    uid = rs_chungtu!User_ID
-    LbUser.Caption = TenUser(uid)
+    uID = rs_chungtu!User_ID
+    LbUser.Caption = TenUser(uID)
     If (loaict = 7 Or loaict = 8) And pNVBH > 0 Then
         LBNV.Caption = TenNV(sh, rs_chungtu!MaNV)
         txt(3).Text = sh
@@ -13051,7 +13339,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
             If rs_chungtu!sops <> 0 Or taikhoan.tk_id = GTGTKT_ID Or taikhoan.tk_id = GTGTPN_ID Or taikhoan.tk_id = TTDB_ID Or taikhoan.tk_id = TKVT_ID Or ((taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And rs_chungtu!MaKHC > 0) Then
                 If Not CmdPhieu(0).Visible Then CmdPhieu(0).Visible = (Left(taikhoan.sohieu, Len(TM)) = TM)
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
 
                 If (((taikhoan.tk_id <> TKVT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> GTGTKT_ID) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> TKGT_ID) And (taikhoan.tk_id <> TSCD_ID)) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then         ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, -1, rs_chungtu!sops, rs_chungtu!SoPS2No, rs_chungtu!makh)
@@ -13234,7 +13522,7 @@ KT1:
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
                 If Not CmdPhieu(2).Visible Then CmdPhieu(2).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH Or taikhoan.tk_id2 = CLng(NH))
                 CmdPhieu(2).tag = taikhoan.sohieu
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
 
                 If ((taikhoan.tk_id <> TKVT_ID And taikhoan.tk_id <> TKDT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> GTGTPN_ID) And (taikhoan.tk_id <> TTDB_ID) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then       ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, 1, rs_chungtu!sops, rs_chungtu!SoPS2Co, rs_chungtu!MaKHC)
@@ -13349,8 +13637,8 @@ KT2:
         If Not xddu Then xddu = SetDoiUng(1)
     End If
     GrdChungtu.Row = 0
-    Command(1).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And ChoNhapTiep And (User_Right = 0 Or (UserID = uid))
-    Command(2).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And (User_Right = 0 Or (UserID = uid))
+    Command(1).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And ChoNhapTiep And (User_Right = 0 Or (UserID = uID))
+    Command(2).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And (User_Right = 0 Or (UserID = uID))
     If User_Right <> 0 Then
         If SelectSQL("SELECT Lock" + CStr(CboThang.ItemData(CboThang.ListIndex)) + " Mod 10 AS F1 FROM License") > 0 Then
             Command(1).Enabled = False
@@ -13461,7 +13749,7 @@ Private Function KiemTraChungtu() As Boolean
         RFocus txtchungtu(0)
         Exit Function
     End If
-    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or Chk.Value = 0) Then
+    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or chk.Value = 0) Then
         If Not PSTuDong(SoPSConLai) Then
 
             If skiperror <> 1 Then
@@ -13522,7 +13810,7 @@ End Function
 Private Function SetDoiUng(Optional dr As Integer = 0) As Boolean
     Dim sono As Integer, soco As Integer, j As Integer, sodong As Integer, sonox As Integer, socox As Integer
     Dim sodon As Double, chuyen As Boolean, chuyenvt As Boolean, chuyenkh As Boolean    ', st As String
-    Dim i As Integer, X As Double, TK As String, TK1 As String, kq As Boolean, id As Long
+    Dim i As Integer, X As Double, TK As String, TK1 As String, kq As Boolean, ID As Long
 
     kq = False
     sono = 0
@@ -13787,8 +14075,8 @@ A2:
                                     Else
                                         If mkh(i) > 0 And mkh(i) <> CLng5(.Text) Then
                                             .col = 1
-                                            id = GetTK_ID(.Text, 0)
-                                            If id <> TKCNKH_ID And id <> TKCNPT_ID Then GoTo A2
+                                            ID = GetTK_ID(.Text, 0)
+                                            If ID <> TKCNKH_ID And ID <> TKCNPT_ID Then GoTo A2
                                             GoTo ABC
                                         End If
                                     End If
@@ -13869,8 +14157,8 @@ A1:
                                     Else
                                         If mkh(i) > 0 And mkh(i) <> CLng5(.Text) Then
                                             .col = 1
-                                            id = GetTK_ID(.Text, 0)
-                                            If id <> TKCNKH_ID And id <> TKCNPT_ID Then GoTo A1
+                                            ID = GetTK_ID(.Text, 0)
+                                            If ID <> TKCNKH_ID And ID <> TKCNPT_ID Then GoTo A1
                                             GoTo ABC
                                         End If
                                     End If
@@ -14428,7 +14716,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
         Set tkxt = New ClsTaikhoan
         tkxt.InitTaikhoanSohieu txtsh(0).Text
         txtsh(0).tag = IIf(tkxt.MaSo > 0 And tkxt.tkcon = 0, tkxt.MaSo, 0)
-        lb(0).Caption = tkxt.Ten
+        Lb(0).Caption = tkxt.Ten
         vis = (tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID Or (tkxt.loai = 6 And pDTTP <> 0))
         If Left(txtsh(0).Text, 3) = "154" Then
             vis = True
@@ -14436,7 +14724,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
 
         Label(19).Enabled = vis
         txtsh(1).Enabled = vis
-        lb(1).Enabled = vis
+        Lb(1).Enabled = vis
         cmd(1).Enabled = vis
         cmd(0).tag = IIf(tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID, 1, IIf(tkxt.loai = 6 And pDTTP <> 0, 2, 0))
         Set tkxt = Nothing
@@ -14445,14 +14733,14 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set khxt = New ClsKhachHang
             khxt.InitKhachHangSohieu txtsh(1).Text
             txtsh(1).tag = khxt.MaSo
-            lb(1).Caption = khxt.Ten
+            Lb(1).Caption = khxt.Ten
             Set khxt = Nothing
         End If
         If cmd(0).tag = 2 Then
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            lb(1).Caption = tpxt.TenVattu
+            Lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -14460,7 +14748,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            lb(1).Caption = tpxt.TenVattu
+            Lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -14619,7 +14907,7 @@ KT:
 End Sub
 
 Private Function LaySohieuDoiTuong(dg As String) As Integer
-    Dim i As Integer, k As Integer, id As Long
+    Dim i As Integer, k As Integer, ID As Long
 
     dg = ""
     With GrdChungtu
@@ -14627,8 +14915,8 @@ Private Function LaySohieuDoiTuong(dg As String) As Integer
             .Row = i
             .col = 1
             If Len(.Text) = 0 Then Exit For
-            id = GetTK_ID(.Text, 0)
-            If id = TKCNKH_ID Or id = TKCNPT_ID Then
+            ID = GetTK_ID(.Text, 0)
+            If ID = TKCNKH_ID Or ID = TKCNPT_ID Then
                 k = k + 1
                 .col = 3
                 If Len(.Text) > 0 Then dg = dg + " - " + .Text
@@ -14654,7 +14942,7 @@ Private Sub LaySohieuDoiTuong2(loaidt As Integer, sh As String)
 End Sub
 
 Private Sub LayXuatKho(ml As Integer)
-    Dim id As Double
+    Dim ID As Double
     Dim FileNum As Integer
     Dim BytesNeeded As Long
     Dim Buffers As Long
@@ -14665,7 +14953,7 @@ Private Sub LayXuatKho(ml As Integer)
     ChDir Left(pCurDir, Len(pCurDir) - 1)
     Recycle pCurDir + "BARCODE.FIL"
     On Error GoTo E
-    id = Shell(pCurDir + "DOWNLOAD.EXE", vbMaximizedFocus)
+    ID = Shell(pCurDir + "DOWNLOAD.EXE", vbMaximizedFocus)
     On Error GoTo 0
     Do While bcstop = 0
         AppIdle 1000

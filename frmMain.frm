@@ -471,7 +471,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "05/01/26"
+            TextSave        =   "06/01/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -1669,6 +1669,7 @@ Begin VB.Form frmMain
    End
    Begin VB.Menu mnDuLieu 
       Caption         =   "NhËp sè d­ ®Çu kú"
+      Index           =   1
       Tag             =   "&Tools"
       Begin VB.Menu mnDL 
          Caption         =   "KiÓm tra &nhËp xuÊt tån"
@@ -1955,7 +1956,6 @@ Begin VB.Form frmMain
       Begin VB.Menu mnVT 
          Caption         =   "KiÓm kª tån kho cuèi &ngµy"
          Index           =   10
-         Visible         =   0   'False
       End
       Begin VB.Menu mnVT 
          Caption         =   "-"
@@ -2166,6 +2166,11 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+'Module tieng viet
+
+'end Module tieng viet
+
+
 Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
@@ -2185,10 +2190,6 @@ Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" _
                                       (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, _
                                        ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
 
-Private Const SPI_GETNONCLIENTMETRICS As Long = 41
-Private Const SPI_SETNONCLIENTMETRICS As Long = 42
-Private Const SPIF_UPDATEINIFILE As Long = &H1
-Private Const SPIF_SENDCHANGE As Long = &H2
 
 Private Type WIN32_FIND_DATA
     dwFileAttributes As Long
@@ -2203,10 +2204,9 @@ Private Type WIN32_FIND_DATA
     cAlternateFileName As String * 14
 End Type
 
- 
+
 Dim ret
 Dim m_nonClientMetrics As NONCLIENTMETRICS
-Dim m_logFont As LOGFONT
 
 Dim m_fontCaption As String * 32
 
@@ -2474,11 +2474,30 @@ Private Sub Image2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y
     Image2.MousePointer = vbSizeNS
     ' Load icon t? file .ico ho?c .cur
 End Sub
-Private Sub Form_Activate()    ' viet menu
-     
-    'Tudongtinhgiavon = True
-    'Kiemtraphienban
-    ' FindLatestExe
+
+
+Public Sub SetMenuUnicode(hMenu As Long, pos As Long, textU As String)
+    Dim mii As MENUITEMINFOW
+    Dim s As String
+
+    s = textU & vbNullChar
+
+    With mii
+        .cbSize = Len(mii)
+        .fMask = MIIM_STRING Or MIIM_FTYPE
+        .fType = MFT_STRING
+        .dwTypeData = StrPtr(s)
+        .cch = Len(textU)
+    End With
+
+    SetMenuItemInfoW hMenu, pos, 1, mii
+End Sub
+
+
+Private Sub Form_Activate()
+'Tudongtinhgiavon = True
+'Kiemtraphienban
+' FindLatestExe
     Label1.Left = 0
     Label1.Top = (Me.ScaleHeight * 95 / 100)
 
@@ -2505,7 +2524,7 @@ Private Sub Form_Activate()    ' viet menu
     ExecuteSQL5 "Update License set skiperror=0 where skiperror='...'"
     ' ExecuteSQL5 ("ALTER TABLE Vattu ALTER COLUMN TenVattu MEMO")
     'ExecuteSQL5 ("UPDATE HOADON SET KyHieu = '01GTKT3/001' WHERE KYHIEU = '...'")
-    mnDuLieu.Caption = "Xö lý"
+    'mnDuLieu.Caption = "Xö lý"
 
     StationList
 End Sub
@@ -2656,36 +2675,195 @@ Private Sub Kiemtraphienbanht()
     End If
 End Sub
 
-Private Sub Form_Load()
 
-    Kiemtraphienbanht
-    'Taifilecapnhat
-    Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
-    If 1 > 2 And findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
-        SendMessage HWND_BROADCAST, WM_FONTCHANGE, 0, 0
+
+Private Sub StringToByteArray(ByVal str As String, byteArray() As Byte)
+    Dim i As Long
+    Dim maxLen As Long
+
+    maxLen = UBound(byteArray)
+    For i = 0 To maxLen
+        byteArray(i) = 0
+    Next i
+
+    For i = 1 To Len(str)
+        If i - 1 > maxLen Then Exit For
+        byteArray(i - 1) = Asc(Mid$(str, i, 1))
+    Next i
+    byteArray(i) = 0    ' Null terminator
+End Sub
+Private Sub SetFontNameSimple(faceName() As Byte, ByVal fontName As String)
+    Dim i As Long
+    For i = 0 To 31
+        faceName(i) = 0
+    Next i
+
+    For i = 1 To Len(fontName)
+        If i > 32 Then Exit For
+        faceName(i - 1) = Asc(Mid$(fontName, i, 1))
+    Next i
+End Sub
+
+Private Sub ChangeFont()
+    If findwindowpartial("Microsoft Word") = 0 And findwindowpartial("Microsoft Excel") = 0 Then
+
         DoEvents
 
         m_nonClientMetrics.cbSize = Len(m_nonClientMetrics)
         ret = SystemParametersInfo(SPI_GETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
-        ret = SystemParametersInfo(SPI_GETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
 
-        m_fontCaption = m_nonClientMetrics.lfCaptionFont.lfFaceName
-        m_fontSmCaption = m_nonClientMetrics.lfSmCaptionFont.lfFaceName
-        m_fontMenu = m_nonClientMetrics.lfMenuFont.lfFaceName
-        m_fontMessage = m_nonClientMetrics.lfMessageFont.lfFaceName
-        m_fontStatus = m_nonClientMetrics.lfStatusFont.lfFaceName
-        m_fontIcon = m_logFont.lfFaceName
+        ' FIX L?I L?N 2 + FIX CH? NH?: dùng Trim$ thay vì InStr
+        m_fontCaption = Trim$(m_nonClientMetrics.lfCaptionFont.lfFaceName)
+        m_fontSmCaption = Trim$(m_nonClientMetrics.lfSmCaptionFont.lfFaceName)
+        m_fontMenu = Trim$(m_nonClientMetrics.lfMenuFont.lfFaceName)
+        m_fontStatus = Trim$(m_nonClientMetrics.lfStatusFont.lfFaceName)
 
-        m_nonClientMetrics.lfCaptionFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfSmCaptionFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfMenuFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfStatusFont.lfFaceName = sFONTNAME & vbNullChar
-        m_nonClientMetrics.lfMessageFont.lfFaceName = sFONTNAME & vbNullChar
+        Dim sNewFont As String
+        sNewFont = sFONTNAME & vbNullChar
 
-        ret = SystemParametersInfo(SPI_SETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
-        m_logFont.lfFaceName = sFONTNAME & vbNullChar
-        ret = SystemParametersInfo(SPI_SETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
-    End If
+        ' Ch? thay 4 ph?n an toàn nh?t, gi? nguyên height ? ch? không b? nh?
+        m_nonClientMetrics.lfCaptionFont.lfFaceName = sNewFont
+        m_nonClientMetrics.lfSmCaptionFont.lfFaceName = sNewFont
+        m_nonClientMetrics.lfMenuFont.lfFaceName = sNewFont
+        m_nonClientMetrics.lfStatusFont.lfFaceName = sNewFont
+
+        ' Áp d?ng thay d?i
+    ret = SystemParametersInfo(SPI_SETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
+
+    ' Thêm do?n code sau d? thay d?i font ch? c?a menu
+    Me.fontName = sFONTNAME
+    Me.FontSize = 12
+
+    DoEvents
+End If
+End Sub
+Public Function U(ParamArray codes() As Variant) As String
+    Dim i As Long
+    For i = LBound(codes) To UBound(codes)
+        U = U & ChrW(codes(i))
+    Next
+End Function
+Private Sub LoadMenuForm()
+    Dim hMenu As Long
+    Dim hSub As Long
+    Dim hSub2 As Long
+    Dim hDuLieu As Long
+
+
+    hMenu = GetMenu(Me.hwnd)
+    ' =====================================================
+    ' MENU C?P 1
+    ' =====================================================
+    SetMenuUnicode hMenu, 0, U(84, 104, 244, 110, 103, 32, 115, 7889)                ' Thông s?
+    'SetMenuUnicode hMenu, 1, U(78, 104, 7853, 112, 32, 115, 7889, 32, 100, 432, 32, 273, 7847, 117, 32, 107, 7923)    ' Nh?p s? du d?u k?
+    SetMenuUnicode hMenu, 1, U(88, 7917, 32, 108, 253)
+
+
+    SetMenuUnicode hMenu, 2, U(86, 7853, 116, 32, 116, 432, 44, 32, 104, 224, 110, 103, 32, 104, 243, 97)    ' V?t tu, hàng hóa
+    SetMenuUnicode hMenu, 3, U(67, 244, 110, 103, 32, 110, 7907)                     ' Công n?
+    SetMenuUnicode hMenu, 4, U(84, 224, 105, 32, 115, 7843, 110, 32, 99, 7889, 32, 273, 7883, 110, 104)    ' Tài s?n c? d?nh
+    SetMenuUnicode hMenu, 5, U(84, 114, 7907, 32, 103, 105, 250, 112)                ' Tr? giúp
+
+    ' =====================================================
+    ' THÔNG So sub
+    ' =====================================================
+    hSub = GetSubMenu(hMenu, 0)
+    SetMenuUnicode hSub, 0, U(84, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 109, 7863, 99, 32, 273, 7883, 110, 104)
+    SetMenuUnicode hSub, 1, U(78, 233, 110, 32, 116, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117)
+    SetMenuUnicode hSub, 2, U(77, 7903, 32, 116, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 110, 233, 110)
+    SetMenuUnicode hSub, 4, U(84, 104, 244, 110, 103, 32, 115, 7889, 32, 104, 7879, 32, 116, 104, 7889, 110, 103)
+    SetMenuUnicode hSub, 6, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 110, 103, 432, 7901, 105, 32, 115, 7917, 32, 100, 7909, 110, 103)
+    SetMenuUnicode hSub, 7, U(272, 7863, 116, 32, 109, 7853, 116, 32, 107, 104, 7849, 117)
+    SetMenuUnicode hSub, 9, U(272, 7893, 105, 32, 110, 103, 432, 7901, 105, 32, 115, 7917, 32, 100, 7909, 110, 103)
+    SetMenuUnicode hSub, 10, U(75, 7871, 116, 32, 116, 104, 250, 99, 32, 99, 104, 432, 417, 110, 103, 32, 116, 114, 236, 110, 104)
+
+    ' =====================================================
+    ' Xu ly sub
+    ' =====================================================
+    hSub = GetSubMenu(hMenu, 1)
+    SetMenuUnicode hSub, 0, U(75, 105, 7875, 109, 32, 116, 114, 97, 32, 110, 104, 7853, 112, 32, 120, 117, 7845, 116, 32, 116, 7891, 110)
+    SetMenuUnicode hSub, 1, U(75, 105, 7875, 109, 32, 116, 114, 97, 32, 104, 7879, 32, 116, 7889, 110, 103, 32, 116, 224, 105, 32, 107, 104, 111, 7843, 110)
+    ' SetMenuUnicode hSub, 2, U(88, 7917, 32, 108, 253, 32, 115, 7889, 32, 108, 105, 7879, 117)
+    SetMenuUnicode hSub, 3, U(88, 243, 97, 32, 112, 104, 225, 116, 32, 115, 105, 110, 104, 32, 116, 104, 225, 110, 103)
+    hSub2 = GetSubMenu(hSub, 3)
+    SetMenuUnicode hSub2, 0, U(83, 7889, 32, 100, 432, 32, 273, 7847, 117, 32, 110, 259, 109)
+    SetMenuUnicode hSub, 5, U(67, 104, 117, 121, 7875, 110, 32, 115, 97, 110, 103, 32, 110, 259, 109, 32, 109, 7899, 105)
+    SetMenuUnicode hSub, 6, U(67, 104, 7917, 110, 103, 32, 116, 7915, 32, 107, 7871, 116, 32, 99, 104, 117, 121, 7875, 110)
+    SetMenuUnicode hSub, 7, U(80, 104, 226, 110, 32, 98, 7893, 32, 99, 104, 105, 32, 112, 104, 237)
+    SetMenuUnicode hSub, 8, U(75, 7871, 116, 32, 99, 104, 117, 121, 7875, 110, 32, 115, 7889, 32, 108, 105, 7879, 117)
+    SetMenuUnicode hSub, 9, U(75, 104, 243, 97, 32, 115, 7889, 32, 108, 105, 7879, 117, 32, 116, 104, 225, 110, 103)
+    SetMenuUnicode hSub, 10, U(67, 104, 117, 121, 7875, 110, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 273, 7847, 117, 32, 107, 7923)
+    SetMenuUnicode hSub, 11, U(75, 104, 97, 105, 32, 98, 225, 111, 32, 109, 7851, 117, 32, 98, 105, 7875, 117, 32, 115, 111, 110, 103, 32, 110, 103, 7919)
+    hSub2 = GetSubMenu(hSub, 9)
+    SetMenuUnicode hSub2, 0, U(83, 7889, 32, 100, 432, 32, 99, 117, 7889, 105, 32, 110, 259, 109)
+    ' =====================================================
+    ' V?T TU – HÀNG HÓA
+    ' =====================================================
+    hSub = GetSubMenu(hMenu, 2)
+    SetMenuUnicode hSub, 0, U(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 118, 7853, 116, 32, 116, 432)
+    SetMenuUnicode hSub, 1, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 118, 7853, 116, 32, 116, 432, 32, 104, 224, 110, 103, 32, 104, 243, 97)
+    SetMenuUnicode hSub, 2, U(75, 234, 110, 104, 32, 112, 104, 226, 110, 32, 112, 104, 7889, 105)
+    SetMenuUnicode hSub, 3, U(76, 432, 32, 99, 104, 117, 121, 7875, 110, 32, 110, 7897, 32, 98, 7897)
+    SetMenuUnicode hSub, 4, U(84, 104, 224, 110, 104, 32, 112, 104, 7849, 109, 32, 104, 111, 224, 110, 32, 116, 104, 224, 110, 104, 32, 116, 114, 111, 110, 103, 32, 107, 7923)
+    SetMenuUnicode hSub, 6, U(84, 104, 234, 109, 32, 107, 104, 111, 32, 104, 224, 110, 103)
+    SetMenuUnicode hSub, 7, U(84, 7891, 110, 32, 107, 104, 111, 32, 273, 7847, 117, 32, 107, 7923)
+    SetMenuUnicode hSub, 8, U(84, 237, 110, 104, 32, 108, 7841, 105, 32, 103, 105, 225, 32, 120, 117, 7845, 116, 32, 107, 104, 111, 32, 116, 114, 111, 110, 103, 32, 116, 104, 225, 110, 103)
+    SetMenuUnicode hSub, 9, U(84, 237, 110, 104, 32, 103, 105, 225, 32, 118, 7889, 110, 32, 104, 224, 110, 103, 32, 98, 225, 110)
+    ' Ki?m kê t?n kho cu?i ngày
+    SetMenuUnicode hSub, 10, U(75, 105, 7875, 109, 32, 107, 234, 32, 116, 7891, 110, 32, 107, 104, 111, 32, 99, 117, 7889, 105, 32, 110, 103, 224, 121)
+
+   SetMenuUnicode hSub, 12, U(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 99, 244, 110, 103, 32, 116, 114, 236, 110, 104, 44, 32, 115, 7843, 110, 32, 112, 104, 7849, 109)
+    SetMenuUnicode hSub, 13, U(67, 104, 105, 32, 116, 105, 7871, 116, 32, 99, 244, 110, 103, 32, 116, 114, 236, 110, 104, 44, 32, 115, 7843, 110, 32, 112, 104, 7849, 109)
+    SetMenuUnicode hSub, 14, U(84, 224, 105, 32, 107, 104, 111, 7843, 110, 32, 100, 111, 97, 110, 104, 32, 116, 104, 117)
+    SetMenuUnicode hSub, 16, U(272, 7863, 116, 32, 98, 7887, 32, 84, 75, 32, 116, 104, 101, 111, 32, 100, 245, 105, 32, 116, 104, 101, 111, 32, 99, 104, 105, 32, 116, 105, 7871, 116)
+    SetMenuUnicode hSub, 17, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 118, 7853, 116, 32, 116, 432, 32, 104, 224, 110, 103, 32, 104, 111, 225)
+    SetMenuUnicode hSub, 18, U(84, 7921, 32, 273, 7897, 110, 103, 32, 110, 104, 7853, 112, 32, 107, 104, 111)
+    SetMenuUnicode hSub, 19, U(88, 111, 225, 32, 118, 7853, 116, 32, 116, 432, 32, 116, 104, 7915, 97)
+    ' =====================================================
+    ' CÔNG N?
+    ' =====================================================
+    hSub = GetSubMenu(hMenu, 3)
+    SetMenuUnicode hSub, 0, U(80, 104, 226, 110, 32, 108, 111, 7841, 105)
+    SetMenuUnicode hSub, 1, U(68, 97, 110, 104, 32, 115, 225, 99, 104)
+    SetMenuUnicode hSub, 3, U(83, 7889, 32, 100, 432, 32, 273, 7847, 117, 32, 107, 7923)
+    SetMenuUnicode hSub, 4, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 72, 7907, 112, 32, 273, 7891, 110, 103)
+    SetMenuUnicode hSub, 9, U(272, 7863, 116, 32, 98, 7887, 32, 116, 104, 101, 111, 32, 100, 245, 105, 32, 116, 104, 101, 111, 32, 99, 104, 105, 32, 116, 105, 7871, 116)
+    SetMenuUnicode hSub, 10, U(88, 111, 225, 32, 99, 244, 110, 103, 32, 110, 7907, 32, 116, 104, 7915, 97)
+
+    ' =====================================================
+    ' TÀI S?N C? Ð?NH
+    ' =====================================================
+    hSub = GetSubMenu(hMenu, 4)
+    SetMenuUnicode hSub, 0, U(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 116, 224, 105, 32, 115, 7843, 110)
+    SetMenuUnicode hSub, 1, U(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 99, 104, 7917, 110, 103, 32, 116, 7915)
+    SetMenuUnicode hSub, 2, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 84, 83, 67, 272)
+    SetMenuUnicode hSub, 4, U(78, 432, 7899, 99, 32, 115, 7843, 110, 32, 120, 117, 7845, 116)
+    SetMenuUnicode hSub, 5, U(84, 236, 110, 104, 32, 116, 114, 7841, 110, 103, 32, 115, 7917, 32, 100, 7909, 110, 103)
+    SetMenuUnicode hSub, 6, U(272, 7889, 105, 32, 116, 432, 7901, 110, 103, 32, 113, 117, 7843, 110, 32, 108, 253)
+    SetMenuUnicode hSub, 8, U(84, 224, 105, 32, 115, 7843, 110, 32, 273, 7847, 117, 32, 107, 7923)
+    SetMenuUnicode hSub, 10, U(272, 7863, 116, 32, 98, 7887, 32, 84, 75, 32, 99, 104, 105, 32, 112, 104, 237, 32, 107, 104, 7845, 117, 32, 104, 97, 111)
+    SetMenuUnicode hSub, 11, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 116, 224, 105, 32, 115, 7843, 110, 32, 99, 7889, 32, 273, 7883, 110, 104)
+
+    ' =====================================================
+    ' TR? GIÚP
+    ' =====================================================
+    hSub = GetSubMenu(hMenu, 5)
+    SetMenuUnicode hSub, 0, U(71, 105, 7899, 105, 32, 116, 104, 105, 7879, 117)
+    SetMenuUnicode hSub, 2, U(84, 224, 105, 32, 108, 105, 7879, 117)
+    SetMenuUnicode hSub, 4, U(84, 7841, 111, 32, 99, 244, 110, 103, 32, 116, 121, 32, 109, 7899, 105)
+End Sub
+
+
+Private Sub Form_Load()
+
+    LoadMenuForm
+    Kiemtraphienbanht
+    'Taifilecapnhat
+    Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
+
+    'ResetSystemFontToDefault
+    'ChangeFont
+    ' L?y handle d?n menu c?a form
     If pVersion = 2 Then
         Label(19).Visible = False
         '  img.Top = 3120
@@ -2831,8 +3009,8 @@ Private Sub Form_Unload(Cancel As Integer)
     m_nonClientMetrics.lfStatusFont.lfFaceName = m_fontStatus
 
     ret = SystemParametersInfo(SPI_SETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
-    m_logFont.lfFaceName = m_fontIcon
-    ret = SystemParametersInfo(SPI_SETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
+    ' m_logFont.lfFaceName = m_fontIcon
+    'ret = SystemParametersInfo(SPI_SETICONTITLELOGFONT, Len(m_logFont), m_logFont, 0)
 
     Recycle pCurDir + "DATA\backup1.MDB"
 
@@ -2883,8 +3061,31 @@ End Sub
 
 Public Sub mnCn_Click(Index As Integer)
     If Index = 12 Then
-        Dim response As Integer
-        response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ c«ng nî kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
+        Dim sMsg As String
+        Dim sCap As String
+        Dim response As Long
+
+        sMsg = _
+        ChrW(66) & ChrW(7841) & ChrW(110) & " " & _
+               ChrW(99) & ChrW(243) & " " & _
+               ChrW(109) & ChrW(117) & ChrW(7889) & " " & _
+               ChrW(120) & ChrW(111) & ChrW(225) & " " & _
+               ChrW(116) & ChrW(7845) & ChrW(116) & " " & _
+               ChrW(99) & ChrW(7843) & " " & _
+               ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & " " & _
+               ChrW(110) & ChrW(7907) & " " & _
+               ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & _
+               ChrW(99) & ChrW(243) & " " & _
+               ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & _
+               ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & "?"
+        sCap = _
+        ChrW(88) & ChrW(225) & ChrW(99) & " " & _
+               ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110) & " " & _
+               ChrW(120) & ChrW(111) & ChrW(225)
+        ' xoá
+        response = MessageBoxW(Me.hwnd, StrPtr(sMsg), StrPtr(sCap), vbYesNo Or vbQuestion)
+        'Dim response As Integer
+        'response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ c«ng nî kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
         If response = vbYes Then
             'Kiem tra cong no khach hang
 
@@ -3050,8 +3251,25 @@ Private Sub mnDL_Click(Index As Integer)
         End If
 
         If KtraMKAdmin Then
-            If MsgBox("B¹n ch¾c ch¾n kÕt thóc n¨m " + CStr(pNamTC) + " vµ chuyÓn sang n¨m míi ?" _
-             , vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo KT
+            Dim sMsg As String
+            Dim sCap As String
+
+            sMsg = ChrW(66) & ChrW(7841) & ChrW(110) & " " & _
+                   ChrW(99) & ChrW(104) & ChrW(7855) & ChrW(99) & " " & _
+                   ChrW(99) & ChrW(104) & ChrW(7855) & ChrW(110) & " " & _
+                   ChrW(107) & ChrW(7871) & ChrW(116) & " " & _
+                   ChrW(116) & ChrW(104) & ChrW(250) & ChrW(99) & " " & _
+                   ChrW(110) & ChrW(259) & ChrW(109) & " " & _
+                   CStr(pNamTC) & " " & _
+                   ChrW(118) & ChrW(224) & " " & _
+                   ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & " " & _
+                   ChrW(115) & ChrW(97) & ChrW(110) & ChrW(103) & " " & _
+                   ChrW(110) & ChrW(259) & ChrW(109) & " " & _
+                   ChrW(109) & ChrW(7899) & ChrW(105) & ChrW(63)                  ' m?i ?
+
+            sCap = App.ProductName   ' gi? nguyên tiêu d? là tên ?ng d?ng
+
+            If MessageBoxW(0&, StrPtr(sMsg), StrPtr(sCap), vbYesNo + vbExclamation) <> vbYes Then GoTo KT
 
             HienThongBao "ChuyÓn sè d­ cuèi kú ...  Xin vui lßng chê !", 1
             ChuyenNamMoi
@@ -3213,12 +3431,12 @@ X1:
         ChonTenTep "", 0, "", 3
     Case 9:    ' Dat may in
         ChonTenTep "", cdlCFBoth, "", 4
-        If Len(dlgCommonDialog.FontName) > 1 And (LoaiFont(dlgCommonDialog.FontName) = FontFlag Or KiemTraMaSoThue(LbCty(8).Caption, "03")) Then
-            pFontName = dlgCommonDialog.FontName
+        If Len(dlgCommonDialog.fontName) > 1 And (LoaiFont(dlgCommonDialog.fontName) = FontFlag Or KiemTraMaSoThue(LbCty(8).Caption, "03")) Then
+            pFontName = dlgCommonDialog.fontName
             pFontSize = dlgCommonDialog.FontSize
             ExecuteSQL5 "UPDATE License SET FontName='" + pFontName + "', FontSize=" + CStr(pFontSize)
-            LbCty(0).FontName = pFontName
-            LbCty(1).FontName = pFontName
+            LbCty(0).fontName = pFontName
+            LbCty(1).fontName = pFontName
             mnHT(10).Caption = IIf(FontFlag <> 2, "ChuyÓn ®æi CSDL sang font ABC", "ChuyÓn ®æi CSDL sang font VNI")
             SetFont Me
         End If
@@ -3247,9 +3465,9 @@ X1:
     Case 16:
         If (Not IsNumeric(Left(LbCty(8).Caption, 2))) Then GoTo KT
         If CInt(Left(LbCty(8).Caption, 3)) = 0 Then GoTo KT
-        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
+        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo b
         If FrmGetStr.GetMK(LbCty(8).Caption) Then
-B:
+b:
             UpDateDB
             GetLicense
         End If
@@ -3439,7 +3657,24 @@ Public Sub mnVT_Click(Index As Integer)
 
     If Index = 22 Then
         Dim response As Integer
-        response = MsgBox("B¹n cã muèn xo¸ tÊt c¶ vËt t­ kh«ng cã  ph¸t sinh ?", vbYesNo + vbQuestion, "X¸c nhËn xo¸")
+
+        response = MessageBoxW(0&, _
+                               StrPtr(ChrW(66) & ChrW(7841) & ChrW(110) & " " & _
+                                      ChrW(99) & ChrW(243) & " " & _
+                                      ChrW(109) & ChrW(117) & ChrW(7889) & ChrW(110) & " " & _
+                                      ChrW(120) & ChrW(243) & ChrW(97) & " " & _
+                                      ChrW(116) & ChrW(7845) & ChrW(116) & " " & _
+                                      ChrW(99) & ChrW(7843) & " " & _
+                                      ChrW(118) & ChrW(7853) & ChrW(116) & " " & _
+                                      ChrW(116) & ChrW(432) & " " & _
+                                      ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & _
+                                      ChrW(99) & ChrW(243) & " " & _
+                                      ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & _
+                                      ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & ChrW(63)), _
+                                      StrPtr(ChrW(88) & ChrW(225) & ChrW(99) & " " & _
+                                             ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110) & " " & _
+                                             ChrW(120) & ChrW(243) & ChrW(97)), _
+                                             vbYesNo + vbQuestion)
         If response = vbYes Then
             Dim sql As String
             sql = "DELETE FROM Vattu WHERE MaSo NOT IN (SELECT MaVatTu FROM TonKho)"
@@ -4072,10 +4307,10 @@ Private Sub GetLicense()
         pTienStr = "VND"
     End If
     CTGS_GV = rs_license!CTGS_GV
-    pFontName = rs_license!FontName
+    pFontName = rs_license!fontName
     pFontSize = rs_license!FontSize
-    LbCty(0).FontName = pFontName
-    LbCty(1).FontName = pFontName
+    LbCty(0).fontName = pFontName
+    LbCty(1).fontName = pFontName
     LbCty(10).Caption = rs_license!Quan
     LbCty(11).Caption = rs_license!ThanhPho
     frmMain.LbCty(9).Caption = rs_license!email
@@ -4194,8 +4429,8 @@ Private Sub GetLicense()
     On Error GoTo 0
 End Sub
 
-Private Sub NoRight(id As Integer)
-    Select Case id
+Private Sub NoRight(ID As Integer)
+    Select Case ID
         Case 0: HienThongBao "Kh«ng cã quyÒn truy cËp!", 1
         Case 1: HienThongBao "Kh«ng ®¨ng ký theo dâi chi tiÕt vËt t­!", 1
         Case 2: HienThongBao "Kh«ng ®¨ng ký theo dâi chi tiÕt TSC§!", 1
@@ -4345,10 +4580,10 @@ Private Sub RunCT()
     If Len(Dir(pctpath)) > 0 Then Shell pctpath, vbNormalFocus
 End Sub
 
-Public Function ChonTenTep(title As String, f As Long, mask As String, act As Integer) As String
+Public Function ChonTenTep(Title As String, f As Long, mask As String, act As Integer) As String
     With dlgCommonDialog
         .InitDir = pCurDir + "data\"
-        .DialogTitle = title
+        .DialogTitle = Title
         .Flags = f
         .fileName = mask
         .DefaultExt = mask

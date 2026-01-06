@@ -1,13 +1,15 @@
 VERSION 5.00
 Begin VB.Form frmToast 
+   BorderStyle     =   0  'None
    Caption         =   "Form4"
    ClientHeight    =   3210
-   ClientLeft      =   75
-   ClientTop       =   315
+   ClientLeft      =   0
+   ClientTop       =   0
    ClientWidth     =   4650
    LinkTopic       =   "Form4"
    ScaleHeight     =   3210
    ScaleWidth      =   4650
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
 End
 Attribute VB_Name = "frmToast"
