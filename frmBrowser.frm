@@ -37,7 +37,7 @@ Begin VB.Form frmBrowser
       NoFolders       =   0   'False
       Transparent     =   0   'False
       ViewID          =   "{0057D0E0-3573-11CF-AE69-08002B2E1262}"
-      Location        =   ""
+      Location        =   "http:///"
    End
 End
 Attribute VB_Name = "frmBrowser"
@@ -47,9 +47,12 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Dim plct As Integer
 Private Sub Form_Load()
-
+    Dim namct As Integer
+    namct = SelectSQL("SELECT NamTC as F1 FROM License ")
     Dim mypath As String
-    mypath = App.path & "\Hoadon"
+    Dim folderName As String
+    folderName = "HD" & namct
+    mypath = App.path & "\Hoadon\" & folderName
     Dim LoaiHD As String
     If FrmChungtu.txtPhanloaichungtu.Text = 1 Or FrmChungtu.txtPhanloaichungtu.Text = 0 Then
         LoaiHD = "\HDVao"

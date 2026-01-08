@@ -51,10 +51,10 @@ Public SL_XXXX As Double
 Dim sBar As String, i0 As Integer, i1 As Integer
 Attribute i0.VB_VarUserMemId = 1073741826
 Attribute i1.VB_VarUserMemId = 1073741826
-Public Function GetResString(ID As Long) As String
+Public Function GetResString(id As Long) As String
     On Error Resume Next
     Dim b() As Byte
-    b = LoadResData(ID, "CUSTOM")   ' type là CUSTOM (vi?t hoa)
+    b = LoadResData(id, "CUSTOM")   ' type là CUSTOM (vi?t hoa)
     If UBound(b) >= 0 Then
         GetResString = StrConv(b, vbUnicode)   ' convert byte ? Unicode, gi? d?u d?p
         ' Xóa null terminator n?u có

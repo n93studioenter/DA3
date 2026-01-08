@@ -3826,12 +3826,12 @@ Public Sub AutoCLickLoai()
     RFocus CboThang
     DisplayFileImportList
 End Sub
-Public Sub AddImportData(ByVal ID As String, ByVal Name As String, ByVal mst As String, ByVal sohd As String, ByVal khHD As String, ByVal ngay As Date, ByVal types As String, ByVal path As String, ByVal tkno As String, ByVal TkCo As String, ByVal tkThue As String, ByVal diengiai As String, ByVal TongTien As String, ByVal VAT As String, ByVal sohieutp As String, ByVal TgTCThue As String, ByVal TgTThue As String, ByVal Ishaschild As String)
+Public Sub AddImportData(ByVal id As String, ByVal Name As String, ByVal mst As String, ByVal sohd As String, ByVal khHD As String, ByVal ngay As Date, ByVal types As String, ByVal path As String, ByVal tkno As String, ByVal TkCo As String, ByVal tkThue As String, ByVal diengiai As String, ByVal TongTien As String, ByVal VAT As String, ByVal sohieutp As String, ByVal TgTCThue As String, ByVal TgTThue As String, ByVal Ishaschild As String)
     Dim fileImport As ClsFileImport
     Set fileImport = New ClsFileImport
 
     ' Gán giá tr? cho các thu?c tính
-    fileImport.ID = ID
+    fileImport.id = id
     fileImport.Name = Name
     fileImport.mst = mst
     fileImport.sohd = sohd
@@ -4125,7 +4125,7 @@ Private Sub btnImport_Click()
         ' Duy?t qua t?t c? các b?n ghi
         Do While Not rs_ktra.EOF
             ' L?y s? lu?ng tru?ng
-            AddImportData rs_ktra!ID, rs_ktra!Ten, rs_ktra!mst, rs_ktra!SHDon, rs_ktra!KHHDon, rs_ktra!NLap, "", "", rs_ktra!tkno, rs_ktra!TkCo, rs_ktra!tkThue, rs_ktra!noidung, rs_ktra!TongTien, rs_ktra!VAT, rs_ktra!sohieutp, rs_ktra!TgTCThue, rs_ktra!TgTThue, rs_ktra!Ishaschild
+            AddImportData rs_ktra!id, rs_ktra!Ten, rs_ktra!mst, rs_ktra!SHDon, rs_ktra!KHHDon, rs_ktra!NLap, "", "", rs_ktra!tkno, rs_ktra!TkCo, rs_ktra!tkThue, rs_ktra!noidung, rs_ktra!TongTien, rs_ktra!VAT, rs_ktra!sohieutp, rs_ktra!TgTCThue, rs_ktra!TgTThue, rs_ktra!Ishaschild
             rs_ktra.MoveNext
         Loop
     End If
@@ -4157,7 +4157,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
 
     Dim QueryUpdate As String
     Dim rstUPdate As String
-    QueryUpdate = "UPDATE tbimport SET Status = 1 where ID= " & item.ID & ""
+    QueryUpdate = "UPDATE tbimport SET Status = 1 where ID= " & item.id & ""
     'Set rstUPdate = DBKetoan.OpenRecordset(QueryUpdate, dbOpenSnapshot)
     ExecuteSQL5 QueryUpdate
 
@@ -4273,7 +4273,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         txtChungtu_LostFocus (0)
         ' T?o truy v?n SQL d? l?y thông tin khách hàng theo MST
         With fileImportList(IndexFirst)
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT = 'Exception'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT = 'Exception'"
         End With
         Set rs_ktra711 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
         If Not rs_ktra711.EOF Then
@@ -4310,7 +4310,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         'txtChungtu_LostFocus (0)
         ' T?o truy v?n SQL d? l?y thông tin khách hàng theo MST
         With fileImportList(IndexFirst)
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT <> 'Exception'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT <> 'Exception'"
         End With
 
         ' M? Recordset d? l?y thông tin khách hàng
@@ -4399,7 +4399,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         Else
             'Kiem tra xem co con hay khogn
             With fileImportList(IndexFirst)
-                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "'"
+                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "'"
             End With
 
             Dim rs_check As Recordset
@@ -4442,7 +4442,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         Else
             'Xu ly1 con cua 154
             With fileImportList(IndexFirst)
-                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "'"
+                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "'"
             End With
             Set rs_ktra154c = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
 
@@ -4459,7 +4459,7 @@ Private Sub Xulyimport(ByVal item As ClsFileImport)
         With fileImportList(IndexFirst)
             Dim ass As String
             ass = .Ishaschild
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT <> 'Exception' AND '" & ass & "' = '1'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT <> 'Exception' AND '" & ass & "' = '1'"
         End With
 
         ' M? Recordset d? l?y thông tin khách hàng
@@ -5167,7 +5167,7 @@ Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXML
     childElement.appendChild subElement
 
     AddElement xmlDoc, subElement, "mst", "3500779171"
-    AddElement xmlDoc, subElement, "tenNNT", VNItoUNICODE(frmMain.lbCty(0).Caption)
+    AddElement xmlDoc, subElement, "tenNNT", VNItoUNICODE(frmMain.LbCty(0).Caption)
 
     AddElement xmlDoc, subElement, "dchiNNT", "31 Ð?i C?n"
     AddElement xmlDoc, subElement, "phuongXa", ""
@@ -6247,20 +6247,20 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
 'Kiem tra xem co con khong
 
     Dim countchild As Integer
-    countchild = SelectSQL("SELECT COUNT(*) AS F1 FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'")
+    countchild = SelectSQL("SELECT COUNT(*) AS F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'")
 
     If countchild > 0 Then
         Dim QueryDistinct As String
-        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "' GROUP BY MaCT"
+        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' GROUP BY MaCT"
         Dim countgroup As Integer
         countgroup = SelectSQL(QueryDistinct)
         'Kiem tra xem có 15 khác ngoài 154 không
-        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "' AND (LEFT(TKNo, 3) <> '154' OR TKCo='711')"
+        QueryDistinct = "SELECT count(*) as F1 FROM tbimportdetail WHERE ParentId='" & rs_import!id & "' AND (LEFT(TKNo, 3) <> '154' OR TKCo='711')"
         Dim count154 As Integer
         count154 = SelectSQL(QueryDistinct)
         If countgroup <> countchild Or count154 >= 1 Then
             Dim Query2 As String
-            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
+            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
             Set rs_ktchild154 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
             If Not rs_ktchild154.EOF Then
                 Timer154c.Enabled = True
@@ -6385,14 +6385,14 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
     If (rs_import!tkno Like "64*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "338*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
         FThuChi.FThuChiForm = 1
         Dim Query64 As String
-        Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
+        Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
         Set rs_ktra164 = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
         If rs_import!Ishaschild = "0" Then
             XulyTongtopChild rs_import
         Else
             FThuChi.FThuChiForm = 2
             Dim Query2 As String
-            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
+            Query2 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
             Set rs_ktra152 = DBKetoan.OpenRecordset(Query2, dbOpenSnapshot)
             Xuly15Child
         End If
@@ -6403,14 +6403,14 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
         If rs_import!Type = 1 Then
             FThuChi.FThuChiForm = 2
             Dim Query As String
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
             Set rs_ktra152 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
             Xuly15Child
         End If
         If rs_import!Type = 3 Then
             FThuChi.FThuChiForm = 2
             Dim Qus As String
-            Qus = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
+            Qus = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
             Set rs_ktra152 = DBKetoan.OpenRecordset(Qus, dbOpenSnapshot)
             demThumua = 0
             XuLy15Childhd
@@ -6430,7 +6430,7 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
         If rs_import!sohieutp = "" Or IsNull(rs_import!sohieutp) Then
             'Truong hop co chi tiet
             If rs_import!Ishaschild = 1 Then
-                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!ID & "'"
+                Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
                 Set rs_ktra152 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
                 Xuly51Child
             Else
@@ -6455,7 +6455,7 @@ Private Sub UpdateImportStatus(ByRef Status As Integer)
 ' Ki?m tra xem rs_import có h?p l? không
     If Not rs_import.EOF Then
         ' Th?c hi?n c?p nh?t tr?ng thái
-        ExecuteSQL5 "UPDATE tbimport SET Status = " & Status & " WHERE ID = " & rs_import!ID
+        ExecuteSQL5 "UPDATE tbimport SET Status = " & Status & " WHERE ID = " & rs_import!id
     End If
 End Sub
 Private Sub timerNext_Timer()
@@ -6932,8 +6932,8 @@ End Sub
 
 Private Sub Chk_Click()
     txt_LostFocus 0
-    CmdPhieu(1).Caption = IIf(chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
-    CmdPhieu(1).tag = chk.Value
+    CmdPhieu(1).Caption = IIf(Chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
+    CmdPhieu(1).tag = Chk.Value
 End Sub
 
 Private Sub ChkXT_Click()
@@ -7115,7 +7115,7 @@ Public Sub CmdChitiet_chon()
         Exit Sub
     End If
 
-    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And chk.Value = 0 And Me.Visible Then
+    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And Chk.Value = 0 And Me.Visible Then
         'MsgBox "§· xuÊt qu¸ l­îng tån!", vbCritical, App.ProductName
         'Exit Sub
         If IsImport = False Then
@@ -7259,7 +7259,7 @@ Public Sub CmdChitiet_chon()
         CmdPhieu(0).Visible = True
     End If
 
-    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04") Then
+    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04") Then
         If co > 0 Then FThuChi.tag = 1
         If MaSoCT = 0 And hdcount >= 0 And TenTC = "..." Then
             TenTC = HD(0).TenKH
@@ -7495,12 +7495,12 @@ htp:
     End If
 
     If loaict = 2 And taikhoan.loai > 0 And (OutCost = 2 Or OutCost = 3) And taikhoan.tk_id = TKVT_ID And vattu.MaSo > 0 Then
-        Dim luongx() As Double, tienx() As Double, ID() As Long, cx As Integer, tienx2() As Double
+        Dim luongx() As Double, tienx() As Double, id() As Long, cx As Integer, tienx2() As Double
 
         If OutCost = 2 Then
-            cx = GiaXuatKhoFIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, ID, tienx2)
+            cx = GiaXuatKhoFIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, id, tienx2)
         Else
-            cx = GiaXuatKhoLIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, ID, tienx2)
+            cx = GiaXuatKhoLIFO(CboNguon(1).ItemData(CboNguon(1).ListIndex), taikhoan.MaSo, vattu.MaSo, nt, luongx, tienx, id, tienx2)
         End If
 
         For i = 1 To cx
@@ -7508,14 +7508,14 @@ htp:
             GrdChungtu.AddItem "" + Chr(9) + txtchungtu(0).Text + Chr(9) + txtchungtu(1).Text + Chr(9) + shnt _
                              + Chr(9) + Format(luongx(i), Mask_2) + Chr(9) + IIf(luongx(i) <> 0, Format(X, Mask_2), "") + Chr(9) + "" + Chr(9) + Format(tienx(i), msk) + Chr(9) _
                              + CStr(taikhoan.MaSo) + Chr(9) + CStr(vattu.MaSo) + Chr(9) + IIf(taikhoan.loai > 0, "0", "1") _
-                             + Chr(9) + CStr(taikhoan.MaTC) + Chr(9) + CStr(ID(i)) + Chr(9) + CStr(taikhoan.tk_id) _
+                             + Chr(9) + CStr(taikhoan.MaTC) + Chr(9) + CStr(id(i)) + Chr(9) + CStr(taikhoan.tk_id) _
                              + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "-1" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) _
                              + Format(tienx2(i), Mask_2), NewRowIndex(GrdChungtu, 1)    'NewRowIndex(GrdChungtu, 1)
         Next
         Erase luongx
         Erase tienx
         Erase tienx2
-        Erase ID
+        Erase id
 
         GoTo KT
     End If
@@ -7859,8 +7859,8 @@ b:
         frmMain.Rpt.Formulas(3) = "SoPhieu='" + LaySH(txt(0).Text, 1) + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiachiTC + "'"
         frmMain.Rpt.Formulas(5) = "CTGoc='" + ctgoc + "'"
-        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.lbCty(2).Caption + "'"
-        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.lbCty(3).Caption + "'"
+        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.LbCty(2).Caption + "'"
+        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.LbCty(3).Caption + "'"
         frmMain.Rpt.Formulas(44) = "Ngay='Ngµy " + Format(ngay(1), Mask_DR) + "'"
         frmMain.Rpt.Formulas(45) = "BangChu='" + sotien + "'"
         frmMain.Rpt.Formulas(46) = "TenNV='" + TenTC + "'"
@@ -8342,10 +8342,10 @@ Sub In_hoa_don2(sotien As String, i As Integer, k As Integer, xxx As String, sod
             frmMain.Rpt.Formulas(15) = "MaKH='" + xxx + "'"
         End If
         '     frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.lbCty(2).Caption + "'"
+        frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.LbCty(2).Caption + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiaChiBH + "'"
-        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.lbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.LbCty(8).Caption + "'"
         frmMain.Rpt.Formulas(7) = "MS2='" + MSTBH + "'"
         frmMain.Rpt.Formulas(8) = "TenNN='" + txtVT(1).Text + "'"
         frmMain.Rpt.Formulas(10) = "HTTT='" + HTTT + "'"
@@ -8456,7 +8456,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
     frmMain.Rpt.Formulas(405) = "hantt= '" + thoihanthanhtoan.Text + " " + "'"
     frmMain.Rpt.Formulas(406) = "sophieu= '" + sochungtu.Text + " " + "'"
     frmMain.Rpt.Formulas(550) = "thanhtoan = '" + hinhthucthanhtoan.Text + "'"
-    frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+    frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
 
     CoPSTK "521", -1, v521
     If sodu = 0 Then
@@ -9317,7 +9317,7 @@ Public Sub Command_Click(Index As Integer)
             MaCT = MaSoCT
             MaSoCT = 0
         Else
-            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
+            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And Chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
         End If
 
         bg = Fix(SoPSConLai * Mask_N) <> 0 And loaict = 7
@@ -9464,8 +9464,8 @@ Public Sub Command_Click(Index As Integer)
                     End If
                     If pTygia > 0 Then chungtu.tygia = Cdbl5(txtchungtu(7).Text)
                     If loaict = 8 And pNVBH > 0 Then chungtu.MaNV = txt(3).tag
-                    If loaict = 8 And chk.Value = 1 Then chungtu.maloai = 7
-                    If loaict = 7 And chk.Value = 0 Then chungtu.maloai = 8
+                    If loaict = 8 And Chk.Value = 1 Then chungtu.maloai = 7
+                    If loaict = 7 And Chk.Value = 0 Then chungtu.maloai = 8
                     If loaict = 8 And (chungtu.tkno.tk_id = TKGT_ID And chungtu.MaVattu = 0) Then
                         .col = 3
                         chungtu.TLCK = Cdbl5(.Text)
@@ -9574,7 +9574,7 @@ Public Sub Command_Click(Index As Integer)
 
 
         If loaict > 8 Then GhiChungtuTS MaCT
-        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And chk.Value = 0 Then XoaPhieu pMaBG
+        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And Chk.Value = 0 Then XoaPhieu pMaBG
 
         'tat ca da ghi xong dua so so va han dung vao trong database
         Dim stt_dong As Integer
@@ -9637,7 +9637,7 @@ Public Sub Command_Click(Index As Integer)
 
         If Not rs_kiemtra.EOF Then
             'MsgBox rs_kiemtra!id
-            ExecuteSQL5 "UPDATE tbimport SET Status = 1 WHERE ID = " & rs_kiemtra!ID
+            ExecuteSQL5 "UPDATE tbimport SET Status = 1 WHERE ID = " & rs_kiemtra!id
         End If
 
         UnlockDB
@@ -9737,7 +9737,11 @@ Public Sub Command_Click(Index As Integer)
             If loaict = 1 And chkXT.Value = 0 Then
                 If FThuChi.FThuChiForm = 0 Then
                     If Not XoaCTOK(MaSoCT) Then
-                        MsgBox "V©t t­ nhËp ®· xuÊt hÕt, kh«ng xo¸ chøng tõ!", vbCritical, App.ProductName
+                        'MsgBox "V©t t­ nhËp ®· xuÊt hÕt, kh«ng xo¸ chøng tõ!", vbCritical, App.ProductName
+                        Dim s As String
+                        s = ChrW(86) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & ChrW(32) & ChrW(104) & ChrW(7871) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(120) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(33)
+                        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
                         GoTo XongCT
                     End If
                 End If
@@ -9758,10 +9762,11 @@ Public Sub Command_Click(Index As Integer)
 
             sCap = ChrW(88) & ChrW(225) & ChrW(99) & " " & _
                    ChrW(110) & ChrW(104) & ChrW(226) & ChrW(769) & ChrW(110)
-
-            If MessageBoxW(Me.hwnd, StrPtr(sMsg), StrPtr("Xác nh?n"), vbYesNo + vbExclamation) = vbYes Then
-                isxoa = 1
-                countDete = 0
+            If msgXoa = 0 Or countDete = 1 Then
+                If MessageBoxW(Me.hwnd, StrPtr(sMsg), StrPtr("Xác nh?n"), vbYesNo + vbExclamation) = vbYes Then
+                    isxoa = 1
+                    countDete = 0
+                End If
             End If
             If isxoa = 1 Or msgXoa = 1 Then
                 If pPhieu > 0 Or pMaBG > 0 Then
@@ -9776,7 +9781,11 @@ Public Sub Command_Click(Index As Integer)
                                 If rs_chungtu!MaVattu > 0 And rs_chungtu!SoPS2Co > 0 Then
                                     rs_chungtu.Close
                                     Set rs_chungtu = Nothing
-                                    MsgBox "Chøng tõ nhËp ®· tÝnh gi¸ xuÊt, kh«ng xãa !", vbExclamation, App.ProductName
+                                    'MsgBox "Chøng tõ nhËp ®· tÝnh gi¸ xuÊt, kh«ng xãa !", vbExclamation, App.ProductName
+                                    
+                                    s = ChrW(67) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(120) & ChrW(243) & ChrW(97) & ChrW(32) & ChrW(33)
+                                    MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
                                     GoTo XongCT
                                 Else
                                     rs_chungtu.MoveNext
@@ -9855,11 +9864,11 @@ Public Sub Command_Click(Index As Integer)
 XongCT:
     ' Me.Caption = "NhËp chøng tõ kÕ to¸n" + " - " + CStr(pNamTC)
     'Me.Caption = ChrW(78) & ChrW(104) & ChrW(7853) & ChrW(112) & " " & _
-                 ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & _
-                 ChrW(116) & ChrW(7915) & " " & _
-                 ChrW(107) & ChrW(7871) & " " & _
-                 ChrW(116) & ChrW(111) & ChrW(225) & ChrW(110) & _
-               " - " & CStr(pNamTC)
+     ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & _
+     ChrW(116) & ChrW(7915) & " " & _
+     ChrW(107) & ChrW(7871) & " " & _
+     ChrW(116) & ChrW(111) & ChrW(225) & ChrW(110) & _
+     " - " & CStr(pNamTC)
     Me.MousePointer = 0
 KT:
     Set chungtu = Nothing
@@ -10224,7 +10233,7 @@ If hasError = False Then
     dlayNganhang.Enabled = False
     Command_Click 1
     'Cap status ngan hang
-    ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!ID & ""
+    ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
 
     rs_ktraNH.MoveNext
     timerNganhang.Enabled = True
@@ -10249,7 +10258,6 @@ End Function
 
 
 Private Sub Form_Activate()
-    
     isimportnk = False
     ExecuteSQL5_Themmoi ("ALTER TABLE tbRegister  ADD tk154 text")
     tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
@@ -10927,7 +10935,7 @@ Public Sub NhapkhoTPChitiet()
         txtChungtu_KeyPress 6, 13
         Command_Click 1
         'ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!id
-        bakParentId = rs_importNK!ID
+        bakParentId = rs_importNK!id
         bakPerentDate = rs_importNK!NgayLap
 
         'Chuan bi cho nhap kho nguyen lieu
@@ -10938,7 +10946,7 @@ Public Sub NhapkhoTPChitiet()
             timerReadyNKNL.Enabled = True
             nknl = 1
         Else
-            ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!ID
+            ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!id
             rs_importNK.MoveNext
             If Not rs_importNK.EOF Then
                 Nhapkhotong
@@ -10982,7 +10990,7 @@ Public Sub NhapkhoNLChitiet()
         txtChungtu_KeyPress 6, 13
         Command_Click 1
 
-        ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!ID
+        ExecuteSQL5 "UPDATE tbNhapkhotp SET Status = '1' WHERE ID = " & rs_importNK!id
         rs_importNK.MoveNext
         If Not rs_importNK.EOF Then
             Nhapkhotong
@@ -11009,7 +11017,7 @@ Public Sub Nhapkhotong()
 
     'duyet con
     Dim Query As String
-    Query = "SELECT * FROM tbNhapkhotpChitiet WHERE ParentID=" & rs_importNK!ID & ""
+    Query = "SELECT * FROM tbNhapkhotpChitiet WHERE ParentID=" & rs_importNK!id & ""
     Set rs_importNKDetail = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     NhapkhoTPChitiet
 End Sub
@@ -11424,7 +11432,7 @@ Private Sub Timer4_Timer()
         'Xu li tai khoan chiec khau .....
         Dim Query As String
         With fileImportList(IndexFirst)
-            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .ID & "' AND DVT = 'Exception' ORDER BY DonGia ASC"
+            Query = "SELECT * FROM tbimportdetail WHERE ParentId='" & .id & "' AND DVT = 'Exception' ORDER BY DonGia ASC"
         End With
         Set rs_ktra152 = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
         If Not rs_ktra152.EOF Then
@@ -11584,7 +11592,7 @@ Private Sub txt_LostFocus(Index As Integer)
         If Len(txt(Index).Text) = 0 Then
             txt(Index).Text = "..."
         Else
-            sh = IIf(chk.Value = 1, "P", "")
+            sh = IIf(Chk.Value = 1, "P", "")
             L = Len(txt(0).Text)
             If Index = 0 And L > 0 And MaSoCT = 0 Then
                 If Not IsNumeric(txt(0).Text) Then
@@ -12982,8 +12990,8 @@ Public Sub SetLoaiChungtu(loai As Integer)
     chkXT.Visible = (loai = 1) And pDTTP <> 0
 
     vis = (loai = 7 Or loai = 8) And (pBaoGia = 1) And ((frmMain.Command(4).Visible And pPhieu = 1) Or (Not frmMain.Command(4).Visible And pPhieu = 0))
-    chk.Visible = vis
-    chk.Value = 0
+    Chk.Visible = vis
+    Chk.Value = 0
     pMaBG = 0
 
     vis = ((loai = 7 Or loai = 8) And pNVBH = 1)
@@ -13152,7 +13160,7 @@ Private Sub XoaPhieuTrenManHinh()
     Command(2).Enabled = True
     Label(22).Enabled = False
     txtchungtu(8).Enabled = False
-    chk.Value = 0
+    Chk.Value = 0
     pMaBG = 0
 
     txtchungtu(7).Text = Format(pRate, Mask_2)
@@ -13204,7 +13212,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     XoaPhieuTrenManHinh
     loaict = rs_chungtu!maloai
     SetListIndex CboThang, rs_chungtu!ThangCT
-    chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
+    Chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
     pMaBG = IIf(rs_chungtu!maloai = 7, ma, 0)
     ngay(0) = rs_chungtu!NgayCT
     ngay(1) = rs_chungtu!NgayGS
@@ -13339,7 +13347,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
             If rs_chungtu!sops <> 0 Or taikhoan.tk_id = GTGTKT_ID Or taikhoan.tk_id = GTGTPN_ID Or taikhoan.tk_id = TTDB_ID Or taikhoan.tk_id = TKVT_ID Or ((taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And rs_chungtu!MaKHC > 0) Then
                 If Not CmdPhieu(0).Visible Then CmdPhieu(0).Visible = (Left(taikhoan.sohieu, Len(TM)) = TM)
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If (((taikhoan.tk_id <> TKVT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> GTGTKT_ID) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> TKGT_ID) And (taikhoan.tk_id <> TSCD_ID)) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then         ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, -1, rs_chungtu!sops, rs_chungtu!SoPS2No, rs_chungtu!makh)
@@ -13522,7 +13530,7 @@ KT1:
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
                 If Not CmdPhieu(2).Visible Then CmdPhieu(2).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH Or taikhoan.tk_id2 = CLng(NH))
                 CmdPhieu(2).tag = taikhoan.sohieu
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If ((taikhoan.tk_id <> TKVT_ID And taikhoan.tk_id <> TKDT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> GTGTPN_ID) And (taikhoan.tk_id <> TTDB_ID) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then       ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, 1, rs_chungtu!sops, rs_chungtu!SoPS2Co, rs_chungtu!MaKHC)
@@ -13749,7 +13757,7 @@ Private Function KiemTraChungtu() As Boolean
         RFocus txtchungtu(0)
         Exit Function
     End If
-    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or chk.Value = 0) Then
+    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or Chk.Value = 0) Then
         If Not PSTuDong(SoPSConLai) Then
 
             If skiperror <> 1 Then
@@ -13810,7 +13818,7 @@ End Function
 Private Function SetDoiUng(Optional dr As Integer = 0) As Boolean
     Dim sono As Integer, soco As Integer, j As Integer, sodong As Integer, sonox As Integer, socox As Integer
     Dim sodon As Double, chuyen As Boolean, chuyenvt As Boolean, chuyenkh As Boolean    ', st As String
-    Dim i As Integer, X As Double, TK As String, TK1 As String, kq As Boolean, ID As Long
+    Dim i As Integer, X As Double, TK As String, TK1 As String, kq As Boolean, id As Long
 
     kq = False
     sono = 0
@@ -14075,8 +14083,8 @@ A2:
                                     Else
                                         If mkh(i) > 0 And mkh(i) <> CLng5(.Text) Then
                                             .col = 1
-                                            ID = GetTK_ID(.Text, 0)
-                                            If ID <> TKCNKH_ID And ID <> TKCNPT_ID Then GoTo A2
+                                            id = GetTK_ID(.Text, 0)
+                                            If id <> TKCNKH_ID And id <> TKCNPT_ID Then GoTo A2
                                             GoTo ABC
                                         End If
                                     End If
@@ -14157,8 +14165,8 @@ A1:
                                     Else
                                         If mkh(i) > 0 And mkh(i) <> CLng5(.Text) Then
                                             .col = 1
-                                            ID = GetTK_ID(.Text, 0)
-                                            If ID <> TKCNKH_ID And ID <> TKCNPT_ID Then GoTo A1
+                                            id = GetTK_ID(.Text, 0)
+                                            If id <> TKCNKH_ID And id <> TKCNPT_ID Then GoTo A1
                                             GoTo ABC
                                         End If
                                     End If
@@ -14716,7 +14724,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
         Set tkxt = New ClsTaikhoan
         tkxt.InitTaikhoanSohieu txtsh(0).Text
         txtsh(0).tag = IIf(tkxt.MaSo > 0 And tkxt.tkcon = 0, tkxt.MaSo, 0)
-        Lb(0).Caption = tkxt.Ten
+        lb(0).Caption = tkxt.Ten
         vis = (tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID Or (tkxt.loai = 6 And pDTTP <> 0))
         If Left(txtsh(0).Text, 3) = "154" Then
             vis = True
@@ -14724,7 +14732,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
 
         Label(19).Enabled = vis
         txtsh(1).Enabled = vis
-        Lb(1).Enabled = vis
+        lb(1).Enabled = vis
         cmd(1).Enabled = vis
         cmd(0).tag = IIf(tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID, 1, IIf(tkxt.loai = 6 And pDTTP <> 0, 2, 0))
         Set tkxt = Nothing
@@ -14733,14 +14741,14 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set khxt = New ClsKhachHang
             khxt.InitKhachHangSohieu txtsh(1).Text
             txtsh(1).tag = khxt.MaSo
-            Lb(1).Caption = khxt.Ten
+            lb(1).Caption = khxt.Ten
             Set khxt = Nothing
         End If
         If cmd(0).tag = 2 Then
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -14748,7 +14756,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -14907,7 +14915,7 @@ KT:
 End Sub
 
 Private Function LaySohieuDoiTuong(dg As String) As Integer
-    Dim i As Integer, k As Integer, ID As Long
+    Dim i As Integer, k As Integer, id As Long
 
     dg = ""
     With GrdChungtu
@@ -14915,8 +14923,8 @@ Private Function LaySohieuDoiTuong(dg As String) As Integer
             .Row = i
             .col = 1
             If Len(.Text) = 0 Then Exit For
-            ID = GetTK_ID(.Text, 0)
-            If ID = TKCNKH_ID Or ID = TKCNPT_ID Then
+            id = GetTK_ID(.Text, 0)
+            If id = TKCNKH_ID Or id = TKCNPT_ID Then
                 k = k + 1
                 .col = 3
                 If Len(.Text) > 0 Then dg = dg + " - " + .Text
@@ -14942,7 +14950,7 @@ Private Sub LaySohieuDoiTuong2(loaidt As Integer, sh As String)
 End Sub
 
 Private Sub LayXuatKho(ml As Integer)
-    Dim ID As Double
+    Dim id As Double
     Dim FileNum As Integer
     Dim BytesNeeded As Long
     Dim Buffers As Long
@@ -14953,7 +14961,7 @@ Private Sub LayXuatKho(ml As Integer)
     ChDir Left(pCurDir, Len(pCurDir) - 1)
     Recycle pCurDir + "BARCODE.FIL"
     On Error GoTo E
-    ID = Shell(pCurDir + "DOWNLOAD.EXE", vbMaximizedFocus)
+    id = Shell(pCurDir + "DOWNLOAD.EXE", vbMaximizedFocus)
     On Error GoTo 0
     Do While bcstop = 0
         AppIdle 1000

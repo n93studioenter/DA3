@@ -459,23 +459,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "06/01/26"
-            Key             =   ""
+            TextSave        =   "08/01/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2499,9 +2495,10 @@ End Sub
 
 
 Private Sub Form_Activate()
-'Tudongtinhgiavon = True
-'Kiemtraphienban
-' FindLatestExe
+    
+    'Tudongtinhgiavon = True
+    'Kiemtraphienban
+    ' FindLatestExe
     Label1.Left = 0
     Label1.Top = (Me.ScaleHeight * 95 / 100)
 
@@ -4076,17 +4073,44 @@ Function IsThanhPham(ByVal number As Integer, ByVal MaSo As Integer) As Boolean
 End Function
 
 Private Sub mnXoa_Click(Index As Integer)
-    
+
     If User_Right <> 0 Then
         NoRight 0
         Exit Sub
     End If
-    
-    
+
+
     If mnXoa(Index).tag > 0 Then
-        If MsgBox("B¹n ch¾c ch¾n cÇn xãa ph¸t sinh th¸ng " + CStr(mnXoa(Index).tag) + " ?", vbYesNo + vbExclamation, App.ProductName) = vbYes Then
+        Dim sMsg As String
+        sMsg = _
+        ChrW(&H42) & ChrW(&H1EA1) & ChrW(&H6E) & " " & _
+               ChrW(&H63) & ChrW(&H68) & ChrW(&H1EAF) & ChrW(&H63) & " " & _
+               ChrW(&H63) & ChrW(&H68) & ChrW(&H1EAF) & ChrW(&H6E) & " " & _
+               ChrW(&H63) & ChrW(&H1EA7) & ChrW(&H6E) & " " & _
+               ChrW(&H78) & ChrW(&HF3) & ChrW(&H61) & " " & _
+               ChrW(&H70) & ChrW(&H68) & ChrW(&HE1) & ChrW(&H74) & " " & _
+               ChrW(&H73) & ChrW(&H69) & ChrW(&H6E) & ChrW(&H68) & " " & _
+               ChrW(&H74) & ChrW(&H68) & ChrW(&HE1) & ChrW(&H6E) & ChrW(&H67) & " " & _
+               CStr(mnXoa(Index).tag) & ChrW(&H20) & ChrW(&H3F)
+
+        ' tháng
+        Dim sCap As String
+        sCap = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+        If MessageBoxW(Me.hwnd, StrPtr(sMsg), _
+                       StrPtr(sCap), _
+                       vbYesNo + vbExclamation) = vbYes Then
             Me.MousePointer = 11
-            HienThongBao "Xãa ph¸t sinh th¸ng " + CStr(mnXoa(Index).tag) + " ...  Xin vui lßng chê !", 1
+            sMsg = _
+            ChrW(&H58) & ChrW(&HF3) & ChrW(&H61) & " " & _
+                   ChrW(&H70) & ChrW(&H68) & ChrW(&HE1) & ChrW(&H74) & " " & _
+                   ChrW(&H73) & ChrW(&H69) & ChrW(&H6E) & ChrW(&H68) & " " & _
+                   ChrW(&H74) & ChrW(&H68) & ChrW(&HE1) & ChrW(&H6E) & ChrW(&H67) & " " & _
+                   CStr(mnXoa(Index).tag) & " ...  " & _
+                   ChrW(&H78) & ChrW(&H69) & ChrW(&H6E) & " " & _
+                   ChrW(&H76) & ChrW(&H75) & ChrW(&H69) & " " & _
+                   ChrW(&H6C) & ChrW(&HF2) & ChrW(&H6E) & ChrW(&H67) & " " & _
+                   ChrW(&H63) & ChrW(&H68) & ChrW(&H1EDD)
+            HienThongBao sMsg, 1
             XoaPSThang Index
         End If
     Else
@@ -4433,8 +4457,8 @@ Private Sub GetLicense()
     On Error GoTo 0
 End Sub
 
-Private Sub NoRight(ID As Integer)
-    Select Case ID
+Private Sub NoRight(id As Integer)
+    Select Case id
         Case 0: HienThongBao "Kh«ng cã quyÒn truy cËp!", 1
         Case 1: HienThongBao "Kh«ng ®¨ng ký theo dâi chi tiÕt vËt t­!", 1
         Case 2: HienThongBao "Kh«ng ®¨ng ký theo dâi chi tiÕt TSC§!", 1
