@@ -9741,7 +9741,6 @@ Public Sub Command_Click(Index As Integer)
                         Dim s As String
                         s = ChrW(86) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & ChrW(32) & ChrW(104) & ChrW(7871) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(120) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(33)
                         MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
-
                         GoTo XongCT
                     End If
                 End If
@@ -9760,10 +9759,9 @@ Public Sub Command_Click(Index As Integer)
                    ChrW(116) & ChrW(7915) & " " & _
                    ChrW(110) & ChrW(224) & ChrW(121) & ChrW(63)
 
-            sCap = ChrW(88) & ChrW(225) & ChrW(99) & " " & _
-                   ChrW(110) & ChrW(104) & ChrW(226) & ChrW(769) & ChrW(110)
+            sCap = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
             If msgXoa = 0 Or countDete = 1 Then
-                If MessageBoxW(Me.hwnd, StrPtr(sMsg), StrPtr("Xác nh?n"), vbYesNo + vbExclamation) = vbYes Then
+                If MessageBoxW(Me.hwnd, StrPtr(sMsg), StrPtr(sCap), vbYesNo + vbExclamation) = vbYes Then
                     isxoa = 1
                     countDete = 0
                 End If
@@ -9782,7 +9780,6 @@ Public Sub Command_Click(Index As Integer)
                                     rs_chungtu.Close
                                     Set rs_chungtu = Nothing
                                     'MsgBox "Chøng tõ nhËp ®· tÝnh gi¸ xuÊt, kh«ng xãa !", vbExclamation, App.ProductName
-                                    
                                     s = ChrW(67) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(120) & ChrW(243) & ChrW(97) & ChrW(32) & ChrW(33)
                                     MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
 
@@ -10229,22 +10226,25 @@ Public Sub Show4()
  OptLoai_Click 12
 End Sub
 Private Sub dlayNganhang_Timer()
-If hasError = False Then
-    dlayNganhang.Enabled = False
-    Command_Click 1
-    'Cap status ngan hang
-    ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
+    If hasError = False Then
+        dlayNganhang.Enabled = False
+        Command_Click 1
+        'Cap status ngan hang
+        ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
 
-    rs_ktraNH.MoveNext
-    timerNganhang.Enabled = True
+        rs_ktraNH.MoveNext
+        timerNganhang.Enabled = True
     Else
-      MsgBox "Hóa don loi, se xu lý hóa don tiep theo"
-      hasError = False
+        ' MsgBox "Hóa don loi, se xu lý hóa don tiep theo"
+        Dim s As String
+        s = ChrW(72) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(7895) & ChrW(105) & ChrW(44) & ChrW(32) & ChrW(115) & ChrW(7869) & ChrW(32) & ChrW(120) & ChrW(7917) & ChrW(32) & ChrW(108) & ChrW(253) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(112) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111)
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+        hasError = False
         Command_Click 0
-         'Command6_Click
-          'rs_ktraNH.MoveNext
-    'timerNganhang.Enabled = True
-End If
+        'Command6_Click
+        'rs_ktraNH.MoveNext
+        'timerNganhang.Enabled = True
+    End If
 End Sub
 
 Public Function MsgBoxU(ByVal sText As String, _
@@ -13743,7 +13743,7 @@ Private Function KiemTraChungtu() As Boolean
     Dim sodu As Double, sodu2 As Double, st As String
     Dim skiperror As Integer
     skiperror = SelectSQL("select skiperror AS f1 from  License")
-    
+
     KiemTraChungtu = False
     If Len(txt(0).Text) = 0 Then txt(0).Text = "..."
     If (loaict = 1 Or loaict = 2 Or loaict = 8) And (CboNguon(0).ListIndex < 0 Or CboNguon(1).ListIndex < 0) Then
@@ -13761,7 +13761,11 @@ Private Function KiemTraChungtu() As Boolean
         If Not PSTuDong(SoPSConLai) Then
 
             If skiperror <> 1 Then
-                MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
+                ' MsgBox "Sè ph¸t sinh nî cã ch­a c©n b»ng !", vbInformation, App.ProductName
+                Dim s As String
+                s = ChrW(83) & ChrW(7889) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & ChrW(32) & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(110) & ChrW(7907) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(99) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(98) & ChrW(7857) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(33)
+                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
             End If
             hasError = True
             If FThuChi.FThuChiForm <> 0 Then

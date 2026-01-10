@@ -8,6 +8,9 @@ Attribute VB_Name = "AllCodes"
 'The Barcode() Function will print one character of sBar at a time in a loop
 'To add more Barcode types, just continue to build functions that make the appropriate sBar String
 Option Explicit
+Public Declare Function SetWindowTextW Lib "user32" _
+                                       (ByVal hwnd As Long, ByVal lpString As Long) As Long
+
 Private Declare Function LoadStringW Lib "user32" ( _
                                      ByVal hInstance As Long, ByVal uID As Long, _
                                      ByVal lpBuffer As Long, ByVal nBufferMax As Long) As Long

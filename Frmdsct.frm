@@ -1771,7 +1771,7 @@ End Sub
 
 
 Public Sub LietKeChungtu(shtk As String, mvt As Long, mts As Long, mcn As Long, shd As String)
-    Dim sql As String, loaict As String, i As Integer, mct As Long, uid As Long, mct1 As Long, mloai As Integer
+    Dim sql As String, loaict As String, i As Integer, mct As Long, uID As Long, mct1 As Long, mloai As Integer
     Dim rs_chungtu As Recordset, st As Double, ovr As Integer, sh As String
     
     Me.MousePointer = 11
@@ -1854,13 +1854,13 @@ chuoidieukien_intoanbo = sql
     Do While Not rs_chungtu.EOF
         If mct <> rs_chungtu!MaCT Then
             mct = rs_chungtu!MaCT
-            uid = rs_chungtu!User_ID
+            uID = rs_chungtu!User_ID
         Else
-            If uid <> rs_chungtu!User_ID Or mloai <> rs_chungtu!maloai Then
+            If uID <> rs_chungtu!User_ID Or mloai <> rs_chungtu!maloai Then
                 mct1 = Lng_MaxValue("MaCT", "ChungTu" + sh) + 1
                 ExecuteSQL5 "UPDATE ChungTu" + sh + " SET MaCT=" + CStr(mct1) + " WHERE MaCT=" + CStr(mct) + " AND User_ID=" + CStr(rs_chungtu!User_ID)
                 mct = mct1
-                uid = rs_chungtu!User_ID
+                uID = rs_chungtu!User_ID
                 mloai = rs_chungtu!maloai
             End If
         End If
@@ -1928,7 +1928,7 @@ End Sub
 
 
 Public Sub LietKeChungtu_1(shtk As String, mvt As Long, mts As Long, mcn As Long, shd As String)
-    Dim sql As String, loaict As String, i As Integer, mct As Long, uid As Long, mct1 As Long, mloai As Integer
+    Dim sql As String, loaict As String, i As Integer, mct As Long, uID As Long, mct1 As Long, mloai As Integer
     Dim rs_chungtu As Recordset, st As Double, ovr As Integer, sh As String
 
     Me.MousePointer = 11
@@ -2079,13 +2079,13 @@ Public Sub LietKeChungtu_1(shtk As String, mvt As Long, mts As Long, mcn As Long
     Do While Not rs_chungtu.EOF
         If mct <> rs_chungtu!MaCT Then
             mct = rs_chungtu!MaCT
-            uid = rs_chungtu!User_ID
+            uID = rs_chungtu!User_ID
         Else
-            If uid <> rs_chungtu!User_ID Or mloai <> rs_chungtu!maloai Then
+            If uID <> rs_chungtu!User_ID Or mloai <> rs_chungtu!maloai Then
                 mct1 = Lng_MaxValue("MaCT", "ChungTu" + sh) + 1
                 ExecuteSQL5 "UPDATE ChungTu" + sh + " SET MaCT=" + CStr(mct1) + " WHERE MaCT=" + CStr(mct) + " AND User_ID=" + CStr(rs_chungtu!User_ID)
                 mct = mct1
-                uid = rs_chungtu!User_ID
+                uID = rs_chungtu!User_ID
                 mloai = rs_chungtu!maloai
             End If
         End If

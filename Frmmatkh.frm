@@ -106,7 +106,14 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
+Private Declare Function SetWindowTextW Lib "user32" _
+                                        (ByVal hwnd As Long, ByVal lpString As Long) As Long
+Private Declare Function MultiByteToWideChar Lib "kernel32" _
+                                             (ByVal CodePage As Long, ByVal dwFlags As Long, _
+                                              lpMultiByteStr As Any, ByVal cchMultiByte As Long, _
+                                              ByVal lpWideCharStr As Long, ByVal cchWideChar As Long) As Long
+
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Dim Counter As Integer
@@ -613,7 +620,11 @@ Private Sub Command_Click(Index As Integer)
             Unload Me
         Else
 
-            MsgBox "Sai mÀt kh»u !", vbExclamation, App.ProductName
+            'MsgBox "Sai mÀt kh»u !", vbExclamation, App.ProductName
+            Dim s As String
+            s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
             Counter = Counter + 1
             If Counter > 3 Then
                 Unload Me
@@ -630,7 +641,9 @@ Private Sub Command_Click(Index As Integer)
                 txtPsw.Text = ""
                 RFocus txtPsw
             Else
-                MsgBox "Sai mÀt kh»u !", vbExclamation, App.ProductName
+                'MsgBox "Sai mÀt kh»u !", vbExclamation, App.ProductName
+                s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
                 Unload FrmMatkhau
             End If
         Case 1:
@@ -827,11 +840,33 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 
-
+Private Function SetCaptionUnicode(frm As Form, ByVal sText As String)
+    Call SetWindowTextW(frm.hwnd, StrPtr(sText))
+End Function
+Public Sub SetFormCaptionUnicode(frm As Form, ByVal sAnsiText As String)
+    Dim sUnicode As String
+    sUnicode = AnsiToUnicode(sAnsiText)
+    SetWindowTextW frm.hwnd, StrPtr(sUnicode & vbNullChar)
+    frm.Caption = sAnsiText    ' G·n ANSI version
+End Sub
+Public Function AnsiToUnicode(ByVal sAnsi As String) As String
+    Dim bytes() As Byte
+    Dim length As Long
+    
+    ' Convert ANSI string to bytes
+    bytes = sAnsi
+    
+    ' Get required buffer size
+    length = MultiByteToWideChar(0, 0, bytes(0), -1, 0, 0)
+    AnsiToUnicode = String$(length, 0)
+    
+    ' Do conversion
+    MultiByteToWideChar 0, 0, bytes(0), -1, _
+                       StrPtr(AnsiToUnicode), length
+End Function
 Private Sub Form_Load()
     Counter = -1
     Int_RecsetToCbo "SELECT MaSo As F2, TenNSD As F1 FROM Users ORDER BY TenNSD", CboUser
-    
     SetFont Me
 End Sub
 

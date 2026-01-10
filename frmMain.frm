@@ -103,6 +103,48 @@ Begin VB.Form frmMain
          EndProperty
       EndProperty
    End
+   Begin ComctlLib.StatusBar sbStatusBar 
+      Align           =   2  'Align Bottom
+      Height          =   390
+      Left            =   0
+      TabIndex        =   57
+      Top             =   9240
+      Width           =   18900
+      _ExtentX        =   33338
+      _ExtentY        =   688
+      SimpleText      =   ""
+      _Version        =   327682
+      BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
+         NumPanels       =   4
+         BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Object.Width           =   8819
+            MinWidth        =   8819
+            Object.Tag             =   ""
+         EndProperty
+         BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Object.Width           =   12347
+            MinWidth        =   12347
+            Object.Tag             =   ""
+         EndProperty
+         BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Object.Tag             =   ""
+         EndProperty
+         BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Style           =   6
+            TextSave        =   "09/01/26"
+            Object.Tag             =   ""
+         EndProperty
+      EndProperty
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
    Begin VB.CommandButton Command2 
       Caption         =   "Update"
       Height          =   280
@@ -442,48 +484,6 @@ Begin VB.Form frmMain
       Top             =   6240
       Visible         =   0   'False
       Width           =   1200
-   End
-   Begin ComctlLib.StatusBar sbStatusBar 
-      Align           =   2  'Align Bottom
-      Height          =   390
-      Left            =   0
-      TabIndex        =   57
-      Top             =   9240
-      Width           =   18900
-      _ExtentX        =   33338
-      _ExtentY        =   688
-      SimpleText      =   ""
-      _Version        =   327682
-      BeginProperty Panels {0713E89E-850A-101B-AFC0-4210102A8DA7} 
-         NumPanels       =   4
-         BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Object.Width           =   8819
-            MinWidth        =   8819
-            Object.Tag             =   ""
-         EndProperty
-         BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Object.Width           =   12347
-            MinWidth        =   12347
-            Object.Tag             =   ""
-         EndProperty
-         BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Object.Tag             =   ""
-         EndProperty
-         BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Style           =   6
-            TextSave        =   "08/01/26"
-            Object.Tag             =   ""
-         EndProperty
-      EndProperty
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
    End
    Begin Crystal.CrystalReport Rpt 
       Left            =   3000
@@ -2171,21 +2171,21 @@ Option Explicit
 'end Module tieng viet
 
 
-Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Public Tudongtinhgiavon As Boolean
 
-Private Declare Function GetModuleFileName Lib "Kernel32" Alias "GetModuleFileNameA" _
+Private Declare Function GetModuleFileName Lib "kernel32" Alias "GetModuleFileNameA" _
                                            (ByVal hModule As Long, ByVal lpFilename As String, ByVal nSize As Long) As Long
-Private Declare Function FindFirstFile Lib "Kernel32" Alias "FindFirstFileA" _
+Private Declare Function FindFirstFile Lib "kernel32" Alias "FindFirstFileA" _
                                        (ByVal lpFilename As String, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 
-Private Declare Function FindNextFile Lib "Kernel32" Alias "FindNextFileA" _
+Private Declare Function FindNextFile Lib "kernel32" Alias "FindNextFileA" _
                                       (ByVal hFindFile As Long, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
-Private Declare Function FindClose Lib "Kernel32" (ByVal hFindFile As Long) As Long
+Private Declare Function FindClose Lib "kernel32" (ByVal hFindFile As Long) As Long
 Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" _
                                       (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, _
                                        ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
@@ -2961,7 +2961,7 @@ Private Sub Form_Load()
     End If
 
 End Sub
-Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional msg As Boolean = True) As Integer
+Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional Msg As Boolean = True) As Integer
       On Error GoTo ErrLock
      DBKetoan.CreateQueryDef Ten, sql
       On Error GoTo 0
@@ -2970,7 +2970,7 @@ Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional msg
 ErrLock:
 'MsgBox Err.Description
 End Function
-Public Function ExecuteSQL_them_bang(Ten As String, Optional msg As Boolean = True) As Integer
+Public Function ExecuteSQL_them_bang(Ten As String, Optional Msg As Boolean = True) As Integer
       On Error GoTo ErrLock
       ExecuteSQL5_Themmoi ("create table " + Ten + " (MaVatTu number,SoLo Text,HanDung datetime,SoLuong Number)")
       On Error GoTo 0
@@ -3216,7 +3216,11 @@ Private Sub mnDL_Click(Index As Integer)
                     Dim Chk As Integer
                     Chk = (CInt(resultArray(0)) - 1) + CInt(resultArray(1)) - pNamTC
                     If Chk <= 0 Then
-                        MsgBox "Gãi d÷ liÖu theo n¨m ®· hÕt, vui lßng liªn hÖ ®Ó ®­îc chuyÓn sang n¨m míi"
+                        'MsgBox "Gãi d÷ liÖu theo n¨m ®· hÕt, vui lßng liªn hÖ ®Ó ®­îc chuyÓn sang n¨m míi"
+                        Dim s As String
+                        s = ChrW(71) & ChrW(243) & ChrW(105) & ChrW(32) & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(110) & ChrW(259) & ChrW(109) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(104) & ChrW(7871) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(118) & ChrW(117) & ChrW(105) & ChrW(32) & ChrW(108) & ChrW(242) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(7879) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(273) & ChrW(432) & ChrW(7907) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(115) & ChrW(97) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(259) & ChrW(109) & ChrW(32) & ChrW(109) & ChrW(7899) & ChrW(105)
+                        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
                         Me.MousePointer = 0
                         Exit Sub
                     End If
