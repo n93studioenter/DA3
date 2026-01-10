@@ -119,19 +119,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "09/01/26"
+            TextSave        =   "10/01/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2171,21 +2175,21 @@ Option Explicit
 'end Module tieng viet
 
 
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal length As Long)
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Public Tudongtinhgiavon As Boolean
 
-Private Declare Function GetModuleFileName Lib "kernel32" Alias "GetModuleFileNameA" _
+Private Declare Function GetModuleFileName Lib "Kernel32" Alias "GetModuleFileNameA" _
                                            (ByVal hModule As Long, ByVal lpFilename As String, ByVal nSize As Long) As Long
-Private Declare Function FindFirstFile Lib "kernel32" Alias "FindFirstFileA" _
+Private Declare Function FindFirstFile Lib "Kernel32" Alias "FindFirstFileA" _
                                        (ByVal lpFilename As String, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 
-Private Declare Function FindNextFile Lib "kernel32" Alias "FindNextFileA" _
+Private Declare Function FindNextFile Lib "Kernel32" Alias "FindNextFileA" _
                                       (ByVal hFindFile As Long, ByRef lpFindFileData As WIN32_FIND_DATA) As Long
 Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
-Private Declare Function FindClose Lib "kernel32" (ByVal hFindFile As Long) As Long
+Private Declare Function FindClose Lib "Kernel32" (ByVal hFindFile As Long) As Long
 Private Declare Function ShellExecute Lib "shell32.dll" Alias "ShellExecuteA" _
                                       (ByVal hwnd As Long, ByVal lpOperation As String, ByVal lpFile As String, _
                                        ByVal lpParameters As String, ByVal lpDirectory As String, ByVal nShowCmd As Long) As Long
@@ -2447,13 +2451,13 @@ Public Sub Taifilecapnhat()
         ' Ch? copy n?u file dích chua t?n t?i ho?c khác kích thu?c/ngày gi?
         If Dir(destFile) = "" Then
             FileCopy sourceFile, destFile
-            MsgBox "Ðã t?i update.exe v? thu m?c Hoadon thành công!", vbInformation
+            'MsgBox "Ðã t?i update.exe v? thu m?c Hoadon thành công!", vbInformation
         Else
             ' So sánh kích thu?c d? tránh copy th?a (tùy ch?n nâng cao)
             If FileLen(sourceFile) <> FileLen(destFile) Then
                 Kill destFile  ' Xóa file cu tru?c khi copy dè
                 FileCopy sourceFile, destFile
-                MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
+               ' MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
             Else
                 ' MsgBox "File update.exe dã là phiên b?n m?i nh?t.", vbInformation  ' Có th? b? n?u không mu?n thông báo
             End If
@@ -2961,7 +2965,7 @@ Private Sub Form_Load()
     End If
 
 End Sub
-Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional Msg As Boolean = True) As Integer
+Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional msg As Boolean = True) As Integer
       On Error GoTo ErrLock
      DBKetoan.CreateQueryDef Ten, sql
       On Error GoTo 0
@@ -2970,7 +2974,7 @@ Public Function ExecuteSQL_them_query(Ten As String, sql As String, Optional Msg
 ErrLock:
 'MsgBox Err.Description
 End Function
-Public Function ExecuteSQL_them_bang(Ten As String, Optional Msg As Boolean = True) As Integer
+Public Function ExecuteSQL_them_bang(Ten As String, Optional msg As Boolean = True) As Integer
       On Error GoTo ErrLock
       ExecuteSQL5_Themmoi ("create table " + Ten + " (MaVatTu number,SoLo Text,HanDung datetime,SoLuong Number)")
       On Error GoTo 0
@@ -3470,9 +3474,9 @@ X1:
     Case 16:
         If (Not IsNumeric(Left(LbCty(8).Caption, 2))) Then GoTo KT
         If CInt(Left(LbCty(8).Caption, 3)) = 0 Then GoTo KT
-        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo b
+        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
         If FrmGetStr.GetMK(LbCty(8).Caption) Then
-b:
+B:
             UpDateDB
             GetLicense
         End If
