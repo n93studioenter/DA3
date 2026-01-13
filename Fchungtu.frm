@@ -7825,7 +7825,7 @@ C1:
                                     Else
                                         GoTo c
                                     End If
-                                    GoTo b
+                                    GoTo B
                                 End If
                             Next
 c:
@@ -7835,7 +7835,7 @@ c:
                             frmMain.Rpt.Formulas(7 + 2 * sodu) = "PSNo" + CStr(sodu) + "=" + DoiDau(tien)
                             .col = 19
                             .Text = CStr(sodu)
-b:
+B:
                         End If
                     End If
                 Next

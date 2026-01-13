@@ -119,23 +119,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "10/01/26"
-            Key             =   ""
+            TextSave        =   "12/01/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -499,7 +495,7 @@ Begin VB.Form frmMain
       PrintFileLinesPerPage=   60
    End
    Begin VB.Label Label1 
-      Caption         =   "Version 3.1"
+      Caption         =   "Version 3.2"
       Height          =   255
       Left            =   0
       TabIndex        =   70
@@ -2252,7 +2248,7 @@ Private Sub Command_Click(Index As Integer)
         End If
         pPhieu = 0
         ' frmTaiLieu.Show 1
-        FrmChungtu.Show 1
+        FrmChungtu.Show vbModal
         Set FrmChungtu = Nothing
     Case 1:
         If User_Right = 1 Then
@@ -2454,10 +2450,10 @@ Public Sub Taifilecapnhat()
             'MsgBox "Ðã t?i update.exe v? thu m?c Hoadon thành công!", vbInformation
         Else
             ' So sánh kích thu?c d? tránh copy th?a (tùy ch?n nâng cao)
-            If FileLen(sourceFile) <> FileLen(destFile) Then
+            If 1 < 2 Then
                 Kill destFile  ' Xóa file cu tru?c khi copy dè
                 FileCopy sourceFile, destFile
-               ' MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
+                ' MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
             Else
                 ' MsgBox "File update.exe dã là phiên b?n m?i nh?t.", vbInformation  ' Có th? b? n?u không mu?n thông báo
             End If
