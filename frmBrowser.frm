@@ -37,7 +37,7 @@ Begin VB.Form frmBrowser
       NoFolders       =   0   'False
       Transparent     =   0   'False
       ViewID          =   "{0057D0E0-3573-11CF-AE69-08002B2E1262}"
-      Location        =   "http:///"
+      Location        =   ""
    End
 End
 Attribute VB_Name = "frmBrowser"
@@ -114,21 +114,8 @@ Private Sub Form_Load()
     WebBrowser1.Navigate FilePath
 End Sub
 Private Sub WebBrowser1_DocumentComplete(ByVal pDisp As Object, URL As Variant)
-'SetZoomTo50Percent
-    Dim table As Object
-    Dim productRows As Object
-    Dim i As Integer
+    SetZoomTo50Percent
 
-    ' Tham chi?u d?n b?ng s?n ph?m (gi? s? nó có class là "res-tb")
-    Set table = WebBrowser1.Document.getElementsByClassName("res-tb")(0)
-
-    ' L?y t?t c? các hàng trong b?ng
-    Set productRows = table.getElementsByTagName("tr")
-
-    ' Thêm s? ki?n click cho t?ng dòng s?n ph?m
-    For i = 1 To productRows.Length - 1    ' B? qua header
-        'productRows(i).setAttribute "onclick", "alert('" & productRows(i).getElementsByTagName("td")(9).innerText & "');"
-    Next i
 End Sub
 
 Private Sub SetZoomTo50Percent()

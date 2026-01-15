@@ -119,19 +119,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "13/01/26"
+            TextSave        =   "14/01/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2451,15 +2455,15 @@ Public Sub Taifilecapnhat()
         ' Ch? copy n?u file dích chua t?n t?i ho?c khác kích thu?c/ngày gi?
         If Dir(destFile) = "" Then
             FileCopy sourceFile, destFile
-            'MsgBox "Ðã t?i update.exe v? thu m?c Hoadon thành công!", vbInformation
+            MsgBox "Ðã t?i update.exe v? thu m?c Hoadon thành công!", vbInformation
         Else
             ' So sánh kích thu?c d? tránh copy th?a (tùy ch?n nâng cao)
             If 1 < 2 Then
                 Kill destFile  ' Xóa file cu tru?c khi copy dè
                 FileCopy sourceFile, destFile
-                ' MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
+                 MsgBox "Ðã c?p nh?t file update.exe m?i!", vbInformation
             Else
-                ' MsgBox "File update.exe dã là phiên b?n m?i nh?t.", vbInformation  ' Có th? b? n?u không mu?n thông báo
+                 MsgBox "File update.exe dã là phiên b?n m?i nh?t.", vbInformation  ' Có th? b? n?u không mu?n thông báo
             End If
         End If
     Else

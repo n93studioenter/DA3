@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HDon>
+  <DLHDon Id="DuLieuKy">
+    <TTChung>
+      <PBan>2.1.0</PBan>
+      <THDon>Hóa đơn GTGT</THDon>
+      <KHMSHDon>1</KHMSHDon>
+      <KHHDon>K25TAA</KHHDon>
+      <SHDon>2213939</SHDon>
+      <NLap>27/12/25 12:00:00 AM</NLap>
+      <HDCTTChinh>0</HDCTTChinh>
+      <DVTTe>VND</DVTTe>
+      <TGia>1</TGia>
+      <HTTToan></HTTToan>
+      <MSTTCGP></MSTTCGP>
+      <TTKhac>
+        <TTin>
+          <TTruong>Extra</TTruong>
+          <KDLieu>string</KDLieu>
+          <DLieu>ThuyUyen.Nguyen@britishcouncil.org</DLieu>
+        </TTin>
+      </TTKhac>
+    </TTChung>
+    <NDHDon>
+      <NBan>
+        <Ten>CÔNG TY CỔ PHẦN CẤP NƯỚC BÀ RỊA - VŨNG TÀU</Ten>
+        <MST>3500101386</MST>
+        <DChi></DChi>
+        <SDThoai></SDThoai>
+      </NBan>
+      <NMua>
+        <Ten>CÔNG TY TNHH MỘT THÀNH VIÊN LINH PHONG</Ten>
+        <MST>3501550899</MST>
+        <DChi></DChi>
+        <MKHang>6868358</MKHang>
+        <HVTNMHang></HVTNMHang>
+      </NMua>
+      <DSHHDVu>
+        <HHDVu>
+          <TChat>0</TChat>
+          <STT>1</STT>
+          <THHDVu>Dịch vụ thoát nước, Nước tiêu thụ, Nước tiêu thụ, Nước tiêu thụ</THHDVu>
+          <DVTinh>M3, M3, M3, M3</DVTinh>
+          <SLuong>139</SLuong>
+          <DGia></DGia>
+          <TSuat>0</TSuat>
+          <ThTien>2623800</ThTien>
+          <TTKhac>
+            <TTin>
+              <TTruong>Amount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>2623800</DLieu>
+            </TTin>
+            <TTin>
+              <TTruong>VATAmount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>0</DLieu>
+            </TTin>
+          </TTKhac>
+        </HHDVu>
+      </DSHHDVu>
+      <TToan>
+        <TTKhac>
+          <TTin>
+            <TTruong>ServiceProvided</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>Le phi thi</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Location</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>British Council Ho Chi Minh City</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Datasource</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>ORS2</DLieu>
+          </TTin>
+        </TTKhac>
+        <THTTLTSuat>
+          <LTSuat>
+            <TSuat>0</TSuat>
+            <TThue>131190</TThue>
+            <ThTien>2623800</ThTien>
+          </LTSuat>
+        </THTTLTSuat>
+        <TPhi>
+          <ThTien>262380</ThTien>
+        </TPhi>
+        <TgTCThue>2623800</TgTCThue>
+        <TgTThue>131190</TgTThue>
+        <TTCKTMai></TTCKTMai>
+        <TgTTTBSo>3017370</TgTTTBSo>
+        <TgTTTBChu></TgTTTBChu>
+      </TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>
