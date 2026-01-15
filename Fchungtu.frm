@@ -6531,13 +6531,16 @@ Private Sub btnImportXML_Click()
             "AND t.Status = 0 " & _
             "AND NOT EXISTS (" & _
             "SELECT 1 FROM HoaDon AS h " & _
+            "INNER JOIN ChungTu AS c ON h.MaSo = c.MaSo " & _
             "WHERE t.SHDon = h.SoHD " & _
-            "AND ( " & _
-          " (t.Type='1' AND h.Loai=-1) " & _
+            "AND (" & _
+          " (t.Type = '1' AND h.Loai = -1) " & _
           " OR " & _
-          " (t.Type='2' AND h.Loai=1) " & _
-          " ) " & _
-            "AND Format(t.NLap, 'dd/MM/yy') = Format(h.NgayPH, 'dd/MM/yy'))"
+          " (t.Type = '2' AND h.Loai = 1) " & _
+            ") " & _
+            "AND Format(t.NLap, 'dd/MM/yy') = Format(h.NgayPH, 'dd/MM/yy')" & _
+            ")"
+
     Set rs_import = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     sttHD = 1
     Dim isloop As Boolean

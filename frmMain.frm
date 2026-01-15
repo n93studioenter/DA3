@@ -134,7 +134,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "14/01/26"
+            TextSave        =   "15/01/26"
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -2593,6 +2593,9 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         End Select
     End If
     Dim rs As Recordset
+    If (Shift And vbAltMask) > 0 And (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyK Then
+    MsgBox "Sda"
+    End If
     If (Shift And vbAltMask) > 0 And (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyU Then
         Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
         'ExecuteSQL5 "update License set TenCty = '" + ModSAS.Federo16(rs!TenCty, CStr(rs!NamTC)) + "',DiaChi = '" + ModSAS.Federo16(rs!DiaChi, CStr(rs!NamTC)) + "',MaSoThue = '" + ModSAS.Federo16(rs!masothue, CStr(rs!NamTC)) + "',CMP = '" + ModSAS.Federo16(IIf(IsNull(rs!CMP), "", rs!CMP), CStr(rs!NamTC)) + "'"
