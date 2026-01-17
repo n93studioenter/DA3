@@ -2926,8 +2926,45 @@ Private Sub Command_Click(Index As Integer)
         End If
     End If
 
-
+    'Tao file version.txt
+    Dim versionpath As String
+    versionpath = originPath & "\Hoadon\version.txt"
     Dim checkBoxValue As Integer
+    If Not FileExists(versionpath) Then
+        ' T?o file version.txt
+        If CreateVersionFile(versionpath, content) Then
+            'MsgBox "Ðã t?o file version.txt t?i:" & vbCrLf & filePath, vbInformation
+        Else
+            MsgBox "Không th? t?o file version.txt", vbExclamation
+        End If
+    Else
+        'Dim fileNumber As Integer
+        fileNumber = FreeFile
+        On Error Resume Next
+        Open serverpath For Output As #fileNumber
+        If Err.number = 0 Then
+            Print #fileNumber, Text3.Text;
+            Close #fileNumber
+            'MsgBox "Ðã ghi dè file version.txt thành công!", vbInformation
+        Else
+            MsgBox "L?i khi ghi dè file!", vbExclamation
+        End If
+    End If
+
+
+    'Tao file status.txt
+    Dim statuspath As String
+    statuspath = originPath & "\Hoadon\status.txt"
+    If Not FileExists(statuspath) Then
+        ' T?o file version.txt
+        If CreateVersionFile(statuspath, content) Then
+            'MsgBox "Ðã t?o file version.txt t?i:" & vbCrLf & filePath, vbInformation
+        Else
+            MsgBox "Không th? t?o file version.txt", vbExclamation
+        End If
+
+    End If
+
 
     checkBoxValue = CheckBox1(0).Value
 

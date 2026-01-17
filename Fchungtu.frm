@@ -6476,7 +6476,14 @@ Private Sub timerNext_Timer()
         Dim skiperror As Integer
         skiperror = SelectSQL("select skiperror AS f1 from  License")
         If skiperror <> 1 Then
-            response = MsgBox("Ho¸ ®¬n t¶i bÞ lçi, chän Yes ®Ó söa tay, chän No ®Ó bá qua.", vbYesNo + vbQuestion, "Xác nh?n")
+            ' response = MsgBox("Ho¸ ®¬n t¶i bÞ lçi, chän Yes ®Ó söa tay, chän No ®Ó bá qua.", vbYesNo + vbQuestion, "Xác nh?n")
+            Dim s As String
+            s = ChrW(72) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(7843) & ChrW(105) & ChrW(32) & ChrW(98) & ChrW(7883) & ChrW(32) & ChrW(108) & ChrW(7895) & ChrW(105) & ChrW(44) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(89) & ChrW(101) & ChrW(115) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(115) & ChrW(7917) & ChrW(97) & ChrW(32) & ChrW(116) & ChrW(97) & ChrW(121) & ChrW(44) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(78) & ChrW(111) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(98) & ChrW(7887) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(97) & ChrW(46)
+            Dim xn As String
+            xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+            If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                response = vbYes
+            End If
         Else
             dshdloi = dshdloi & rs_import!SHDon & ","
             response = vbNo
@@ -7217,7 +7224,10 @@ Public Sub CmdChitiet_chon()
     End If
 
     If no <> 0 And co <> 0 Then
-        MsgBox "ChØ ghi ph¸t sinh nî hoÆc cã !", vbExclamation, App.ProductName
+        'MsgBox "ChØ ghi ph¸t sinh nî hoÆc cã !", vbExclamation, App.ProductName
+        Dim s As String
+        s = ChrW(67) & ChrW(104) & ChrW(7881) & ChrW(32) & ChrW(103) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & ChrW(32) & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(110) & ChrW(7907) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(243)
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
         RFocus txtchungtu(5)
         Exit Sub
     End If
