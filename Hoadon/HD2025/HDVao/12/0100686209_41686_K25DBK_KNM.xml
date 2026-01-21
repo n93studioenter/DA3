@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HDon>
+  <DLHDon Id="DuLieuKy">
+    <TTChung>
+      <PBan>2.1.0</PBan>
+      <THDon>Hóa đơn GTGT</THDon>
+      <KHMSHDon>1</KHMSHDon>
+      <KHHDon>K25DBK</KHHDon>
+      <SHDon>41686</SHDon>
+      <NLap>07/12/25 12:00:00 AM</NLap>
+      <HDCTTChinh>0</HDCTTChinh>
+      <DVTTe>VND</DVTTe>
+      <TGia></TGia>
+      <HTTToan></HTTToan>
+      <MSTTCGP></MSTTCGP>
+      <TTKhac>
+        <TTin>
+          <TTruong>Extra</TTruong>
+          <KDLieu>string</KDLieu>
+          <DLieu>ThuyUyen.Nguyen@britishcouncil.org</DLieu>
+        </TTin>
+      </TTKhac>
+    </TTChung>
+    <NDHDon>
+      <NBan>
+        <Ten>TỔNG CÔNG TY VIỄN THÔNG MOBIFONE</Ten>
+        <MST>0100686209</MST>
+        <DChi></DChi>
+        <SDThoai></SDThoai>
+      </NBan>
+      <NMua>
+        <Ten>Trương Thị Hiền</Ten>
+        <MST>3502187558</MST>
+        <DChi></DChi>
+        <MKHang>0001748511</MKHang>
+        <HVTNMHang></HVTNMHang>
+      </NMua>
+      <DSHHDVu>
+        <HHDVu>
+          <TChat>0</TChat>
+          <STT>1</STT>
+          <THHDVu>Cước dịch vụ viễn thông trả sau (Dịch vụ chịu thuế)</THHDVu>
+          <SLuong></SLuong>
+          <DGia></DGia>
+          <TSuat>10</TSuat>
+          <ThTien>196568</ThTien>
+          <TTKhac>
+            <TTin>
+              <TTruong>Amount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>196568</DLieu>
+            </TTin>
+            <TTin>
+              <TTruong>VATAmount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>0</DLieu>
+            </TTin>
+          </TTKhac>
+        </HHDVu>
+      </DSHHDVu>
+      <TToan>
+        <TTKhac>
+          <TTin>
+            <TTruong>ServiceProvided</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>Le phi thi</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Location</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>British Council Ho Chi Minh City</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Datasource</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>ORS2</DLieu>
+          </TTin>
+        </TTKhac>
+        <THTTLTSuat>
+          <LTSuat>
+            <TSuat>10</TSuat>
+            <TThue>19657</TThue>
+            <ThTien>196568</ThTien>
+          </LTSuat>
+        </THTTLTSuat>
+        <TgTCThue>196568</TgTCThue>
+        <TgTThue>19657</TgTThue>
+        <TTCKTMai></TTCKTMai>
+        <TgTTTBSo>216225</TgTTTBSo>
+        <TgTTTBChu></TgTTTBChu>
+      </TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>

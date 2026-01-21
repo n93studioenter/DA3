@@ -119,19 +119,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "17/01/26"
+            TextSave        =   "19/01/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -3587,42 +3591,43 @@ Public Sub mnTS_Click(Index As Integer)
         Exit Sub
     End If
     Me.MousePointer = 11
-      
+
     Select Case Index
-        Case 0:                         ' Phan loai TS
-            'Load frmPhanLoai
-            frmPhanLoai.tag = 1
-            frmPhanLoai.Show 1
-        Case 11:                         ' Phan loai TS
-          frmDSTaiSan.Show 1
-        
-        Case 1:                         ' Phan loai ctu
-            'Load frmPhanLoai
-            frmPhanLoai.tag = 2
-            frmPhanLoai.Show 1
-        Case 3:                         ' Nuoc sx
-            'Load FrmKho
-            FrmKho.tag = 2
-            FrmKho.Show 1
-        Case 4:                         ' Tinh trang SD
-            'Load FrmKho
-            FrmKho.tag = 3
-            FrmKho.Show 1
-        Case 5:                         ' DTQL
-            'Load FrmKho
-            FrmKho.tag = 4
-            FrmKho.Show 1
-        Case 7:
-            If ChoDieuChinhDauKy Then
-                pNghiepVu = NV_TANG
-                'Load frmTaiSan
-                frmTaiSan.tag = 1
-                frmTaiSan.Show 1
-            End If
-        Case 9:
-            If KtraMKAdmin Then DatTKTS
-        Case 10:
-             frmDSTaiSan.Show 1
+    Case 0:    ' Phan loai TS
+        'Load frmPhanLoai
+        frmPhanLoai.tag = 1
+        frmPhanLoai.Show 1
+    Case 11:    ' Phan loai TS
+        frmDSTaiSan.Show 1
+
+    Case 1:    ' Phan loai ctu
+        'Load frmPhanLoai
+        frmPhanLoai.tag = 2
+        frmPhanLoai.Show 1
+    Case 3:    ' Nuoc sx
+        'Load FrmKho
+        FrmKho.tag = 2
+        FrmKho.Show 1
+    Case 4:    ' Tinh trang SD
+        'Load FrmKho
+        FrmKho.tag = 3
+        FrmKho.Show 1
+    Case 5:    ' DTQL
+        'Load FrmKho
+        FrmKho.tag = 4
+        FrmKho.Show 1
+    Case 7:
+        If ChoDieuChinhDauKy Then
+            pNghiepVu = NV_TANG
+            'Load frmTaiSan
+            frmTaiSan.tag = 1
+            frmTaiSan.Show 1
+        End If
+    Case 9:
+        If KtraMKAdmin Then DatTKTS
+    Case 10:
+        'frmDSTaiSan.Show 1
+        If KtraMKAdmin Then DatTKTS
     End Select
     HienThongBao "", 1
     Me.MousePointer = 0

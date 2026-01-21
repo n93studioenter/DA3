@@ -2,7 +2,7 @@ Attribute VB_Name = "modUtilities"
 Option Explicit
 Private Declare Function SendMessageW Lib "user32" ( _
                                       ByVal hwnd As Long, _
-                                      ByVal Msg As Long, _
+                                      ByVal msg As Long, _
                                       ByVal wParam As Long, _
                                       lParam As Any) As Long
 
@@ -179,168 +179,168 @@ Private Const HKEY_CURRENT_USER = &H80000001
 Public m_IgnoreEvents As Boolean
 Attribute m_IgnoreEvents.VB_VarUserMemId = 1073741832
 Public Sub ErrMsg(errnum As Integer)
-    Dim Msg As String
+    Dim msg As String
 
     Select Case errnum
     Case er_SoHieu
-        Msg = ChrW(83) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
+        msg = ChrW(83) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
         ' S? hi?u không h?p l? !
 
     Case er_Ten
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(100) & ChrW(105) & ChrW(7877) & ChrW(110) & " " & ChrW(103) & ChrW(105) & ChrW(7843) & ChrW(105) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(100) & ChrW(105) & ChrW(7877) & ChrW(110) & " " & ChrW(103) & ChrW(105) & ChrW(7843) & ChrW(105) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
         ' Thi?u di?n gi?i ho?c không h?p l? !
 
     Case er_PhanLoai
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & " " & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & " " & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & " !"
         ' Thi?u phân lo?i !
 
     Case er_KhoHang
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(111) & " " & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(103) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(111) & " " & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(103) & " !"
         ' Thi?u kho hàng !
 
     Case er_NguonNX
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(110) & ChrW(103) & ChrW(117) & ChrW(7891) & ChrW(110) & " " & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & " " & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(110) & ChrW(103) & ChrW(117) & ChrW(7891) & ChrW(110) & " " & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & " " & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116) & " !"
         ' Thi?u ngu?n nh?p xu?t !
 
     Case er_SHKhachHang
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(225) & ChrW(99) & ChrW(104) & " " & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(103) & " !" & ChrW(32)
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(225) & ChrW(99) & ChrW(104) & " " & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(103) & " !" & ChrW(32)
         ' Thi?u s? hi?u khách hàng !222
 
     Case er_SHTaiKhoan
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & "!"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & "!"
         ' Thi?u s? hi?u tài kho?n!
 
     Case er_SHTaiKhoan1
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(99) & ChrW(243) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(99) & ChrW(243) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " !"
         ' Thi?u s? hi?u tài kho?n ho?c tài kho?n có chi ti?t !
 
     Case er_SHVattu
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
         ' Thi?u s? hi?u v?t tu !
 
     Case er_SHTaiSan
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(115) & ChrW(7843) & ChrW(110) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(115) & ChrW(7843) & ChrW(110) & " !"
         ' Thi?u s? hi?u tài s?n !
 
     Case er_SHThanhPham
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & " " & ChrW(112) & ChrW(104) & ChrW(7849) & ChrW(109) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & " " & ChrW(112) & ChrW(104) & ChrW(7849) & ChrW(109) & " !"
         ' Thi?u s? hi?u thành ph?m !
 
     Case er_SHTKVT
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
         ' Thi?u s? hi?u tài kho?n theo dõi chi ti?t v?t tu !
 
     Case er_SHTKCN
-        Msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(110) & ChrW(7907) & " !"
+        msg = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(110) & ChrW(7907) & " !"
         ' Thi?u s? hi?u tài kho?n theo dõi chi ti?t công n? !
 
     Case er_SHChTu
-        Msg = ChrW(83) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " !"
+        msg = ChrW(83) & ChrW(7893) & " " & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " !"
         ' S? hi?u ch?ng t? dã có !
 
     Case er_CoPS
-        Msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
+        msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
         ' Ð?i tu?ng dã có phát sinh !
 
     Case er_CoPS1
-        Msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(100) & ChrW(432) & " " & ChrW(273) & ChrW(7847) & ChrW(117) & " " & ChrW(107) & ChrW(236) & " !"
+        msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(100) & ChrW(432) & " " & ChrW(273) & ChrW(7847) & ChrW(117) & " " & ChrW(107) & ChrW(236) & " !"
         ' Ð?i tu?ng dã có phát sinh ho?c s? du d?u k? !
 
     Case er_KoPS
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
         ' Không có phát sinh !
 
     Case er_KoPS1
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(100) & ChrW(432) & " " & ChrW(273) & ChrW(7847) & ChrW(117) & " " & ChrW(107) & ChrW(236) & " !"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(100) & ChrW(432) & " " & ChrW(273) & ChrW(7847) & ChrW(117) & " " & ChrW(107) & ChrW(236) & " !"
         ' Không có phát sinh ho?c s? du d?u k? !
 
     Case er_KoSD
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(113) & ChrW(117) & ChrW(7923) & ChrW(110) & " " & ChrW(115) & ChrW(7917) & " " & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(99) & " " & ChrW(110) & ChrW(259) & ChrW(110) & ChrW(103) & " " & ChrW(110) & ChrW(224) & ChrW(121) & " !"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(113) & ChrW(117) & ChrW(7923) & ChrW(110) & " " & ChrW(115) & ChrW(7917) & " " & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(99) & " " & ChrW(110) & ChrW(259) & ChrW(110) & ChrW(103) & " " & ChrW(110) & ChrW(224) & ChrW(121) & " !"
         ' Không có quy?n s? d?ng ch?c nang này !
 
     Case er_KoVT
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(107) & ChrW(104) & ChrW(97) & ChrW(105) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(107) & ChrW(104) & ChrW(97) & ChrW(105) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(118) & ChrW(7853) & ChrW(116) & " " & ChrW(116) & ChrW(432) & " !"
         ' Không khai báo theo dõi chi ti?t v?t tu !
 
     Case er_KoTS
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(107) & ChrW(104) & ChrW(97) & ChrW(105) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(115) & ChrW(7843) & ChrW(110) & " !"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(107) & ChrW(104) & ChrW(97) & ChrW(105) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(100) & ChrW(245) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(105) & " " & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & " " & ChrW(116) & ChrW(224) & ChrW(105) & " " & ChrW(115) & ChrW(7843) & ChrW(110) & " !"
         ' Không khai báo theo dõi chi ti?t tài s?n !
 
     Case er_KoXem
-        Msg = ChrW(67) & ChrW(104) & ChrW(7881) & " " & ChrW(105) & ChrW(110) & " " & ChrW(114) & ChrW(97) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(105) & ChrW(110) & ChrW(44) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(120) & ChrW(101) & ChrW(109) & " " & ChrW(116) & ChrW(114) & ChrW(432) & ChrW(7899) & ChrW(99) & " !"
+        msg = ChrW(67) & ChrW(104) & ChrW(7881) & " " & ChrW(105) & ChrW(110) & " " & ChrW(114) & ChrW(97) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(105) & ChrW(110) & ChrW(44) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(120) & ChrW(101) & ChrW(109) & " " & ChrW(116) & ChrW(114) & ChrW(432) & ChrW(7899) & ChrW(99) & " !"
         ' Ch? in ra máy in, không xem tru?c !
 
     Case er_RWait
-        Msg = ChrW(88) & ChrW(105) & ChrW(110) & " " & ChrW(99) & ChrW(104) & ChrW(7901) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & " " & ChrW(107) & ChrW(104) & ChrW(225) & ChrW(99) & " " & ChrW(116) & ChrW(114) & ChrW(111) & ChrW(110) & ChrW(103) & " " & ChrW(109) & ChrW(7841) & ChrW(110) & ChrW(103) & " " & ChrW(105) & ChrW(110) & " " & ChrW(115) & ChrW(111) & ChrW(110) & ChrW(103) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(99) & ChrW(225) & ChrW(111) & " " & ChrW(110) & ChrW(224) & ChrW(121) & " !"
+        msg = ChrW(88) & ChrW(105) & ChrW(110) & " " & ChrW(99) & ChrW(104) & ChrW(7901) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & " " & ChrW(107) & ChrW(104) & ChrW(225) & ChrW(99) & " " & ChrW(116) & ChrW(114) & ChrW(111) & ChrW(110) & ChrW(103) & " " & ChrW(109) & ChrW(7841) & ChrW(110) & ChrW(103) & " " & ChrW(105) & ChrW(110) & " " & ChrW(115) & ChrW(111) & ChrW(110) & ChrW(103) & " " & ChrW(98) & ChrW(225) & ChrW(111) & " " & ChrW(99) & ChrW(225) & ChrW(111) & " " & ChrW(110) & ChrW(224) & ChrW(121) & " !"
         ' Xin ch? máy tính khác trong m?ng in xong báo cáo này !
 
     Case er_DBFile
-        Msg = ChrW(84) & ChrW(7853) & ChrW(112) & " " & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
+        msg = ChrW(84) & ChrW(7853) & ChrW(112) & " " & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & " " & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(7907) & ChrW(112) & " " & ChrW(108) & ChrW(7879) & " !"
         ' T?p d? li?u không h?p l? !
 
     Case er_Connection
-        Msg = ChrW(75) & ChrW(7871) & ChrW(116) & " " & ChrW(110) & ChrW(7891) & ChrW(105) & " " & ChrW(118) & ChrW(432) & ChrW(7907) & ChrW(116) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(99) & ChrW(104) & ChrW(111) & " " & ChrW(112) & ChrW(104) & ChrW(233) & ChrW(112) & " !"
+        msg = ChrW(75) & ChrW(7871) & ChrW(116) & " " & ChrW(110) & ChrW(7891) & ChrW(105) & " " & ChrW(118) & ChrW(432) & ChrW(7907) & ChrW(116) & " " & ChrW(115) & ChrW(7893) & " " & ChrW(109) & ChrW(225) & ChrW(121) & " " & ChrW(99) & ChrW(104) & ChrW(111) & " " & ChrW(112) & ChrW(104) & ChrW(233) & ChrW(112) & " !"
         ' K?t n?i vu?t s? máy cho phép !
 
     Case er_VTKoTon
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(116) & ChrW(7891) & ChrW(110) & " " & ChrW(107) & ChrW(104) & ChrW(111) & " !"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(99) & ChrW(243) & " " & ChrW(116) & ChrW(7891) & ChrW(110) & " " & ChrW(107) & ChrW(104) & ChrW(111) & " !"
         ' Không có t?n kho !
 
     Case er_NhieuCT
-        Msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(105) & ChrW(7875) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(7883) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(225) & " " & CStr(MaxGridRow) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & ChrW(44) & " " & ChrW(104) & ChrW(227) & ChrW(121) & " " & ChrW(108) & ChrW(7885) & ChrW(99) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(225) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & "!"
+        msg = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(105) & ChrW(7875) & ChrW(110) & " " & ChrW(116) & ChrW(104) & ChrW(7883) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(225) & " " & CStr(MaxGridRow) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & ChrW(44) & " " & ChrW(104) & ChrW(227) & ChrW(121) & " " & ChrW(108) & ChrW(7885) & ChrW(99) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & " " & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & " " & ChrW(116) & ChrW(104) & ChrW(225) & ChrW(110) & ChrW(103) & " " & ChrW(104) & ChrW(111) & ChrW(7853) & ChrW(99) & " " & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & " " & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & ChrW(116) & ChrW(7915) & "!"
         ' Không hi?n th? quá ... ch?ng t?, hãy l?c ch?ng t? theo tháng ho?c lo?i ch?ng t?!
 
     Case er_Version
         ' Không h? tr? trong phiên b?n này, liên h? Ban gi?i pháp cho kh?i doanh nghi?p Nhà nu?c, C? ph?n, Liên doanh
 
     Case Else
-        Msg = "L?i không xác d?nh!"
+        msg = "L?i không xác d?nh!"
     End Select
-    If pKhongDau = 1 Then Msg = ABCtoKDau(Msg)
-    MessageBoxW 0&, StrPtr(Msg), StrPtr("Thông báo loi"), vbOKOnly + vbExclamation
+    If pKhongDau = 1 Then msg = ABCtoKDau(msg)
+    MessageBoxW 0&, StrPtr(msg), StrPtr("Thông báo loi"), vbOKOnly + vbExclamation
 End Sub
 Public Sub ErrMsg2(errnum As Integer)
-    Dim Msg As String
+    Dim msg As String
     
     Select Case errnum
-        Case er_SoHieu:         Msg = "Sè hiÖu kh«ng hîp lÖ !"
-        Case er_Ten:         Msg = "ThiÕu diÔn gi¶i hoÆc kh«ng hîp lÖ !"
-        Case er_PhanLoai:     Msg = "ThiÕu ph©n lo¹i !"
-        Case er_KhoHang:        Msg = "ThiÕu kho hµng !"
-        Case er_NguonNX:        Msg = "ThiÕu nguån nhËp xuÊt !"
-        Case er_SHKhachHang:        Msg = "ThiÕu sè hiÖu kh¸ch hµng !222"
-        Case er_SHTaiKhoan:        Msg = "ThiÕu sè hiÖu tµi kho¶n!"
-        Case er_SHTaiKhoan1:        Msg = "ThiÕu sè hiÖu tµi kho¶n hoÆc tµi kho¶n cã chi tiÕt !"
-        Case er_SHVattu:        Msg = "ThiÕu sè hiÖu vËt t­ !"
-        Case er_SHTaiSan:        Msg = "ThiÕu sè hiÖu tµi s¶n !"
-        Case er_SHThanhPham:        Msg = "ThiÕu sè hiÖu thµnh phÈm !"
-        Case er_SHTKVT:            Msg = "ThiÕu sè hiÖu tµi kho¶n theo dâi chi tiÕt vËt t­ !"
-        Case er_SHTKCN:            Msg = "ThiÕu sè hiÖu tµi kho¶n theo dâi chi tiÕt c«ng nî !"
-        Case er_SHChTu:             Msg = "Sè hiÖu chøng tõ ®· cã !"
+        Case er_SoHieu:         msg = "Sè hiÖu kh«ng hîp lÖ !"
+        Case er_Ten:         msg = "ThiÕu diÔn gi¶i hoÆc kh«ng hîp lÖ !"
+        Case er_PhanLoai:     msg = "ThiÕu ph©n lo¹i !"
+        Case er_KhoHang:        msg = "ThiÕu kho hµng !"
+        Case er_NguonNX:        msg = "ThiÕu nguån nhËp xuÊt !"
+        Case er_SHKhachHang:        msg = "ThiÕu sè hiÖu kh¸ch hµng !222"
+        Case er_SHTaiKhoan:        msg = "ThiÕu sè hiÖu tµi kho¶n!"
+        Case er_SHTaiKhoan1:        msg = "ThiÕu sè hiÖu tµi kho¶n hoÆc tµi kho¶n cã chi tiÕt !"
+        Case er_SHVattu:        msg = "ThiÕu sè hiÖu vËt t­ !"
+        Case er_SHTaiSan:        msg = "ThiÕu sè hiÖu tµi s¶n !"
+        Case er_SHThanhPham:        msg = "ThiÕu sè hiÖu thµnh phÈm !"
+        Case er_SHTKVT:            msg = "ThiÕu sè hiÖu tµi kho¶n theo dâi chi tiÕt vËt t­ !"
+        Case er_SHTKCN:            msg = "ThiÕu sè hiÖu tµi kho¶n theo dâi chi tiÕt c«ng nî !"
+        Case er_SHChTu:             msg = "Sè hiÖu chøng tõ ®· cã !"
         
-        Case er_CoPS:               Msg = "§èi t­îng ®· cã ph¸t sinh !"
-        Case er_CoPS1:               Msg = "§èi t­îng ®· cã ph¸t sinh hoÆc sè d­ ®Çu kú !"
-        Case er_KoPS:               Msg = "Kh«ng cã ph¸t sinh !"
-        Case er_KoPS1:               Msg = "Kh«ng cã ph¸t sinh hoÆc sè d­ ®Çu kú !"
+        Case er_CoPS:               msg = "§èi t­îng ®· cã ph¸t sinh !"
+        Case er_CoPS1:               msg = "§èi t­îng ®· cã ph¸t sinh hoÆc sè d­ ®Çu kú !"
+        Case er_KoPS:               msg = "Kh«ng cã ph¸t sinh !"
+        Case er_KoPS1:               msg = "Kh«ng cã ph¸t sinh hoÆc sè d­ ®Çu kú !"
         
-        Case er_KoSD:               Msg = "Kh«ng cã quyÒn sö dông chøc n¨ng nµy !"
+        Case er_KoSD:               msg = "Kh«ng cã quyÒn sö dông chøc n¨ng nµy !"
         
-        Case er_KoVT:               Msg = "Kh«ng khai b¸o theo dâi chi tiÕt vËt t­ !"
-        Case er_KoTS:               Msg = "Kh«ng khai b¸o theo dâi chi tiÕt tµi s¶n !"
+        Case er_KoVT:               msg = "Kh«ng khai b¸o theo dâi chi tiÕt vËt t­ !"
+        Case er_KoTS:               msg = "Kh«ng khai b¸o theo dâi chi tiÕt tµi s¶n !"
         
-        Case er_KoXem:               Msg = "ChØ in ra m¸y in, kh«ng xem tr­íc !"
-        Case er_RWait:             Msg = "Xin chê m¸y tÝnh kh¸c trong m¹ng in xong b¸o c¸o nµy !"
+        Case er_KoXem:               msg = "ChØ in ra m¸y in, kh«ng xem tr­íc !"
+        Case er_RWait:             msg = "Xin chê m¸y tÝnh kh¸c trong m¹ng in xong b¸o c¸o nµy !"
         
-        Case er_DBFile:                 Msg = "TÖp d÷ liÖu kh«ng hîp lÖ !"
-        Case er_Connection:     Msg = "KÕt nèi v­ît sè m¸y cho phÐp !"
+        Case er_DBFile:                 msg = "TÖp d÷ liÖu kh«ng hîp lÖ !"
+        Case er_Connection:     msg = "KÕt nèi v­ît sè m¸y cho phÐp !"
         
-        Case er_VTKoTon:        Msg = "Kh«ng cã tån kho !"
-        Case er_NhieuCT:         Msg = "Kh«ng hiÓn thÞ qu¸ " + CStr(MaxGridRow) + " chøng tõ, h·y läc chøng tõ theo th¸ng hoÆc lo¹i chøng tõ!"
+        Case er_VTKoTon:        msg = "Kh«ng cã tån kho !"
+        Case er_NhieuCT:         msg = "Kh«ng hiÓn thÞ qu¸ " + CStr(MaxGridRow) + " chøng tõ, h·y läc chøng tõ theo th¸ng hoÆc lo¹i chøng tõ!"
         
-        Case er_Version:        Msg = "Kh«ng hç trî trong phiªn b¶n nµy, liªn hÖ Ban gi¶i ph¸p cho khèi doanh nghiÖp Nhµ n­íc, Cæ phÇn, Liªn doanh"
+        Case er_Version:        msg = "Kh«ng hç trî trong phiªn b¶n nµy, liªn hÖ Ban gi¶i ph¸p cho khèi doanh nghiÖp Nhµ n­íc, Cæ phÇn, Liªn doanh"
     End Select
-    If pKhongDau = 1 Then Msg = ABCtoKDau(Msg)
-    MsgBox Msg, IIf(errnum < 1000, vbCritical, vbInformation), App.ProductName
+    If pKhongDau = 1 Then msg = ABCtoKDau(msg)
+    MsgBox msg, IIf(errnum < 1000, vbCritical, vbInformation), App.ProductName
 End Sub
 '======================================================================================
 ' Ham liet ke item tu Recordset vao Combo hoac List co kem Ma so
@@ -656,7 +656,7 @@ Public Sub HienThongBao(thong_bao As String, tabid As Integer)
 
     ' G?i text Unicode cho panel
     SendMessageW frmMain.sbStatusBar.hwnd, SB_SETTEXTW, panelIndex, ByVal StrPtr(thong_bao)
-    ' frmMain.sbStatusBar.Panels(tabid).Text = thong_bao
+     frmMain.sbStatusBar.Panels(tabid).Text = thong_bao
     frmMain.sbStatusBar.Refresh
 End Sub
 
@@ -2407,13 +2407,13 @@ End Sub
 
 Public Function GetDiskSpace() As Long
 Dim Sectors As Long
-Dim Bytes As Long
+Dim bytes As Long
 Dim freeClusters As Long
 Dim totalClusters As Long
 Dim retValue As Long
 
-    retValue = GetDiskFreeSpace(Left(pDataPath, 2) & "\", Sectors, Bytes, freeClusters, totalClusters)
-    If retValue > 0 Then GetDiskSpace = Fix(Sectors * Bytes * (freeClusters / 1048576))
+    retValue = GetDiskFreeSpace(Left(pDataPath, 2) & "\", Sectors, bytes, freeClusters, totalClusters)
+    If retValue > 0 Then GetDiskSpace = Fix(Sectors * bytes * (freeClusters / 1048576))
 End Function
 
 Public Function ChungTu2TKNC(loai As Integer, Optional p As Integer = 0) As String

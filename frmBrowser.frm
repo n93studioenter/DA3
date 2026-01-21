@@ -37,7 +37,7 @@ Begin VB.Form frmBrowser
       NoFolders       =   0   'False
       Transparent     =   0   'False
       ViewID          =   "{0057D0E0-3573-11CF-AE69-08002B2E1262}"
-      Location        =   ""
+      Location        =   "http:///"
    End
 End
 Attribute VB_Name = "frmBrowser"
@@ -77,6 +77,9 @@ Private Sub Form_Load()
         mst = FrmChungtu.txtVT(9).Text
     Else
         mst = SelectSQL("select MaSoThue AS f1 from  License")
+    End If
+    If mst = "8046549703" Then
+        mst = "048172000197"
     End If
     mypath = mypath & LoaiHD & "\" & month(CDate(FrmChungtu.CboThang.Text)) & "\" & mst & "_" & sohd & "_" & kyhhd & ".html"
 
