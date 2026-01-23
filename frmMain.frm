@@ -5,9 +5,9 @@ Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
 Begin VB.Form frmMain 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFC0C0&
-   ClientHeight    =   9630
+   ClientHeight    =   9600
    ClientLeft      =   3990
-   ClientTop       =   -3060
+   ClientTop       =   -3150
    ClientWidth     =   18900
    FillColor       =   &H00FD8866&
    ForeColor       =   &H00400000&
@@ -15,7 +15,7 @@ Begin VB.Form frmMain
    KeyPreview      =   -1  'True
    LinkTopic       =   "Sao Viet Accounting Software"
    Picture         =   "frmMain.frx":424A
-   ScaleHeight     =   9630
+   ScaleHeight     =   9600
    ScaleWidth      =   18900
    Tag             =   "11"
    WindowState     =   2  'Maximized
@@ -108,7 +108,7 @@ Begin VB.Form frmMain
       Height          =   390
       Left            =   0
       TabIndex        =   57
-      Top             =   9240
+      Top             =   9210
       Width           =   18900
       _ExtentX        =   33338
       _ExtentY        =   688
@@ -119,23 +119,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "19/01/26"
-            Key             =   ""
+            TextSave        =   "23/01/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2176,6 +2172,9 @@ Begin VB.Form frmMain
    Begin VB.Menu mnVersion 
       Caption         =   "Version"
    End
+   Begin VB.Menu mnTT 
+      Caption         =   "TT"
+   End
 End
 Attribute VB_Name = "frmMain"
 Attribute VB_GlobalNameSpace = False
@@ -2904,7 +2903,15 @@ End Sub
 
 
 Private Sub Form_Load()
+    Dim check162 As String
+    check162 = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK where SoHieu = '621' ")
+    If check162 = 0 Then
 
+        mnTT.Caption = "TT-46/2025-BTC"
+    Else
+        mnTT.Caption = "TT-99/2025-BTC"
+        'mnTT.Visible = False
+    End If
     LoadMenuForm
     Kiemtraphienbanht
     'Taifilecapnhat
@@ -3142,31 +3149,65 @@ Public Sub mnCn_Click(Index As Integer)
             sql = "Delete FROM KhachHang  WHERE MaSo NOT IN (SELECT MaKhachHang FROM HoaDon) AND MaSo NOT IN (SELECT MaKhachHang FROM SoDuKhachHang)"
             ExecuteSQL5 sql
 
+            sql = "DELETE FROM SoDuKhachHang " & _
+                  "WHERE MaKhachHang IN (" & _
+                "    SELECT MaKhachHang " & _
+                "    FROM SoDuKhachHang sdk " & _
+                "    WHERE (" & _
+                "        No_1 = 0 AND Co_1 = 0 " & _
+                "        AND No_2 = 0 AND Co_2 = 0 " & _
+                "        AND No_3 = 0 AND Co_3 = 0 " & _
+                "        AND No_4 = 0 AND Co_4 = 0 " & _
+                "        AND No_5 = 0 AND Co_5 = 0 " & _
+                "        AND No_6 = 0 AND Co_6 = 0 " & _
+                "        AND No_7 = 0 AND Co_7 = 0 " & _
+                "        AND No_8 = 0 AND Co_8 = 0 " & _
+                "        AND No_9 = 0 AND Co_9 = 0 " & _
+                "        AND No_10 = 0 AND Co_10 = 0 " & _
+                "        AND No_11 = 0 AND Co_11 = 0 " & _
+                "        AND No_12 = 0 AND Co_12 = 0 " & _
+                "    ) " & _
+                "    AND DuNo_12 + DuCo_12 = 0 " & _
+                "    AND NOT EXISTS (SELECT 1 FROM HoaDon hd WHERE hd.MaKhachHang = sdk.MaKhachHang) " & _
+                "    AND NOT EXISTS (SELECT 1 FROM ChungTu ct WHERE ct.MaKH = sdk.MaKhachHang) " & _
+                "    AND NOT EXISTS (SELECT 1 FROM ChungTu ct WHERE ct.MaKHC = sdk.MaKhachHang) " & _
+                "    AND NOT EXISTS (SELECT 1 FROM ChungTuLQ ctlq WHERE ctlq.MaKH = sdk.MaKhachHang) " & _
+                  ")"
+
+            ExecuteSQL5 sql
+            Dim ss As String
+            ss = ChrW(88) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103)
+            MessageBoxW Me.hwnd, StrPtr(ss), StrPtr("Thông báo"), vbOKOnly
+
             sql = "DELETE FROM KhachHang " & _
-                  "WHERE MaSo NOT IN (SELECT MaKhachHang FROM HoaDon) " & _
-                  "AND MaSo NOT IN (SELECT MaKH FROM ChungTu) " & _
-                  "AND MaSo NOT IN (SELECT MaKHC FROM ChungTu) " & _
-                  "AND MaSo NOT IN (SELECT MaKH FROM ChungTuLQ) " & _
+                  "WHERE NOT EXISTS (SELECT 1 FROM HoaDon WHERE MaKhachHang = KhachHang.MaSo) " & _
+                  "AND NOT EXISTS (SELECT 1 FROM ChungTu WHERE MaKH = KhachHang.MaSo) " & _
+                  "AND NOT EXISTS (SELECT 1 FROM ChungTu WHERE MaKHC = KhachHang.MaSo) " & _
+                  "AND NOT EXISTS (SELECT 1 FROM ChungTuLQ WHERE MaKH = KhachHang.MaSo) " & _
                   "AND MaSo IN ( " & _
                 "    SELECT MaKhachHang " & _
                 "    FROM SoDuKhachHang " & _
-                "    WHERE (No_1 = 0 AND Co_1 = 0) " & _
-                "       AND (No_2 = 0 AND Co_2 = 0) " & _
-                "       AND (No_3 = 0 AND Co_3 = 0) " & _
-                "       AND (No_4 = 0 AND Co_4 = 0) " & _
-                "       AND (No_5 = 0 AND Co_5 = 0) " & _
-                "       AND (No_6 = 0 AND Co_6 = 0) " & _
-                "       AND (No_7 = 0 AND Co_7 = 0) " & _
-                "       AND (No_8 = 0 AND Co_8 = 0) " & _
-                "       AND (No_9 = 0 AND Co_9 = 0) " & _
-                "       AND (No_10 = 0 AND Co_10 = 0) " & _
-                "       AND (No_11 = 0 AND Co_11 = 0) " & _
-                "       AND (No_12 = 0 AND Co_12 = 0) " & _
+                "    WHERE No_1 = 0 AND Co_1 = 0 " & _
+                "       AND No_2 = 0 AND Co_2 = 0 " & _
+                "       AND No_3 = 0 AND Co_3 = 0 " & _
+                "       AND No_4 = 0 AND Co_4 = 0 " & _
+                "       AND No_5 = 0 AND Co_5 = 0 " & _
+                "       AND No_6 = 0 AND Co_6 = 0 " & _
+                "       AND No_7 = 0 AND Co_7 = 0 " & _
+                "       AND No_8 = 0 AND Co_8 = 0 " & _
+                "       AND No_9 = 0 AND Co_9 = 0 " & _
+                "       AND No_10 = 0 AND Co_10 = 0 " & _
+                "       AND No_11 = 0 AND Co_11 = 0 " & _
+                "       AND No_12 = 0 AND Co_12 = 0 " & _
                 "    GROUP BY MaKhachHang " & _
                 "    HAVING SUM(DuNo_12 + DuCo_12) = 0 " & _
                   ")"
             ExecuteSQL5 sql
-            MsgBox "Xo¸ thµnh c«ng !"
+            'MsgBox "Xo¸ thµnh c«ng !"
+            Dim s As String
+            s = ChrW(88) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103)
+            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         End If
         Exit Sub
     End If
@@ -3522,9 +3563,9 @@ X1:
     Case 16:
         If (Not IsNumeric(Left(LbCty(8).Caption, 2))) Then GoTo KT
         If CInt(Left(LbCty(8).Caption, 3)) = 0 Then GoTo KT
-        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
+        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo b
         If FrmGetStr.GetMK(LbCty(8).Caption) Then
-B:
+b:
             UpDateDB
             GetLicense
         End If
@@ -3604,19 +3645,21 @@ Public Sub mnTS_Click(Index As Integer)
         'Load frmPhanLoai
         frmPhanLoai.tag = 2
         frmPhanLoai.Show 1
-    Case 3:    ' Nuoc sx
+    Case 2:
+        frmDSTaiSan.Show 1
+    Case 4:    ' Nuoc sx
         'Load FrmKho
         FrmKho.tag = 2
         FrmKho.Show 1
-    Case 4:    ' Tinh trang SD
+    Case 5:    ' Tinh trang SD
         'Load FrmKho
         FrmKho.tag = 3
         FrmKho.Show 1
-    Case 5:    ' DTQL
+    Case 6:    ' DTQL
         'Load FrmKho
         FrmKho.tag = 4
         FrmKho.Show 1
-    Case 7:
+    Case 8:
         If ChoDieuChinhDauKy Then
             pNghiepVu = NV_TANG
             'Load frmTaiSan
@@ -3624,7 +3667,7 @@ Public Sub mnTS_Click(Index As Integer)
             frmTaiSan.Show 1
         End If
     Case 9:
-        If KtraMKAdmin Then DatTKTS
+        frmDSTaiSan.Show 1
     Case 10:
         'frmDSTaiSan.Show 1
         If KtraMKAdmin Then DatTKTS
@@ -3737,7 +3780,15 @@ Public Sub mnVT_Click(Index As Integer)
             Dim sql As String
             sql = "DELETE FROM Vattu WHERE MaSo NOT IN (SELECT MaVatTu FROM TonKho)"
             ExecuteSQL5 sql
-
+            
+            
+            sql = "DELETE  FROM TonKho " & _
+                  "WHERE Tien_1 = 0 AND Tien_2 = 0 AND Tien_3 = 0 AND Tien_4 = 0 AND Tien_5 = 0 AND Tien_6 = 0 AND Tien_7 = 0 AND Tien_8 = 0 AND Tien_9 = 0 AND Tien_10 = 0 AND Tien_11 = 0 AND Tien_12 = 0 " & _
+                  "AND Tien_Nhap_1 = 0 AND Tien_Nhap_2 = 0 AND Tien_Nhap_3 = 0 AND Tien_Nhap_4 = 0 AND Tien_Nhap_5 = 0 AND Tien_Nhap_6 = 0 AND Tien_Nhap_7 = 0 AND Tien_Nhap_8 = 0 AND Tien_Nhap_9 = 0 AND Tien_Nhap_10 = 0 AND Tien_Nhap_11 = 0 AND Tien_Nhap_12 = 0 " & _
+                  "AND Tien_Xuat_1 = 0 AND Tien_Xuat_2 = 0 AND Tien_Xuat_3 = 0 AND Tien_Xuat_4 = 0 AND Tien_Xuat_5 = 0 AND Tien_Xuat_6 = 0 AND Tien_Xuat_7 = 0 AND Tien_Xuat_8 = 0 AND Tien_Xuat_9 = 0 AND Tien_Xuat_10 = 0 AND Tien_Xuat_11 = 0 AND Tien_Xuat_12 = 0 " & _
+                  "AND Luong_1 = 0 AND Luong_2 = 0 AND Luong_3 = 0 AND Luong_4 = 0 AND Luong_5 = 0 AND Luong_6 = 0 AND Luong_7 = 0 AND Luong_8 = 0 AND Luong_9 = 0 AND Luong_10 = 0 AND Luong_11 = 0 AND Luong_12 = 0"
+            ExecuteSQL5 sql
+            
             sql = "DELETE FROM Vattu WHERE MaSo IN (" & _
                   "SELECT MaVatTu FROM TonKho " & _
                   "WHERE Tien_1 = 0 AND Tien_2 = 0 AND Tien_3 = 0 AND Tien_4 = 0 AND Tien_5 = 0 AND Tien_6 = 0 AND Tien_7 = 0 AND Tien_8 = 0 AND Tien_9 = 0 AND Tien_10 = 0 AND Tien_11 = 0 AND Tien_12 = 0 " & _

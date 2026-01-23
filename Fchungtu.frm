@@ -6998,7 +6998,7 @@ Public Sub CmdChitiet_chon()
             'Kiem tra them so luong neu co
             If txtchungtu(4).Text <> "" Then
                 If txtchungtu(4).Text = oldDongia And txtchungtu(0).Text <> "154" Then
-                    Exit Sub
+                    ' Exit Sub
                 End If
             Else
                 If txtchungtu(0).Text <> "154" Then
@@ -7843,7 +7843,7 @@ C1:
                                     Else
                                         GoTo c
                                     End If
-                                    GoTo B
+                                    GoTo b
                                 End If
                             Next
 c:
@@ -7853,7 +7853,7 @@ c:
                             frmMain.Rpt.Formulas(7 + 2 * sodu) = "PSNo" + CStr(sodu) + "=" + DoiDau(tien)
                             .col = 19
                             .Text = CStr(sodu)
-B:
+b:
                         End If
                     End If
                 Next
