@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HDon>
+  <DLHDon Id="DuLieuKy">
+    <TTChung>
+      <PBan>2.1.0</PBan>
+      <THDon>Hóa đơn GTGT</THDon>
+      <KHMSHDon>1</KHMSHDon>
+      <KHHDon>K25TBB</KHHDon>
+      <SHDon>8517620</SHDon>
+      <NLap>13/12/25 12:00:00 AM</NLap>
+      <HDCTTChinh>0</HDCTTChinh>
+      <DVTTe>VND</DVTTe>
+      <TGia>1</TGia>
+      <HTTToan></HTTToan>
+      <MSTTCGP></MSTTCGP>
+      <TTKhac>
+        <TTin>
+          <TTruong>Extra</TTruong>
+          <KDLieu>string</KDLieu>
+          <DLieu>ThuyUyen.Nguyen@britishcouncil.org</DLieu>
+        </TTin>
+      </TTKhac>
+    </TTChung>
+    <NDHDon>
+      <NBan>
+        <Ten>Ngân Hàng Thương mại Cổ phần Quốc Tế Việt Nam</Ten>
+        <MST>0100233488</MST>
+        <DChi></DChi>
+        <SDThoai></SDThoai>
+      </NBan>
+      <NMua>
+        <Ten>CÔNG TY TNHH LÊ HƯƠNG VŨNG TÀU</Ten>
+        <MST>3502551856</MST>
+        <DChi></DChi>
+        <MKHang></MKHang>
+        <HVTNMHang></HVTNMHang>
+      </NMua>
+      <DSHHDVu>
+        <HHDVu>
+          <TChat>0</TChat>
+          <STT>1</STT>
+          <THHDVu>PHI CHUYEN TIEN NAPAS TAI QUAY_DNSN/ NAPAS FUND TRANSFER COUNTER FEE_MSME</THHDVu>
+          <SLuong></SLuong>
+          <DGia></DGia>
+          <TSuat>10</TSuat>
+          <ThTien>15000</ThTien>
+          <TTKhac>
+            <TTin>
+              <TTruong>Amount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>15000</DLieu>
+            </TTin>
+            <TTin>
+              <TTruong>VATAmount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>0</DLieu>
+            </TTin>
+          </TTKhac>
+        </HHDVu>
+      </DSHHDVu>
+      <TToan>
+        <TTKhac>
+          <TTin>
+            <TTruong>ServiceProvided</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>Le phi thi</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Location</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>British Council Ho Chi Minh City</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Datasource</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>ORS2</DLieu>
+          </TTin>
+        </TTKhac>
+        <THTTLTSuat>
+          <LTSuat>
+            <TSuat>10</TSuat>
+            <TThue>1500</TThue>
+            <ThTien>15000</ThTien>
+          </LTSuat>
+        </THTTLTSuat>
+        <TgTCThue>15000</TgTCThue>
+        <TgTThue>1500</TgTThue>
+        <TTCKTMai></TTCKTMai>
+        <TgTTTBSo>16500</TgTTTBSo>
+        <TgTTTBChu></TgTTTBChu>
+      </TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>

@@ -3981,6 +3981,7 @@ End Sub
 
 
 Public Sub DoSubNganhang()
+    
     FThuChi.FThuChiForm = 3
     OptLoai(4).Value = True
     OptLoai_LostFocus 0
@@ -4673,7 +4674,7 @@ Private Sub XulyAddHeader(ByRef rs_import As Recordset)
         RFocus CboThang
 
 
-    Case rs_import!tkno Like "64*" And rs_import!Ishaschild = "0"
+    Case (rs_import!tkno Like "64*" Or rs_import!tkno Like "62*") And rs_import!Ishaschild = "0"
         OptLoai(0).Value = True
         OptLoai_LostFocus 0
         RFocus CboThang
@@ -6382,7 +6383,7 @@ Private Sub XulyMiddle(ByRef rs_import As Recordset)
     Else
         FVAT.Text1 = "0"
     End If
-    If (rs_import!tkno Like "64*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "338*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
+    If (rs_import!tkno Like "64*" Or rs_import!tkno Like "62*" Or rs_import!tkno Like "242*" Or rs_import!tkno Like "338*" Or rs_import!tkno Like "8112*" Or rs_import!tkno Like "635*") Then
         FThuChi.FThuChiForm = 1
         Dim Query64 As String
         Query64 = "SELECT * FROM tbimportdetail WHERE ParentId='" & rs_import!id & "'"
@@ -7088,10 +7089,14 @@ Public Sub CmdChitiet_chon()
     End If
 
     If pDTTP <> 0 And (Left(taikhoan.sohieu, 3) = "621" Or Left(taikhoan.sohieu, 3) = "622" Or Left(taikhoan.sohieu, 3) = "623" Or Left(taikhoan.sohieu, 3) = "627") And (tp.MaSo = 0) Then
-        If MsgBox("Kh«ng cã m· sè c«ng tr×nh, tiÕp tôc?", vbCritical + vbYesNo, App.ProductName) = vbNo Then
-            RFocus txtchungtu(2)
-            Exit Sub
+        If FThuChi.FThuChiForm = 0 Then
+            If MsgBox("Kh«ng cã m· sè c«ng tr×nh, tiÕp tôc?", vbCritical + vbYesNo, App.ProductName) = vbNo Then
+
+                RFocus txtchungtu(2)
+                Exit Sub
+            End If
         End If
+
     End If
 
     If pDTTP <> 0 And (Left(taikhoan.sohieu, 3) = "621" Or Left(taikhoan.sohieu, 3) = "622" Or Left(taikhoan.sohieu, 3) = "623" Or Left(taikhoan.sohieu, 3) = "627") And (tp.MaSo > 0) Then
@@ -10248,7 +10253,7 @@ Private Sub dlayNganhang_Timer()
         dlayNganhang.Enabled = False
         Command_Click 1
         'Cap status ngan hang
-        ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
+        'ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
 
         rs_ktraNH.MoveNext
         timerNganhang.Enabled = True
@@ -10258,7 +10263,8 @@ Private Sub dlayNganhang_Timer()
         s = ChrW(72) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(7895) & ChrW(105) & ChrW(44) & ChrW(32) & ChrW(115) & ChrW(7869) & ChrW(32) & ChrW(120) & ChrW(7917) & ChrW(32) & ChrW(108) & ChrW(253) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(112) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111)
         MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
         hasError = False
-        Command_Click 0
+        timerNganhang.Enabled = False
+        'Command_Click 0
         'Command6_Click
         'rs_ktraNH.MoveNext
         'timerNganhang.Enabled = True
