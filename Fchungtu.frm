@@ -10253,7 +10253,7 @@ Private Sub dlayNganhang_Timer()
         dlayNganhang.Enabled = False
         Command_Click 1
         'Cap status ngan hang
-        'ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
+        ExecuteSQL5 "UPDATE tbNganhang SET Status = 1 where ID= " & rs_ktraNH!id & ""
 
         rs_ktraNH.MoveNext
         timerNganhang.Enabled = True
@@ -10263,11 +10263,13 @@ Private Sub dlayNganhang_Timer()
         s = ChrW(72) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(7895) & ChrW(105) & ChrW(44) & ChrW(32) & ChrW(115) & ChrW(7869) & ChrW(32) & ChrW(120) & ChrW(7917) & ChrW(32) & ChrW(108) & ChrW(253) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(112) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111)
         MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
         hasError = False
-        timerNganhang.Enabled = False
+        dlayNganhang.Enabled = False
+        'DoSubNganhang
         'Command_Click 0
         'Command6_Click
-        'rs_ktraNH.MoveNext
-        'timerNganhang.Enabled = True
+        Command_Click 0
+        rs_ktraNH.MoveNext
+        timerNganhang.Enabled = True
     End If
 End Sub
 
