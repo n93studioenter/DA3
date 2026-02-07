@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HDon>
+  <DLHDon Id="DuLieuKy">
+    <TTChung>
+      <PBan>2.1.0</PBan>
+      <THDon>Hóa đơn GTGT</THDon>
+      <KHMSHDon>1</KHMSHDon>
+      <KHHDon>K25TLR</KHHDon>
+      <SHDon>9982</SHDon>
+      <NLap>18/12/25 12:00:00 AM</NLap>
+      <HDCTTChinh>0</HDCTTChinh>
+      <DVTTe>VND</DVTTe>
+      <TGia>1</TGia>
+      <HTTToan></HTTToan>
+      <MSTTCGP></MSTTCGP>
+      <TTKhac>
+        <TTin>
+          <TTruong>Extra</TTruong>
+          <KDLieu>string</KDLieu>
+          <DLieu>ThuyUyen.Nguyen@britishcouncil.org</DLieu>
+        </TTin>
+      </TTKhac>
+    </TTChung>
+    <NDHDon>
+      <NBan>
+        <Ten>CÔNG TY BẢO HIỂM  MIC BẾN THÀNH</Ten>
+        <MST>0102385623-058</MST>
+        <DChi></DChi>
+        <SDThoai></SDThoai>
+      </NBan>
+      <NMua>
+        <Ten>CÔNG TY TNHH ĐẠI PHÚ HIỆP</Ten>
+        <MST>3500392181</MST>
+        <DChi></DChi>
+        <MKHang></MKHang>
+        <HVTNMHang></HVTNMHang>
+      </NMua>
+      <DSHHDVu>
+        <HHDVu>
+          <TChat>0</TChat>
+          <STT>1</STT>
+          <THHDVu>Bảo hiểm bắt buộc trách nhiệm dân sự của chủ xe ô tô;Bảo hiểm trách nhiệm bồi thường đối với lái xe, phụ xe và người ngồi trên xe</THHDVu>
+          <SLuong>0</SLuong>
+          <DGia></DGia>
+          <TSuat>10</TSuat>
+          <ThTien>3218182</ThTien>
+          <TTKhac>
+            <TTin>
+              <TTruong>Amount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>3218182</DLieu>
+            </TTin>
+            <TTin>
+              <TTruong>VATAmount</TTruong>
+              <KDLieu>numeric</KDLieu>
+              <DLieu>0</DLieu>
+            </TTin>
+          </TTKhac>
+        </HHDVu>
+      </DSHHDVu>
+      <TToan>
+        <TTKhac>
+          <TTin>
+            <TTruong>ServiceProvided</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>Le phi thi</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Location</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>British Council Ho Chi Minh City</DLieu>
+          </TTin>
+          <TTin>
+            <TTruong>Datasource</TTruong>
+            <KDLieu>String</KDLieu>
+            <DLieu>ORS2</DLieu>
+          </TTin>
+        </TTKhac>
+        <THTTLTSuat>
+          <LTSuat>
+            <TSuat>10</TSuat>
+            <TThue>321818</TThue>
+            <ThTien>3218182</ThTien>
+          </LTSuat>
+        </THTTLTSuat>
+        <TgTCThue>3218182</TgTCThue>
+        <TgTThue>321818</TgTThue>
+        <TTCKTMai></TTCKTMai>
+        <TgTTTBSo>3540000</TgTTTBSo>
+        <TgTTTBChu></TgTTTBChu>
+      </TToan>
+    </NDHDon>
+  </DLHDon>
+</HDon>

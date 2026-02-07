@@ -1,6 +1,10 @@
 VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
+  Persistable = 0  'NotPersistable
+  DataBindingBehavior = 0  'vbNone
+  DataSourceBehavior  = 0  'vbNone
+  MTSTransactionMode  = 0  'NotAnMTSObject
 END
 Attribute VB_Name = "clsThongSo"
 Attribute VB_GlobalNameSpace = False
@@ -42,22 +46,26 @@ Public MaTTSD As Long
 '                          Tr¶ vÒ : 0 nÕu hîp lÖ, -1 nÕu cã lçi
 '======================================================================================
 Public Function HopLe()
-Dim thong_bao As String
-      If MaDTQL = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký ®èi t­îng qu¶n lý": GoTo Err_InValidate
-      If MaDTSD = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký ®èi t­îng sö dông": GoTo Err_InValidate
-      If MaTTSD = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký t×nh tr¹ng sö dông": GoTo Err_InValidate
-'      If NG_NS + NG_TBS + NG_CNK + NG_TD = 0 Then thong_bao = "Nguyªn gi¸ cña tµi s¶n thiÕu hoÆc kh«ng chÝnh x¸c": GoTo Err_InValidate
-      If (NG_NS = 0 And Not KH_NS = 0) Or (NG_TBS = 0 And Not KH_TBS = 0) Or _
-                                          (NG_CNK = 0 And Not KH_CNK = 0) Or (NG_TD = 0 And Not KH_TD = 0) Then _
-            thong_bao = "L­îng khÊu hao chØ cã nÕu tµi s¶n cã thµnh phÇn nguån vèn t­¬ng øng": GoTo Err_InValidate
-      If (CL_NS < KH_NS) Or (CL_TBS < KH_TBS) Or (CL_CNK < KH_CNK) Or (CL_TD < KH_TD) Then _
-            thong_bao = "L­îng khÊu hao lín h¬n gi¸ trÞ cßn l¹i cña tµi s¶n": GoTo Err_InValidate
-      HopLe = 0
-      Exit Function
+    Dim thong_bao As String
+    Dim s As String
+
+    If MaDTQL = 0 Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(273) & ChrW(7889) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(253): GoTo Err_InValidate
+    If MaDTSD = 0 Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(273) & ChrW(7889) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(115) & ChrW(7917) & ChrW(32) & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103): GoTo Err_InValidate
+    If MaTTSD = 0 Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(273) & ChrW(7889) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(115) & ChrW(7917) & ChrW(32) & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103): GoTo Err_InValidate
+    '      If NG_NS + NG_TBS + NG_CNK + NG_TD = 0 Then thong_bao = "Nguyªn gi¸ cña tµi s¶n thiÕu hoÆc kh«ng chÝnh x¸c": GoTo Err_InValidate
+    If (NG_NS = 0 And Not KH_NS = 0) Or (NG_TBS = 0 And Not KH_TBS = 0) Or _
+       (NG_CNK = 0 And Not KH_CNK = 0) Or (NG_TD = 0 And Not KH_TD = 0) Then _
+     s = ChrW(76) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7845) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(97) & ChrW(111) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7881) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(110) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(7847) & ChrW(110) & ChrW(32) & ChrW(110) & ChrW(103) & ChrW(117) & ChrW(7891) & ChrW(110) & ChrW(32) & ChrW(118) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(417) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(7913) & ChrW(110) & ChrW(103): GoTo Err_InValidate
+    If (CL_NS < KH_NS) Or (CL_TBS < KH_TBS) Or (CL_CNK < KH_CNK) Or (CL_TD < KH_TD) Then _
+     s = ChrW(76) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7845) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(97) & ChrW(111) & ChrW(32) & ChrW(108) & ChrW(7899) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(116) & ChrW(114) & ChrW(7883) & ChrW(32) & ChrW(99) & ChrW(242) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(7911) & ChrW(97) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110): GoTo Err_InValidate
+    HopLe = 0
+    Exit Function
 Err_InValidate:
-      Beep
-      MsgBox thong_bao, vbCritical, App.ProductName
-      HopLe = -1
+    Beep
+    'MsgBox thong_bao, vbCritical, App.ProductName
+    MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+    HopLe = -1
 End Function
 '======================================================================================
 ' FUNCTION ThemMoi : Thªm mét b¶n ghi chøa gi¸ trÞ hµng th¸ng cña tµi s¶n
@@ -97,7 +105,7 @@ Dim rs_thongso As Recordset, sql As String
       ' C¸c ®èi t­îng quan hÖ
       sql = "SELECT  * FROM ThongSo WHERE MaTS = " + CStr(ma_ts) + " AND Thang = " + CStr(CThangDB(thang_cd))
       Set rs_thongso = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
-      If rs_thongso.RecordCount > 0 Then
+      If rs_thongso.recordCount > 0 Then
             MaTS = rs_thongso!MaTS
             thang = rs_thongso!thang
             MaDTQL = rs_thongso!MaDTQL

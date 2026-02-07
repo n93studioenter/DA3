@@ -3,11 +3,10 @@ Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FVTDauKy 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00E0E0E0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Tån kho ®Çu kú"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   870
-   ClientTop       =   735
+   ClientLeft      =   825
+   ClientTop       =   405
    ClientWidth     =   9945
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -30,6 +29,75 @@ Begin VB.Form FVTDauKy
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   33
+      Top             =   0
+      Width           =   13575
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Fvtdauky.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Fvtdauky.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   35
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   34
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.CommandButton loadexel 
       BackColor       =   &H8000000E&
       Caption         =   "CËp nhËt tõ exel"
@@ -69,7 +137,7 @@ Begin VB.Form FVTDauKy
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   9
-      Text            =   "Fvtdauky.frx":57E2
+      Text            =   "Fvtdauky.frx":115BC
       Top             =   6240
       Visible         =   0   'False
       Width           =   1335
@@ -99,9 +167,9 @@ Begin VB.Form FVTDauKy
    Begin VB.ComboBox CboDV 
       Appearance      =   0  'Flat
       Height          =   315
-      ItemData        =   "Fvtdauky.frx":57E4
+      ItemData        =   "Fvtdauky.frx":115BE
       Left            =   4560
-      List            =   "Fvtdauky.frx":57E6
+      List            =   "Fvtdauky.frx":115C0
       Style           =   2  'Dropdown List
       TabIndex        =   4
       ToolTipText     =   "Danh s¸ch ®¬n vÞ tÝnh"
@@ -133,9 +201,9 @@ Begin VB.Form FVTDauKy
    End
    Begin VB.ComboBox Cbo 
       Height          =   315
-      ItemData        =   "Fvtdauky.frx":57E8
+      ItemData        =   "Fvtdauky.frx":115C2
       Left            =   5400
-      List            =   "Fvtdauky.frx":57EA
+      List            =   "Fvtdauky.frx":115C4
       Style           =   2  'Dropdown List
       TabIndex        =   23
       Top             =   120
@@ -151,7 +219,7 @@ Begin VB.Form FVTDauKy
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   8
-      Text            =   "Fvtdauky.frx":57EC
+      Text            =   "Fvtdauky.frx":115C6
       Top             =   6240
       Width           =   1335
    End
@@ -164,7 +232,7 @@ Begin VB.Form FVTDauKy
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   7
-      Text            =   "Fvtdauky.frx":57EE
+      Text            =   "Fvtdauky.frx":115C8
       Top             =   6240
       Width           =   1335
    End
@@ -180,15 +248,6 @@ Begin VB.Form FVTDauKy
       _ExtentY        =   9551
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   30
       Cols            =   11
       FixedRows       =   0
@@ -207,7 +266,7 @@ Begin VB.Form FVTDauKy
       EndProperty
       Height          =   285
       Left            =   9480
-      Picture         =   "Fvtdauky.frx":57F0
+      Picture         =   "Fvtdauky.frx":115CA
       Style           =   1  'Graphical
       TabIndex        =   10
       Top             =   6240
@@ -217,7 +276,7 @@ Begin VB.Form FVTDauKy
       Height          =   375
       Index           =   1
       Left            =   8400
-      Picture         =   "Fvtdauky.frx":5B92
+      Picture         =   "Fvtdauky.frx":1196C
       Style           =   1  'Graphical
       TabIndex        =   11
       Tag             =   "&Return"
@@ -233,7 +292,7 @@ Begin VB.Form FVTDauKy
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   6
-      Text            =   "Fvtdauky.frx":6FB4
+      Text            =   "Fvtdauky.frx":12D8E
       Top             =   6240
       Width           =   1335
    End
@@ -503,41 +562,45 @@ End Sub
 
 Public Sub CmdCt_Click()
     Dim luong As Double, tien As Double, i As Integer, dgia As Double, dvt As Long, tien2 As Double
-    
+
     If CboKho.ListIndex < 0 Then
         ErrMsg er_KhoHang
         Exit Sub
     End If
-    
+
     If taikhoan.MaSo = 0 Or taikhoan.tkcon > 0 Or taikhoan.tk_id <> TKVT_ID Then
         ErrMsg er_SHTaiKhoan1
         RFocus txtTon(0)
         Exit Sub
     End If
-        
+
     If vattu.MaSo = 0 Then
         ErrMsg er_SHVattu
         RFocus txtTon(1)
         Exit Sub
     End If
-    
+
     luong = Cdbl5(txtTon(4).Text)
     tien = Cdbl5(txtTon(6).Text)
     tien2 = Cdbl5(txtTon(7).Text)
     If luong <> 0 Then dgia = Fix(0.5 + Mask_N * tien / luong) / Mask_N Else dgia = 0
-    
+
     If (tien <> 0) And (luong = 0) Then
-        MsgBox "H·y nhËp sè l­îng tån kho !", vbExclamation, App.ProductName
+        'MsgBox "H·y nhËp sè l­îng tån kho !", vbExclamation, App.ProductName
+        Dim s As String
+        s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(108) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7891) & ChrW(110) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(32) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         RFocus txtTon(4)
         Exit Sub
     End If
-    
+
     If vattu.Dvt2 > 0 Then
         dvt = CboDV.ItemData(CboDV.ListIndex)
     Else
         dvt = 0
     End If
-    
+
     Me.MousePointer = 0
     With GrdVT
         If OutCost = 0 Or f1 > 0 Then
@@ -550,8 +613,8 @@ Public Sub CmdCt_Click()
                     If CLng5(.Text) = vattu.MaSo Then
                         GrdVT.RemoveItem i
                         GrdVT.AddItem taikhoan.sohieu + Chr(9) + vattu.sohieu + Chr(9) + vattu.TenVattu + Chr(9) + IIf(dvt = 0, vattu.DonVi, CboDV.Text) + Chr(9) _
-                            + Format(luong, Mask_2) + Chr(9) + Format(dgia, Mask_2) + Chr(9) + Format(tien, Mask_0) + Chr(9) + CStr(taikhoan.MaSo) _
-                            + Chr(9) + CStr(vattu.MaSo) + Chr(9) + CStr(dvt) + IIf(pGiaUSD > 0, Chr(9) + Format(tien2, Mask_2), ""), i
+                                    + Format(luong, Mask_2) + Chr(9) + Format(dgia, Mask_2) + Chr(9) + Format(tien, Mask_0) + Chr(9) + CStr(taikhoan.MaSo) _
+                                    + Chr(9) + CStr(vattu.MaSo) + Chr(9) + CStr(dvt) + IIf(pGiaUSD > 0, Chr(9) + Format(tien2, Mask_2), ""), i
                         If dvt > 0 Then luong = QuyDoiTheoDVT1(vattu.MaSo, dvt, luong)
                         GhiDauKy CboKho.ItemData(CboKho.ListIndex), taikhoan.MaSo, vattu.MaSo, luong, tien, tien2
                         phatsinh = True
@@ -566,8 +629,8 @@ Public Sub CmdCt_Click()
         End If
         phatsinh = True
         .AddItem taikhoan.sohieu + Chr(9) + vattu.sohieu + Chr(9) + vattu.TenVattu + Chr(9) + IIf(dvt = 0, vattu.DonVi, CboDV.Text) + Chr(9) _
-            + Format(luong, Mask_2) + Chr(9) + Format(dgia, Mask_2) + Chr(9) + Format(tien, Mask_0) + Chr(9) + CStr(taikhoan.MaSo) + Chr(9) _
-            + CStr(vattu.MaSo) + Chr(9) + CStr(dvt) + IIf(pGiaUSD > 0, Chr(9) + Format(tien2, Mask_2), ""), NewRowIndex(GrdVT, 0)
+               + Format(luong, Mask_2) + Chr(9) + Format(dgia, Mask_2) + Chr(9) + Format(tien, Mask_0) + Chr(9) + CStr(taikhoan.MaSo) + Chr(9) _
+               + CStr(vattu.MaSo) + Chr(9) + CStr(dvt) + IIf(pGiaUSD > 0, Chr(9) + Format(tien2, Mask_2), ""), NewRowIndex(GrdVT, 0)
         If dvt > 0 Then luong = QuyDoiTheoDVT1(vattu.MaSo, dvt, luong)
         GhiDauKy CboKho.ItemData(CboKho.ListIndex), taikhoan.MaSo, vattu.MaSo, luong, tien, tien2
         .Row = .Rows - 1
@@ -618,8 +681,28 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         Unload Me
     End If
 End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     ColumnSetUp GrdVT, 0, 940, 2
     ColumnSetUp GrdVT, 1, 1300, 2
     ColumnSetUp GrdVT, 2, 2380, 0
@@ -631,15 +714,16 @@ Private Sub Form_Load()
     ColumnSetUp GrdVT, 8, 1, 0
     ColumnSetUp GrdVT, 9, 1, 0
     ColumnSetUp GrdVT, 10, 1260, 1
-            
+
     AddMonthToCbo Cbo
-    
+    Caption = "Tån kho ®Çu kú"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     f1 = -1
     Int_RecsetToCbo "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho", CboKho
     f1 = 0
     phatsinh = False
-    
+
     If pGiaUSD > 0 Then
         tygia = TyGiaDK
         Label(11).Caption = Label(11).Caption + "  " + Format(tygia, Mask_0)
@@ -651,7 +735,7 @@ Private Sub Form_Load()
         txtTon(7).Visible = True
         FCenter Me
     End If
-    
+
     SetFont Me
 End Sub
 
@@ -711,41 +795,46 @@ Private Sub GrdVT_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
 End Sub
 
 Private Sub laydatabase_Click()
-Dim psw As String, fn As String
-  Dim rs_chungtu As Recordset
-  psw = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.MDB", 1)
-  Dim sql, st
-  Dim i As Integer
-  If Len(psw) > 0 Then
-  
-  sql = "insert into phanloaivattu select * from [" + psw + ";PWD=" + pPSW + "].phanloaivattu where maso  not in (select maso from phanloaivattu) "
-  DBKetoan.Execute sql
-   sql = "insert into dvtvattu select * from [" + psw + ";PWD=" + pPSW + "].dvtvattu where maso  not in (select maso from dvtvattu) "
-  DBKetoan.Execute sql
-  sql = "insert into vattu select * from [" + psw + ";PWD=" + pPSW + "].vattu where maso  not in (select maso from vattu) "
-  DBKetoan.Execute sql
- ' sql = " insert into [Tonkho] select * from  [" + psw + ";PWD=" + pPSW + "].TonKho where maso not in (select maso from tonkho) "
-  sql = " insert into [Tonkho] select * from  [" + psw + ";PWD=" + pPSW + "].TonKho where mavattu not in (select maso from vattu)"
-  DBKetoan.Execute sql
+    Dim psw As String, fn As String
+    Dim rs_chungtu As Recordset
+    psw = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.MDB", 1)
+    Dim sql, st
+    Dim i As Integer
+    If Len(psw) > 0 Then
 
-  'sql = " Update [Tonkho] b INNER JOIN [" + psw + ";PWD=" + pPSW + "].TonKho a ON b.maso = a.maso "
-   sql = " Update [Tonkho] b INNER JOIN [" + psw + ";PWD=" + pPSW + "].TonKho a ON b.mavattu = a.mavattu and b.MaSoKho = a.MaSoKho and   b.MaTaiKhoan = a.MaTaiKhoan"
+        sql = "insert into phanloaivattu select * from [" + psw + ";PWD=" + pPSW + "].phanloaivattu where maso  not in (select maso from phanloaivattu) "
+        DBKetoan.Execute sql
+        sql = "insert into dvtvattu select * from [" + psw + ";PWD=" + pPSW + "].dvtvattu where maso  not in (select maso from dvtvattu) "
+        DBKetoan.Execute sql
+        sql = "insert into vattu select * from [" + psw + ";PWD=" + pPSW + "].vattu where maso  not in (select maso from vattu) "
+        DBKetoan.Execute sql
+        ' sql = " insert into [Tonkho] select * from  [" + psw + ";PWD=" + pPSW + "].TonKho where maso not in (select maso from tonkho) "
+        sql = " insert into [Tonkho] select * from  [" + psw + ";PWD=" + pPSW + "].TonKho where mavattu not in (select maso from vattu)"
+        DBKetoan.Execute sql
+
+        'sql = " Update [Tonkho] b INNER JOIN [" + psw + ";PWD=" + pPSW + "].TonKho a ON b.maso = a.maso "
+        sql = " Update [Tonkho] b INNER JOIN [" + psw + ";PWD=" + pPSW + "].TonKho a ON b.mavattu = a.mavattu and b.MaSoKho = a.MaSoKho and   b.MaTaiKhoan = a.MaTaiKhoan"
         sql = sql + " SET b.tien_0 = a.tien_12"
         sql = sql + " ,b.Luong_0 = a.Luong_12"
         For i = 1 To 12
-        st = CStr(i)
-        sql = sql + ",b.Luong_" + st + " = a.Luong_12, b.Tien_" + st + " = a.Tien_12"
-      Next
-  DBKetoan.Execute sql
-  CboKho_Click
-  MsgBox "B¹n ®· chuyÓn d÷ liÖu ®Çu kú thµnh c«ng."
-  Dim sttt As String
- ' ' sttt = SelectSQL("select mataikhoan as f1 from [" + psw + ";PWD=" + pPSW + "].Tonkho where maso not in (select maso from tonkho)")
-  ' sttt = SelectSQL("select sohieu as f1 from [" + psw + ";PWD=" + pPSW + "].vattu where maso = 1510")
-  ' sttt = SelectSQL("select sohieu as f1 from vattu where maso = 1510")
- '  sttt = SelectSQL("select ten as f1 from hethongtk where maso = 0")
-  '  MsgBox sttt
-  End If
+            st = CStr(i)
+            sql = sql + ",b.Luong_" + st + " = a.Luong_12, b.Tien_" + st + " = a.Tien_12"
+        Next
+        DBKetoan.Execute sql
+        CboKho_Click
+        'MsgBox "B¹n ®· chuyÓn d÷ liÖu ®Çu kú thµnh c«ng."
+        Dim s As String
+
+        s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(273) & ChrW(7847) & ChrW(117) & ChrW(32) & ChrW(107) & ChrW(7923) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(46)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+        Dim sttt As String
+        ' ' sttt = SelectSQL("select mataikhoan as f1 from [" + psw + ";PWD=" + pPSW + "].Tonkho where maso not in (select maso from tonkho)")
+        ' sttt = SelectSQL("select sohieu as f1 from [" + psw + ";PWD=" + pPSW + "].vattu where maso = 1510")
+        ' sttt = SelectSQL("select sohieu as f1 from vattu where maso = 1510")
+        '  sttt = SelectSQL("select ten as f1 from hethongtk where maso = 0")
+        '  MsgBox sttt
+    End If
 End Sub
 
 Private Sub loadexel_Click()
@@ -845,7 +934,7 @@ Private Sub LietKeTonKho(mkho As Long, thang As Integer, lk As Integer)
         If lk = 1 Then GhiDauKy mkho, rs_ton!MaSo, rs_ton!MaVattu, rs_ton!luong, rs_ton!tien, t2
         rs_ton.MoveNext
     Loop
-    GrdVT.Rows = IIf(rs_ton.RecordCount > GrdVT.tag, rs_ton.RecordCount, GrdVT.tag)
+    GrdVT.Rows = IIf(rs_ton.recordCount > GrdVT.tag, rs_ton.recordCount, GrdVT.tag)
     rs_ton.Close
     Set rs_ton = Nothing
     GrdVT.Row = 0
@@ -865,7 +954,7 @@ Public Sub GhiDauKy(mkho As Long, mtk As Long, mvt As Long, luong As Double, tie
     
     Set rs_ton = DBKetoan.OpenRecordset("SELECT Luong_" + CStr(CThangDB(thang)) + " AS Luong, Tien_" + CStr(CThangDB(thang)) + " AS Tien" + IIf(pGiaUSD > 0 And f1 = 0, ",USDTien_" + CStr(CThangDB(thang)) + " AS Tien2", "") + " FROM " + tbl + " INNER JOIN Vattu ON " + tbl + ".MaVattu = Vattu.MaSo WHERE MaSoKho=" + CStr(mkho) + " AND MaTaiKhoan=" + CStr(mtk) + " AND MaVattu=" + CStr(mvt), dbOpenSnapshot)
     WSpace.BeginTrans
-    If rs_ton.RecordCount = 0 Then
+    If rs_ton.recordCount = 0 Then
         st1 = DoiDau(luong)
         st2 = DoiDau(tien)
         st3 = DoiDau(tien2)
@@ -944,17 +1033,20 @@ Private Sub XuLyChenhLech(thang As Integer, mkho As Long)
 End Sub
 
 Public Sub xoa_Click()
-Dim sql As String
- If MsgBox("B¹n cã muèn xãa toµn bé tån ®Çu kh«ng ?", vbYesNo + vbCritical, App.ProductName) = vbYes Then
- sql = " Update [Tonkho] b  "
+    Dim sql As String
+    Dim s As String
+    s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(109) & ChrW(117) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(120) & ChrW(243) & ChrW(97) & ChrW(32) & ChrW(116) & ChrW(111) & ChrW(224) & ChrW(110) & ChrW(32) & ChrW(98) & ChrW(7897) & ChrW(32) & ChrW(116) & ChrW(7891) & ChrW(110) & ChrW(32) & ChrW(273) & ChrW(7847) & ChrW(117) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(63)
+    Dim xn As String
+    xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+    If MessageBoxW(Me.hWnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+        sql = " Update [Tonkho] b  "
         sql = sql + " SET b.tien_0 = 0"
         sql = sql + " ,b.Luong_0 = 0"
         DBKetoan.Execute sql
         CboKho_Click
-            DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '156*'"
-       DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '154*'"
-       DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '152*'"
+        DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '156*'"
+        DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '154*'"
+        DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '152*'"
+    End If
 
-   '     MsgBox "Xãa thµnh c«ng"
-End If
 End Sub

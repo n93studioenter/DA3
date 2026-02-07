@@ -10,7 +10,16 @@ Begin VB.Form frmMain
    ClientTop       =   -3150
    ClientWidth     =   18900
    FillColor       =   &H00FD8866&
-   ForeColor       =   &H00400000&
+   BeginProperty Font 
+      Name            =   "Tahoma"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   ForeColor       =   &H00C00000&
    Icon            =   "frmMain.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Sao Viet Accounting Software"
@@ -103,6 +112,64 @@ Begin VB.Form frmMain
          EndProperty
       EndProperty
    End
+   Begin VB.PictureBox picPopup 
+      Height          =   1335
+      Left            =   6840
+      ScaleHeight     =   1275
+      ScaleWidth      =   1755
+      TabIndex        =   74
+      Top             =   1320
+      Visible         =   0   'False
+      Width           =   1815
+      Begin VB.Label lblItem 
+         Caption         =   "Label4"
+         Height          =   255
+         Index           =   1
+         Left            =   480
+         TabIndex        =   76
+         Top             =   600
+         Visible         =   0   'False
+         Width           =   615
+      End
+      Begin VB.Label lblItem 
+         Caption         =   "Label4"
+         Height          =   255
+         Index           =   0
+         Left            =   360
+         TabIndex        =   75
+         Top             =   240
+         Visible         =   0   'False
+         Width           =   615
+      End
+   End
+   Begin VB.PictureBox picMenu 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   495
+      Left            =   0
+      ScaleHeight     =   435
+      ScaleWidth      =   13515
+      TabIndex        =   72
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   13575
+      Begin VB.Label lblMenu 
+         Caption         =   "Label4"
+         Height          =   255
+         Index           =   0
+         Left            =   240
+         TabIndex        =   73
+         Top             =   120
+         Width           =   615
+      End
+   End
    Begin ComctlLib.StatusBar sbStatusBar 
       Align           =   2  'Align Bottom
       Height          =   390
@@ -131,7 +198,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "23/01/26"
+            TextSave        =   "06/02/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -147,6 +214,15 @@ Begin VB.Form frmMain
    End
    Begin VB.CommandButton Command2 
       Caption         =   "Update"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   280
       Left            =   16080
       TabIndex        =   69
@@ -182,7 +258,7 @@ Begin VB.Form frmMain
    Begin VB.CommandButton Command 
       BackColor       =   &H0000C000&
       Caption         =   "NhËp chøng tõ"
-      DragIcon        =   "frmMain.frx":58268C
+      DragIcon        =   "frmMain.frx":177B0
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   9.75
@@ -196,7 +272,7 @@ Begin VB.Form frmMain
       Index           =   0
       Left            =   1440
       MaskColor       =   &H0000C000&
-      Picture         =   "frmMain.frx":593386
+      Picture         =   "frmMain.frx":284AA
       Style           =   1  'Graphical
       TabIndex        =   60
       Tag             =   "Voucher"
@@ -219,7 +295,7 @@ Begin VB.Form frmMain
       Index           =   1
       Left            =   1440
       MaskColor       =   &H0000C000&
-      Picture         =   "frmMain.frx":598B68
+      Picture         =   "frmMain.frx":2DC8C
       Style           =   1  'Graphical
       TabIndex        =   59
       Tag             =   "Detail Report"
@@ -242,7 +318,7 @@ Begin VB.Form frmMain
       Index           =   2
       Left            =   1440
       MaskColor       =   &H0000C000&
-      Picture         =   "frmMain.frx":59E34A
+      Picture         =   "frmMain.frx":3346E
       Style           =   1  'Graphical
       TabIndex        =   58
       Tag             =   "Financial Report"
@@ -253,6 +329,15 @@ Begin VB.Form frmMain
       BackColor       =   &H00FFC0C0&
       BorderStyle     =   0  'None
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   495
       Index           =   1
       Left            =   9480
@@ -359,6 +444,15 @@ Begin VB.Form frmMain
    End
    Begin VB.CommandButton Command 
       Caption         =   "KÕ to¸n      Chñ ®Çu t­"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   210
       Index           =   6
       Left            =   1800
@@ -370,6 +464,15 @@ Begin VB.Form frmMain
    End
    Begin VB.CommandButton Command 
       Caption         =   "B¸o c¸o   Qu¶n trÞ"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   330
       Index           =   5
       Left            =   2400
@@ -380,10 +483,19 @@ Begin VB.Form frmMain
       Width           =   435
    End
    Begin VB.CommandButton Command 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   165
       Index           =   4
       Left            =   1800
-      Picture         =   "frmMain.frx":5A3B2C
+      Picture         =   "frmMain.frx":38C50
       Style           =   1  'Graphical
       TabIndex        =   3
       Top             =   240
@@ -393,6 +505,15 @@ Begin VB.Form frmMain
    Begin VB.CommandButton Command 
       Caption         =   "Ch­¬ng tr×nh theo &yªu cÇu doanh nghiÖp"
       Enabled         =   0   'False
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   210
       Index           =   3
       Left            =   840
@@ -405,6 +526,15 @@ Begin VB.Form frmMain
    Begin VB.Frame Frame 
       BackColor       =   &H00FFC0C0&
       BorderStyle     =   0  'None
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   615
       Index           =   2
       Left            =   960
@@ -461,6 +591,15 @@ Begin VB.Form frmMain
       End
    End
    Begin VB.FileListBox File1 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   480
       Left            =   8760
       TabIndex        =   7
@@ -476,6 +615,15 @@ Begin VB.Form frmMain
    End
    Begin VB.PictureBox imlIcons 
       BackColor       =   &H80000005&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   480
       Left            =   13680
       ScaleHeight     =   420
@@ -496,6 +644,15 @@ Begin VB.Form frmMain
    End
    Begin VB.Label Label2 
       Caption         =   "Version 9.9"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   960
       TabIndex        =   71
@@ -505,6 +662,15 @@ Begin VB.Form frmMain
    End
    Begin VB.Label Label1 
       Caption         =   "Version 9.9"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   255
       Left            =   0
       TabIndex        =   70
@@ -515,7 +681,7 @@ Begin VB.Form frmMain
    Begin VB.Image Image2 
       Height          =   1155
       Left            =   13080
-      Picture         =   "frmMain.frx":5A45AE
+      Picture         =   "frmMain.frx":396D2
       Stretch         =   -1  'True
       Top             =   120
       Width           =   2400
@@ -523,7 +689,7 @@ Begin VB.Form frmMain
    Begin VB.Image Image1 
       Height          =   1725
       Left            =   17040
-      Picture         =   "frmMain.frx":5ACB8D
+      Picture         =   "frmMain.frx":41CB1
       Top             =   360
       Width           =   1500
    End
@@ -1174,51 +1340,51 @@ Begin VB.Form frmMain
       BeginProperty Images {0713E8C2-850A-101B-AFC0-4210102A8DA7} 
          NumListImages   =   12
          BeginProperty ListImage1 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5ADC75
+            Picture         =   "frmMain.frx":42D99
             Key             =   ""
          EndProperty
          BeginProperty ListImage2 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5AEF87
+            Picture         =   "frmMain.frx":440AB
             Key             =   ""
          EndProperty
          BeginProperty ListImage3 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B0299
+            Picture         =   "frmMain.frx":453BD
             Key             =   ""
          EndProperty
          BeginProperty ListImage4 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B15AB
+            Picture         =   "frmMain.frx":466CF
             Key             =   ""
          EndProperty
          BeginProperty ListImage5 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B28BD
+            Picture         =   "frmMain.frx":479E1
             Key             =   ""
          EndProperty
          BeginProperty ListImage6 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B3BCF
+            Picture         =   "frmMain.frx":48CF3
             Key             =   ""
          EndProperty
          BeginProperty ListImage7 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B4821
+            Picture         =   "frmMain.frx":49945
             Key             =   ""
          EndProperty
          BeginProperty ListImage8 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B6373
+            Picture         =   "frmMain.frx":4B497
             Key             =   ""
          EndProperty
          BeginProperty ListImage9 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B7025
+            Picture         =   "frmMain.frx":4C149
             Key             =   ""
          EndProperty
          BeginProperty ListImage10 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5B8427
+            Picture         =   "frmMain.frx":4D54B
             Key             =   ""
          EndProperty
          BeginProperty ListImage11 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5BA799
+            Picture         =   "frmMain.frx":4F8BD
             Key             =   ""
          EndProperty
          BeginProperty ListImage12 {0713E8C3-850A-101B-AFC0-4210102A8DA7} 
-            Picture         =   "frmMain.frx":5BAB8B
+            Picture         =   "frmMain.frx":4FCAF
             Key             =   ""
          EndProperty
       EndProperty
@@ -1247,6 +1413,15 @@ Begin VB.Form frmMain
    End
    Begin VB.Label lbCty 
       Caption         =   "LbCty 9"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   375
       Index           =   9
       Left            =   13440
@@ -1275,6 +1450,15 @@ Begin VB.Form frmMain
       Width           =   1935
    End
    Begin VB.Label Label 
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   735
       Index           =   16
       Left            =   12000
@@ -1329,6 +1513,15 @@ Begin VB.Form frmMain
    End
    Begin VB.Label email 
       BackColor       =   &H00FFC0C0&
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Height          =   360
       Index           =   10
       Left            =   6840
@@ -1959,16 +2152,16 @@ Begin VB.Form frmMain
          Tag             =   "Recalculate cost of material in month..."
       End
       Begin VB.Menu mnVT 
-         Caption         =   "TÝnh gi¸ vèn hµng &b¸n"
+         Caption         =   "TÝnh gi¸ vèn hµng &b¸n..."
          Index           =   9
          Tag             =   "Recalculate cost of sold gooods"
       End
       Begin VB.Menu mnVT 
-         Caption         =   "KiÓm kª tån kho cuèi &ngµy"
+         Caption         =   "-"
          Index           =   10
       End
       Begin VB.Menu mnVT 
-         Caption         =   "-"
+         Caption         =   "KiÓm kª tån kho cuèi ngµy"
          Index           =   11
       End
       Begin VB.Menu mnVT 
@@ -2182,15 +2375,83 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private g_NcmBackup As NONCLIENTMETRICS
+Private g_HasBackup As Boolean
+
+Private Declare Function MulDiv Lib "Kernel32" ( _
+                                ByVal nNumber As Long, _
+                                ByVal nNumerator As Long, _
+                                ByVal nDenominator As Long) As Long
+Private Const SPIF_UPDATEINIFILE As Long = &H1
+Private Const SPIF_SENDCHANGE As Long = &H2
+Private Const SPIF_SENDWININICHANGE As Long = &H2   ' Ð?ng nghia
+Private Declare Function GetDC Lib "user32" (ByVal hwnd As Long) As Long
+Private Declare Function ReleaseDC Lib "user32" (ByVal hwnd As Long, ByVal hDC As Long) As Long
+Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal hDC As Long, ByVal nIndex As Long) As Long
+Private Const LOGPIXELSY = 90   ' Thêm cái này
+Private Const SPI_GETNONCLIENTMETRICS = 41
+Private Const SPI_SETNONCLIENTMETRICS = 42
+Private Const WM_SETTEXT = &HC
+Private Const WM_SETTINGCHANGE As Long = &H1A
+Private Const HWND_BROADCAST As Long = &HFFFF&
+Private Type LOGFONT
+    lfHeight As Long
+    lfWidth As Long
+    lfEscapement As Long
+    lfOrientation As Long
+    lfWeight As Long
+    lfItalic As Byte
+    lfUnderline As Byte
+    lfStrikeOut As Byte
+    lfCharSet As Byte
+    lfOutPrecision As Byte
+    lfClipPrecision As Byte
+    lfQuality As Byte
+    lfPitchAndFamily As Byte
+    lfFaceName As String * 32
+End Type
+
+Private Type NONCLIENTMETRICS
+    cbSize As Long
+    iBorderWidth As Long
+    iScrollWidth As Long
+    iScrollHeight As Long
+    iCaptionWidth As Long
+    iCaptionHeight As Long
+    lfCaptionFont As LOGFONT
+    iSmCaptionWidth As Long
+    iSmCaptionHeight As Long
+    lfSmCaptionFont As LOGFONT
+    iMenuWidth As Long
+    iMenuHeight As Long
+    lfMenuFont As LOGFONT
+    lfStatusFont As LOGFONT
+    lfMessageFont As LOGFONT
+End Type
+Private Declare Function SendMessage Lib "user32.dll" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function FindWindow Lib "user32.dll" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+Private Declare Function DefWindowProcW Lib "user32" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function SystemParametersInfo Lib "user32.dll" Alias "SystemParametersInfoA" (ByVal uAction As Long, ByVal uParam As Long, ByRef lpvParam As Any, ByVal fuWinIni As Long) As Long
+
+
 'Module tieng viet
-
+Dim MenuCount As Integer
+Dim CurrentMenu As Integer
+Dim ItemCount As Integer
+Dim fontmenu As String, fontcaption As String, ncm As NONCLIENTMETRICS
+Attribute fontcaption.VB_VarUserMemId = 1073938437
+Attribute ncm.VB_VarUserMemId = 1073938437
 'end Module tieng viet
-
+Public gSubMenu As frmSubMenu
+Attribute gSubMenu.VB_VarUserMemId = 1073938438
+Public gCurrentMenu As Integer
+Attribute gCurrentMenu.VB_VarUserMemId = 1073938439
 
 Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Public Tudongtinhgiavon As Boolean
+Attribute Tudongtinhgiavon.VB_VarUserMemId = 1073938440
 
 Private Declare Function GetModuleFileName Lib "Kernel32" Alias "GetModuleFileNameA" _
                                            (ByVal hModule As Long, ByVal lpFilename As String, ByVal nSize As Long) As Long
@@ -2222,16 +2483,25 @@ End Type
 
 
 Dim ret
+Attribute ret.VB_VarUserMemId = 1073938441
 Dim m_nonClientMetrics As NONCLIENTMETRICS
+Attribute m_nonClientMetrics.VB_VarUserMemId = 1073938442
 
 Dim m_fontCaption As String * 32
+Attribute m_fontCaption.VB_VarUserMemId = 1073938443
 
 Dim m_fontSmCaption As String * 32
+Attribute m_fontSmCaption.VB_VarUserMemId = 1073938444
 Dim m_fontMenu As String * 32
+Attribute m_fontMenu.VB_VarUserMemId = 1073938445
 Dim m_fontMessage As String * 32
+Attribute m_fontMessage.VB_VarUserMemId = 1073938446
 Dim m_fontStatus As String * 32
+Attribute m_fontStatus.VB_VarUserMemId = 1073938447
 Dim m_fontIcon As String * 32
+Attribute m_fontIcon.VB_VarUserMemId = 1073938448
 Dim pProcessEnable As Boolean
+Attribute pProcessEnable.VB_VarUserMemId = 1073938449
 
 Private Const MaxNamTC = 9
 Private Declare Function OSWinHelp% Lib "user32" Alias "WinHelpA" (ByVal hwnd&, ByVal HelpFile$, ByVal wCommand%, dwData As Any)
@@ -2723,15 +2993,15 @@ Private Sub StringToByteArray(ByVal str As String, byteArray() As Byte)
     Next i
     byteArray(i) = 0    ' Null terminator
 End Sub
-Private Sub SetFontNameSimple(faceName() As Byte, ByVal fontName As String)
+Private Sub SetFontNameSimple(faceName() As Byte, ByVal FontName As String)
     Dim i As Long
     For i = 0 To 31
         faceName(i) = 0
     Next i
 
-    For i = 1 To Len(fontName)
+    For i = 1 To Len(FontName)
         If i > 32 Then Exit For
-        faceName(i - 1) = Asc(Mid$(fontName, i, 1))
+        faceName(i - 1) = Asc(Mid$(FontName, i, 1))
     Next i
 End Sub
 
@@ -2762,19 +3032,19 @@ Private Sub ChangeFont()
     ret = SystemParametersInfo(SPI_SETNONCLIENTMETRICS, Len(m_nonClientMetrics), m_nonClientMetrics, 0)
 
     ' Thêm do?n code sau d? thay d?i font ch? c?a menu
-    Me.fontName = sFONTNAME
+    Me.FontName = sFONTNAME
     Me.FontSize = 12
 
     DoEvents
 End If
 End Sub
-Public Function U(ParamArray codes() As Variant) As String
+Public Function U(ParamArray Codes() As Variant) As String
     Dim i As Long
-    For i = LBound(codes) To UBound(codes)
-        U = U & ChrW(codes(i))
+    For i = LBound(Codes) To UBound(Codes)
+        U = U & ChrW(Codes(i))
     Next
 End Function
-Private Sub LoadMenuForm()
+Private Sub LoadMenuform()
 
     Dim originPaths As String
     originPaths = App.path
@@ -2795,6 +3065,7 @@ Private Sub LoadMenuForm()
     Dim hMenu As Long
     Dim hSub As Long
     Dim hSub2 As Long
+    Dim hSub3 As Long
     Dim hDuLieu As Long
 
 
@@ -2816,6 +3087,8 @@ Private Sub LoadMenuForm()
     ' THÔNG So sub
     ' =====================================================
     hSub = GetSubMenu(hMenu, 0)
+
+    'SetMenuUnicode mnHT(2), 0, U(84, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 109, 7863, 99, 32, 273, 7883, 110, 104)
     SetMenuUnicode hSub, 0, U(84, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 109, 7863, 99, 32, 273, 7883, 110, 104)
     SetMenuUnicode hSub, 1, U(78, 233, 110, 32, 116, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117)
     SetMenuUnicode hSub, 2, U(77, 7903, 32, 116, 7879, 112, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 110, 233, 110)
@@ -2831,10 +3104,11 @@ Private Sub LoadMenuForm()
     hSub = GetSubMenu(hMenu, 1)
     SetMenuUnicode hSub, 0, U(75, 105, 7875, 109, 32, 116, 114, 97, 32, 110, 104, 7853, 112, 32, 120, 117, 7845, 116, 32, 116, 7891, 110)
     SetMenuUnicode hSub, 1, U(75, 105, 7875, 109, 32, 116, 114, 97, 32, 104, 7879, 32, 116, 7889, 110, 103, 32, 116, 224, 105, 32, 107, 104, 111, 7843, 110)
-    ' SetMenuUnicode hSub, 2, U(88, 7917, 32, 108, 253, 32, 115, 7889, 32, 108, 105, 7879, 117)
+    'SetMenuUnicode hSub, 2, U(88, 7917, 32, 108, 253, 32, 115, 7889, 32, 108, 105, 7879, 117)
     SetMenuUnicode hSub, 3, U(88, 243, 97, 32, 112, 104, 225, 116, 32, 115, 105, 110, 104, 32, 116, 104, 225, 110, 103)
     hSub2 = GetSubMenu(hSub, 3)
     SetMenuUnicode hSub2, 0, U(83, 7889, 32, 100, 432, 32, 273, 7847, 117, 32, 110, 259, 109)
+
     SetMenuUnicode hSub, 5, U(67, 104, 117, 121, 7875, 110, 32, 115, 97, 110, 103, 32, 110, 259, 109, 32, 109, 7899, 105)
     SetMenuUnicode hSub, 6, U(67, 104, 7917, 110, 103, 32, 116, 7915, 32, 107, 7871, 116, 32, 99, 104, 117, 121, 7875, 110)
     SetMenuUnicode hSub, 7, U(80, 104, 226, 110, 32, 98, 7893, 32, 99, 104, 105, 32, 112, 104, 237)
@@ -2842,8 +3116,8 @@ Private Sub LoadMenuForm()
     SetMenuUnicode hSub, 9, U(75, 104, 243, 97, 32, 115, 7889, 32, 108, 105, 7879, 117, 32, 116, 104, 225, 110, 103)
     SetMenuUnicode hSub, 10, U(67, 104, 117, 121, 7875, 110, 32, 100, 7919, 32, 108, 105, 7879, 117, 32, 273, 7847, 117, 32, 107, 7923)
     SetMenuUnicode hSub, 11, U(75, 104, 97, 105, 32, 98, 225, 111, 32, 109, 7851, 117, 32, 98, 105, 7875, 117, 32, 115, 111, 110, 103, 32, 110, 103, 7919)
-    hSub2 = GetSubMenu(hSub, 9)
-    SetMenuUnicode hSub2, 0, U(83, 7889, 32, 100, 432, 32, 99, 117, 7889, 105, 32, 110, 259, 109)
+    hSub3 = GetSubMenu(hSub, 8)
+    SetMenuUnicode hSub3, 0, U(83, 7889, 32, 100, 432, 32, 99, 117, 7889, 105, 32, 110, 259, 109)
     ' =====================================================
     ' V?T TU – HÀNG HÓA
     ' =====================================================
@@ -2851,14 +3125,15 @@ Private Sub LoadMenuForm()
     SetMenuUnicode hSub, 0, U(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 118, 7853, 116, 32, 116, 432)
     SetMenuUnicode hSub, 1, U(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 118, 7853, 116, 32, 116, 432, 32, 104, 224, 110, 103, 32, 104, 243, 97)
     SetMenuUnicode hSub, 2, U(75, 234, 110, 104, 32, 112, 104, 226, 110, 32, 112, 104, 7889, 105)
-    SetMenuUnicode hSub, 3, U(76, 432, 32, 99, 104, 117, 121, 7875, 110, 32, 110, 7897, 32, 98, 7897)
+    SetMenuUnicode hSub, 3, U(76, 432, 117, 32, 99, 104, 117, 121, 7875, 110, 32, 110, 7897, 105, 32, 98, 7897)
     SetMenuUnicode hSub, 4, U(84, 104, 224, 110, 104, 32, 112, 104, 7849, 109, 32, 104, 111, 224, 110, 32, 116, 104, 224, 110, 104, 32, 116, 114, 111, 110, 103, 32, 107, 7923)
     SetMenuUnicode hSub, 6, U(84, 104, 234, 109, 32, 107, 104, 111, 32, 104, 224, 110, 103)
     SetMenuUnicode hSub, 7, U(84, 7891, 110, 32, 107, 104, 111, 32, 273, 7847, 117, 32, 107, 7923)
     SetMenuUnicode hSub, 8, U(84, 237, 110, 104, 32, 108, 7841, 105, 32, 103, 105, 225, 32, 120, 117, 7845, 116, 32, 107, 104, 111, 32, 116, 114, 111, 110, 103, 32, 116, 104, 225, 110, 103)
     SetMenuUnicode hSub, 9, U(84, 237, 110, 104, 32, 103, 105, 225, 32, 118, 7889, 110, 32, 104, 224, 110, 103, 32, 98, 225, 110)
     ' Ki?m kê t?n kho cu?i ngày
-    SetMenuUnicode hSub, 10, U(75, 105, 7875, 109, 32, 107, 234, 32, 116, 7891, 110, 32, 107, 104, 111, 32, 99, 117, 7889, 105, 32, 110, 103, 224, 121)
+    SetMenuUnicode hSub, 11, U(75, 105, 7875, 109, 32, 107, 234, 32, 116, 7891, 110, 32, 107, 104, 111, 32, 99, 117, 7889, 105, 32, 110, 103, 224, 121)
+    'SetMenuUnicode hSub, 11, U(75, 105, 7875, 109, 32, 107, 234, 32, 116, 7891, 110, 32, 107, 104, 111, 32, 99, 117, 7889, 105, 32, 110, 103, 224, 121)
 
     SetMenuUnicode hSub, 12, U(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 99, 244, 110, 103, 32, 116, 114, 236, 110, 104, 44, 32, 115, 7843, 110, 32, 112, 104, 7849, 109)
     SetMenuUnicode hSub, 13, U(67, 104, 105, 32, 116, 105, 7871, 116, 32, 99, 244, 110, 103, 32, 116, 114, 236, 110, 104, 44, 32, 115, 7843, 110, 32, 112, 104, 7849, 109)
@@ -2900,9 +3175,93 @@ Private Sub LoadMenuForm()
     SetMenuUnicode hSub, 2, U(84, 224, 105, 32, 108, 105, 7879, 117)
     SetMenuUnicode hSub, 4, U(84, 7841, 111, 32, 99, 244, 110, 103, 32, 116, 121, 32, 109, 7899, 105)
 End Sub
+ 
+Public Sub HideSubMenu()
 
+    gCurrentMenu = -1
 
+    If Not gSubMenu Is Nothing Then
+        Unload gSubMenu
+        Set gSubMenu = Nothing
+    End If
+
+End Sub
+Public Sub SetMenuFont(FontName As String, PointSize As Integer, Optional Bold As Boolean = False)
+    Dim ncm As NONCLIENTMETRICS
+    Dim hDC As Long
+    Dim PixelsPerInchY As Long
+    Dim lfHeight As Long
+
+    ncm.cbSize = Len(ncm)
+
+    ' L?y thông tin hi?n t?i
+    SystemParametersInfo SPI_GETNONCLIENTMETRICS, Len(ncm), ncm, 0
+
+    ' Tính lfHeight t? PointSize (âm d? là point size)
+    hDC = GetDC(0)  ' Desktop DC
+    PixelsPerInchY = GetDeviceCaps(hDC, LOGPIXELSY)
+    ReleaseDC 0, hDC
+
+    lfHeight = -MulDiv(PointSize, PixelsPerInchY, 72)   ' Công th?c chu?n (MulDiv c?n Declare n?u chua có)
+    ' Ho?c don gi?n n?u DPI ~96: lfHeight = -CLng(PointSize * 1.333)
+
+    With ncm.lfMenuFont
+        .lfFaceName = Left$(FontName & String$(32, vbNullChar), 32)   ' Copy tên font + nulls
+        .lfHeight = lfHeight
+        .lfWeight = IIf(Bold, 700, 400)   ' FW_BOLD = 700, FW_NORMAL = 400
+        ' .lfItalic = 1 n?u mu?n italic, v.v.
+    End With
+
+    ' Ð?ng b? caption n?u mu?n
+    With ncm.lfCaptionFont
+        .lfFaceName = Left$(FontName & String$(32, vbNullChar), 32)
+        .lfHeight = lfHeight
+        .lfWeight = IIf(Bold, 700, 400)
+    End With
+    ' Áp d?ng cho MessageBox
+    With ncm.lfMessageFont
+        .lfFaceName = Left$(FontName & String$(32, vbNullChar), 32)
+        .lfHeight = lfHeight
+        .lfWeight = IIf(Bold, 700, 400)
+    End With
+
+    ' Áp d?ng thay d?i
+    SystemParametersInfo SPI_SETNONCLIENTMETRICS, Len(ncm), ncm, SPIF_SENDCHANGE
+
+    ' Broadcast d? t?t c? window c?p nh?t
+    SendMessage HWND_BROADCAST, WM_SETTINGCHANGE, 0, 0
+End Sub
+Public Sub RestoreSysFont()
+    If g_HasBackup = False Then Exit Sub
+
+    SystemParametersInfo SPI_SETNONCLIENTMETRICS, _
+                         Len(g_NcmBackup), g_NcmBackup, _
+                         SPIF_UPDATEINIFILE Or SPIF_SENDCHANGE
+
+    SendMessage HWND_BROADCAST, WM_SETTINGCHANGE, 0, 0
+End Sub
+Public Sub BackupSysFont()
+    g_NcmBackup.cbSize = Len(g_NcmBackup)
+    SystemParametersInfo SPI_GETNONCLIENTMETRICS, Len(g_NcmBackup), g_NcmBackup, 0
+    g_HasBackup = True
+End Sub
 Private Sub Form_Load()
+'PopMenu1.BindMenu Me.hwnd, Me.Menu
+'MsgBox TypeName(PopMenu1)
+
+'Call BackupSysFont
+'Call SetMenuFont("Tahoma", 11, True)
+'RestoreSysFont
+'RestoreSysFont
+' Fake menu bar
+' picFakeMenu.Align = vbAlignTop
+'picFakeMenu.Height = 360
+'picFakeMenu.BackColor = CLR_MENU_NORMAL
+
+'InitFakeMenu
+'gCurrentMenu = -1
+
+
     Dim check162 As String
     check162 = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK where SoHieu = '621' ")
     If check162 = 0 Then
@@ -2912,7 +3271,7 @@ Private Sub Form_Load()
         mnTT.Caption = "TT-99/2025-BTC"
         'mnTT.Visible = False
     End If
-    LoadMenuForm
+    LoadMenuform
     Kiemtraphienbanht
     'Taifilecapnhat
     Dim X1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer
@@ -3035,15 +3394,17 @@ ErrLock:
 'MsgBox Err.Description
 End Function
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
- Command(1).BackColor = &HC000&    ' &H808000
+    Command(1).BackColor = &HC000&    ' &H808000
     Command(0).BackColor = &HC000&    '&H808000
     Command(2).BackColor = &HC000&    '&H808000
-     Command1.BackColor = &HC0FFFF
+    Command1.BackColor = &HC0FFFF
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
-'kiem tra he thong tai khoan truoc
-'KiemTraTaiKhoan
+    Call BackupSysFont
+    'kiem tra he thong tai khoan truoc
+    'KiemTraTaiKhoan
     Screen.MousePointer = 11
     HienThongBao "KÕt thóc ch­¬ng tr×nh kÕ to¸n!", 1
 
@@ -3114,6 +3475,8 @@ End Sub
 Private Sub Image2_Click()
     Taifilecapnhat
 End Sub
+
+ 
 
 Public Sub mnCn_Click(Index As Integer)
     If Index = 12 Then
@@ -3529,12 +3892,12 @@ X1:
         ChonTenTep "", 0, "", 3
     Case 9:    ' Dat may in
         ChonTenTep "", cdlCFBoth, "", 4
-        If Len(dlgCommonDialog.fontName) > 1 And (LoaiFont(dlgCommonDialog.fontName) = FontFlag Or KiemTraMaSoThue(LbCty(8).Caption, "03")) Then
-            pFontName = dlgCommonDialog.fontName
+        If Len(dlgCommonDialog.FontName) > 1 And (LoaiFont(dlgCommonDialog.FontName) = FontFlag Or KiemTraMaSoThue(LbCty(8).Caption, "03")) Then
+            pFontName = dlgCommonDialog.FontName
             pFontSize = dlgCommonDialog.FontSize
             ExecuteSQL5 "UPDATE License SET FontName='" + pFontName + "', FontSize=" + CStr(pFontSize)
-            LbCty(0).fontName = pFontName
-            LbCty(1).fontName = pFontName
+            LbCty(0).FontName = pFontName
+            LbCty(1).FontName = pFontName
             mnHT(10).Caption = IIf(FontFlag <> 2, "ChuyÓn ®æi CSDL sang font ABC", "ChuyÓn ®æi CSDL sang font VNI")
             SetFont Me
         End If
@@ -3563,9 +3926,9 @@ X1:
     Case 16:
         If (Not IsNumeric(Left(LbCty(8).Caption, 2))) Then GoTo KT
         If CInt(Left(LbCty(8).Caption, 3)) = 0 Then GoTo KT
-        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo b
+        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
         If FrmGetStr.GetMK(LbCty(8).Caption) Then
-b:
+B:
             UpDateDB
             GetLicense
         End If
@@ -3688,8 +4051,7 @@ Private Sub mnuHLP_Click(Index As Integer)
         If Err Then MsgBox Err.Description
         On Error GoTo 0
     Case 1:
-
-        frmTaiLieu.Show 1
+frmgioithieu.Show vbModal, Me
         'Formimport.Show 1
 
         ' Tra cuu
@@ -3701,7 +4063,8 @@ Private Sub mnuHLP_Click(Index As Integer)
     Case 3:
         '  frmTonDauDaTaBaSE.Show ' Ban quyen
         '   frmAbout.Show vbModal, Me
-        frmgioithieu.Show vbModal, Me
+        
+        frmTaiLieu.Show 1
     Case 4:
         Dim fso As New FileSystemObject
         '  MsgBox pCurDir + "DATA"
@@ -3780,15 +4143,15 @@ Public Sub mnVT_Click(Index As Integer)
             Dim sql As String
             sql = "DELETE FROM Vattu WHERE MaSo NOT IN (SELECT MaVatTu FROM TonKho)"
             ExecuteSQL5 sql
-            
-            
+
+
             sql = "DELETE  FROM TonKho " & _
                   "WHERE Tien_1 = 0 AND Tien_2 = 0 AND Tien_3 = 0 AND Tien_4 = 0 AND Tien_5 = 0 AND Tien_6 = 0 AND Tien_7 = 0 AND Tien_8 = 0 AND Tien_9 = 0 AND Tien_10 = 0 AND Tien_11 = 0 AND Tien_12 = 0 " & _
                   "AND Tien_Nhap_1 = 0 AND Tien_Nhap_2 = 0 AND Tien_Nhap_3 = 0 AND Tien_Nhap_4 = 0 AND Tien_Nhap_5 = 0 AND Tien_Nhap_6 = 0 AND Tien_Nhap_7 = 0 AND Tien_Nhap_8 = 0 AND Tien_Nhap_9 = 0 AND Tien_Nhap_10 = 0 AND Tien_Nhap_11 = 0 AND Tien_Nhap_12 = 0 " & _
                   "AND Tien_Xuat_1 = 0 AND Tien_Xuat_2 = 0 AND Tien_Xuat_3 = 0 AND Tien_Xuat_4 = 0 AND Tien_Xuat_5 = 0 AND Tien_Xuat_6 = 0 AND Tien_Xuat_7 = 0 AND Tien_Xuat_8 = 0 AND Tien_Xuat_9 = 0 AND Tien_Xuat_10 = 0 AND Tien_Xuat_11 = 0 AND Tien_Xuat_12 = 0 " & _
                   "AND Luong_1 = 0 AND Luong_2 = 0 AND Luong_3 = 0 AND Luong_4 = 0 AND Luong_5 = 0 AND Luong_6 = 0 AND Luong_7 = 0 AND Luong_8 = 0 AND Luong_9 = 0 AND Luong_10 = 0 AND Luong_11 = 0 AND Luong_12 = 0"
             ExecuteSQL5 sql
-            
+
             sql = "DELETE FROM Vattu WHERE MaSo IN (" & _
                   "SELECT MaVatTu FROM TonKho " & _
                   "WHERE Tien_1 = 0 AND Tien_2 = 0 AND Tien_3 = 0 AND Tien_4 = 0 AND Tien_5 = 0 AND Tien_6 = 0 AND Tien_7 = 0 AND Tien_8 = 0 AND Tien_9 = 0 AND Tien_10 = 0 AND Tien_11 = 0 AND Tien_12 = 0 " & _
@@ -3915,15 +4278,25 @@ Public Sub mnVT_Click(Index As Integer)
         Else
             If Not GetDate2.GetDate("TÝnh gi¸ vèn b¸n hµng", d1, d2) Then Exit Sub
         End If
+        Dim s As String
+        s = ChrW(76) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(108) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(118) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(63) & ChrW(32) & ChrW(40)
+        s = s & ChrW(78) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(236) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(417) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(114) & ChrW(236) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7881)
+        s = s & ChrW(32) & ChrW(108) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(118) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(242) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(41)
+        Dim xn As String
+        xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+        If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+            i = 6
+        Else
+            i = 7
+        End If
 
-        i = MsgBox("LËp l¹i c¸c chøng tõ gi¸ vèn ®· tÝnh ? (NÕu kh«ng th× ch­¬ng tr×nh chØ lËp c¸c chøng tõ gi¸ vèn cßn thiÕu)", vbCritical + vbYesNo, App.ProductName)
+        'i = MsgBox("LËp l¹i c¸c chøng tõ gi¸ vèn ®· tÝnh ? (NÕu kh«ng th× ch­¬ng tr×nh chØ lËp c¸c chøng tõ gi¸ vèn cßn thiÕu)", vbCritical + vbYesNo, App.ProductName)
         st = FrmGetStr.GetString("Sè hiÖu vËt t­ cÇn tÝnh l¹i (®Ó trèng nÕu tÝnh l¹i toµn bé):", "TÝnh gi¸ vèn")
         Do While Len(st) > 0
             mv = SoHieu2MaSo(st, "Vattu")
             If mv > 0 Then Exit Do
             st = FrmGetStr.GetString("Sè hiÖu vËt t­ cÇn tÝnh l¹i (®Ó trèng nÕu tÝnh l¹i toµn bé):", "TÝnh gi¸ vèn")
         Loop
-
         Me.MousePointer = 11
         If OutCost = 0 Then
             k = CInt5(FrmGetStr.GetString("NhËp sè 1 ®Ó tÝnh b×nh qu©n di ®éng, sè 2 ®Ó tÝnh b×nh qu©n cuèi kú (tÝnh theo th¸ng)", "TÝnh l¹i gi¸ vèn"))
@@ -4443,10 +4816,10 @@ Private Sub GetLicense()
         pTienStr = "VND"
     End If
     CTGS_GV = rs_license!CTGS_GV
-    pFontName = rs_license!fontName
+    pFontName = rs_license!FontName
     pFontSize = rs_license!FontSize
-    LbCty(0).fontName = pFontName
-    LbCty(1).fontName = pFontName
+    LbCty(0).FontName = pFontName
+    LbCty(1).FontName = pFontName
     LbCty(10).Caption = rs_license!Quan
     LbCty(11).Caption = rs_license!ThanhPho
     frmMain.LbCty(9).Caption = rs_license!email
@@ -4561,7 +4934,8 @@ Private Sub GetLicense()
 
     LietKeNam
     mnVT(15).Visible = True
-
+    'mnCongno.Visible = False
+    
     On Error GoTo 0
 End Sub
 

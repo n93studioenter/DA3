@@ -2,12 +2,12 @@ VERSION 5.00
 Begin VB.Form FrmMatkhau 
    AutoRedraw      =   -1  'True
    BackColor       =   &H0080FFFF&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "MËt khÈu"
-   ClientHeight    =   1785
-   ClientLeft      =   4665
-   ClientTop       =   5205
-   ClientWidth     =   4260
+   BorderStyle     =   0  'None
+   Caption         =   "Login"
+   ClientHeight    =   2385
+   ClientLeft      =   4620
+   ClientTop       =   4875
+   ClientWidth     =   4230
    ClipControls    =   0   'False
    BeginProperty Font 
       Name            =   "VK Sans Serif"
@@ -25,21 +25,80 @@ Begin VB.Form FrmMatkhau
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    Picture         =   "Frmmatkh.frx":57E2
-   ScaleHeight     =   1785
-   ScaleWidth      =   4260
+   ScaleHeight     =   2385
+   ScaleWidth      =   4230
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picTitle 
+      Align           =   1  'Align Top
+      BackColor       =   &H00FFFFFF&
+      Height          =   375
+      Left            =   0
+      ScaleHeight     =   315
+      ScaleWidth      =   4170
+      TabIndex        =   6
+      Top             =   0
+      Width           =   4230
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   400
+         Left            =   3720
+         TabIndex        =   8
+         Top             =   75
+         Width           =   600
+      End
+      Begin VB.Image Image1 
+         Appearance      =   0  'Flat
+         Height          =   250
+         Left            =   100
+         Picture         =   "Frmmatkh.frx":62CC
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   250
+      End
+      Begin VB.Label Label1 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         ForeColor       =   &H00000000&
+         Height          =   375
+         Left            =   500
+         TabIndex        =   7
+         Top             =   60
+         Width           =   975
+      End
+   End
    Begin VB.CommandButton Command 
       BackColor       =   &H00FFC0C0&
       Height          =   375
       Index           =   1
-      Left            =   1560
-      Picture         =   "Frmmatkh.frx":62CC
+      Left            =   1440
+      Picture         =   "Frmmatkh.frx":6589
       Style           =   1  'Graphical
       TabIndex        =   5
       Tag             =   "&Return"
-      Top             =   1200
+      Top             =   1800
       Width           =   1095
    End
    Begin VB.CommandButton Command 
@@ -47,30 +106,30 @@ Begin VB.Form FrmMatkhau
       Default         =   -1  'True
       Height          =   375
       Index           =   0
-      Left            =   3000
-      Picture         =   "Frmmatkh.frx":76EE
+      Left            =   2880
+      Picture         =   "Frmmatkh.frx":79AB
       Style           =   1  'Graphical
       TabIndex        =   4
       Tag             =   "&Ok"
-      Top             =   1200
+      Top             =   1800
       Width           =   1095
    End
    Begin VB.ComboBox CboUser 
       Height          =   315
-      Left            =   1320
+      Left            =   1200
       Style           =   2  'Dropdown List
       TabIndex        =   0
-      Top             =   160
+      Top             =   765
       Width           =   2775
    End
    Begin VB.TextBox txtPsw 
       Height          =   285
       IMEMode         =   3  'DISABLE
-      Left            =   1320
+      Left            =   1200
       MaxLength       =   15
       PasswordChar    =   "*"
       TabIndex        =   2
-      Top             =   660
+      Top             =   1260
       Width           =   2775
    End
    Begin VB.Label Label 
@@ -80,10 +139,10 @@ Begin VB.Form FrmMatkhau
       ForeColor       =   &H0000FFFF&
       Height          =   255
       Index           =   1
-      Left            =   240
+      Left            =   120
       TabIndex        =   3
       Tag             =   "User Name"
-      Top             =   240
+      Top             =   840
       Width           =   975
    End
    Begin VB.Label Label 
@@ -93,10 +152,10 @@ Begin VB.Form FrmMatkhau
       ForeColor       =   &H0000FFFF&
       Height          =   255
       Index           =   0
-      Left            =   240
+      Left            =   120
       TabIndex        =   1
       Tag             =   "Password"
-      Top             =   705
+      Top             =   1320
       Width           =   1095
    End
 End
@@ -106,14 +165,39 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+ 
+
+
+
+Private Type TrackMouseEvent
+    cbSize As Long
+    dwFlags As Long
+    hwndTrack As Long
+    dwHoverTime As Long
+End Type
+
+Private Declare Function TrackMouseEvent Lib "user32" _
+                                         (lpEventTrack As TrackMouseEvent) As Long
+
+Private Const TME_LEAVE = &H2
+
+Private Declare Sub ReleaseCapture Lib "user32" ()
+Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" _
+                                     (ByVal hwnd As Long, ByVal wMsg As Long, _
+                                      ByVal wParam As Long, ByVal lParam As Long) As Long
+
+Private Const WM_NCLBUTTONDOWN = &HA1
+Private Const HTCAPTION = 2
+
+
 Private Declare Function SetWindowTextW Lib "user32" _
                                         (ByVal hwnd As Long, ByVal lpString As Long) As Long
-Private Declare Function MultiByteToWideChar Lib "kernel32" _
+Private Declare Function MultiByteToWideChar Lib "Kernel32" _
                                              (ByVal CodePage As Long, ByVal dwFlags As Long, _
                                               lpMultiByteStr As Any, ByVal cchMultiByte As Long, _
                                               ByVal lpWideCharStr As Long, ByVal cchWideChar As Long) As Long
 
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal length As Long)
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Dim Counter As Integer
@@ -121,6 +205,8 @@ Dim pass As Integer
 Dim psw As String
 Dim ok As Boolean
 Dim scecretpws As String
+Private m_Title As String   ' gi? chu?i s?ng
+
 
 '====================================================================================================
 ' KiÓm tra mËt khÈu
@@ -231,6 +317,50 @@ Public Sub CheckAndCreateTableDinhDanh()
         Set fld = tdf.CreateField("TKThue", dbText, 255)
         tdf.Fields.Append fld
         ' Thêm b?ng vào co s? d? li?u
+        DBKetoan.TableDefs.Append tdf
+
+    End If
+End Sub
+Public Sub CheckAndCreateTableFontSize()
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim tableExists As Boolean
+    Dim tableName As String
+    tableName = "tbFontsize"    ' Thay d?i tên b?ng c?a b?n ? dây
+    tableExists = False
+
+    ' Ki?m tra t?n t?i b?ng
+    For Each tdf In DBKetoan.TableDefs
+        If tdf.Name = tableName Then
+            tableExists = True
+            Exit For
+        End If
+    Next tdf
+
+    If Not tableExists Then
+        ' T?o b?ng n?u chua t?n t?i
+        Set tdf = DBKetoan.CreateTableDef(tableName)
+
+        Set fld = tdf.CreateField("ID", dbLong)
+        fld.Attributes = dbAutoIncrField    ' Thi?t l?p thu?c tính t? d?ng tang
+        tdf.Fields.Append fld
+
+        ' Menu
+        Set fld = tdf.CreateField("MemnuFont", dbText, 255)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("MenuSize", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("MenuBold", dbDouble)
+        tdf.Fields.Append fld
+        'Font control
+        Set fld = tdf.CreateField("ControlvniFont", dbText, 255)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("ControlvniSize", dbDouble)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("ControluniFont", dbText, 255)
+        tdf.Fields.Append fld
+        Set fld = tdf.CreateField("ControluniSize", dbDouble)
+        tdf.Fields.Append fld
         DBKetoan.TableDefs.Append tdf
 
     End If
@@ -681,6 +811,7 @@ End Sub
 
 
 Private Sub Form_Activate()
+
     Left = frmMain.ScaleWidth * 30 / 100
     Top = frmMain.ScaleHeight * 40 / 100
     CheckAndCreateTable
@@ -693,6 +824,7 @@ Private Sub Form_Activate()
     If countrow = 0 Then
         ExecuteSQL5 ("insert into tbLicensekey(Type,Year,Totals) values(0,0,0)")
     End If
+    CheckAndCreateTableFontSize
     CheckAndCreateTableThongTinToKhai
     CheckAndCreateTablePL1
     CheckAndCreateTablePL2
@@ -753,6 +885,7 @@ Private Sub Form_Activate()
 
         End If
     End If
+ 
 End Sub
 '====================================================================================================
 ' Thu tuc kiem tra mat khau
@@ -851,23 +984,63 @@ Public Sub SetFormCaptionUnicode(frm As Form, ByVal sAnsiText As String)
 End Sub
 Public Function AnsiToUnicode(ByVal sAnsi As String) As String
     Dim bytes() As Byte
-    Dim length As Long
+    Dim Length As Long
     
     ' Convert ANSI string to bytes
     bytes = sAnsi
     
     ' Get required buffer size
-    length = MultiByteToWideChar(0, 0, bytes(0), -1, 0, 0)
-    AnsiToUnicode = String$(length, 0)
+    Length = MultiByteToWideChar(0, 0, bytes(0), -1, 0, 0)
+    AnsiToUnicode = String$(Length, 0)
     
     ' Do conversion
     MultiByteToWideChar 0, 0, bytes(0), -1, _
-                       StrPtr(AnsiToUnicode), length
+                       StrPtr(AnsiToUnicode), Length
 End Function
+  Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+
+
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+
+Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+ 
     Counter = -1
     Int_RecsetToCbo "SELECT MaSo As F2, TenNSD As F1 FROM Users ORDER BY TenNSD", CboUser
     SetFont Me
+    Label1.Left = Image1.Left + Image1.Width + 80
+    lblClose.Left = picTitle.ScaleWidth - 480
+    'BuildTitle
+    'SetWindowTextW Me.hwnd, StrPtr(m_Title)
+
+End Sub
+Private Sub BuildTitle()
+    m_Title = ""
+    m_Title = m_Title & ChrW(&H4D)   ' M
+    m_Title = m_Title & ChrW(&H1EAD) ' ?
+    m_Title = m_Title & ChrW(&H74)   ' t
+    m_Title = m_Title & ChrW(&H20)   ' space
+    m_Title = m_Title & ChrW(&H6B)   ' k
+    m_Title = m_Title & ChrW(&H68)   ' h
+    m_Title = m_Title & ChrW(&H1EA9) ' ?
+    m_Title = m_Title & ChrW(&H75)   ' u
+    m_Title = m_Title & ChrW(&H20)
+    m_Title = m_Title & ChrW(&H111)  ' d
+    m_Title = m_Title & ChrW(&H103)  ' a
+    m_Title = m_Title & ChrW(&H6E)
+    m_Title = m_Title & ChrW(&H67)
+    m_Title = m_Title & ChrW(&H20)
+    m_Title = m_Title & ChrW(&H6E)
+    m_Title = m_Title & ChrW(&H68)
+    m_Title = m_Title & ChrW(&H1EAD)
+    m_Title = m_Title & ChrW(&H70)
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)

@@ -359,6 +359,7 @@ End Sub
 ' Thñ tôc thùc hiÖn cËp nhËt
 '======================================================================================
 Public Function ExecuteSQL5(sql As String, Optional msg As Boolean = True) As Integer
+    Dim s As String
     On Error GoTo ErrLock
     DBKetoan.Execute sql, dbFailOnError
     Debug.Print sql
@@ -369,18 +370,33 @@ ErrLock:
     If msg Then
         Select Case Err.number
         Case 13:
-            MsgBox "Kh«ng nhËn d¹ng ®­îc kiÓu d÷ liÖu", vbExclamation, App.ProductName
+            'MsgBox "Kh«ng nhËn d¹ng ®­îc kiÓu d÷ liÖu", vbExclamation, App.ProductName
+            s = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110) & ChrW(32) & ChrW(100) & ChrW(7841) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(273) & ChrW(432) & ChrW(7907) & ChrW(99) & ChrW(32) & ChrW(107) & ChrW(105) & ChrW(7875) & ChrW(117) & ChrW(32) & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117)
+            MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         Case 3040, 3043, 3566, 3572, 3575:
-            MsgBox "Lçi ®äc ghi ®Üa. KiÓm tra l¹i ®Üa cøng hoÆc m¹ng !", vbExclamation, App.ProductName
+            'MsgBox "Lçi ®äc ghi ®Üa. KiÓm tra l¹i ®Üa cøng hoÆc m¹ng !", vbExclamation, App.ProductName
+            s = ChrW(76) & ChrW(7895) & ChrW(105) & ChrW(32) & ChrW(273) & ChrW(7885) & ChrW(99) & ChrW(32) & ChrW(103) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(273) & ChrW(297) & ChrW(97) & ChrW(46) & ChrW(32) & ChrW(75) & ChrW(105) & ChrW(7875) & ChrW(109) & ChrW(32) & ChrW(116) & ChrW(114) & ChrW(97) & ChrW(32) & ChrW(108) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(273) & ChrW(297) & ChrW(97) & ChrW(32) & ChrW(99) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(109) & ChrW(7841) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(33)
+            MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         Case 3006, 3008, 3009, 3202, 3045, 3046, 3186, 3187, 3188, 3189, 3196, 3211, 3212, 3218, 3260, 3261, 3262, 3356, 3576, 3623:
             DBEngine.Idle
             Resume
         Case 3200, 3201:
-            MsgBox "§· cã th«ng tin, kh«ng xo¸ !", vbExclamation, App.ProductName
+            'MsgBox "§· cã th«ng tin, kh«ng xo¸ !", vbExclamation, App.ProductName
+            s = ChrW(208) & ChrW(227) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(110) & ChrW(44) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(120) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(33)
+            MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         Case 3022:
-            MsgBox "Trïng lÆp sè hiÖu, tªn... !", vbExclamation, App.ProductName
+            'MsgBox "Trïng lÆp sè hiÖu, tªn... !", vbExclamation, App.ProductName
+            s = ChrW(84) & ChrW(114) & ChrW(249) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(108) & ChrW(7863) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(44) & ChrW(32) & ChrW(116) & ChrW(234) & ChrW(110) & ChrW(46) & ChrW(46) & ChrW(46) & ChrW(32) & ChrW(33)
+            MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         Case 3075:
-            MsgBox "Kh«ng sö dông dÊu ' trong c¸c chuçi", vbExclamation, App.ProductName
+            'MsgBox "Kh«ng sö dông dÊu ' trong c¸c chuçi", vbExclamation, App.ProductName
+            s = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(115) & ChrW(7917) & ChrW(32) & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(100) & ChrW(7845) & ChrW(117) & ChrW(32) & ChrW(39) & ChrW(32) & ChrW(116) & ChrW(114) & ChrW(111) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(7895) & ChrW(105)
+            MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         Case Else
             MsgBox "Error " + CStr(Err.number) + ": " + Err.Description, vbExclamation, App.ProductName
         End Select

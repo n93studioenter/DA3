@@ -5,7 +5,6 @@ Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Begin VB.Form FBcTC 
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   0  'None
-   Caption         =   "B¸o c¸o thuÕ - Tµi chÝnh"
    ClientHeight    =   6195
    ClientLeft      =   1620
    ClientTop       =   2610
@@ -23,6 +22,75 @@ Begin VB.Form FBcTC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Tag             =   "Financial Report"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   134
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   136
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Fbctc.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Fbctc.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9360
+         TabIndex        =   135
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.Frame Frame1 
       Caption         =   "Frame1"
       Height          =   495
@@ -138,9 +206,9 @@ Begin VB.Form FBcTC
       End
       Begin VB.ComboBox CTGS 
          Height          =   315
-         ItemData        =   "Fbctc.frx":57E2
+         ItemData        =   "Fbctc.frx":115BC
          Left            =   240
-         List            =   "Fbctc.frx":57E9
+         List            =   "Fbctc.frx":115C3
          Style           =   2  'Dropdown List
          TabIndex        =   126
          Top             =   3120
@@ -260,9 +328,9 @@ Begin VB.Form FBcTC
             Strikethrough   =   0   'False
          EndProperty
          Height          =   450
-         ItemData        =   "Fbctc.frx":57F3
+         ItemData        =   "Fbctc.frx":115CD
          Left            =   600
-         List            =   "Fbctc.frx":57F5
+         List            =   "Fbctc.frx":115CF
          TabIndex        =   120
          Top             =   0
          Width           =   2625
@@ -334,7 +402,7 @@ Begin VB.Form FBcTC
       Height          =   255
       Index           =   3
       Left            =   840
-      Picture         =   "Fbctc.frx":57F7
+      Picture         =   "Fbctc.frx":115D1
       Style           =   1  'Graphical
       TabIndex        =   114
       Tag             =   "&View"
@@ -346,7 +414,7 @@ Begin VB.Form FBcTC
       Height          =   375
       Index           =   3
       Left            =   1920
-      Picture         =   "Fbctc.frx":5B39
+      Picture         =   "Fbctc.frx":11913
       Style           =   1  'Graphical
       TabIndex        =   112
       Top             =   6600
@@ -357,7 +425,7 @@ Begin VB.Form FBcTC
       Height          =   375
       Index           =   1
       Left            =   1920
-      Picture         =   "Fbctc.frx":5FB3
+      Picture         =   "Fbctc.frx":11D8D
       Style           =   1  'Graphical
       TabIndex        =   108
       Top             =   4080
@@ -368,7 +436,7 @@ Begin VB.Form FBcTC
       Height          =   375
       Index           =   0
       Left            =   1680
-      Picture         =   "Fbctc.frx":642D
+      Picture         =   "Fbctc.frx":12207
       Style           =   1  'Graphical
       TabIndex        =   107
       Top             =   4560
@@ -379,7 +447,7 @@ Begin VB.Form FBcTC
       Height          =   375
       Index           =   2
       Left            =   120
-      Picture         =   "Fbctc.frx":68A7
+      Picture         =   "Fbctc.frx":12681
       Style           =   1  'Graphical
       TabIndex        =   106
       Tag             =   "&Return"
@@ -390,7 +458,7 @@ Begin VB.Form FBcTC
       Height          =   375
       Index           =   1
       Left            =   120
-      Picture         =   "Fbctc.frx":7CC9
+      Picture         =   "Fbctc.frx":13AA3
       Style           =   1  'Graphical
       TabIndex        =   105
       Tag             =   "&Print"
@@ -402,7 +470,7 @@ Begin VB.Form FBcTC
       Height          =   375
       Index           =   0
       Left            =   1440
-      Picture         =   "Fbctc.frx":912B
+      Picture         =   "Fbctc.frx":14F05
       Style           =   1  'Graphical
       TabIndex        =   104
       Tag             =   "&View"
@@ -544,7 +612,7 @@ Begin VB.Form FBcTC
          Height          =   375
          Index           =   6
          Left            =   5280
-         Picture         =   "Fbctc.frx":A29D
+         Picture         =   "Fbctc.frx":16077
          Style           =   1  'Graphical
          TabIndex        =   111
          Top             =   1800
@@ -555,7 +623,7 @@ Begin VB.Form FBcTC
          Height          =   375
          Index           =   5
          Left            =   5280
-         Picture         =   "Fbctc.frx":A717
+         Picture         =   "Fbctc.frx":164F1
          Style           =   1  'Graphical
          TabIndex        =   110
          Top             =   1320
@@ -566,7 +634,7 @@ Begin VB.Form FBcTC
          Height          =   375
          Index           =   4
          Left            =   5280
-         Picture         =   "Fbctc.frx":AB91
+         Picture         =   "Fbctc.frx":1696B
          Style           =   1  'Graphical
          TabIndex        =   109
          Top             =   600
@@ -789,9 +857,9 @@ Begin VB.Form FBcTC
       End
       Begin VB.ComboBox CboTL 
          Height          =   315
-         ItemData        =   "Fbctc.frx":AD0F
+         ItemData        =   "Fbctc.frx":16AE9
          Left            =   4680
-         List            =   "Fbctc.frx":AD37
+         List            =   "Fbctc.frx":16B11
          Style           =   2  'Dropdown List
          TabIndex        =   49
          Top             =   240
@@ -1337,7 +1405,7 @@ Begin VB.Form FBcTC
          Height          =   375
          Index           =   2
          Left            =   5400
-         Picture         =   "Fbctc.frx":AD65
+         Picture         =   "Fbctc.frx":16B3F
          Style           =   1  'Graphical
          TabIndex        =   113
          Top             =   1499
@@ -1375,9 +1443,9 @@ Begin VB.Form FBcTC
          EndProperty
          Height          =   315
          Index           =   2
-         ItemData        =   "Fbctc.frx":AEE3
+         ItemData        =   "Fbctc.frx":16CBD
          Left            =   5280
-         List            =   "Fbctc.frx":B076
+         List            =   "Fbctc.frx":16E50
          Style           =   2  'Dropdown List
          TabIndex        =   22
          Top             =   240
@@ -1760,9 +1828,9 @@ Begin VB.Form FBcTC
       Begin VB.ComboBox CboThang 
          Height          =   315
          Index           =   0
-         ItemData        =   "Fbctc.frx":B186
+         ItemData        =   "Fbctc.frx":16F60
          Left            =   240
-         List            =   "Fbctc.frx":B18D
+         List            =   "Fbctc.frx":16F67
          Style           =   2  'Dropdown List
          TabIndex        =   1
          Top             =   600
@@ -1771,9 +1839,9 @@ Begin VB.Form FBcTC
       Begin VB.ComboBox CboThang 
          Height          =   315
          Index           =   1
-         ItemData        =   "Fbctc.frx":B19B
+         ItemData        =   "Fbctc.frx":16F75
          Left            =   240
-         List            =   "Fbctc.frx":B1A2
+         List            =   "Fbctc.frx":16F7C
          Style           =   2  'Dropdown List
          TabIndex        =   2
          Top             =   1440
@@ -1939,9 +2007,9 @@ Begin VB.Form FBcTC
    Begin VB.ComboBox CboNK 
       Height          =   315
       Index           =   1
-      ItemData        =   "Fbctc.frx":B1B0
+      ItemData        =   "Fbctc.frx":16F8A
       Left            =   1920
-      List            =   "Fbctc.frx":B1B7
+      List            =   "Fbctc.frx":16F91
       Style           =   2  'Dropdown List
       TabIndex        =   18
       Top             =   6240
@@ -1951,9 +2019,9 @@ Begin VB.Form FBcTC
    Begin VB.ComboBox CboNK 
       Height          =   315
       Index           =   0
-      ItemData        =   "Fbctc.frx":B1C2
+      ItemData        =   "Fbctc.frx":16F9C
       Left            =   0
-      List            =   "Fbctc.frx":B1C9
+      List            =   "Fbctc.frx":16FA3
       Style           =   2  'Dropdown List
       TabIndex        =   17
       Top             =   6480
@@ -2372,7 +2440,7 @@ Dim letter As String
 Dim Text1 As String
 Dim Text2 As String
 Dim MapNum As String
-Dim i, Pos, item, TLen
+Dim i, pos, item, TLen
     ' Assign content of input Textbox to Text1
     'Text1 = TextBox1(0).Text
     If IsNull(chuoi) Then
@@ -2411,13 +2479,13 @@ Dim i, Pos, item, TLen
         Else
            ' get here if encounter a "&", obtain the position of the Unicode vowel
            ' Note that there'll be a bug if the text string contains genuine "|" character
-           Pos = val(Mid(Text1, i + 1, 3))
-           If Pos = 0 Then
+           pos = val(Mid(Text1, i + 1, 3))
+           If pos = 0 Then
                Text2 = Text2 & letter
                i = i + 1
            Else
              ' get the Unicode vowel for output
-               Text2 = Text2 & Mid(UVowels, Pos, 1)
+               Text2 = Text2 & Mid(UVowels, pos, 1)
                i = i + 4
            End If
         End If
@@ -2879,40 +2947,55 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
 Public Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 300 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 300
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
+
+
     Dim chi_so As Integer
-    
+
     baocao = 0
     Pdelay = GetSetting(IniPath, "Environment", "PrinterDelay", 30)
-    Caption = Caption + " - " + CStr(pNamTC)
+    Caption = "B¸o c¸o thuÕ - Tµi chÝnh" + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     Int_RecsetToCbo "SELECT DoituongCT.MaSo As F2,(IIF(DoituongCT.MaKhachHang>0,KhachHang.Ten+' - '+DoituongCT.Sohieu+' - ','')+DienGiai+IIF(DoituongCT.MaKhachHang>0,' - '+ Format(NgayKy,'dd/mm/yy'),'')) As F1 FROM DoituongCT LEFT JOIN KhachHang ON DoituongCT.MaKhachHang=KhachHang.MaSo ORDER BY  KhachHang.Ten,DoituongCT.SoHieu,DienGiai", CboVV
-    
+
     tkdt1 = GetSetting(IniPath, "VAT", "TK_DTHU1", "51")
     tkdt2 = GetSetting(IniPath, "VAT", "TK_DTHU2", "3387")
     tkdt3 = GetSetting(IniPath, "VAT", "TK_DTHU3", "711")
     tkdt4 = GetSetting(IniPath, "VAT", "TK_DTHU4", "721")
-    
+
     vatr = GetSetting(IniPath, "VAT", "TK_VATR", "3331")
-    
+
     vatv1 = GetSetting(IniPath, "VAT", "TK_VATV1", pVATV + "111")
     vatv2 = GetSetting(IniPath, "VAT", "TK_VATV2", pVATV + "211")
     vatv3 = GetSetting(IniPath, "VAT", "TK_VATV3", pVATV + "12")
     vatv4 = GetSetting(IniPath, "VAT", "TK_VATV4", pVATV + "22")
-    
+
     sodcthue = GetSetting(IniPath, "LastYear", "IncTax" + CStr(pNamTC), 0)
-    
+
     For chi_so = 0 To 1
         AddMonthToCbo CboThang(chi_so)
-       CboNK(chi_so).ListIndex = 0
+        CboNK(chi_so).ListIndex = 0
         InitDateVars MedNgay(chi_so), ngay(chi_so)
     Next
-    
+
     Int_RecsetToCbo "SELECT MaSo As F2,SoHieu+ ' - '+DienGiai As F1 FROM CTGhiSo ORDER BY SoHieu", CTGS
-    
+
     NLB = GetSetting(IniPath, "Environment", "SReport1", "")
     KTT = GetSetting(IniPath, "Environment", "SReport2", "")
     GD = GetSetting(IniPath, "Environment", "SReport3", "")
-       
+
     CTGS.Visible = (pSoKT Mod 100 >= 10)
     OptBC(14).Visible = (pSoKT Mod 100 >= 10)
     OptBC(15).Visible = (pSoKT Mod 100 >= 10)
@@ -2920,69 +3003,69 @@ Public Sub Form_Load()
     OptBC(18).Visible = (pSoKT Mod 100 >= 10)
     OptBC(20).Visible = (pSoKT Mod 100 >= 10)
     OptBC(21).Visible = (pSoKT Mod 100 >= 10)
-    
+
     OptBC(12).Visible = (pSoKT Mod 1000 >= 100)
     OptBC(13).Visible = (pSoKT Mod 1000 >= 100)
     'OptBC(13).Visible
     CboNK(0).Visible = (pSoKT Mod 1000 >= 100)
     Label(3).Visible = (pSoKT Mod 1000 >= 100)
-    
+
     OptBC(1).Visible = (pSoKT Mod 1000 >= 100) Or (pSoKT Mod 10 >= 1)
     OptKqkd(9).Visible = (Len(Dir(pCurDir + "REPORTS\DTCP.XLS")) > 0)
-            
+
     Frame(5).Visible = pSongNgu
-    
+
     If pNN = 1 Then OptNN(1).Value = True
     CboTL.ListIndex = 1
     CboNK(2).ListIndex = 0
-    
+
     If pNoiBo > 0 Then
         OptBC(5).Enabled = False
         OptBC(7).Enabled = False
         OptBC(11).Enabled = False
         OptBC(17).Enabled = False
     End If
-        
+
     Frame(6).Visible = (pSoVV > 0)
     For chi_so = 1 To pSoVV
         ChkTT(chi_so - 1).Visible = True
         CboTT(chi_so - 1).Visible = True
         Int_RecsetToCbo "SELECT MaSo As F2,DienGiai As F1 FROM DoituongCT" + CStr(chi_so) + " ORDER BY DoituongCT" + CStr(chi_so) + ".DienGiai", CboTT(chi_so - 1)
     Next
-    
+
     If pVersion = 3 Then
         OptBC(11).Caption = "C¸c b¸o c¸o vÒ h¹n møc kinh phÝ"
         OptQT(2).Visible = False
     End If
-    
+
     SetFont Me
-    
+
     Frame(2).Visible = True
     OptBc_Click 5
-    
-    OptBC(1).Visible = False
-    
-      Dim ngaytt As Date
- ngaytt = "01/01/" + Mid(str(pNamTC), 4, 5)
- MedNgay(0).Text = ngaytt
- MedNgay(1).Text = ngaytt
-OptBC(5).Value = True
-OptBC(5).BackColor = 8438015
 
-ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD MauSoHD text")
-   ExecuteSQL5_Themmoi ("ALTER TABLE chungtuP  ADD MauSoHD text")
-   ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD LoaiHoaDon text")
-   ExecuteSQL5_Themmoi ("ALTER TABLE chungtuP  ADD LoaiHoaDon text")
-   
+    OptBC(1).Visible = False
+
+    Dim ngaytt As Date
+    ngaytt = "01/01/" + Mid(str(pNamTC), 4, 5)
+    MedNgay(0).Text = ngaytt
+    MedNgay(1).Text = ngaytt
+    OptBC(5).Value = True
+    OptBC(5).BackColor = 8438015
+
+    ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD MauSoHD text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE chungtuP  ADD MauSoHD text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD LoaiHoaDon text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE chungtuP  ADD LoaiHoaDon text")
+
     If SelectSQL("SELECT count(maso) AS F1 from HethongTK where SoHieu LIKE '621*'") <= 0 Then
-              '   If SelectSQL("SELECT count(maso) as f1 from cdts2005 where maso = 320") > 0 Or SelectSQL("SELECT count(maso) as f1 from cdts2005") <= 0 Then
-                    ExecuteSQL5 "drop table cdts2005 "
-                    ExecuteSQL5 "drop table KQKD "
-                    ExecuteSQL5 "SELECT * INTO cdts2005 FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].cdts2005"
-                    ExecuteSQL5 "SELECT * INTO KQKD FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].KQKD"
-               ' End If
-   End If
-   
+        '   If SelectSQL("SELECT count(maso) as f1 from cdts2005 where maso = 320") > 0 Or SelectSQL("SELECT count(maso) as f1 from cdts2005") <= 0 Then
+        ExecuteSQL5 "drop table cdts2005 "
+        ExecuteSQL5 "drop table KQKD "
+        ExecuteSQL5 "SELECT * INTO cdts2005 FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].cdts2005"
+        ExecuteSQL5 "SELECT * INTO KQKD FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].KQKD"
+        ' End If
+    End If
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -3148,7 +3231,7 @@ Private Sub OptBc_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
     If pRpt = 1 And Button = 2 And User_Right = 0 Then
         FU1.QuyenBCTongHop Index, OptBC(Index).Caption
     End If
@@ -3157,7 +3240,7 @@ Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Intege
       
 End Sub
 
-Private Sub OptBC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub OptBC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
     Dim i
 
         OptBC(5).BackColor = &H80FF80 '&HC0FFC0    '&H80000003
@@ -3219,37 +3302,37 @@ End Sub
 '======================================================================================
 Private Sub InVAT(tdau As Integer, tcuoi As Integer)
     Dim sql As String, kn As Double, lk As Double, CK As Double, cklk As Double, TK As New ClsTaikhoan
-    Dim dk As Double, duno As Double, lk1 As Double, duco As Double, X As Double, Y As Double, lk2 As Double
+    Dim dk As Double, duno As Double, lk1 As Double, duco As Double, x As Double, y As Double, lk2 As Double
     
     GauGe.Max = 10
     
     ExecuteSQL5 "UPDATE VAT SET KyNay = 0,LuyKe=0"
     
     TK.InitTaikhoanSohieu pVATV
-    TK.SoDuTK ThangTruoc(tdau), duno, duco, X
+    TK.SoDuTK ThangTruoc(tdau), duno, duco, x
     kn = duno - duco
-    TK.SoDuTK 0, duno, duco, X
+    TK.SoDuTK 0, duno, duco, x
     lk = duno - duco
     TK.InitTaikhoanSohieu vatr
-    TK.SoDuTK ThangTruoc(tdau), duno, duco, X
+    TK.SoDuTK ThangTruoc(tdau), duno, duco, x
     kn = kn + duno - duco
-    TK.SoDuTK 0, duno, duco, X
+    TK.SoDuTK 0, duno, duco, x
     lk = lk + duno - duco
     lk2 = -kn
     
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(IIf(kn > 0, kn, 0)) + ",LuyKe = " + DoiDau(IIf(lk > 0, lk, 0)) + " WHERE MaSo = '10'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(IIf(kn < 0, -kn, 0)) + ",LuyKe = " + DoiDau(IIf(lk < 0, -lk, 0)) + " WHERE MaSo = '40'"
     
-    VATHoanLai tdau, tcuoi, dk, duno, lk1, duco, X
+    VATHoanLai tdau, tcuoi, dk, duno, lk1, duco, x
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk) + " WHERE MaSo = '20'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duno) + ", LuyKe = " + DoiDau(lk1) + " WHERE MaSo = '21'"
-    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(X) + " WHERE MaSo = '22'"
+    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(x) + " WHERE MaSo = '22'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk + duno - duco) + " WHERE MaSo = '23'"
     
-    VATMienGiam tdau, tcuoi, dk, duno, lk1, duco, X
+    VATMienGiam tdau, tcuoi, dk, duno, lk1, duco, x
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk) + " WHERE MaSo = '30'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duno) + ", LuyKe = " + DoiDau(lk1) + " WHERE MaSo = '31'"
-    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(X) + " WHERE MaSo = '32'"
+    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(x) + " WHERE MaSo = '32'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk + duno - duco) + " WHERE MaSo = '33'"
     
     GauGe.Value = 1
@@ -3264,17 +3347,17 @@ Private Sub InVAT(tdau As Integer, tcuoi As Integer)
     If TK.tk_id = GTGTKT_ID Then
         sql = "SELECT SUM(IIF(" + WThang("ThangCT", tdau, 0) + ",SoPS,0)) AS F1,SUM(SoPS) AS F2 FROM (" + ChungTu2TKNC(0) + ") LEFT JOIN MienTru ON ChungTu.MaCT=MienTru.MaCT " _
             & " WHERE IsNull(MienTru.MaCT) AND (HethongTK.SoHieu LIKE '33312*') AND " + WThang("ThangCT", 0, tcuoi) + " AND (TK.SoHieu LIKE '11*' OR TK.SoHieu LIKE '136*')"
-        X = SelectSQL(sql, Y) - PSDu(pVATV, "33312", tdau, tcuoi)
-        Y = Y - PSDu(pVATV, "33312", pThangDauKy, tcuoi)
+        x = SelectSQL(sql, y) - PSDu(pVATV, "33312", tdau, tcuoi)
+        y = y - PSDu(pVATV, "33312", pThangDauKy, tcuoi)
     Else
-        X = 0
-        Y = 0
+        x = 0
+        y = 0
     End If
     
     sql = "SELECT SUM(IIF(" + WThang("ThangCT", tdau, 0) + ",SoPS,0)) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKHD(0) + " WHERE HoaDon.Loai=-1 AND " + WThang("ThangCT", 0, tcuoi)
     kn = SelectSQL(sql, lk)
-    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(kn - X) + ",LuyKe = " + DoiDau(lk - Y) + " WHERE MaSo = '11'"
-    lk2 = lk2 - (kn - X)
+    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(kn - x) + ",LuyKe = " + DoiDau(lk - y) + " WHERE MaSo = '11'"
+    lk2 = lk2 - (kn - x)
     
     sql = "SELECT SUM(IIF(" + WThang("ThangCT", tdau, 0) + ",SoPS,0)) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKNC(0) _
         & " WHERE (HethongTK.SoHieu LIKE '142*' OR HethongTK.SoHieu LIKE '242*' OR HethongTK.SoHieu LIKE '6*' OR HethongTK.SoHieu LIKE '421*') AND (TK.SoHieu LIKE '" + pVATV + "*') AND " + WThang("ThangCT", 0, tcuoi)
@@ -6340,7 +6423,7 @@ Private Sub ToKhaiVAT2(thang As Integer, taikhoan As ClsTaikhoan)
     If prg = 0 Then Exit Sub
     AppActivate prg
     AppIdle w1
-B:
+b:
     SendKeys "{F9}"
     AppIdle w1
     ' chon thang
@@ -6369,7 +6452,7 @@ B:
     SendKeys Chr(32)
     AppIdle w1
     f1 = 1
-    GoTo B
+    GoTo b
     
 a:
     SendKeys "{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}"
@@ -7140,7 +7223,7 @@ Private Function KiemTraMaVach(loai As Integer, dd As String) As String
 End Function
 
 Private Function DKToKhai(thang As Integer, shct As String)
-    Dim TK As ClsTaikhoan, duno As Double, duco As Double, dunt As Double, sql As String, X As Double
+    Dim TK As ClsTaikhoan, duno As Double, duco As Double, dunt As Double, sql As String, x As Double
     Dim tdau As Integer
     
     If thang = pThangDauKy Then
@@ -7151,8 +7234,8 @@ Private Function DKToKhai(thang As Integer, shct As String)
         duno = duno - duco
         
         TK.InitTaikhoanSohieu vatr, shct
-        TK.SoDuTK 0, X, duco, dunt
-        duno = duno + X - duco
+        TK.SoDuTK 0, x, duco, dunt
+        duno = duno + x - duco
         
         Set TK = Nothing
     Else
@@ -7171,8 +7254,8 @@ Private Function DKToKhai(thang As Integer, shct As String)
         Else
             sql = "SELECT SUM(SoPS) AS F1 FROM " + ChungTu2TKHD(0) + " WHERE HoaDon.Loai=1 AND " + WThang("ThangCT", tdau, tdau)
         End If
-        X = SelectSQL(sql)
-        If X < 0 Then duno = duno + Abs(X)
+        x = SelectSQL(sql)
+        If x < 0 Then duno = duno + Abs(x)
         
         sql = "SELECT SUM(SoPS) AS F1 FROM " + ChungTu2TKNC(0) _
                 & " WHERE (HethongTK.SoHieu LIKE '142*' OR HethongTK.SoHieu LIKE '242*' OR HethongTK.SoHieu LIKE '6*') AND (TK.SoHieu LIKE '" + pVATV + "*') AND RIGHT(TK.SoHieu," + CStr(Len(shct)) + ")='" + shct + "' AND " + WThang("ThangCT", tdau, tdau)
@@ -7265,7 +7348,7 @@ KT:
 End Sub
 
 Private Sub PTDTCP(tdau As Integer, tcuoi As Integer)
-    Dim r As Integer, X As Integer, j As Integer, ps As Double, f As Integer, v As Double, pslk As Double, vlk As Double
+    Dim r As Integer, x As Integer, j As Integer, ps As Double, f As Integer, v As Double, pslk As Double, vlk As Double
     Dim TK As New ClsTaikhoan
 
     Recycle pCurDir + "DTCP.XLS"
@@ -7275,8 +7358,8 @@ Private Sub PTDTCP(tdau As Integer, tcuoi As Integer)
     xlapp.Workbooks.Open pCurDir + "DTCP.XLS"
     On Error GoTo 0
     
-    For X = 1 To 3
-        Set xlsheet = xlapp.Worksheets(X)
+    For x = 1 To 3
+        Set xlsheet = xlapp.Worksheets(x)
         
         xlsheet.Cells(1, 1) = pTenCty
         xlsheet.Cells(2, 1) = pTenCn
@@ -7288,7 +7371,7 @@ Private Sub PTDTCP(tdau As Integer, tcuoi As Integer)
             f = 0
             j = 12
             
-            If X > 1 Then
+            If x > 1 Then
                 Do While Len(xlsheet.Cells(r, j)) > 0
                     TK.InitTaikhoanSohieu xlsheet.Cells(r, j)
                     If TK.MaSo > 0 Then

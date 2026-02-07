@@ -37,28 +37,31 @@ Public NCT As Date
 '                         Tr¶ vÒ : 0 nÕu ®óng, -1 nÕu cã lçi
 '======================================================================================
 Public Function HopLe()
-Dim thong_bao As String, sql As String
-Dim so_hieu As String
-      If Len(sohieu) = 0 Or sohieu = "(...)" Then thong_bao = "ThiÕu sè hiÖu tµi s¶n": GoTo Err_InValidate
-      If Len(Ten) = 0 Or Ten = "(...)" Then thong_bao = "ThiÕu tªn tµi s¶n": GoTo Err_InValidate
-      ' C¸c ®èi t­îng quan hÖ
-      If MaNuoc = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký tªn n­íc s¶n xuÊt": GoTo Err_InValidate
-      'If NamSX < 1800 Or NamSX > 3000 Then thong_bao = "Thêi gian s¶n xuÊt cña tµi s¶n thiÕu hoÆc kh«ng chÝnh x¸c": GoTo Err_InValidate
-      'If NamSD < 1800 Or NamSD > 3000 Then thong_bao = "Thêi gian sö dông cña tµi s¶n thiÕu hoÆc kh«ng chÝnh x¸c": GoTo Err_InValidate
-      If MaTaiKhoan = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký tµi kho¶n tµi s¶n": GoTo Err_InValidate
-      If maloai = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký ph©n lo¹i tµi s¶n": GoTo Err_InValidate
-'      If MaNhom = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký ph©n nhãm tµi s¶n": GoTo Err_InValidate
-      ' KiÓm tra sè hiÖu
-      sql = "SELECT SoHieu AS F1 FROM LoaiTaiSan WHERE MaSo = " + CStr(IIf(MaNhom > 0, MaNhom, maloai))
-      so_hieu = CStr(SelectSQL(sql))
-      If Not Left(sohieu, Len(so_hieu)) = so_hieu Then thong_bao = "Sè hiÖu tµi s¶n kh«ng ®óng quy ®Þnh": GoTo Err_InValidate
-      If ThangGiam = 0 Then ThangGiam = 13
-      HopLe = ThongSo.HopLe
-      Exit Function
+    Dim thong_bao As String, sql As String
+    Dim so_hieu As String
+    Dim s As String
+    If Len(sohieu) = 0 Or sohieu = "(...)" Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110): GoTo Err_InValidate
+    If Len(Ten) = 0 Or Ten = "(...)" Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110): GoTo Err_InValidate
+    ' C¸c ®èi t­îng quan hÖ
+    If MaNuoc = 0 Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(116) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(110) & ChrW(432) & ChrW(7899) & ChrW(99) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116): GoTo Err_InValidate
+    'If NamSX < 1800 Or NamSX > 3000 Then thong_bao = "Thêi gian s¶n xuÊt cña tµi s¶n thiÕu hoÆc kh«ng chÝnh x¸c": GoTo Err_InValidate
+    'If NamSD < 1800 Or NamSD > 3000 Then thong_bao = "Thêi gian sö dông cña tµi s¶n thiÕu hoÆc kh«ng chÝnh x¸c": GoTo Err_InValidate
+    If MaTaiKhoan = 0 Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(116) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(110) & ChrW(432) & ChrW(7899) & ChrW(99) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(120) & ChrW(117) & ChrW(7845) & ChrW(116): GoTo Err_InValidate
+    If maloai = 0 Then s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110): GoTo Err_InValidate
+    '      If MaNhom = 0 Then thong_bao = "ThiÕu hoÆc ch­a ®¨ng ký ph©n nhãm tµi s¶n": GoTo Err_InValidate
+    ' KiÓm tra sè hiÖu
+    sql = "SELECT SoHieu AS F1 FROM LoaiTaiSan WHERE MaSo = " + CStr(IIf(MaNhom > 0, MaNhom, maloai))
+    so_hieu = CStr(SelectSQL(sql))
+    If Not Left(sohieu, Len(so_hieu)) = so_hieu Then s = ChrW(83) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(273) & ChrW(250) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(121) & ChrW(32) & ChrW(273) & ChrW(7883) & ChrW(110) & ChrW(104): GoTo Err_InValidate
+    If ThangGiam = 0 Then ThangGiam = 13
+    HopLe = ThongSo.HopLe
+    Exit Function
 Err_InValidate:
-      Beep
-      MsgBox thong_bao, vbCritical, App.ProductName
-      HopLe = -1
+    Beep
+    'MsgBox thong_bao, vbCritical, App.ProductName
+    MessageBoxW &O0, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+    HopLe = -1
 End Function
 '======================================================================================
 ' FUNCTION ThemMoi : Ghi ®èi t­îng tµi s¶n hiÖn t¹i vµo c¬ së d÷ liÖu.
@@ -116,7 +119,7 @@ Dim rs_taisan As Recordset, sql As String
       sql = "SELECT * FROM TaiSan WHERE MaSo = " + CStr(ma_so)
       Set rs_taisan = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
             ' Chi tiÕt
-      If rs_taisan.RecordCount > 0 Then
+      If rs_taisan.recordCount > 0 Then
             MaSo = rs_taisan!MaSo
             Ten = rs_taisan!Ten
             sohieu = rs_taisan!sohieu

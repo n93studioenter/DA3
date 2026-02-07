@@ -3,11 +3,10 @@ Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form frmDSTaiSan 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Danh s¸ch tµi s¶n"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   60
-   ClientTop       =   555
+   ClientLeft      =   15
+   ClientTop       =   225
    ClientWidth     =   9855
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -30,12 +29,81 @@ Begin VB.Form frmDSTaiSan
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   19
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   21
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Dstsan.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Dstsan.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   20
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.CommandButton Command 
       BackColor       =   &H00FFC0C0&
       Height          =   375
       Index           =   2
       Left            =   6000
-      Picture         =   "Dstsan.frx":57E2
+      Picture         =   "Dstsan.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   7
       Tag             =   "&Delete"
@@ -47,7 +115,7 @@ Begin VB.Form frmDSTaiSan
       Height          =   375
       Index           =   1
       Left            =   8400
-      Picture         =   "Dstsan.frx":6CC4
+      Picture         =   "Dstsan.frx":12A9E
       Style           =   1  'Graphical
       TabIndex        =   6
       Tag             =   "&Return"
@@ -59,7 +127,7 @@ Begin VB.Form frmDSTaiSan
       Height          =   375
       Index           =   0
       Left            =   7200
-      Picture         =   "Dstsan.frx":80E6
+      Picture         =   "Dstsan.frx":13EC0
       Style           =   1  'Graphical
       TabIndex        =   5
       Tag             =   "&Select"
@@ -69,9 +137,9 @@ Begin VB.Form frmDSTaiSan
    Begin VB.ComboBox Combo 
       Height          =   315
       Index           =   2
-      ItemData        =   "Dstsan.frx":9548
+      ItemData        =   "Dstsan.frx":15322
       Left            =   5280
-      List            =   "Dstsan.frx":954A
+      List            =   "Dstsan.frx":15324
       Style           =   2  'Dropdown List
       TabIndex        =   3
       Top             =   840
@@ -98,9 +166,9 @@ Begin VB.Form frmDSTaiSan
    Begin VB.ComboBox Combo 
       Height          =   315
       Index           =   3
-      ItemData        =   "Dstsan.frx":954C
+      ItemData        =   "Dstsan.frx":15326
       Left            =   840
-      List            =   "Dstsan.frx":954E
+      List            =   "Dstsan.frx":15328
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   75
@@ -122,7 +190,7 @@ Begin VB.Form frmDSTaiSan
       FixedRows       =   0
       FixedCols       =   0
       ScrollBars      =   2
-      MouseIcon       =   "Dstsan.frx":9550
+      MouseIcon       =   "Dstsan.frx":1532A
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -319,7 +387,21 @@ Private Sub Form_Unload(Cancel As Integer)
     
       Frmpopup.closeMain
 End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
 Private Sub Form_Load()
+ lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
+
+
 Dim chi_so As Integer
       ' NÕu nhËp ®Çu kú th× cho phÐp xo¸ tµi s¶n
       
@@ -347,8 +429,8 @@ Dim chi_so As Integer
       End Select
 
       pGhichungtu = 0
-      Caption = Caption + " - " + CStr(pNamTC)
-      
+      Caption = "Danh s¸ch tµi s¶n" + " - " + CStr(pNamTC)
+      lblTitle(11).Caption = Caption
       For chi_so = 1 To 12
         SoLieu(chi_so) = False
       Next
@@ -460,7 +542,8 @@ Private Sub Command_Click(Index As Integer)
                   DoEvents
             Case 1      ' Trë vÒ ...........................................................................................................................................................
                   TSChon = ""
-                  SendKeys "{Escape}", False
+                  'SendKeys "{Escape}", False
+                  Unload Me
             Case 2      ' Xo¸ ................................................................................................................................................................
                   Grid.col = 0
                   If Len(Grid.Text) > 0 Then

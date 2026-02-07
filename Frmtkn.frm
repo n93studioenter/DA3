@@ -1,15 +1,14 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{BE4F3AC8-AEC9-101A-947B-00DD010F7B46}#1.0#0"; "MSOUTL32.OCX"
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FrmTaikhoan 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "HÖ thèng tµi kho¶n"
+   BorderStyle     =   0  'None
    ClientHeight    =   7200
-   ClientLeft      =   5250
-   ClientTop       =   3225
+   ClientLeft      =   5205
+   ClientTop       =   2895
    ClientWidth     =   11535
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -27,8 +26,78 @@ Begin VB.Form FrmTaikhoan
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   7200
    ScaleWidth      =   11535
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   67
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   69
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Frmtkn.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Frmtkn.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   11160
+         TabIndex        =   68
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.Frame Frame 
       Appearance      =   0  'Flat
       BackColor       =   &H80000005&
@@ -81,7 +150,7 @@ Begin VB.Form FrmTaikhoan
          MaxLength       =   20
          MultiLine       =   -1  'True
          TabIndex        =   49
-         Text            =   "Frmtkn.frx":57E2
+         Text            =   "Frmtkn.frx":115BC
          Top             =   600
          Width           =   1695
       End
@@ -95,7 +164,7 @@ Begin VB.Form FrmTaikhoan
          MaxLength       =   20
          MultiLine       =   -1  'True
          TabIndex        =   51
-         Text            =   "Frmtkn.frx":57E6
+         Text            =   "Frmtkn.frx":115C0
          Top             =   1440
          Width           =   1455
       End
@@ -109,7 +178,7 @@ Begin VB.Form FrmTaikhoan
          MaxLength       =   20
          MultiLine       =   -1  'True
          TabIndex        =   52
-         Text            =   "Frmtkn.frx":57EA
+         Text            =   "Frmtkn.frx":115C4
          Top             =   1800
          Width           =   1455
       End
@@ -123,7 +192,7 @@ Begin VB.Form FrmTaikhoan
          MaxLength       =   20
          MultiLine       =   -1  'True
          TabIndex        =   53
-         Text            =   "Frmtkn.frx":57EE
+         Text            =   "Frmtkn.frx":115C8
          Top             =   2160
          Width           =   1455
       End
@@ -327,7 +396,7 @@ Begin VB.Form FrmTaikhoan
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   16
-      Text            =   "Frmtkn.frx":57F2
+      Text            =   "Frmtkn.frx":115CC
       Top             =   5760
       Visible         =   0   'False
       Width           =   1575
@@ -476,7 +545,7 @@ Begin VB.Form FrmTaikhoan
       MaxLength       =   15
       MultiLine       =   -1  'True
       TabIndex        =   9
-      Text            =   "Frmtkn.frx":57F6
+      Text            =   "Frmtkn.frx":115D0
       Top             =   1800
       Width           =   1335
    End
@@ -490,7 +559,7 @@ Begin VB.Form FrmTaikhoan
       MaxLength       =   15
       MultiLine       =   -1  'True
       TabIndex        =   10
-      Text            =   "Frmtkn.frx":57FA
+      Text            =   "Frmtkn.frx":115D4
       Top             =   2160
       Width           =   1335
    End
@@ -502,7 +571,7 @@ Begin VB.Form FrmTaikhoan
       Left            =   5880
       MultiLine       =   -1  'True
       TabIndex        =   12
-      Text            =   "Frmtkn.frx":57FE
+      Text            =   "Frmtkn.frx":115D8
       Top             =   3960
       Width           =   1635
    End
@@ -514,7 +583,7 @@ Begin VB.Form FrmTaikhoan
       Left            =   7320
       MultiLine       =   -1  'True
       TabIndex        =   13
-      Text            =   "Frmtkn.frx":5800
+      Text            =   "Frmtkn.frx":115DA
       Top             =   3960
       Width           =   2055
    End
@@ -526,12 +595,12 @@ Begin VB.Form FrmTaikhoan
       Left            =   9240
       MultiLine       =   -1  'True
       TabIndex        =   14
-      Text            =   "Frmtkn.frx":5802
+      Text            =   "Frmtkn.frx":115DC
       Top             =   3960
       Width           =   1935
    End
    Begin VB.CommandButton CmdNT 
-      DragIcon        =   "Frmtkn.frx":5804
+      DragIcon        =   "Frmtkn.frx":115DE
       BeginProperty Font 
          Name            =   "Vni 14 AlexBrush"
          Size            =   9.75
@@ -543,7 +612,7 @@ Begin VB.Form FrmTaikhoan
       EndProperty
       Height          =   285
       Left            =   11160
-      Picture         =   "Frmtkn.frx":AFE6
+      Picture         =   "Frmtkn.frx":16DC0
       Style           =   1  'Graphical
       TabIndex        =   15
       Top             =   3960
@@ -577,7 +646,7 @@ Begin VB.Form FrmTaikhoan
       Height          =   375
       Index           =   0
       Left            =   6720
-      Picture         =   "Frmtkn.frx":B388
+      Picture         =   "Frmtkn.frx":17162
       Style           =   1  'Graphical
       TabIndex        =   19
       Tag             =   "&Add"
@@ -589,7 +658,7 @@ Begin VB.Form FrmTaikhoan
       Height          =   375
       Index           =   1
       Left            =   7920
-      Picture         =   "Frmtkn.frx":C8E2
+      Picture         =   "Frmtkn.frx":186BC
       Style           =   1  'Graphical
       TabIndex        =   18
       Tag             =   "&Save"
@@ -601,7 +670,7 @@ Begin VB.Form FrmTaikhoan
       Height          =   375
       Index           =   2
       Left            =   9120
-      Picture         =   "Frmtkn.frx":DD10
+      Picture         =   "Frmtkn.frx":19AEA
       Style           =   1  'Graphical
       TabIndex        =   20
       Tag             =   "&Delete"
@@ -613,7 +682,7 @@ Begin VB.Form FrmTaikhoan
       Height          =   375
       Index           =   3
       Left            =   10320
-      Picture         =   "Frmtkn.frx":F1F2
+      Picture         =   "Frmtkn.frx":1AFCC
       Style           =   1  'Graphical
       TabIndex        =   21
       Tag             =   "&Return"
@@ -673,12 +742,12 @@ Begin VB.Form FrmTaikhoan
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      MouseIcon       =   "Frmtkn.frx":10614
-      PicturePlus     =   "Frmtkn.frx":10630
-      PictureMinus    =   "Frmtkn.frx":1072A
-      PictureLeaf     =   "Frmtkn.frx":10824
-      PictureOpen     =   "Frmtkn.frx":1091E
-      PictureClosed   =   "Frmtkn.frx":10A18
+      MouseIcon       =   "Frmtkn.frx":1C3EE
+      PicturePlus     =   "Frmtkn.frx":1C40A
+      PictureMinus    =   "Frmtkn.frx":1C504
+      PictureLeaf     =   "Frmtkn.frx":1C5FE
+      PictureOpen     =   "Frmtkn.frx":1C6F8
+      PictureClosed   =   "Frmtkn.frx":1C7F2
    End
    Begin MSGrid.Grid GrdNT 
       Height          =   735
@@ -1341,24 +1410,37 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+
+
     Dim chi_so As Integer
-    
+
     ColumnSetUp GrdNT(0), 0, 700, 2
     ColumnSetUp GrdNT(0), 1, 1180 + 600, 1
     ColumnSetUp GrdNT(0), 2, 1180 + 600, 1
     ColumnSetUp GrdNT(0), 3, 1060 + 600, 1
     ColumnSetUp GrdNT(0), 4, 1, 0
-    
+
     ColumnSetUp GrdNT(1), 0, 700, 2
     ColumnSetUp GrdNT(1), 1, 1180 + 600, 1
     ColumnSetUp GrdNT(1), 2, 1180 + 600, 1
     ColumnSetUp GrdNT(1), 3, 1060 + 600, 1
-    
+
     For chi_so = 0 To 1
         InitDateVars MedNgay(chi_so), ngay(chi_so)
     Next
-    
+
     enable = False
     ' Liet ke danh sach loai tai khoan
     Int_RecsetToCbo "SELECT Loai As F2,Ten" + IIf(pSongNgu And pVersion <> 3, "+' - '+TenE", "") + " As F1 FROM HethongTk WHERE Cap=0 AND Len(SoHieu)>1 ORDER BY SoHieu", CboLoai
@@ -1368,17 +1450,18 @@ Private Sub Form_Load()
     enable = True
     CboLoai.ListIndex = 1
     ThemMoi = 0
-'    xPhatsinh = False
+    '    xPhatsinh = False
     CmdNT.Enabled = (User_Right <> 2)
-    
-    Caption = Caption + " - " + CStr(pNamTC)
-    
+
+    Caption = "HÖ thèng tµi kho¶n" + " - " + CStr(pNamTC)
+
     Label(8).Visible = pSongNgu
     txt(3).Visible = pSongNgu
     Line1(5).Visible = pSongNgu
-    
+    lblTitle(11).Caption = Caption
+    AnControl Me
     SetFont Me
-     ExecuteSQL5_Themmoi ("ALTER TABLE HethongTk ADD THEMMOI text")
+    ExecuteSQL5_Themmoi ("ALTER TABLE HethongTk ADD THEMMOI text")
 End Sub
 '====================================================================================================
 ' HiÓn thÞ danh s¸ch tµi kho¶n thuéc mét lo¹i
@@ -1549,7 +1632,7 @@ Private Sub OtlTk_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
 End Sub
 
-Private Sub OtlTk_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub OtlTk_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
     
     If Button = 2 And TkNhap.MaSo > 0 And User_Right = 0 Then
         If pPQTK = 0 Then ChuyenTK Else FU1.QuyenTaiKhoan TkNhap.MaSo

@@ -6,11 +6,10 @@ Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FBcKt 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Sæ chi tiÕt "
+   BorderStyle     =   0  'None
    ClientHeight    =   6720
-   ClientLeft      =   3090
-   ClientTop       =   3855
+   ClientLeft      =   3045
+   ClientTop       =   3525
    ClientWidth     =   10185
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -33,6 +32,75 @@ Begin VB.Form FBcKt
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Tag             =   "Detail Administrative Report"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   243
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9720
+         TabIndex        =   245
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Fbckt.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Fbckt.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   244
+         Top             =   0
+         Width           =   4455
+      End
+   End
    Begin VB.Frame Frame1 
       Caption         =   "Frame1"
       Height          =   1935
@@ -100,6 +168,229 @@ Begin VB.Form FBcKt
          Width           =   2055
       End
    End
+   Begin VB.Frame Frame 
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Index           =   6
+      Left            =   120
+      TabIndex        =   212
+      Top             =   5160
+      Visible         =   0   'False
+      Width           =   1695
+      Begin VB.OptionButton OptNN 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "ViÖt"
+         Height          =   255
+         Index           =   0
+         Left            =   0
+         TabIndex        =   213
+         Tag             =   "VN"
+         Top             =   0
+         Value           =   -1  'True
+         Visible         =   0   'False
+         Width           =   735
+      End
+      Begin VB.OptionButton OptNN 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Anh"
+         Height          =   255
+         Index           =   1
+         Left            =   1080
+         MaskColor       =   &H00EC5928&
+         TabIndex        =   214
+         Tag             =   "English"
+         Top             =   0
+         Visible         =   0   'False
+         Width           =   855
+      End
+   End
+   Begin VB.Frame Frame 
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   0  'None
+      Height          =   1935
+      Index           =   1
+      Left            =   240
+      TabIndex        =   207
+      Top             =   3000
+      Visible         =   0   'False
+      Width           =   1455
+      Begin MSMask.MaskEdBox MedNgay 
+         Height          =   315
+         Index           =   1
+         Left            =   120
+         TabIndex        =   209
+         Top             =   480
+         Width           =   855
+         _ExtentX        =   1508
+         _ExtentY        =   556
+         _Version        =   393216
+         Appearance      =   0
+         PromptChar      =   "_"
+      End
+      Begin MSMask.MaskEdBox MedNgay 
+         Height          =   315
+         Index           =   2
+         Left            =   120
+         TabIndex        =   211
+         Top             =   1200
+         Width           =   855
+         _ExtentX        =   1508
+         _ExtentY        =   556
+         _Version        =   393216
+         Appearance      =   0
+         PromptChar      =   "_"
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "®Õn ngµy"
+         Height          =   255
+         Index           =   5
+         Left            =   120
+         TabIndex        =   210
+         Tag             =   "to"
+         Top             =   960
+         Width           =   735
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Tõ ngµy"
+         Height          =   255
+         Index           =   4
+         Left            =   120
+         TabIndex        =   208
+         Tag             =   "From"
+         Top             =   120
+         Width           =   855
+      End
+   End
+   Begin VB.OptionButton OptTG 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "Theo ngµy"
+      Height          =   255
+      Index           =   1
+      Left            =   120
+      MaskColor       =   &H00000000&
+      TabIndex        =   201
+      Tag             =   "By date"
+      Top             =   2520
+      Width           =   1215
+   End
+   Begin VB.OptionButton OptTG 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "Theo th¸ng"
+      Height          =   255
+      Index           =   0
+      Left            =   120
+      TabIndex        =   200
+      Tag             =   "By month"
+      Top             =   2160
+      Value           =   -1  'True
+      Width           =   1215
+   End
+   Begin VB.Frame Frame 
+      BackColor       =   &H00FFFFC0&
+      BorderStyle     =   0  'None
+      Height          =   1695
+      Index           =   0
+      Left            =   240
+      TabIndex        =   202
+      Top             =   3120
+      Width           =   1455
+      Begin VB.ComboBox CboThang 
+         Height          =   315
+         Index           =   0
+         ItemData        =   "Fbckt.frx":115BC
+         Left            =   120
+         List            =   "Fbckt.frx":115BE
+         Style           =   2  'Dropdown List
+         TabIndex        =   204
+         Top             =   360
+         Width           =   1095
+      End
+      Begin VB.ComboBox CboThang 
+         Height          =   315
+         Index           =   1
+         ItemData        =   "Fbckt.frx":115C0
+         Left            =   120
+         List            =   "Fbckt.frx":115C2
+         Style           =   2  'Dropdown List
+         TabIndex        =   206
+         Top             =   1080
+         Width           =   1095
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "Tõ th¸ng"
+         Height          =   255
+         Index           =   0
+         Left            =   120
+         TabIndex        =   203
+         Tag             =   "From"
+         Top             =   0
+         Width           =   735
+      End
+      Begin VB.Label Label 
+         BackColor       =   &H00FFFFC0&
+         Caption         =   "®Õn th¸ng"
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         TabIndex        =   205
+         Tag             =   "to"
+         Top             =   840
+         Width           =   735
+      End
+   End
+   Begin ComctlLib.ProgressBar GauGe 
+      Height          =   255
+      Left            =   840
+      TabIndex        =   218
+      Top             =   6960
+      Visible         =   0   'False
+      Width           =   1095
+      _ExtentX        =   1931
+      _ExtentY        =   450
+      _Version        =   327682
+      Appearance      =   1
+   End
+   Begin VB.CommandButton Command 
+      BackColor       =   &H00FFC0C0&
+      Height          =   375
+      Index           =   2
+      Left            =   60
+      Picture         =   "Fbckt.frx":115C4
+      Style           =   1  'Graphical
+      TabIndex        =   217
+      Tag             =   "&Return"
+      Top             =   6360
+      Width           =   975
+   End
+   Begin VB.CommandButton Command 
+      BackColor       =   &H00FFC0C0&
+      Height          =   375
+      Index           =   1
+      Left            =   360
+      Picture         =   "Fbckt.frx":129E6
+      Style           =   1  'Graphical
+      TabIndex        =   216
+      Tag             =   "&Print"
+      Top             =   5400
+      Visible         =   0   'False
+      Width           =   1095
+   End
+   Begin VB.CommandButton Command 
+      BackColor       =   &H00FFC0C0&
+      Height          =   375
+      Index           =   0
+      Left            =   1080
+      Picture         =   "Fbckt.frx":13E48
+      Style           =   1  'Graphical
+      TabIndex        =   215
+      Tag             =   "&View"
+      Top             =   6360
+      Width           =   975
+   End
    Begin TabDlg.SSTab SSTab 
       Height          =   6855
       Left            =   2040
@@ -124,7 +415,7 @@ Begin VB.Form FBcKt
          Strikethrough   =   0   'False
       EndProperty
       TabCaption(0)   =   "Tæng hîp"
-      TabPicture(0)   =   "Fbckt.frx":57E2
+      TabPicture(0)   =   "Fbckt.frx":14FBA
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "LbTenTk(3)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -250,7 +541,7 @@ Begin VB.Form FBcKt
       Tab(0).Control(60).Enabled=   0   'False
       Tab(0).ControlCount=   61
       TabCaption(1)   =   "VËt t­, thµnh phÈm"
-      TabPicture(1)   =   "Fbckt.frx":57FE
+      TabPicture(1)   =   "Fbckt.frx":14FD6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "CboHD"
       Tab(1).Control(1)=   "txtCT(0)"
@@ -304,7 +595,7 @@ Begin VB.Form FBcKt
       Tab(1).Control(49)=   "LbTenVT(0)"
       Tab(1).ControlCount=   50
       TabCaption(2)   =   "Doanh thu - C«ng nî"
-      TabPicture(2)   =   "Fbckt.frx":581A
+      TabPicture(2)   =   "Fbckt.frx":14FF2
       Tab(2).ControlEnabled=   0   'False
       Tab(2).Control(0)=   "Frame(4)"
       Tab(2).Control(1)=   "cmdkh(0)"
@@ -347,7 +638,7 @@ Begin VB.Form FBcKt
       Tab(2).Control(38)=   "Label(3)"
       Tab(2).ControlCount=   39
       TabCaption(3)   =   "Tµi s¶n cè ®Þnh"
-      TabPicture(3)   =   "Fbckt.frx":5836
+      TabPicture(3)   =   "Fbckt.frx":1500E
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Line(11)"
       Tab(3).Control(1)=   "OptBC(18)"
@@ -383,9 +674,9 @@ Begin VB.Form FBcKt
       Begin VB.ComboBox CboThang 
          Height          =   315
          Index           =   2
-         ItemData        =   "Fbckt.frx":5852
+         ItemData        =   "Fbckt.frx":1502A
          Left            =   3300
-         List            =   "Fbckt.frx":5868
+         List            =   "Fbckt.frx":15040
          Style           =   2  'Dropdown List
          TabIndex        =   232
          Top             =   1860
@@ -452,7 +743,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   12
          Left            =   7200
-         Picture         =   "Fbckt.frx":587E
+         Picture         =   "Fbckt.frx":15056
          Style           =   1  'Graphical
          TabIndex        =   226
          Top             =   2820
@@ -463,7 +754,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   5
          Left            =   6540
-         Picture         =   "Fbckt.frx":5CF8
+         Picture         =   "Fbckt.frx":154D0
          Style           =   1  'Graphical
          TabIndex        =   225
          Top             =   540
@@ -576,7 +867,7 @@ Begin VB.Form FBcKt
             Height          =   375
             Index           =   9
             Left            =   3000
-            Picture         =   "Fbckt.frx":6172
+            Picture         =   "Fbckt.frx":1594A
             Style           =   1  'Graphical
             TabIndex        =   187
             Top             =   1920
@@ -744,7 +1035,7 @@ Begin VB.Form FBcKt
             Height          =   375
             Index           =   0
             Left            =   3000
-            Picture         =   "Fbckt.frx":65EC
+            Picture         =   "Fbckt.frx":15DC4
             Style           =   1  'Graphical
             TabIndex        =   183
             Tag             =   "0"
@@ -755,7 +1046,7 @@ Begin VB.Form FBcKt
             Height          =   375
             Index           =   2
             Left            =   3000
-            Picture         =   "Fbckt.frx":6A66
+            Picture         =   "Fbckt.frx":1623E
             Style           =   1  'Graphical
             TabIndex        =   174
             Top             =   480
@@ -850,7 +1141,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   0
          Left            =   -71880
-         Picture         =   "Fbckt.frx":6EE0
+         Picture         =   "Fbckt.frx":166B8
          Style           =   1  'Graphical
          TabIndex        =   125
          Top             =   1080
@@ -882,7 +1173,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   1
          Left            =   -71880
-         Picture         =   "Fbckt.frx":735A
+         Picture         =   "Fbckt.frx":16B32
          Style           =   1  'Graphical
          TabIndex        =   141
          Top             =   2160
@@ -914,7 +1205,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   1
          Left            =   -70020
-         Picture         =   "Fbckt.frx":77D4
+         Picture         =   "Fbckt.frx":16FAC
          Style           =   1  'Graphical
          TabIndex        =   150
          Top             =   5445
@@ -1268,7 +1559,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   0
          Left            =   -70200
-         Picture         =   "Fbckt.frx":7C4E
+         Picture         =   "Fbckt.frx":17426
          Style           =   1  'Graphical
          TabIndex        =   107
          Top             =   680
@@ -1383,7 +1674,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   0
          Left            =   -70320
-         Picture         =   "Fbckt.frx":80C8
+         Picture         =   "Fbckt.frx":178A0
          Style           =   1  'Graphical
          TabIndex        =   31
          Top             =   2160
@@ -1538,7 +1829,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   11
          Left            =   -70020
-         Picture         =   "Fbckt.frx":8542
+         Picture         =   "Fbckt.frx":17D1A
          Style           =   1  'Graphical
          TabIndex        =   147
          Top             =   5040
@@ -1568,7 +1859,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   10
          Left            =   -69180
-         Picture         =   "Fbckt.frx":89BC
+         Picture         =   "Fbckt.frx":18194
          Style           =   1  'Graphical
          TabIndex        =   114
          Top             =   4140
@@ -1578,7 +1869,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   8
          Left            =   3180
-         Picture         =   "Fbckt.frx":8E36
+         Picture         =   "Fbckt.frx":1860E
          Style           =   1  'Graphical
          TabIndex        =   109
          Top             =   540
@@ -1653,7 +1944,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   1
          Left            =   -71940
-         Picture         =   "Fbckt.frx":92B0
+         Picture         =   "Fbckt.frx":18A88
          Style           =   1  'Graphical
          TabIndex        =   133
          Top             =   3960
@@ -1711,7 +2002,7 @@ Begin VB.Form FBcKt
             Height          =   375
             Index           =   7
             Left            =   1200
-            Picture         =   "Fbckt.frx":972A
+            Picture         =   "Fbckt.frx":18F02
             Style           =   1  'Graphical
             TabIndex        =   18
             Top             =   120
@@ -1938,7 +2229,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   6
          Left            =   6540
-         Picture         =   "Fbckt.frx":9BA4
+         Picture         =   "Fbckt.frx":1937C
          Style           =   1  'Graphical
          TabIndex        =   61
          Top             =   2700
@@ -1949,7 +2240,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   1
          Left            =   6540
-         Picture         =   "Fbckt.frx":A01E
+         Picture         =   "Fbckt.frx":197F6
          Style           =   1  'Graphical
          TabIndex        =   28
          Top             =   900
@@ -1960,7 +2251,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   3
          Left            =   4140
-         Picture         =   "Fbckt.frx":A498
+         Picture         =   "Fbckt.frx":19C70
          Style           =   1  'Graphical
          TabIndex        =   137
          Top             =   5700
@@ -1970,7 +2261,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   2
          Left            =   4140
-         Picture         =   "Fbckt.frx":A912
+         Picture         =   "Fbckt.frx":1A0EA
          Style           =   1  'Graphical
          TabIndex        =   130
          Top             =   5340
@@ -1980,7 +2271,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   0
          Left            =   3180
-         Picture         =   "Fbckt.frx":AD8C
+         Picture         =   "Fbckt.frx":1A564
          Style           =   1  'Graphical
          TabIndex        =   10
          Top             =   900
@@ -1990,7 +2281,7 @@ Begin VB.Form FBcKt
          Height          =   375
          Index           =   4
          Left            =   -69180
-         Picture         =   "Fbckt.frx":B206
+         Picture         =   "Fbckt.frx":1A9DE
          Style           =   1  'Graphical
          TabIndex        =   139
          Top             =   3780
@@ -2400,9 +2691,9 @@ Begin VB.Form FBcKt
       End
       Begin VB.ComboBox CboNT 
          Height          =   315
-         ItemData        =   "Fbckt.frx":B680
+         ItemData        =   "Fbckt.frx":1AE58
          Left            =   4500
-         List            =   "Fbckt.frx":B682
+         List            =   "Fbckt.frx":1AE5A
          Style           =   2  'Dropdown List
          TabIndex        =   131
          Top             =   5340
@@ -2704,229 +2995,6 @@ Begin VB.Form FBcKt
          Top             =   4140
          Width           =   3375
       End
-   End
-   Begin VB.Frame Frame 
-      BackColor       =   &H00FFFFC0&
-      BorderStyle     =   0  'None
-      Height          =   255
-      Index           =   6
-      Left            =   120
-      TabIndex        =   212
-      Top             =   5160
-      Visible         =   0   'False
-      Width           =   1695
-      Begin VB.OptionButton OptNN 
-         BackColor       =   &H00FFFFC0&
-         Caption         =   "ViÖt"
-         Height          =   255
-         Index           =   0
-         Left            =   0
-         TabIndex        =   213
-         Tag             =   "VN"
-         Top             =   0
-         Value           =   -1  'True
-         Visible         =   0   'False
-         Width           =   735
-      End
-      Begin VB.OptionButton OptNN 
-         BackColor       =   &H00FFFFC0&
-         Caption         =   "Anh"
-         Height          =   255
-         Index           =   1
-         Left            =   1080
-         MaskColor       =   &H00EC5928&
-         TabIndex        =   214
-         Tag             =   "English"
-         Top             =   0
-         Visible         =   0   'False
-         Width           =   855
-      End
-   End
-   Begin VB.Frame Frame 
-      BackColor       =   &H00FFFFC0&
-      BorderStyle     =   0  'None
-      Height          =   1935
-      Index           =   1
-      Left            =   240
-      TabIndex        =   207
-      Top             =   3000
-      Visible         =   0   'False
-      Width           =   1455
-      Begin MSMask.MaskEdBox MedNgay 
-         Height          =   315
-         Index           =   1
-         Left            =   120
-         TabIndex        =   209
-         Top             =   480
-         Width           =   855
-         _ExtentX        =   1508
-         _ExtentY        =   556
-         _Version        =   393216
-         Appearance      =   0
-         PromptChar      =   "_"
-      End
-      Begin MSMask.MaskEdBox MedNgay 
-         Height          =   315
-         Index           =   2
-         Left            =   120
-         TabIndex        =   211
-         Top             =   1200
-         Width           =   855
-         _ExtentX        =   1508
-         _ExtentY        =   556
-         _Version        =   393216
-         Appearance      =   0
-         PromptChar      =   "_"
-      End
-      Begin VB.Label Label 
-         BackColor       =   &H00FFFFC0&
-         Caption         =   "®Õn ngµy"
-         Height          =   255
-         Index           =   5
-         Left            =   120
-         TabIndex        =   210
-         Tag             =   "to"
-         Top             =   960
-         Width           =   735
-      End
-      Begin VB.Label Label 
-         BackColor       =   &H00FFFFC0&
-         Caption         =   "Tõ ngµy"
-         Height          =   255
-         Index           =   4
-         Left            =   120
-         TabIndex        =   208
-         Tag             =   "From"
-         Top             =   120
-         Width           =   855
-      End
-   End
-   Begin VB.OptionButton OptTG 
-      BackColor       =   &H00FFFFC0&
-      Caption         =   "Theo ngµy"
-      Height          =   255
-      Index           =   1
-      Left            =   120
-      MaskColor       =   &H00000000&
-      TabIndex        =   201
-      Tag             =   "By date"
-      Top             =   2520
-      Width           =   1215
-   End
-   Begin VB.OptionButton OptTG 
-      BackColor       =   &H00FFFFC0&
-      Caption         =   "Theo th¸ng"
-      Height          =   255
-      Index           =   0
-      Left            =   120
-      TabIndex        =   200
-      Tag             =   "By month"
-      Top             =   2160
-      Value           =   -1  'True
-      Width           =   1215
-   End
-   Begin VB.Frame Frame 
-      BackColor       =   &H00FFFFC0&
-      BorderStyle     =   0  'None
-      Height          =   1695
-      Index           =   0
-      Left            =   240
-      TabIndex        =   202
-      Top             =   3120
-      Width           =   1455
-      Begin VB.ComboBox CboThang 
-         Height          =   315
-         Index           =   0
-         ItemData        =   "Fbckt.frx":B684
-         Left            =   120
-         List            =   "Fbckt.frx":B686
-         Style           =   2  'Dropdown List
-         TabIndex        =   204
-         Top             =   360
-         Width           =   1095
-      End
-      Begin VB.ComboBox CboThang 
-         Height          =   315
-         Index           =   1
-         ItemData        =   "Fbckt.frx":B688
-         Left            =   120
-         List            =   "Fbckt.frx":B68A
-         Style           =   2  'Dropdown List
-         TabIndex        =   206
-         Top             =   1080
-         Width           =   1095
-      End
-      Begin VB.Label Label 
-         BackColor       =   &H00FFFFC0&
-         Caption         =   "Tõ th¸ng"
-         Height          =   255
-         Index           =   0
-         Left            =   120
-         TabIndex        =   203
-         Tag             =   "From"
-         Top             =   0
-         Width           =   735
-      End
-      Begin VB.Label Label 
-         BackColor       =   &H00FFFFC0&
-         Caption         =   "®Õn th¸ng"
-         Height          =   255
-         Index           =   1
-         Left            =   120
-         TabIndex        =   205
-         Tag             =   "to"
-         Top             =   840
-         Width           =   735
-      End
-   End
-   Begin ComctlLib.ProgressBar GauGe 
-      Height          =   255
-      Left            =   840
-      TabIndex        =   218
-      Top             =   6960
-      Visible         =   0   'False
-      Width           =   1095
-      _ExtentX        =   1931
-      _ExtentY        =   450
-      _Version        =   327682
-      Appearance      =   1
-   End
-   Begin VB.CommandButton Command 
-      BackColor       =   &H00FFC0C0&
-      Height          =   375
-      Index           =   2
-      Left            =   60
-      Picture         =   "Fbckt.frx":B68C
-      Style           =   1  'Graphical
-      TabIndex        =   217
-      Tag             =   "&Return"
-      Top             =   6360
-      Width           =   975
-   End
-   Begin VB.CommandButton Command 
-      BackColor       =   &H00FFC0C0&
-      Height          =   375
-      Index           =   1
-      Left            =   360
-      Picture         =   "Fbckt.frx":CAAE
-      Style           =   1  'Graphical
-      TabIndex        =   216
-      Tag             =   "&Print"
-      Top             =   5400
-      Visible         =   0   'False
-      Width           =   1095
-   End
-   Begin VB.CommandButton Command 
-      BackColor       =   &H00FFC0C0&
-      Height          =   375
-      Index           =   0
-      Left            =   1080
-      Picture         =   "Fbckt.frx":DF10
-      Style           =   1  'Graphical
-      TabIndex        =   215
-      Tag             =   "&View"
-      Top             =   6360
-      Width           =   975
    End
    Begin MSForms.CommandButton CommandButton1 
       Height          =   495
@@ -3929,22 +3997,70 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ b¸o c¸o
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+ 
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Public Sub AnControl(frm As Form)
+    Dim ctl As Control
+    Dim TITLE_HEIGHT As Long
+    TITLE_HEIGHT = 150
+    For Each ctl In frm.Controls
+        Select Case TypeName(ctl)
+        Case "Label", "TextBox", "ComboBox", "PictureBox", _
+             "CommandButton", "Frame", "CheckBox", _
+             "OptionButton", "ListBox", "Grid", _
+             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
+
+            If ctl.Name <> "picFakeTitle" _
+               And ctl.Name <> "lblTitle" _
+               And ctl.Name <> "lblClose" Then
+
+                If TypeName(ctl) = "Line" Then
+                    ctl.y1 = ctl.y1 + TITLE_HEIGHT
+                    ctl.y2 = ctl.y2 + TITLE_HEIGHT
+                Else
+                    ctl.Top = ctl.Top + TITLE_HEIGHT
+                End If
+
+            End If
+        End Select
+    Next
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 300 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 300
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
+
+
     Dim chi_so As Integer
-    
+
     AddMonthToCbo CboThang(0)
     AddMonthToCbo CboThang(1)
-    
+
     CboThang(2).ListIndex = CboThang(2).ListCount - 5
-    
+
     ChkDu(11).Visible = (pNVBH > 0)
     txtsh(0).Visible = (pNVBH > 0)
     cmd(0).Visible = (pNVBH > 0)
-    
+
     Int_RecsetToCbo "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho", CboKho(0)
     CboCopy CboKho(0), CboKho(1)
     Int_RecsetToCbo "SELECT PhanLoaiVattu.MaSo As F2, (PhanLoaiVattu.SoHieu + ' - '+ PhanLoaiVattu.TenPhanLoai) As F1" _
-        & " FROM PhanLoaiVattu ORDER BY PhanLoaiVattu.SoHieu", CboLoai(0)
+                  & " FROM PhanLoaiVattu ORDER BY PhanLoaiVattu.SoHieu", CboLoai(0)
     Int_RecsetToCbo "SELECT MaSo As F2,SoHieu + ' - ' + DienGiai As F1 FROM NguonNhapXuat ORDER BY SoHieu", CboLoai(1)
     Int_RecsetToCbo "SELECT DoituongCT.MaSo As F2,(IIF(DoituongCT.MaKhachHang>0,KhachHang.Ten+' - '+DoituongCT.Sohieu+' - ','')+DienGiai+IIF(DoituongCT.MaKhachHang>0,' - '+ Format(NgayKy,'dd/mm/yy'),'')) As F1 FROM DoituongCT LEFT JOIN KhachHang ON DoituongCT.MaKhachHang=KhachHang.MaSo ORDER BY  KhachHang.Ten,DoituongCT.SoHieu,DienGiai", CboVV(0)
     CboCopy CboVV(0), CboVV(1)
@@ -3952,21 +4068,21 @@ Private Sub Form_Load()
     Opt(1).Enabled = Cbo.ListCount > 0
     Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0 AND LEFT(SoHieu,1)<>'#' ORDER BY SoHieu", CboKH
     Int_RecsetToCbo "SELECT MaSo As F2,SoHieu + ' - ' + DienGiai As F1 FROM NguonNhapXuat ORDER BY SoHieu", CboKho(2)
-    
+
     baocao = 0
-    
+
     Pdelay = GetSetting(IniPath, "Environment", "PrinterDelay", 10)
-    
+
     For chi_so = 0 To 2
         InitDateVars MedNgay(chi_so), ngay(chi_so)
     Next
-            
+
     For chi_so = 1 To 12
         SoLieu(chi_so) = False
     Next
-        
+    Caption = "Sæ chi tiÕt"
     Caption = Caption + " - " + CStr(pNamTC)
-    
+    lblTitle(11).Caption = Caption
     OptBC(35).Enabled = KHDetail
     OptBC(36).Enabled = KHDetail
     txtshkh(0).Enabled = KHDetail
@@ -3974,28 +4090,28 @@ Private Sub Form_Load()
     txtshkh(1).Enabled = KHDetail
     cmdkh(1).Enabled = KHDetail
     Int_RecsetToCbo "SELECT DoituongCT.MaSo As F2,(IIF(DoituongCT.MaKhachHang>0,KhachHang.Ten+' - '+DoituongCT.Sohieu+' - ','')+DienGiai+IIF(DoituongCT.MaKhachHang>0,' - Kyù ngaøy: '+ Format(NgayKy,'dd/mm/yy'),'')) As F1 FROM DoituongCT LEFT JOIN KhachHang ON DoituongCT.MaKhachHang=KhachHang.MaSo ORDER BY  KhachHang.Ten,DoituongCT.SoHieu,DienGiai", CboHD
-    
+
     KiemTraUser
-    
+
     NLB = GetSetting(IniPath, "Environment", "SReport1", "")
     KTT = GetSetting(IniPath, "Environment", "SReport2", "")
     GD = GetSetting(IniPath, "Environment", "SReport3", "")
-    
+
     Frame(6).Visible = pSongNgu
-    
+
     StopPrint = True
     If pNN = 1 Then OptNN(1).Value = True
     StopPrint = False
-    
+
     OptBC(72).Visible = (pCongNoHD > 0)
     OptBC(73).Visible = (pCongNoHD > 0)
-    
+
     For chi_so = 1 To pSoVV
         ChkTT(chi_so - 1).Visible = True
         CboTT(chi_so - 1).Visible = True
         Int_RecsetToCbo "SELECT MaSo As F2,DienGiai As F1 FROM DoituongCT" + CStr(chi_so) + " ORDER BY DoituongCT" + CStr(chi_so) + ".DienGiai", CboTT(chi_so - 1)
     Next
-    
+
     If pDTTP = 0 Then
         For chi_so = 0 To 1
             OptBC(59 + chi_so).Visible = False
@@ -4004,7 +4120,7 @@ Private Sub Form_Load()
         Next
         OptBC(77).Visible = False
     End If
-    
+
     If pVersion = 3 Then
         OptBC(10).Visible = False
         OptBC(11).Visible = False
@@ -4012,12 +4128,12 @@ Private Sub Form_Load()
         OptBC(51).Visible = False
         OptBC(54).Visible = False
     End If
-        
+
     SetFont Me
-      Dim ngaytt As Date
- ngaytt = "01/01/" + Mid(str(pNamTC), 4, 5)
- MedNgay(1).Text = ngaytt
- MedNgay(2).Text = ngaytt
+    Dim ngaytt As Date
+    ngaytt = "01/01/" + Mid(str(pNamTC), 4, 5)
+    MedNgay(1).Text = ngaytt
+    MedNgay(2).Text = ngaytt
 
 End Sub
 

@@ -1,13 +1,13 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FrmHD 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   Caption         =   "Danh s¸ch Hîp ®ång kinh tÕ"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   75
-   ClientTop       =   1065
+   ClientLeft      =   15
+   ClientTop       =   720
    ClientWidth     =   10710
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -25,8 +25,78 @@ Begin VB.Form FrmHD
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   7080
    ScaleWidth      =   10710
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Contract List"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   21
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   10320
+         TabIndex        =   23
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   22
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmHD.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmHD.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.TextBox txtNhap 
       Appearance      =   0  'Flat
       Height          =   285
@@ -49,7 +119,7 @@ Begin VB.Form FrmHD
       MultiLine       =   -1  'True
       TabIndex        =   5
       Tag             =   "0"
-      Text            =   "FrmHD.frx":57E2
+      Text            =   "FrmHD.frx":115BC
       Top             =   6240
       Width           =   1095
    End
@@ -109,7 +179,7 @@ Begin VB.Form FrmHD
       Height          =   375
       Index           =   3
       Left            =   9240
-      Picture         =   "FrmHD.frx":57E4
+      Picture         =   "FrmHD.frx":115BE
       Style           =   1  'Graphical
       TabIndex        =   10
       Tag             =   "&Return"
@@ -120,7 +190,7 @@ Begin VB.Form FrmHD
       Height          =   375
       Index           =   2
       Left            =   8040
-      Picture         =   "FrmHD.frx":6C06
+      Picture         =   "FrmHD.frx":129E0
       Style           =   1  'Graphical
       TabIndex        =   11
       Tag             =   "&Delete"
@@ -131,7 +201,7 @@ Begin VB.Form FrmHD
       Height          =   375
       Index           =   1
       Left            =   6840
-      Picture         =   "FrmHD.frx":80E8
+      Picture         =   "FrmHD.frx":13EC2
       Style           =   1  'Graphical
       TabIndex        =   8
       Tag             =   "&Save"
@@ -142,7 +212,7 @@ Begin VB.Form FrmHD
       Height          =   375
       Index           =   0
       Left            =   5640
-      Picture         =   "FrmHD.frx":9516
+      Picture         =   "FrmHD.frx":152F0
       Style           =   1  'Graphical
       TabIndex        =   9
       Tag             =   "&Add"
@@ -440,9 +510,30 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     Dim i As Integer
-    
+
     ColumnSetUp GrdNT, 0, 1300, 0
     ColumnSetUp GrdNT, 1, 820, 2
     ColumnSetUp GrdNT, 2, 2020, 0
@@ -451,25 +542,26 @@ Private Sub Form_Load()
     ColumnSetUp GrdNT, 5, 1060, 1
     ColumnSetUp GrdNT, 6, 1060, 0
     ColumnSetUp GrdNT, 7, 820, 2
-    
+
     For i = 0 To 1
         InitDateVars MedNgay(i), ngay(i)
     Next
-
+    Caption = "Danh s¸ch Hîp ®ång kinh tÕ"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     LietKeNgte
-    
+
     SetFont Me
 End Sub
 
-Private Sub Form_Unload(CANCEL As Integer)
+Private Sub Form_Unload(Cancel As Integer)
     Set okh = Nothing
 End Sub
 
 Private Sub GrdNt_click()
     Dim i As Integer
     
-    SendKeys "{Home}", True
+    'SendKeys "{Home}", True
     SetGridIndex GrdNT, GrdNT.Row
     With GrdNT
         .col = 0
@@ -524,7 +616,7 @@ Private Sub LietKeNgte()
         GrdNT.AddItem rs_ngte!sohieu + Chr(9) + Format(rs_ngte!NgayKy, Mask_D) + Chr(9) + rs_ngte!diengiai + Chr(9) + sh + Chr(9) + Ten + Chr(9) + Format(rs_ngte!TriGia, IIf(nt > 0, Mask_2, Mask_0)) + Chr(9) + rs_ngte!GhiChu + Chr(9) + Format(rs_ngte!NgayTH, Mask_D), 0
         rs_ngte.MoveNext
     Loop
-    GrdNT.Rows = IIf(rs_ngte.RecordCount > GrdNT.tag, rs_ngte.RecordCount, GrdNT.tag)
+    GrdNT.Rows = IIf(rs_ngte.recordCount > GrdNT.tag, rs_ngte.recordCount, GrdNT.tag)
     GrdNT.Row = 0
     GrdNT.col = 0
     rs_ngte.Close

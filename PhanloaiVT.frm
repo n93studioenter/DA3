@@ -1,12 +1,13 @@
 VERSION 5.00
 Object = "{BE4F3AC8-AEC9-101A-947B-00DD010F7B46}#1.0#0"; "MSOUTL32.OCX"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form frmPhanLoaiVT 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   ClientHeight    =   5325
-   ClientLeft      =   1605
-   ClientTop       =   1050
+   BorderStyle     =   0  'None
+   ClientHeight    =   5355
+   ClientLeft      =   1560
+   ClientTop       =   720
    ClientWidth     =   6615
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -24,13 +25,82 @@ Begin VB.Form frmPhanLoaiVT
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   ScaleHeight     =   5325
+   ScaleHeight     =   5355
    ScaleWidth      =   6615
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "1"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   9
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   6240
+         TabIndex        =   12
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "PhanloaiVT.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "PhanloaiVT.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "ß®ng nhÀp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   10
+         Top             =   0
+         Width           =   4455
+      End
+   End
    Begin VB.TextBox Text 
-      Height          =   285
+      Height          =   340
       Index           =   2
       Left            =   5400
       MaxLength       =   15
@@ -44,7 +114,7 @@ Begin VB.Form frmPhanLoaiVT
       Height          =   375
       Index           =   4
       Left            =   5400
-      Picture         =   "PhanloaiVT.frx":57E2
+      Picture         =   "PhanloaiVT.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   8
       Tag             =   "&Print"
@@ -56,7 +126,7 @@ Begin VB.Form frmPhanLoaiVT
       Height          =   375
       Index           =   3
       Left            =   5400
-      Picture         =   "PhanloaiVT.frx":6C44
+      Picture         =   "PhanloaiVT.frx":12A1E
       Style           =   1  'Graphical
       TabIndex        =   6
       Tag             =   "&Return"
@@ -68,7 +138,7 @@ Begin VB.Form frmPhanLoaiVT
       Height          =   375
       Index           =   2
       Left            =   5400
-      Picture         =   "PhanloaiVT.frx":8066
+      Picture         =   "PhanloaiVT.frx":13E40
       Style           =   1  'Graphical
       TabIndex        =   5
       Tag             =   "&Delete"
@@ -80,7 +150,7 @@ Begin VB.Form frmPhanLoaiVT
       Height          =   375
       Index           =   1
       Left            =   5400
-      Picture         =   "PhanloaiVT.frx":9548
+      Picture         =   "PhanloaiVT.frx":15322
       Style           =   1  'Graphical
       TabIndex        =   4
       Tag             =   "&Save"
@@ -92,7 +162,7 @@ Begin VB.Form frmPhanLoaiVT
       Height          =   375
       Index           =   0
       Left            =   5400
-      Picture         =   "PhanloaiVT.frx":A976
+      Picture         =   "PhanloaiVT.frx":16750
       Style           =   1  'Graphical
       TabIndex        =   3
       Tag             =   "&Add"
@@ -102,14 +172,15 @@ Begin VB.Form frmPhanLoaiVT
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   0
-      Left            =   1320
+      Left            =   5400
       MaxLength       =   50
-      TabIndex        =   1
-      Top             =   4920
-      Width           =   3975
+      TabIndex        =   11
+      Top             =   3120
+      Visible         =   0   'False
+      Width           =   1215
    End
    Begin VB.TextBox Text 
-      Height          =   285
+      Height          =   340
       Index           =   1
       Left            =   120
       MaxLength       =   15
@@ -137,13 +208,26 @@ Begin VB.Form frmPhanLoaiVT
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      MouseIcon       =   "PhanloaiVT.frx":BED0
+      MouseIcon       =   "PhanloaiVT.frx":17CAA
       Style           =   2
-      PicturePlus     =   "PhanloaiVT.frx":BEEC
-      PictureMinus    =   "PhanloaiVT.frx":BFE6
-      PictureLeaf     =   "PhanloaiVT.frx":C0E0
-      PictureOpen     =   "PhanloaiVT.frx":C1DA
-      PictureClosed   =   "PhanloaiVT.frx":C2D4
+      PicturePlus     =   "PhanloaiVT.frx":17CC6
+      PictureMinus    =   "PhanloaiVT.frx":17DC0
+      PictureLeaf     =   "PhanloaiVT.frx":17EBA
+      PictureOpen     =   "PhanloaiVT.frx":17FB4
+      PictureClosed   =   "PhanloaiVT.frx":180AE
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   340
+      Left            =   1320
+      TabIndex        =   1
+      Top             =   4920
+      Width           =   3855
+      VariousPropertyBits=   679495707
+      Size            =   "6800;600"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Line Line1 
       BorderColor     =   &H80000005&
@@ -187,7 +271,7 @@ Private Type tpPhanLoai
       MaSo As Long
       TenPhanLoai As String
       sohieu As String
-      vat As Integer
+      VAT As Integer
       plcha As Long
       plcon As Integer
       cap As Integer
@@ -201,33 +285,34 @@ Dim sql As String
 Dim flag As Integer
 
 Private Sub Form_Activate()
- Dim sh As String, m As Long
-   m = SelectSQL("SELECT MaSo AS F1 FROM PhanLoaiKhachHang")
+    Dim sh As String, m As Long
+    m = SelectSQL("SELECT MaSo AS F1 FROM PhanLoaiKhachHang")
 
     If Me.tag > 0 Then
         flag = Me.tag
         Select Case Me.tag
-            Case 1:
-                If pNN = 0 Then Me.Caption = "Ph©n loπi vÀt t≠ vµ tµi kho∂n xu t kho t›nh gia vËn"
-                tbl = "PhanLoaiVattu"
-                tbl1 = "Vattu"
-                Text(2).Visible = True
-            Case 2:
-                If pNN = 0 Then Me.Caption = "Ph©n loπi kh∏ch hµng"
-                tbl = "PhanLoaiKhachHang"
-                tbl1 = "KhachHang"
-            Case 3:
-                If pNN = 0 Then Me.Caption = "Ph©n loπi C´ng tr◊nh, s∂n ph»m"
-                tbl = "PhanLoai154"
-                tbl1 = "TP154"
-            Case 4:
-                If pNN = 0 Then Me.Caption = "Ph©n loπi Nh©n vi™n b∏n hµng"
-                tbl = "PhanLoaiNhanVien"
-                tbl1 = "NhanVien"
+        Case 1:
+            If pNN = 0 Then Me.Caption = "Ph©n loπi vÀt t≠ vµ tµi kho∂n xu t kho t›nh gia vËn"
+            tbl = "PhanLoaiVattu"
+            tbl1 = "Vattu"
+            Text(2).Visible = True
+        Case 2:
+            If pNN = 0 Then Me.Caption = "Ph©n loπi kh∏ch hµng"
+            tbl = "PhanLoaiKhachHang"
+            tbl1 = "KhachHang"
+        Case 3:
+            If pNN = 0 Then Me.Caption = "Ph©n loπi C´ng tr◊nh, s∂n ph»m"
+            tbl = "PhanLoai154"
+            tbl1 = "TP154"
+        Case 4:
+            If pNN = 0 Then Me.Caption = "Ph©n loπi Nh©n vi™n b∏n hµng"
+            tbl = "PhanLoaiNhanVien"
+            tbl1 = "NhanVien"
         End Select
         If pNN = 0 And pKhongDau > 0 Then Me.Caption = ABCtoKDau(Me.Caption)
         Me.tag = 0
         LayDanhSachPhanLoai
+        lblTitle(11).Caption = Caption
     End If
 End Sub
 
@@ -253,8 +338,31 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
       End If
       If KeyCode = vbKeyEscape Then Unload Me
 End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+
+
+
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+
 
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
     SetFont Me
 End Sub
 
@@ -282,17 +390,18 @@ Private Sub Outline_Click()
 End Sub
 ' DblClick
 Private Sub Outline_DblClick()
-      ' Chÿ Æﬁnh ÆËi t≠Óng theo m∑ sË
-      ChiDinh Outline.ItemData(Outline.ListIndex)
-      ' Ki”m tra c p cÒa ph©n loπi Æ≠Óc ch‰n (c p tr™n cÔng kh´ng th” sˆa ÆÊi hay xo∏)
-'      If PhanLoai.Cap = 1 Then
-'            KhoiTao False
-'      Else
-            Text(0).Text = PhanLoai.TenPhanLoai
-            Text(1).Text = PhanLoai.sohieu
-            If flag = 1 Then Text(2).Text = MaSo2SoHieu(PhanLoai.MaTK, "HethongTK")
-            RFocus Text(0)
- '     End If
+' Chÿ Æﬁnh ÆËi t≠Óng theo m∑ sË
+    ChiDinh Outline.ItemData(Outline.ListIndex)
+    ' Ki”m tra c p cÒa ph©n loπi Æ≠Óc ch‰n (c p tr™n cÔng kh´ng th” sˆa ÆÊi hay xo∏)
+    '      If PhanLoai.Cap = 1 Then
+    '            KhoiTao False
+    '      Else
+    'Text(0).Text = PhanLoai.TenPhanLoai
+    txtName.Text = VniToUnicode(PhanLoai.TenPhanLoai)
+    Text(1).Text = PhanLoai.sohieu
+    If flag = 1 Then Text(2).Text = MaSo2SoHieu(PhanLoai.MaTK, "HethongTK")
+    RFocus txtName
+    '     End If
 End Sub
 ' GotFocus
 Private Sub Outline_GotFocus()
@@ -307,53 +416,63 @@ End Sub
 '======================================================================================
 Private Sub Command_Click(Index As Integer)
     Dim mpl As Long
-    
-      Select Case Index
-            Case 0      ' MÌi
-                  KhoiTao Outline.ListIndex >= 0
-                  If Outline.ListIndex < 0 Then RFocus Text(1)
-            Case 1      ' Ghi
-                  If HopLe = 0 Then
-                        If PhanLoai.MaSo = 0 Then
-                              If ThemMoi = 0 Then KhoiTao True
-                        Else
-                              Dim vi_tri As Integer
-                              If SuaDoi = 0 Then
-                                    CapNhatSoHieu PhanLoai.cap, PhanLoai.MaSo, PhanLoai.sohieu
-                                    vi_tri = Outline.ListIndex
-                                    LayDanhSachPhanLoai
-                                    Outline.ListIndex = vi_tri
-                                    KhoiTao False
-                              End If
-                        End If
-                  End If
-            Case 2      ' Xo∏
-                If Outline.ListIndex < 0 Then Exit Sub
-                If vbNo = MsgBox("Xo∏ ph©n loπi hi÷n tπi", vbYesNo + vbQuestion, App.ProductName) Then Exit Sub
-                If Outline.ListIndex + 1 < Outline.ListCount Then
-                      If Outline.indent(Outline.ListIndex + 1) > Outline.indent(Outline.ListIndex) Then
-                            Beep
-                            MsgBox "V…n cﬂn c∏c ph©n loπi c p d≠Ìi", vbCritical, App.ProductName
-                            Exit Sub
-                      End If
-                End If
-                If xoa = 0 Then
+
+    Select Case Index
+    Case 0      ' MÌi
+        KhoiTao Outline.ListIndex >= 0
+        If Outline.ListIndex < 0 Then RFocus Text(1)
+    Case 1      ' Ghi
+        If HopLe = 0 Then
+            If PhanLoai.MaSo = 0 Then
+                If ThemMoi = 0 Then KhoiTao True
+            Else
+                Dim vi_tri As Integer
+                If vi_tri = 0 Then
+                    SuaDoi
+                    CapNhatSoHieu PhanLoai.cap, PhanLoai.MaSo, PhanLoai.sohieu
+                    vi_tri = Outline.ListIndex
+                    LayDanhSachPhanLoai
+                    Outline.ListIndex = vi_tri
                     KhoiTao False
-                    tmpMaSo = 0
-                    tmpSoHieu = ""
-                    tmpCap = 0
                 End If
-            Case 3      ' TrÎ v“
-                Unload Me
-            Case 4:
-                If Outline.ListIndex < 0 Then mpl = 0 Else mpl = Outline.ItemData(Outline.ListIndex)
-                SetRptInfo
-                Select Case flag
-                    Case 1:                    DanhDiemVT mpl
-                    Case 2:                    DanhDiemCN mpl
-                End Select
-                InBaoCaoRPT
-      End Select
+            End If
+        End If
+    Case 2      ' Xo∏
+        If Outline.ListIndex < 0 Then Exit Sub
+        Dim s As String
+        s = ChrW(88) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(7841) & ChrW(105)
+        Dim xn As String
+        xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+        If MessageBoxW(Me.hWnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbNo Then Exit Sub
+
+        'If vbNo = MsgBox("Xo∏ ph©n loπi hi÷n tπi", vbYesNo + vbQuestion, App.ProductName) Then Exit Sub
+        If Outline.ListIndex + 1 < Outline.ListCount Then
+            If Outline.indent(Outline.ListIndex + 1) > Outline.indent(Outline.ListIndex) Then
+                Beep
+                'MsgBox "V…n cﬂn c∏c ph©n loπi c p d≠Ìi", vbCritical, App.ProductName
+                s = ChrW(86) & ChrW(7851) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(242) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(7845) & ChrW(112) & ChrW(32) & ChrW(100) & ChrW(432) & ChrW(7899) & ChrW(105)
+                MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
+                Exit Sub
+            End If
+        End If
+        If xoa = 0 Then
+            KhoiTao False
+            tmpMaSo = 0
+            tmpSoHieu = ""
+            tmpCap = 0
+        End If
+    Case 3      ' TrÎ v“
+        Unload Me
+    Case 4:
+        If Outline.ListIndex < 0 Then mpl = 0 Else mpl = Outline.ItemData(Outline.ListIndex)
+        SetRptInfo
+        Select Case flag
+        Case 1: DanhDiemVT mpl
+        Case 2: DanhDiemCN mpl
+        End Select
+        InBaoCaoRPT
+    End Select
 End Sub
 '======================================================================================
 ' TEXT
@@ -377,72 +496,78 @@ End Sub
 
 ' Lost Focus
 Private Sub Text_LostFocus(Index As Integer)
-      If Len(Text(Index).Text) = 0 Then Text(Index).Text = "(...)"
-      Select Case Index
-            Case 0:  PhanLoai.TenPhanLoai = Text(0).Text
-            Case 1:  PhanLoai.sohieu = Text(1).Text
-            Case 2:
-                            If flag = 1 Then
-                                PhanLoai.MaTK = SoHieu2MaSo(Text(2).Text, "HethongTK")
-                            End If
-      End Select
+    If Len(Text(Index).Text) = 0 Then Text(Index).Text = "(...)"
+    Select Case Index
+    Case 0: PhanLoai.TenPhanLoai = UnicodeToVni(txtName.Text)
+    Case 1: PhanLoai.sohieu = Text(1).Text
+    Case 2:
+        If flag = 1 Then
+            PhanLoai.MaTK = SoHieu2MaSo(Text(2).Text, "HethongTK")
+        End If
+    End Select
 End Sub
 '======================================================================================
 ' FUNCTION HopLe
 '======================================================================================
 Private Function HopLe()
-Dim thong_bao As String
-Dim TK As New ClsTaikhoan
+    Dim thong_bao As String
+    Dim TK As New ClsTaikhoan
+    Dim s As String
 
-      With PhanLoai
-            If Len(.TenPhanLoai) = 0 Then Text_LostFocus (0)
-            If Len(.sohieu) = 0 Then Text_LostFocus (1)
-            If .TenPhanLoai = "(...)" Then
-                RFocus Text(0)
-                thong_bao = "Thi’u t™n ph©n loπi"
-                GoTo Err_InValidate
-            End If
-            If .sohieu = "(...)" Then
-                RFocus Text(1)
-                thong_bao = "Thi’u sË hi÷u ph©n loπi"
-                GoTo Err_InValidate
-            End If
-            If flag = 1 And PhanLoai.MaTK = 0 Then
-                RFocus Text(2)
-                thong_bao = "Thi’u sË hi÷u tµi kho∂n"
-                GoTo Err_InValidate
-            End If
-            If flag = 1 Then
-                TK.InitTaikhoanMaSo PhanLoai.MaTK
-                If TK.tk_id <> TKVT_ID Then thong_bao = "Ch‰n tµi kho∂n theo d‚i chi ti’t vÀt t≠": GoTo Err_InValidate
-                If TK.tkcon > 0 Then thong_bao = "Ch‰n tµi kho∂n chi ti’t": GoTo Err_InValidate
-            End If
-            ' N’u lµ th™m mÌi th◊ nhÀn c∏c thuÈc t›nh cÒa ph©n loπi c p tr™n
-            If .MaSo = 0 Then
-                  .cap = tmpCap + 1
-                  .plcha = tmpMaSo
-                  ' Ki”m tra c p vµ sË hi÷u
-                  If (.cap > 3) Then _
-                                                                                    thong_bao = "SË c p v≠Ót qu∏ quy Æﬁnh": GoTo Err_InValidate
-                  If Not Left(.sohieu, Len(tmpSoHieu)) = tmpSoHieu Then thong_bao = "SË hi÷u kh´ng ÆÛng quy Æﬁnh": GoTo Err_InValidate
-            Else
-                If .plcha > 0 Then
-                    Dim shieu_ctren As String
-                    ' Ki”m tra sË hi÷u
-                    sql = "SELECT SoHieu AS F1 FROM " + tbl + " WHERE MaSo = " + CStr(.plcha)
-                    shieu_ctren = CStr(SelectSQL(sql))
-                    If shieu_ctren <> "0" Then
-                        If Not Left(.sohieu, Len(shieu_ctren)) = shieu_ctren Then thong_bao = "SË hi÷u kh´ng ÆÛng quy Æﬁnh": GoTo Err_InValidate
-                    End If
+    With PhanLoai
+        If Len(.TenPhanLoai) = 0 Then Text_LostFocus (0)
+        If Len(.sohieu) = 0 Then Text_LostFocus (1)
+        If .TenPhanLoai = "(...)" Then
+            RFocus txtName
+            s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105)
+
+            GoTo Err_InValidate
+        End If
+        If .sohieu = "(...)" Then
+            RFocus Text(1)
+            s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105)
+
+            GoTo Err_InValidate
+        End If
+        If flag = 1 And PhanLoai.MaTK = 0 Then
+            RFocus Text(2)
+            s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110)
+
+            GoTo Err_InValidate
+        End If
+        If flag = 1 Then
+            TK.InitTaikhoanMaSo PhanLoai.MaTK
+            If TK.tk_id <> TKVT_ID Then s = ChrW(67) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(100) & ChrW(245) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(118) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(432): GoTo Err_InValidate
+            If TK.tkcon > 0 Then s = ChrW(67) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116): GoTo Err_InValidate
+        End If
+        ' N’u lµ th™m mÌi th◊ nhÀn c∏c thuÈc t›nh cÒa ph©n loπi c p tr™n
+        If .MaSo = 0 Then
+            .cap = tmpCap + 1
+            .plcha = tmpMaSo
+            ' Ki”m tra c p vµ sË hi÷u
+            If (.cap > 3) Then _
+             s = ChrW(83) & ChrW(7889) & ChrW(32) & ChrW(99) & ChrW(7845) & ChrW(112) & ChrW(32) & ChrW(118) & ChrW(432) & ChrW(7907) & ChrW(116) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(225) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(121) & ChrW(32) & ChrW(273) & ChrW(7883) & ChrW(110) & ChrW(104): GoTo Err_InValidate
+            If Not Left(.sohieu, Len(tmpSoHieu)) = tmpSoHieu Then thong_bao = "SË hi÷u kh´ng ÆÛng quy Æﬁnh": GoTo Err_InValidate
+        Else
+            If .plcha > 0 Then
+                Dim shieu_ctren As String
+                ' Ki”m tra sË hi÷u
+                sql = "SELECT SoHieu AS F1 FROM " + tbl + " WHERE MaSo = " + CStr(.plcha)
+                shieu_ctren = CStr(SelectSQL(sql))
+                If shieu_ctren <> "0" Then
+                    If Not Left(.sohieu, Len(shieu_ctren)) = shieu_ctren Then s = ChrW(83) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(273) & ChrW(250) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(113) & ChrW(117) & ChrW(121) & ChrW(32) & ChrW(273) & ChrW(7883) & ChrW(110) & ChrW(104): GoTo Err_InValidate
                 End If
             End If
-      End With
-      HopLe = 0
-      Exit Function
+        End If
+    End With
+    HopLe = 0
+    Exit Function
 Err_InValidate:
-      Beep
-      MsgBox thong_bao, vbCritical, App.ProductName
-      HopLe = -1
+    Beep
+    'MsgBox thong_bao, vbCritical, App.ProductName
+    MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
+    HopLe = -1
 End Function
 '======================================================================================
 ' SUB ChiDinh
@@ -493,41 +618,44 @@ End Function
 ' FUNCTION SuaDoi
 '======================================================================================
 Private Function SuaDoi()
-      Me.MousePointer = 11
-      
-      sql = "UPDATE " + tbl + " SET TenPhanLoai = '" + PhanLoai.TenPhanLoai _
-                                                                                      + "', SoHieu = '" + PhanLoai.sohieu _
-                                                                         + "'" + IIf(flag = 1, ",MaTK=" + CStr(PhanLoai.MaTK), "") + " WHERE MaSo = " + CStr(PhanLoai.MaSo)
-      If ExecuteSQL5(sql) = 0 Then
-            Outline.List(Outline.ListIndex) = PhanLoai.sohieu + "  " + PhanLoai.TenPhanLoai + IIf(flag = 1, " - " + Text(2).Text, "")
-            SuaDoi = 0
-      Else
-            SuaDoi = -1
-      End If
-      Me.MousePointer = 0
+    Me.MousePointer = 11
+
+    sql = "UPDATE " + tbl + " SET TenPhanLoai = '" + UnicodeToVni(txtName.Text) _
+        + "', SoHieu = '" + PhanLoai.sohieu _
+        + "'" + IIf(flag = 1, ",MaTK=" + CStr(PhanLoai.MaTK), "") + " WHERE MaSo = " + CStr(PhanLoai.MaSo)
+    If ExecuteSQL5(sql) = 0 Then
+        Outline.List(Outline.ListIndex) = PhanLoai.sohieu + "  " + PhanLoai.TenPhanLoai + IIf(flag = 1, " - " + Text(2).Text, "")
+        SuaDoi = 0
+    Else
+        SuaDoi = -1
+    End If
+    Me.MousePointer = 0
 End Function
 '======================================================================================
 ' FUNCTION Xoa
 '======================================================================================
 Private Function xoa() As Integer
-      Dim mc As Long
-      
-      Me.MousePointer = 11
-      If SelectSQL("SELECT DISTINCTROW Count(MaSo) AS F1 FROM " + tbl1 + " WHERE MaPhanLoai = " + CStr(Outline.ItemData(Outline.ListIndex))) > 0 Then
-            MsgBox "Ph©n loπi Æ∑ Æ®ng k˝ chi ti’t, kh´ng xo∏!", vbInformation, App.ProductName
+    Dim mc As Long
+    Dim s As String
+
+    Me.MousePointer = 11
+    If SelectSQL("SELECT DISTINCTROW Count(MaSo) AS F1 FROM " + tbl1 + " WHERE MaPhanLoai = " + CStr(Outline.ItemData(Outline.ListIndex))) > 0 Then
+        'MsgBox "Ph©n loπi Æ∑ Æ®ng k˝ chi ti’t, kh´ng xo∏!", vbInformation, App.ProductName
+        s = ChrW(80) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(108) & ChrW(111) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(120) & ChrW(111) & ChrW(225) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+        xoa = -1
+    Else
+        mc = SelectSQL("SELECT DISTINCTROW PLCha AS F1 FROM " + tbl + " WHERE MaSo=" + CStr(Outline.ItemData(Outline.ListIndex)))
+        sql = "DELETE * FROM " + tbl + " WHERE MaSo = " + CStr(Outline.ItemData(Outline.ListIndex))
+        If ExecuteSQL5(sql) = 0 Then
+            ExecuteSQL5 "UPDATE " + tbl1 + " SET MaPhanLoai = " + CStr(mc) + " WHERE MaPhanLoai = " + CStr(Outline.ItemData(Outline.ListIndex))
+            Outline.RemoveItem Outline.ListIndex
+            xoa = 0
+        Else
             xoa = -1
-      Else
-            mc = SelectSQL("SELECT DISTINCTROW PLCha AS F1 FROM " + tbl + " WHERE MaSo=" + CStr(Outline.ItemData(Outline.ListIndex)))
-            sql = "DELETE * FROM " + tbl + " WHERE MaSo = " + CStr(Outline.ItemData(Outline.ListIndex))
-            If ExecuteSQL5(sql) = 0 Then
-                  ExecuteSQL5 "UPDATE " + tbl1 + " SET MaPhanLoai = " + CStr(mc) + " WHERE MaPhanLoai = " + CStr(Outline.ItemData(Outline.ListIndex))
-                  Outline.RemoveItem Outline.ListIndex
-                  xoa = 0
-            Else
-                  xoa = -1
-            End If
-      End If
-      Me.MousePointer = 0
+        End If
+    End If
+    Me.MousePointer = 0
 End Function
 '======================================================================================
 ' SUB CapNhatSoHieu
@@ -587,7 +715,7 @@ Private Sub KhoiTao(tiep_tuc As Boolean)
       PhanLoai.plcha = 0
       PhanLoai.plcon = 0
       PhanLoai.cap = 0
-      Text(0).Text = ""
+      txtName.Text = ""
       If tiep_tuc = True Then
             Text(1).Text = tmpSoHieu
             If flag = 1 And Outline.ListIndex >= 0 Then

@@ -41,15 +41,6 @@ Begin VB.Form frmDCPTung
       _ExtentY        =   4392
       _StockProps     =   77
       BackColor       =   16761024
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Cols            =   5
    End
    Begin VB.TextBox Text 
@@ -229,6 +220,7 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
             Set frmDCPTung = Nothing
       End If
 End Sub
+
 ' Load
 Private Sub Form_Load()
 Dim rs_dcptung As Recordset, sql As String

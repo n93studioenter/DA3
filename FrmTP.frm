@@ -1,12 +1,12 @@
 VERSION 5.00
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmTP 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFFF&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "HÖ thèng danh ®iÓm c«ng tr×nh, s¶n phÈm"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   510
-   ClientTop       =   870
+   ClientLeft      =   465
+   ClientTop       =   540
    ClientWidth     =   9855
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -21,11 +21,83 @@ Begin VB.Form FrmTP
    Icon            =   "FrmTP.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Products and Contructions"
+   MaxButton       =   0   'False
+   MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   7080
    ScaleWidth      =   9855
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   42
+      Top             =   0
+      Width           =   13575
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmTP.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmTP.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   44
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9360
+         TabIndex        =   43
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.TextBox txtShTk 
       Height          =   285
       Index           =   0
@@ -42,7 +114,7 @@ Begin VB.Form FrmTP
       Height          =   375
       Index           =   0
       Left            =   7680
-      Picture         =   "FrmTP.frx":57E2
+      Picture         =   "FrmTP.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   7
       Top             =   1860
@@ -50,9 +122,9 @@ Begin VB.Form FrmTP
    End
    Begin VB.ComboBox CboThang 
       Height          =   315
-      ItemData        =   "FrmTP.frx":5960
+      ItemData        =   "FrmTP.frx":1173A
       Left            =   8280
-      List            =   "FrmTP.frx":5962
+      List            =   "FrmTP.frx":1173C
       Style           =   2  'Dropdown List
       TabIndex        =   39
       Top             =   2640
@@ -69,33 +141,33 @@ Begin VB.Form FrmTP
       Width           =   1935
    End
    Begin VB.TextBox TxtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   1
-      Left            =   6240
+      Left            =   1080
       MaxLength       =   50
       TabIndex        =   3
-      Top             =   720
+      Top             =   840
+      Visible         =   0   'False
       Width           =   3135
    End
    Begin VB.TextBox TxtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   2
-      Left            =   6240
+      Left            =   1920
       MaxLength       =   12
       TabIndex        =   4
-      Top             =   1080
+      Top             =   1320
+      Visible         =   0   'False
       Width           =   1935
    End
    Begin VB.TextBox TxtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   3
-      Left            =   6240
+      Left            =   960
       MaxLength       =   50
       TabIndex        =   5
-      Top             =   1440
+      Top             =   1920
+      Visible         =   0   'False
       Width           =   3135
    End
    Begin VB.TextBox TxtVT 
@@ -115,7 +187,7 @@ Begin VB.Form FrmTP
       Height          =   375
       Index           =   3
       Left            =   8640
-      Picture         =   "FrmTP.frx":5964
+      Picture         =   "FrmTP.frx":1173E
       Style           =   1  'Graphical
       TabIndex        =   19
       Tag             =   "&Return"
@@ -127,7 +199,7 @@ Begin VB.Form FrmTP
       Height          =   375
       Index           =   2
       Left            =   7440
-      Picture         =   "FrmTP.frx":6D86
+      Picture         =   "FrmTP.frx":12B60
       Style           =   1  'Graphical
       TabIndex        =   18
       Tag             =   "&Delete"
@@ -139,7 +211,7 @@ Begin VB.Form FrmTP
       Height          =   375
       Index           =   1
       Left            =   6240
-      Picture         =   "FrmTP.frx":8268
+      Picture         =   "FrmTP.frx":14042
       Style           =   1  'Graphical
       TabIndex        =   17
       Tag             =   "&Save"
@@ -151,7 +223,7 @@ Begin VB.Form FrmTP
       Height          =   375
       Index           =   0
       Left            =   5040
-      Picture         =   "FrmTP.frx":9696
+      Picture         =   "FrmTP.frx":15470
       Style           =   1  'Graphical
       TabIndex        =   16
       Tag             =   "&Add"
@@ -230,6 +302,48 @@ Begin VB.Form FrmTP
       Top             =   480
       Width           =   4695
    End
+   Begin MSForms.TextBox txtGhiChu 
+      Height          =   320
+      Left            =   6240
+      TabIndex        =   47
+      Top             =   1440
+      Width           =   3135
+      VariousPropertyBits=   679495707
+      Size            =   "5530;564"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtDonVi 
+      Height          =   300
+      Left            =   6240
+      TabIndex        =   46
+      Top             =   1080
+      Width           =   1935
+      VariousPropertyBits=   679495707
+      Size            =   "3413;529"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   320
+      Left            =   6240
+      TabIndex        =   45
+      Top             =   720
+      Width           =   3135
+      VariousPropertyBits=   679495707
+      Size            =   "5530;564"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
    Begin VB.Label LbTenTk 
       BackColor       =   &H80000005&
       ForeColor       =   &H00FF0000&
@@ -296,8 +410,8 @@ Begin VB.Form FrmTP
       Index           =   1
       X1              =   6240
       X2              =   9360
-      Y1              =   1005
-      Y2              =   1005
+      Y1              =   1050
+      Y2              =   1050
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -314,8 +428,8 @@ Begin VB.Form FrmTP
       Index           =   2
       X1              =   6240
       X2              =   8160
-      Y1              =   1365
-      Y2              =   1365
+      Y1              =   1380
+      Y2              =   1380
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -332,8 +446,8 @@ Begin VB.Form FrmTP
       Index           =   8
       X1              =   6240
       X2              =   9360
-      Y1              =   1725
-      Y2              =   1725
+      Y1              =   1765
+      Y2              =   1765
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -708,22 +822,57 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
     If KeyCode = vbKeyEscape Then Hide
 End Sub
+
 '======================================================================================
 ' Khoi tao form
 '======================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub txtName_Change()
+    txtVT(1).Text = UnicodeToVni(txtName.Text)
+End Sub
+Private Sub txtDonVi_Change()
+    txtVT(2).Text = UnicodeToVni(txtDonVi.Text)
+End Sub
+Private Sub txtGhichu_Change()
+    txtVT(3).Text = UnicodeToVni(txtGhiChu.Text)
+End Sub
+
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
     ThemMoi = 0
     doiloai = 0
+    Caption = "HÖ thèng danh ®iÓm c«ng tr×nh, s¶n phÈm"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2, SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoai154 WHERE PLCon=0 ORDER BY SoHieu", CboLoai
-    
+
     AddMonthToCbo CboThang
     CboThang.AddItem "TB", 0
     CboThang.ListIndex = 0
-    
+
     SetFont Me
-    
+
     TK.InitTaikhoanSohieu txtShTk(0).Text
+
+    'txtName.Font.Name = "Times New Roman"
+
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -741,15 +890,18 @@ End Sub
 ' Thu tuc hien thong tin chi tiet
 '======================================================================================
 Private Sub ShowChitiet(tp As Cls154)
-    
+
     txtVT(0).Text = tp.sohieu
     txtVT(1).Text = tp.TenVattu
+    txtName.Text = VniToUnicode(tp.TenVattu)
     txtVT(2).Text = tp.DonVi
+    txtDonVi.Text = VniToUnicode(tp.DonVi)
     txtVT(3).Text = tp.GhiChu
+    txtGhiChu.Text = VniToUnicode(tp.GhiChu)
     TK.InitTaikhoanMaSo tp.MaTK
     txtShTk(0).Text = TK.sohieu
     LbTenTk(0).Caption = TK.Ten
-    
+
     cboThang_Click
 End Sub
 '======================================================================================

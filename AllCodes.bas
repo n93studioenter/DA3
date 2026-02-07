@@ -8,6 +8,51 @@ Attribute VB_Name = "AllCodes"
 'The Barcode() Function will print one character of sBar at a time in a loop
 'To add more Barcode types, just continue to build functions that make the appropriate sBar String
 Option Explicit
+
+
+
+
+
+
+
+Public Const CLR_MENU_NORMAL As Long = &HE0E0E0
+Public Const CLR_MENU_HOVER As Long = &HC0C0FF
+
+Public Declare Function ReleaseCapture Lib "user32" () As Long
+Public Const WM_NCLBUTTONDOWN = &HA1
+Public Const HTCAPTION = 2
+
+
+Public Const TITLE_HEIGHT As Long = 350   ' twips
+Public Declare Function CreatePopupMenu Lib "user32" () As Long
+Public Declare Function InsertMenuItemW Lib "user32" ( _
+                                        ByVal hMenu As Long, _
+                                        ByVal uItem As Long, _
+                                        ByVal fByPosition As Long, _
+                                        lpmii As Any) As Long
+' ByRef ? dây, và lpmii As MENUITEMINFOW
+
+Public Declare Function TrackPopupMenu Lib "user32" ( _
+                                       ByVal hMenu As Long, _
+                                       ByVal wFlags As Long, _
+                                       ByVal X As Long, _
+                                       ByVal Y As Long, _
+                                       ByVal nReserved As Long, _
+                                       ByVal hwnd As Long, _
+                                       ByVal prcRect As Long) As Long   ' Ð? hi?n th? popup
+Public Declare Function SetForegroundWindow Lib "user32" ( _
+                                            ByVal hwnd As Long) As Long
+
+Public Declare Function GetCursorPos Lib "user32" (lpPoint As POINTAPI) As Long
+Public Type POINTAPI
+    X As Long
+    Y As Long
+End Type
+Public Const TPM_LEFTALIGN = &H0
+Public Const TPM_TOPALIGN = &H0
+Public Const TPM_RIGHTBUTTON = &H2
+Public Const TPM_RETURNCMD = &H100
+Public Declare Function DestroyMenu Lib "user32" (ByVal hMenu As Long) As Long
 Public Declare Function SetWindowTextW Lib "user32" _
                                        (ByVal hwnd As Long, ByVal lpString As Long) As Long
 
@@ -34,8 +79,9 @@ Public Type MENUITEMINFOW
     hbmpChecked As Long
     hbmpUnchecked As Long
     dwItemData As Long
-    dwTypeData As Long   ' ?? B?T BU?C – THI?U LÀ H?NG
+    dwTypeData As Long  ' Ðây là LPWSTR (pointer to wide string)
     cch As Long
+    hbmpItem As Long    ' Cho Vista+ n?u c?n icon
 End Type
 
 Public Declare Function SetMenuItemInfoW Lib "user32" _
@@ -49,17 +95,88 @@ Public Declare Function GetMenu Lib "user32" _
 Public Declare Function GetSubMenu Lib "user32" _
                                    (ByVal hMenu As Long, ByVal nPos As Long) As Long
 'Public Const pBCode = 39
+
+
 Public LO_XXXX As String
 Public SL_XXXX As Double
 Dim sBar As String, i0 As Integer, i1 As Integer
 Attribute i0.VB_VarUserMemId = 1073741826
 Attribute i1.VB_VarUserMemId = 1073741826
+Public Function VniToUnicode2(ByVal sVNI As String) As String
+    Dim VNI As String, UNI As String
+    Dim arrVNI() As String, arrUNI() As String
+    Dim i As Long, j As Long, result As String
+
+    ' B?ng mapping VNI Windows ? Unicode (hex)
+    VNI = "aù,aø,aû,aõ,aï,aâ,aê,aá,aà,aå,aã,aä,aé,aè,aú,aü,aë," & _
+          "AÙ,AØ,AÛ,AÕ,AÏ,AÂ,AÊ,AÁ,AÀ,AÅ,AÃ,AÄ,AÉ,AÈ,AÚ,AÜ,AË," & _
+          "eù,eø,eû,eõ,eï,eâ,eá,eà,eå,eã,eä," & _
+          "EÙ,EØ,EÛ,EÕ,EÏ,EÂ,EÁ,EÀ,EÅ,EÃ,EÄ," & _
+          "où,oø,oû,oõ,oï,oâ,ô,oá,oà,oå,oã,oä,ôù,ôø,ôû,ôõ,ôï," & _
+          "OÙ,OØ,OÛ,OÕ,OÏ,OÂ,Ô,OÁ,OÀ,OÅ,OÃ,OÄ,ÔÙ,ÔØ,ÔÛ,ÔÕ,ÔÏ," & _
+          "uù,uø,uû,uõ,uï,ö,öù,öø,öû,öõ,öï," & _
+          "UÙ,UØ,UÛ,UÕ,UÏ,Ö,ÖÙ,ÖØ,ÖÛ,ÖÕ,ÖÏ," & _
+          "yù,yø,yû,yõ,yï," & _
+          "YÙ,YØ,YÛ,YÕ,YÏ," & _
+          "ñ,Ñ,ñ,Ñ,î,Î,d,Ð"
+
+    UNI = "E1,E0,1EA3,E3,1EA1,E2,103,1EA5,1EA7,1EA9,1EAB,1EAD,1EAF,1EB1,1EB3,1EB5,1EB7," & _
+          "C1,C0,1EA2,C3,1EA0,C2,102,1EA4,1EA6,1EA8,1EAA,1EAC,1EAE,1EB0,1EB2,1EB4,1EB6," & _
+          "E9,E8,1EBB,1EBD,1EB9,EA,1EBF,1EC1,1EC3,1EC5,1EC7," & _
+          "C9,C8,1EBA,1EBC,1EB8,CA,1EBE,1EC0,1EC2,1EC4,1EC6," & _
+          "F3,F2,1ECF,F5,1ECD,F4,1A1,1ED1,1ED3,1ED5,1ED7,1ED9," & _
+          "D3,D2,1ECE,D5,1ECC,D4,1A0,1ED0,1ED2,1ED4,1ED6,1ED8," & _
+          "FA,F9,1EE7,169,1EE5,1B0,1EE9,1EEB,1EED,1EEF,1EF1," & _
+          "DA,D9,1EE6,168,1EE4,1AF,1EE8,1EEA,1EEC,1EEE,1EF0," & _
+          "FD,1EF3,1EF7,1EF9,1EF5," & _
+          "DD,1EF2,1EF6,1EF8,1EF4," & _
+          "111,110,ñ,Ñ,î,Î,111,110"
+
+    arrVNI = Split(VNI, ",")
+    arrUNI = Split(UNI, ",")
+
+    result = sVNI   ' B?t d?u t? nguyên b?n
+
+    For i = 0 To UBound(arrVNI)
+        If Len(arrVNI(i)) > 0 Then
+            result = Replace(result, arrVNI(i), ChrW(CLng("&H" & arrUNI(i))))
+        End If
+    Next i
+
+    VniToUnicode2 = result
+End Function
+Public Sub AnControl(frm As Form)
+    Dim ctl As Control
+
+    For Each ctl In frm.Controls
+        Select Case TypeName(ctl)
+        Case "Label", "TextBox", "ComboBox", "PictureBox", _
+             "CommandButton", "Frame", "CheckBox", _
+             "OptionButton", "ListBox", "Grid", _
+             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
+
+            If ctl.Name <> "picFakeTitle" _
+               And ctl.Name <> "lblTitle" _
+               And ctl.Name <> "lblClose" Then
+
+                If TypeName(ctl) = "Line" Then
+                    ctl.y1 = ctl.y1 + TITLE_HEIGHT
+                    ctl.y2 = ctl.y2 + TITLE_HEIGHT
+                Else
+                    ctl.Top = ctl.Top + TITLE_HEIGHT
+                End If
+
+            End If
+        End Select
+    Next
+End Sub
+
 Public Function GetResString(id As Long) As String
     On Error Resume Next
-    Dim b() As Byte
-    b = LoadResData(id, "CUSTOM")   ' type là CUSTOM (vi?t hoa)
-    If UBound(b) >= 0 Then
-        GetResString = StrConv(b, vbUnicode)   ' convert byte ? Unicode, gi? d?u d?p
+    Dim B() As Byte
+    B = LoadResData(id, "CUSTOM")   ' type là CUSTOM (vi?t hoa)
+    If UBound(B) >= 0 Then
+        GetResString = StrConv(B, vbUnicode)   ' convert byte ? Unicode, gi? d?u d?p
         ' Xóa null terminator n?u có
         If Right(GetResString, 1) = Chr(0) Then GetResString = Left(GetResString, Len(GetResString) - 1)
     End If

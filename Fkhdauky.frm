@@ -3,11 +3,10 @@ Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FKHDauKy 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Sè d­ ®Çu kú kh¸ch hµng"
+   BorderStyle     =   0  'None
    ClientHeight    =   7095
-   ClientLeft      =   870
-   ClientTop       =   735
+   ClientLeft      =   825
+   ClientTop       =   405
    ClientWidth     =   9885
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -30,9 +29,78 @@ Begin VB.Form FKHDauKy
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Liability Opening Balance"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   23
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   25
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   24
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Fkhdauky.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Fkhdauky.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.CommandButton importexel 
       BackColor       =   &H80000009&
-      Caption         =   "CËp nhË tõ excel"
+      Caption         =   "CËp nhËt tõ excel"
       Height          =   375
       Left            =   5280
       TabIndex        =   22
@@ -112,7 +180,7 @@ Begin VB.Form FKHDauKy
       EndProperty
       Height          =   285
       Left            =   9480
-      Picture         =   "Fkhdauky.frx":57E2
+      Picture         =   "Fkhdauky.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   7
       Top             =   6240
@@ -133,7 +201,7 @@ Begin VB.Form FKHDauKy
    Begin VB.CommandButton Command 
       Height          =   375
       Left            =   8400
-      Picture         =   "Fkhdauky.frx":5B84
+      Picture         =   "Fkhdauky.frx":1195E
       Style           =   1  'Graphical
       TabIndex        =   8
       Tag             =   "&Return"
@@ -416,8 +484,26 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
         Unload Me
     End If
 End Sub
-
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
     ColumnSetUp GrdVT, 0, 940, 2
     ColumnSetUp GrdVT, 1, 1300, 2
     ColumnSetUp GrdVT, 2, 3100, 0
@@ -426,12 +512,13 @@ Private Sub Form_Load()
     ColumnSetUp GrdVT, 5, 1300, 1
     ColumnSetUp GrdVT, 6, 1, 0
     ColumnSetUp GrdVT, 7, 1, 0
-    
+    Caption = "Sè d­ ®Çu kú kh¸ch hµng"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0 AND LEFT(SoHieu,1)<>'#' ORDER BY SoHieu", CboKho
-    
+
     psw = GetSetting(IniPath, "Environment", "InvPsw")
-    
+
     SetFont Me
 End Sub
 
@@ -468,11 +555,11 @@ Private Sub GrdVT_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
 End Sub
 
 Private Sub importdatabase_Click()
-Dim psw As String, fn As String
-Dim sql
-  Dim rs_chungtu As Recordset
-  psw = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.MDB", 1)
-If Len(psw) > 0 Then
+    Dim psw As String, fn As String
+    Dim sql
+    Dim rs_chungtu As Recordset
+    psw = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.MDB", 1)
+    If Len(psw) > 0 Then
         sql = "insert into khachhang select * from [" + psw + ";PWD=" + pPSW + "].khachhang where maso not in (select maso from khachhang)"
         DBKetoan.Execute sql
         sql = "insert into sodukhachhang select * from [" + psw + ";PWD=" + pPSW + "].SoDuKhachHang where maso not in (select maso from SoDuKhachHang )"
@@ -483,108 +570,124 @@ If Len(psw) > 0 Then
         sql = sql + ",SoDuKhachHang.DuCo_0 = a.DuCo_12 "
         sql = sql + ",SoDuKhachHang.DuNT_0 = a.DuNT_12 "
         DBKetoan.Execute sql
-         LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
-        MsgBox "B¹n chuyÓn d÷ liÖu thµnh c«ng."
-End If
+        LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
+        ' MsgBox "B¹n chuyÓn d÷ liÖu thµnh c«ng."
+        Dim s As String
+        s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(46)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+    End If
 End Sub
 
 Private Sub importexel_Click()
-Dim pDataPath As String, fn As String
-Dim xlapp
-Dim xlsheet
-Dim so
-Dim sql As String
-pDataPath = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.xlsx", 1)
- 
- If Len(pDataPath) > 0 Then
- If MsgBox("B¹n chon Yes th× cËp nhËt míi toµn bé." & vbNewLine & "B¹n chän No cËp nhËt bæ sung thªm vµo danh s¸ch.", vbYesNo + vbCritical, App.ProductName) = vbYes Then
-    sql = " UPDATE SoDuKhachHang "
-    sql = sql + " set DuNo_0  = 0 "
-    sql = sql + ",DuCo_0 = 0 "
-    sql = sql + ",DuNT_0 = 0"
-    ExecuteSQL5 sql
- End If
-   LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
- 
- Set xlapp = CreateObject("Excel.Application")
- xlapp.Workbooks.Open pDataPath
- Set xlsheet = xlapp.Worksheets(1)
- Dim sodong, MaSo, i As Integer
- 
- 'sodong = Int(xlsheet.Cells(4, 2))
- Dim MaTaiKhoan As String
- Dim loai As Integer
- Dim sohieu, Ten, DiaChi, mst, Tel, Fax, email, taikhoan, DaiDien, GhiChu, duno, duco, NguyenTe As String
- sodong = Int(xlsheet.Cells(4, 2))
- For i = 6 To sodong + 5
-  sohieu = CStr(xlsheet.Cells(i, 1))
-  Ten = CStr(xlsheet.Cells(i, 2))
-  DiaChi = CStr(xlsheet.Cells(i, 3)) + "..."
-  mst = CStr(xlsheet.Cells(i, 4)) + "..."
-  Tel = xlsheet.Cells(i, 5) + "..."
-  Fax = xlsheet.Cells(i, 6) + "..."
-  email = xlsheet.Cells(i, 7) + "..."
-  taikhoan = xlsheet.Cells(i, 8) + "..."
-  DaiDien = xlsheet.Cells(i, 9) + "..."
-  GhiChu = xlsheet.Cells(i, 10) + "..."
-  MaTaiKhoan = xlsheet.Cells(i, 11)
-  If (i > 4) Then
-  
-  duno = CStr(xlsheet.Cells(i, 12))
-  duco = CStr(xlsheet.Cells(i, 13))
-  NguyenTe = CStr(xlsheet.Cells(i, 14))
-  Else
-  duno = "0"
-  duco = "0"
-  NguyenTe = "0"
-  End If
-   sql = ""
-    If Left(MaTaiKhoan, 3) = "331" Then
-        loai = 2
-    ElseIf Left(MaTaiKhoan, 3) = "131" Then
-        loai = 3
-    Else
-        loai = 1
-    End If
-    
-    MaTaiKhoan = SelectSQL("SELECT MaSo AS F1 FROM hethongtk WHERE  SoHieu = '" + CStr(MaTaiKhoan) + "'")
-    MaSo = SelectSQL("SELECT MaSo AS F1 FROM KhachHang WHERE  sohieu = '" + sohieu + "'")
-    If MaSo > 0 Then
-            sql = sql + "update khachhang set ten = '" + CStr(Ten) + "'"
-            sql = sql + ",diachi = '" + CStr(DiaChi) + "..." + "'"
-            sql = sql + ",MST = '" + CStr(mst) + "..." + "'"
-            sql = sql + ",Tel = '" + CStr(Tel) + "..." + "'"
-            sql = sql + ",Fax = '" + CStr(Fax) + "..." + "'"
-            sql = sql + ",EMail = '" + CStr(email) + "..." + "'"
-            sql = sql + ",DaiDien = '" + CStr(DaiDien) + "..." + "'"
-            sql = sql + ",TaiKhoan = '" + CStr(taikhoan) + "'"
-            sql = sql + ",GhiChu = '" + CStr(GhiChu) + "..." + "'"
-            sql = sql + " where maso = " + CStr(MaSo) + ""
-            ExecuteSQL5 sql
-            If SelectSQL(" select count(*) as f1 from SoDuKhachHang  where mataikhoan = " + CStr(MaTaiKhoan) + " and MaKhachHang = " + CStr(MaSo)) > 0 Then
-            
-                ExecuteSQL5 "update SoDuKhachHang set DuNo_0 = " + CStr("0" + duno) + ",DuCo_0 = " + CStr("0" + duco) + ",DuNT_0 = " + CStr("0" + NguyenTe) + " where mataikhoan = " + CStr(MaTaiKhoan) + " and MaKhachHang = " + CStr(MaSo) + ""
-            Else
-                ExecuteSQL5 "INSERT INTO SoDuKhachHang (MaSo,MaTaiKhoan,MaKhachHang,DuNo_0,DuCo_0,DuNT_0) VALUES (" + CStr(Lng_MaxValue("MaSo", "SoDuKhachHang") + 1) + "," + CStr(MaTaiKhoan) + "," + CStr(MaSo) + "," + CStr("0" + duno) + "," + CStr("0" + duco) + "," + CStr("0" + NguyenTe) + ")"
-               End If
+    Dim pDataPath As String, fn As String
+    Dim xlapp
+    Dim xlsheet
+    Dim so
+    Dim sql As String
+    pDataPath = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.xlsx", 1)
 
-      Else
-      If Len(sohieu) > 0 And Len(Ten) > 0 And MaTaiKhoan > 0 Then
-          sql = sql + "INSERT INTO KhachHang (MaSo,MaPhanLoai,SoHieu,Ten,DiaChi,MST,Tel,Fax,EMail,DaiDien,TaiKhoan,GhiChu) VALUES (" + CStr(Lng_MaxValue("MaSo", "KhachHang") + 1) + ","
-          sql = sql + CStr(loai) + ",'" + sohieu + "','" + Ten + "','" + DiaChi + "','" + mst + "','" + Tel + "','" + Fax + "','" + email + "','" + DaiDien + "','"
-          sql = sql + taikhoan + "','" + GhiChu + "')"
-          ExecuteSQL5 sql
-          ExecuteSQL5 "INSERT INTO SoDuKhachHang (MaSo,MaTaiKhoan,MaKhachHang,DuNo_0,DuCo_0,DuNT_0) VALUES (" + CStr(Lng_MaxValue("MaSo", "SoDuKhachHang") + 1) + "," + CStr(MaTaiKhoan) + "," + CStr(Lng_MaxValue("MaSo", "KhachHang")) + "," + CStr("0" + duno) + "," + CStr("0" + duco) + "," + CStr("0" + NguyenTe) + ")"
-          Else
-          MsgBox "Kh«ng thÓ cËp nhËt ®èi t­îng :" + sohieu + " - " + Ten
-      End If
-   End If
-  Next
-   xlapp.Workbooks.Close
-   LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
-    KiemTraVatTu
-    KiemTraTaiKhoan
-End If
+    If Len(pDataPath) > 0 Then
+        Dim s As String
+
+        s = ChrW(66) & ChrW(185) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(111) & ChrW(110) & ChrW(32) & ChrW(89) & ChrW(101) & ChrW(115) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(215) & ChrW(32) & ChrW(99) & ChrW(203) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(203) & ChrW(116) & ChrW(32) & ChrW(109) & ChrW(237) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(111) & ChrW(181) & ChrW(110) & ChrW(32) & ChrW(98) & ChrW(233) & ChrW(46) & vbCrLf
+
+        s = s & _
+            ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(78) & ChrW(111) & ChrW(32) & ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(98) & ChrW(7893) & ChrW(32) & ChrW(115) & ChrW(117) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(234) & ChrW(109) & ChrW(32) & ChrW(118) & ChrW(224) & ChrW(111) & ChrW(32) & ChrW(100) & ChrW(97) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(115) & ChrW(225) & ChrW(99) & ChrW(104) & ChrW(46)
+        Dim xn As String
+        xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+        If MessageBoxW(Me.hWnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+            sql = " UPDATE SoDuKhachHang "
+            sql = sql + " set DuNo_0  = 0 "
+            sql = sql + ",DuCo_0 = 0 "
+            sql = sql + ",DuNT_0 = 0"
+            ExecuteSQL5 sql
+        End If
+        LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
+
+        Set xlapp = CreateObject("Excel.Application")
+        xlapp.Workbooks.Open pDataPath
+        Set xlsheet = xlapp.Worksheets(1)
+        Dim sodong, MaSo, i As Integer
+
+        'sodong = Int(xlsheet.Cells(4, 2))
+        Dim MaTaiKhoan As String
+        Dim loai As Integer
+        Dim sohieu, Ten, DiaChi, mst, Tel, Fax, email, taikhoan, DaiDien, GhiChu, duno, duco, NguyenTe As String
+        sodong = Int(xlsheet.Cells(4, 2))
+        For i = 6 To sodong + 5
+            sohieu = CStr(xlsheet.Cells(i, 1))
+            Ten = CStr(xlsheet.Cells(i, 2))
+            DiaChi = CStr(xlsheet.Cells(i, 3)) + "..."
+            mst = CStr(xlsheet.Cells(i, 4)) + "..."
+            Tel = xlsheet.Cells(i, 5) + "..."
+            Fax = xlsheet.Cells(i, 6) + "..."
+            email = xlsheet.Cells(i, 7) + "..."
+            taikhoan = xlsheet.Cells(i, 8) + "..."
+            DaiDien = xlsheet.Cells(i, 9) + "..."
+            GhiChu = xlsheet.Cells(i, 10) + "..."
+            MaTaiKhoan = xlsheet.Cells(i, 11)
+            If (i > 4) Then
+
+                duno = CStr(xlsheet.Cells(i, 12))
+                duco = CStr(xlsheet.Cells(i, 13))
+                NguyenTe = CStr(xlsheet.Cells(i, 14))
+            Else
+                duno = "0"
+                duco = "0"
+                NguyenTe = "0"
+            End If
+            sql = ""
+            If Left(MaTaiKhoan, 3) = "331" Then
+                loai = 2
+            ElseIf Left(MaTaiKhoan, 3) = "131" Then
+                loai = 3
+            Else
+                loai = 1
+            End If
+
+            MaTaiKhoan = SelectSQL("SELECT MaSo AS F1 FROM hethongtk WHERE  SoHieu = '" + CStr(MaTaiKhoan) + "'")
+            MaSo = SelectSQL("SELECT MaSo AS F1 FROM KhachHang WHERE  sohieu = '" + sohieu + "'")
+            If MaSo > 0 Then
+                sql = sql + "update khachhang set ten = '" + CStr(Ten) + "'"
+                sql = sql + ",diachi = '" + CStr(DiaChi) + "..." + "'"
+                sql = sql + ",MST = '" + CStr(mst) + "..." + "'"
+                sql = sql + ",Tel = '" + CStr(Tel) + "..." + "'"
+                sql = sql + ",Fax = '" + CStr(Fax) + "..." + "'"
+                sql = sql + ",EMail = '" + CStr(email) + "..." + "'"
+                sql = sql + ",DaiDien = '" + CStr(DaiDien) + "..." + "'"
+                sql = sql + ",TaiKhoan = '" + CStr(taikhoan) + "'"
+                sql = sql + ",GhiChu = '" + CStr(GhiChu) + "..." + "'"
+                sql = sql + " where maso = " + CStr(MaSo) + ""
+                ExecuteSQL5 sql
+                If SelectSQL(" select count(*) as f1 from SoDuKhachHang  where mataikhoan = " + CStr(MaTaiKhoan) + " and MaKhachHang = " + CStr(MaSo)) > 0 Then
+
+                    ExecuteSQL5 "update SoDuKhachHang set DuNo_0 = " + CStr("0" + duno) + ",DuCo_0 = " + CStr("0" + duco) + ",DuNT_0 = " + CStr("0" + NguyenTe) + " where mataikhoan = " + CStr(MaTaiKhoan) + " and MaKhachHang = " + CStr(MaSo) + ""
+                Else
+                    ExecuteSQL5 "INSERT INTO SoDuKhachHang (MaSo,MaTaiKhoan,MaKhachHang,DuNo_0,DuCo_0,DuNT_0) VALUES (" + CStr(Lng_MaxValue("MaSo", "SoDuKhachHang") + 1) + "," + CStr(MaTaiKhoan) + "," + CStr(MaSo) + "," + CStr("0" + duno) + "," + CStr("0" + duco) + "," + CStr("0" + NguyenTe) + ")"
+                End If
+
+            Else
+                If Len(sohieu) > 0 And Len(Ten) > 0 And MaTaiKhoan > 0 Then
+                    sql = sql + "INSERT INTO KhachHang (MaSo,MaPhanLoai,SoHieu,Ten,DiaChi,MST,Tel,Fax,EMail,DaiDien,TaiKhoan,GhiChu) VALUES (" + CStr(Lng_MaxValue("MaSo", "KhachHang") + 1) + ","
+                    sql = sql + CStr(loai) + ",'" + sohieu + "','" + Ten + "','" + DiaChi + "','" + mst + "','" + Tel + "','" + Fax + "','" + email + "','" + DaiDien + "','"
+                    sql = sql + taikhoan + "','" + GhiChu + "')"
+                    ExecuteSQL5 sql
+                    ExecuteSQL5 "INSERT INTO SoDuKhachHang (MaSo,MaTaiKhoan,MaKhachHang,DuNo_0,DuCo_0,DuNT_0) VALUES (" + CStr(Lng_MaxValue("MaSo", "SoDuKhachHang") + 1) + "," + CStr(MaTaiKhoan) + "," + CStr(Lng_MaxValue("MaSo", "KhachHang")) + "," + CStr("0" + duno) + "," + CStr("0" + duco) + "," + CStr("0" + NguyenTe) + ")"
+                Else
+                    'MsgBox "Kh«ng thÓ cËp nhËt ®èi t­îng :" + sohieu + " - " + Ten
+                    s = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(7875) & ChrW(32) & ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(273) & ChrW(7889) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(58)
+                    MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+
+                End If
+            End If
+        Next
+        xlapp.Workbooks.Close
+        LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
+        KiemTraVatTu
+        KiemTraTaiKhoan
+    End If
 
 End Sub
 
@@ -700,8 +803,9 @@ Private Sub xoa_Click()
            ChrW(120) & ChrW(111) & ChrW(225)
 
     ' Hi?n th? MsgBox v?i n?i dung sMsg
-    If MsgBox(sMsg, vbYesNo + vbCritical, sCap) = vbYes Then
-
+    Dim xn As String
+    xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+    If MessageBoxW(Me.hWnd, StrPtr(sMsg), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
         sql = " UPDATE SoDuKhachHang "
         sql = sql + " set DuNo_0  = 0 "
         sql = sql + ",DuCo_0 = 0 "
@@ -710,7 +814,13 @@ Private Sub xoa_Click()
         LietKeTonKho CboKho.ItemData(CboKho.ListIndex)
         DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '331*'"
         DBKetoan.Execute "update hethongtk set duno_0 = 0,duco_0 = 0 where sohieu like '131*'"
-        MsgBox "Xãa thµnh c«ng"
+        'MsgBox "Xãa thµnh c«ng"
+        Dim s As String
+
+        s = ChrW(88) & ChrW(243) & ChrW(97) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
     End If
+
 
 End Sub

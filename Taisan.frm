@@ -1,15 +1,16 @@
 VERSION 5.00
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form frmTaiSan 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00E0E0E0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Tµi s¶n"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   210
-   ClientTop       =   510
+   ClientLeft      =   180
+   ClientTop       =   195
    ClientWidth     =   9855
    ClipControls    =   0   'False
+   ControlBox      =   0   'False
    BeginProperty Font 
       Name            =   "VK Sans Serif"
       Size            =   8.25
@@ -30,6 +31,75 @@ Begin VB.Form frmTaiSan
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   70
+      Top             =   0
+      Width           =   13575
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Taisan.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Taisan.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   72
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   71
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   19
@@ -59,7 +129,7 @@ Begin VB.Form frmTaiSan
       MaxLength       =   5
       MultiLine       =   -1  'True
       TabIndex        =   23
-      Text            =   "Taisan.frx":57E2
+      Text            =   "Taisan.frx":115BC
       Top             =   6060
       Width           =   495
    End
@@ -133,7 +203,7 @@ Begin VB.Form frmTaiSan
       MaxLength       =   15
       MultiLine       =   -1  'True
       TabIndex        =   18
-      Text            =   "Taisan.frx":57E6
+      Text            =   "Taisan.frx":115C0
       Top             =   4980
       Visible         =   0   'False
       Width           =   1335
@@ -146,7 +216,7 @@ Begin VB.Form frmTaiSan
       MaxLength       =   15
       MultiLine       =   -1  'True
       TabIndex        =   17
-      Text            =   "Taisan.frx":57EA
+      Text            =   "Taisan.frx":115C4
       Top             =   4980
       Visible         =   0   'False
       Width           =   1335
@@ -159,7 +229,7 @@ Begin VB.Form frmTaiSan
       MaxLength       =   15
       MultiLine       =   -1  'True
       TabIndex        =   16
-      Text            =   "Taisan.frx":57EE
+      Text            =   "Taisan.frx":115C8
       Top             =   4980
       Width           =   1335
    End
@@ -171,7 +241,7 @@ Begin VB.Form frmTaiSan
       MaxLength       =   15
       MultiLine       =   -1  'True
       TabIndex        =   15
-      Text            =   "Taisan.frx":57F2
+      Text            =   "Taisan.frx":115CC
       Top             =   5040
       Visible         =   0   'False
       Width           =   1335
@@ -224,20 +294,22 @@ Begin VB.Form frmTaiSan
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   2
-      Left            =   1440
+      Left            =   7680
       MaxLength       =   50
       TabIndex        =   7
       Top             =   2280
-      Width           =   6015
+      Visible         =   0   'False
+      Width           =   495
    End
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   1
-      Left            =   1440
+      Left            =   7560
       MaxLength       =   50
       TabIndex        =   6
       Top             =   1920
-      Width           =   6015
+      Visible         =   0   'False
+      Width           =   735
    End
    Begin VB.TextBox Text 
       Height          =   285
@@ -260,11 +332,12 @@ Begin VB.Form frmTaiSan
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   5
-      Left            =   1440
+      Left            =   7560
       MaxLength       =   50
       TabIndex        =   10
       Top             =   3000
-      Width           =   6015
+      Visible         =   0   'False
+      Width           =   735
    End
    Begin VB.ComboBox Combo 
       Height          =   315
@@ -298,7 +371,7 @@ Begin VB.Form frmTaiSan
       Height          =   375
       Index           =   4
       Left            =   8520
-      Picture         =   "Taisan.frx":57F6
+      Picture         =   "Taisan.frx":115D0
       Style           =   1  'Graphical
       TabIndex        =   39
       Tag             =   "&Print"
@@ -310,7 +383,7 @@ Begin VB.Form frmTaiSan
       Height          =   375
       Index           =   3
       Left            =   8520
-      Picture         =   "Taisan.frx":6C58
+      Picture         =   "Taisan.frx":12A32
       Style           =   1  'Graphical
       TabIndex        =   38
       Tag             =   "&View"
@@ -322,7 +395,7 @@ Begin VB.Form frmTaiSan
       Height          =   375
       Index           =   2
       Left            =   8520
-      Picture         =   "Taisan.frx":7DCA
+      Picture         =   "Taisan.frx":13BA4
       Style           =   1  'Graphical
       TabIndex        =   37
       Tag             =   "&Equipment"
@@ -334,7 +407,7 @@ Begin VB.Form frmTaiSan
       Height          =   375
       Index           =   1
       Left            =   8520
-      Picture         =   "Taisan.frx":810C
+      Picture         =   "Taisan.frx":13EE6
       Style           =   1  'Graphical
       TabIndex        =   36
       Tag             =   "&Return"
@@ -346,7 +419,7 @@ Begin VB.Form frmTaiSan
       Height          =   375
       Index           =   0
       Left            =   8520
-      Picture         =   "Taisan.frx":952E
+      Picture         =   "Taisan.frx":15308
       Style           =   1  'Graphical
       TabIndex        =   35
       Tag             =   "&Save"
@@ -383,9 +456,9 @@ Begin VB.Form frmTaiSan
    Begin VB.ComboBox Combo 
       Height          =   315
       Index           =   6
-      ItemData        =   "Taisan.frx":A95C
+      ItemData        =   "Taisan.frx":16736
       Left            =   1440
-      List            =   "Taisan.frx":A95E
+      List            =   "Taisan.frx":16738
       Style           =   2  'Dropdown List
       TabIndex        =   12
       Top             =   3840
@@ -394,9 +467,9 @@ Begin VB.Form frmTaiSan
    Begin VB.ComboBox Combo 
       Height          =   315
       Index           =   7
-      ItemData        =   "Taisan.frx":A960
+      ItemData        =   "Taisan.frx":1673A
       Left            =   8640
-      List            =   "Taisan.frx":A962
+      List            =   "Taisan.frx":1673C
       Style           =   2  'Dropdown List
       TabIndex        =   29
       Top             =   3120
@@ -425,6 +498,45 @@ Begin VB.Form frmTaiSan
       EndProperty
       Mask            =   "99/99/99"
       PromptChar      =   "_"
+   End
+   Begin MSForms.TextBox txtGhichu 
+      Height          =   300
+      Left            =   1440
+      TabIndex        =   75
+      Top             =   3000
+      Width           =   6015
+      VariousPropertyBits=   679495707
+      Size            =   "10610;529"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtNangLuc 
+      Height          =   300
+      Left            =   1440
+      TabIndex        =   74
+      Top             =   2280
+      Width           =   6015
+      VariousPropertyBits=   679495707
+      Size            =   "10610;529"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtTen 
+      Height          =   300
+      Left            =   1440
+      TabIndex        =   73
+      Top             =   1920
+      Width           =   6015
+      VariousPropertyBits=   679495707
+      Size            =   "10610;529"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label 
       Alignment       =   1  'Right Justify
@@ -991,7 +1103,7 @@ Dim ngay As Date
 Private Sub Form_Activate()
     pNhapdauky = (Me.tag > 0)
     If Not pNhapdauky Then
-          SetListIndex Combo(7), Month(Date)
+          SetListIndex Combo(7), month(Date)
           DoEvents
           Combo(7).Enabled = True
           
@@ -1032,66 +1144,96 @@ End Sub
 '     - LÊy danh s¸ch c¸c ®èi t­îng qu¶n lý, sö dông, n­íc s¶n xuÊt vµ hÖ thèng ph©n lo¹i
 '     - Khëi t¹o m«i tr­êng nÕu nhËp míi
 '     - LÊy vµ hiÓn thÞ néi dung tµi s¶n nÕu ®· cã
-Private Sub Form_Load()
-Dim chi_so As Integer
-        InitDateVars MedNgay, ngay
-      ' LÊy danh s¸ch c¸c ®èi t­îng quan hÖ
-      Int_RecsetToCbo "SELECT Ten AS F1, MaSo as F2 FROM QuocGia ORDER BY Ten", Combo(0)
-      Int_RecsetToCbo "SELECT SoHieu + '  ' + Ten AS F1, MaSo as F2 FROM LoaiTaiSan WHERE Cap = 1", Combo(1)
-      Int_RecsetToCbo "SELECT Ten AS F1, MaSo as F2 FROM DTQly ORDER BY Ten", Combo(4)
-      Int_RecsetToCbo "SELECT SoHieu + ' - ' + Ten AS F1, MaSo as F2 FROM HethongTK WHERE TK_ID2 = " + CStr(TKCPSX_ID) + " AND TKCon = 0 ORDER BY SoHieu", Combo(5)
-      Int_RecsetToCbo "SELECT Ten AS F1, MaSo as F2 FROM TinhTrang ORDER BY Ten", Combo(6)
-      AddMonthToCbo Combo(7)
-      ' Khëi t¹o tµi s¶n míi
-      If pMaTaiSan = 0 Then
-            ' LÊy danh s¸ch c¸c th¸ng cã thÓ chän
-            ' Khëi t¹o ®èi t­îng TaiSan (Thñ tôc nµy ph¶i ®­îc gäi tr­íc khi ®Æt th¸ng ngÇm ®Þnh)
-            KhoiTaoTaiSan False
-            ' NÕu nhËp ®Çu kú th× ®Æt th¸ng ngÇm ®Þnh lµ th¸ng ®Çu kú, nÕu t¨ng th× ®Æt b»ng th¸ng t¨ng
-            SetListIndex Combo(7), CLng(IIf(pNhapdauky, pThangDauKy, pThangTacDong))
-            ' Khëi t¹o m«i tr­êng
-            Command(2).Visible = False
-            Command(3).Visible = False
-            Command(4).Visible = False
-            Label(12).Caption = "Hao mßn :"
-            Label(16).Caption = "KhÊu hao / th¸ng :"
-      ' HiÓn thÞ c¸c th«ng tin cña tµi s¶n ®· cã
-      Else
-            ' LÊy c¸c th«ng tin trong d÷ liÖu. Qu¸ tr×nh hiÓn thÞ néi dung tµi s¶n cÇn ph¶i tr¸nh c¸c t¸c ®éng
-            ' do lÊy vµ ®Æt thuéc tÝnh ListIndex cho c¸c ComboBox lµm thay ®æi thuéc tÝnh ph©n lo¹i ®· cã
-            KhoiTao = True
-                  NoiDungTaiSan pMaTaiSan, pThangTacDong
-            KhoiTao = False
-            ' LÊy danh s¸ch c¸c th¸ng cã thÓ chän
-            Do While chi_so < Combo(7).ListCount
-                If Not InMonth(Combo(7).ItemData(chi_so), IIf(TaiSan.ThangTang = 0, pThangDauKy, TaiSan.ThangTang), IIf(TaiSan.ThangGiam = 13, IIf(pThangDauKy > 1, pThangDauKy - 1, 12), TaiSan.ThangGiam)) Then
-                    Combo(7).RemoveItem chi_so
-                Else
-                    chi_so = chi_so + 1
-                End If
-            Loop
-            ' §Æt th¸ng ngÇm ®Þnh (sÏ dÉn ®Õn viÖc hiÓn thÞ c¸c th«ng sè t­¬ng øng)
-            SetListIndex Combo(7), CLng(pThangTacDong)
-            DoEvents
-            ' Khëi t¹o m«i tr­êng
-            Command(2).Visible = True
-            Command(3).Visible = True
-            Command(4).Visible = True
-            Label(12).Caption = "Tæng hao mßn :"
-            Label(16).Caption = "Møc khÊu hao th¸ng :"
-      End If
-      
-      If pMaTaiSan = 0 Then
-            Me.Caption = " NhËp tµi s¶n míi"
-      Else
-            Me.Caption = " Söa ®æi chi tiÕt tµi s¶n"
-      End If
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub txtTen_Change()
+    Text(1).Text = UnicodeToVni(txtTen.Text)
+End Sub
+Private Sub txtNangLuc_Change()
+    Text(2).Text = UnicodeToVni(txtNangLuc.Text)
+End Sub
+Private Sub txtGhichu_Change()
+    Text(5).Text = UnicodeToVni(txtGhichu.Text)
+End Sub
 
-      pGhichungtu = 0
-      Caption = Caption + " - " + CStr(pNamTC)
-      psw = GetSetting(IniPath, "Environment", "InvPsw")
-      
-      SetFont Me
+Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+    Dim chi_so As Integer
+    InitDateVars MedNgay, ngay
+    ' LÊy danh s¸ch c¸c ®èi t­îng quan hÖ
+    Int_RecsetToCbo "SELECT Ten AS F1, MaSo as F2 FROM QuocGia ORDER BY Ten", Combo(0)
+    Int_RecsetToCbo "SELECT SoHieu + '  ' + Ten AS F1, MaSo as F2 FROM LoaiTaiSan WHERE Cap = 1", Combo(1)
+    Int_RecsetToCbo "SELECT Ten AS F1, MaSo as F2 FROM DTQly ORDER BY Ten", Combo(4)
+    Int_RecsetToCbo "SELECT SoHieu + ' - ' + Ten AS F1, MaSo as F2 FROM HethongTK WHERE TK_ID2 = " + CStr(TKCPSX_ID) + " AND TKCon = 0 ORDER BY SoHieu", Combo(5)
+    Int_RecsetToCbo "SELECT Ten AS F1, MaSo as F2 FROM TinhTrang ORDER BY Ten", Combo(6)
+    AddMonthToCbo Combo(7)
+    ' Khëi t¹o tµi s¶n míi
+    If pMaTaiSan = 0 Then
+        ' LÊy danh s¸ch c¸c th¸ng cã thÓ chän
+        ' Khëi t¹o ®èi t­îng TaiSan (Thñ tôc nµy ph¶i ®­îc gäi tr­íc khi ®Æt th¸ng ngÇm ®Þnh)
+        KhoiTaoTaiSan False
+        ' NÕu nhËp ®Çu kú th× ®Æt th¸ng ngÇm ®Þnh lµ th¸ng ®Çu kú, nÕu t¨ng th× ®Æt b»ng th¸ng t¨ng
+        SetListIndex Combo(7), CLng(IIf(pNhapdauky, pThangDauKy, pThangTacDong))
+        ' Khëi t¹o m«i tr­êng
+        Command(2).Visible = False
+        Command(3).Visible = False
+        Command(4).Visible = False
+        Label(12).Caption = "Hao mßn :"
+        Label(16).Caption = "KhÊu hao / th¸ng :"
+        ' HiÓn thÞ c¸c th«ng tin cña tµi s¶n ®· cã
+    Else
+        ' LÊy c¸c th«ng tin trong d÷ liÖu. Qu¸ tr×nh hiÓn thÞ néi dung tµi s¶n cÇn ph¶i tr¸nh c¸c t¸c ®éng
+        ' do lÊy vµ ®Æt thuéc tÝnh ListIndex cho c¸c ComboBox lµm thay ®æi thuéc tÝnh ph©n lo¹i ®· cã
+        KhoiTao = True
+        NoiDungTaiSan pMaTaiSan, pThangTacDong
+        KhoiTao = False
+        ' LÊy danh s¸ch c¸c th¸ng cã thÓ chän
+        Do While chi_so < Combo(7).ListCount
+            If Not InMonth(Combo(7).ItemData(chi_so), IIf(TaiSan.ThangTang = 0, pThangDauKy, TaiSan.ThangTang), IIf(TaiSan.ThangGiam = 13, IIf(pThangDauKy > 1, pThangDauKy - 1, 12), TaiSan.ThangGiam)) Then
+                Combo(7).RemoveItem chi_so
+            Else
+                chi_so = chi_so + 1
+            End If
+        Loop
+        ' §Æt th¸ng ngÇm ®Þnh (sÏ dÉn ®Õn viÖc hiÓn thÞ c¸c th«ng sè t­¬ng øng)
+        SetListIndex Combo(7), CLng(pThangTacDong)
+        DoEvents
+        ' Khëi t¹o m«i tr­êng
+        Command(2).Visible = True
+        Command(3).Visible = True
+        Command(4).Visible = True
+        Label(12).Caption = "Tæng hao mßn :"
+        Label(16).Caption = "Møc khÊu hao th¸ng :"
+    End If
+
+    If pMaTaiSan = 0 Then
+        Me.Caption = " NhËp tµi s¶n míi"
+    Else
+        Me.Caption = " Söa ®æi chi tiÕt tµi s¶n"
+    End If
+
+    pGhichungtu = 0
+    Caption = Caption + " - " + CStr(pNamTC)
+    psw = GetSetting(IniPath, "Environment", "InvPsw")
+
+    SetFont Me
+    lblTitle(11).Caption = Caption
 End Sub
 
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -1123,88 +1265,94 @@ End Sub
 '     2. In hoÆc xem thÎ tµi s¶n
 '======================================================================================
 Private Sub Command_Click(Index As Integer)
-      Me.MousePointer = 11
-      Select Case Index
-            Case 0            ' Ghi tµi s¶n ............................................................................................................................................
-                  If TaiSan.HopLe = 0 Then
-                        ' Thªm míi (t¨ng tµi s¶n)
-                        If pMaTaiSan = 0 Then
-                              If TaiSan.ThemMoi(Chk.Value) = 0 Then
-                                    pMaTaiSan = TaiSan.MaSo
-                                    ' ChuyÓn gi¸ trÞ cña tµi s¶n võa ghi vµo biÕn chung GiaTri ®Ó t¹o vµ ghi chøng tõ
-                                    ' (riªng l­îng khÊu hao sÏ kh«ng ®­îc ghi vµo chøng tõ t¨ng hoÆc ®Çu kú )
-                                    With TaiSan.ThongSo
-                                          GiaTri.NG_NS = .NG_NS
-                                          GiaTri.NG_TBS = .NG_TBS
-                                          GiaTri.NG_CNK = .NG_CNK
-                                          GiaTri.NG_TD = .NG_TD
-                                          GiaTri.CL_NS = .CL_NS
-                                          GiaTri.CL_TBS = .CL_TBS
-                                          GiaTri.CL_CNK = .CL_CNK
-                                          GiaTri.CL_TD = .CL_TD
-                                    End With
-                                    ' NhËp c¸c dông cô phô tïng kÌm theo tµi s¶n
-                                    Dim dem_
-                                    dem_ = 0
-                                    If vbYes = MsgBox("Tµi s¶n cã c¸c dông cô, phô tïng kÌm theo ?", _
-                                                                                                                        vbYesNo + vbQuestion) Then
-                                          frmDCPTung.Show 1
-                                          frmTaiSan.Refresh
-                                         Else
-                                          dem_ = 1
-                                    End If
-                                    ' NÕu nhËp ®Çu kú th× t¹o chøng tõ ®Çu kú, nÕu t¨ng trong kú th× t¹o chøng tõ t¨ng
-                                    If dem_ = 0 Then
-                                          frmDCPTung.Show 1
-                                          frmTaiSan.Refresh
-                                    End If
-                                    If pNhapdauky Then
-                                          GhiChungTuDauKy
-                                    Else
-                                          ' Thµnh lËp dßng ph¸t sinh
-                                          ThanhLapPhatSinh NV_TANG, TaiSan.MaTaiKhoan
-                                          ' Ghi chøng tõ
-                                          pGhichungtu = 1
-                                          SetListIndex FrmChungtu.CboThang, Combo(7).ItemData(Combo(7).ListIndex)
-                                          FrmChungtu.txt(0).Text = Text(19).Text
-                                          FrmChungtu.MedNgay(0).Text = MedNgay.Text
-                                          FrmChungtu.MedNgay(1).Text = MedNgay.Text
-                                          Unload Me
-                                          Exit Sub
-                                    End If
-                                    pMaTaiSan = 0
-                                    pMaChungTu = 0
-                                    KhoiTaoTaiSan True
-                              End If
-                        ' Söa ®æi (kh«ng cã nghiÖp vô nµo kÌm theo)
-                        Else
-                            If Len(psw) > 0 Then
-                                If FPsw.GetPswX() <> psw Then GoTo XongTS
-                            End If
-                              Select Case TaiSan.SuaDoi
-                                    Case 0
-                                          pMaTaiSan = 0
-                                          If Combo(7).ItemData(Combo(7).ListIndex) = pThangDauKy Then SoDuTKTS
-                                          SendKeys "{Escape}", False
-                                    Case -2, -3:
-                                          MsgBox "Chó ý : söa ®æi l­îng khÊu hao vµ gi¸ trÞ cña mét tµi s¶n ®· bÞ gi¶m hoÆc ®¸nh " _
-                                                       & "gi¸ l¹i sÏ lµm cho sè liÖu ghi trªn chøng tõ t­¬ng øng kh«ng cßn chÝnh x¸c n÷a. " _
-                                                       & "Xo¸ c¸c chøng tõ cã liªn quan ®i vµ sau ®ã ghi l¹i nÕu cÇn söa ®æi", vbCritical
-                              End Select
-                        End If
-                  End If
-            Case 1            ' Trë vÒ ...................................................................................................................................................
-                  pMaTaiSan = 0
-                  SendKeys "{Escape}", False
-            Case 2            ' Danh s¸ch dông cô phô tïng kÌm theo .....................................................................................
-                  frmDCPTung.Show 1
-            Case 3            ' In thÎ tµi s¶n trong n¨m ...................................................................................................................
-                  TaoTheTaiSan 0, Combo(7).ItemData(Combo(7).ListIndex)
-            Case 4            ' Xem tr­íc thÎ tµi s¶n trong n¨m ...................................................................................................
-                  TaoTheTaiSan 1, Combo(7).ItemData(Combo(7).ListIndex)
-      End Select
+    Me.MousePointer = 11
+    Select Case Index
+    Case 0            ' Ghi tµi s¶n ............................................................................................................................................
+        If TaiSan.HopLe = 0 Then
+            ' Thªm míi (t¨ng tµi s¶n)
+            If pMaTaiSan = 0 Then
+                If TaiSan.ThemMoi(Chk.Value) = 0 Then
+                    pMaTaiSan = TaiSan.MaSo
+                    ' ChuyÓn gi¸ trÞ cña tµi s¶n võa ghi vµo biÕn chung GiaTri ®Ó t¹o vµ ghi chøng tõ
+                    ' (riªng l­îng khÊu hao sÏ kh«ng ®­îc ghi vµo chøng tõ t¨ng hoÆc ®Çu kú )
+                    With TaiSan.ThongSo
+                        GiaTri.NG_NS = .NG_NS
+                        GiaTri.NG_TBS = .NG_TBS
+                        GiaTri.NG_CNK = .NG_CNK
+                        GiaTri.NG_TD = .NG_TD
+                        GiaTri.CL_NS = .CL_NS
+                        GiaTri.CL_TBS = .CL_TBS
+                        GiaTri.CL_CNK = .CL_CNK
+                        GiaTri.CL_TD = .CL_TD
+                    End With
+                    ' NhËp c¸c dông cô phô tïng kÌm theo tµi s¶n
+                    Dim dem_
+                    dem_ = 0
+                    Dim s As String
+                    s = ChrW(84) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(99) & ChrW(7909) & ChrW(44) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(7909) & ChrW(32) & ChrW(116) & ChrW(249) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(232) & ChrW(109) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(63)
+                    Dim xn As String
+                    xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                    If MessageBoxW(Me.hWnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                        frmDCPTung.Show 1
+                        frmTaiSan.Refresh
+                    Else
+                        dem_ = 1
+                    End If
+
+
+                    ' NÕu nhËp ®Çu kú th× t¹o chøng tõ ®Çu kú, nÕu t¨ng trong kú th× t¹o chøng tõ t¨ng
+                    If dem_ = 0 Then
+                        frmDCPTung.Show 1
+                        frmTaiSan.Refresh
+                    End If
+                    If pNhapdauky Then
+                        GhiChungTuDauKy
+                    Else
+                        ' Thµnh lËp dßng ph¸t sinh
+                        ThanhLapPhatSinh NV_TANG, TaiSan.MaTaiKhoan
+                        ' Ghi chøng tõ
+                        pGhichungtu = 1
+                        SetListIndex FrmChungtu.CboThang, Combo(7).ItemData(Combo(7).ListIndex)
+                        FrmChungtu.txt(0).Text = Text(19).Text
+                        FrmChungtu.MedNgay(0).Text = MedNgay.Text
+                        FrmChungtu.MedNgay(1).Text = MedNgay.Text
+                        Unload Me
+                        Exit Sub
+                    End If
+                    pMaTaiSan = 0
+                    pMaChungTu = 0
+                    KhoiTaoTaiSan True
+                End If
+                ' Söa ®æi (kh«ng cã nghiÖp vô nµo kÌm theo)
+            Else
+                If Len(psw) > 0 Then
+                    If FPsw.GetPswX() <> psw Then GoTo XongTS
+                End If
+                Select Case TaiSan.SuaDoi
+                Case 0
+                    pMaTaiSan = 0
+                    If Combo(7).ItemData(Combo(7).ListIndex) = pThangDauKy Then SoDuTKTS
+                    SendKeys "{Escape}", False
+                Case -2, -3:
+                    MsgBox "Chó ý : söa ®æi l­îng khÊu hao vµ gi¸ trÞ cña mét tµi s¶n ®· bÞ gi¶m hoÆc ®¸nh " _
+                         & "gi¸ l¹i sÏ lµm cho sè liÖu ghi trªn chøng tõ t­¬ng øng kh«ng cßn chÝnh x¸c n÷a. " _
+                         & "Xo¸ c¸c chøng tõ cã liªn quan ®i vµ sau ®ã ghi l¹i nÕu cÇn söa ®æi", vbCritical
+
+                End Select
+            End If
+        End If
+    Case 1            ' Trë vÒ ...................................................................................................................................................
+        pMaTaiSan = 0
+        SendKeys "{Escape}", False
+    Case 2            ' Danh s¸ch dông cô phô tïng kÌm theo .....................................................................................
+        frmDCPTung.Show 1
+    Case 3            ' In thÎ tµi s¶n trong n¨m ...................................................................................................................
+        TaoTheTaiSan 0, Combo(7).ItemData(Combo(7).ListIndex)
+    Case 4            ' Xem tr­íc thÎ tµi s¶n trong n¨m ...................................................................................................
+        TaoTheTaiSan 1, Combo(7).ItemData(Combo(7).ListIndex)
+    End Select
 XongTS:
-      Me.MousePointer = 0
+    Me.MousePointer = 0
 End Sub
 '======================================================================================
 ' COMBO
@@ -1377,72 +1525,74 @@ Private Sub Text_KeyPress(Index As Integer, KeyAscii As Integer)
     If Index = 0 And (KeyAscii = 32 Or KeyAscii = 39 Or KeyAscii = 42) Then KeyAscii = 0
     If Index >= 6 And Index <= 18 Then KeyProcess Text(Index), KeyAscii
 End Sub
-
+Private Sub txtTen_LostFocus()
+TaiSan.Ten = txtTen.Text
+End Sub
 ' LostFocus
 Private Sub Text_LostFocus(Index As Integer)
-      Dim i As Integer, sn As Integer
-      
-      If Index >= 6 And Index <= 18 Then
-            Text(Index).Text = Format(Text(Index).Text, Mask_0)
-      End If
-      If Len(Text(Index).Text) = 0 Then
-            If (Index < 3 Or Index = 5) Then Text(Index).Text = "(...)" Else Text(Index).Text = "0"
-      End If
-      On Error GoTo Err_DataTypeConvertion
-      Select Case Index
-            Case 0: TaiSan.sohieu = Text(0).Text
-            Case 1: TaiSan.Ten = Text(1).Text
-            Case 2: TaiSan.NangLuc = Text(2).Text
-            Case 3: TaiSan.NamSX = CInt5(Text(3).Text)
-            Case 4: TaiSan.NamSD = CInt5(Text(4).Text)
-            Case 5: TaiSan.GhiChu = Text(5).Text
-            ' Nguyªn gi¸
-            Case 6: TaiSan.ThongSo.NG_NS = Cdbl5(Text(6).Text)
-            Case 7: TaiSan.ThongSo.NG_TBS = Cdbl5(Text(7).Text)
-            Case 8: TaiSan.ThongSo.NG_CNK = Cdbl5(Text(8).Text)
-            Case 9: TaiSan.ThongSo.NG_TD = Cdbl5(Text(9).Text)
-            ' Hao mßn
-            Case 10: TaiSan.ThongSo.HM_NS = Cdbl5(Text(10).Text)
-            Case 11: TaiSan.ThongSo.HM_TBS = Cdbl5(Text(11).Text)
-            Case 12: TaiSan.ThongSo.HM_CNK = Cdbl5(Text(12).Text)
-            Case 13: TaiSan.ThongSo.HM_TD = Cdbl5(Text(13).Text)
-            ' KhÊu hao
-            Case 14: TaiSan.ThongSo.KH_NS = Cdbl5(Text(14).Text)
-            Case 15: TaiSan.ThongSo.KH_TBS = Cdbl5(Text(15).Text)
-            Case 16: TaiSan.ThongSo.KH_CNK = Cdbl5(Text(16).Text)
-            Case 17: TaiSan.ThongSo.KH_TD = Cdbl5(Text(17).Text)
-            Case 18:
-                                sn = CInt5(Text(18).Text)
-                               TaiSan.NamKH = sn
-                                If sn > 0 And (Not Text(18).Locked) Then
-                                    For i = 6 To 9
-                                         If Cdbl5(Label(20 + IIf(i < 9, i, 10)).Caption) > 0 Then
-                                             Text(i + 8).Text = Format(RoundMoney(Cdbl5(Text(i).Text) / (sn * 12)), Mask_0)
-                                             Text_LostFocus i + 8
-                                         End If
-                                    Next
-                                End If
-            Case 19:  TaiSan.shct = Text(19).Text
-      End Select
-      If Index > 5 And Index < 10 Then
-            If Cdbl5(Text(Index).Text) = 0 Then
-                Text(Index + 4).Text = "0"
-                Text(Index + 8).Text = "0"
-                Text_LostFocus Index + 4
-                Text_LostFocus Index + 8
-                Text(Index + 4).Enabled = False
-                Text(Index + 8).Enabled = False
-            Else
-                Text(Index + 4).Enabled = True
-                Text(Index + 8).Enabled = True
-            End If
-      End If
-      On Error GoTo 0
-      ' TÝnh gi¸ trÞ cßn l¹i vµ c¸c tæng sè
-      With TaiSan.ThongSo
-      If Index > 5 And Index < 14 Then
+    Dim i As Integer, sn As Integer
+
+    If Index >= 6 And Index <= 18 Then
+        Text(Index).Text = Format(Text(Index).Text, Mask_0)
+    End If
+    If Len(Text(Index).Text) = 0 Then
+        If (Index < 3 Or Index = 5) Then Text(Index).Text = "(...)" Else Text(Index).Text = "0"
+    End If
+    On Error GoTo Err_DataTypeConvertion
+    Select Case Index
+    Case 0: TaiSan.sohieu = Text(0).Text
+    Case 1: TaiSan.Ten = txtTen.Text
+    Case 2: TaiSan.NangLuc = Text(2).Text
+    Case 3: TaiSan.NamSX = CInt5(Text(3).Text)
+    Case 4: TaiSan.NamSD = CInt5(Text(4).Text)
+    Case 5: TaiSan.GhiChu = Text(5).Text
+        ' Nguyªn gi¸
+    Case 6: TaiSan.ThongSo.NG_NS = Cdbl5(Text(6).Text)
+    Case 7: TaiSan.ThongSo.NG_TBS = Cdbl5(Text(7).Text)
+    Case 8: TaiSan.ThongSo.NG_CNK = Cdbl5(Text(8).Text)
+    Case 9: TaiSan.ThongSo.NG_TD = Cdbl5(Text(9).Text)
+        ' Hao mßn
+    Case 10: TaiSan.ThongSo.HM_NS = Cdbl5(Text(10).Text)
+    Case 11: TaiSan.ThongSo.HM_TBS = Cdbl5(Text(11).Text)
+    Case 12: TaiSan.ThongSo.HM_CNK = Cdbl5(Text(12).Text)
+    Case 13: TaiSan.ThongSo.HM_TD = Cdbl5(Text(13).Text)
+        ' KhÊu hao
+    Case 14: TaiSan.ThongSo.KH_NS = Cdbl5(Text(14).Text)
+    Case 15: TaiSan.ThongSo.KH_TBS = Cdbl5(Text(15).Text)
+    Case 16: TaiSan.ThongSo.KH_CNK = Cdbl5(Text(16).Text)
+    Case 17: TaiSan.ThongSo.KH_TD = Cdbl5(Text(17).Text)
+    Case 18:
+        sn = CInt5(Text(18).Text)
+        TaiSan.NamKH = sn
+        If sn > 0 And (Not Text(18).Locked) Then
+            For i = 6 To 9
+                If Cdbl5(Label(20 + IIf(i < 9, i, 10)).Caption) > 0 Then
+                    Text(i + 8).Text = Format(RoundMoney(Cdbl5(Text(i).Text) / (sn * 12)), Mask_0)
+                    Text_LostFocus i + 8
+                End If
+            Next
+        End If
+    Case 19: TaiSan.shct = Text(19).Text
+    End Select
+    If Index > 5 And Index < 10 Then
+        If Cdbl5(Text(Index).Text) = 0 Then
+            Text(Index + 4).Text = "0"
+            Text(Index + 8).Text = "0"
+            Text_LostFocus Index + 4
+            Text_LostFocus Index + 8
+            Text(Index + 4).Enabled = False
+            Text(Index + 8).Enabled = False
+        Else
+            Text(Index + 4).Enabled = True
+            Text(Index + 8).Enabled = True
+        End If
+    End If
+    On Error GoTo 0
+    ' TÝnh gi¸ trÞ cßn l¹i vµ c¸c tæng sè
+    With TaiSan.ThongSo
+        If Index > 5 And Index < 14 Then
             If Index < 10 Then Label(19).Caption = Format(.NG_NS + .NG_TBS + .NG_CNK + .NG_TD, Mask_0) _
-                                  Else Label(20).Caption = Format(.HM_NS + .HM_TBS + .HM_CNK + .HM_TD, Mask_0)
+               Else Label(20).Caption = Format(.HM_NS + .HM_TBS + .HM_CNK + .HM_TD, Mask_0)
             .CL_NS = .NG_NS - .HM_NS
             .CL_TBS = .NG_TBS - .HM_TBS
             .CL_CNK = .NG_CNK - .HM_CNK
@@ -1452,12 +1602,12 @@ Private Sub Text_LostFocus(Index As Integer)
             Label(28).Caption = Format(.CL_CNK, Mask_0)
             Label(30).Caption = Format(.CL_TD, Mask_0)
             Label(21).Caption = Format(.CL_NS + .CL_TBS + .CL_CNK + .CL_TD, Mask_0)
-      End If
-      If Index > 13 Then Label(22).Caption = Format(.KH_NS + .KH_TBS + .KH_CNK + .KH_TD, Mask_0)
-      End With
-      Exit Sub
+        End If
+        If Index > 13 Then Label(22).Caption = Format(.KH_NS + .KH_TBS + .KH_CNK + .KH_TD, Mask_0)
+    End With
+    Exit Sub
 Err_DataTypeConvertion:
-      RFocus Text(Index)
+    RFocus Text(Index)
 End Sub
 '======================================================================================
 ' SUB KhoiTaoTaiSan
@@ -1652,21 +1802,44 @@ End Sub
 ' FUNCTION KiemTraSoLieuDauKy
 '======================================================================================
 Private Function KiemTraSoLieuDauKy() As Integer
-Dim rs_dauky As Recordset, sql As String
-      Me.MousePointer = 11
-      sql = "SELECT Sum(NG_NS+NG_TBS+NG_CNK+NG_TD) AS TNG, " _
-                              & "Sum(CL_NS+CL_TBS+CL_CNK+CL_TD) AS TCL " _
-                              & "FROM CTTaiSan WHERE Thang=0"
-      Set rs_dauky = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
-      
-      MsgBox "Sè liÖu ®Çu kú ®· nhËp" + Chr(13) _
-                  + "  Tæng nguyªn gi¸ : " + Format(rs_dauky!TNG, Mask_0) + Chr(13) _
-                  + "  Tæng cßn l¹i : " + Format(rs_dauky!TCL, Mask_0), vbInformation, App.ProductName
-      KiemTraSoLieuDauKy = 0
-      SoDuTKTS
-      rs_dauky.Close
-      Set rs_dauky = Nothing
-      Me.MousePointer = 0
+    Dim rs_dauky As Recordset, sql As String
+    Me.MousePointer = 11
+    sql = "SELECT Sum(NG_NS+NG_TBS+NG_CNK+NG_TD) AS TNG, " _
+        & "Sum(CL_NS+CL_TBS+CL_CNK+CL_TD) AS TCL " _
+        & "FROM CTTaiSan WHERE Thang=0"
+    Set rs_dauky = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+
+    'MsgBox "Sè liÖu ®Çu kú ®· nhËp" + Chr(13) _
+     '+ "  Tæng nguyªn gi¸ : " + Format(rs_dauky!TNG, Mask_0) + Chr(13) _
+     '+ "  Tæng cßn l¹i : " + Format(rs_dauky!TCL, Mask_0), vbInformation, App.ProductName
+    Dim s As String
+
+    s = _
+    ChrW(83) & ChrW(7889) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & _
+        ChrW(273) & ChrW(7847) & ChrW(7847) & ChrW(117) & ChrW(32) & _
+        ChrW(107) & ChrW(7923) & ChrW(32) & _
+        ChrW(273) & ChrW(227) & ChrW(32) & _
+        ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & _
+        ChrW(13) & _
+        ChrW(32) & ChrW(32) & _
+        ChrW(84) & ChrW(7893) & ChrW(110) & ChrW(103) & ChrW(32) & _
+        ChrW(110) & ChrW(103) & ChrW(117) & ChrW(121) & ChrW(234) & ChrW(110) & ChrW(32) & _
+        ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(58) & ChrW(32) & _
+        Format(rs_dauky!TNG, Mask_0) & _
+        ChrW(13) & _
+        ChrW(32) & ChrW(32) & _
+        ChrW(84) & ChrW(7893) & ChrW(110) & ChrW(103) & ChrW(32) & _
+        ChrW(99) & ChrW(242) & ChrW(110) & ChrW(32) & _
+        ChrW(108) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(58) & ChrW(32) & _
+        Format(rs_dauky!TCL, Mask_0)
+
+    MessageBoxW Me.hWnd, StrPtr(s), StrPtr(App.ProductName), vbInformation
+
+    KiemTraSoLieuDauKy = 0
+    SoDuTKTS
+    rs_dauky.Close
+    Set rs_dauky = Nothing
+    Me.MousePointer = 0
 End Function
 
 Private Sub MedNgay_GotFocus()

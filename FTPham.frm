@@ -1,14 +1,13 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FrmThanhPham 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFFF&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "B¶ng kª thµnh phÈm hoµn thµnh trong kú"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   825
-   ClientTop       =   465
+   ClientLeft      =   780
+   ClientTop       =   135
    ClientWidth     =   9855
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -31,6 +30,75 @@ Begin VB.Form FrmThanhPham
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Finished Good Voucher"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   56
+      Top             =   0
+      Width           =   13575
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FTPham.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FTPham.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   58
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   57
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.TextBox txtChuyen 
       Alignment       =   1  'Right Justify
       Appearance      =   0  'Flat
@@ -108,7 +176,7 @@ Begin VB.Form FrmThanhPham
    Begin VB.CommandButton cmdtp 
       Height          =   375
       Left            =   2400
-      Picture         =   "FTPham.frx":57E2
+      Picture         =   "FTPham.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   4
       Top             =   360
@@ -119,7 +187,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   4
       Left            =   3600
-      Picture         =   "FTPham.frx":5C5C
+      Picture         =   "FTPham.frx":11A36
       Style           =   1  'Graphical
       TabIndex        =   47
       Tag             =   "&Print"
@@ -157,7 +225,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   2
       Left            =   2925
-      Picture         =   "FTPham.frx":70BE
+      Picture         =   "FTPham.frx":12E98
       Style           =   1  'Graphical
       TabIndex        =   13
       Top             =   2760
@@ -189,7 +257,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   1
       Left            =   2925
-      Picture         =   "FTPham.frx":7538
+      Picture         =   "FTPham.frx":13312
       Style           =   1  'Graphical
       TabIndex        =   11
       Top             =   2400
@@ -199,7 +267,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   0
       Left            =   2925
-      Picture         =   "FTPham.frx":79B2
+      Picture         =   "FTPham.frx":1378C
       Style           =   1  'Graphical
       TabIndex        =   9
       Top             =   2040
@@ -207,9 +275,9 @@ Begin VB.Form FrmThanhPham
    End
    Begin VB.ComboBox CboThang 
       Height          =   315
-      ItemData        =   "FTPham.frx":7E2C
+      ItemData        =   "FTPham.frx":13C06
       Left            =   960
-      List            =   "FTPham.frx":7E2E
+      List            =   "FTPham.frx":13C08
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   120
@@ -226,15 +294,6 @@ Begin VB.Form FrmThanhPham
       _ExtentX        =   16960
       _ExtentY        =   5106
       _StockProps     =   77
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   20
       Cols            =   12
       FixedRows       =   0
@@ -245,7 +304,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   3
       Left            =   8400
-      Picture         =   "FTPham.frx":7E30
+      Picture         =   "FTPham.frx":13C0A
       Style           =   1  'Graphical
       TabIndex        =   33
       Tag             =   "&Return"
@@ -257,7 +316,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   2
       Left            =   7200
-      Picture         =   "FTPham.frx":9252
+      Picture         =   "FTPham.frx":1502C
       Style           =   1  'Graphical
       TabIndex        =   32
       Tag             =   "&Delete"
@@ -269,7 +328,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   1
       Left            =   6000
-      Picture         =   "FTPham.frx":A734
+      Picture         =   "FTPham.frx":1650E
       Style           =   1  'Graphical
       TabIndex        =   31
       Tag             =   "&Save"
@@ -281,7 +340,7 @@ Begin VB.Form FrmThanhPham
       Height          =   375
       Index           =   0
       Left            =   4800
-      Picture         =   "FTPham.frx":BB62
+      Picture         =   "FTPham.frx":1793C
       Style           =   1  'Graphical
       TabIndex        =   30
       Tag             =   "&Add"
@@ -289,7 +348,6 @@ Begin VB.Form FrmThanhPham
       Width           =   1095
    End
    Begin VB.CommandButton cmdct 
-      Caption         =   "­"
       BeginProperty Font 
          Name            =   "Wingdings"
          Size            =   9.75
@@ -781,7 +839,7 @@ Private Sub CboSohieu_Click()
     ClearGrid Grd, Grd.tag
     
     Set rs = DBKetoan.OpenRecordset("SELECT ThanhPham.*,Vattu.SoHieu AS SHVT,TenVattu,DonVi,HethongTK.SoHieu AS SHTK FROM (ThanhPham INNER JOIN Vattu ON ThanhPham.MaTP=Vattu.MaSo) INNER JOIN HethongTK ON ThanhPham.MaTK=HethongTK.MaSo WHERE ThanhPham.SoHieu='" + CboSohieu.Text + "' AND Thang=" + CStr(CboThang.ItemData(CboThang.ListIndex)), dbOpenSnapshot)
-    If rs.RecordCount = 0 Then GoTo KT
+    If rs.recordCount = 0 Then GoTo KT
     SetListIndex CboThang, rs!thang
     SetListIndex CboKho(0), rs!MaKhoTP
     SetListIndex CboKho(1), rs!MaKhoNVL
@@ -869,88 +927,88 @@ Private Sub Command_Click(Index As Integer)
     Dim chungtu As New ClsChungtu, sh As String, DaNhap As Integer, m1 As New Cls154
     Dim MaCT As Long, i As Integer, mvt As Long, luong As Double, tien As Double, mtk As Long
     Dim nvl As Double, nC As Double, sxc As Double, n As Date, dgia As Double, thang As Integer
-            
+
     Me.MousePointer = 11
     thang = CboThang.ItemData(CboThang.ListIndex)
     Select Case Index
-        Case 0:
-            XoaPhieuTrenManHinh
-            Grd.Row = 0
-            cboThang_Click
-            If pGiaHT > 0 Then
-                mtk = SelectSQL("SELECT MaSo AS F1 FROM ThanhPham WHERE Thang=" + CStr(thang) + " AND Ma154=" + CStr(m.MaSo))
-                If mtk > 0 Then SetListIndex CboSohieu, mtk Else LietKeTP
-            Else
-                If Len(shct) > 0 Then CboSohieu.Text = SHCtuMoi(shct)
-                RFocus CboSohieu
-            End If
-        Case 1:
-            Me.Refresh
-            If Not KiemTraPhieu Then GoTo XongLC
-            sh = CboSohieu.Text
-            If CboSohieu.ListIndex >= 0 Then
-                i = SelectSQL("SELECT TOP 1 Thang AS F1,Ma154 AS F2 FROM ThanhPham WHERE MaCT=" + CStr(CboSohieu.ItemData(CboSohieu.ListIndex)), mtk)
-                n = SelectSQL("SELECT TOP 1 Ngay AS F1 FROM ThanhPham WHERE MaCT=" + CStr(CboSohieu.ItemData(CboSohieu.ListIndex)))
-                ExecuteSQL5 "DELETE * FROM ThanhPham WHERE MaCT=" + CStr(CboSohieu.ItemData(CboSohieu.ListIndex))
-                XoaCTTheoID i, 610000000 + CboSohieu.ItemData(CboSohieu.ListIndex), 0, n, n
-                CboSohieu.RemoveItem CboSohieu.ListIndex
-            Else
-                n = ngay
-            End If
-            f1 = 1
-            cboThang_Click
-            f1 = 0
-            GiaBQ
-            MaCT = Lng_MaxValue("MaCT", "ThanhPham") + 1
-            With Grd
-                For i = 0 To .Rows - 1
-                    .Row = i
-                    .col = 7
-                    If Len(.Text) = 0 Then Exit For
-                    mtk = CLng5(.Text)
-                    .col = 8
-                    mvt = CLng5(.Text)
-                    .col = 4
-                    luong = Cdbl5(.Text)
-                    .col = 6
-                    tien = Cdbl5(.Text)
-                    .col = 9
-                    nvl = Cdbl5(.Text)
-                    .col = 10
-                    nC = Cdbl5(.Text)
-                    .col = 11
-                    sxc = Cdbl5(.Text)
-                    If luong <> 0 Then dgia = tien / luong Else dgia = 0
-                    ExecuteSQL5 "INSERT INTO ThanhPham (MaSo,MaCT,Thang,SoHieu,Ngay,MaKhoTP,MaKhoNVL,MaTK,MaTP,SoLuong,MaTKCP,MaTKNC,MaTKSX,Ma154,GiaThanh,CPNVL,CPNC,CPSXC,XK) VALUES (" + CStr(Lng_MaxValue("MaSo", "ThanhPham") + 1) + "," + CStr(MaCT) + "," + CStr(thang) _
-                        + ",'" + sh + "',#" + Format(ngay, Mask_DB) + "#," + CStr(CboKho(0).ItemData(CboKho(0).ListIndex)) + "," + CStr(CboKho(1).ItemData(CboKho(1).ListIndex)) _
-                        + "," + CStr(mtk) + "," + CStr(mvt) + "," + DoiDau(luong) + "," + CStr(txtShTk(1).tag) + "," + CStr(txtShTk(2).tag) + "," + CStr(txtShTk(0).tag) + "," + CStr(m.MaSo) + "," + DoiDau(tien) + "," + DoiDau(nvl) + "," + DoiDau(nC) + "," + DoiDau(sxc) + "," + CStr(Chk.Value) + ")"
-                    If pGiaHT > 0 Then DieuChinhGiaTP thang, m.MaSo, mtk, mvt, dgia, tien
-                Next
-            End With
-            
-            CboSohieu.AddItem sh
-            CboSohieu.ItemData(CboSohieu.NewIndex) = MaCT
-            m.DanXuat m1
-            shct = chungtu.sohieu
-            Command_Click 0
+    Case 0:
+        XoaPhieuTrenManHinh
+        Grd.Row = 0
+        cboThang_Click
+        If pGiaHT > 0 Then
+            mtk = SelectSQL("SELECT MaSo AS F1 FROM ThanhPham WHERE Thang=" + CStr(thang) + " AND Ma154=" + CStr(m.MaSo))
+            If mtk > 0 Then SetListIndex CboSohieu, mtk Else LietKeTP
+        Else
+            If Len(shct) > 0 Then CboSohieu.Text = SHCtuMoi(shct)
+            RFocus CboSohieu
+        End If
+    Case 1:
+        Me.Refresh
+        If Not KiemTraPhieu Then GoTo XongLC
+        sh = CboSohieu.Text
+        If CboSohieu.ListIndex >= 0 Then
+            i = SelectSQL("SELECT TOP 1 Thang AS F1,Ma154 AS F2 FROM ThanhPham WHERE MaCT=" + CStr(CboSohieu.ItemData(CboSohieu.ListIndex)), mtk)
+            n = SelectSQL("SELECT TOP 1 Ngay AS F1 FROM ThanhPham WHERE MaCT=" + CStr(CboSohieu.ItemData(CboSohieu.ListIndex)))
+            ExecuteSQL5 "DELETE * FROM ThanhPham WHERE MaCT=" + CStr(CboSohieu.ItemData(CboSohieu.ListIndex))
+            XoaCTTheoID i, 610000000 + CboSohieu.ItemData(CboSohieu.ListIndex), 0, n, n
+            CboSohieu.RemoveItem CboSohieu.ListIndex
+        Else
+            n = ngay
+        End If
+        f1 = 1
+        cboThang_Click
+        f1 = 0
+        GiaBQ
+        MaCT = Lng_MaxValue("MaCT", "ThanhPham") + 1
+        With Grd
+            For i = 0 To .Rows - 1
+                .Row = i
+                .col = 7
+                If Len(.Text) = 0 Then Exit For
+                mtk = CLng5(.Text)
+                .col = 8
+                mvt = CLng5(.Text)
+                .col = 4
+                luong = Cdbl5(.Text)
+                .col = 6
+                tien = Cdbl5(.Text)
+                .col = 9
+                nvl = Cdbl5(.Text)
+                .col = 10
+                nC = Cdbl5(.Text)
+                .col = 11
+                sxc = Cdbl5(.Text)
+                If luong <> 0 Then dgia = tien / luong Else dgia = 0
+                ExecuteSQL5 "INSERT INTO ThanhPham (MaSo,MaCT,Thang,SoHieu,Ngay,MaKhoTP,MaKhoNVL,MaTK,MaTP,SoLuong,MaTKCP,MaTKNC,MaTKSX,Ma154,GiaThanh,CPNVL,CPNC,CPSXC,XK) VALUES (" + CStr(Lng_MaxValue("MaSo", "ThanhPham") + 1) + "," + CStr(MaCT) + "," + CStr(thang) _
+                          + ",'" + sh + "',#" + Format(ngay, Mask_DB) + "#," + CStr(CboKho(0).ItemData(CboKho(0).ListIndex)) + "," + CStr(CboKho(1).ItemData(CboKho(1).ListIndex)) _
+                          + "," + CStr(mtk) + "," + CStr(mvt) + "," + DoiDau(luong) + "," + CStr(txtShTk(1).tag) + "," + CStr(txtShTk(2).tag) + "," + CStr(txtShTk(0).tag) + "," + CStr(m.MaSo) + "," + DoiDau(tien) + "," + DoiDau(nvl) + "," + DoiDau(nC) + "," + DoiDau(sxc) + "," + CStr(Chk.Value) + ")"
+                If pGiaHT > 0 Then DieuChinhGiaTP thang, m.MaSo, mtk, mvt, dgia, tien
+            Next
+        End With
+
+        CboSohieu.AddItem sh
+        CboSohieu.ItemData(CboSohieu.NewIndex) = MaCT
+        m.DanXuat m1
+        shct = chungtu.sohieu
+        Command_Click 0
+        DaNhap = 1
+    Case 2:
+        If CboSohieu.ListIndex >= 0 Then
+            MaCT = CboSohieu.ItemData(CboSohieu.ListIndex)
+            If pGiaHT > 0 Then DatLaiGiaHT MaCT
+            ExecuteSQL5 "DELETE * FROM ThanhPham WHERE MaCT=" + CStr(MaCT)
+            CboSohieu.RemoveItem CboSohieu.ListIndex
             DaNhap = 1
-        Case 2:
-            If CboSohieu.ListIndex >= 0 Then
-                MaCT = CboSohieu.ItemData(CboSohieu.ListIndex)
-                If pGiaHT > 0 Then DatLaiGiaHT MaCT
-                ExecuteSQL5 "DELETE * FROM ThanhPham WHERE MaCT=" + CStr(MaCT)
-                CboSohieu.RemoveItem CboSohieu.ListIndex
-                DaNhap = 1
-            End If
-            m.DanXuat m1
-            XoaPhieuTrenManHinh
-            Grd.Row = 0
-        Case 3:
-            Unload Me
-        Case 4:
-            InGiaThanh
-        Case 5:
-            InNVL
+        End If
+        m.DanXuat m1
+        XoaPhieuTrenManHinh
+        Grd.Row = 0
+    Case 3:
+        Unload Me
+    Case 4:
+        InGiaThanh
+    Case 5:
+        InNVL
     End Select
     If DaNhap = 1 And (pGiaHT = 0 Or pDTTP = 0) Then
         GhiXuatNVL MaCT, ngay, thang, Chk.Value, m1, , Cdbl5(txtChuyen(7).Text)
@@ -976,31 +1034,39 @@ XongLC:
     Set m1 = Nothing
     Set chungtu = Nothing
     Me.MousePointer = 0
-    If pGiaHT > 0 And Index = 1 And ktra = 0 Then MsgBox "§· tÝnh xong gi¸ thµnh!", vbInformation, App.ProductName
+    If pGiaHT > 0 And Index = 1 And ktra = 0 Then
+        Dim s As String
+        s = ChrW(208) & ChrW(227) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(120) & ChrW(111) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+    End If
 End Sub
 '====================================================================================================
 ' Ghi chi tiÕt l­u chuyÓn
 '====================================================================================================
 Private Sub CmdCt_Click()
     Dim luong As Double, i As Integer, dgia As Double, tien As Double
-    
+
     If (taikhoan.MaSo = 0 Or taikhoan.tk_id <> TKVT_ID) Then
         RFocus txtChuyen(0)
         Exit Sub
     End If
-    
+
     If vattu.MaSo = 0 Then
         RFocus txtChuyen(1)
         Exit Sub
     End If
-    
+
     luong = Cdbl5(txtChuyen(4).Text)
     If luong = 0 Then
-        MsgBox "H·y nhËp sè l­îng thµnh phÈm !", vbExclamation, App.ProductName
+        'MsgBox "H·y nhËp sè l­îng thµnh phÈm !", vbExclamation, App.ProductName
+        Dim s As String
+        s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(108) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(7849) & ChrW(109) & ChrW(32) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         RFocus txtChuyen(4)
         Exit Sub
     End If
-    
+
     If pGiaHT = 0 Then
         With Grd
             For i = 0 To .Rows - 1
@@ -1009,26 +1075,26 @@ Private Sub CmdCt_Click()
                 If Len(.Text) = 0 Then Exit For
                 If CLng5(.Text) = taikhoan.MaSo Then
                     .col = 8
-                     If CLng5(.Text) = vattu.MaSo Then
+                    If CLng5(.Text) = vattu.MaSo Then
                         .RemoveItem i
                         .AddItem taikhoan.sohieu + Chr(9) + vattu.sohieu + Chr(9) + vattu.TenVattu + Chr(9) + vattu.DonVi + Chr(9) _
-                            + Format(luong, Mask_2) + Chr(9) + "0" + Chr(9) + "0" + Chr(9) + CStr(taikhoan.MaSo) + Chr(9) + CStr(vattu.MaSo), i
+                               + Format(luong, Mask_2) + Chr(9) + "0" + Chr(9) + "0" + Chr(9) + CStr(taikhoan.MaSo) + Chr(9) + CStr(vattu.MaSo), i
                         GoTo ABC
                     End If
                 End If
             Next
         End With
-        
+
         Grd.AddItem taikhoan.sohieu + Chr(9) + vattu.sohieu + Chr(9) + vattu.TenVattu + Chr(9) + vattu.DonVi + Chr(9) _
-            + Format(luong, Mask_2) + Chr(9) + "0" + Chr(9) + "0" + Chr(9) + CStr(taikhoan.MaSo) + Chr(9) + CStr(vattu.MaSo), NewRowIndex(Grd, 0)
+                  + Format(luong, Mask_2) + Chr(9) + "0" + Chr(9) + "0" + Chr(9) + CStr(taikhoan.MaSo) + Chr(9) + CStr(vattu.MaSo), NewRowIndex(Grd, 0)
         Grd.Row = Grd.Rows - 1
         Grd.col = 7
         If Len(Grd.Text) = 0 Then Grd.RemoveItem Grd.Row
         Grd.Row = 0
         Grd.col = 0
-        
+
         GiaBQ
-    
+
 ABC:
         For i = 0 To 3
             txtChuyen(i).Text = ""
@@ -1081,9 +1147,29 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ nhËp
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     Dim i As Integer
-    
+
     ColumnSetUp Grd, 0, 1300, 0
     ColumnSetUp Grd, 1, 1300, 0
     ColumnSetUp Grd, 2, 2020, 0
@@ -1096,18 +1182,18 @@ Private Sub Form_Load()
     ColumnSetUp Grd, 9, 1180, 1
     ColumnSetUp Grd, 10, 1180, 1
     ColumnSetUp Grd, 11, 1180, 1
-    
+
     AddMonthToCbo CboThang
     InitDateVars MedNgay, ngay
 
     Int_RecsetToCbo "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho", CboKho(0)
     Int_RecsetToCbo "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho", CboKho(1)
-    
+
     CboSohieu.ListIndex = -1
     'Command_Click 0
-    
-    Caption = Caption + " - " + CStr(pNamTC)
-            
+
+    Caption = "B¶ng kª thµnh phÈm hoµn thµnh trong kú" + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     txtShTk(0).Text = "154"
     txtShTk(1).Text = "621"
     txtShTk(2).Text = "622"
@@ -1116,11 +1202,11 @@ Private Sub Form_Load()
     Next
     CboKho(1).Enabled = (Chk.Value = 1)
     Chk.Value = SelectSQL("SELECT TOP 1 XK AS F1 FROM ThanhPham ORDER BY Ngay DESC")
-    
+
     Label(13).Visible = (pDTTP <> 0)
     TxtCT.Visible = (pDTTP <> 0)
     cmdtp.Visible = (pDTTP <> 0)
-    
+
     Label(18).Visible = (pTygia > 0)
     txtChuyen(7).Visible = (pTygia > 0)
     If pTygia > 0 Then txtChuyen(7).Text = Format(TyGiaCuoi, Mask_0)
@@ -1133,7 +1219,7 @@ Private Sub Form_Load()
 LoiNgay:
 End Sub
 
-Private Sub Form_Unload(CANCEL As Integer)
+Private Sub Form_Unload(Cancel As Integer)
     SaveSetting IniPath, "Stock", "AutoOut", Chk.Value
     Set taikhoan = Nothing
     Set vattu = Nothing
@@ -1188,12 +1274,12 @@ End Sub
 '====================================================================================================
 Private Sub MedNgay_LostFocus()
     Dim m As Integer
-    m = Month(ngay)
+    m = month(ngay)
     On Error GoTo LoiNgayChuyen
     ngay = CDate(MedNgay.Text)
     On Error GoTo 0
-    If Month(ngay) <> m Then
-        m = Month(ngay)
+    If month(ngay) <> m Then
+        m = month(ngay)
         ClearGrid Grd, Grd.tag
         If CboSohieu.ListIndex >= 0 Then
             CboSohieu.ListIndex = -1
@@ -1260,55 +1346,63 @@ End Sub
 '====================================================================================================
 Private Function KiemTraPhieu() As Boolean
     KiemTraPhieu = False
-    
+
     If Len(CboSohieu.Text) = 0 Then
         ErrMsg er_SoHieu
         RFocus CboSohieu
         Exit Function
     End If
-        
+
     If CboKho(0).ListIndex < 0 Then
         ErrMsg er_KhoHang
         RFocus CboKho(1)
         Exit Function
     End If
-    
-    
+
+
     Grd.Row = 0
     Grd.col = 0
     If Len(Grd.Text) = 0 Then
-        MsgBox "H·y nhËp chi tiÕt b¶ng kª !", vbExclamation, App.ProductName
+        'MsgBox "H·y nhËp chi tiÕt b¶ng kª !", vbExclamation, App.ProductName
+        Dim s As String
+        s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(98) & ChrW(7843) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(234) & ChrW(32) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         RFocus txtChuyen(0)
         Exit Function
     End If
-    
+
     If Left(txtShTk(0).Text, 3) <> "154" Or txtShTk(0).tag = 0 Then
         RFocus txtShTk(0)
         Exit Function
     End If
-    
+
     If Left(txtShTk(1).Text, 3) <> "621" Or txtShTk(1).tag = 0 Then
         RFocus txtShTk(1)
         Exit Function
     End If
-    
+
     If Left(txtShTk(2).Text, 3) <> "622" Or txtShTk(2).tag = 0 Then
         RFocus txtShTk(2)
         Exit Function
     End If
-        
+
     If pDTTP <> 0 And m.MaSo = 0 Then
         RFocus TxtCT
         Exit Function
     End If
-    
+
     If User_Right <> 0 Then
         If SelectSQL("SELECT Lock" + CStr(CboThang.ItemData(CboThang.ListIndex)) + " Mod 10 AS F1 FROM License") > 0 Then
-            MsgBox "Th¸ng ®· bÞ kho¸ kh«ng cho nhËp sè liÖu!", vbCritical, App.ProductName
+            ' MsgBox "Th¸ng ®· bÞ kho¸ kh«ng cho nhËp sè liÖu!", vbCritical, App.ProductName
+             
+            s = ChrW(84) & ChrW(104) & ChrW(225) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(98) & ChrW(7883) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(111) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(33)
+            MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
             Exit Function
         End If
     End If
-    
+
     KiemTraPhieu = True
 End Function
 '======================================================================================

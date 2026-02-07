@@ -5,13 +5,13 @@ Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmChungtu 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00E0E0E0&
-   BorderStyle     =   1  'Fixed Single
-   Caption         =   "NhËp chøng tõ"
+   BorderStyle     =   0  'None
    ClientHeight    =   8850
-   ClientLeft      =   60
-   ClientTop       =   450
+   ClientLeft      =   30
+   ClientTop       =   135
    ClientWidth     =   18180
    ClipControls    =   0   'False
+   ControlBox      =   0   'False
    BeginProperty Font 
       Name            =   "VK Sans Serif"
       Size            =   8.25
@@ -27,12 +27,83 @@ Begin VB.Form FrmChungtu
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
+   Picture         =   "Fchungtu.frx":57E2
    ScaleHeight     =   8850
    ScaleWidth      =   18180
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   189
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   13080
+         TabIndex        =   191
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   11
+         Left            =   480
+         TabIndex        =   190
+         Top             =   0
+         Width           =   1335
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Fchungtu.frx":68AC
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Fchungtu.frx":6B69
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.CommandButton Command10 
       Caption         =   "KiÓm tra hãa ®¬n"
       Height          =   375
@@ -255,7 +326,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   5
       Left            =   5400
-      Picture         =   "Fchungtu.frx":57E2
+      Picture         =   "Fchungtu.frx":12686
       Style           =   1  'Graphical
       TabIndex        =   177
       Tag             =   "&Delete"
@@ -276,7 +347,7 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   375
       Left            =   12480
-      Picture         =   "Fchungtu.frx":6CC4
+      Picture         =   "Fchungtu.frx":13B68
       TabIndex        =   176
       Top             =   8280
       Width           =   855
@@ -552,9 +623,9 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   315
-      ItemData        =   "Fchungtu.frx":191E1
+      ItemData        =   "Fchungtu.frx":26085
       Left            =   3120
-      List            =   "Fchungtu.frx":191E3
+      List            =   "Fchungtu.frx":26087
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   0
@@ -626,7 +697,7 @@ Begin VB.Form FrmChungtu
       Height          =   255
       Index           =   0
       Left            =   3120
-      Picture         =   "Fchungtu.frx":191E5
+      Picture         =   "Fchungtu.frx":26089
       Style           =   1  'Graphical
       TabIndex        =   143
       Top             =   7800
@@ -676,7 +747,7 @@ Begin VB.Form FrmChungtu
       Height          =   255
       Index           =   0
       Left            =   3120
-      Picture         =   "Fchungtu.frx":1965F
+      Picture         =   "Fchungtu.frx":26503
       Style           =   1  'Graphical
       TabIndex        =   141
       Top             =   7160
@@ -727,7 +798,7 @@ Begin VB.Form FrmChungtu
       Height          =   255
       Index           =   0
       Left            =   3120
-      Picture         =   "Fchungtu.frx":19AD9
+      Picture         =   "Fchungtu.frx":2697D
       Style           =   1  'Graphical
       TabIndex        =   139
       Top             =   7480
@@ -745,9 +816,9 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   2
-      ItemData        =   "Fchungtu.frx":19F53
+      ItemData        =   "Fchungtu.frx":26DF7
       Left            =   1920
-      List            =   "Fchungtu.frx":19F55
+      List            =   "Fchungtu.frx":26DF9
       Style           =   2  'Dropdown List
       TabIndex        =   138
       Top             =   8130
@@ -765,9 +836,9 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   1
-      ItemData        =   "Fchungtu.frx":19F57
+      ItemData        =   "Fchungtu.frx":26DFB
       Left            =   480
-      List            =   "Fchungtu.frx":19F59
+      List            =   "Fchungtu.frx":26DFD
       Style           =   2  'Dropdown List
       TabIndex        =   137
       Top             =   8130
@@ -805,9 +876,9 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   1
-      ItemData        =   "Fchungtu.frx":19F5B
+      ItemData        =   "Fchungtu.frx":26DFF
       Left            =   8160
-      List            =   "Fchungtu.frx":19F5D
+      List            =   "Fchungtu.frx":26E01
       TabIndex        =   133
       Text            =   "CboNT"
       ToolTipText     =   "§¬n gi¸ mÆc ®Þnh"
@@ -829,9 +900,9 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   3
-      ItemData        =   "Fchungtu.frx":19F5F
+      ItemData        =   "Fchungtu.frx":26E03
       Left            =   9840
-      List            =   "Fchungtu.frx":19F87
+      List            =   "Fchungtu.frx":26E2B
       TabIndex        =   132
       Tag             =   "0"
       Text            =   "CboNT"
@@ -854,9 +925,9 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   0
-      ItemData        =   "Fchungtu.frx":19FB2
+      ItemData        =   "Fchungtu.frx":26E56
       Left            =   6360
-      List            =   "Fchungtu.frx":19FB4
+      List            =   "Fchungtu.frx":26E58
       Style           =   2  'Dropdown List
       TabIndex        =   131
       ToolTipText     =   "Ngo¹i tÖ ph¸t sinh"
@@ -1118,7 +1189,7 @@ Begin VB.Form FrmChungtu
       Width           =   1575
    End
    Begin VB.CommandButton CmdChitiet 
-      DragIcon        =   "Fchungtu.frx":19FB6
+      DragIcon        =   "Fchungtu.frx":26E5A
       BeginProperty Font 
          Name            =   "Wingdings"
          Size            =   8.25
@@ -1130,7 +1201,7 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   255
       Left            =   13560
-      Picture         =   "Fchungtu.frx":1F798
+      Picture         =   "Fchungtu.frx":2C63C
       TabIndex        =   109
       Tag             =   "-1"
       ToolTipText     =   "Ghi ph¸t sinh"
@@ -1512,7 +1583,7 @@ Begin VB.Form FrmChungtu
          MultiLine       =   -1  'True
          TabIndex        =   89
          Tag             =   "0"
-         Text            =   "Fchungtu.frx":1FC72
+         Text            =   "Fchungtu.frx":2CB16
          Top             =   2640
          Visible         =   0   'False
          Width           =   975
@@ -1550,9 +1621,9 @@ Begin VB.Form FrmChungtu
          EndProperty
          Height          =   315
          Index           =   2
-         ItemData        =   "Fchungtu.frx":1FC74
+         ItemData        =   "Fchungtu.frx":2CB18
          Left            =   1440
-         List            =   "Fchungtu.frx":1FC76
+         List            =   "Fchungtu.frx":2CB1A
          Style           =   2  'Dropdown List
          TabIndex        =   83
          ToolTipText     =   "Danh s¸ch ®¬n vÞ tÝnh"
@@ -1580,7 +1651,7 @@ Begin VB.Form FrmChungtu
          MultiLine       =   -1  'True
          TabIndex        =   82
          Tag             =   "0"
-         Text            =   "Fchungtu.frx":1FC78
+         Text            =   "Fchungtu.frx":2CB1C
          Top             =   1440
          Width           =   495
       End
@@ -1603,7 +1674,7 @@ Begin VB.Form FrmChungtu
          MultiLine       =   -1  'True
          TabIndex        =   81
          Tag             =   "0"
-         Text            =   "Fchungtu.frx":1FC7A
+         Text            =   "Fchungtu.frx":2CB1E
          Top             =   1440
          Visible         =   0   'False
          Width           =   1335
@@ -1931,7 +2002,7 @@ Begin VB.Form FrmChungtu
          Height          =   375
          Index           =   1
          Left            =   3000
-         Picture         =   "Fchungtu.frx":1FC7C
+         Picture         =   "Fchungtu.frx":2CB20
          Style           =   1  'Graphical
          TabIndex        =   65
          Top             =   480
@@ -1971,7 +2042,7 @@ Begin VB.Form FrmChungtu
          Height          =   375
          Index           =   0
          Left            =   3000
-         Picture         =   "Fchungtu.frx":200F6
+         Picture         =   "Fchungtu.frx":2CF9A
          Style           =   1  'Graphical
          TabIndex        =   62
          Tag             =   "0"
@@ -2162,14 +2233,14 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   0
       Left            =   6600
-      Picture         =   "Fchungtu.frx":20570
+      Picture         =   "Fchungtu.frx":2D414
       Style           =   1  'Graphical
       TabIndex        =   29
       Top             =   4680
       Width           =   1095
    End
    Begin VB.CommandButton CmdPhieu 
-      BackColor       =   &H00E0E0E0&
+      BackColor       =   &H00FFFFFF&
       Caption         =   "&3 UNC"
       Height          =   375
       Index           =   2
@@ -2194,7 +2265,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   4
       Left            =   4200
-      Picture         =   "Fchungtu.frx":2193A
+      Picture         =   "Fchungtu.frx":2E7DE
       Style           =   1  'Graphical
       TabIndex        =   53
       Tag             =   "&Print"
@@ -2214,7 +2285,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   1
       Left            =   16200
-      Picture         =   "Fchungtu.frx":22D9C
+      Picture         =   "Fchungtu.frx":2FC40
       Style           =   1  'Graphical
       TabIndex        =   30
       Top             =   3840
@@ -2400,13 +2471,14 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   1
-      Left            =   3120
+      Left            =   11040
       LinkItem        =   "DiÔn gi¶i chøng tõ"
       MaxLength       =   500
       TabIndex        =   9
       Tag             =   "18"
-      Top             =   1440
-      Width           =   5400
+      Top             =   5280
+      Visible         =   0   'False
+      Width           =   1080
    End
    Begin VB.ComboBox CboNguon 
       Appearance      =   0  'Flat
@@ -2421,9 +2493,9 @@ Begin VB.Form FrmChungtu
       EndProperty
       Height          =   315
       Index           =   1
-      ItemData        =   "Fchungtu.frx":23216
+      ItemData        =   "Fchungtu.frx":300BA
       Left            =   10920
-      List            =   "Fchungtu.frx":23218
+      List            =   "Fchungtu.frx":300BC
       Style           =   2  'Dropdown List
       TabIndex        =   11
       Tag             =   "19"
@@ -2458,7 +2530,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   3
       Left            =   7800
-      Picture         =   "Fchungtu.frx":2321A
+      Picture         =   "Fchungtu.frx":300BE
       Style           =   1  'Graphical
       TabIndex        =   35
       Tag             =   "&Return"
@@ -2479,7 +2551,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   2
       Left            =   12120
-      Picture         =   "Fchungtu.frx":2463C
+      Picture         =   "Fchungtu.frx":314E0
       Style           =   1  'Graphical
       TabIndex        =   34
       Tag             =   "&Delete"
@@ -2501,7 +2573,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   1
       Left            =   3000
-      Picture         =   "Fchungtu.frx":25B1E
+      Picture         =   "Fchungtu.frx":329C2
       Style           =   1  'Graphical
       TabIndex        =   32
       Tag             =   "&Save"
@@ -2522,7 +2594,7 @@ Begin VB.Form FrmChungtu
       Height          =   375
       Index           =   0
       Left            =   1800
-      Picture         =   "Fchungtu.frx":26F4C
+      Picture         =   "Fchungtu.frx":33DF0
       Style           =   1  'Graphical
       TabIndex        =   33
       Tag             =   "&Add"
@@ -2714,7 +2786,7 @@ Begin VB.Form FrmChungtu
       MaxLength       =   50
       TabIndex        =   31
       TabStop         =   0   'False
-      Top             =   2085
+      Top             =   2080
       Width           =   2955
    End
    Begin MSGrid.Grid GrdChungtu 
@@ -2722,7 +2794,7 @@ Begin VB.Form FrmChungtu
       Left            =   1800
       TabIndex        =   160
       Tag             =   "20"
-      Top             =   2400
+      Top             =   2380
       Width           =   11325
       _Version        =   65536
       _ExtentX        =   19976
@@ -2743,6 +2815,19 @@ Begin VB.Form FrmChungtu
       FixedRows       =   0
       HighLight       =   0   'False
       MousePointer    =   1
+   End
+   Begin MSForms.TextBox txtNoidung 
+      Height          =   340
+      Left            =   3120
+      TabIndex        =   192
+      Top             =   1440
+      Width           =   5415
+      VariousPropertyBits=   679495707
+      Size            =   "9551;600"
+      FontName        =   "Times New Roman"
+      FontHeight      =   195
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label 
       BackColor       =   &H00E0E0E0&
@@ -3612,6 +3697,53 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Const MIM_STYLE As Long = &H10
+Private Const MIM_APPLYTOSUBMENUS As Long = &H80000000
+
+Private Const MFT_SEPARATOR As Long = &H800&
+
+Private Const MIIM_ID As Long = &H2&
+Private Const MIIM_TYPE As Long = &H10&
+Private Const MIIM_DATA As Long = &H20&
+
+Private Declare Function ModifyMenu Lib "user32" Alias "ModifyMenuW" ( _
+                                    ByVal hMnu As Long, ByVal uPosition As Long, ByVal uFlags As Long, _
+                                    ByVal uIDNewItem As Long, ByVal lpNewItem As Long) As Long
+
+Private Const MF_BYPOSITION = &H400&
+Private Const MF_STRING = &H0&
+
+' Ví d? set cho item v? trí 0 trong popup
+
+Private Type UniMenuItem
+    id As Long
+    Codes() As Long   ' Unicode code points
+    IsSeparator As Boolean
+End Type
+
+Private UniMenu() As UniMenuItem
+Private Declare Function GetMenuItemInfoW Lib "user32" _
+                                          (ByVal hMenu As Long, ByVal item As Long, _
+                                           ByVal fByPos As Long, mii As MENUITEMINFOW) As Long
+Private Declare Function SetMenuItemInfoW Lib "user32" _
+                                          (ByVal hMenu As Long, ByVal item As Long, _
+                                           ByVal fByPos As Long, ByRef mii As MENUITEMINFOW) As Long
+
+Private Declare Function DrawMenuBar Lib "user32" _
+                                     (ByVal hwnd As Long) As Long
+
+
+
+Private Declare Function SetWindowTextW Lib "user32" _
+                                        (ByVal hwnd As Long, ByVal lpString As Long) As Long
+
+
+Private Declare Sub ReleaseCapture Lib "user32" ()
+Private Const TITLE_HEIGHT As Long = 340   ' twips
+
+Private Const WM_NCLBUTTONDOWN = &HA1
+Private Const HTCAPTION = 2
+
 Private Declare Function SetTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long, ByVal uElapse As Long, ByVal lpTimerFunc As Long) As Long
 Private Declare Function KillTimer Lib "user32" (ByVal hwnd As Long, ByVal nIDEvent As Long) As Long
 Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
@@ -3627,7 +3759,7 @@ Private Declare Function WideCharToMultiByte Lib "Kernel32" ( _
                                              ByVal lpUsedDefaultChar As Long) As Long
 
 Private Const CP_UTF8 As Long = 65001
-
+Private hPopup As Long
 Dim dshdloi As String
 Dim oldKeypress As String
 Dim isimportnk As Boolean
@@ -3697,6 +3829,24 @@ Dim stt51none As Integer
 Dim hasError As Boolean
 Public fileImportList As Collection
 
+Private Type MENUITEMINFOW
+    cbSize As Long
+    fMask As Long
+    fType As Long
+    fState As Long
+    wID As Long
+    hSubMenu As Long
+    hbmpChecked As Long
+    hbmpUnchecked As Long
+    dwItemData As Long
+    dwTypeData As Long
+    cch As Long
+    hbmpItem As Long
+End Type
+
+Private Const MIIM_STRING = &H40
+Private Const MIIM_FTYPE = &H100
+Private Const MFT_STRING = &H0
 
 Private Declare Sub Sleep Lib "Kernel32" (ByVal dwMilliseconds As Long)
 
@@ -3753,18 +3903,6 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938530
-Attribute ctgoc.VB_VarUserMemId = 1073938530
-Attribute TenNX.VB_VarUserMemId = 1073938530
-Attribute DiaChiNX.VB_VarUserMemId = 1073938530
-Attribute TenBH.VB_VarUserMemId = 1073938530
-Attribute DiaChiBH.VB_VarUserMemId = 1073938530
-Attribute MSTBH.VB_VarUserMemId = 1073938530
-Attribute unc1.VB_VarUserMemId = 1073938530
-Attribute unc2.VB_VarUserMemId = 1073938530
-Attribute unc3.VB_VarUserMemId = 1073938530
-Attribute MaKHBH.VB_VarUserMemId = 1073938530
-Attribute HanTT.VB_VarUserMemId = 1073938530
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -5169,7 +5307,7 @@ Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXML
     childElement.appendChild subElement
 
     AddElement xmlDoc, subElement, "mst", "3500779171"
-    AddElement xmlDoc, subElement, "tenNNT", VNItoUNICODE(frmMain.lbCty(0).Caption)
+    AddElement xmlDoc, subElement, "tenNNT", VniToUnicode(frmMain.LbCty(0).Caption)
 
     AddElement xmlDoc, subElement, "dchiNNT", "31 Ð?i C?n"
     AddElement xmlDoc, subElement, "phuongXa", ""
@@ -5181,152 +5319,7 @@ Private Sub AddTTinTKhaiThue(xmlDoc As MSXML2.DOMDocument, parentElement As IXML
     AddElement xmlDoc, subElement, "faxNNT", ""
     AddElement xmlDoc, subElement, "emailNNT", ""
 End Sub
-Function VNItoUNICODE(vniText As String) As String
-    Dim strResult As String
-    Dim i As Integer
-    Dim charCode As Integer
-
-    ' Chuy?n d?i t?ng ký t?
-    For i = 1 To Len(vniText)
-        charCode = Asc(Mid(vniText, i, 1))
-
-        ' Chuy?n d?i ký t? VNI sang Unicode
-        Select Case charCode
-        Case 192    ' À
-            strResult = strResult & ChrW(&H410)    ' À
-        Case 193    ' Á
-            strResult = strResult & ChrW(&H1EA0)    ' Á
-        Case 194    ' Â
-            strResult = strResult & ChrW(&H1EA4)    ' Â
-        Case 195    ' Ã
-            strResult = strResult & ChrW(&H1EA6)    ' Ã
-        Case 196    ' Ä
-            strResult = strResult & ChrW(&H1EB0)    ' Ä
-        Case 197    ' Å
-            strResult = strResult & ChrW(&H1EB2)    ' Å
-        Case 198    ' Æ
-            strResult = strResult & ChrW(&H1EB4)    ' Æ
-        Case 199    ' Ç
-            strResult = strResult & ChrW(&H1EA8)    ' Ç
-        Case 200    ' È
-            strResult = strResult & ChrW(&H1EC0)    ' È
-        Case 201    ' É
-            strResult = strResult & ChrW(&H1EC2)    ' É
-        Case 202    ' Ê
-            strResult = strResult & ChrW(&H1EC4)    ' Ê
-        Case 203    ' Ë
-            strResult = strResult & ChrW(&H1EC6)    ' Ë
-        Case 204    ' Ì
-            strResult = strResult & ChrW(&H1EC8)    ' Ì
-        Case 205    ' Í
-            strResult = strResult & ChrW(&H1ECA)    ' Í
-        Case 206    ' Î
-            strResult = strResult & ChrW(&H1ECC)    ' Î
-        Case 207    ' Ï
-            strResult = strResult & ChrW(&H1ECE)    ' Ï
-        Case 208    ' Ð
-            strResult = strResult & ChrW(&H110)  ' Ð
-        Case 209    ' Ñ
-            strResult = strResult & ChrW(&H1ED8)    ' Ñ
-        Case 210    ' Ò
-            strResult = strResult & ChrW(&H1ED0)    ' Ò
-        Case 211    ' Ó
-            strResult = strResult & ChrW(&H1ED2)    ' Ó
-        Case 212    ' Ô
-            strResult = strResult & ChrW(&H1ED4)    ' Ô
-        Case 213    ' Õ
-            strResult = strResult & ChrW(&H1ED6)    ' Õ
-        Case 214    ' Ö
-            strResult = strResult & ChrW(&H1EDC)    ' Ö
-        Case 215    ' ×
-            strResult = strResult & ChrW(&HD7)   ' ×
-        Case 216    ' Ø
-            strResult = strResult & ChrW(&HD8)   ' Ø
-        Case 217    ' Ù
-            strResult = strResult & ChrW(&H1EE0)    ' Ù
-        Case 218    ' Ú
-            strResult = strResult & ChrW(&H1EE2)    ' Ú
-        Case 219    ' Û
-            strResult = strResult & ChrW(&H1EE4)    ' Û
-        Case 220    ' Ü
-            strResult = strResult & ChrW(&H1EE6)    ' Ü
-        Case 221    ' Ý
-            strResult = strResult & ChrW(&H1EF2)    ' Ý
-        Case 222    ' Þ
-            strResult = strResult & ChrW(&HDE)   ' Þ
-        Case 223    ' ß
-            strResult = strResult & ChrW(&HDF)   ' ß
-        Case 224    ' à
-            strResult = strResult & ChrW(&H1EA1)    ' ?
-        Case 225    ' á
-            strResult = strResult & ChrW(&H1EA3)    ' á
-        Case 226    ' â
-            strResult = strResult & ChrW(&H1EA5)    ' â
-        Case 227    ' ã
-            strResult = strResult & ChrW(&H1EA7)    ' ã
-        Case 228    ' ä
-            strResult = strResult & ChrW(&H1EB1)    ' ä
-        Case 229    ' å
-            strResult = strResult & ChrW(&H1EB3)    ' å
-        Case 230    ' æ
-            strResult = strResult & ChrW(&H1EB5)    ' æ
-        Case 231    ' ç
-            strResult = strResult & ChrW(&H1EAB)    ' ç
-        Case 232    ' è
-            strResult = strResult & ChrW(&H1EC1)    ' è
-        Case 233    ' é
-            strResult = strResult & ChrW(&H1EC3)    ' é
-        Case 234    ' ê
-            strResult = strResult & ChrW(&H1EC5)    ' ê
-        Case 235    ' ë
-            strResult = strResult & ChrW(&H1EC7)    ' ë
-        Case 236    ' ì
-            strResult = strResult & ChrW(&H1EC9)    ' ì
-        Case 237    ' í
-            strResult = strResult & ChrW(&H1ECB)    ' í
-        Case 238    ' î
-            strResult = strResult & ChrW(&H1ECD)    ' î
-        Case 239    ' ï
-            strResult = strResult & ChrW(&H1ECF)    ' ï
-        Case 240    ' ð
-            strResult = strResult & ChrW(&H111)  ' d
-        Case 241    ' ñ
-            strResult = strResult & ChrW(&H1ED9)    ' ñ
-        Case 242    ' ò
-            strResult = strResult & ChrW(&H1ED1)    ' ò
-        Case 243    ' ó
-            strResult = strResult & ChrW(&H1ED3)    ' ó
-        Case 244    ' ô
-            strResult = strResult & ChrW(&H1ED5)    ' ô
-        Case 245    ' õ
-            strResult = strResult & ChrW(&H1ED7)    ' õ
-        Case 246    ' ö
-            strResult = strResult & ChrW(&H1EDD)    ' ö
-        Case 247    ' ÷
-            strResult = strResult & ChrW(&HF7)   ' ÷
-        Case 248    ' ø
-            strResult = strResult & ChrW(&HF8)   ' ø
-        Case 249    ' ù
-            strResult = strResult & ChrW(&H1EE1)    ' ù
-        Case 250    ' ú
-            strResult = strResult & ChrW(&H1EE3)    ' ú
-        Case 251    ' û
-            strResult = strResult & ChrW(&H1EE5)    ' û
-        Case 252    ' ü
-            strResult = strResult & ChrW(&H1EE7)    ' ü
-        Case 253    ' ý
-            strResult = strResult & ChrW(&H1EF3)    ' ý
-        Case 254    ' þ
-            strResult = strResult & ChrW(&HFE)   ' þ
-        Case 255    ' ÿ
-            strResult = strResult & ChrW(&HFF)   ' ÿ
-        Case Else
-            strResult = strResult & Mid(vniText, i, 1)    ' Gi? nguyên ký t? không chuy?n d?i
-        End Select
-    Next i
-
-    VNItoUNICODE = strResult
-End Function
+ 
 ' Hàm thêm Ch? ký s? (dã s?a l?i namespace)
 Private Sub AddCKyDTu(xmlDoc As MSXML2.DOMDocument, parentElement As IXMLDOMElement)
     Dim childElement As IXMLDOMElement
@@ -6949,8 +6942,8 @@ End Sub
 
 Private Sub Chk_Click()
     txt_LostFocus 0
-    CmdPhieu(1).Caption = IIf(chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
-    CmdPhieu(1).tag = chk.Value
+    CmdPhieu(1).Caption = IIf(Chk.Value = 1, "&2 B¸o gi¸", "&2 Ho¸ ®¬n")
+    CmdPhieu(1).tag = Chk.Value
 End Sub
 
 Private Sub ChkXT_Click()
@@ -7137,7 +7130,7 @@ Public Sub CmdChitiet_chon()
         Exit Sub
     End If
 
-    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And chk.Value = 0 And Me.Visible Then
+    If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And Chk.Value = 0 And Me.Visible Then
         'MsgBox "§· xuÊt qu¸ l­îng tån!", vbCritical, App.ProductName
         'Exit Sub
         If IsImport = False Then
@@ -7284,7 +7277,7 @@ Public Sub CmdChitiet_chon()
         CmdPhieu(0).Visible = True
     End If
 
-    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04") Then
+    If (Left(taikhoan.sohieu, Len(NH)) = NH) And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04") Then
         If co > 0 Then FThuChi.tag = 1
         If MaSoCT = 0 And hdcount >= 0 And TenTC = "..." Then
             TenTC = HD(0).TenKH
@@ -7850,7 +7843,7 @@ C1:
                                     Else
                                         GoTo c
                                     End If
-                                    GoTo b
+                                    GoTo B
                                 End If
                             Next
 c:
@@ -7860,7 +7853,7 @@ c:
                             frmMain.Rpt.Formulas(7 + 2 * sodu) = "PSNo" + CStr(sodu) + "=" + DoiDau(tien)
                             .col = 19
                             .Text = CStr(sodu)
-b:
+B:
                         End If
                     End If
                 Next
@@ -7884,8 +7877,8 @@ b:
         frmMain.Rpt.Formulas(3) = "SoPhieu='" + LaySH(txt(0).Text, 1) + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiachiTC + "'"
         frmMain.Rpt.Formulas(5) = "CTGoc='" + ctgoc + "'"
-        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.lbCty(2).Caption + "'"
-        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.lbCty(3).Caption + "'"
+        frmMain.Rpt.Formulas(41) = "DiaChiDN='" + frmMain.LbCty(2).Caption + "'"
+        frmMain.Rpt.Formulas(42) = "TelDN='" + frmMain.LbCty(3).Caption + "'"
         frmMain.Rpt.Formulas(44) = "Ngay='Ngµy " + Format(ngay(1), Mask_DR) + "'"
         frmMain.Rpt.Formulas(45) = "BangChu='" + sotien + "'"
         frmMain.Rpt.Formulas(46) = "TenNV='" + TenTC + "'"
@@ -8367,10 +8360,10 @@ Sub In_hoa_don2(sotien As String, i As Integer, k As Integer, xxx As String, sod
             frmMain.Rpt.Formulas(15) = "MaKH='" + xxx + "'"
         End If
         '     frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
-        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.lbCty(2).Caption + "'"
+        frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "BANGKE" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+        frmMain.Rpt.Formulas(3) = "DC1='" + frmMain.LbCty(2).Caption + "'"
         frmMain.Rpt.Formulas(4) = "DiaChi='" + DiaChiBH + "'"
-        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.lbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(6) = "MS1='" + frmMain.LbCty(8).Caption + "'"
         frmMain.Rpt.Formulas(7) = "MS2='" + MSTBH + "'"
         frmMain.Rpt.Formulas(8) = "TenNN='" + txtVT(1).Text + "'"
         frmMain.Rpt.Formulas(10) = "HTTT='" + HTTT + "'"
@@ -8481,7 +8474,7 @@ Sub In_hoa_don1(sotien As String, i As Integer, k As Integer, xxx As String, sod
     frmMain.Rpt.Formulas(405) = "hantt= '" + thoihanthanhtoan.Text + " " + "'"
     frmMain.Rpt.Formulas(406) = "sophieu= '" + sochungtu.Text + " " + "'"
     frmMain.Rpt.Formulas(550) = "thanhtoan = '" + hinhthucthanhtoan.Text + "'"
-    frmMain.Rpt.ReportFileName = IIf(chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
+    frmMain.Rpt.ReportFileName = IIf(Chk.Value = 0, "HOADON" + IIf(pGiaUSD > 0, "X", "") + IIf(somh > 10, "2", "") + ".RPT", "BAOGIA" + IIf(pGiaUSD > 0, "X", "") + ".RPT")
 
     CoPSTK "521", -1, v521
     If sodu = 0 Then
@@ -9209,6 +9202,9 @@ Public Sub TuDongNhapKho()
     ExecuteSQL5 "UPDATE License SET Lock12=10+ Lock12 Mod 10 + Lock12 \100"
 End Sub
 Public Sub Command_Click(Index As Integer)
+    If Index = 0 Then
+        txtNoidung.Text = ""
+    End If
 
     If hasError = True Then
         Exit Sub
@@ -9342,7 +9338,7 @@ Public Sub Command_Click(Index As Integer)
             MaCT = MaSoCT
             MaSoCT = 0
         Else
-            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
+            MaCT = Lng_MaxValue("MaCT", "ChungTu" + IIf((pBaoGia = 1 And Chk.Value = 1) Or (pPhieu > 0), "P", "")) + 1
         End If
 
         bg = Fix(SoPSConLai * Mask_N) <> 0 And loaict = 7
@@ -9489,8 +9485,8 @@ Public Sub Command_Click(Index As Integer)
                     End If
                     If pTygia > 0 Then chungtu.tygia = Cdbl5(txtchungtu(7).Text)
                     If loaict = 8 And pNVBH > 0 Then chungtu.MaNV = txt(3).tag
-                    If loaict = 8 And chk.Value = 1 Then chungtu.maloai = 7
-                    If loaict = 7 And chk.Value = 0 Then chungtu.maloai = 8
+                    If loaict = 8 And Chk.Value = 1 Then chungtu.maloai = 7
+                    If loaict = 7 And Chk.Value = 0 Then chungtu.maloai = 8
                     If loaict = 8 And (chungtu.tkno.tk_id = TKGT_ID And chungtu.MaVattu = 0) Then
                         .col = 3
                         chungtu.TLCK = Cdbl5(.Text)
@@ -9599,7 +9595,7 @@ Public Sub Command_Click(Index As Integer)
 
 
         If loaict > 8 Then GhiChungtuTS MaCT
-        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And chk.Value = 0 Then XoaPhieu pMaBG
+        If loaict = 8 And pBaoGia > 0 And pMaBG > 0 And Chk.Value = 0 Then XoaPhieu pMaBG
 
         'tat ca da ghi xong dua so so va han dung vao trong database
         Dim stt_dong As Integer
@@ -9884,7 +9880,7 @@ Public Sub Command_Click(Index As Integer)
         InBaoCaoRPT
     End Select
 XongCT:
-    ' Me.Caption = "NhËp chøng tõ kÕ to¸n" + " - " + CStr(pNamTC)
+    'Me.Caption = "NhËp chøng tõ kÕ to¸n" + " - " + CStr(pNamTC)
     'Me.Caption = ChrW(78) & ChrW(104) & ChrW(7853) & ChrW(112) & " " & _
      ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & " " & _
      ChrW(116) & ChrW(7915) & " " & _
@@ -10473,7 +10469,7 @@ Private Sub Grid2_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
 End Sub
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 ' Ki?m tra n?u phím Shift dang du?c gi?
-    Me.Caption = "asd"
+    'Me.Caption = "asd"
     If GetAsyncKeyState(vbKeyControl) <> 0 Then
         isshift = 1
     Else
@@ -10511,7 +10507,206 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ nhËp
 '====================================================================================================
+Private Sub AnControl()
+    Dim ctl As Control
+
+    For Each ctl In Me.Controls
+        Select Case TypeName(ctl)
+        Case "Label", "TextBox", "ComboBox", "PictureBox", _
+             "CommandButton", "Frame", "CheckBox", _
+             "OptionButton", "ListBox", "Grid", _
+             "MSHFlexGrid", "DataGrid"
+
+            ' b? qua title gi?
+            If ctl.Name <> "picFakeTitle" And ctl.Name <> "lblTitle" And ctl.Name <> "lblClose" Then
+                ctl.Top = ctl.Top + TITLE_HEIGHT
+            End If
+        End Select
+    Next
+End Sub
+  Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Public Function U(ParamArray Codes() As Variant) As String
+    Dim i As Long
+    For i = LBound(Codes) To UBound(Codes)
+        U = U & ChrW(Codes(i))
+    Next
+End Function
+Public Sub SetMenuUnicode(hMenu As Long, pos As Long, textU As String)
+    Dim mii As MENUITEMINFOW
+    Dim s As String
+
+    s = textU & vbNullChar
+
+    With mii
+        .cbSize = Len(mii)
+        .fMask = MIIM_STRING Or MIIM_FTYPE
+        .fType = MFT_STRING
+        .dwTypeData = StrPtr(s)
+        .cch = Len(textU)
+    End With
+
+    SetMenuItemInfoW hMenu, pos, 1, mii
+End Sub
+Private Sub AddSeparator(hMenu As Long, pos As Long, ByRef mii As MENUITEMINFOW)
+    mii.fMask = MIIM_FTYPE
+    mii.fType = MFT_SEPARATOR
+    InsertMenuItemW hMenu, pos, 1, mii
+
+    ' ph?c h?i menu ch?
+    mii.fMask = MIIM_STRING Or MIIM_FTYPE Or MIIM_ID
+    mii.fType = MFT_STRING
+End Sub
+Public Function CreateUnicodePopup() As Long
+    Dim hMenu As Long
+    Dim mii As MENUITEMINFOW
+    Dim p As Long
+
+    hMenu = CreatePopupMenu
+
+    With mii
+        .cbSize = LenB(mii)
+        .fMask = MIIM_STRING Or MIIM_FTYPE Or MIIM_ID
+        .fType = MFT_STRING
+    End With
+
+    p = 0
+
+    AddUniMenu hMenu, p, 1001, _
+               UniFromCodes(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, _
+                            118, 7853, 116, 32, 116, 432, 32, _
+                            104, 224, 110, 103, 32, 104, 111, 225), mii
+    p = p + 1
+
+    AddUniMenu hMenu, p, 1002, _
+               UniFromCodes(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, _
+                            116, 224, 105, 32, 115, 7843, 110, 32, _
+                            99, 7889, 32, 273, 7883, 110, 104), mii
+    p = p + 1
+
+
+    AddUniMenu hMenu, p, 1003, UniFromCodes(80, 104, 226, 110, 32, 108, 111, 7841, 105, 32, 99, 244, 110, 103, 32, 110, 7907), mii: p = p + 1
+    AddSeparator hMenu, p, mii: p = p + 1
+
+    AddUniMenu hMenu, p, 1004, UniFromCodes(72, 7879, 32, 116, 104, 7889, 110, 103, 32, 116, 224, 105, 32, 107, 104, 111, 7843, 110), mii: p = p + 1
+
+    AddUniMenu hMenu, p, 1005, UniFromCodes(68, 97, 110, 104, 32, 109, 7909, 99, 32, 118, 7853, 116, 32, 116, 432), mii: p = p + 1
+    AddUniMenu hMenu, p, 1006, UniFromCodes(68, 97, 110, 104, 32, 109, 7909, 99, 32, 84, 83, 67, 272), mii: p = p + 1
+    AddUniMenu hMenu, p, 1007, UniFromCodes(68, 97, 110, 104, 32, 109, 7909, 99, 32, 99, 244, 110, 103, 32, 110, 7907), mii: p = p + 1
+    AddSeparator hMenu, p, mii: p = p + 1
+
+    AddUniMenu hMenu, p, 1008, UniFromCodes(78, 103, 117, 7891, 110, 32, 110, 104, 7853, 112, 32, 120, 117, 7845, 116), mii: p = p + 1
+    'AddUniMenu hMenu, p, 1009, UniFromCodes(86, 244, 32, 118, 105, 7879, 117, 32, 108, 105, 234, 110, 32, 113, 117, 97, 110), mii: p = p + 1
+    AddUniMenu hMenu, p, 1009, UniFromCodes(86, 7909, 32, 118, 105, 7879, 99, 32, 108, 105, 234, 110, 32, 113, 117, 97, 110), mii: p = p + 1
+
+
+    AddUniMenu hMenu, p, 1010, UniFromCodes(72, 7907, 112, 32, 273, 7891, 110, 103, 32, 107, 105, 110, 104, 32, 116, 7871), mii: p = p + 1
+
+    AddSeparator hMenu, p, mii: p = p + 1
+
+    AddUniMenu hMenu, p, 1011, UniFromCodes(66, 225, 111, 32, 99, 225, 111, 32, 99, 104, 105, 32, 116, 105, 7871, 116), mii: p = p + 1
+    AddUniMenu hMenu, p, 1012, UniFromCodes(66, 225, 111, 32, 99, 225, 111, 32, 116, 7893, 110, 103, 32, 104, 7907, 112), mii: p = p + 1
+    AddSeparator hMenu, p, mii: p = p + 1
+
+    AddUniMenu hMenu, p, 1013, UniFromCodes(83, 7889, 32, 104, 105, 7879, 117, 32, 99, 104, 7913, 110, 103, 32, 116, 7915), mii: p = p + 1
+    AddUniMenu hMenu, p, 1014, UniFromCodes(68, 97, 110, 104, 32, 115, 225, 99, 104, 32, 99, 104, 7913, 110, 103, 32, 116, 7915), mii: p = p + 1
+    AddUniMenu hMenu, p, 1015, UniFromCodes(78, 104, 7853, 116, 32, 107, 253, 32, 99, 104, 117, 110, 103), mii: p = p + 1
+    AddSeparator hMenu, p, mii: p = p + 1
+
+    AddUniMenu hMenu, p, 1016, UniFromCodes(73, 110, 32, 116, 111, 224, 110, 32, 98, 7897, 32, 112, 104, 105, 7871, 117, 32, 116, 104, 117), mii: p = p + 1
+    AddUniMenu hMenu, p, 1017, UniFromCodes(73, 110, 32, 116, 111, 224, 110, 32, 98, 7897, 32, 112, 104, 105, 7871, 117, 32, 99, 104, 105), mii: p = p + 1
+    AddUniMenu hMenu, p, 1018, UniFromCodes(73, 110, 32, 116, 111, 224, 110, 32, 98, 7897, 32, 112, 104, 105, 7871, 117, 32, 110, 104, 7853, 112), mii: p = p + 1
+    AddUniMenu hMenu, p, 1019, UniFromCodes(73, 110, 32, 116, 111, 224, 110, 32, 98, 7897, 32, 112, 104, 105, 7871, 117, 32, 120, 117, 7845, 116), mii
+
+    CreateUnicodePopup = hMenu
+End Function
+
+Private Sub AddUniMenu( _
+        ByVal hMenu As Long, _
+        ByVal pos As Long, _
+        ByVal id As Long, _
+        ByVal sUni As String, _
+        ByRef mii As MENUITEMINFOW)
+
+    mii.wID = id
+    mii.dwTypeData = StrPtr(sUni)
+    mii.cch = Len(sUni)
+
+    InsertMenuItemW hMenu, pos, 1, mii
+End Sub
+
+
+Private Sub LoadMenuform()
+    Dim hMain As Long
+    Dim hPopup As Long
+
+    hMain = GetMenu(Me.hwnd)
+    hPopup = GetSubMenu(hMain, 0)
+
+    ' item d?u tiên = "X? lý"
+    SetMenuUnicodeByCodes hPopup, 0
+
+    DrawMenuBar Me.hwnd
+End Sub
+
+
+Public Sub SetMenuUnicodeByCodes(hMenu As Long, pos As Long)
+    Dim mii As MENUITEMINFOW
+    Dim sUni As String
+
+    ' 88, 7917, 32, 108, 253
+    sUni = UniFromCodes(88, 7917, 32, 108, 253) & vbNullChar
+
+    With mii
+        .cbSize = LenB(mii)
+        .fMask = MIIM_STRING Or MIIM_FTYPE Or MIIM_ID   ' ? B?T BU?C
+        .fType = MFT_STRING
+        .wID = 1001                                    ' ? gi? m?i có hi?u l?c
+        .dwTypeData = StrPtr(sUni)
+        .cch = Len(sUni)
+    End With
+
+
+    SetMenuItemInfoW hMenu, pos, 1, mii
+End Sub
+
+Public Function UniFromCodes(ParamArray Codes() As Variant) As String
+    Dim i As Long
+    Dim s As String
+
+    For i = LBound(Codes) To UBound(Codes)
+        s = s & ChrW(CLng(Codes(i)))
+    Next
+
+    UniFromCodes = s
+End Function
+
+Private Sub txtNoidung_Change()
+    txt(1).Text = UnicodeToVni(txtNoidung.Text)
+End Sub
+ 
+ 
 Private Sub Form_Load()
+    hPopup = CreateUnicodePopup()
+    lblTitle(11).AutoSize = True
+
+    Me.Height = Me.Height + TITLE_HEIGHT
+
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = TITLE_HEIGHT
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 50
+
+    lblClose.Top = 80
+    'lblClose.Left = picFakeTitle.ScaleWidth \ 2
+
+    AnControl
 
     stt = 1
     ListReset
@@ -10583,7 +10778,10 @@ a:
     Int_RecsetToCbo "SELECT DoituongCT.MaSo As F2,(IIF(DoituongCT.MaKhachHang>0,KhachHang.Ten+' - '+DoituongCT.Sohieu+' - ','')+DienGiai) As F1 FROM DoituongCT LEFT JOIN KhachHang ON DoituongCT.MaKhachHang=KhachHang.MaSo ORDER BY  KhachHang.Ten,DoituongCT.SoHieu,DienGiai", CboNguon(2)
 
     VTEnable = True
-    Caption = Caption + " - " + CStr(pNamTC)
+    'Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = "NhËp chøng tõ kÕ to¸n" + " - " + CStr(pNamTC)
+
+
     OptLoai(1).Enabled = STDetail
     OptLoai(2).Enabled = STDetail
     OptLoai(8).Enabled = STDetail
@@ -10659,9 +10857,149 @@ LoiNgay:
 
 End Sub
 
+'Private Sub Form_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+'If Button = 2 Then PopupMenu mnPU
+'End Sub
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-    If Button = 2 Then PopupMenu mnPU
+    If Button <> 2 Then Exit Sub
+
+    Dim hUniMenu As Long
+    Dim pt As POINTAPI
+    Dim cmd As Long
+
+    hUniMenu = CreateUnicodePopup
+
+    GetCursorPos pt
+    SetForegroundWindow Me.hwnd
+
+    cmd = TrackPopupMenu( _
+          hUniMenu, _
+          TPM_LEFTALIGN Or TPM_TOPALIGN Or TPM_RIGHTBUTTON Or TPM_RETURNCMD, _
+          pt.X, pt.Y, _
+          0, _
+          Me.hwnd, _
+          0)
+ 
+
+    If cmd <> 0 Then HandleMenuCommand cmd
 End Sub
+
+ 
+
+
+
+Public Function Codes(ParamArray a() As Variant) As Long()
+    Dim tmp() As Long
+    Dim i As Long
+
+    ReDim tmp(0 To UBound(a))
+
+    For i = 0 To UBound(a)
+        tmp(i) = CLng(a(i))
+    Next
+
+    Codes = tmp
+End Function
+
+
+ 
+Public Sub BuildMenuList()
+    ReDim UniMenu(0 To 2)
+
+    ' M?
+    UniMenu(0).id = 1001
+    UniMenu(0).Codes = Codes(77, 7903)
+
+    ' Separator
+    UniMenu(1).IsSeparator = True
+
+    ' Thoát
+    UniMenu(2).id = 1002
+    UniMenu(2).Codes = Codes(84, 104, 111, 225, 116)
+End Sub
+
+
+Public Sub HandleMenuCommand(ByVal cmdID As Long)
+
+    Select Case cmdID
+
+        ' ===== PHÂN LO?I =====
+    Case 1001    ' PLVT
+        frmMain.mnVT_Click 0
+
+    Case 1002    ' PLTS
+        frmMain.mnTS_Click 0
+
+    Case 1003    ' PLCN
+        If KHDetail Then frmMain.mnCn_Click 0
+
+
+        ' ===== H? TR? / DANH M?C =====
+    Case 1004    ' H? tr? thu khoán
+        FrmTaikhoan.tag = 1
+        FrmTaikhoan.Show 1
+
+    Case 1005    ' Danh m?c v?t tu
+        If STDetail Then FrmVattu.Show 1
+
+    Case 1006    ' Danh m?c TSCÐ
+        If KHDetail Then
+            pNghiepVu = NV_KHONG
+            frmDSTaiSan.Show 1
+        End If
+
+    Case 1007    ' Danh m?c công n?
+        If FADetail Then FrmKhachHang.Show vbModal
+
+
+        ' ===== NGHI?P V? =====
+    Case 1008    ' Ngu?n nh?p xu?t
+        frmMain.mnVT_Click 1
+        If loaict = 1 Or loaict = 2 Then Int_RecsetToCbo "SELECT MaSo As F2,SoHieu + ' - ' + DienGiai As F1 FROM NguonNhapXuat ORDER BY SoHieu", CboNguon(0)
+
+    Case 1009    ' Vô hi?u liên quan
+        FrmKho.tag = 5
+        FrmKho.Show 1
+        Int_RecsetToCbo "SELECT DoituongCT.MaSo As F2,(DienGiai+IIF(DoituongCT.MaKhachHang>0,' - HÑ: '+DoituongCT.SoHieu+' - Kyù ngaøy: '+ Format(NgayKy,'dd/mm/yy'),'')) As F1 FROM DoituongCT LEFT JOIN KhachHang ON DoituongCT.MaKhachHang=KhachHang.MaSo ORDER BY DienGiai", CboNguon(2)
+    Case 1010    ' Hi?p d?ng kinh t?
+        FrmHD.Show vbModal
+        Int_RecsetToCbo "SELECT DoituongCT.MaSo As F2,(DienGiai+IIF(DoituongCT.MaKhachHang>0,' - HÑ: '+DoituongCT.SoHieu+' - Kyù ngaøy: '+ Format(NgayKy,'dd/mm/yy'),'')) As F1 FROM DoituongCT LEFT JOIN KhachHang ON DoituongCT.MaKhachHang=KhachHang.MaSo ORDER BY DienGiai", CboNguon(2)
+        ' ===== BÁO CÁO =====
+    Case 1011    ' Báo cáo chi ti?t
+        If User_Right = 3 Then Exit Sub
+        FBcKt.Show 1
+
+    Case 1012    ' Báo cáo t?ng h?p
+        If User_Right = 3 Then Exit Sub
+        FBcTC.Show 1
+        ' ===== S? / CH?NG T? =====
+    Case 1013    ' S? hi?u ch?ng t?
+        FrmDU.Show 1
+        Set FrmDU = Nothing
+
+    Case 1014    ' Danh sách ch?ng t?
+        InDSCtu
+
+    Case 1015    ' Nh?t ký chung
+       InNhatKy1
+    Case 1016    ' In toàn b? phi?u thu
+         InTC 0
+    Case 1017    ' In toàn b? phi?u chi
+         InTC 1
+    Case 1018    ' In toàn b? phi?u nh?p
+        InNX 1
+    Case 1019    ' In toàn b? phi?u xu?t
+        InNX 2
+
+    End Select
+
+    Me.MousePointer = 0
+End Sub
+
+
+
+
+
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Dim i
@@ -10805,9 +11143,9 @@ Private Sub Grid2_Click()
         End If
         .col = 0
         Label(27).Caption = "Dßng sè: " + str(.Row + 1)
-         
-    End With
 
+    End With
+    txtNoidung.Text = VniToUnicode(txt(1).Text)
 End Sub
 
 Private Sub MedNgay_GotFocus(Index As Integer)
@@ -11620,7 +11958,7 @@ Private Sub txt_LostFocus(Index As Integer)
         If Len(txt(Index).Text) = 0 Then
             txt(Index).Text = "..."
         Else
-            sh = IIf(chk.Value = 1, "P", "")
+            sh = IIf(Chk.Value = 1, "P", "")
             L = Len(txt(0).Text)
             If Index = 0 And L > 0 And MaSoCT = 0 Then
                 If Not IsNumeric(txt(0).Text) Then
@@ -13018,8 +13356,8 @@ Public Sub SetLoaiChungtu(loai As Integer)
     chkXT.Visible = (loai = 1) And pDTTP <> 0
 
     vis = (loai = 7 Or loai = 8) And (pBaoGia = 1) And ((frmMain.Command(4).Visible And pPhieu = 1) Or (Not frmMain.Command(4).Visible And pPhieu = 0))
-    chk.Visible = vis
-    chk.Value = 0
+    Chk.Visible = vis
+    Chk.Value = 0
     pMaBG = 0
 
     vis = ((loai = 7 Or loai = 8) And pNVBH = 1)
@@ -13144,6 +13482,7 @@ Private Sub XoaPhieuTrenManHinh()
     pMaTaiSan = 0
 
     'Me.Caption = "NhËp chøng tõ kÕ to¸n"
+    lblTitle(11).Caption = "NhËp chøng tõ kÕ to¸n"
     ClearText Me
     ClearGrid GrdChungtu, GrdChungtu.tag
     taikhoan.InitTaikhoanMaSo 0
@@ -13188,7 +13527,7 @@ Private Sub XoaPhieuTrenManHinh()
     Command(2).Enabled = True
     Label(22).Enabled = False
     txtchungtu(8).Enabled = False
-    chk.Value = 0
+    Chk.Value = 0
     pMaBG = 0
 
     txtchungtu(7).Text = Format(pRate, Mask_2)
@@ -13197,6 +13536,7 @@ Private Sub XoaPhieuTrenManHinh()
     txtchungtu(11).Visible = False
     CboNT(3).Visible = False
     kiemtralicenkey
+    txtNoidung.Text = ""
 End Sub
 '====================================================================================================
 ' Thñ tôc hiÓn thÞ néi dung phiÕu trªn mµn h×nh
@@ -13240,7 +13580,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
     XoaPhieuTrenManHinh
     loaict = rs_chungtu!maloai
     SetListIndex CboThang, rs_chungtu!ThangCT
-    chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
+    Chk.Value = IIf(rs_chungtu!maloai = 7, 1, 0)
     pMaBG = IIf(rs_chungtu!maloai = 7, ma, 0)
     ngay(0) = rs_chungtu!NgayCT
     ngay(1) = rs_chungtu!NgayGS
@@ -13375,7 +13715,7 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
             If rs_chungtu!sops <> 0 Or taikhoan.tk_id = GTGTKT_ID Or taikhoan.tk_id = GTGTPN_ID Or taikhoan.tk_id = TTDB_ID Or taikhoan.tk_id = TKVT_ID Or ((taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) And rs_chungtu!MaKHC > 0) Then
                 If Not CmdPhieu(0).Visible Then CmdPhieu(0).Visible = (Left(taikhoan.sohieu, Len(TM)) = TM)
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If (((taikhoan.tk_id <> TKVT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> GTGTKT_ID) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> TKGT_ID) And (taikhoan.tk_id <> TSCD_ID)) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then         ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, -1, rs_chungtu!sops, rs_chungtu!SoPS2No, rs_chungtu!makh)
@@ -13558,7 +13898,7 @@ KT1:
                 If Not CmdPhieu(1).Visible Then CmdPhieu(1).Visible = (taikhoan.tk_id = TKVT_ID Or taikhoan.tk_id = TKDT_ID Or taikhoan.tk_id = TSCD_ID)
                 If Not CmdPhieu(2).Visible Then CmdPhieu(2).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH Or taikhoan.tk_id2 = CLng(NH))
                 CmdPhieu(2).tag = taikhoan.sohieu
-                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.lbCty(8).Caption, "04"))
+                If Not CmdPhieu(3).Visible Then CmdPhieu(3).Visible = (Left(taikhoan.sohieu, Len(NH)) = NH And KiemTraMaSoThue(frmMain.LbCty(8).Caption, "04"))
 
                 If ((taikhoan.tk_id <> TKVT_ID And taikhoan.tk_id <> TKDT_ID) Or (Not STDetail)) And (taikhoan.tk_id <> TKDT_ID) And (taikhoan.tk_id <> GTGTPN_ID) And (taikhoan.tk_id <> TTDB_ID) And (rs_chungtu!MaTP = 0 Or taikhoan.tk_id = TKCNKH_ID Or taikhoan.tk_id = TKCNPT_ID) Then       ' And taikhoan.TK_ID <> TKCNKH_ID And taikhoan.TK_ID <> TKCNPT_ID
                     ThemDong = Not PSDaCo(taikhoan, 1, rs_chungtu!sops, rs_chungtu!SoPS2Co, rs_chungtu!MaKHC)
@@ -13785,7 +14125,7 @@ Private Function KiemTraChungtu() As Boolean
         RFocus txtchungtu(0)
         Exit Function
     End If
-    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or chk.Value = 0) Then
+    If pHachToan <> 0 And Fix(SoPSConLai * Mask_N) <> 0 And ((loaict <> 8 And loaict <> 7) Or Chk.Value = 0) Then
         If Not PSTuDong(SoPSConLai) Then
 
             If skiperror <> 1 Then
@@ -14756,7 +15096,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
         Set tkxt = New ClsTaikhoan
         tkxt.InitTaikhoanSohieu txtsh(0).Text
         txtsh(0).tag = IIf(tkxt.MaSo > 0 And tkxt.tkcon = 0, tkxt.MaSo, 0)
-        Lb(0).Caption = tkxt.Ten
+        lb(0).Caption = tkxt.Ten
         vis = (tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID Or (tkxt.loai = 6 And pDTTP <> 0))
         If Left(txtsh(0).Text, 3) = "154" Then
             vis = True
@@ -14764,7 +15104,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
 
         Label(19).Enabled = vis
         txtsh(1).Enabled = vis
-        Lb(1).Enabled = vis
+        lb(1).Enabled = vis
         cmd(1).Enabled = vis
         cmd(0).tag = IIf(tkxt.tk_id = TKCNKH_ID Or tkxt.tk_id = TKCNPT_ID, 1, IIf(tkxt.loai = 6 And pDTTP <> 0, 2, 0))
         Set tkxt = Nothing
@@ -14773,14 +15113,14 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set khxt = New ClsKhachHang
             khxt.InitKhachHangSohieu txtsh(1).Text
             txtsh(1).tag = khxt.MaSo
-            Lb(1).Caption = khxt.Ten
+            lb(1).Caption = khxt.Ten
             Set khxt = Nothing
         End If
         If cmd(0).tag = 2 Then
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 
@@ -14788,7 +15128,7 @@ Private Sub txtsh_LostFocus(Index As Integer)
             Set tpxt = New Cls154
             tpxt.InitTPSohieu txtsh(1).Text
             txtsh(1).tag = tpxt.MaSo
-            Lb(1).Caption = tpxt.TenVattu
+            lb(1).Caption = tpxt.TenVattu
             Set tpxt = Nothing
         End If
 

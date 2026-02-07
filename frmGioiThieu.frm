@@ -1,10 +1,10 @@
 VERSION 5.00
 Begin VB.Form frmgioithieu 
    BackColor       =   &H00FFFFC0&
-   Caption         =   "Gioi thieu"
+   BorderStyle     =   0  'None
    ClientHeight    =   5460
-   ClientLeft      =   120
-   ClientTop       =   450
+   ClientLeft      =   60
+   ClientTop       =   105
    ClientWidth     =   9780
    BeginProperty Font 
       Name            =   "VK Sans Serif"
@@ -19,12 +19,82 @@ Begin VB.Form frmgioithieu
    LinkTopic       =   "Form3"
    ScaleHeight     =   5460
    ScaleWidth      =   9780
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   13
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9360
+         TabIndex        =   15
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   14
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "frmGioiThieu.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "frmGioiThieu.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.CommandButton Command 
       Height          =   375
       Index           =   3
       Left            =   8280
-      Picture         =   "frmGioiThieu.frx":57E2
+      Picture         =   "frmGioiThieu.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   9
       Tag             =   "&Return"
@@ -72,7 +142,7 @@ Begin VB.Form frmgioithieu
    End
    Begin VB.Label Label3 
       BackColor       =   &H00FFFFC0&
-      Caption         =   $"frmGioiThieu.frx":6C04
+      Caption         =   $"frmGioiThieu.frx":129DE
       Height          =   615
       Index           =   6
       Left            =   360
@@ -178,7 +248,7 @@ Begin VB.Form frmgioithieu
    End
    Begin VB.Label Label1 
       BackColor       =   &H00FFFFC0&
-      Caption         =   $"frmGioiThieu.frx":6CB7
+      Caption         =   $"frmGioiThieu.frx":12A91
       Height          =   735
       Left            =   360
       TabIndex        =   0
@@ -191,7 +261,29 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Private Sub Form_Load()
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+    Caption = "Giíi thiÖu"
+    lblTitle(11).Caption = Caption
+End Sub
 
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 
 Private Sub Command_Click(Index As Integer)
 Unload Me

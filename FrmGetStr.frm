@@ -2,10 +2,10 @@ VERSION 5.00
 Begin VB.Form FrmGetStr 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
+   BorderStyle     =   0  'None
    ClientHeight    =   3975
-   ClientLeft      =   2430
-   ClientTop       =   3870
+   ClientLeft      =   2385
+   ClientTop       =   3825
    ClientWidth     =   6795
    ClipControls    =   0   'False
    ControlBox      =   0   'False
@@ -28,6 +28,75 @@ Begin VB.Form FrmGetStr
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   9
+      Top             =   0
+      Width           =   13575
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmGetStr.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmGetStr.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   11
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   6360
+         TabIndex        =   10
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "C"
       Height          =   255
@@ -85,6 +154,7 @@ Begin VB.Form FrmGetStr
       Left            =   2040
       TabIndex        =   8
       Top             =   3720
+      Visible         =   0   'False
       Width           =   4575
    End
    Begin VB.Label Label 
@@ -117,15 +187,16 @@ Option Explicit
 
 Dim pms As String
 
-Public Function GetString(des As String, title As String, Optional ans As String) As String
- Text(1).Visible = False
- Text(2).Visible = False
- Text(3).Visible = False
- Command1.Visible = False
-  Text(0).MaxLength = 500
- Text(0).Width = 6375
- Label(1).Visible = False
-    Me.Caption = title
+Public Function GetString(des As String, Title As String, Optional ans As String) As String
+    Text(1).Visible = False
+    Text(2).Visible = False
+    Text(3).Visible = False
+    Command1.Visible = False
+    Text(0).MaxLength = 500
+    Text(0).Width = 6375
+    Label(1).Visible = False
+    Me.Caption = Title
+    lblTitle(11).Caption = Title
     Label(0).Caption = des
     Text(0).Text = ans
     Me.Show vbModal
@@ -162,8 +233,26 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
                              Me.Hide
     End Select
 End Sub
-
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
     SetFont Me
 End Sub
 

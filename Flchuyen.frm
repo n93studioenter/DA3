@@ -1,14 +1,14 @@
 VERSION 5.00
-Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "MSMASK32.OCX"
+Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmLuuChuyen 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "L≠u chuy”n nÈi bÈ"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   180
-   ClientTop       =   780
+   ClientLeft      =   135
+   ClientTop       =   450
    ClientWidth     =   9855
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -31,6 +31,75 @@ Begin VB.Form FrmLuuChuyen
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Inventory Internal Flow"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   49
+      Top             =   0
+      Width           =   13575
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Flchuyen.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Flchuyen.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "ß®ng nhÀp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   51
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   50
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.CommandButton Command 
       Caption         =   "&Barcode"
       Height          =   375
@@ -97,9 +166,9 @@ Begin VB.Form FrmLuuChuyen
    Begin VB.ComboBox CboDV 
       Appearance      =   0  'Flat
       Height          =   315
-      ItemData        =   "Flchuyen.frx":57E2
+      ItemData        =   "Flchuyen.frx":115BC
       Left            =   3840
-      List            =   "Flchuyen.frx":57E4
+      List            =   "Flchuyen.frx":115BE
       Style           =   2  'Dropdown List
       TabIndex        =   9
       ToolTipText     =   "Danh s∏ch Æ¨n vﬁ t›nh"
@@ -122,9 +191,9 @@ Begin VB.Form FrmLuuChuyen
    End
    Begin VB.ComboBox Cbo 
       Height          =   315
-      ItemData        =   "Flchuyen.frx":57E6
+      ItemData        =   "Flchuyen.frx":115C0
       Left            =   960
-      List            =   "Flchuyen.frx":57E8
+      List            =   "Flchuyen.frx":115C2
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   0
@@ -134,12 +203,13 @@ Begin VB.Form FrmLuuChuyen
       Appearance      =   0  'Flat
       Height          =   285
       Index           =   7
-      Left            =   6120
+      Left            =   4440
       MaxLength       =   150
       TabIndex        =   4
       Text            =   "..."
-      Top             =   360
-      Width           =   3375
+      Top             =   3120
+      Visible         =   0   'False
+      Width           =   3615
    End
    Begin VB.TextBox txtChuyen 
       Alignment       =   1  'Right Justify
@@ -156,7 +226,7 @@ Begin VB.Form FrmLuuChuyen
       Height          =   375
       Index           =   4
       Left            =   3600
-      Picture         =   "Flchuyen.frx":57EA
+      Picture         =   "Flchuyen.frx":115C4
       Style           =   1  'Graphical
       TabIndex        =   17
       Tag             =   "&Print"
@@ -188,15 +258,6 @@ Begin VB.Form FrmLuuChuyen
       _ExtentY        =   7223
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   20
       Cols            =   15
       FixedRows       =   0
@@ -206,7 +267,7 @@ Begin VB.Form FrmLuuChuyen
       Height          =   375
       Index           =   3
       Left            =   8400
-      Picture         =   "Flchuyen.frx":6C4C
+      Picture         =   "Flchuyen.frx":12A26
       Style           =   1  'Graphical
       TabIndex        =   20
       Tag             =   "&Return"
@@ -217,7 +278,7 @@ Begin VB.Form FrmLuuChuyen
       Height          =   375
       Index           =   2
       Left            =   7200
-      Picture         =   "Flchuyen.frx":806E
+      Picture         =   "Flchuyen.frx":13E48
       Style           =   1  'Graphical
       TabIndex        =   21
       Tag             =   "&Delete"
@@ -228,7 +289,7 @@ Begin VB.Form FrmLuuChuyen
       Height          =   375
       Index           =   1
       Left            =   6000
-      Picture         =   "Flchuyen.frx":9550
+      Picture         =   "Flchuyen.frx":1532A
       Style           =   1  'Graphical
       TabIndex        =   18
       Tag             =   "&Save"
@@ -239,7 +300,7 @@ Begin VB.Form FrmLuuChuyen
       Height          =   375
       Index           =   0
       Left            =   4800
-      Picture         =   "Flchuyen.frx":A97E
+      Picture         =   "Flchuyen.frx":16758
       Style           =   1  'Graphical
       TabIndex        =   19
       Tag             =   "&Add"
@@ -359,6 +420,19 @@ Begin VB.Form FrmLuuChuyen
       MaxLength       =   8
       Mask            =   "99/99/99"
       PromptChar      =   "_"
+   End
+   Begin MSForms.TextBox txtDiengiai 
+      Height          =   340
+      Left            =   6120
+      TabIndex        =   52
+      Top             =   360
+      Width           =   3375
+      VariousPropertyBits=   679495707
+      Size            =   "5953;600"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -670,7 +744,7 @@ Private Sub CboDV_Click()
     
     If OutCost <> 0 Or vattu.MaSo = 0 Or vattu.Dvt2 = 0 Then Exit Sub
     dvt = CboDV.ItemData(CboDV.ListIndex)
-    luong = SoTonKho(Month(ngay), CboKho(0).ItemData(CboKho(0).ListIndex), taikhoan.MaSo, vattu.MaSo, tien, tien2)
+    luong = SoTonKho(month(ngay), CboKho(0).ItemData(CboKho(0).ListIndex), taikhoan.MaSo, vattu.MaSo, tien, tien2)
     If dvt = 0 Then
         txtChuyen(4).tag = luong
     Else
@@ -704,6 +778,7 @@ Private Sub CboSohieu_Click()
     ngay = rs_chungtu!NgayCT
     MedNgay.Text = Format(ngay, Mask_D)
     txtChuyen(7).Text = rs_chungtu!diengiai
+    txtDiengiai.Text = VniToUnicode(rs_chungtu!diengiai)
     SetListIndex CboKho(0), rs_chungtu!MaKho
     LbUser.Caption = TenUser(rs_chungtu!User_ID)
     If pTygia > 0 Then txtChuyen(8).Text = Format(rs_chungtu!tygia, Mask_0)
@@ -723,7 +798,7 @@ Private Sub CboSohieu_Click()
             + Chr(9) + CStr(rs_chungtu!CT_ID) + Chr(9) + CStr(rs_chungtu!MaNguon) + Chr(9) + CStr(rs_chungtu!MaTkNo) + Chr(9) + CStr(rs_chungtu!dvt) + Chr(9) + Format(tien, Mask_2), 0
         rs_chungtu.MoveNext
     Loop
-    GrdChuyen.Rows = IIf(rs_chungtu.RecordCount > GrdChuyen.tag, rs_chungtu.RecordCount, GrdChuyen.tag)
+    GrdChuyen.Rows = IIf(rs_chungtu.recordCount > GrdChuyen.tag, rs_chungtu.recordCount, GrdChuyen.tag)
     TongTien
     rs_chungtu.Close
     Set rs_chungtu = Nothing
@@ -978,9 +1053,33 @@ End Sub
 '====================================================================================================
 ' KhÎi tπo cˆa sÊ nhÀp
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub txtDiengiai_Change()
+    txtChuyen(7).Text = UnicodeToVni(txtDiengiai.Text)
+End Sub
+
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     Dim chi_so As Integer
-    
+
     ColumnSetUp GrdChuyen, 0, 940, 0
     ColumnSetUp GrdChuyen, 1, 1180, 0
     ColumnSetUp GrdChuyen, 2, 1780, 0
@@ -997,38 +1096,39 @@ Private Sub Form_Load()
     ColumnSetUp GrdChuyen, 13, 1, 0
     ColumnSetUp GrdChuyen, 14, 1180, 1
     InitDateVars MedNgay, ngay
-        
+
     Int_RecsetToCbo "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho", CboKho(0)
     Int_RecsetToCbo "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho", CboKho(1)
-    
+
     'Int_RecsetToCbo "SELECT MaSo As F2,SoHieu As F1 FROM HethongTK WHERE TKCon=0 AND TK_ID=" + CStr(TKVT_ID) + " ORDER BY SoHieu", CboTK
     Command_Click 0
-    
+    Caption = "L≠u chuy”n nÈi bÈ"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     'mtkc = 0
-    
+
     'txtChuyen(5).TabStop = Not FCost
-    
+
     AddMonthToCbo Cbo
-    
+
     Label(15).Visible = (pTygia > 0)
     txtChuyen(8).Visible = (pTygia > 0)
     If pTygia > 0 Then txtChuyen(8).Text = Format(TyGiaCuoi, Mask_0)
-    
+
     LbUser.Caption = UserName
-        
+
     For chi_so = 1 To pSoVV
         LbTT(chi_so - 1).Visible = True
         CboVV(chi_so - 1).Visible = True
         Int_RecsetToCbo "SELECT MaSo As F2,DienGiai As F1 FROM DoituongCT" + CStr(chi_so) + " ORDER BY DoituongCT" + CStr(chi_so) + ".DienGiai", CboVV(chi_so - 1)
     Next
-    
+
     Command(5).Visible = (pBarCode > 0 And CboKho(0).ListCount > 1)
-    
+
     SetFont Me
 End Sub
 
-Private Sub Form_Unload(CANCEL As Integer)
+Private Sub Form_Unload(Cancel As Integer)
     Set taikhoan = Nothing
     Set taikhoan1 = Nothing
     Set vattu = Nothing
@@ -1037,7 +1137,7 @@ End Sub
 Private Sub GrdChuyen_Click()
     Dim i As Integer
     
-    SendKeys "{Home}", True
+    'SendKeys "{Home}", True
     SetGridIndex GrdChuyen, GrdChuyen.Row
     With GrdChuyen
         .col = 0
@@ -1089,12 +1189,12 @@ End Sub
 '====================================================================================================
 Private Sub MedNgay_LostFocus()
     Dim m As Integer
-    m = Month(ngay)
+    m = month(ngay)
     On Error GoTo LoiNgayChuyen
     ngay = CDate(MedNgay.Text)
     On Error GoTo 0
-    If Month(ngay) <> m Then
-        m = Month(ngay)
+    If month(ngay) <> m Then
+        m = month(ngay)
         ClearGrid GrdChuyen, GrdChuyen.tag
         If CboSohieu.ListIndex >= 0 Then
             CboSohieu.ListIndex = -1
@@ -1173,10 +1273,10 @@ Private Sub txtChuyen_LostFocus(Index As Integer)
                         
             If (taikhoan.loai = 0 Or OutCost > 0) Then
                 FDsNhap.tag = vattu.MaSo
-                MaNhap = FDsNhap.XuatDichDanh(Month(ngay), vattu.sohieu + " - " + vattu.TenVattu + ABCtoVNI(" - ß.v.t: ") + vattu.DonVi, CboKho(0).ItemData(CboKho(0).ListIndex), luong, ThanhTien, tien2)
+                MaNhap = FDsNhap.XuatDichDanh(month(ngay), vattu.sohieu + " - " + vattu.TenVattu + ABCtoVNI(" - ß.v.t: ") + vattu.DonVi, CboKho(0).ItemData(CboKho(0).ListIndex), luong, ThanhTien, tien2)
                 FDsNhap.tag = 0
                 If luong = 0 Then
-                    luong = SoTonKho(Month(ngay), CboKho(0).ItemData(CboKho(0).ListIndex), taikhoan.MaSo, vattu.MaSo, ThanhTien, tien2)
+                    luong = SoTonKho(month(ngay), CboKho(0).ItemData(CboKho(0).ListIndex), taikhoan.MaSo, vattu.MaSo, ThanhTien, tien2)
                 End If
                 txtChuyen(4).tag = luong
                 txtChuyen(5).tag = ThanhTien
@@ -1185,7 +1285,7 @@ Private Sub txtChuyen_LostFocus(Index As Integer)
                 txtChuyen(5).Text = Format(ThanhTien, Mask_0)
                 txtChuyen(9).Text = Format(tien2, Mask_2)
             Else
-                txtChuyen(4).tag = SoTonKho(Month(ngay), CboKho(0).ItemData(CboKho(0).ListIndex), taikhoan.MaSo, vattu.MaSo, ThanhTien, tien2)
+                txtChuyen(4).tag = SoTonKho(month(ngay), CboKho(0).ItemData(CboKho(0).ListIndex), taikhoan.MaSo, vattu.MaSo, ThanhTien, tien2)
                 txtChuyen(5).tag = ThanhTien
                 txtChuyen(4).Text = Format(txtChuyen(4).tag, Mask_2)
                 txtChuyen(5).Text = Format(ThanhTien, Mask_0)
@@ -1227,7 +1327,11 @@ Private Function KiemTraPhieu() As Boolean
     KiemTraPhieu = False
     If Len(txtChuyen(7).Text) = 0 Then txtChuyen(7).Text = "..."
     If Len(CboSohieu.Text) = 0 Then
-        MsgBox "Thi’u sË hi÷u phi’u l≠u chuy”n !", vbExclamation, App.ProductName
+        'MsgBox "Thi’u sË hi÷u phi’u l≠u chuy”n !", vbExclamation, App.ProductName
+        Dim s As String
+        s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(108) & ChrW(432) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
         RFocus CboSohieu
         Exit Function
     End If
@@ -1245,7 +1349,10 @@ Private Function KiemTraPhieu() As Boolean
     GrdChuyen.Row = 0
     GrdChuyen.col = 0
     If Len(GrdChuyen.Text) = 0 Then
-        MsgBox "H∑y nhÀp chi ti’t l≠u chuy”n !", vbExclamation, App.ProductName
+        'MsgBox "H∑y nhÀp chi ti’t l≠u chuy”n !", vbExclamation, App.ProductName
+        s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(108) & ChrW(432) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
         RFocus txtChuyen(0)
         Exit Function
     End If
@@ -1274,6 +1381,7 @@ Private Sub XoaPhieuTrenManHinh()
     txtChuyen(6).Text = ""
     txtChuyen(9).Text = ""
     txtChuyen(7).Text = ABCtoVNI("L≠u chuy”n nÈi bÈ")
+    txtDiengiai.Text = VniToUnicode("Lˆu chuyeÂn no‰i bo‰")
     LbTien.Caption = ""
     vattu.InitVattuMaSo 0
     taikhoan.InitTaikhoanMaSo 0

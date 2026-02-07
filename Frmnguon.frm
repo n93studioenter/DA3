@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmNguon 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Danh s¸ch nguyån nhËp xuÊt vËt t­"
+   BorderStyle     =   0  'None
    ClientHeight    =   5535
-   ClientLeft      =   1905
-   ClientTop       =   930
+   ClientLeft      =   1860
+   ClientTop       =   600
    ClientWidth     =   5655
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -30,6 +30,75 @@ Begin VB.Form FrmNguon
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "1"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   9
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   5280
+         TabIndex        =   11
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   10
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Frmnguon.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Frmnguon.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin MSGrid.Grid GrdNT 
       Height          =   4815
       Left            =   120
@@ -61,7 +130,7 @@ Begin VB.Form FrmNguon
       Height          =   375
       Index           =   3
       Left            =   4440
-      Picture         =   "Frmnguon.frx":57E2
+      Picture         =   "Frmnguon.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   5
       Tag             =   "&Return"
@@ -73,7 +142,7 @@ Begin VB.Form FrmNguon
       Height          =   375
       Index           =   2
       Left            =   4440
-      Picture         =   "Frmnguon.frx":6C04
+      Picture         =   "Frmnguon.frx":129DE
       Style           =   1  'Graphical
       TabIndex        =   4
       Tag             =   "&Delete"
@@ -85,7 +154,7 @@ Begin VB.Form FrmNguon
       Height          =   375
       Index           =   1
       Left            =   4440
-      Picture         =   "Frmnguon.frx":80E6
+      Picture         =   "Frmnguon.frx":13EC0
       Style           =   1  'Graphical
       TabIndex        =   3
       Tag             =   "&Save"
@@ -97,7 +166,7 @@ Begin VB.Form FrmNguon
       Height          =   375
       Index           =   0
       Left            =   4440
-      Picture         =   "Frmnguon.frx":9514
+      Picture         =   "Frmnguon.frx":152EE
       Style           =   1  'Graphical
       TabIndex        =   2
       Tag             =   "&Add"
@@ -108,12 +177,13 @@ Begin VB.Form FrmNguon
       Appearance      =   0  'Flat
       Height          =   285
       Index           =   1
-      Left            =   960
+      Left            =   4440
       MaxLength       =   50
       TabIndex        =   1
       Text            =   "..."
-      Top             =   5160
-      Width           =   3135
+      Top             =   2280
+      Visible         =   0   'False
+      Width           =   975
    End
    Begin VB.TextBox txtNhap 
       Alignment       =   2  'Center
@@ -126,6 +196,19 @@ Begin VB.Form FrmNguon
       Text            =   "..."
       Top             =   5160
       Width           =   855
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   300
+      Left            =   960
+      TabIndex        =   12
+      Top             =   5160
+      Width           =   3375
+      VariousPropertyBits=   679495707
+      Size            =   "5953;529"
+      FontName        =   "Tahoma"
+      FontHeight      =   165
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -226,18 +309,18 @@ End Sub
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     If (Shift And vbAltMask) > 0 Then
         Select Case KeyCode
-            Case vbKeyT:
-                RFocus Command(0)
-                Command_Click 0
-            Case vbKeyG:
-                RFocus Command(1)
-                Command_Click 1
-            Case vbKeyX:
-                RFocus Command(2)
-                Command_Click 2
-            Case vbKeyV:
-                RFocus Command(3)
-                Command_Click 3
+        Case vbKeyT:
+            RFocus Command(0)
+            Command_Click 0
+        Case vbKeyG:
+            RFocus Command(1)
+            Command_Click 1
+        Case vbKeyX:
+            RFocus Command(2)
+            Command_Click 2
+        Case vbKeyV:
+            RFocus Command(3)
+            Command_Click 3
         End Select
     End If
     If KeyCode = vbKeyEscape Then Unload Me
@@ -245,16 +328,42 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub txtName_Change()
+    txtNhap(1).Text = UnicodeToVni(txtName.Text)
+End Sub
+
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     Dim i As Integer
-    
+
     ColumnSetUp GrdNT, 0, 820, 2
     ColumnSetUp GrdNT, 1, 3340, 0
-                
+
     ThemMoi = 0
+    Caption = "Danh s¸ch nguyån nhËp xuÊt vËt t­"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     LietKeNguon
-    
+
     SetFont Me
 End Sub
 
@@ -265,6 +374,7 @@ Private Sub GrdNt_click()
         txtNhap(0).Text = .Text
         .col = 1
         txtNhap(1).Text = .Text
+        txtName.Text = VNItoUNICODE(.Text)
         .col = 0
     End With
 End Sub
@@ -293,7 +403,7 @@ Private Sub LietKeNguon()
         GrdNT.AddItem rs_nguon!sohieu + Chr(9) + rs_nguon!diengiai, 0
         rs_nguon.MoveNext
     Loop
-    GrdNT.Rows = IIf(rs_nguon.RecordCount > GrdNT.tag, rs_nguon.RecordCount, GrdNT.tag)
+    GrdNT.Rows = IIf(rs_nguon.recordCount > GrdNT.tag, rs_nguon.recordCount, GrdNT.tag)
     GrdNT.Row = 0
     GrdNt_click
     rs_nguon.Close

@@ -2,43 +2,155 @@ VERSION 5.00
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{BDC217C8-ED16-11CD-956C-0000C04E4C0A}#1.1#0"; "TabCtl32.Ocx"
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmVattu 
    AutoRedraw      =   -1  'True
    BackColor       =   &H8000000E&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "H÷ thËng danh Æi”m vÀt t≠, hµng ho∏"
+   BorderStyle     =   0  'None
    ClientHeight    =   8130
-   ClientLeft      =   345
-   ClientTop       =   375
-   ClientWidth     =   10830
+   ClientLeft      =   300
+   ClientTop       =   45
+   ClientWidth     =   12480
    ClipControls    =   0   'False
    Icon            =   "Frmvattu.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Inventory Items"
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   8130
-   ScaleWidth      =   10830
+   ScaleWidth      =   12480
+   ShowInTaskbar   =   0   'False
    Tag             =   "0"
+   Begin VB.TextBox txtF 
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   320
+      Left            =   480
+      TabIndex        =   35
+      Top             =   7080
+      Visible         =   0   'False
+      Width           =   6015
+   End
+   Begin VB.ListBox LstVt 
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   9.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   7020
+      Left            =   120
+      TabIndex        =   1
+      Top             =   480
+      Width           =   6615
+   End
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   92
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "ß®ng nhÀp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   94
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Frmvattu.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Frmvattu.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   12000
+         TabIndex        =   93
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.CommandButton Command3 
       Caption         =   "Search"
-      Height          =   375
-      Left            =   3840
+      BeginProperty Font 
+         Name            =   "VNI-Times"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   360
+      Left            =   5880
       TabIndex        =   91
-      Top             =   7730
-      Width           =   855
+      Top             =   7680
+      Width           =   735
    End
    Begin VB.CommandButton Command 
       Caption         =   "X.LÙ"
       Height          =   375
       Index           =   5
-      Left            =   5280
+      Left            =   6840
       TabIndex        =   90
-      Top             =   6600
+      Top             =   6360
       Width           =   610
    End
    Begin TabDlg.SSTab SSTab1 
       Height          =   1815
-      Left            =   5310
+      Left            =   6840
       TabIndex        =   79
       Top             =   5640
       Width           =   5295
@@ -52,7 +164,7 @@ Begin VB.Form FrmVattu
       ShowFocusRect   =   0   'False
       OLEDropMode     =   1
       TabCaption(0)   =   "Tab 0"
-      TabPicture(0)   =   "Frmvattu.frx":57E2
+      TabPicture(0)   =   "Frmvattu.frx":115BC
       Tab(0).ControlEnabled=   -1  'True
       Tab(0).Control(0)=   "Label(33)"
       Tab(0).Control(0).Enabled=   0   'False
@@ -123,7 +235,7 @@ Begin VB.Form FrmVattu
       Begin MSGrid.Grid GrdNT 
          Height          =   1215
          Index           =   4
-         Left            =   0
+         Left            =   120
          TabIndex        =   88
          Tag             =   "10"
          Top             =   240
@@ -249,7 +361,7 @@ Begin VB.Form FrmVattu
       BackColor       =   &H00FFFFFF&
       Height          =   7335
       Index           =   0
-      Left            =   5040
+      Left            =   6720
       ScaleHeight     =   7275
       ScaleWidth      =   5595
       TabIndex        =   25
@@ -338,7 +450,7 @@ Begin VB.Form FrmVattu
          MaxLength       =   12
          MultiLine       =   -1  'True
          TabIndex        =   15
-         Text            =   "Frmvattu.frx":57FE
+         Text            =   "Frmvattu.frx":115D8
          Top             =   6600
          Visible         =   0   'False
          Width           =   1455
@@ -423,7 +535,7 @@ Begin VB.Form FrmVattu
          MaxLength       =   12
          MultiLine       =   -1  'True
          TabIndex        =   14
-         Text            =   "Frmvattu.frx":5800
+         Text            =   "Frmvattu.frx":115DA
          Top             =   6600
          Visible         =   0   'False
          Width           =   1215
@@ -513,7 +625,6 @@ Begin VB.Form FrmVattu
          Width           =   255
       End
       Begin VB.TextBox TxtVT 
-         BorderStyle     =   0  'None
          BeginProperty Font 
             Name            =   "VK Sans Serif"
             Size            =   8.25
@@ -523,13 +634,14 @@ Begin VB.Form FrmVattu
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         Height          =   315
+         Height          =   195
          Index           =   6
-         Left            =   1200
+         Left            =   2640
          MaxLength       =   50
          TabIndex        =   19
-         Top             =   1450
-         Width           =   4095
+         Top             =   5040
+         Visible         =   0   'False
+         Width           =   2655
       End
       Begin VB.TextBox TxtVT 
          Alignment       =   1  'Right Justify
@@ -549,7 +661,7 @@ Begin VB.Form FrmVattu
          MaxLength       =   20
          MultiLine       =   -1  'True
          TabIndex        =   5
-         Text            =   "Frmvattu.frx":5802
+         Text            =   "Frmvattu.frx":115DC
          Top             =   2760
          Width           =   975
       End
@@ -571,7 +683,7 @@ Begin VB.Form FrmVattu
          MaxLength       =   12
          MultiLine       =   -1  'True
          TabIndex        =   18
-         Text            =   "Frmvattu.frx":5804
+         Text            =   "Frmvattu.frx":115DE
          Top             =   3120
          Width           =   975
       End
@@ -593,12 +705,11 @@ Begin VB.Form FrmVattu
          MaxLength       =   12
          MultiLine       =   -1  'True
          TabIndex        =   17
-         Text            =   "Frmvattu.frx":5808
+         Text            =   "Frmvattu.frx":115E2
          Top             =   3120
          Width           =   975
       End
       Begin VB.TextBox TxtVT 
-         BorderStyle     =   0  'None
          BeginProperty Font 
             Name            =   "VK Sans Serif"
             Size            =   8.25
@@ -610,14 +721,14 @@ Begin VB.Form FrmVattu
          EndProperty
          Height          =   285
          Index           =   2
-         Left            =   1200
+         Left            =   2760
          MaxLength       =   12
          TabIndex        =   4
-         Top             =   1080
-         Width           =   1335
+         Top             =   4560
+         Visible         =   0   'False
+         Width           =   2535
       End
       Begin VB.TextBox TxtVT 
-         BorderStyle     =   0  'None
          BeginProperty Font 
             Name            =   "VK Sans Serif"
             Size            =   8.25
@@ -629,11 +740,12 @@ Begin VB.Form FrmVattu
          EndProperty
          Height          =   285
          Index           =   1
-         Left            =   1200
+         Left            =   2880
          MaxLength       =   50
          TabIndex        =   3
-         Top             =   600
-         Width           =   3735
+         Top             =   4200
+         Visible         =   0   'False
+         Width           =   2535
       End
       Begin VB.TextBox TxtVT 
          BorderStyle     =   0  'None
@@ -711,6 +823,48 @@ Begin VB.Form FrmVattu
          FixedRows       =   0
          ScrollBars      =   2
          HighLight       =   0   'False
+      End
+      Begin MSForms.TextBox txtGhiChu 
+         Height          =   280
+         Left            =   1200
+         TabIndex        =   97
+         Top             =   1560
+         Width           =   3255
+         VariousPropertyBits=   679495707
+         Size            =   "5741;494"
+         SpecialEffect   =   0
+         FontName        =   "Tahoma"
+         FontHeight      =   180
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
+      End
+      Begin MSForms.TextBox txtDVT 
+         Height          =   280
+         Left            =   1200
+         TabIndex        =   96
+         Top             =   1100
+         Width           =   1455
+         VariousPropertyBits=   679495707
+         Size            =   "2566;494"
+         SpecialEffect   =   0
+         FontName        =   "Tahoma"
+         FontHeight      =   180
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
+      End
+      Begin MSForms.TextBox txtTen 
+         Height          =   285
+         Left            =   1200
+         TabIndex        =   95
+         Top             =   720
+         Width           =   4215
+         VariousPropertyBits=   679495707
+         Size            =   "7435;503"
+         SpecialEffect   =   0
+         FontName        =   "Tahoma"
+         FontHeight      =   180
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
       End
       Begin VB.Label Label 
          Alignment       =   1  'Right Justify
@@ -1012,8 +1166,8 @@ Begin VB.Form FrmVattu
          Index           =   8
          X1              =   1200
          X2              =   4440
-         Y1              =   1800
-         Y2              =   1800
+         Y1              =   1850
+         Y2              =   1850
       End
       Begin VB.Label Label 
          BackColor       =   &H00FFFFFF&
@@ -1122,8 +1276,8 @@ Begin VB.Form FrmVattu
          Index           =   2
          X1              =   1200
          X2              =   2640
-         Y1              =   1365
-         Y2              =   1365
+         Y1              =   1400
+         Y2              =   1400
       End
       Begin VB.Label Label 
          BackColor       =   &H00FFFFFF&
@@ -1168,9 +1322,9 @@ Begin VB.Form FrmVattu
       Begin VB.Line Line 
          Index           =   1
          X1              =   1200
-         X2              =   4920
-         Y1              =   960
-         Y2              =   960
+         X2              =   5400
+         Y1              =   1005
+         Y2              =   1005
       End
       Begin VB.Line Line 
          Index           =   0
@@ -1231,12 +1385,13 @@ Begin VB.Form FrmVattu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   315
-      ItemData        =   "Frmvattu.frx":580C
+      ItemData        =   "Frmvattu.frx":115E6
       Left            =   7320
-      List            =   "Frmvattu.frx":580E
+      List            =   "Frmvattu.frx":115E8
       Style           =   2  'Dropdown List
       TabIndex        =   41
       Top             =   360
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.CommandButton CmdChitiet 
@@ -1310,10 +1465,11 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   285
       Index           =   4
-      Left            =   5160
+      Left            =   3600
       MaxLength       =   20
       TabIndex        =   47
-      Top             =   5400
+      Top             =   5160
+      Visible         =   0   'False
       Width           =   1215
    End
    Begin VB.TextBox txtTon 
@@ -1325,7 +1481,7 @@ Begin VB.Form FrmVattu
       MaxLength       =   12
       MultiLine       =   -1  'True
       TabIndex        =   51
-      Text            =   "Frmvattu.frx":5810
+      Text            =   "Frmvattu.frx":115EA
       Top             =   5880
       Width           =   1095
    End
@@ -1343,7 +1499,7 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   375
       Index           =   4
-      Left            =   8400
+      Left            =   10160
       Style           =   1  'Graphical
       TabIndex        =   21
       Tag             =   "&Norm"
@@ -1353,7 +1509,7 @@ Begin VB.Form FrmVattu
    Begin MSGrid.Grid GrdNT 
       Height          =   1575
       Index           =   0
-      Left            =   5160
+      Left            =   5400
       TabIndex        =   52
       Tag             =   "10"
       Top             =   1440
@@ -1391,10 +1547,11 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   285
       Index           =   0
-      Left            =   5160
+      Left            =   3240
       MaxLength       =   20
       TabIndex        =   42
-      Top             =   3000
+      Top             =   2880
+      Visible         =   0   'False
       Width           =   855
    End
    Begin VB.TextBox txtNhap 
@@ -1488,8 +1645,8 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   375
       Index           =   3
-      Left            =   9600
-      Picture         =   "Frmvattu.frx":5814
+      Left            =   11280
+      Picture         =   "Frmvattu.frx":115EE
       Style           =   1  'Graphical
       TabIndex        =   23
       Tag             =   "&Return"
@@ -1508,8 +1665,8 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   375
       Index           =   2
-      Left            =   7200
-      Picture         =   "Frmvattu.frx":6C36
+      Left            =   9000
+      Picture         =   "Frmvattu.frx":12A10
       Style           =   1  'Graphical
       TabIndex        =   24
       Tag             =   "&Delete"
@@ -1528,8 +1685,8 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   375
       Index           =   1
-      Left            =   6000
-      Picture         =   "Frmvattu.frx":8118
+      Left            =   7880
+      Picture         =   "Frmvattu.frx":13EF2
       Style           =   1  'Graphical
       TabIndex        =   20
       Tag             =   "&Save"
@@ -1548,8 +1705,8 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   375
       Index           =   0
-      Left            =   4800
-      Picture         =   "Frmvattu.frx":9546
+      Left            =   6720
+      Picture         =   "Frmvattu.frx":15320
       Style           =   1  'Graphical
       TabIndex        =   22
       Tag             =   "&Add"
@@ -1567,11 +1724,11 @@ Begin VB.Form FrmVattu
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   285
-      Left            =   3480
+      Height          =   360
+      Left            =   5280
       TabIndex        =   38
-      Top             =   7800
-      Width           =   255
+      Top             =   7680
+      Width           =   495
    End
    Begin VB.OptionButton SSOpt 
       BackColor       =   &H8000000E&
@@ -1614,22 +1771,6 @@ Begin VB.Form FrmVattu
       Value           =   -1  'True
       Width           =   855
    End
-   Begin VB.TextBox txtF 
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   285
-      Left            =   2040
-      TabIndex        =   35
-      Top             =   7800
-      Width           =   1335
-   End
    Begin VB.ComboBox CboLoai 
       BeginProperty Font 
          Name            =   "VK Sans Serif"
@@ -1646,12 +1787,12 @@ Begin VB.Form FrmVattu
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   120
-      Width           =   4815
+      Width           =   6615
    End
    Begin MSGrid.Grid GrdNT 
       Height          =   1335
       Index           =   1
-      Left            =   5160
+      Left            =   5400
       TabIndex        =   62
       Tag             =   "10"
       Top             =   4080
@@ -1676,21 +1817,18 @@ Begin VB.Form FrmVattu
       ScrollBars      =   2
       HighLight       =   0   'False
    End
-   Begin VB.ListBox LstVt 
-      BeginProperty Font 
-         Name            =   "VK Sans Serif"
-         Size            =   9.75
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      Height          =   7020
-      Left            =   120
-      TabIndex        =   1
-      Top             =   450
-      Width           =   4815
+   Begin MSForms.TextBox txtSearch 
+      Height          =   345
+      Left            =   2040
+      TabIndex        =   98
+      Top             =   7680
+      Width           =   3135
+      VariousPropertyBits=   679495707
+      Size            =   "5530;609"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -1706,10 +1844,10 @@ Begin VB.Form FrmVattu
       EndProperty
       Height          =   255
       Index           =   28
-      Left            =   5160
+      Left            =   4680
       TabIndex        =   66
       Tag             =   "Norm applied from month"
-      Top             =   360
+      Top             =   840
       Width           =   2055
    End
    Begin VB.Label Label 
@@ -2068,7 +2206,9 @@ Public Sub Command_Click(Index As Integer)
             txtVT(0).Text = SoHieuVTMoi(CboLoai.ItemData(CboLoai.ListIndex))
             txtVT(1).Text = ""
             txtVT(13).Text = ""
-            
+            txtTen.Text = ""
+            txtDVT.Text = ""
+            txtGhiChu.Text = ""
             txtTon(0).Text = "0"
             txtTon(1).Text = "0"
             ClearGrid GrdNT(2), GrdNT(2).tag
@@ -2206,13 +2346,19 @@ Private Sub Command3_Click()
     Dim rs_KH As DAO.Recordset
 
     ' Ki?m tra xem h?p van b?n cÛ d? li?u khÙng
-    If Len(Trim(txtF.Text)) = 0 Then
-        MsgBox "Vui lÚng nh?p tÍn kh·ch h‡ng d? tÏm ki?m.", vbExclamation
+    If Len(Trim(txtSearch.Text)) = 0 Then
+        'MsgBox "Vui lÚng nh?p tÍn kh·ch h‡ng d? tÏm ki?m.", vbExclamation
+        Dim s As String
+        s = ChrW(86) & ChrW(117) & ChrW(105) & ChrW(32) & ChrW(108) & ChrW(242) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(116) & ChrW(236) & ChrW(109) & ChrW(32) & ChrW(107) & ChrW(105) & ChrW(7871) & ChrW(109)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
         Exit Sub
     End If
 
     ' T?o truy v?n v?i di?u ki?n LIKE
-    Query = "SELECT * FROM Vattu WHERE TenVattu LIKE '*" & txtF.Text & "*'"
+    Query = "SELECT * FROM Vattu " & _
+            "WHERE TenVattu LIKE '*" & UnicodeToVni(txtSearch.Text) & "*' " & _
+            "OR SoHieu LIKE '*" & UnicodeToVni(txtSearch.Text) & "*'"
 
     ' M? Recordset
     Set rs_KH = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
@@ -2274,76 +2420,101 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
     If KeyCode = vbKeyEscape Then Hide
 End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
 '======================================================================================
 ' Khoi tao form
 '======================================================================================
+
+Private Sub txtTen_Change()
+    txtVT(1).Text = UnicodeToVni(txtTen.Text)
+End Sub
+Private Sub txtDVT_Change()
+    txtVT(2).Text = UnicodeToVni(txtDVT.Text)
+End Sub
+Private Sub txtGhichu_Change()
+    txtVT(6).Text = UnicodeToVni(txtGhiChu.Text)
+End Sub
+
 Private Sub Form_Load()
 
+    lblTitle(11).AutoSize = True
+    Caption = "H÷ thËng danh Æi”m vÀt t≠, hµng ho∏"
+    lblTitle(11).Caption = "H÷ thËng danh Æi”m vÀt t≠, hµng ho∏"
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
 
+    ' ColumnSetUp GrdDanhSachLo, 0, 820, 0
+    '  ColumnSetUp GrdDanhSachLo, 1, 1660, 0
+    '  ColumnSetUp GrdDanhSachLo, 2, 700, 0
 
-' ColumnSetUp GrdDanhSachLo, 0, 820, 0
-  '  ColumnSetUp GrdDanhSachLo, 1, 1660, 0
-  '  ColumnSetUp GrdDanhSachLo, 2, 700, 0
-    
     ColumnSetUp GrdNT(0), 0, 820, 0
     ColumnSetUp GrdNT(0), 1, 1660, 0
     ColumnSetUp GrdNT(0), 2, 700, 0
     ColumnSetUp GrdNT(0), 3, 820, 1
-    
+
     ColumnSetUp GrdNT(1), 0, 1180, 0
     ColumnSetUp GrdNT(1), 1, 2020, 0
     ColumnSetUp GrdNT(1), 2, 820, 1
-    
-'    ColumnSetUp GrdNT(2), 0, 1180, 0
-'    ColumnSetUp GrdNT(2), 1, 940, 1
-'    ColumnSetUp GrdNT(2), 2, 940, 1
-'    ColumnSetUp GrdNT(2), 3, 940, 1
-    
+
+    '    ColumnSetUp GrdNT(2), 0, 1180, 0
+    '    ColumnSetUp GrdNT(2), 1, 940, 1
+    '    ColumnSetUp GrdNT(2), 2, 940, 1
+    '    ColumnSetUp GrdNT(2), 3, 940, 1
+
     ColumnSetUp GrdNT(2), 0, 1180, 0
     ColumnSetUp GrdNT(2), 1, 940, 1
     ColumnSetUp GrdNT(2), 2, 940 + 300, 1
     ColumnSetUp GrdNT(2), 3, 940 + 445 + 150, 1
-    
-    
+
+
     ColumnSetUp GrdNT(3), 0, 1060, 2
     ColumnSetUp GrdNT(3), 1, 700, 1
     ColumnSetUp GrdNT(3), 2, 1180 + 0, 1
     ColumnSetUp GrdNT(3), 3, 1, 0
-    
+
     ColumnSetUp GrdNT(4), 0, 1180, 0
     ColumnSetUp GrdNT(4), 1, 940, 1
     ColumnSetUp GrdNT(4), 2, 940 + 300, 1
     ColumnSetUp GrdNT(4), 3, 940 + 445 + 150, 1
-    
-    
+
+
     Pic.Visible = (pBarCode > 0)
     txtVT(3).Enabled = pGiaHT > 0
     ThemMoi = 0
     doiloai = 0
-    Caption = Caption + " - " + CStr(pNamTC)
+    'Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption + " - " + CStr(pNamTC)
     Int_RecsetToCbo "SELECT DISTINCTROW PhanLoaiVattu.MaSo As F2, PhanLoaiVattu.SoHieu + ' - '  + PhanLoaiVattu.TenPhanLoai As F1 FROM PhanLoaiVattu WHERE PLCon=0 ORDER BY PhanLoaiVattu.SoHieu", CboLoai
-        
+
     Label(28).Visible = (pDinhmuc <> 0)
     CboThang.Visible = (pDinhmuc <> 0)
     AddMonthToCbo CboThang
     If pDinhmuc = 0 Then CboThang.ListIndex = 0
-    
+
     Label(31).Visible = pChietKhau > 0
     txtVT(12).Visible = pChietKhau > 0
-        
+
     'Lines(7).Visible = (pNhapKhau > 0)
     Label(32).Visible = (pNhapKhau > 0)
     txtVT(13).Visible = (pNhapKhau > 0)
-        
+
     FCenter Me
 
     SetFont Me
     If SelectSQL("SELECT banthuoc as f1 from license ") = 0 Then
-    GrdNT(4).Visible = False
-    SSTab1.Visible = False
+        GrdNT(4).Visible = False
+        SSTab1.Visible = False
     Else
-    GrdNT(4).Visible = True
-    SSTab1.Visible = True
+        GrdNT(4).Visible = True
+        SSTab1.Visible = True
     End If
 End Sub
 
@@ -2374,29 +2545,33 @@ End Sub
 '======================================================================================
 Private Sub ShowChitiet(vattu As ClsVattu)
     Dim rs As Recordset, dgia As Double, st As String
- 
+
     txtVT(0).Text = vattu.sohieu
     txtVT(1).Text = vattu.TenVattu
     txtVT(2).Text = vattu.DonVi
+    txtTen.Text = VniToUnicode(txtVT(1).Text)
+    txtDVT.Text = VniToUnicode(txtVT(2).Text)
+
     txtVT(3).Text = Format(vattu.GiaHT, Mask_0)
     'Chk.Value = vattu.Dvt2
     'txtVT(4).Text = vattu.DonVi2
     'txtVT(5).Text = Format(vattu.TyleQD, Mask_2)
     txtVT(6).Text = vattu.GhiChu
+    txtGhiChu.Text = VniToUnicode(txtVT(6).Text)
     txtVT(7).Text = CStr(vattu.VAT)
     txtVT(8).Text = Format(vattu.GiaBan1, Mask_2)
     txtVT(9).Text = Format(vattu.GiaBan2, Mask_2)
     txtVT(10).Text = Format(vattu.GiaBan3, Mask_2)
     txtVT(12).Text = Format(vattu.CK, Mask_2)
     txtVT(13).Text = Format(vattu.ThueNK, Mask_2)
-    
+
     txtTon(0).Text = Format(vattu.TonMin, Mask_2)
     txtTon(1).Text = Format(vattu.TonMax, Mask_2)
-    
+
     If pBarCode > 0 Then TxtVT_Change 0
-    
+
     ClearGrid GrdNT(3), GrdNT(3).tag
-   
+
     Set rs = DBKetoan.OpenRecordset("SELECT * FROM DVTVattu WHERE MaVattu=" + CStr(vattu.MaSo) + " ORDER BY DonVi DESC", dbOpenSnapshot)
     Do While Not rs.EOF
         GrdNT(3).AddItem rs!DonVi + Chr(9) + Format(rs!TyLeQD, Mask_2) + Chr(9) + Format(rs!GiaBan, Mask_2) + Chr(9) + CStr(rs!MaSo), 0
@@ -2405,7 +2580,7 @@ Private Sub ShowChitiet(vattu As ClsVattu)
     Chk.Value = IIf(rs.recordCount > 0, 1, 0)
     'Chk_Click
     rs.Close
-    
+
     ClearGrid GrdNT(2), GrdNT(2).tag
     st = CStr(CThangDB(ThangCuoiNamTC))
     Set rs = DBKetoan.OpenRecordset("SELECT TenKho,Sum(Luong_" + st + ") AS Luong, Sum(Tien_" + st + ") AS Tien FROM TonKho INNER JOIN KhoHang ON TonKho.MaSoKho=KhoHang.MaSo WHERE MaVattu=" + CStr(vattu.MaSo) + " GROUP BY TenKho HAVING Sum(Luong_" + st + ")<>0 OR Sum(Tien_" + st + ")<>0 ORDER BY TenKho DESC", dbOpenSnapshot)
@@ -2415,9 +2590,9 @@ Private Sub ShowChitiet(vattu As ClsVattu)
         rs.MoveNext
     Loop
     rs.Close
-    
-    
-     ClearGrid GrdNT(4), GrdNT(4).tag
+
+
+    ClearGrid GrdNT(4), GrdNT(4).tag
     Set rs = DBKetoan.OpenRecordset("select * from DanhSachVatTu where mavattu = " + CStr(vattu.MaSo) + "", dbOpenSnapshot)
     Do While Not rs.EOF
         GrdNT(4).AddItem "" + Chr(9) + CStr(rs!conlai) + Chr(9) + rs!solo + Chr(9) + rs!handung, 0
@@ -2503,52 +2678,56 @@ End Sub
 '======================================================================================
 Private Function KiemTraSoLieu() As Boolean
     KiemTraSoLieu = False
-    
+
     If Len(txtVT(0).Text) = 0 Then
         ErrMsg er_SoHieu
         RFocus txtVT(0)
         Exit Function
     End If
-    
+
     If Len(txtVT(1).Text) = 0 Then
         ErrMsg er_Ten
         RFocus txtVT(1)
         Exit Function
     End If
-    
+
     If Len(txtVT(2).Text) = 0 Then
-        MsgBox "Thi’u Æ¨n vﬁ t›nh vÀt t≠!", vbExclamation, App.ProductName
+        'MsgBox "Thi’u Æ¨n vﬁ t›nh vÀt t≠!", vbExclamation, App.ProductName
+        Dim s As String
+        s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(118) & ChrW(7883) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(118) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(33)
+        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("ThÙng b·o"), vbOKOnly
+
         RFocus txtVT(2)
         Exit Function
     End If
 
-With vattu
-    If ThemMoi = 1 Then .MaSo = 0
-    .MaPhanLoai = CboLoai.ItemData(CboLoai.ListIndex)
-    .sohieu = txtVT(0).Text
-    .TenVattu = txtVT(1).Text
-    .DonVi = txtVT(2).Text
-    .GiaHT = Cdbl5(txtVT(3).Text)
-    .TonMin = Cdbl5(txtTon(0).Text)
-    .TonMax = Cdbl5(txtTon(1).Text)
-    .TyLeQD = Cdbl5(txtVT(5).Text)
-    .VAT = CInt5(txtVT(7).Text)
-    .GiaBan1 = Cdbl5(txtVT(8).Text)
-    .GiaBan2 = Cdbl5(txtVT(9).Text)
-    .GiaBan3 = Cdbl5(txtVT(10).Text)
-    .CK = Cdbl5(txtVT(12).Text)
-    .Dvt2 = Chk.Value
-    .DonVi2 = IIf(Len(txtVT(4).Text) > 0, txtVT(4).Text, "...")
-    .GhiChu = IIf(Len(txtVT(6).Text) > 0, txtVT(6).Text, "...")
-    If pNhapKhau > 0 Then .ThueNK = Cdbl5(txtVT(13).Text)
-End With
+    With vattu
+        If ThemMoi = 1 Then .MaSo = 0
+        .MaPhanLoai = CboLoai.ItemData(CboLoai.ListIndex)
+        .sohieu = txtVT(0).Text
+        .TenVattu = txtVT(1).Text
+        .DonVi = txtVT(2).Text
+        .GiaHT = Cdbl5(txtVT(3).Text)
+        .TonMin = Cdbl5(txtTon(0).Text)
+        .TonMax = Cdbl5(txtTon(1).Text)
+        .TyLeQD = Cdbl5(txtVT(5).Text)
+        .VAT = CInt5(txtVT(7).Text)
+        .GiaBan1 = Cdbl5(txtVT(8).Text)
+        .GiaBan2 = Cdbl5(txtVT(9).Text)
+        .GiaBan3 = Cdbl5(txtVT(10).Text)
+        .CK = Cdbl5(txtVT(12).Text)
+        .Dvt2 = Chk.Value
+        .DonVi2 = IIf(Len(txtVT(4).Text) > 0, txtVT(4).Text, "...")
+        .GhiChu = IIf(Len(txtVT(6).Text) > 0, txtVT(6).Text, "...")
+        If pNhapKhau > 0 Then .ThueNK = Cdbl5(txtVT(13).Text)
+    End With
     KiemTraSoLieu = True
 End Function
 
 Private Sub LstVt_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     Dim sh As String, m As Long, Ten As String
     Dim luong As Double, tien As Double, flag As Integer, rs As Recordset
-    
+
     If Button = 2 And LstVt.ListIndex >= 0 And ThemMoi = 0 Then
         If OutCost = 0 And SelectSQL("SELECT MaSo AS F1 FROM DVTVattu WHERE MaVattu=" + CStr(vattu.MaSo)) = 0 Then
             sh = FrmGetStr.GetString("Chuy”n " + VString(vattu.sohieu + " - " + vattu.TenVattu) + " sang ph©n loπi kh∏c, ho∆c gÈp vµo vÀt t≠ c„ sË hi÷u:", App.ProductName)
@@ -2570,7 +2749,7 @@ Private Sub LstVt_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
                     ExecuteSQL5 "UPDATE ChungTu SET MaVattu=" + CStr(m) + " WHERE MaSo=" + CStr(vattu.MaSo)
                     ExecuteSQL5 "UPDATE ChungTu2 SET MaVattu=" + CStr(m) + " WHERE MaSo=" + CStr(vattu.MaSo)
                     ExecuteSQL5 "UPDATE ChungTuP SET MaVattu=" + CStr(m) + " WHERE MaSo=" + CStr(vattu.MaSo)
-                    
+
                     Set rs = DBKetoan.OpenRecordset("SELECT MaSo, MaSoKho, MaTaiKhoan, Luong_0, Tien_0 FROM TonKho WHERE MaVattu=" + CStr(vattu.MaSo) + " AND (Luong_0<>0 OR Tien_0<>0)", dbOpenSnapshot)
                     Do While Not rs.EOF
                         ExecuteSQL5 "UPDATE TonKho SET Luong_0=Luong_0+" + DoiDau(rs!Luong_0) + ",Tien_0=Tien_0+" + DoiDau(rs!Tien_0) + " WHERE MaVattu=" + CStr(m) + " AND MaSoKho=" + CStr(rs!MaSoKho) + " AND MaTaiKhoan=" + CStr(rs!MaTaiKhoan)
@@ -2579,18 +2758,19 @@ Private Sub LstVt_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
                     Loop
                     rs.Close
                     Set rs = Nothing
-                    
+
                     ExecuteSQL5 "DELETE * FROM TonKho WHERE MaVattu=" + CStr(vattu.MaSo)
                     vattu.XoaVT
-                    
+
                     KiemTraVatTu
                     CboLoai_Click
-                    
+
                     Me.MousePointer = 0
                 End If
             End If
         End If
     End If
+   
 KT:
 End Sub
 
@@ -2608,7 +2788,7 @@ Private Sub SSCmdF_Click()
     Dim sql As String
     
     If Len(txtF.Text) = 0 Then
-        RFocus txtF
+        RFocus txtSearch
         Exit Sub
     End If
     
@@ -2622,6 +2802,9 @@ Private Sub SSCmdF_Click()
         MaDaTim = 0
     End If
     Me.MousePointer = 0
+End Sub
+Private Sub txtSearch_Change()
+    txtF.Text = UnicodeToVni(txtSearch.Text)
 End Sub
 
 Private Sub txtF_GotFocus()

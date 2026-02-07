@@ -1,12 +1,12 @@
 VERSION 5.00
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmKho 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Kho vËt t­, thµnh phÈm, ®¹i lý..."
+   BorderStyle     =   0  'None
    ClientHeight    =   3870
-   ClientLeft      =   4170
-   ClientTop       =   2445
+   ClientLeft      =   4125
+   ClientTop       =   2115
    ClientWidth     =   4230
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -28,11 +28,80 @@ Begin VB.Form FrmKho
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "List of Items"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   8
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   3840
+         TabIndex        =   10
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   9
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Frmkho.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Frmkho.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.CommandButton Command 
       Height          =   375
       Index           =   4
       Left            =   3000
-      Picture         =   "Frmkho.frx":57E2
+      Picture         =   "Frmkho.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   6
       Tag             =   "&Select"
@@ -44,7 +113,7 @@ Begin VB.Form FrmKho
       Height          =   375
       Index           =   3
       Left            =   3000
-      Picture         =   "Frmkho.frx":6C44
+      Picture         =   "Frmkho.frx":12A1E
       Style           =   1  'Graphical
       TabIndex        =   5
       Tag             =   "&Return"
@@ -55,7 +124,7 @@ Begin VB.Form FrmKho
       Height          =   375
       Index           =   2
       Left            =   3000
-      Picture         =   "Frmkho.frx":8066
+      Picture         =   "Frmkho.frx":13E40
       Style           =   1  'Graphical
       TabIndex        =   4
       Tag             =   "&Delete"
@@ -66,7 +135,7 @@ Begin VB.Form FrmKho
       Height          =   375
       Index           =   1
       Left            =   3000
-      Picture         =   "Frmkho.frx":9548
+      Picture         =   "Frmkho.frx":15322
       Style           =   1  'Graphical
       TabIndex        =   3
       Tag             =   "&Save"
@@ -77,7 +146,7 @@ Begin VB.Form FrmKho
       Height          =   375
       Index           =   0
       Left            =   3000
-      Picture         =   "Frmkho.frx":A976
+      Picture         =   "Frmkho.frx":16750
       Style           =   1  'Graphical
       TabIndex        =   2
       Tag             =   "&Add"
@@ -88,23 +157,37 @@ Begin VB.Form FrmKho
       Appearance      =   0  'Flat
       ForeColor       =   &H80000012&
       Height          =   3150
-      ItemData        =   "Frmkho.frx":ACB8
+      ItemData        =   "Frmkho.frx":16A92
       Left            =   120
-      List            =   "Frmkho.frx":ACBA
+      List            =   "Frmkho.frx":16A94
       Sorted          =   -1  'True
       TabIndex        =   1
-      Top             =   120
+      Top             =   240
       Width           =   2775
    End
    Begin VB.TextBox txtTenkho 
       Appearance      =   0  'Flat
       ForeColor       =   &H00FF0000&
       Height          =   285
-      Left            =   120
+      Left            =   3000
       MaxLength       =   50
       TabIndex        =   0
-      Top             =   3440
+      Top             =   2160
+      Visible         =   0   'False
+      Width           =   1215
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   320
+      Left            =   120
+      TabIndex        =   11
+      Top             =   3480
       Width           =   2775
+      VariousPropertyBits=   679495707
+      Size            =   "4895;564"
+      FontName        =   "Tahoma"
+      FontHeight      =   165
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label1 
       BackColor       =   &H00FFFFC0&
@@ -135,60 +218,61 @@ Dim MaChon As Long
 '====================================================================================================
 Private Sub Command_Click(Index As Integer)
     Dim i As Integer, tenkho As String, mk As Long, luong As Double, tien As Double
-    
+
     Select Case Index
-        Case 0:
-            flag = 1
-            txtTenkho = ""
+    Case 0:
+        flag = 1
+        txtTenkho = ""
+        txtName = ""
+        RFocus txtName
+    Case 1:
+        If Len(txtTenkho.Text) = 0 Then
             RFocus txtTenkho
+            Exit Sub
+        End If
+        Me.MousePointer = 11
+        Select Case flag
         Case 1:
-            If Len(txtTenkho.Text) = 0 Then
-                RFocus txtTenkho
-                Exit Sub
+            If ExecuteSQL5("INSERT INTO " + TenTB + " (MaSo, " + TenFL + ") VALUES (" + CStr(Lng_MaxValue("MaSo", TenTB) + 1) + ",'" + txtTenkho + "')") <> 0 Then GoTo XongKho
+            LstKho.AddItem txtTenkho.Text
+            LstKho.ItemData(LstKho.NewIndex) = Lng_MaxValue("MaSo", TenTB)
+            flag = 0
+            LstKho.ListIndex = LstKho.NewIndex
+        Case 0:
+            If LstKho.ListIndex < 0 Then GoTo XongKho
+            If txtTenkho.Text = LstKho.List(LstKho.ListIndex) Then GoTo XongKho
+            If ExecuteSQL5("UPDATE " + TenTB + " SET " + TenFL + "='" + txtTenkho + "' WHERE MaSo=" + CStr(LstKho.ItemData(LstKho.ListIndex))) <> 0 Then GoTo XongKho
+            LstKho.List(LstKho.ListIndex) = txtTenkho.Text
+        End Select
+        RFocus txtTenkho
+    Case 2:
+        Select Case flag
+        Case 0:
+            i = LstKho.ListIndex
+            If i < 0 Then GoTo XongKho
+            If f1 = 1 And SelectSQL("SELECT MaSo AS F1 FROM TonKho WHERE MaSoKho=" + CStr(LstKho.ItemData(i))) > 0 Then
+                tenkho = FrmGetStr.GetString("ChuyÓn c¸c ph¸t sinh ®· cã sang kho", App.ProductName)
+                mk = SelectSQL("SELECT MaSo AS F1 FROM KhoHang WHERE TenKho='" + tenkho + "'")
+                If mk = 0 Or mk = LstKho.ItemData(i) Then GoTo XongKho
+                Me.MousePointer = 11
+                ChuyenKho LstKho.ItemData(i), mk
             End If
-            Me.MousePointer = 11
-            Select Case flag
-                Case 1:
-                     If ExecuteSQL5("INSERT INTO " + TenTB + " (MaSo, " + TenFL + ") VALUES (" + CStr(Lng_MaxValue("MaSo", TenTB) + 1) + ",'" + txtTenkho + "')") <> 0 Then GoTo XongKho
-                     LstKho.AddItem txtTenkho.Text
-                     LstKho.ItemData(LstKho.NewIndex) = Lng_MaxValue("MaSo", TenTB)
-                     flag = 0
-                     LstKho.ListIndex = LstKho.NewIndex
-                Case 0:
-                     If LstKho.ListIndex < 0 Then GoTo XongKho
-                     If txtTenkho.Text = LstKho.List(LstKho.ListIndex) Then GoTo XongKho
-                     If ExecuteSQL5("UPDATE " + TenTB + " SET " + TenFL + "='" + txtTenkho + "' WHERE MaSo=" + CStr(LstKho.ItemData(LstKho.ListIndex))) <> 0 Then GoTo XongKho
-                     LstKho.List(LstKho.ListIndex) = txtTenkho.Text
-            End Select
-            RFocus txtTenkho
-        Case 2:
-            Select Case flag
-                Case 0:
-                     i = LstKho.ListIndex
-                    If i < 0 Then GoTo XongKho
-                    If f1 = 1 And SelectSQL("SELECT MaSo AS F1 FROM TonKho WHERE MaSoKho=" + CStr(LstKho.ItemData(i))) > 0 Then
-                        tenkho = FrmGetStr.GetString("ChuyÓn c¸c ph¸t sinh ®· cã sang kho", App.ProductName)
-                        mk = SelectSQL("SELECT MaSo AS F1 FROM KhoHang WHERE TenKho='" + tenkho + "'")
-                        If mk = 0 Or mk = LstKho.ItemData(i) Then GoTo XongKho
-                        Me.MousePointer = 11
-                        ChuyenKho LstKho.ItemData(i), mk
-                    End If
-                    If f1 = 5 And pNhapKhau > 0 Then
-                        ExecuteSQL5 "DELETE * FROM CPGVHD WHERE MaSo=" + CStr(LstKho.ItemData(i))
-                    End If
-                    If ExecuteSQL5("DELETE * FROM " + TenTB + " WHERE MaSo=" + CStr(LstKho.ItemData(i))) <> 0 Then GoTo XongKho
-                    LstKho.RemoveItem i
-                    If LstKho.ListCount > 0 Then LstKho.ListIndex = i - 1
-                Case 1:
-                    flag = 0
-                    LstKho_Click
-            End Select
-        Case 3:
-            Unload Me
-        Case 4:
-            If LstKho.ListIndex < 0 Then Exit Sub
-            MaChon = LstKho.ItemData(LstKho.ListIndex)
-            Unload Me
+            If f1 = 5 And pNhapKhau > 0 Then
+                ExecuteSQL5 "DELETE * FROM CPGVHD WHERE MaSo=" + CStr(LstKho.ItemData(i))
+            End If
+            If ExecuteSQL5("DELETE * FROM " + TenTB + " WHERE MaSo=" + CStr(LstKho.ItemData(i))) <> 0 Then GoTo XongKho
+            LstKho.RemoveItem i
+            If LstKho.ListCount > 0 Then LstKho.ListIndex = i - 1
+        Case 1:
+            flag = 0
+            LstKho_Click
+        End Select
+    Case 3:
+        Unload Me
+    Case 4:
+        If LstKho.ListIndex < 0 Then Exit Sub
+        MaChon = LstKho.ItemData(LstKho.ListIndex)
+        Unload Me
     End Select
 XongKho:
     Me.MousePointer = 0
@@ -229,6 +313,7 @@ Private Sub Form_Activate()
                 TenTB = "DoituongCT" + CStr(f1 - 9)
                 TenFL = "DienGiai"
         End Select
+        lblTitle(11).Caption = Caption
         If pNN = 0 And pKhongDau > 0 Then Me.Caption = ABCtoKDau(Me.Caption)
         Int_RecsetToCbo "SELECT MaSo As F2," + TenFL + " As F1 FROM " + TenTB + IIf(f1 = 5, " WHERE MaSo > 1 AND MaKhachHang=0", "") + IIf(f1 = 6, " WHERE MaSo > 1", "") + " ORDER BY " + TenFL, LstKho
         If f1 = 10 And MaChon > 0 Then
@@ -268,7 +353,23 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+
+Private Sub txtName_Change()
+    txtTenkho.Text = UnicodeToVni(txtName.Text)
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
     flag = 0
     SetFont Me
 End Sub
@@ -276,6 +377,7 @@ End Sub
 Private Sub LstKho_Click()
     flag = 0
     txtTenkho.Text = LstKho.List(LstKho.ListIndex)
+    txtName.Text = VniToUnicode(LstKho.List(LstKho.ListIndex))
 End Sub
 
 Private Sub LstKho_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)

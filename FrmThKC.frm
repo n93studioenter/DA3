@@ -2,11 +2,10 @@ VERSION 5.00
 Begin VB.Form FrmThKC 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00E0E0E0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Thùc hiÖn kÕt chuyÓn"
+   BorderStyle     =   0  'None
    ClientHeight    =   6210
-   ClientLeft      =   1650
-   ClientTop       =   1545
+   ClientLeft      =   1605
+   ClientTop       =   1215
    ClientWidth     =   4485
    BeginProperty Font 
       Name            =   "VK Sans Serif"
@@ -27,6 +26,75 @@ Begin VB.Form FrmThKC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Monthly Conversion"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   54
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   4080
+         TabIndex        =   56
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmThKC.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmThKC.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   55
+         Top             =   0
+         Width           =   4455
+      End
+   End
    Begin VB.TextBox txt 
       Appearance      =   0  'Flat
       BackColor       =   &H00E0E0E0&
@@ -42,9 +110,9 @@ Begin VB.Form FrmThKC
    Begin VB.ComboBox Cbo 
       BackColor       =   &H00E0E0E0&
       Height          =   315
-      ItemData        =   "FrmThKC.frx":57E2
+      ItemData        =   "FrmThKC.frx":115BC
       Left            =   600
-      List            =   "FrmThKC.frx":57E4
+      List            =   "FrmThKC.frx":115BE
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   120
@@ -471,7 +539,7 @@ Begin VB.Form FrmThKC
       Height          =   375
       Index           =   0
       Left            =   2040
-      Picture         =   "FrmThKC.frx":57E6
+      Picture         =   "FrmThKC.frx":115C0
       Style           =   1  'Graphical
       TabIndex        =   18
       Tag             =   "&Done"
@@ -483,7 +551,7 @@ Begin VB.Form FrmThKC
       Height          =   375
       Index           =   1
       Left            =   3480
-      Picture         =   "FrmThKC.frx":6C14
+      Picture         =   "FrmThKC.frx":129EE
       Style           =   1  'Graphical
       TabIndex        =   19
       Tag             =   "&Return"
@@ -762,17 +830,38 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
     If KeyCode = vbKeyEscape Then Unload Me
 End Sub
-
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+    Caption = "Thùc hiÖn kÕt chuyÓn"
+    lblTitle(11).Caption = Caption
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     Dim i As Integer
     Dim rs As Recordset
-    
+
     AddMonthToCbo Cbo
     Set rs = DBKetoan.OpenRecordset("SELECT * FROM CTKetChuyen ORDER BY STT", dbOpenSnapshot, dbForwardOnly)
     Do While Not rs.EOF
         ChkKC(i).Caption = rs!diengiai
         ChkKC(i).tag = rs!MaSo
-        ChkKC(i).FontName = pFontName
+        ChkKC(i).fontName = pFontName
         ChkKC(i).FontSize = pFontSize
         ChkKC(i).Visible = True
         ChkKC(i).Value = 1
@@ -782,13 +871,13 @@ Private Sub Form_Load()
     Loop
     rs.Close
     Set rs = Nothing
-    
+
     LbKC(1).Visible = (pTygia > 0)
     txt.Visible = (pTygia > 0)
     If pTygia > 0 Then txt.Text = Format(TyGiaCuoi, Mask_0)
-    
+
     SetFont Me
-    
+
 KT:
     If i > 0 Then Me.Height = ChkKC(IIf(i > 16, 15, i - 1)).Top + 780
     Me.Width = Me.Width + (Fix(i / 16) + IIf(i Mod 16 > 0, 0, -1)) * 3495

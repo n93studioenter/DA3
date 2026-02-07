@@ -3,11 +3,10 @@ Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmOptions 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Th«ng tin doanh nghiÖp"
-   ClientHeight    =   8250
-   ClientLeft      =   660
-   ClientTop       =   915
+   BorderStyle     =   0  'None
+   ClientHeight    =   8265
+   ClientLeft      =   615
+   ClientTop       =   585
    ClientWidth     =   11925
    ClipControls    =   0   'False
    FillColor       =   &H00FFFFC0&
@@ -28,10 +27,79 @@ Begin VB.Form FrmOptions
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    Picture         =   "Frmopt.frx":57E2
-   ScaleHeight     =   8250
+   ScaleHeight     =   8265
    ScaleWidth      =   11925
    ShowInTaskbar   =   0   'False
    Tag             =   "Options"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   135
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   137
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Frmopt.frx":AFC4
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Frmopt.frx":B281
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   11400
+         TabIndex        =   136
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.Frame Frame 
       BackColor       =   &H00FFFFC0&
       BeginProperty Font 
@@ -587,9 +655,9 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   315
          Index           =   2
-         ItemData        =   "Frmopt.frx":AFC4
+         ItemData        =   "Frmopt.frx":16D9E
          Left            =   3960
-         List            =   "Frmopt.frx":AFC6
+         List            =   "Frmopt.frx":16DA0
          Style           =   2  'Dropdown List
          TabIndex        =   53
          Top             =   5040
@@ -1038,9 +1106,9 @@ Begin VB.Form FrmOptions
             Strikethrough   =   0   'False
          EndProperty
          Height          =   315
-         ItemData        =   "Frmopt.frx":AFC8
+         ItemData        =   "Frmopt.frx":16DA2
          Left            =   2880
-         List            =   "Frmopt.frx":AFF0
+         List            =   "Frmopt.frx":16DCA
          Style           =   2  'Dropdown List
          TabIndex        =   29
          Top             =   1080
@@ -1309,12 +1377,12 @@ Begin VB.Form FrmOptions
       EndProperty
       Height          =   285
       Index           =   29
-      Left            =   4200
+      Left            =   8640
       MaxLength       =   20
       TabIndex        =   123
       Text            =   "..."
-      Top             =   1020
-      Width           =   1695
+      Top             =   6720
+      Width           =   255
    End
    Begin VB.CheckBox Chbanthuoc 
       BackColor       =   &H00FFFFC0&
@@ -1376,12 +1444,13 @@ Begin VB.Form FrmOptions
       EndProperty
       Height          =   285
       Index           =   27
-      Left            =   4080
+      Left            =   11400
       MaxLength       =   30
       TabIndex        =   92
       Text            =   "..."
-      Top             =   1395
-      Width           =   1215
+      Top             =   600
+      Visible         =   0   'False
+      Width           =   375
    End
    Begin VB.Frame Frame 
       BackColor       =   &H00FFFFC0&
@@ -1479,9 +1548,9 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   315
          Index           =   3
-         ItemData        =   "Frmopt.frx":B01B
+         ItemData        =   "Frmopt.frx":16DF5
          Left            =   9120
-         List            =   "Frmopt.frx":B033
+         List            =   "Frmopt.frx":16E0D
          Style           =   2  'Dropdown List
          TabIndex        =   12
          Top             =   840
@@ -1716,9 +1785,9 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   315
          Index           =   1
-         ItemData        =   "Frmopt.frx":B097
+         ItemData        =   "Frmopt.frx":16E71
          Left            =   9120
-         List            =   "Frmopt.frx":B0C2
+         List            =   "Frmopt.frx":16E9C
          Style           =   2  'Dropdown List
          TabIndex        =   18
          Top             =   480
@@ -1795,12 +1864,13 @@ Begin VB.Form FrmOptions
          Height          =   285
          HideSelection   =   0   'False
          Index           =   0
-         Left            =   1800
+         Left            =   5040
          MaxLength       =   500
          TabIndex        =   0
          Text            =   "..."
-         Top             =   240
-         Width           =   7215
+         Top             =   200
+         Visible         =   0   'False
+         Width           =   2175
       End
       Begin VB.TextBox Text 
          BeginProperty Font 
@@ -1814,12 +1884,13 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   285
          Index           =   1
-         Left            =   8520
+         Left            =   8040
          MaxLength       =   50
          TabIndex        =   1
          Text            =   "..."
          Top             =   240
-         Width           =   495
+         Visible         =   0   'False
+         Width           =   975
       End
       Begin VB.TextBox Text 
          BeginProperty Font 
@@ -1833,12 +1904,13 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   285
          Index           =   2
-         Left            =   1800
+         Left            =   7920
          MaxLength       =   500
          TabIndex        =   3
          Text            =   "..."
          Top             =   650
-         Width           =   7215
+         Visible         =   0   'False
+         Width           =   1095
       End
       Begin VB.TextBox Text 
          BeginProperty Font 
@@ -1871,12 +1943,13 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   285
          Index           =   5
-         Left            =   1800
+         Left            =   8760
          MaxLength       =   5000
          TabIndex        =   9
          Text            =   "..."
          Top             =   1800
-         Width           =   7215
+         Visible         =   0   'False
+         Width           =   495
       End
       Begin VB.TextBox Text 
          BeginProperty Font 
@@ -1928,9 +2001,9 @@ Begin VB.Form FrmOptions
          EndProperty
          Height          =   315
          Index           =   0
-         ItemData        =   "Frmopt.frx":B0ED
+         ItemData        =   "Frmopt.frx":16EC7
          Left            =   6000
-         List            =   "Frmopt.frx":B0EF
+         List            =   "Frmopt.frx":16EC9
          Style           =   2  'Dropdown List
          TabIndex        =   17
          Top             =   1005
@@ -2032,6 +2105,72 @@ Begin VB.Form FrmOptions
          Text            =   "..."
          Top             =   2640
          Width           =   1695
+      End
+      Begin MSForms.TextBox txtTaikhoan 
+         Height          =   340
+         Left            =   1800
+         TabIndex        =   142
+         Top             =   1800
+         Width           =   7335
+         VariousPropertyBits=   -1467987941
+         Size            =   "12938;600"
+         FontName        =   "Tahoma"
+         FontHeight      =   180
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
+      End
+      Begin MSForms.TextBox txtFax 
+         Height          =   300
+         Left            =   4200
+         TabIndex        =   141
+         Top             =   1440
+         Width           =   1215
+         VariousPropertyBits=   746604571
+         Size            =   "2143;529"
+         FontName        =   "Times New Roman"
+         FontHeight      =   195
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
+      End
+      Begin MSForms.TextBox txtCCCD 
+         Height          =   300
+         Left            =   4200
+         TabIndex        =   140
+         Top             =   1080
+         Width           =   1215
+         VariousPropertyBits=   746604571
+         Size            =   "2143;529"
+         Value           =   "..."
+         FontName        =   "Times New Roman"
+         FontHeight      =   195
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
+      End
+      Begin MSForms.TextBox txtDiachi 
+         Height          =   330
+         Left            =   1800
+         TabIndex        =   139
+         Top             =   610
+         Width           =   7095
+         VariousPropertyBits=   679495707
+         Size            =   "12515;582"
+         FontName        =   "Tahoma"
+         FontHeight      =   180
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
+      End
+      Begin MSForms.TextBox txtTenCty 
+         Height          =   340
+         Left            =   1800
+         TabIndex        =   138
+         Top             =   230
+         Width           =   7095
+         VariousPropertyBits=   679495707
+         Size            =   "12515;600"
+         FontName        =   "Tahoma"
+         FontHeight      =   180
+         FontCharSet     =   0
+         FontPitchAndFamily=   2
       End
       Begin VB.Label Label 
          BackColor       =   &H00FFFFC0&
@@ -2464,7 +2603,7 @@ Begin VB.Form FrmOptions
       Height          =   375
       Index           =   1
       Left            =   9120
-      Picture         =   "Frmopt.frx":B0F1
+      Picture         =   "Frmopt.frx":16ECB
       Style           =   1  'Graphical
       TabIndex        =   55
       Tag             =   "&Return"
@@ -2485,7 +2624,7 @@ Begin VB.Form FrmOptions
       Height          =   375
       Index           =   0
       Left            =   9120
-      Picture         =   "Frmopt.frx":C513
+      Picture         =   "Frmopt.frx":182ED
       Style           =   1  'Graphical
       TabIndex        =   54
       Tag             =   "&Save"
@@ -2536,6 +2675,14 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" ( _
+                                     ByVal hWnd As Long, _
+                                     ByVal wMsg As Long, _
+                                     ByVal wParam As Long, _
+                                     ByVal lParam As Long) As Long
+Private Const EM_SETMARGINS = &HD3
+Private Const EC_LEFTMARGIN = &H1
+
 Private Type BROWSEINFO
     hOwner As Long
     pidlRoot As Long
@@ -2560,6 +2707,11 @@ Dim mst As String
 Dim suatencn As Integer
 Dim kb As Integer
 Dim typeRegistry As Integer
+Private Sub SetLeftPadding(txt As Object, widthInPixels As Long)
+    ' lParam luu giá tr? margin (LOWORD là Left, HIWORD là Right)
+    SendMessage txt.hWnd, EM_SETMARGINS, EC_LEFTMARGIN, widthInPixels
+End Sub
+
 Public Function BrowseForFolder(ByVal sTitle As String) As String
     Dim bi As BROWSEINFO
     Dim pidl As Long
@@ -2783,22 +2935,61 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     
     If KeyCode = vbKeyEscape Then Unload Me
 End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Public Sub AnControl2(frm As Form)
+    Dim ctl As Control
+Dim TITLE_HEIGHT As Double
+TITLE_HEIGHT = 160
+    For Each ctl In frm.Controls
+        Select Case TypeName(ctl)
+        Case "Label", "TextBox", "ComboBox", "PictureBox", _
+             "CommandButton", "Frame", "CheckBox", _
+             "OptionButton", "ListBox", "Grid", _
+             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
 
+            If ctl.Name <> "picFakeTitle" _
+               And ctl.Name <> "lblTitle" _
+               And ctl.Name <> "lblClose" Then
+
+                If TypeName(ctl) = "Line" Then
+                    ctl.y1 = ctl.y1 + TITLE_HEIGHT
+                    ctl.y2 = ctl.y2 + TITLE_HEIGHT
+                Else
+                    ctl.Top = ctl.Top + TITLE_HEIGHT
+                End If
+
+            End If
+        End Select
+    Next
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 350
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl2 Me
+
+
     Dim vis As Boolean
-    
+
     ' LÊy l¹i c¸c gi¸ trÞ mÆc ®Þnh
     Int_RecsetToCbo "SELECT MaSo As F2,SoHieu+ ' - '+DienGiai As F1 FROM CTGhiSo ORDER BY SoHieu", CTGS
-    
+
     SetFont Me
     Set Combo(3).Font = Me.Font
-    mst = frmMain.LbCty(8).Caption
+    mst = frmMain.lbCty(8).Caption
     If IsNumeric(mst) Then
         vis = (Cdbl5(mst) = 0)
     Else
         vis = False
     End If
-    
+
     Frame(1).Enabled = vis
     Combo(3).Enabled = vis
     Check(25).Enabled = vis
@@ -2810,12 +3001,12 @@ Private Sub Form_Load()
     Combo(2).AddItem "VND", 0
     Combo(2).ItemData(0) = 0
     SetListIndex Combo(2), pTien
-    
+
     LoadInfo
-  
-   Frame(1).Enabled = True
-   Frame(2).Enabled = False
-   If Len(Text(7).Text) >= 9 Then Chbanthuoc.Enabled = False
+    Frame(1).Enabled = True
+    Frame(2).Enabled = False
+    If Len(Text(7).Text) >= 9 Then Chbanthuoc.Enabled = False
+
    
 End Sub
 
@@ -2898,7 +3089,12 @@ Public Function FileExists(FilePath As String) As Boolean
 ErrorHandler:
     FileExists = False
 End Function
+Private Sub Dongbotxt()
+    Text(0).Text = UnicodeToVni(txtTenCty.Text)
+    Text(2).Text = UnicodeToVni(txtDiaChi.Text)
+End Sub
 Private Sub Command_Click(Index As Integer)
+    Dongbotxt
     Dim originPath As String
     Dim content As String
     originPath = App.path
@@ -2991,7 +3187,7 @@ Private Sub Command_Click(Index As Integer)
         ExecuteSQL5 "Update License set col711ra=0"
     End If
     If Index = 0 Then
-        ExecuteSQL5 "UPDATE license SET CCCD = '" + Text(29).Text + "'"
+        ExecuteSQL5 "UPDATE license SET CCCD = '" + txtCCCD.Text + "'"
     End If
 
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD tenhoadon text")
@@ -3047,7 +3243,7 @@ Private Sub Command_Click(Index As Integer)
 
         If Combo(2).ListIndex >= 0 Then T = Combo(2).ItemData(Combo(2).ListIndex) Else T = pTien
         If CInt5(Left(Text(Index).Text, 2)) <> 0 Then Check(55).Value = 0
-        If ((((pTenCty = Text(0).Text And (pTenCn = Text(1).Text Or suatencn = 1) And (Check(19).Value = suatencn) And pMaVach = Check(9).Value And pDinhmuc = Check(13).Value And pSongNgu = (Check(14).Value = 1) And pRpt = Check(15).Value And pTygia = Check(18).Value And T = pTien And mk = 0) Or (DEMO = 1 And CLng5(Left(Text(7).Text, 2)) > 0)) And (mst = Text(7).Text Or (suatencn = 1 And Left(mst, 10) = Left(Text(7).Text, 10)))) Or Combo(3).ListIndex = 4 Or (Cdbl5(Left(Text(7).Text, 10)) = 0 And Cdbl5(Left(frmMain.LbCty(8).Caption, 10)) = 0)) And (pNoiBo = Check(55).Value) And (CInt5(Combo(0).Text) = pNamTC) Then GoTo a
+        If ((((pTenCty = Text(0).Text And (pTenCn = Text(1).Text Or suatencn = 1) And (Check(19).Value = suatencn) And pMaVach = Check(9).Value And pDinhmuc = Check(13).Value And pSongNgu = (Check(14).Value = 1) And pRpt = Check(15).Value And pTygia = Check(18).Value And T = pTien And mk = 0) Or (DEMO = 1 And CLng5(Left(Text(7).Text, 2)) > 0)) And (mst = Text(7).Text Or (suatencn = 1 And Left(mst, 10) = Left(Text(7).Text, 10)))) Or Combo(3).ListIndex = 4 Or (Cdbl5(Left(Text(7).Text, 10)) = 0 And Cdbl5(Left(frmMain.lbCty(8).Caption, 10)) = 0)) And (pNoiBo = Check(55).Value) And (CInt5(Combo(0).Text) = pNamTC) Then GoTo a
         If (Len(pMST) > 0 And Left(Text(7).Text, Len(pMST)) = pMST) Then GoTo a
         If boolean_kiemtra() = False Then GoTo a    ' kiem tra da active thi bat khung nhap ma so le
         If FrmGetStr.GetMK(Text(7).Text) Then
@@ -3099,7 +3295,7 @@ a:
             f1 = IIf(Check(34).Value = 1, 10, 0) + IIf(ChkVT(3).Value = 1, 100, 0) + IIf(Check(55).Value = 1, 1000, 0) + IIf(Check(35).Value = 1 And k > 0 And k <= 3, 10000 * k, 0)
             F2 = IIf(Check(36).Value = 1, 10, 0) + IIf(ChkVT(4).Value = 1, 100, 0) + IIf(Check(37).Value = 1, 1000, 0) + IIf(Check(38).Value = 1, 10000, 0)
 
-            If ExecuteSQL5("UPDATE License SET banthuoc = " + CStr(Chbanthuoc.Value) + ",sofax = '" + Text(27) + "', Tenhoadon ='" + Text(26).Text + "',TenCty = '" + Text(0).Text + "', TenCn = '" + Text(1).Text + "', DiaChi = '" _
+            If ExecuteSQL5("UPDATE License SET banthuoc = " + CStr(Chbanthuoc.Value) + ",sofax = '" + txtFax.Text + "', Tenhoadon ='" + Text(26).Text + "',TenCty = '" + Text(0).Text + "', TenCn = '" + Text(1).Text + "', DiaChi = '" _
                          + Text(2).Text + "', Tel = '" + Text(3).Text + "', Fax = '" + Text(4).Text + "', Quan='" + Text(19).Text + "', ThanhPho='" + Text(20).Text + "',TaiKhoanVN = '" _
                          + Text(5).Text + "', TaiKhoanNT = '" + Text(6).Text + "', TenCty_ID = " + CStr(Int_StrToCode(Text(0).Text)) _
                          + ",TenCn_ID = " + CStr(Int_StrToCode(Text(1).Text)) + ", NamTC = " + CStr(Combo(0).Text) + ",TKVattu='" + Text(22).Text + "-" + Text(23).Text + "'" _
@@ -3167,7 +3363,7 @@ End Sub
 
 Private Sub LoadInfo()
     Dim rs As Recordset, i As Integer
-    
+
     Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
     On Error Resume Next
     If pVersion = 3 Then
@@ -3197,29 +3393,29 @@ Private Sub LoadInfo()
     Check(21).Value = pTyGiaBQ
     Check(23).Value = pBaoGia
     Check(24).Value = pNVBH
-    
+
     Check(30).Value = (rs!Lock0 Mod 100) \ 10
     Check(31).Value = (rs!Lock0 Mod 1000) \ 100
     Check(32).Value = (rs!Lock0 Mod 10000) \ 1000
     Check(33).Value = (rs!Lock0 Mod 100000) \ 10000
     Check(34).Value = (rs!Lock1 Mod 100) \ 10
-    
+
     Check(35).Value = IIf(pSoVV > 0, 1, 0)
     Check(36).Value = IIf(pNhapKhau > 0, 1, 0)
     Check(37).Value = IIf(pNhapDoiTuong > 0, 1, 0)
     Check(38).Value = IIf(pTrungSoHieuKhacThang > 0, 1, 0)
     Text(25).Text = CStr(pSoVV)
-    
+
     ChkVT(3).Value = pKiemKeNgay
-    
+
     Text(24).Text = CStr(rs!Flag1 Mod 100)
     Check(25).Value = (rs!Flag1 Mod 100000000) \ 10000000
     Check(26).Value = (rs!Flag1 Mod 10000000) \ 1000000
     Check(27).Value = (rs!Flag1 Mod 1000000) \ 100000
     Check(28).Value = (rs!Flag1 Mod 100000) \ 10000
-    
+
     Check(29).Value = IIf(frmMain.Command(4).Visible, 1, 0)
-    
+
     Check(10).Value = IIf(pSoKT Mod 10 >= 1, 1, 0)
     Check(11).Value = IIf(pSoKT Mod 100 >= 10, 1, 0)
     Check(12).Value = IIf(pSoKT Mod 1000 >= 100, 1, 0)
@@ -3231,64 +3427,72 @@ Private Sub LoadInfo()
     Check(18).Value = IIf(rs!tygia > 0, 1, 0)
     Text(8).Text = rs!App1Path
     Text(0).Text = pTenCty
+    txtTenCty.Text = VniToUnicode(pTenCty)
     Text(1).Text = pTenCn
     Text(2).Text = rs!DiaChi
+    txtDiaChi.Text = VniToUnicode(rs!DiaChi)
     Text(3).Text = rs!Tel
     Text(4).Text = rs!Fax
     Text(5).Text = rs!TaiKhoanVN
+    txtTaikhoan.Text = VniToUnicode(rs!TaiKhoanVN)
     Text(6).Text = rs!TaiKhoanNT
     mst = rs!masothue
     Chbanthuoc.Value = rs!banthuoc
     Text(7).Text = mst
     Text(29).Text = rs!CCCD
+    txtCCCD.Text = rs!CCCD
     SetListIndex CTGS, rs!CTGS_GV
     Text(11).Text = GetSetting(IniPath, "Environment", "DInvoice", 2)
     Text(12).Text = GetSetting(IniPath, "Environment", "CInvoice", 2)
     Text(18).Text = GetSetting(IniPath, "Environment", "UNC", 2)
     Text(13).Text = GetSetting(IniPath, "Environment", "NDecimal", 2)
     Text(14).Text = CStr(IIf(rs!NgayDauThang = 0, 1, rs!NgayDauThang))
-    
+
     Text(15).Text = rs!email
     Text(16).Text = rs!smtp
     Text(17).Text = rs!EMailDB
-    
+
     Text(19).Text = rs!Quan
     Text(20).Text = rs!ThanhPho
     Text(21).Text = Format(rs!tygia, Mask_2)
     Text(22).Text = LaySH(rs!TKVattu, 1, "-")
     Text(23).Text = LaySH(rs!TKVattu, 2, "-")
-     Text(26).Text = rs!Tenhoadon
-     Text(27).Text = rs!sofax
-    
-     If boolean_kiemtra() Then active.Visible = False
+    Text(26).Text = rs!Tenhoadon
+    Text(27).Text = rs!sofax
+    txtFax.Text = rs!sofax
+    If boolean_kiemtra() Then active.Visible = False
     rs.Close
     Set rs = Nothing
-    
+
     If pNoiBo > 0 Then
         kb = 1
         Check(55).Value = 1
         HienNoiBo
     End If
-    
+
     On Error GoTo 0
-    
+
     SetListIndex Combo(0), CLng(pNamTC)
     SetListIndex Combo(1), CLng(pThangDauKy)
-        
- '   For i = pNamTC - 1 To pNamTC + 1
- Dim so_index, kkk
- so_index = 0
- kkk = 0
+
+    '   For i = pNamTC - 1 To pNamTC + 1
+    Dim so_index, kkk
+    so_index = 0
+    kkk = 0
     For i = 2005 To 3000
         Combo(0).AddItem CStr(i)
         If i = pNamTC Then
-        kkk = so_index
+            kkk = so_index
         End If
         so_index = so_index + 1
     Next
     Combo(0).ListIndex = kkk
-        
+
 End Sub
+Private Sub txtTaikhoan_Change()
+    Text(5).Text = UnicodeToVni(txtTaikhoan.Text)
+End Sub
+
 
 Private Sub PhanChucNang(lh As Integer, TM As Integer, xd As Integer, cdt As Integer, sx As Integer)
     Dim i As Integer

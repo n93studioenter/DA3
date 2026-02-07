@@ -181,98 +181,117 @@ End Sub
 
 Private Sub Command22_Click(Index As Integer)
 
- 
-  Dim sql As String
- Dim pDataPath As String, fn As String
- Dim thoat
- thoat = 0
- pDataPath = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.xlsx", 1)
- If MsgBox("B¹n chon Yes th× cËp nhËt míi toµn bé" & vbNewLine & "B¹n chän No cËp nhËt bæ sung thªm vµo danh s¸ch.", vbYesNo + vbCritical, App.ProductName) = vbYes Then
-    sql = " Update [Tonkho] b  "
+
+    Dim sql As String
+    Dim pDataPath As String, fn As String
+    Dim thoat
+    thoat = 0
+    pDataPath = frmMain.ChonTenTep("Chän tÖp d÷ liÖu", &H4&, "*.xlsx", 1)
+    Dim s As String
+
+    s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(111) & ChrW(110) & ChrW(32) & _
+        ChrW(89) & ChrW(101) & ChrW(115) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(236) & ChrW(32) & _
+        ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(116) & ChrW(32) & _
+        ChrW(109) & ChrW(7899) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(111) & ChrW(224) & ChrW(110) & ChrW(32) & _
+        ChrW(98) & ChrW(7897) & vbCrLf
+
+    s = s & _
+        ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & _
+        ChrW(78) & ChrW(111) & ChrW(32) & ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & _
+        ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(98) & ChrW(7893) & ChrW(32) & ChrW(115) & ChrW(117) & ChrW(110) & _
+        ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(234) & ChrW(109) & ChrW(32) & ChrW(118) & ChrW(224) & _
+        ChrW(111) & ChrW(32) & ChrW(100) & ChrW(97) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(115) & ChrW(225) & _
+        ChrW(99) & ChrW(104) & ChrW(46)
+
+    Dim xn As String
+    xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+    If MessageBoxW(Me.hWnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+        sql = " Update [Tonkho] b  "
         sql = sql + " SET b.tien_0 = 0"
         sql = sql + " ,b.Luong_0 = 0"
-    ExecuteSQL5 sql
- End If
-  
- If Len(pDataPath) > 0 Then
- Set xlapp = CreateObject("Excel.Application")
- xlapp.Workbooks.Open pDataPath ' + "bangkera.XLS"
- 
- Set xlsheet = xlapp.Worksheets(1)
- Dim sodong, MaSo, i As Integer
- 'Dim sql As String
- Dim MaTaiKhoan As String
- Dim loai As Integer
- Dim masovattu As String
- Dim sohieu, Ten, donvitinh, SoLuong, dongia, ThanhTien
- sodong = Int(xlsheet.Cells(3, 2))
-  
-   For i = 5 To sodong + 4
-        sohieu = CStr(xlsheet.Cells(i, 1))
-        Ten = CStr(xlsheet.Cells(i, 2))
-        donvitinh = CStr(xlsheet.Cells(i, 3))
-        MaTaiKhoan = xlsheet.Cells(i, 7)
-        If (Len(sohieu) <= 0 Or Len(Ten) <= 0 Or Len(donvitinh) <= 0 Or Len(MaTaiKhoan) <= 0) Then
-         MsgBox " B¹n ph¶i nhËp ®ñ th«ng tin  file exel: m· s¶n phÈm , tªn, ®¬n vÞ tÝnh, m· tµi kho¶n!"
-        xlapp.Workbooks.Close
-        thoat = 1
-   End If
-  Next
-If thoat = 0 Then
- For i = 5 To sodong + 4
-  FVTDauKy.Form_Activate
- 
-
- 
-  FrmVattu.CboLoai = CboLoai
-  
-  sohieu = CStr(xlsheet.Cells(i, 1))
-  Ten = CStr(xlsheet.Cells(i, 2))
-  donvitinh = CStr(xlsheet.Cells(i, 3))
-  
- 
-  
-  SoLuong = CStr(xlsheet.Cells(i, 4))
-  dongia = CStr(xlsheet.Cells(i, 5))
-  ThanhTien = CStr(xlsheet.Cells(i, 6))
-  MaTaiKhoan = xlsheet.Cells(i, 7)
-  
-    FrmVattu.txtVT(6).Text = ".." 'vattu.GhiChu
-    FrmVattu.txtVT(7).Text = 0 'CStr(vattu.VAT)
-    FrmVattu.txtVT(8).Text = 0 'GiaBan1
-    FrmVattu.txtVT(9).Text = 0 'GiaBan2
-    FrmVattu.txtVT(10).Text = 0 'GiaBan3
-    FrmVattu.txtVT(12).Text = 0 'CK
-    FrmVattu.txtVT(13).Text = 0 'ThueNK
-    FrmVattu.txtTon(0).Text = 0 'TonMin
-    FrmVattu.txtTon(1).Text = 0 'TonMax
-    If Int(SelectSQL("SELECT count(MaSo) AS F1 FROM vattu WHERE  SoHieu = '" + CStr(sohieu) + "'")) <= 0 Then
-      FrmVattu.Command_Click (0)
-      FrmVattu.txtVT(0).Text = sohieu
-      FrmVattu.txtVT(1).Text = Ten
-      FrmVattu.txtVT(2).Text = donvitinh
-      FrmVattu.Command_Click (1) ' luu vat tu do lai
+        ExecuteSQL5 sql
     End If
-    
-    
-    FVTDauKy.txtTon(0).Text = MaTaiKhoan
-    FVTDauKy.txtTon_LostFocus (0)
-    FVTDauKy.txtTon(1).Text = sohieu
-    FVTDauKy.txtTon_LostFocus (1)
 
-    FVTDauKy.txtTon(4).Text = SoLuong
-    FVTDauKy.txtTon(5).Text = dongia
-    FVTDauKy.txtTon(6).Text = ThanhTien
-    FVTDauKy.CmdCt_Click
 
- Next
-    KiemTraVatTu
-    KiemTraTaiKhoan
-  xlapp.Workbooks.Close
-  frmTonDauSanPham.Hide
+    If Len(pDataPath) > 0 Then
+        Set xlapp = CreateObject("Excel.Application")
+        xlapp.Workbooks.Open pDataPath    ' + "bangkera.XLS"
+
+        Set xlsheet = xlapp.Worksheets(1)
+        Dim sodong, MaSo, i As Integer
+        'Dim sql As String
+        Dim MaTaiKhoan As String
+        Dim loai As Integer
+        Dim masovattu As String
+        Dim sohieu, Ten, donvitinh, SoLuong, dongia, ThanhTien
+        sodong = Int(xlsheet.Cells(3, 2))
+
+        For i = 5 To sodong + 4
+            sohieu = CStr(xlsheet.Cells(i, 1))
+            Ten = CStr(xlsheet.Cells(i, 2))
+            donvitinh = CStr(xlsheet.Cells(i, 3))
+            MaTaiKhoan = xlsheet.Cells(i, 7)
+            If (Len(sohieu) <= 0 Or Len(Ten) <= 0 Or Len(donvitinh) <= 0 Or Len(MaTaiKhoan) <= 0) Then
+                MsgBox " B¹n ph¶i nhËp ®ñ th«ng tin  file exel: m· s¶n phÈm , tªn, ®¬n vÞ tÝnh, m· tµi kho¶n!"
+                xlapp.Workbooks.Close
+                thoat = 1
+            End If
+        Next
+        If thoat = 0 Then
+            For i = 5 To sodong + 4
+                FVTDauKy.Form_Activate
+
+
+
+                FrmVattu.CboLoai = CboLoai
+
+                sohieu = CStr(xlsheet.Cells(i, 1))
+                Ten = CStr(xlsheet.Cells(i, 2))
+                donvitinh = CStr(xlsheet.Cells(i, 3))
+
+
+
+                SoLuong = CStr(xlsheet.Cells(i, 4))
+                dongia = CStr(xlsheet.Cells(i, 5))
+                ThanhTien = CStr(xlsheet.Cells(i, 6))
+                MaTaiKhoan = xlsheet.Cells(i, 7)
+
+                FrmVattu.txtVT(6).Text = ".."    'vattu.GhiChu
+                FrmVattu.txtVT(7).Text = 0    'CStr(vattu.VAT)
+                FrmVattu.txtVT(8).Text = 0    'GiaBan1
+                FrmVattu.txtVT(9).Text = 0    'GiaBan2
+                FrmVattu.txtVT(10).Text = 0    'GiaBan3
+                FrmVattu.txtVT(12).Text = 0    'CK
+                FrmVattu.txtVT(13).Text = 0    'ThueNK
+                FrmVattu.txtTon(0).Text = 0    'TonMin
+                FrmVattu.txtTon(1).Text = 0    'TonMax
+                If Int(SelectSQL("SELECT count(MaSo) AS F1 FROM vattu WHERE  SoHieu = '" + CStr(sohieu) + "'")) <= 0 Then
+                    FrmVattu.Command_Click (0)
+                    FrmVattu.txtVT(0).Text = sohieu
+                    FrmVattu.txtVT(1).Text = Ten
+                    FrmVattu.txtVT(2).Text = donvitinh
+                    FrmVattu.Command_Click (1)    ' luu vat tu do lai
+                End If
+
+
+                FVTDauKy.txtTon(0).Text = MaTaiKhoan
+                FVTDauKy.txtTon_LostFocus (0)
+                FVTDauKy.txtTon(1).Text = sohieu
+                FVTDauKy.txtTon_LostFocus (1)
+
+                FVTDauKy.txtTon(4).Text = SoLuong
+                FVTDauKy.txtTon(5).Text = dongia
+                FVTDauKy.txtTon(6).Text = ThanhTien
+                FVTDauKy.CmdCt_Click
+
+            Next
+            KiemTraVatTu
+            KiemTraTaiKhoan
+            xlapp.Workbooks.Close
+            frmTonDauSanPham.Hide
+        End If
     End If
- End If
- 
+
 End Sub
 
 Private Sub Form_Load()

@@ -1,12 +1,12 @@
 VERSION 5.00
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmKhachHang 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Danh s¸ch kh¸ch hµng"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   1080
-   ClientTop       =   1005
+   ClientLeft      =   1035
+   ClientTop       =   675
    ClientWidth     =   11010
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -24,22 +24,93 @@ Begin VB.Form FrmKhachHang
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   7080
    ScaleWidth      =   11010
+   ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   52
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   54
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmKhachHang.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmKhachHang.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   10560
+         TabIndex        =   53
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "Search"
       Height          =   315
       Left            =   4560
-      TabIndex        =   46
+      TabIndex        =   51
       Top             =   6600
       Width           =   855
    End
    Begin VB.TextBox txtF 
       Height          =   285
-      Left            =   2880
-      TabIndex        =   20
-      Top             =   6640
-      Width           =   1335
+      Left            =   360
+      TabIndex        =   25
+      Top             =   6000
+      Visible         =   0   'False
+      Width           =   4695
    End
    Begin VB.TextBox txtVT 
       BorderStyle     =   0  'None
@@ -53,14 +124,14 @@ Begin VB.Form FrmKhachHang
       Width           =   1335
    End
    Begin VB.TextBox txtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   1
-      Left            =   6960
+      Left            =   1080
       MaxLength       =   100
-      TabIndex        =   3
+      TabIndex        =   4
       Text            =   "..."
-      Top             =   960
+      Top             =   840
+      Visible         =   0   'False
       Width           =   3615
    End
    Begin VB.TextBox txtVT 
@@ -71,8 +142,8 @@ Begin VB.Form FrmKhachHang
       Left            =   7440
       MaxLength       =   20
       MultiLine       =   -1  'True
-      TabIndex        =   11
-      Text            =   "FrmKhachHang.frx":57E2
+      TabIndex        =   15
+      Text            =   "FrmKhachHang.frx":115BC
       Top             =   4320
       Width           =   1095
    End
@@ -82,20 +153,20 @@ Begin VB.Form FrmKhachHang
       Index           =   3
       Left            =   6960
       MaxLength       =   20
-      TabIndex        =   5
+      TabIndex        =   7
       Text            =   "..."
       Top             =   1920
       Width           =   1335
    End
    Begin VB.TextBox txtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   2
-      Left            =   6960
+      Left            =   1200
       MaxLength       =   100
-      TabIndex        =   4
+      TabIndex        =   6
       Text            =   "..."
-      Top             =   1440
+      Top             =   1200
+      Visible         =   0   'False
       Width           =   3615
    End
    Begin VB.TextBox txtVT 
@@ -104,7 +175,7 @@ Begin VB.Form FrmKhachHang
       Index           =   4
       Left            =   6960
       MaxLength       =   20
-      TabIndex        =   6
+      TabIndex        =   8
       Text            =   "..."
       Top             =   2400
       Width           =   1335
@@ -115,7 +186,7 @@ Begin VB.Form FrmKhachHang
       Index           =   5
       Left            =   9240
       MaxLength       =   20
-      TabIndex        =   8
+      TabIndex        =   10
       Text            =   "..."
       Top             =   2400
       Width           =   1335
@@ -126,63 +197,52 @@ Begin VB.Form FrmKhachHang
       Index           =   6
       Left            =   6960
       MaxLength       =   20
-      TabIndex        =   7
+      TabIndex        =   9
       Text            =   "..."
       Top             =   2880
       Width           =   1335
    End
    Begin VB.TextBox txtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   7
-      Left            =   6960
+      Left            =   1800
       MaxLength       =   100
-      TabIndex        =   9
+      TabIndex        =   12
       Text            =   "..."
-      Top             =   3360
+      Top             =   3240
+      Visible         =   0   'False
       Width           =   3615
    End
    Begin VB.TextBox txtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   8
-      Left            =   6960
+      Left            =   1440
       MaxLength       =   100
-      TabIndex        =   10
+      TabIndex        =   14
       Text            =   "..."
       Top             =   3840
+      Visible         =   0   'False
       Width           =   3615
    End
    Begin VB.TextBox txtVT 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   9
-      Left            =   6960
+      Left            =   1080
       MaxLength       =   100
-      TabIndex        =   13
+      TabIndex        =   18
       Text            =   "..."
-      Top             =   5880
+      Top             =   1920
+      Visible         =   0   'False
       Width           =   3615
-   End
-   Begin VB.OptionButton SSOpt 
-      BackColor       =   &H00FFFFC0&
-      Caption         =   "MST"
-      Height          =   255
-      Index           =   2
-      Left            =   2160
-      TabIndex        =   23
-      Tag             =   "T. Code"
-      Top             =   6640
-      Width           =   975
    End
    Begin VB.ComboBox CboNT 
       Appearance      =   0  'Flat
       Height          =   315
-      ItemData        =   "FrmKhachHang.frx":57E6
+      ItemData        =   "FrmKhachHang.frx":115C0
       Left            =   9240
-      List            =   "FrmKhachHang.frx":57E8
+      List            =   "FrmKhachHang.frx":115C2
       Style           =   2  'Dropdown List
-      TabIndex        =   12
+      TabIndex        =   16
       Top             =   4560
       Width           =   1335
    End
@@ -190,9 +250,9 @@ Begin VB.Form FrmKhachHang
       Height          =   375
       Index           =   3
       Left            =   9480
-      Picture         =   "FrmKhachHang.frx":57EA
+      Picture         =   "FrmKhachHang.frx":115C4
       Style           =   1  'Graphical
-      TabIndex        =   16
+      TabIndex        =   21
       Tag             =   "&Return"
       Top             =   6600
       Width           =   1095
@@ -201,9 +261,9 @@ Begin VB.Form FrmKhachHang
       Height          =   375
       Index           =   2
       Left            =   8280
-      Picture         =   "FrmKhachHang.frx":6C0C
+      Picture         =   "FrmKhachHang.frx":129E6
       Style           =   1  'Graphical
-      TabIndex        =   25
+      TabIndex        =   30
       Tag             =   "&Delete"
       Top             =   6600
       Width           =   1095
@@ -212,9 +272,9 @@ Begin VB.Form FrmKhachHang
       Height          =   375
       Index           =   1
       Left            =   7080
-      Picture         =   "FrmKhachHang.frx":80EE
+      Picture         =   "FrmKhachHang.frx":13EC8
       Style           =   1  'Graphical
-      TabIndex        =   14
+      TabIndex        =   19
       Tag             =   "&Save"
       Top             =   6600
       Width           =   1095
@@ -223,9 +283,9 @@ Begin VB.Form FrmKhachHang
       Height          =   375
       Index           =   0
       Left            =   5880
-      Picture         =   "FrmKhachHang.frx":951C
+      Picture         =   "FrmKhachHang.frx":152F6
       Style           =   1  'Graphical
-      TabIndex        =   15
+      TabIndex        =   20
       Tag             =   "&Add"
       Top             =   6600
       Width           =   1095
@@ -243,7 +303,7 @@ Begin VB.Form FrmKhachHang
       EndProperty
       Height          =   285
       Left            =   4200
-      TabIndex        =   24
+      TabIndex        =   29
       Top             =   6640
       Width           =   255
    End
@@ -253,7 +313,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   1
       Left            =   1200
-      TabIndex        =   22
+      TabIndex        =   27
       Tag             =   "Name"
       Top             =   6640
       Width           =   855
@@ -264,7 +324,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   0
       Left            =   120
-      TabIndex        =   21
+      TabIndex        =   26
       Tag             =   "Code"
       Top             =   6640
       Value           =   -1  'True
@@ -286,13 +346,107 @@ Begin VB.Form FrmKhachHang
       Top             =   480
       Width           =   5295
    End
+   Begin VB.OptionButton SSOpt 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "MST"
+      Height          =   255
+      Index           =   2
+      Left            =   2160
+      TabIndex        =   28
+      Tag             =   "T. Code"
+      Top             =   6640
+      Width           =   700
+   End
+   Begin MSForms.TextBox txtSearch 
+      Height          =   375
+      Left            =   2880
+      TabIndex        =   55
+      Top             =   6600
+      Width           =   1215
+      VariousPropertyBits=   679495707
+      Size            =   "2143;661"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtTK 
+      Height          =   320
+      Left            =   6960
+      TabIndex        =   13
+      Top             =   3840
+      Width           =   3615
+      VariousPropertyBits=   679495707
+      Size            =   "6376;564"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtDaiDien 
+      Height          =   300
+      Left            =   6960
+      TabIndex        =   11
+      Top             =   3360
+      Width           =   3615
+      VariousPropertyBits=   679495707
+      Size            =   "6376;529"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   165
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtGhiChu 
+      Height          =   300
+      Left            =   6960
+      TabIndex        =   17
+      Top             =   5880
+      Width           =   3615
+      VariousPropertyBits=   679495707
+      Size            =   "6376;529"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   165
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtDiaChi 
+      Height          =   320
+      Left            =   6960
+      TabIndex        =   5
+      Top             =   1440
+      Width           =   3615
+      VariousPropertyBits=   679495707
+      Size            =   "6376;564"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   320
+      Left            =   6960
+      TabIndex        =   3
+      Top             =   960
+      Width           =   3615
+      VariousPropertyBits=   679495707
+      Size            =   "6376;564"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
       Caption         =   "D­ cã"
       Height          =   255
       Index           =   19
       Left            =   8880
-      TabIndex        =   45
+      TabIndex        =   50
       Tag             =   "Current Balance"
       Top             =   5160
       Width           =   495
@@ -303,7 +457,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   18
       Left            =   6480
-      TabIndex        =   44
+      TabIndex        =   49
       Tag             =   "Current Balance"
       Top             =   5160
       Width           =   615
@@ -316,7 +470,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   2
       Left            =   7440
-      TabIndex        =   43
+      TabIndex        =   48
       Top             =   5520
       Width           =   1095
    End
@@ -326,7 +480,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   1
       Left            =   6120
-      TabIndex        =   42
+      TabIndex        =   47
       Tag             =   "Code"
       Top             =   480
       Width           =   615
@@ -337,7 +491,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   2
       Left            =   6120
-      TabIndex        =   41
+      TabIndex        =   46
       Tag             =   "Name"
       Top             =   960
       Width           =   735
@@ -353,8 +507,8 @@ Begin VB.Form FrmKhachHang
       Index           =   1
       X1              =   6960
       X2              =   10560
-      Y1              =   1245
-      Y2              =   1245
+      Y1              =   1285
+      Y2              =   1285
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -362,7 +516,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   3
       Left            =   6120
-      TabIndex        =   40
+      TabIndex        =   45
       Tag             =   "Address"
       Top             =   1440
       Width           =   615
@@ -373,7 +527,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   8
       Left            =   6120
-      TabIndex        =   39
+      TabIndex        =   44
       Tag             =   "Current Balance"
       Top             =   4800
       Width           =   1215
@@ -386,7 +540,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   0
       Left            =   7440
-      TabIndex        =   38
+      TabIndex        =   43
       Top             =   5160
       Width           =   1095
    End
@@ -394,8 +548,8 @@ Begin VB.Form FrmKhachHang
       Index           =   2
       X1              =   6960
       X2              =   10560
-      Y1              =   1725
-      Y2              =   1725
+      Y1              =   1755
+      Y2              =   1755
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -403,7 +557,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   12
       Left            =   6120
-      TabIndex        =   37
+      TabIndex        =   42
       Tag             =   "Credit"
       Top             =   4320
       Width           =   1215
@@ -421,7 +575,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   10
       Left            =   6120
-      TabIndex        =   36
+      TabIndex        =   41
       Tag             =   "Tax Code"
       Top             =   1920
       Width           =   735
@@ -446,7 +600,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   0
       Left            =   6120
-      TabIndex        =   35
+      TabIndex        =   40
       Top             =   2400
       Width           =   375
    End
@@ -463,7 +617,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   11
       Left            =   8640
-      TabIndex        =   34
+      TabIndex        =   39
       Top             =   2400
       Width           =   375
    End
@@ -480,7 +634,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   13
       Left            =   6120
-      TabIndex        =   33
+      TabIndex        =   38
       Top             =   2880
       Width           =   615
    End
@@ -488,8 +642,8 @@ Begin VB.Form FrmKhachHang
       Index           =   8
       X1              =   6960
       X2              =   10560
-      Y1              =   3645
-      Y2              =   3645
+      Y1              =   3675
+      Y2              =   3675
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -497,7 +651,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   14
       Left            =   6120
-      TabIndex        =   32
+      TabIndex        =   37
       Tag             =   "Representative"
       Top             =   3360
       Width           =   735
@@ -506,8 +660,8 @@ Begin VB.Form FrmKhachHang
       Index           =   9
       X1              =   6960
       X2              =   10560
-      Y1              =   4125
-      Y2              =   4125
+      Y1              =   4155
+      Y2              =   4155
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -515,7 +669,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   6
       Left            =   6000
-      TabIndex        =   31
+      TabIndex        =   36
       Tag             =   "Bank Acc."
       Top             =   3840
       Width           =   855
@@ -524,8 +678,8 @@ Begin VB.Form FrmKhachHang
       Index           =   10
       X1              =   6960
       X2              =   10560
-      Y1              =   6165
-      Y2              =   6165
+      Y1              =   6195
+      Y2              =   6195
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -533,7 +687,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   7
       Left            =   6120
-      TabIndex        =   30
+      TabIndex        =   35
       Tag             =   "Notes"
       Top             =   5880
       Width           =   735
@@ -544,7 +698,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   15
       Left            =   9000
-      TabIndex        =   29
+      TabIndex        =   34
       Tag             =   "by Currency"
       Top             =   4320
       Width           =   1095
@@ -555,7 +709,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   16
       Left            =   6480
-      TabIndex        =   28
+      TabIndex        =   33
       Tag             =   "F. Currency"
       Top             =   5520
       Width           =   855
@@ -568,7 +722,7 @@ Begin VB.Form FrmKhachHang
       Height          =   255
       Index           =   1
       Left            =   9480
-      TabIndex        =   27
+      TabIndex        =   32
       Top             =   5160
       Width           =   1095
    End
@@ -580,7 +734,7 @@ Begin VB.Form FrmKhachHang
       Height          =   6375
       Index           =   17
       Left            =   5640
-      TabIndex        =   26
+      TabIndex        =   31
       Top             =   120
       Width           =   5295
    End
@@ -592,7 +746,7 @@ Begin VB.Form FrmKhachHang
       Height          =   6255
       Index           =   5
       Left            =   5880
-      TabIndex        =   19
+      TabIndex        =   24
       Top             =   180
       Width           =   4935
    End
@@ -604,7 +758,7 @@ Begin VB.Form FrmKhachHang
       Height          =   6255
       Index           =   4
       Left            =   5880
-      TabIndex        =   18
+      TabIndex        =   23
       Top             =   240
       Width           =   4935
    End
@@ -613,7 +767,7 @@ Begin VB.Form FrmKhachHang
       Height          =   5955
       Index           =   9
       Left            =   165
-      TabIndex        =   17
+      TabIndex        =   22
       Top             =   540
       Width           =   5295
    End
@@ -802,20 +956,62 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
     If KeyCode = vbKeyEscape Then Hide
 End Sub
+
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub txtName_Change()
+    txtVT(1).Text = UnicodeToVni(txtName.Text)
+End Sub
+Private Sub txtDiaChi_Change()
+    txtVT(2).Text = UnicodeToVni(txtDiaChi.Text)
+End Sub
+Private Sub txtGhichu_Change()
+    txtVT(9).Text = UnicodeToVni(txtGhiChu.Text)
+End Sub
+Private Sub txtDaiDien_Change()
+    txtVT(7).Text = UnicodeToVni(txtDaiDien.Text)
+End Sub
+Private Sub txtTK_Change()
+    txtVT(8).Text = UnicodeToVni(txtTK.Text)
+End Sub
+
 '======================================================================================
 ' Khoi tao form
 '======================================================================================
+Private Sub txtSearch_Change()
+    txtF.Text = UnicodeToVni(txtSearch.Text)
+End Sub
 Private Sub Form_Load()
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
+
+
+
     ThemMoi = 0
     doiloai = 0
-    Caption = Caption + " - " + CStr(pNamTC)
-    'Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0 AND LEFT(SoHieu,1)<>'#' ORDER BY SoHieu", CboLoai
-    Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0  ORDER BY SoHieu", CboLoai
+    Caption = "Danh s¸ch kh¸ch hµng" + " - " + CStr(pNamTC)
+    Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0 AND LEFT(SoHieu,1)<>'#' ORDER BY SoHieu", CboLoai
+    'Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0  ORDER BY SoHieu", CboLoai
     Int_RecsetToCbo "SELECT MaSo As F2,KyHieu As F1 FROM NguyenTe WHERE KyHieu<>'" + pTienStr + "' ORDER BY KyHieu", CboNT
     CboNT.AddItem pTienStr, 0
     CboNT.ItemData(0) = 0
     CboNT.ListIndex = 0
-        
+    lblTitle(11).Caption = Caption
     SetFont Me
 End Sub
 
@@ -838,14 +1034,20 @@ Private Sub ShowChitiet(otk As ClsKhachHang)
     
     txtVT(0).Text = okh.sohieu
     txtVT(1).Text = okh.Ten
+    txtName.Text = VniToUnicode(okh.Ten)
+    
     txtVT(2).Text = okh.DiaChi
+    txtDiaChi.Text = VniToUnicode(okh.DiaChi)
     txtVT(3).Text = okh.mst
     txtVT(4).Text = okh.Tel
     txtVT(5).Text = okh.Fax
     txtVT(6).Text = okh.email
     txtVT(7).Text = okh.DaiDien
+    txtDaiDien.Text = VniToUnicode(okh.DaiDien)
     txtVT(8).Text = okh.taikhoan
+    txtTK.Text = VniToUnicode(okh.taikhoan)
     txtVT(9).Text = okh.GhiChu
+    txtGhiChu.Text = VniToUnicode(okh.GhiChu)
     txtVT(10).Text = Format(okh.DuMax, Mask_0)
     SetListIndex CboNT, okh.MaNT
     okh.SoDuKH ThangCuoiNamTC, n, c, nt

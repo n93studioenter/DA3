@@ -1,7 +1,7 @@
 Attribute VB_Name = "modUtilities"
 Option Explicit
 Private Declare Function SendMessageW Lib "user32" ( _
-                                      ByVal hwnd As Long, _
+                                      ByVal hWnd As Long, _
                                       ByVal msg As Long, _
                                       ByVal wParam As Long, _
                                       lParam As Any) As Long
@@ -31,11 +31,11 @@ Public Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As L
 Public Declare Function RegSetValueEx Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, lpData As Any, ByVal cbData As Long) As Long
 Private Const REG_SZ = 1    ' Unicode null terminated string
 Private Const VER_PLATFORM_WIN32_NT = 2
-Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 
 Private Declare Function GetDiskFreeSpace Lib "Kernel32" Alias "GetDiskFreeSpaceA" (ByVal lpRootPathName As String, lpSectorsPerCluster As Long, lpBytesPerSector As Long, lpNumberOfFreeClusters As Long, lpTtoalNumberOfClusters As Long) As Long
 Private Declare Function GetComputerName Lib "Kernel32" Alias "GetComputerNameA" (ByVal lpBuffer As String, nSize As Long) As Long
-Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
 Public Const er_SoHieu = 1
 Public Const er_PhanLoai = 2
@@ -129,10 +129,10 @@ Private Declare Function WaitForSingleObject Lib "Kernel32" (ByVal hHandle As Lo
 Private Declare Function CloseHandle Lib "Kernel32" (ByVal hObject As Long) As Long
 Private Declare Sub ExitThread Lib "Kernel32" (ByVal xc As Long)
 
-Private Declare Function GetWindowText Lib "user32.dll" Alias "GetWindowTextA" (ByVal hwnd As Long, ByVal lpString As String, ByVal nMaxCount As Long) As Long
+Private Declare Function GetWindowText Lib "user32.dll" Alias "GetWindowTextA" (ByVal hWnd As Long, ByVal lpString As String, ByVal nMaxCount As Long) As Long
 Private Declare Function FindWindow Lib "user32.dll" Alias "FindWindowA" (ByVal lpClassName As Any, ByVal lpWindowName As Any) As Long
-Private Declare Function GetParent Lib "user32.dll" (ByVal hwnd As Long) As Long
-Private Declare Function GetWindow Lib "user32.dll" (ByVal hwnd As Long, ByVal wCmd As Long) As Long
+Private Declare Function GetParent Lib "user32.dll" (ByVal hWnd As Long) As Long
+Private Declare Function GetWindow Lib "user32.dll" (ByVal hWnd As Long, ByVal wCmd As Long) As Long
 Private Const gw_hwndnext = 2
 Private Const fwp_startswith = 0
 Private Const fwp_contains = 1
@@ -239,7 +239,7 @@ Public Sub ErrMsg(errnum As Integer)
         ' S? hi?u ch?ng t? dã có !
 
     Case er_CoPS
-        msg = ChrW(272) & ChrW(7897) & ChrW(105) & " " & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
+        msg = ChrW(272) & ChrW(7889) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(7907) & ChrW(110) & ChrW(103) & " " & ChrW(273) & ChrW(227) & " " & ChrW(99) & ChrW(243) & " " & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & " " & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104) & " !"
         ' Ð?i tu?ng dã có phát sinh !
 
     Case er_CoPS1
@@ -659,7 +659,7 @@ Public Sub HienThongBao(thong_bao As String, tabid As Integer)
     panelIndex = tabid - 1  ' Panel b?t d?u t? 0
 
     ' G?i text Unicode cho panel
-    SendMessageW frmMain.sbStatusBar.hwnd, SB_SETTEXTW, panelIndex, ByVal StrPtr(thong_bao)
+    SendMessageW frmMain.sbStatusBar.hWnd, SB_SETTEXTW, panelIndex, ByVal StrPtr(thong_bao)
      frmMain.sbStatusBar.Panels(tabid).Text = thong_bao
     frmMain.sbStatusBar.Refresh
 End Sub
@@ -1625,7 +1625,7 @@ Public Function UNICODEtoABC(st As String) As String
     Next
 End Function
 
-Public Function VNItoUNICODE(st As String) As String
+Public Function VniToUnicode(st As String) As String
     Dim i As Integer, L As Integer, C1 As Integer, c2 As Integer, c As Integer
         
     L = Len(st)
@@ -1842,13 +1842,193 @@ a:
             c = C1
         End If
 KT:
-        VNItoUNICODE = VNItoUNICODE + ChrW(c)
+        VniToUnicode = VniToUnicode + ChrW(c)
+    Loop
+End Function
+Public Function UnicodeToVni(st As String) As String
+    Dim i As Integer, L As Integer, C1 As Integer, c As Long
+    Dim vniChar As String
+    
+    L = Len(st)
+    i = 1
+    Do While i <= L
+        ' L?y mã Unicode c?a ký t? hi?n t?i
+        C1 = AscW(Mid(st, i, 1))
+        If C1 < 0 Then C1 = C1 + 65536 ' X? lý ký t? Unicode > 32767
+        
+        vniChar = ""
+        
+        ' X? lý các ký t? có d?u ti?ng Vi?t
+        Select Case C1
+            ' Ch? thu?ng
+            Case 224: vniChar = Chr(97) & Chr(248)    ' à
+            Case 225: vniChar = Chr(97) & Chr(249)    ' á
+            Case 7843: vniChar = Chr(97) & Chr(251)   ' ?
+            Case 227: vniChar = Chr(97) & Chr(245)    ' ã
+            Case 7841: vniChar = Chr(97) & Chr(239)   ' ?
+            Case 226: vniChar = Chr(97) & Chr(226)    ' â
+            Case 7847: vniChar = Chr(97) & Chr(224)   ' ?
+            Case 7845: vniChar = Chr(97) & Chr(225)   ' ?
+            Case 7849: vniChar = Chr(97) & Chr(229)   ' ?
+            Case 7851: vniChar = Chr(97) & Chr(227)   ' ?
+            Case 7853: vniChar = Chr(97) & Chr(228)   ' ?
+            Case 259: vniChar = Chr(97) & Chr(234)    ' a
+            Case 7857: vniChar = Chr(97) & Chr(232)   ' ?
+            Case 7855: vniChar = Chr(97) & Chr(233)   ' ?
+            Case 7859: vniChar = Chr(97) & Chr(250)   ' ?
+            Case 7861: vniChar = Chr(97) & Chr(252)   ' ?
+            Case 7863: vniChar = Chr(97) & Chr(235)   ' ?
+            Case 273: vniChar = Chr(241)              ' d
+            
+            ' Ch? hoa
+            Case 192: vniChar = Chr(65) & Chr(216)    ' À
+            Case 193: vniChar = Chr(65) & Chr(217)    ' Á
+            Case 7842: vniChar = Chr(65) & Chr(219)   ' ?
+            Case 195: vniChar = Chr(65) & Chr(213)    ' Ã
+            Case 7840: vniChar = Chr(65) & Chr(207)   ' ?
+            Case 194: vniChar = Chr(65) & Chr(194)    ' Â
+            Case 7846: vniChar = Chr(65) & Chr(192)   ' ?
+            Case 7844: vniChar = Chr(65) & Chr(193)   ' ?
+            Case 7848: vniChar = Chr(65) & Chr(197)   ' ?
+            Case 7850: vniChar = Chr(65) & Chr(195)   ' ?
+            Case 7852: vniChar = Chr(65) & Chr(196)   ' ?
+            Case 258: vniChar = Chr(65) & Chr(202)    ' A
+            Case 7856: vniChar = Chr(65) & Chr(200)   ' ?
+            Case 7854: vniChar = Chr(65) & Chr(201)   ' ?
+            Case 7858: vniChar = Chr(65) & Chr(218)   ' ?
+            Case 7860: vniChar = Chr(65) & Chr(220)   ' ?
+            Case 7862: vniChar = Chr(65) & Chr(203)   ' ?
+            Case 272: vniChar = Chr(209)              ' Ð
+            
+            ' Ch? e thu?ng
+            Case 232: vniChar = Chr(101) & Chr(248)   ' è
+            Case 233: vniChar = Chr(101) & Chr(249)   ' é
+            Case 7867: vniChar = Chr(101) & Chr(251)  ' ?
+            Case 7869: vniChar = Chr(101) & Chr(245)  ' ?
+            Case 7865: vniChar = Chr(101) & Chr(239)  ' ?
+            Case 234: vniChar = Chr(101) & Chr(226)   ' ê
+            Case 7873: vniChar = Chr(101) & Chr(224)  ' ?
+            Case 7871: vniChar = Chr(101) & Chr(225)  ' ?
+            Case 7875: vniChar = Chr(101) & Chr(229)  ' ?
+            Case 7877: vniChar = Chr(101) & Chr(227)  ' ?
+            Case 7879: vniChar = Chr(101) & Chr(228)  ' ?
+            
+            ' Ch? e hoa
+            Case 200: vniChar = Chr(69) & Chr(216)    ' È
+            Case 201: vniChar = Chr(69) & Chr(217)    ' É
+            Case 7866: vniChar = Chr(69) & Chr(219)   ' ?
+            Case 7868: vniChar = Chr(69) & Chr(213)   ' ?
+            Case 7864: vniChar = Chr(69) & Chr(207)   ' ?
+            Case 202: vniChar = Chr(69) & Chr(194)    ' Ê
+            Case 7872: vniChar = Chr(69) & Chr(192)   ' ?
+            Case 7870: vniChar = Chr(69) & Chr(193)   ' ?
+            Case 7874: vniChar = Chr(69) & Chr(197)   ' ?
+            Case 7876: vniChar = Chr(69) & Chr(195)   ' ?
+            Case 7878: vniChar = Chr(69) & Chr(196)   ' ?
+            
+            ' Ch? o thu?ng
+            Case 242: vniChar = Chr(111) & Chr(248)   ' ò
+            Case 243: vniChar = Chr(111) & Chr(249)   ' ó
+            Case 7887: vniChar = Chr(111) & Chr(251)  ' ?
+            Case 245: vniChar = Chr(111) & Chr(245)   ' õ
+            Case 7885: vniChar = Chr(111) & Chr(239)  ' ?
+            Case 244: vniChar = Chr(111) & Chr(226)   ' ô
+            Case 7891: vniChar = Chr(111) & Chr(224)  ' ?
+            Case 7889: vniChar = Chr(111) & Chr(225)  ' ?
+            Case 7893: vniChar = Chr(111) & Chr(229)  ' ?
+            Case 7895: vniChar = Chr(111) & Chr(227)  ' ?
+            Case 7897: vniChar = Chr(111) & Chr(228)  ' ?
+            Case 417: vniChar = Chr(244)              ' o
+            Case 7901: vniChar = Chr(244) & Chr(248)  ' ?
+            Case 7899: vniChar = Chr(244) & Chr(249)  ' ?
+            Case 7903: vniChar = Chr(244) & Chr(251)  ' ?
+            Case 7905: vniChar = Chr(244) & Chr(245)  ' ?
+            Case 7907: vniChar = Chr(244) & Chr(239)  ' ?
+            
+            ' Ch? o hoa
+            Case 210: vniChar = Chr(79) & Chr(216)    ' Ò
+            Case 211: vniChar = Chr(79) & Chr(217)    ' Ó
+            Case 7886: vniChar = Chr(79) & Chr(219)   ' ?
+            Case 213: vniChar = Chr(79) & Chr(213)    ' Õ
+            Case 7884: vniChar = Chr(79) & Chr(207)   ' ?
+            Case 212: vniChar = Chr(79) & Chr(194)    ' Ô
+            Case 7890: vniChar = Chr(79) & Chr(192)   ' ?
+            Case 7888: vniChar = Chr(79) & Chr(193)   ' ?
+            Case 7892: vniChar = Chr(79) & Chr(197)   ' ?
+            Case 7894: vniChar = Chr(79) & Chr(195)   ' ?
+            Case 7896: vniChar = Chr(79) & Chr(196)   ' ?
+            Case 416: vniChar = Chr(212)              ' O
+            Case 7900: vniChar = Chr(212) & Chr(216)  ' ?
+            Case 7898: vniChar = Chr(212) & Chr(217)  ' ?
+            Case 7902: vniChar = Chr(212) & Chr(219)  ' ?
+            Case 7904: vniChar = Chr(212) & Chr(213)  ' ?
+            Case 7906: vniChar = Chr(212) & Chr(207)  ' ?
+            
+            ' Ch? u thu?ng
+            Case 249: vniChar = Chr(117) & Chr(248)   ' ù
+            Case 250: vniChar = Chr(117) & Chr(249)   ' ú
+            Case 7911: vniChar = Chr(117) & Chr(251)  ' ?
+            Case 361: vniChar = Chr(117) & Chr(245)   ' u
+            Case 7909: vniChar = Chr(117) & Chr(239)  ' ?
+            Case 432: vniChar = Chr(246)              ' u
+            Case 7915: vniChar = Chr(246) & Chr(248)  ' ?
+            Case 7913: vniChar = Chr(246) & Chr(249)  ' ?
+            Case 7917: vniChar = Chr(246) & Chr(251)  ' ?
+            Case 7919: vniChar = Chr(246) & Chr(245)  ' ?
+            Case 7921: vniChar = Chr(246) & Chr(239)  ' ?
+            
+            ' Ch? u hoa
+            Case 217: vniChar = Chr(85) & Chr(216)    ' Ù
+            Case 218: vniChar = Chr(85) & Chr(217)    ' Ú
+            Case 7910: vniChar = Chr(85) & Chr(219)   ' ?
+            Case 360: vniChar = Chr(85) & Chr(213)    ' U
+            Case 7908: vniChar = Chr(85) & Chr(207)   ' ?
+            Case 431: vniChar = Chr(214)              ' U
+            Case 7914: vniChar = Chr(214) & Chr(216)  ' ?
+            Case 7912: vniChar = Chr(214) & Chr(217)  ' ?
+            Case 7916: vniChar = Chr(214) & Chr(219)  ' ?
+            Case 7918: vniChar = Chr(214) & Chr(213)  ' ?
+            Case 7920: vniChar = Chr(214) & Chr(207)  ' ?
+            
+            ' Ch? y thu?ng
+            Case 7923: vniChar = Chr(121) & Chr(248)  ' ?
+            Case 253: vniChar = Chr(121) & Chr(249)   ' ý
+            Case 7927: vniChar = Chr(121) & Chr(251)  ' ?
+            Case 7929: vniChar = Chr(121) & Chr(245)  ' ?
+            Case 7925: vniChar = Chr(238)              ' ?
+            
+            ' Ch? y hoa
+            Case 7922: vniChar = Chr(89) & Chr(216)   ' ?
+            Case 221: vniChar = Chr(89) & Chr(217)    ' Ý
+            Case 7926: vniChar = Chr(89) & Chr(219)   ' ?
+            Case 7928: vniChar = Chr(89) & Chr(213)   ' ?
+            Case 7924: vniChar = Chr(206)              ' ?
+            
+            ' Các ký t? d?c bi?t
+            Case 236: vniChar = Chr(236)               ' ì
+            Case 204: vniChar = Chr(204)               ' Ì
+            Case 237: vniChar = Chr(237)               ' í
+            Case 205: vniChar = Chr(205)               ' Í
+            Case 7881: vniChar = Chr(230)              ' ? (ê?)
+            Case 7880: vniChar = Chr(198)              ' ? (Ê?)
+            Case 297: vniChar = Chr(243)               ' i
+            Case 296: vniChar = Chr(211)               ' I
+            Case 7883: vniChar = Chr(242)              ' ? (ô?)
+            Case 7882: vniChar = Chr(210)              ' ? (Ô?)
+            
+            ' N?u không ph?i ký t? d?c bi?t, gi? nguyên
+            Case Else: vniChar = ChrW(C1)
+        End Select
+        
+        UnicodeToVni = UnicodeToVni & vniChar
+        i = i + 1
     Loop
 End Function
 
+
 Public Function ThemTruong(tbl As String, fld As String, tp As Integer, Optional s As Integer = 0, Optional dv As Integer = 0, Optional gt As String = "...") As Boolean
     Dim tdf As TableDef, sql As String
-    
+
     ThemTruong = False
     If Not BangDaCo(tbl) Then GoTo KT
     If TruongDaCo(tbl, fld) Then
@@ -1863,15 +2043,15 @@ Public Function ThemTruong(tbl As String, fld As String, tp As Integer, Optional
     End If
     tdf.Fields.Append tdf.CreateField(fld, tp, s)
     Select Case tp
-        Case dbInteger, dbLong, dbDouble, dbSingle:
-                    tdf.Fields(fld).DefaultValue = dv
-                    sql = "UPDATE " + tbl + " SET " + fld + "=" + CStr(dv)
-        Case dbText:
-                    tdf.Fields(fld).DefaultValue = "..."
-                    sql = "UPDATE " + tbl + " SET " + fld + "='" + gt + "'"
-        Case dbDate
-                    tdf.Fields(fld).DefaultValue = CVDate("1/1/80")
-                    sql = "UPDATE " + tbl + " SET " + fld + "=#1/1/80#"
+    Case dbInteger, dbLong, dbDouble, dbSingle:
+        tdf.Fields(fld).DefaultValue = dv
+        sql = "UPDATE " + tbl + " SET " + fld + "=" + CStr(dv)
+    Case dbText:
+        tdf.Fields(fld).DefaultValue = "..."
+        sql = "UPDATE " + tbl + " SET " + fld + "='" + gt + "'"
+    Case dbDate
+        tdf.Fields(fld).DefaultValue = CVDate("1/1/80")
+        sql = "UPDATE " + tbl + " SET " + fld + "=#1/1/80#"
     End Select
     If Len(sql) > 0 Then ExecuteSQL5 sql
     ThemTruong = True

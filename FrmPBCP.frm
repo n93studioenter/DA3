@@ -2,11 +2,10 @@ VERSION 5.00
 Begin VB.Form FrmPBCP 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFFF&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Ph©n bæ chi phÝ"
+   BorderStyle     =   0  'None
    ClientHeight    =   3615
-   ClientLeft      =   1500
-   ClientTop       =   2415
+   ClientLeft      =   1455
+   ClientTop       =   2085
    ClientWidth     =   6510
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -29,6 +28,75 @@ Begin VB.Form FrmPBCP
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   25
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   6120
+         TabIndex        =   27
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   26
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmPBCP.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmPBCP.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.OptionButton ChkKC 
       BackColor       =   &H00FFFFFF&
       Caption         =   "Chi phÝ tµi chÝnh"
@@ -252,9 +320,9 @@ Begin VB.Form FrmPBCP
    Begin VB.ComboBox Cbo 
       Height          =   315
       Index           =   1
-      ItemData        =   "FrmPBCP.frx":57E2
+      ItemData        =   "FrmPBCP.frx":115BC
       Left            =   4440
-      List            =   "FrmPBCP.frx":57E4
+      List            =   "FrmPBCP.frx":115BE
       Style           =   2  'Dropdown List
       TabIndex        =   1
       Top             =   120
@@ -263,9 +331,9 @@ Begin VB.Form FrmPBCP
    Begin VB.ComboBox Cbo 
       Height          =   315
       Index           =   0
-      ItemData        =   "FrmPBCP.frx":57E6
+      ItemData        =   "FrmPBCP.frx":115C0
       Left            =   2280
-      List            =   "FrmPBCP.frx":57E8
+      List            =   "FrmPBCP.frx":115C2
       Style           =   2  'Dropdown List
       TabIndex        =   0
       Top             =   120
@@ -300,7 +368,7 @@ Begin VB.Form FrmPBCP
       Height          =   375
       Index           =   1
       Left            =   5280
-      Picture         =   "FrmPBCP.frx":57EA
+      Picture         =   "FrmPBCP.frx":115C4
       Style           =   1  'Graphical
       TabIndex        =   16
       Tag             =   "&Return"
@@ -483,6 +551,7 @@ Private Sub Command_Click(Index As Integer)
     End Select
 KT:
     Me.MousePointer = 0
+    lblTitle(11).Caption = Caption
 End Sub
 '====================================================================================================
 ' Xö lý phÝm nãng
@@ -503,7 +572,29 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
 Private Sub Form_Load()
+    Caption = "Ph©n bæ chi phÝ"
+    lblTitle(11).Caption = Caption
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+
     AddMonthToCbo Cbo(0)
     AddMonthToCbo Cbo(1)
     ChkKC_Click 2
@@ -512,7 +603,7 @@ Private Sub Form_Load()
     SetFont Me
 End Sub
 
-Private Sub Form_Unload(CANCEL As Integer)
+Private Sub Form_Unload(Cancel As Integer)
     Dim i As Integer, tdau As Integer, tcuoi As Integer
     
     Me.MousePointer = 11
