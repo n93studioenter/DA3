@@ -6529,19 +6529,26 @@ Private Sub btnImportXML_Click()
     Dim Query As String
     'Goi table Import
     Query = "SELECT t.* FROM tbimport AS t " & _
-            "WHERE t.IsImport = 1 " & _
-            "AND t.Status = 0 " & _
-            "AND NOT EXISTS (" & _
-            "SELECT 1 FROM HoaDon AS h " & _
-            "INNER JOIN ChungTu AS c ON h.MaSo = c.MaSo " & _
-            "WHERE t.SHDon = h.SoHD " & _
-            "AND (" & _
-          " (t.Type = '1' AND h.Loai = -1) " & _
-          " OR " & _
-          " (t.Type = '2' AND h.Loai = 1) " & _
-            ") " & _
-            "AND Format(t.NLap, 'dd/MM/yy') = Format(h.NgayPH, 'dd/MM/yy')" & _
-            ")"
+        "WHERE t.IsImport = 1 " & _
+        "AND t.Status = 0 " & _
+        "AND t.ID = (" & _
+        "   SELECT MIN(t2.ID) FROM tbimport AS t2 " & _
+        "   WHERE t2.SHDon = t.SHDon " & _
+        "   AND t2.Type = t.Type " & _
+        "   AND DateValue(t2.NLap) = DateValue(t.NLap)" & _
+        ") " & _
+        "AND NOT EXISTS (" & _
+        "   SELECT * FROM HoaDon AS h " & _
+        "   INNER JOIN ChungTu AS c ON h.MaSo = c.MaSo " & _
+        "   WHERE t.SHDon = h.SoHD " & _
+        "   AND ( " & _
+        "       (t.Type = '1' AND h.Loai = -1) " & _
+        "       OR (t.Type = '2' AND h.Loai = 1) " & _
+        "   ) " & _
+        "   AND DateValue(t.NLap) = DateValue(h.NgayPH)" & _
+        ")"
+
+
 
     Set rs_import = DBKetoan.OpenRecordset(Query, dbOpenSnapshot)
     sttHD = 1
@@ -10515,7 +10522,7 @@ Private Sub AnControl()
         Case "Label", "TextBox", "ComboBox", "PictureBox", _
              "CommandButton", "Frame", "CheckBox", _
              "OptionButton", "ListBox", "Grid", _
-             "MSHFlexGrid", "DataGrid"
+             "MSHFlexGrid", "DataGrid", "MaskEdBox"
 
             ' b? qua title gi?
             If ctl.Name <> "picFakeTitle" And ctl.Name <> "lblTitle" And ctl.Name <> "lblClose" Then

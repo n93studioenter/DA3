@@ -485,13 +485,12 @@ Begin VB.Form FrmTaikhoan
       Width           =   1335
    End
    Begin VB.TextBox txt 
-      BorderStyle     =   0  'None
       Height          =   285
       Index           =   1
-      Left            =   5760
+      Left            =   840
       MaxLength       =   60
       TabIndex        =   4
-      Top             =   720
+      Top             =   1920
       Width           =   3735
    End
    Begin VB.OptionButton OptNo 
@@ -762,15 +761,6 @@ Begin VB.Form FrmTaikhoan
       _ExtentY        =   1296
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   10
       Cols            =   5
       FixedRows       =   0
@@ -790,15 +780,6 @@ Begin VB.Form FrmTaikhoan
       _ExtentY        =   1296
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   10
       Cols            =   4
       FixedRows       =   0
@@ -1632,7 +1613,7 @@ Private Sub OtlTk_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
 End Sub
 
-Private Sub OtlTk_MouseDown(Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub OtlTk_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     
     If Button = 2 And TkNhap.MaSo > 0 And User_Right = 0 Then
         If pPQTK = 0 Then ChuyenTK Else FU1.QuyenTaiKhoan TkNhap.MaSo
