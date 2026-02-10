@@ -194,7 +194,6 @@ Public Function OpenDB(file_name As String, Optional chonluu As Integer = 0) As 
     '        GoTo LDB
     '    End If
     Dim st_5, st_6, st_7, st_8
-
     If Len(Dir(file_name)) = 0 Then
         st_8 = "$"
         If Len(Dir(pCurDir + "DATA\QD48.MDB")) = 0 Then
@@ -236,7 +235,7 @@ Op:
         Set DBKetoan = WSpace.OpenDatabase(file_name, False, False, ";PWD=" + pPSW)
         If Err.number <> 0 Then
             MsgBox "Database chua duoc cap Licence"
-            End
+            GoTo LDB
         End If
 
         pPSW = Chr(8) + Chr(13) + Chr(27) + Chr(27) + Chr(8) + Chr(13) + Chr(27) + Chr(27) + Chr(8) + Chr(8) + Chr(13) + Chr(13)

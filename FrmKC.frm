@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmKC 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Danh s¸ch chøng tõ kÕt chuyÓn"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   750
-   ClientTop       =   930
+   ClientLeft      =   705
+   ClientTop       =   600
    ClientWidth     =   9855
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -30,11 +30,91 @@ Begin VB.Form FrmKC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Conversion Voucher List"
+   Begin VB.TextBox txtNhap 
+      Appearance      =   0  'Flat
+      Height          =   285
+      Index           =   1
+      Left            =   3720
+      MaxLength       =   80
+      TabIndex        =   6
+      Top             =   5520
+      Visible         =   0   'False
+      Width           =   3735
+   End
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   14
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   16
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmKC.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmKC.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   15
+         Top             =   0
+         Width           =   4455
+      End
+   End
    Begin VB.CommandButton Command 
       Height          =   375
       Index           =   4
       Left            =   8640
-      Picture         =   "FrmKC.frx":57E2
+      Picture         =   "FrmKC.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   2
       Tag             =   "&Detail"
@@ -43,7 +123,7 @@ Begin VB.Form FrmKC
    End
    Begin VB.TextBox txtNhap 
       Appearance      =   0  'Flat
-      Height          =   285
+      Height          =   320
       Index           =   3
       Left            =   6960
       MaxLength       =   80
@@ -54,7 +134,7 @@ Begin VB.Form FrmKC
    End
    Begin VB.TextBox txtNhap 
       Appearance      =   0  'Flat
-      Height          =   285
+      Height          =   320
       Index           =   2
       Left            =   5640
       MaxLength       =   80
@@ -75,6 +155,15 @@ Begin VB.Form FrmKC
       _ExtentY        =   11245
       _StockProps     =   77
       BackColor       =   16777215
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
       Rows            =   30
       Cols            =   5
       FixedRows       =   0
@@ -84,7 +173,7 @@ Begin VB.Form FrmKC
       Height          =   375
       Index           =   3
       Left            =   8640
-      Picture         =   "FrmKC.frx":6C44
+      Picture         =   "FrmKC.frx":12A1E
       Style           =   1  'Graphical
       TabIndex        =   3
       Tag             =   "&Return"
@@ -95,7 +184,7 @@ Begin VB.Form FrmKC
       Height          =   375
       Index           =   2
       Left            =   8640
-      Picture         =   "FrmKC.frx":8066
+      Picture         =   "FrmKC.frx":13E40
       Style           =   1  'Graphical
       TabIndex        =   4
       Tag             =   "&Delete"
@@ -106,7 +195,7 @@ Begin VB.Form FrmKC
       Height          =   375
       Index           =   1
       Left            =   8640
-      Picture         =   "FrmKC.frx":9548
+      Picture         =   "FrmKC.frx":15322
       Style           =   1  'Graphical
       TabIndex        =   1
       Tag             =   "&Save"
@@ -117,7 +206,7 @@ Begin VB.Form FrmKC
       Height          =   375
       Index           =   0
       Left            =   8640
-      Picture         =   "FrmKC.frx":A976
+      Picture         =   "FrmKC.frx":16750
       Style           =   1  'Graphical
       TabIndex        =   0
       Tag             =   "&Add"
@@ -125,19 +214,9 @@ Begin VB.Form FrmKC
       Width           =   1095
    End
    Begin VB.TextBox txtNhap 
-      Appearance      =   0  'Flat
-      Height          =   285
-      Index           =   1
-      Left            =   600
-      MaxLength       =   80
-      TabIndex        =   6
-      Top             =   6720
-      Width           =   5055
-   End
-   Begin VB.TextBox txtNhap 
       Alignment       =   2  'Center
       Appearance      =   0  'Flat
-      Height          =   285
+      Height          =   320
       Index           =   0
       Left            =   120
       MaxLength       =   2
@@ -145,6 +224,19 @@ Begin VB.Form FrmKC
       Text            =   "0"
       Top             =   6720
       Width           =   495
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   340
+      Left            =   600
+      TabIndex        =   17
+      Top             =   6720
+      Width           =   5055
+      VariousPropertyBits=   679495707
+      Size            =   "8916;600"
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -313,14 +405,41 @@ End Sub
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
+ 
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub txtName_Change()
+    txtNhap(1).Text = UnicodeToVni(txtName.Text)
+End Sub
 Private Sub Form_Load()
+
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
+
+
     ColumnSetUp GrdNT, 0, 465, 2
     ColumnSetUp GrdNT, 1, 5020, 0
     ColumnSetUp GrdNT, 2, 1300, 0
     ColumnSetUp GrdNT, 3, 1300, 0
     ColumnSetUp GrdNT, 4, 1, 0
-    
+    Caption = "Danh s¸ch chøng tõ kÕt chuyÓn"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     LietKeNgte
     
     SetFont Me
@@ -329,7 +448,8 @@ End Sub
 Private Sub GrdNt_click()
     Dim i As Integer
     
-    SendKeys "{Home}", True
+    'SendKeys "{Home}", True
+    txtNhap(1).SelStart = 0
     SetGridIndex GrdNT, GrdNT.Row
     With GrdNT
         .col = 0
@@ -337,6 +457,9 @@ Private Sub GrdNt_click()
         For i = 0 To 3
             .col = i
             txtNhap(i).Text = .Text
+            If (i = 1) Then
+            txtName.Text = VniToUnicode(.Text)
+            End If
         Next
         ThemMoi = 0
     End With

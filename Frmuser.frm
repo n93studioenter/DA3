@@ -486,7 +486,9 @@ End Sub
 Private Sub GrdNt_click()
     Dim i As Integer
     
-    SendKeys "{Home}", True
+    'SendKeys "{Home}", True
+    txtNhap.SelStart = 0
+    
     SetGridIndex GrdNT, GrdNT.Row
     
     With GrdNT
@@ -530,7 +532,7 @@ Private Sub LietKeUser()
         GrdNT.AddItem rs_ngte!TenNSD + Chr(9) + CboRight.List(rs_ngte!UserRight) + sql + Chr(9) + CStr(rs_ngte!UserRight), 0
         rs_ngte.MoveNext
     Loop
-   GrdNT.Rows = IIf(rs_ngte.RecordCount > GrdNT.tag, rs_ngte.RecordCount, GrdNT.tag)
+   GrdNT.Rows = IIf(rs_ngte.recordCount > GrdNT.tag, rs_ngte.recordCount, GrdNT.tag)
     GrdNT.Row = 0
     GrdNt_click
     rs_ngte.Close

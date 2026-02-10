@@ -3,11 +3,10 @@ Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FrmMauKC 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00E0E0E0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Néi dung chøng tõ kÕt chuyÓn"
+   BorderStyle     =   0  'None
    ClientHeight    =   7080
-   ClientLeft      =   9675
-   ClientTop       =   2955
+   ClientLeft      =   9630
+   ClientTop       =   2625
    ClientWidth     =   9855
    ClipControls    =   0   'False
    BeginProperty Font 
@@ -30,6 +29,75 @@ Begin VB.Form FrmMauKC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   15
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   17
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FrmMauKC.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FrmMauKC.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   9480
+         TabIndex        =   16
+         Top             =   0
+         Width           =   480
+      End
+   End
    Begin MSGrid.Grid GrdNT 
       Height          =   5535
       Index           =   0
@@ -43,15 +111,6 @@ Begin VB.Form FrmMauKC
       _ExtentY        =   9763
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   30
       Cols            =   4
       FixedRows       =   0
@@ -68,15 +127,6 @@ Begin VB.Form FrmMauKC
       _ExtentY        =   9763
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   30
       Cols            =   3
       FixedRows       =   0
@@ -335,8 +385,28 @@ End Sub
 Private Sub Form_KeyPress(KeyAscii As Integer)
     If KeyAscii = vbKeyEscape Then Unload Me
 End Sub
-
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
 Private Sub Form_Load()
+    Caption = "Néi dung chøng tõ kÕt chuyÓn"
+    lblTitle(11).Caption = Caption
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 80
+    AnControl Me
     ColumnSetUp GrdNT(0), 0, 1300, 0
     ColumnSetUp GrdNT(1), 0, 1300, 0
     ColumnSetUp GrdNT(0), 1, 2620, 0

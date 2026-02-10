@@ -5,10 +5,10 @@ Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
 Begin VB.Form frmMain 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFC0C0&
-   ClientHeight    =   9600
+   ClientHeight    =   11100
    ClientLeft      =   3990
    ClientTop       =   -3150
-   ClientWidth     =   18900
+   ClientWidth     =   20490
    FillColor       =   &H00FD8866&
    BeginProperty Font 
       Name            =   "Tahoma"
@@ -24,8 +24,8 @@ Begin VB.Form frmMain
    KeyPreview      =   -1  'True
    LinkTopic       =   "Sao Viet Accounting Software"
    Picture         =   "frmMain.frx":424A
-   ScaleHeight     =   9600
-   ScaleWidth      =   18900
+   ScaleHeight     =   11100
+   ScaleWidth      =   20490
    Tag             =   "11"
    WindowState     =   2  'Maximized
    Begin ComctlLib.Toolbar tbToolBar 
@@ -175,9 +175,9 @@ Begin VB.Form frmMain
       Height          =   390
       Left            =   0
       TabIndex        =   57
-      Top             =   9210
-      Width           =   18900
-      _ExtentX        =   33338
+      Top             =   10710
+      Width           =   20490
+      _ExtentX        =   36142
       _ExtentY        =   688
       SimpleText      =   ""
       _Version        =   327682
@@ -186,19 +186,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "06/02/26"
+            TextSave        =   "09/02/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -718,7 +722,7 @@ Begin VB.Form frmMain
    Begin VB.Label Label3 
       BackColor       =   &H00FFC0C0&
       BackStyle       =   0  'Transparent
-      Caption         =   "B¹n cã thÓ dïng víi giíi h¹n 100 chøng tõ, møc doanh thu hai tr¨m triÖu "
+      Caption         =   "B¹n cã thÓ dïng víi giíi h¹n 200 chøng tõ, møc doanh thu hai tû"
       BeginProperty Font 
          Name            =   "VK Sans Serif"
          Size            =   9.75
@@ -731,7 +735,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H0000FFFF&
       Height          =   435
       Index           =   16
-      Left            =   6480
+      Left            =   8280
       TabIndex        =   67
       Top             =   8760
       Width           =   8055
@@ -752,7 +756,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H0000FFFF&
       Height          =   285
       Index           =   0
-      Left            =   9840
+      Left            =   9960
       TabIndex        =   65
       Top             =   8520
       Width           =   5415
@@ -2789,22 +2793,26 @@ End Sub
 
 
 Private Sub Form_Activate()
-    
-    'Tudongtinhgiavon = True
-    'Kiemtraphienban
-    ' FindLatestExe
+
+'Tudongtinhgiavon = True
+'Kiemtraphienban
+' FindLatestExe
     Label1.Left = 0
     Label1.Top = (Me.ScaleHeight * 95 / 100)
 
 
     Image1.Left = (Me.ScaleWidth * 87 / 100)
     Image1.Top = (Me.ScaleHeight * 5 / 100)
-    Command1.Left = (Me.ScaleWidth * 90 / 100)
-    Command1.Top = (Me.ScaleHeight * 80 / 100)
-    Label3(0).Left = (Me.ScaleWidth * 76 / 100)
-    Label3(0).Top = (Me.ScaleHeight * 85 / 100)
+    'Command1.Left = (Me.ScaleWidth * 90 / 100)
+    Command1.Left = Me.ScaleWidth * 0.957 - Command1.Width
 
-    Label3(16).Left = (Me.ScaleWidth * 61.4 / 100)
+    Command1.Top = (Me.ScaleHeight * 80 / 100)
+    Label3(0).Alignment = vbRightJustify
+    Label3(0).Left = Me.ScaleWidth * 0.957 - Label3(0).Width
+
+    Label3(0).Top = (Me.ScaleHeight * 85 / 100)
+    Label3(16).Alignment = vbRightJustify
+    Label3(16).Left = Me.ScaleWidth * 0.96 - Label3(16).Width
     Label3(16).Top = (Me.ScaleHeight * 88 / 100)
 
 
@@ -4159,7 +4167,11 @@ Public Sub mnVT_Click(Index As Integer)
                   "AND Tien_Xuat_1 = 0 AND Tien_Xuat_2 = 0 AND Tien_Xuat_3 = 0 AND Tien_Xuat_4 = 0 AND Tien_Xuat_5 = 0 AND Tien_Xuat_6 = 0 AND Tien_Xuat_7 = 0 AND Tien_Xuat_8 = 0 AND Tien_Xuat_9 = 0 AND Tien_Xuat_10 = 0 AND Tien_Xuat_11 = 0 AND Tien_Xuat_12 = 0 " & _
                   "AND Luong_1 = 0 AND Luong_2 = 0 AND Luong_3 = 0 AND Luong_4 = 0 AND Luong_5 = 0 AND Luong_6 = 0 AND Luong_7 = 0 AND Luong_8 = 0 AND Luong_9 = 0 AND Luong_10 = 0 AND Luong_11 = 0 AND Luong_12 = 0)"
             ExecuteSQL5 sql
-            MsgBox "Xo¸ thµnh c«ng !"
+            'MsgBox "Xo¸ thµnh c«ng !"
+            Dim s As String
+             s = ChrW(88) & ChrW(243) & ChrW(97) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103)
+            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         End If
         Exit Sub
     End If
@@ -4278,7 +4290,7 @@ Public Sub mnVT_Click(Index As Integer)
         Else
             If Not GetDate2.GetDate("TÝnh gi¸ vèn b¸n hµng", d1, d2) Then Exit Sub
         End If
-        Dim s As String
+        
         s = ChrW(76) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(108) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(118) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(63) & ChrW(32) & ChrW(40)
         s = s & ChrW(78) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(236) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(417) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(114) & ChrW(236) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7881)
         s = s & ChrW(32) & ChrW(108) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(103) & ChrW(105) & ChrW(225) & ChrW(32) & ChrW(118) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(242) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(41)

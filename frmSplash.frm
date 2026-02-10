@@ -204,7 +204,7 @@ Public Sub StartSAS()
     pDataPath = GetSetting(IniPath, "Environment", "Path", pCurDir + "DATA\KETOAN.MDB")
     ' §Æt c¸c format
     'pDataPath = "C:\Tao moi\DATA\KT.MDB"
-
+    MsgBox pDataPath
     Mask_0 = GetSetting(IniPath, "Environment", "IntMask", "###,###,###,###")
     If Cdbl5("1,5") <> 1.5 Then sDecimal = "." Else sDecimal = ","
     pThang = GetSetting(IniPath, "Environment", "NDecimal", 2)
@@ -230,9 +230,9 @@ Public Sub StartSAS()
     Set WSpace = DBEngine.CreateWorkspace(CStr(Time), "Admin", "", dbUseJet)
     Workspaces.Append WSpace
 
-    
 
-    
+
+
     Do While OpenDB(pDataPath) <> 0
         dlgCommonDialog.Flags = &H4&
         dlgCommonDialog.fileName = "*.MDB"

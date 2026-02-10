@@ -3144,773 +3144,816 @@ End Sub
 
 '====================================================================================================
 Public Sub Command_Click(Index As Integer)
-If OptTG(0).Value = False Then
-  If IsDate(MedNgay(1).Text) And IsDate(MedNgay(2).Text) Then
-        If CDate(MedNgay(2).Text) < CDate(MedNgay(1).Text) Then
-            MedNgay(2).Text = MedNgay(1).Text
-            
+    If OptTG(0).Value = False Then
+        If IsDate(MedNgay(1).Text) And IsDate(MedNgay(2).Text) Then
+            If CDate(MedNgay(2).Text) < CDate(MedNgay(1).Text) Then
+                MedNgay(2).Text = MedNgay(1).Text
+
+            End If
         End If
-  End If
-  Else
-   If IsDate(CboThang(0).Text) And IsDate(CboThang(1).Text) Then
-        If CDate(CboThang(1).Text) < CDate(CboThang(0).Text) Then
-            CboThang(1).Text = CboThang(0).Text
-          
+    Else
+        If IsDate(CboThang(0).Text) And IsDate(CboThang(1).Text) Then
+            If CDate(CboThang(1).Text) < CDate(CboThang(0).Text) Then
+                CboThang(1).Text = CboThang(0).Text
+
+            End If
         End If
-  End If
-  End If
-   If IsDate(MedNgay(1).Text) And IsDate(MedNgay(2).Text) Then
+    End If
+    If IsDate(MedNgay(1).Text) And IsDate(MedNgay(2).Text) Then
         If CDate(MedNgay(2).Text) < CDate(MedNgay(1).Text) Then
             MedNgay(1).Text = MedNgay(2).Text
-         '   MsgBox "Thong bao"
-        '   Exit Sub59
-        
+            '   MsgBox "Thong bao"
+            '   Exit Sub59
+
         End If
-  End If
-  ' ke thuc kiem tra ngay
+    End If
+    ' ke thuc kiem tra ngay
     Dim taikhoan As New ClsTaikhoan, doiung As New ClsTaikhoan
     Dim rs_tk As Recordset, tdau As Integer, tcuoi As Integer, n1 As Date
     Dim mkho As Long, mtk As Long, mloai As Long, mn As Long, i As Integer
     Dim mdt1 As Long, mdt2 As Long, mdt3 As Long, mdt As Long, k As Integer
     '///////////////////////////////////////////////
     If Index = 0 Or Index = 1 Then
-    If OptBC(100).Value = True Or OptBC(101).Value = True Or OptBC(102).Value = True Or OptBC(103).Value = True Or OptBC(104).Value = True Or OptBC(105).Value = True Then
-    
-    
-    
-    FBcTC.MedNgay(0).Text = MedNgay(0).Text
-    FBcTC.MedNgay(1).Text = MedNgay(1).Text
-    FBcTC.CboThang(0).Text = CboThang(0).Text
-    FBcTC.CboThang(1).Text = CboThang(1).Text
-    FBcTC.OptTG(0).Value = OptTG(0).Value
-    
-    FBcTC.OptTG(1).Value = OptTG(1).Value
-    FBcTC.OptBC(0).Value = OptBC(100).Value
-    If OptBC(100).Value = False Then
-            If Len(Trim(txtShTk(8).Text)) <= 0 Then
-            RFocus txtShTk(8)
-            Exit Sub
+        If OptBC(100).Value = True Or OptBC(101).Value = True Or OptBC(102).Value = True Or OptBC(103).Value = True Or OptBC(104).Value = True Or OptBC(105).Value = True Then
+
+
+
+            FBcTC.MedNgay(0).Text = MedNgay(0).Text
+            FBcTC.MedNgay(1).Text = MedNgay(1).Text
+            FBcTC.CboThang(0).Text = CboThang(0).Text
+            FBcTC.CboThang(1).Text = CboThang(1).Text
+            FBcTC.OptTG(0).Value = OptTG(0).Value
+
+            FBcTC.OptTG(1).Value = OptTG(1).Value
+            FBcTC.OptBC(0).Value = OptBC(100).Value
+            If OptBC(100).Value = False Then
+                If Len(Trim(txtShTk(8).Text)) <= 0 Then
+                    RFocus txtShTk(8)
+                    Exit Sub
+                End If
             End If
-    End If
-    
-    FBcTC.OptBC(1).Value = OptBC(101).Value
-    FBcTC.OptBC(15).Value = OptBC(102).Value
-    FBcTC.OptBC(18).Value = OptBC(103).Value
-    FBcTC.OptBC(14).Value = OptBC(104).Value
-    FBcTC.OptBC(16).Value = OptBC(105).Value
-    FBcTC.OptBC(6).Value = OptBC(106).Value
-    FBcTC.txtShTk(0).Text = txtShTk(8).Text
-     FBcTC.txtShTk(3).Text = txtShTk(8).Text
-     
-    txtShTk(0).tag = 39
-     FBcTC.txtShTk_LostFocus 0
-    FBcTC.Command_Click 0
-    
-    Exit Sub
-    End If
+
+            FBcTC.OptBC(1).Value = OptBC(101).Value
+            FBcTC.OptBC(15).Value = OptBC(102).Value
+            FBcTC.OptBC(18).Value = OptBC(103).Value
+            FBcTC.OptBC(14).Value = OptBC(104).Value
+            FBcTC.OptBC(16).Value = OptBC(105).Value
+            FBcTC.OptBC(6).Value = OptBC(106).Value
+            FBcTC.txtShTk(0).Text = txtShTk(8).Text
+            FBcTC.txtShTk(3).Text = txtShTk(8).Text
+
+            txtShTk(0).tag = 39
+            FBcTC.txtShTk_LostFocus 0
+            FBcTC.Command_Click 0
+
+            Exit Sub
+        End If
     End If
     '///////////////////////////////////////////////////////
     Select Case Index
-        Case 0, 1:
-            If Not SSTab.TabEnabled(SSTab.Tab) Then Exit Sub
-            If Not OptBC(baocao).TabStop Then Exit Sub
-            If pRpt = 1 And (Not ChoXemBC(baocao, "C")) Then
-                ErrMsg er_KoSD
-                Exit Sub
-            End If
-            Me.MousePointer = 11
-            GauGe.Value = 0
-            If CboThang(0).Enabled And CboThang(1).ListIndex < CboThang(0).ListIndex Then CboThang(1).ListIndex = CboThang(0).ListIndex
-            If baocao = 61 Then
-                CboThang(0).ListIndex = 0
-                CboThang(1).ListIndex = 11
-            End If
-            tdau = CboThang(0).ItemData(CboThang(0).ListIndex)
-            tcuoi = CboThang(1).ItemData(CboThang(1).ListIndex)
-            If OptDT(3).Value And CboVV(1).ListIndex >= 0 Then mdt = CboVV(1).ItemData(CboVV(1).ListIndex) Else mdt = 0
-            If pSoVV > 0 And ChkTT(0).Value = 1 And CboTT(0).ListIndex >= 0 And mdt > 0 Then mdt1 = CboTT(0).ItemData(CboTT(0).ListIndex) Else mdt1 = 0
-            If pSoVV > 1 And ChkTT(1).Value = 1 And CboTT(1).ListIndex >= 0 And mdt > 0 Then mdt2 = CboTT(1).ItemData(CboTT(1).ListIndex) Else mdt2 = 0
-            If pSoVV > 2 And ChkTT(2).Value = 1 And CboTT(2).ListIndex >= 0 And mdt > 0 Then mdt3 = CboTT(2).ItemData(CboTT(2).ListIndex) Else mdt3 = 0
-            SetRptInfo
-            Select Case baocao
-                Case 83:
-                    If txtshkh(0).tag = 0 Then
-                        MsgBox "H∑y nhÀp sË hi÷u chi ti’t c´ng nÓ!", vbExclamation, App.ProductName
-                        RFocus txtshkh(0)
-                        GoTo LoiBC
-                    End If
-                    If OptTG(0).Value Then
-                        BangKeTichSo2 txtShTk(7).Text, txtshkh(0).tag, NgayDauThang(pNamTC, tdau), NgayCuoiThang(pNamTC, tcuoi)
-                    Else
-                        BangKeTichSo2 txtShTk(7).Text, txtshkh(0).tag, ngay(1), ngay(2)
-                    End If
-                Case 84:
-                    If CboKH.ListIndex < 0 Then GoTo LoiBC
-                    If OptTG(0).Value Then
-                        InBangThopCN tdau, tcuoi, IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0), ChkDu(14).Value, 1
-                    Else
-                        InBangThopCNN ngay(1), ngay(2), IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0), 1
-                    End If
-                Case 81:
-                    InTHChietKhau IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)
-                Case 80:
-                    InCTKhuyenMai2 IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(0).tag, txtShVT(1).tag
-                Case 78:
-                    If txtShTk(7).Text = "" Then txtShTk(7).Text = "511"
-                    taikhoan.InitTaikhoanSohieu txtShTk(7).Text
-                    If taikhoan.tk_id <> TKDT_ID Then
-                        RFocus txtShTk(7)
-                        GoTo LoiBC
-                    End If
-                    If Not SoChiTiet3(txtShTk(7).Text, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)) Then GoTo LoiBC
-                Case 76:
-                    InCdt2 tdau, tcuoi, CboThang(2).ListIndex + 1, ChkDu(6).Value
-                Case 75:
-                    If txtShTk(8).tag = 0 Then
-                        MsgBox "H∑y nhÀp sË hi÷u chi ti’t !", vbExclamation, App.ProductName
-                        RFocus txtShTk(8)
-                        GoTo LoiBC
-                    End If
-                    T txtShTk(8).tag, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), CboThang(2).ListIndex + 1
-                Case 74:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
+    Case 0, 1:
+        If Not SSTab.TabEnabled(SSTab.Tab) Then Exit Sub
+        If Not OptBC(baocao).TabStop Then Exit Sub
+        If pRpt = 1 And (Not ChoXemBC(baocao, "C")) Then
+            ErrMsg er_KoSD
+            Exit Sub
+        End If
+        Me.MousePointer = 11
+        GauGe.Value = 0
+        If CboThang(0).Enabled And CboThang(1).ListIndex < CboThang(0).ListIndex Then CboThang(1).ListIndex = CboThang(0).ListIndex
+        If baocao = 61 Then
+            CboThang(0).ListIndex = 0
+            CboThang(1).ListIndex = 11
+        End If
+        tdau = CboThang(0).ItemData(CboThang(0).ListIndex)
+        tcuoi = CboThang(1).ItemData(CboThang(1).ListIndex)
+        If OptDT(3).Value And CboVV(1).ListIndex >= 0 Then mdt = CboVV(1).ItemData(CboVV(1).ListIndex) Else mdt = 0
+        If pSoVV > 0 And ChkTT(0).Value = 1 And CboTT(0).ListIndex >= 0 And mdt > 0 Then mdt1 = CboTT(0).ItemData(CboTT(0).ListIndex) Else mdt1 = 0
+        If pSoVV > 1 And ChkTT(1).Value = 1 And CboTT(1).ListIndex >= 0 And mdt > 0 Then mdt2 = CboTT(1).ItemData(CboTT(1).ListIndex) Else mdt2 = 0
+        If pSoVV > 2 And ChkTT(2).Value = 1 And CboTT(2).ListIndex >= 0 And mdt > 0 Then mdt3 = CboTT(2).ItemData(CboTT(2).ListIndex) Else mdt3 = 0
+        SetRptInfo
+        Select Case baocao
+        Case 83:
+            If txtshkh(0).tag = 0 Then
+                'MsgBox "H∑y nhÀp sË hi÷u chi ti’t c´ng nÓ!", vbExclamation, App.ProductName
+                Dim s As String
+                s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(7907) & ChrW(33)
+                Dim xn As String
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                End If
 
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    
-                    BKSanLuong mkho, mloai, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), IIf(ChkDu(2).Value = 1 And Len(txtShTk(4).Text) > 0, txtShTk(4).Text, "155")
-                
-                    GoTo LoiBC
-                Case 72:
-                    If Opt(3).Value And txtShTk(7).tag > 0 Then taikhoan.InitTaikhoanMaSo txtShTk(7).tag Else taikhoan.InitTaikhoanMaSo 0
-                    n1 = IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(2))
-                    InBangThopCN_HN NgayDauThang(pNamTC, pThangDauKy), n1, taikhoan, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
-                Case 73:
-                    If txtshkh(0).tag = 0 Then
-                        MsgBox "H∑y nhÀp sË hi÷u chi ti’t c´ng nÓ!", vbExclamation, App.ProductName
-                        RFocus txtshkh(0)
-                        GoTo LoiBC
-                    End If
-                    If Opt(3).Value And txtShTk(7).tag > 0 Then taikhoan.InitTaikhoanMaSo txtShTk(7).tag Else taikhoan.InitTaikhoanMaSo 0
-                    n1 = IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(2))
-                    InChitietCN_HN txtshkh(0).tag, NgayDauThang(pNamTC, pThangDauKy), n1, taikhoan
-                Case 71:
-                    Baocao211 tcuoi
-                    GoTo LoiBC
-                Case 43:
-                    If CboKho(0).ListCount > 0 Then Baocao152 IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0), tcuoi
-                    GoTo LoiBC
-                Case 69:
-                    If txtShTk(8).tag = 0 Then
-                        If txtShTk(2).tag = 0 Then
-                            RFocus txtShTk(8)
-                            GoTo LoiBC
-                        Else
-                            taikhoan.InitTaikhoanMaSo txtShTk(2).tag
-                            If CboNT.ListIndex >= 0 Then
-                                mn = CboNT.ItemData(CboNT.ListIndex)
-                                If mn = 0 Then mn = -1
-                            Else
-                                mn = 0
-                            End If
-                        End If
-                    Else
-                        taikhoan.InitTaikhoanMaSo txtShTk(8).tag
-                        mn = 0
-                    End If
-                    BangKeTichSo taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), Cdbl5(txtLS(0).Text), Cdbl5(txtLS(1).Text), mn
-                Case 54:
-                    BKDinhMuc tcuoi
-                Case 67:
-                    If CboKH.ListIndex < 0 Then GoTo LoiBC
-                    InCongNoQuaHanMuc tdau, IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
-                Case 59:
-                    If TxtCT(0).tag = 0 Then
-                        MsgBox "H∑y nhÀp sË hi÷u HÓp ÆÂng ho∆c chi ti’t HÓp ÆÂng !", vbExclamation, App.ProductName
-                        RFocus TxtCT(0)
-                        GoTo LoiBC
-                    End If
-                    ChiPhiCT TxtCT(0).tag, tdau, tcuoi
-                    'ChiPhiGiaThanh TxtCT(0).tag, tdau, tcuoi
-                Case 106:
-                    If txtShTk(0).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(0)
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(0).Value = 1 And txtShTk(5).tag = 0 Then
-                        RFocus txtShTk(5)
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(0).Value = 1 Then
-                        doiung.InitTaikhoanMaSo txtShTk(5).tag
-                    Else
-                        doiung.InitTaikhoanMaSo 0
-                    End If
-                
-                    taikhoan.InitTaikhoanMaSo txtShTk(0).tag
-                    'them
-                     If Not InSocaiTk_them(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 2, nn) Then GoTo LoiBC
-                   
-                      Case 0:
-                    If txtShTk(0).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(0)
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(0).Value = 1 And txtShTk(5).tag = 0 Then
-                        RFocus txtShTk(5)
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(0).Value = 1 Then
-                        doiung.InitTaikhoanMaSo txtShTk(5).tag
-                    Else
-                        doiung.InitTaikhoanMaSo 0
-                    End If
-                
-                    taikhoan.InitTaikhoanMaSo txtShTk(0).tag
-                    'them
-                    If Index = 0 Then
-                     If Not InSocaiTk(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 1, nn) Then GoTo LoiBC
-                   ElseIf taikhoan.MaTC = taikhoan.MaSo Or taikhoan.MaTC = 0 Then
-                        If Not InSocaiTk(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 0, nn) Then GoTo LoiBC
-                    Else
-                        If Not InSoChitiet(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 0, nn) Then GoTo LoiBC
-                    End If
-                Case 1:
-                    If Index = 0 Or OptTG(1).Value Then GoTo KhongIn
-                    If txtShTk(1).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(1)
-                        GoTo LoiBC
-                    End If
-                    taikhoan.InitTaikhoanMaSo txtShTk(1).tag
-                    If taikhoan.tkcon = 0 Or taikhoan.MaTC <> taikhoan.MaSo Then
-                        MsgBox "H∑y ch‰n tµi kho∂n BÈ Tµi ch›nh ban hµnh Æ≠Óc mÎ chi ti’t !", vbExclamation, App.ProductName
-                        GoTo LoiBC
-                    End If
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten FROM HethongTK WHERE SoHieu LIKE '" _
-                        + taikhoan.sohieu + "*' AND TkCon=0 AND MaNT<=0 ORDER BY SoHieu DESC", dbOpenSnapshot, dbForwardOnly)
-                    StopPrint = False
-                    frmMain.Rpt.Destination = 1
-                    GauGe.Max = 10
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        taikhoan.InitTaikhoanMaSo rs_tk!MaSo
-                        SetRptInfo
-                        If InSoChitiet(taikhoan, tdau, tcuoi, ngay(0), ngay(1), False, "", 0, 0, nn) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            AppIdle Pdelay * 100
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    GoTo LoiBC
-                Case 2:
-                    If Index = 0 Then GoTo KhongIn
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW MaSo, SoHieu, Ten FROM HethongTK" _
-                        & " WHERE Loai > 0 AND MaTC > 0 AND MaTC <> MaSo AND TkCon=0 AND MaNT<=0" _
-                        + IIf(Len(txtShCT(0).Text) > 0, " AND SoHieu >= '" + txtShCT(0).Text + "'", "") + IIf(Len(txtShCT(1).Text) > 0, " AND SoHieu <= '" + txtShCT(1).Text + "'", "") + " ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
-                    StopPrint = False
-                    frmMain.Rpt.Destination = 1
-                    GauGe.Max = 300
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        taikhoan.InitTaikhoanMaSo rs_tk!MaSo
-                        SetRptInfo
-                        If InSoChitiet(taikhoan, tdau, tcuoi, ngay(0), ngay(1), False, "", 0, 0, nn) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            AppIdle Pdelay * 100
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    GoTo LoiBC
-                Case 3:
-                    If ChkDu(1).Value = 1 Then
-                        If txtShTk(6).tag = 0 Then
-                            ErrMsg er_SHTaiKhoan
-                            RFocus txtShTk(6)
-                            GoTo LoiBC
-                        End If
-                        taikhoan.InitTaikhoanMaSo txtShTk(6).tag
-                    Else
-                        taikhoan.InitTaikhoanMaSo 0
-                    End If
-                    
-                    InBangThop tdau, tcuoi, taikhoan, CboThang(2).ListIndex + 1, ChkDu(6).Value
-                Case 4:
-                    If txtShTk(2).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(2)
-                        GoTo LoiBC
-                    End If
-                    If CboNT.ListIndex < 0 Then
-                        MsgBox "H∑y ch‰n chi ti’t thanh to∏n theo nguy™n t÷ !", vbExclamation, App.ProductName
-                        RFocus txtShTk(2)
-                        GoTo LoiBC
-                    End If
-                    If CboNT.ItemData(CboNT.ListIndex) < 0 Then mtk = CboNT.ItemData(CboNT.ListIndex - 1) Else mtk = CboNT.ItemData(CboNT.ListIndex)
-                    taikhoan.InitTaikhoanMaSo MaTKNguyenTe(txtShTk(2).Text, mtk)
-                    If Not InSoChitietNT(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), CboNT.ItemData(CboNT.ListIndex), True) Then GoTo LoiBC
-                Case 5:
-                    If txtShTk(3).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(3)
-                        GoTo LoiBC
-                    End If
-                    If Index = 0 Then GoTo KhongIn
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten, KyHieu FROM HethongTK INNER JOIN NguyenTe ON HethongTK.MaNT=NguyenTe.MaSo WHERE SoHieu LIKE '" + txtShTk(3).Text + "*' AND TkCon=0 ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
-                    StopPrint = False
-                    frmMain.Rpt.Destination = 1
-                    GauGe.Max = 10
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten + " - " + rs_tk!KyHieu), 1
-                        taikhoan.InitTaikhoanMaSo rs_tk!MaSo
-                        SetRptInfo
-                        If InSoChitietNT(taikhoan, tdau, tcuoi, ngay(1), ngay(2), CboNT.ItemData(CboNT.ListIndex), False) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            AppIdle Pdelay * 100
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    GoTo LoiBC
-                Case 6:
-                    If Index = 0 Then GoTo KhongIn
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten FROM HethongTK WHERE MaNT>0 ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
-                    StopPrint = False
-                    frmMain.Rpt.Destination = 1
-                    GauGe.Max = 10
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        taikhoan.InitTaikhoanMaSo rs_tk!MaSo
-                        SetRptInfo
-                        If InSoChitietNT(taikhoan, tdau, tcuoi, ngay(1), ngay(2), CboNT.ItemData(CboNT.ListIndex), False) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            AppIdle Pdelay * 100
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    GoTo LoiBC
-                Case 7:
-                    InBangThopNT tdau, tcuoi
-                Case 8:
-                    InCdt False, tdau, tcuoi, CboThang(2).ListIndex + 1, ChkDu(6).Value
-                Case 9:
-                
-                    InCdt True, tdau, tcuoi, CboThang(2).ListIndex + 1, ChkDu(6).Value
-                Case 10:
-                    If pDTTP <> 0 Then
-                        If Not InChiPhi3(tdau, tcuoi, nn) Then GoTo LoiBC
-                    Else
-                        If Not InChiPhi(tdau, tcuoi, True, nn) Then GoTo LoiBC
-                    End If
-                Case 11:
-                    If pDTTP <> 0 Then
-                        taikhoan.InitTaikhoanSohieu "911"
-                        If taikhoan.tkcon > 0 Then
-                            If InKetQua3(tdau, tcuoi, 0, nn, 1) Then InBaoCaoRPT nn
-                            If Not InKetQua(tdau, tcuoi, 0, True, nn) Then GoTo LoiBC
-                        Else
-                            If Not InKetQua3(tdau, tcuoi, 0, nn) Then GoTo LoiBC
-                        End If
-                    Else
-                        If Not InKetQua(tdau, tcuoi, 0, True, nn) Then GoTo LoiBC
-                    End If
-                Case 50:
-                    If Not InChiPhi2(tdau, tcuoi, nn) Then GoTo LoiBC
-                Case 51:
-                    If pDTTP <> 0 Then
-                        InBKGiaThanh2 tdau, tcuoi
-                    Else
-                        InBKGiaThanh tcuoi
-                    End If
-                    GoTo LoiBC
-                Case 12, 64:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    If CboLoai(1).ListIndex < 0 Then
-                        ErrMsg er_NguonNX
-                        GoTo LoiBC
-                    End If
-                    If txtShVT(0).tag = 0 Then
-                        ErrMsg er_SHVattu
-                        RFocus txtShVT(0)
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(7).Value = 1 And txtShTk(10).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShVT(10)
-                        GoTo LoiBC
-                    End If
-                    If OptTG(0).Value Then
-                        If Not InTheKho2(IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0), _
-                            txtShVT(0).tag, tdau, tcuoi, True, IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0), IIf(ChkDu(7).Value = 1 And txtShTk(10).tag > 0, txtShTk(10).Text, ""), IIf(baocao = 64, 1, 0)) Then GoTo LoiBC
-                    Else
-                        If Not InTheKho2N(IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0), _
-                            txtShVT(0).tag, ngay(1), ngay(2), True, IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0), IIf(ChkDu(7).Value = 1 And txtShTk(10).tag > 0, txtShTk(10).Text, ""), IIf(baocao = 64, 1, 0)) Then GoTo LoiBC
-                    End If
-                Case 13:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    If CboLoai(1).ListIndex < 0 Then
-                        ErrMsg er_NguonNX
-                        GoTo LoiBC
-                    End If
-                    StopPrint = False
-                    mkho = CboKho(0).ItemData(CboKho(0).ListIndex)
-                    If Index = 0 Then
-                        InTheKho3 mkho, tdau, tcuoi
-                        InBaoCaoRPT
-                    Else
-                        Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW TonKho.MaVattu, Vattu.SoHieu, Vattu.TenVattu, Vattu.DonVi FROM" _
-                            & " TonKho INNER JOIN Vattu ON TonKho.MaVattu=Vattu.MaSo WHERE TonKho.MaSoKho=" _
-                            + CStr(mkho) + " ORDER BY Vattu.SoHieu", dbOpenSnapshot, dbForwardOnly)
-                            
-                        k = CInt5(FrmGetStr.GetString("NhÀp sË 0 Æ” in sÊ chi ti’t vÀt t≠ hµng ho∏, sË 2 Æ” in thŒ kho", "In toµn bÈ", "0"))
-                        
-                        frmMain.Rpt.Destination = 1
-                        GauGe.Max = 100
-                        Do While (Not rs_tk.EOF) And (Not StopPrint)
-                            txtShVT(0).Text = rs_tk!sohieu
-                            LbTenVT(0).Caption = rs_tk!TenVattu
-                            txtShVT(0).tag = rs_tk!MaVattu
-                            SetRptInfo
-                            If InTheKho2(mkho, rs_tk!MaVattu, tdau, tcuoi, False, IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0), , k) Then
-                                HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!TenVattu), 1
-                                InBaoCaoRPT
-                                AppIdle Pdelay * 100
-                            End If
-                            If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                            rs_tk.MoveNext
-                        Loop
-                        rs_tk.Close
-                    End If
-                    GoTo LoiBC
-                Case 14, 65:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
-                        ErrMsg er_SHTKVT
-                        RFocus txtShTk(4)
-                        GoTo LoiBC
-                    End If
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    If OptTG(0).Value Then
-                        InLuyKe mkho, IIf(ChkDu(2).Value = 0, "", txtShTk(4).Text), mloai, tdau, tcuoi, True, IIf(baocao = 65, 1, 0)
-                    Else
-                        InLuyKeN mkho, IIf(ChkDu(2).Value = 0, "", txtShTk(4).Text), mloai, ngay(1), ngay(2), True, IIf(baocao = 65, 1, 0)
-                    End If
-                Case 46:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
-                        ErrMsg er_SHTKVT
-                        RFocus txtShTk(4)
-                        GoTo LoiBC
-                    End If
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    InLuyKeX mkho, mtk, mloai, tdau, tcuoi
-                    GoTo LoiBC
-                Case 52:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    InLCNoiBo CboKho(0).ItemData(CboKho(0).ListIndex), IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)
-                    GoTo LoiBC
-                Case 47, 48:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
-                        ErrMsg er_SHTKVT
-                        RFocus txtShTk(4)
-                        GoTo LoiBC
-                    End If
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    If OptTG(0).Value Then
-                        InLuyKeHM mkho, mtk, mloai, NgayCuoiThang(pNamTC, tcuoi), IIf(baocao = 47, -1, 1)
-                    Else
-                        InLuyKeHM mkho, mtk, mloai, ngay(2), IIf(baocao = 47, -1, 1)
-                    End If
-                Case 15, 16:
-                    If CboKho(0).ListIndex < 0 Then
-                        ErrMsg er_KhoHang
-                        GoTo LoiBC
-                    End If
-                    If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
-                        ErrMsg er_SHTKVT
-                        RFocus txtShTk(4)
-                        GoTo LoiBC
-                    End If
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    mn = IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0)
-                    
-                    InNguonNhapXuat mkho, mtk, mloai, mn, tdau, tcuoi, IIf(baocao = 15, -1, 1), IIf(OptTG(1).Value, 1, 0), ngay(1), ngay(2)
-               Case 17:
-                    If CboKH.ListIndex < 0 Then GoTo LoiBC
-                    If Not InCTNoQuaHan(ngay(0), CInt5(txtHan.Text), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)) Then GoTo LoiBC
-                Case 18 To 31, 45, 61, 68, 79:
-                    Dim tg As String
-                    If CboThang(0).Enabled And CboThang(1).Enabled Then
-                        tg = ThoiGian(tdau, tcuoi)
-                    Else
-                      If CboThang(0).Enabled Then
-                            tcuoi = tdau
-                      Else
-                            tdau = tcuoi
-                      End If
-                      tg = ThoiGian(tdau, tdau)
-                    End If
-                    ' Chu»n bﬁ sË li÷u
-                    TinhSoLieuBaoCao
-                    ' Tπo b∏o c∏o
-                    TaoBaoCao
-                    ' T™n File d˜ li÷u vµ b∏o c∏o
-                    frmMain.Rpt.ReportFileName = TenFile
-                    RptSetDate NgayCuoiThang(pNamTC, tcuoi)
-                    ' C´ng th¯c
-                    frmMain.Rpt.Formulas(2) = "TenBaoCao = IF PageNumber() = 1 THEN '" + TenBaoCao + "'"
-                    frmMain.Rpt.Formulas(3) = "ThoiGian = IF PageNumber() = 1 THEN '" + tg + "'"
-                    If Opt(1).Value Then
-                        frmMain.Rpt.Formulas(0) = "TenCty='" + pTenCn + "'"
-                        frmMain.Rpt.Formulas(1) = "TenCn='ß¨n vﬁ: " + Cbo.Text + "'"
-                    End If
-                Case 32:
-                    InTK CboThang(2).ListIndex + 1, tdau, tcuoi
-                Case 33:
-                    InPSVuViec CboVV(0).ItemData(CboVV(0).ListIndex), tdau, tcuoi, CboVV(0).Text
-                Case 34:
-                    If CboKho(1).ListIndex < 0 Or CboKho(2).ListIndex < 0 Then Exit Sub
-                    If OptDT(2).Value Then
-                            InTHDoanhThuVAT IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)
-                    Else
-                            InTHDoanhThu IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), IIf(OptDT(0).Value, 0, 1), IIf(ChkDu(9).Value = 1, CboKho(1).ItemData(CboKho(1).ListIndex), 0), IIf(ChkDu(8).Value = 1, txtshkh(2).Text, ""), IIf(ChkDu(11).Value = 1, txtsh(0).tag, 0), IIf(ChkDu(10).Value = 1, CboKho(2).ItemData(CboKho(2).ListIndex), 0), mdt, mdt1, mdt2, mdt3, IIf(ChkDu(12).Value = 1, txtShTk(9).Text, "")
-                    End If
-                Case 35:
-                    If CboKH.ListIndex < 0 Then GoTo LoiBC
-                    If OptTG(0).Value Then
-                        InBangThopCN tdau, tcuoi, IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0), ChkDu(5).Value
-                    Else
-                        InBangThopCNN ngay(1), ngay(2), IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
-                    End If
-                Case 36:
-                    If txtshkh(0).tag = 0 Then
-                        ErrMsg er_SHKhachHang
-                        RFocus txtshkh(0)
-                        GoTo LoiBC
-                    End If
-                    If txtShTk(7).tag = 0 Then
-                        taikhoan.InitTaikhoanMaSo SelectSQL("SELECT MaTaiKhoan AS F1 FROM SoDuKhachHang WHERE MaKhachHang=" + CStr(txtshkh(0).tag))
-                        If taikhoan.MaSo > 0 Then
-                            txtShTk(7).tag = taikhoan.MaSo
-                            txtShTk(7).Text = taikhoan.sohieu
-                            LbTenTk(7).Caption = taikhoan.Ten
-                        Else
-                            ErrMsg er_KoPS1
-                            RFocus txtShTk(7)
-                            GoTo LoiBC
-                        End If
-                    Else
-                        taikhoan.InitTaikhoanMaSo txtShTk(7).tag
-                    End If
-                    If Not InSoChitietCN(taikhoan, txtshkh(0).tag, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)) Then GoTo LoiBC
-                Case 62:
-                    If Index = 0 Then GoTo KhongIn
-                    If txtShTk(7).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(7)
-                        GoTo LoiBC
-                    Else
-                        taikhoan.InitTaikhoanMaSo txtShTk(7).tag
-                    End If
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten FROM (SoDuKhachHang INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo) INNER JOIN KhachHang ON SoDuKhachHang.MaKhachHang=KhachHang.MaSo WHERE HethongTK.SoHieu LIKE '" + taikhoan.sohieu + "*' GROUP BY KhachHang.SoHieu,KhachHang.Ten,KhachHang.MaSo", dbOpenSnapshot)
-                    StopPrint = False
-                    GauGe.Max = 50
-                    frmMain.Rpt.Destination = 1
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        If InSoChitietCN(taikhoan, rs_tk!MaSo, tdau, tcuoi, ngay(1), ngay(2)) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            For i = 1 To Pdelay * 100
-                                DoEvents
-                            Next
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    GoTo LoiBC
-                Case 70:
-                    If Index = 0 Then GoTo KhongIn
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten FROM (SoDuKhachHang INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo) INNER JOIN KhachHang ON SoDuKhachHang.MaKhachHang=KhachHang.MaSo WHERE HethongTK.SoHieu LIKE '" + txtShTk(7).Text + "*' GROUP BY KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten", dbOpenSnapshot)
-                    StopPrint = False
-                    If rs_tk.recordCount > 0 Then
-                        rs_tk.MoveLast
-                        GauGe.Max = rs_tk.recordCount
-                        GauGe.Value = 0
-                        rs_tk.MoveFirst
-                    End If
-                    frmMain.Rpt.Destination = 1
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        If THPSNhomCN2(txtshkh(0).tag, tdau, tcuoi) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            For i = 1 To Pdelay * 100
-                                DoEvents
-                            Next
-                        End If
-                        GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    Set rs_tk = Nothing
-                    GoTo LoiBC
-                Case 63:
-                    If Index = 0 Then GoTo KhongIn
-                    taikhoan.InitTaikhoanMaSo txtShTk(7).tag
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,SoHieu,Ten FROM SoDuKhachHang INNER JOIN KhachHang ON SoDuKhachHang.MaKhachHang=KhachHang.MaSo GROUP BY SoHieu,Ten,KhachHang.MaSo", dbOpenSnapshot)
-                    StopPrint = False
-                    GauGe.Max = 100
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        If DoiChieuCN(IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), rs_tk!MaSo, taikhoan, 1) Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            AppIdle Pdelay * 100
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                    Loop
-                    rs_tk.Close
-                    GoTo LoiBC
-                Case 57:
-                    If txtshkh(0).tag = 0 Then
-                        ErrMsg er_SHKhachHang
-                        RFocus txtshkh(0)
-                        GoTo LoiBC
-                    End If
-                    If Not THPSNhomCN2(txtshkh(0).tag, tdau, tcuoi) Then GoTo LoiBC
-                Case 49, 82:
-                    If txtshkh(1).tag = 0 Then
-                        ErrMsg er_SHKhachHang
-                        RFocus txtshkh(1)
-                        GoTo LoiBC
-                    End If
-                    taikhoan.InitTaikhoanMaSo txtShTk(7).tag
-                    If Not DoiChieuCN(IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(1).tag, taikhoan, IIf(baocao = 49, 1, 0)) Then GoTo LoiBC
-                Case 37:
-                    THDoanhThuGiaVon IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), IIf(ChkDu(9).Value = 1, CboKho(1).ItemData(CboKho(1).ListIndex), 0), IIf(ChkDu(12).Value = 1, txtShTk(9).Text, ""), ChkDu(13).Value
-                Case 38:
-                    If txtShVT(1).tag = 0 Then
-                        ErrMsg er_SHVattu
-                        RFocus txtShVT(1)
-                        GoTo LoiBC
-                    End If
-                    CTDoanhThuGiaVon IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtShVT(1).tag
-                Case 39:
-                    If CboKH.ListIndex < 0 Then Exit Sub
-                    InCTDoanhThu IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(0).tag, txtShVT(1).tag, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
-                Case 53:
-                    If CboKH.ListIndex < 0 Then Exit Sub
-                    InCTDoanhThu4 IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(0).tag, txtShVT(1).tag, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
-                Case 66:
-                    If txtShVT(1).tag = 0 Then
-                        ErrMsg er_SHVattu
-                        RFocus txtShVT(1)
-                        GoTo LoiBC
-                    End If
-                    InCTDoanhThu2 IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtShVT(1).tag
-                Case 40:
-                    KeHopDongV tdau, tcuoi, txtshkh(0).tag, CboHD.ItemData(CboHD.ListIndex)
-                Case 41:
-                    KeHopDongR tdau, tcuoi, txtshkh(0).tag, CboHD.ItemData(CboHD.ListIndex)
-                Case 42:
-                    If txtShTk(8).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(8)
-                        GoTo LoiBC
-                    End If
-                    If Not BKChiTiet(xlapp, xlsheet, txtShTk(8).Text, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)) Then GoTo LoiBC
-                Case 44:
-                    If txtShTk(11).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(11)
-                        GoTo LoiBC
-                    End If
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    InTHXuatKho IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), mkho, mtk, mloai, txtShTk(11).Text
-                Case 60, 77:
-                    If TxtCT(1).tag = 0 Then
-                        ErrMsg er_SHThanhPham
-                        RFocus TxtCT(1)
-                        GoTo LoiBC
-                    End If
-                    mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
-                    mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    InTHXuatKhoDT IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), mkho, mtk, mloai, TxtCT(1).tag, IIf(baocao = 60, 0, 1)
-                Case 55:
-                    mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
-                    mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
-                    InBangKeTon IIf(OptTG(0).Value, tcuoi, 0), ngay(2), mtk, mloai
-                    GoTo LoiBC
-                Case 56:
-                    taikhoan.InitTaikhoanMaSo txtShTk(8).tag
-                    If taikhoan.MaSo = 0 Or (taikhoan.tk_id <> TKCNKH_ID And taikhoan.tk_id <> TKCNPT_ID) Then
-                        THPSNhomTK txtShTk(8).Text, tdau, tcuoi
-                    Else
-                        THPSNhomCN taikhoan, tdau, tcuoi
-                    End If
-                Case 58:
-                    If CboKH.ListIndex < 0 Then GoTo LoiBC
-                    BangCDCno tdau, tcuoi, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
-                     
-            End Select
-            frmMain.Rpt.Destination = Index
-            If Len(NLB) > 0 And NLB <> "..." Then frmMain.Rpt.Formulas(52) = "NLB='" + NLB + "'"
-            If Len(KTT) > 0 And KTT <> "..." Then frmMain.Rpt.Formulas(53) = "KTT='" + KTT + "'"
-            If Len(GD) > 0 And GD <> "..." Then frmMain.Rpt.Formulas(54) = "GD='" + GD + "'"
-a:
-            If Not RptOK(frmMain.Rpt.ReportFileName, nn) Then
-                MsgBox "M…u b∏o c∏o Æ∑ bﬁ thay ÆÊi!", vbCritical, App.ProductName
+                RFocus txtshkh(0)
                 GoTo LoiBC
             End If
-            frmMain.Rpt.WindowTitle = OptBC(baocao).Caption
-            On Error GoTo Bad
-            frmMain.Rpt.Action = 1
-            On Error GoTo 0
+            If OptTG(0).Value Then
+                BangKeTichSo2 txtShTk(7).Text, txtshkh(0).tag, NgayDauThang(pNamTC, tdau), NgayCuoiThang(pNamTC, tcuoi)
+            Else
+                BangKeTichSo2 txtShTk(7).Text, txtshkh(0).tag, ngay(1), ngay(2)
+            End If
+        Case 84:
+            If CboKH.ListIndex < 0 Then GoTo LoiBC
+            If OptTG(0).Value Then
+                InBangThopCN tdau, tcuoi, IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0), ChkDu(14).Value, 1
+            Else
+                InBangThopCNN ngay(1), ngay(2), IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0), 1
+            End If
+        Case 81:
+            InTHChietKhau IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)
+        Case 80:
+            InCTKhuyenMai2 IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(0).tag, txtShVT(1).tag
+        Case 78:
+            If txtShTk(7).Text = "" Then txtShTk(7).Text = "511"
+            taikhoan.InitTaikhoanSohieu txtShTk(7).Text
+            If taikhoan.tk_id <> TKDT_ID Then
+                RFocus txtShTk(7)
+                GoTo LoiBC
+            End If
+            If Not SoChiTiet3(txtShTk(7).Text, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)) Then GoTo LoiBC
+        Case 76:
+            InCdt2 tdau, tcuoi, CboThang(2).ListIndex + 1, ChkDu(6).Value
+        Case 75:
+            If txtShTk(8).tag = 0 Then
+                ' MsgBox "H∑y nhÀp sË hi÷u chi ti’t !", vbExclamation, App.ProductName
+                s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(33)
+                 
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                End If
+
+                RFocus txtShTk(8)
+                GoTo LoiBC
+            End If
+            T txtShTk(8).tag, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), CboThang(2).ListIndex + 1
+        Case 74:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+
+            BKSanLuong mkho, mloai, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), IIf(ChkDu(2).Value = 1 And Len(txtShTk(4).Text) > 0, txtShTk(4).Text, "155")
+
+            GoTo LoiBC
+        Case 72:
+            If Opt(3).Value And txtShTk(7).tag > 0 Then taikhoan.InitTaikhoanMaSo txtShTk(7).tag Else taikhoan.InitTaikhoanMaSo 0
+            n1 = IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(2))
+            InBangThopCN_HN NgayDauThang(pNamTC, pThangDauKy), n1, taikhoan, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
+        Case 73:
+            If txtshkh(0).tag = 0 Then
+                'MsgBox "H∑y nhÀp sË hi÷u chi ti’t c´ng nÓ!", vbExclamation, App.ProductName
+                s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(7907) & ChrW(33)
+               
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                End If
+
+                RFocus txtshkh(0)
+                GoTo LoiBC
+            End If
+            If Opt(3).Value And txtShTk(7).tag > 0 Then taikhoan.InitTaikhoanMaSo txtShTk(7).tag Else taikhoan.InitTaikhoanMaSo 0
+            n1 = IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(2))
+            InChitietCN_HN txtshkh(0).tag, NgayDauThang(pNamTC, pThangDauKy), n1, taikhoan
+        Case 71:
+            Baocao211 tcuoi
+            GoTo LoiBC
+        Case 43:
+            If CboKho(0).ListCount > 0 Then Baocao152 IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0), tcuoi
+            GoTo LoiBC
+        Case 69:
+            If txtShTk(8).tag = 0 Then
+                If txtShTk(2).tag = 0 Then
+                    RFocus txtShTk(8)
+                    GoTo LoiBC
+                Else
+                    taikhoan.InitTaikhoanMaSo txtShTk(2).tag
+                    If CboNT.ListIndex >= 0 Then
+                        mn = CboNT.ItemData(CboNT.ListIndex)
+                        If mn = 0 Then mn = -1
+                    Else
+                        mn = 0
+                    End If
+                End If
+            Else
+                taikhoan.InitTaikhoanMaSo txtShTk(8).tag
+                mn = 0
+            End If
+            BangKeTichSo taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), Cdbl5(txtLS(0).Text), Cdbl5(txtLS(1).Text), mn
+        Case 54:
+            BKDinhMuc tcuoi
+        Case 67:
+            If CboKH.ListIndex < 0 Then GoTo LoiBC
+            InCongNoQuaHanMuc tdau, IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
+        Case 59:
+            If TxtCT(0).tag = 0 Then
+                'MsgBox "H∑y nhÀp sË hi÷u HÓp ÆÂng ho∆c chi ti’t HÓp ÆÂng !", vbExclamation, App.ProductName
+               
+                s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(72) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(7891) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(72) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(7891) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(33)
+              
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                End If
+
+
+                RFocus TxtCT(0)
+                GoTo LoiBC
+            End If
+            ChiPhiCT TxtCT(0).tag, tdau, tcuoi
+            'ChiPhiGiaThanh TxtCT(0).tag, tdau, tcuoi
+        Case 106:
+            If txtShTk(0).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(0)
+                GoTo LoiBC
+            End If
+            If ChkDu(0).Value = 1 And txtShTk(5).tag = 0 Then
+                RFocus txtShTk(5)
+                GoTo LoiBC
+            End If
+            If ChkDu(0).Value = 1 Then
+                doiung.InitTaikhoanMaSo txtShTk(5).tag
+            Else
+                doiung.InitTaikhoanMaSo 0
+            End If
+
+            taikhoan.InitTaikhoanMaSo txtShTk(0).tag
+            'them
+            If Not InSocaiTk_them(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 2, nn) Then GoTo LoiBC
+
+        Case 0:
+            If txtShTk(0).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(0)
+                GoTo LoiBC
+            End If
+            If ChkDu(0).Value = 1 And txtShTk(5).tag = 0 Then
+                RFocus txtShTk(5)
+                GoTo LoiBC
+            End If
+            If ChkDu(0).Value = 1 Then
+                doiung.InitTaikhoanMaSo txtShTk(5).tag
+            Else
+                doiung.InitTaikhoanMaSo 0
+            End If
+
+            taikhoan.InitTaikhoanMaSo txtShTk(0).tag
+            'them
+            If Index = 0 Then
+                If Not InSocaiTk(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 1, nn) Then GoTo LoiBC
+            ElseIf taikhoan.MaTC = taikhoan.MaSo Or taikhoan.MaTC = 0 Then
+                If Not InSocaiTk(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 0, nn) Then GoTo LoiBC
+            Else
+                If Not InSoChitiet(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), True, doiung.sohieu, 0, 0, nn) Then GoTo LoiBC
+            End If
+        Case 1:
+            If Index = 0 Or OptTG(1).Value Then GoTo KhongIn
+            If txtShTk(1).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(1)
+                GoTo LoiBC
+            End If
+            taikhoan.InitTaikhoanMaSo txtShTk(1).tag
+            If taikhoan.tkcon = 0 Or taikhoan.MaTC <> taikhoan.MaSo Then
+                ' MsgBox "H∑y ch‰n tµi kho∂n BÈ Tµi ch›nh ban hµnh Æ≠Óc mÎ chi ti’t !", vbExclamation, App.ProductName
+                
+                s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(66) & ChrW(7897) & ChrW(32) & ChrW(84) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(98) & ChrW(97) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(273) & ChrW(432) & ChrW(7907) & ChrW(99) & ChrW(32) & ChrW(109) & ChrW(7903) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(33)
+                
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                End If
+
+
+                GoTo LoiBC
+            End If
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten FROM HethongTK WHERE SoHieu LIKE '" _
+                                             + taikhoan.sohieu + "*' AND TkCon=0 AND MaNT<=0 ORDER BY SoHieu DESC", dbOpenSnapshot, dbForwardOnly)
+            StopPrint = False
+            frmMain.Rpt.Destination = 1
+            GauGe.Max = 10
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                taikhoan.InitTaikhoanMaSo rs_tk!MaSo
+                SetRptInfo
+                If InSoChitiet(taikhoan, tdau, tcuoi, ngay(0), ngay(1), False, "", 0, 0, nn) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    AppIdle Pdelay * 100
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
             GoTo LoiBC
         Case 2:
-            Unload Me
+            If Index = 0 Then GoTo KhongIn
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW MaSo, SoHieu, Ten FROM HethongTK" _
+                                             & " WHERE Loai > 0 AND MaTC > 0 AND MaTC <> MaSo AND TkCon=0 AND MaNT<=0" _
+                                             + IIf(Len(txtShCT(0).Text) > 0, " AND SoHieu >= '" + txtShCT(0).Text + "'", "") + IIf(Len(txtShCT(1).Text) > 0, " AND SoHieu <= '" + txtShCT(1).Text + "'", "") + " ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
+            StopPrint = False
+            frmMain.Rpt.Destination = 1
+            GauGe.Max = 300
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                taikhoan.InitTaikhoanMaSo rs_tk!MaSo
+                SetRptInfo
+                If InSoChitiet(taikhoan, tdau, tcuoi, ngay(0), ngay(1), False, "", 0, 0, nn) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    AppIdle Pdelay * 100
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
+            GoTo LoiBC
+        Case 3:
+            If ChkDu(1).Value = 1 Then
+                If txtShTk(6).tag = 0 Then
+                    ErrMsg er_SHTaiKhoan
+                    RFocus txtShTk(6)
+                    GoTo LoiBC
+                End If
+                taikhoan.InitTaikhoanMaSo txtShTk(6).tag
+            Else
+                taikhoan.InitTaikhoanMaSo 0
+            End If
+
+            InBangThop tdau, tcuoi, taikhoan, CboThang(2).ListIndex + 1, ChkDu(6).Value
+        Case 4:
+            If txtShTk(2).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(2)
+                GoTo LoiBC
+            End If
+            If CboNT.ListIndex < 0 Then
+                'MsgBox "H∑y ch‰n chi ti’t thanh to∏n theo nguy™n t÷ !", vbExclamation, App.ProductName
+            
+                s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(97) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(116) & ChrW(111) & ChrW(225) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(110) & ChrW(103) & ChrW(117) & ChrW(121) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(7879) & ChrW(32) & ChrW(33)
+                 
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                End If
+
+
+                RFocus txtShTk(2)
+                GoTo LoiBC
+            End If
+            If CboNT.ItemData(CboNT.ListIndex) < 0 Then mtk = CboNT.ItemData(CboNT.ListIndex - 1) Else mtk = CboNT.ItemData(CboNT.ListIndex)
+            taikhoan.InitTaikhoanMaSo MaTKNguyenTe(txtShTk(2).Text, mtk)
+            If Not InSoChitietNT(taikhoan, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), CboNT.ItemData(CboNT.ListIndex), True) Then GoTo LoiBC
+        Case 5:
+            If txtShTk(3).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(3)
+                GoTo LoiBC
+            End If
+            If Index = 0 Then GoTo KhongIn
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten, KyHieu FROM HethongTK INNER JOIN NguyenTe ON HethongTK.MaNT=NguyenTe.MaSo WHERE SoHieu LIKE '" + txtShTk(3).Text + "*' AND TkCon=0 ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
+            StopPrint = False
+            frmMain.Rpt.Destination = 1
+            GauGe.Max = 10
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten + " - " + rs_tk!KyHieu), 1
+                taikhoan.InitTaikhoanMaSo rs_tk!MaSo
+                SetRptInfo
+                If InSoChitietNT(taikhoan, tdau, tcuoi, ngay(1), ngay(2), CboNT.ItemData(CboNT.ListIndex), False) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    AppIdle Pdelay * 100
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
+            GoTo LoiBC
+        Case 6:
+            If Index = 0 Then GoTo KhongIn
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten FROM HethongTK WHERE MaNT>0 ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
+            StopPrint = False
+            frmMain.Rpt.Destination = 1
+            GauGe.Max = 10
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                taikhoan.InitTaikhoanMaSo rs_tk!MaSo
+                SetRptInfo
+                If InSoChitietNT(taikhoan, tdau, tcuoi, ngay(1), ngay(2), CboNT.ItemData(CboNT.ListIndex), False) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    AppIdle Pdelay * 100
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
+            GoTo LoiBC
+        Case 7:
+            InBangThopNT tdau, tcuoi
+        Case 8:
+            InCdt False, tdau, tcuoi, CboThang(2).ListIndex + 1, ChkDu(6).Value
+        Case 9:
+
+            InCdt True, tdau, tcuoi, CboThang(2).ListIndex + 1, ChkDu(6).Value
+        Case 10:
+            If pDTTP <> 0 Then
+                If Not InChiPhi3(tdau, tcuoi, nn) Then GoTo LoiBC
+            Else
+                If Not InChiPhi(tdau, tcuoi, True, nn) Then GoTo LoiBC
+            End If
+        Case 11:
+            If pDTTP <> 0 Then
+                taikhoan.InitTaikhoanSohieu "911"
+                If taikhoan.tkcon > 0 Then
+                    If InKetQua3(tdau, tcuoi, 0, nn, 1) Then InBaoCaoRPT nn
+                    If Not InKetQua(tdau, tcuoi, 0, True, nn) Then GoTo LoiBC
+                Else
+                    If Not InKetQua3(tdau, tcuoi, 0, nn) Then GoTo LoiBC
+                End If
+            Else
+                If Not InKetQua(tdau, tcuoi, 0, True, nn) Then GoTo LoiBC
+            End If
+        Case 50:
+            If Not InChiPhi2(tdau, tcuoi, nn) Then GoTo LoiBC
+        Case 51:
+            If pDTTP <> 0 Then
+                InBKGiaThanh2 tdau, tcuoi
+            Else
+                InBKGiaThanh tcuoi
+            End If
+            GoTo LoiBC
+        Case 12, 64:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            If CboLoai(1).ListIndex < 0 Then
+                ErrMsg er_NguonNX
+                GoTo LoiBC
+            End If
+            If txtShVT(0).tag = 0 Then
+                ErrMsg er_SHVattu
+                RFocus txtShVT(0)
+                GoTo LoiBC
+            End If
+            If ChkDu(7).Value = 1 And txtShTk(10).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShVT(10)
+                GoTo LoiBC
+            End If
+            If OptTG(0).Value Then
+                If Not InTheKho2(IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0), _
+                                 txtShVT(0).tag, tdau, tcuoi, True, IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0), IIf(ChkDu(7).Value = 1 And txtShTk(10).tag > 0, txtShTk(10).Text, ""), IIf(baocao = 64, 1, 0)) Then GoTo LoiBC
+            Else
+                If Not InTheKho2N(IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0), _
+                                  txtShVT(0).tag, ngay(1), ngay(2), True, IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0), IIf(ChkDu(7).Value = 1 And txtShTk(10).tag > 0, txtShTk(10).Text, ""), IIf(baocao = 64, 1, 0)) Then GoTo LoiBC
+            End If
+        Case 13:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            If CboLoai(1).ListIndex < 0 Then
+                ErrMsg er_NguonNX
+                GoTo LoiBC
+            End If
+            StopPrint = False
+            mkho = CboKho(0).ItemData(CboKho(0).ListIndex)
+            If Index = 0 Then
+                InTheKho3 mkho, tdau, tcuoi
+                InBaoCaoRPT
+            Else
+                Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW TonKho.MaVattu, Vattu.SoHieu, Vattu.TenVattu, Vattu.DonVi FROM" _
+                                                 & " TonKho INNER JOIN Vattu ON TonKho.MaVattu=Vattu.MaSo WHERE TonKho.MaSoKho=" _
+                                                 + CStr(mkho) + " ORDER BY Vattu.SoHieu", dbOpenSnapshot, dbForwardOnly)
+
+                k = CInt5(FrmGetStr.GetString("NhÀp sË 0 Æ” in sÊ chi ti’t vÀt t≠ hµng ho∏, sË 2 Æ” in thŒ kho", "In toµn bÈ", "0"))
+
+                frmMain.Rpt.Destination = 1
+                GauGe.Max = 100
+                Do While (Not rs_tk.EOF) And (Not StopPrint)
+                    txtShVT(0).Text = rs_tk!sohieu
+                    LbTenVT(0).Caption = rs_tk!TenVattu
+                    txtShVT(0).tag = rs_tk!MaVattu
+                    SetRptInfo
+                    If InTheKho2(mkho, rs_tk!MaVattu, tdau, tcuoi, False, IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0), , k) Then
+                        HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!TenVattu), 1
+                        InBaoCaoRPT
+                        AppIdle Pdelay * 100
+                    End If
+                    If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                    rs_tk.MoveNext
+                Loop
+                rs_tk.Close
+            End If
+            GoTo LoiBC
+        Case 14, 65:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
+                ErrMsg er_SHTKVT
+                RFocus txtShTk(4)
+                GoTo LoiBC
+            End If
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            If OptTG(0).Value Then
+                InLuyKe mkho, IIf(ChkDu(2).Value = 0, "", txtShTk(4).Text), mloai, tdau, tcuoi, True, IIf(baocao = 65, 1, 0)
+            Else
+                InLuyKeN mkho, IIf(ChkDu(2).Value = 0, "", txtShTk(4).Text), mloai, ngay(1), ngay(2), True, IIf(baocao = 65, 1, 0)
+            End If
+        Case 46:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
+                ErrMsg er_SHTKVT
+                RFocus txtShTk(4)
+                GoTo LoiBC
+            End If
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            InLuyKeX mkho, mtk, mloai, tdau, tcuoi
+            GoTo LoiBC
+        Case 52:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            InLCNoiBo CboKho(0).ItemData(CboKho(0).ListIndex), IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)
+            GoTo LoiBC
+        Case 47, 48:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
+                ErrMsg er_SHTKVT
+                RFocus txtShTk(4)
+                GoTo LoiBC
+            End If
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            If OptTG(0).Value Then
+                InLuyKeHM mkho, mtk, mloai, NgayCuoiThang(pNamTC, tcuoi), IIf(baocao = 47, -1, 1)
+            Else
+                InLuyKeHM mkho, mtk, mloai, ngay(2), IIf(baocao = 47, -1, 1)
+            End If
+        Case 15, 16:
+            If CboKho(0).ListIndex < 0 Then
+                ErrMsg er_KhoHang
+                GoTo LoiBC
+            End If
+            If ChkDu(2).Value = 1 And txtShTk(4).tag = 0 Then
+                ErrMsg er_SHTKVT
+                RFocus txtShTk(4)
+                GoTo LoiBC
+            End If
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            mn = IIf(ChkDu(4).Value = 1, CboLoai(1).ItemData(CboLoai(1).ListIndex), 0)
+
+            InNguonNhapXuat mkho, mtk, mloai, mn, tdau, tcuoi, IIf(baocao = 15, -1, 1), IIf(OptTG(1).Value, 1, 0), ngay(1), ngay(2)
+        Case 17:
+            If CboKH.ListIndex < 0 Then GoTo LoiBC
+            If Not InCTNoQuaHan(ngay(0), CInt5(txtHan.Text), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)) Then GoTo LoiBC
+        Case 18 To 31, 45, 61, 68, 79:
+            Dim tg As String
+            If CboThang(0).Enabled And CboThang(1).Enabled Then
+                tg = ThoiGian(tdau, tcuoi)
+            Else
+                If CboThang(0).Enabled Then
+                    tcuoi = tdau
+                Else
+                    tdau = tcuoi
+                End If
+                tg = ThoiGian(tdau, tdau)
+            End If
+            ' Chu»n bﬁ sË li÷u
+            TinhSoLieuBaoCao
+            ' Tπo b∏o c∏o
+            TaoBaoCao
+            ' T™n File d˜ li÷u vµ b∏o c∏o
+            frmMain.Rpt.ReportFileName = TenFile
+            RptSetDate NgayCuoiThang(pNamTC, tcuoi)
+            ' C´ng th¯c
+            frmMain.Rpt.Formulas(2) = "TenBaoCao = IF PageNumber() = 1 THEN '" + TenBaoCao + "'"
+            frmMain.Rpt.Formulas(3) = "ThoiGian = IF PageNumber() = 1 THEN '" + tg + "'"
+            If Opt(1).Value Then
+                frmMain.Rpt.Formulas(0) = "TenCty='" + pTenCn + "'"
+                frmMain.Rpt.Formulas(1) = "TenCn='ß¨n vﬁ: " + Cbo.Text + "'"
+            End If
+        Case 32:
+            InTK CboThang(2).ListIndex + 1, tdau, tcuoi
+        Case 33:
+            InPSVuViec CboVV(0).ItemData(CboVV(0).ListIndex), tdau, tcuoi, CboVV(0).Text
+        Case 34:
+            If CboKho(1).ListIndex < 0 Or CboKho(2).ListIndex < 0 Then Exit Sub
+            If OptDT(2).Value Then
+                InTHDoanhThuVAT IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)
+            Else
+                InTHDoanhThu IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), IIf(OptDT(0).Value, 0, 1), IIf(ChkDu(9).Value = 1, CboKho(1).ItemData(CboKho(1).ListIndex), 0), IIf(ChkDu(8).Value = 1, txtshkh(2).Text, ""), IIf(ChkDu(11).Value = 1, txtsh(0).tag, 0), IIf(ChkDu(10).Value = 1, CboKho(2).ItemData(CboKho(2).ListIndex), 0), mdt, mdt1, mdt2, mdt3, IIf(ChkDu(12).Value = 1, txtShTk(9).Text, "")
+            End If
+        Case 35:
+            If CboKH.ListIndex < 0 Then GoTo LoiBC
+            If OptTG(0).Value Then
+                InBangThopCN tdau, tcuoi, IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0), ChkDu(5).Value
+            Else
+                InBangThopCNN ngay(1), ngay(2), IIf(Opt(3).Value And txtShTk(7).tag > 0, txtShTk(7).Text, ""), IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
+            End If
+        Case 36:
+            If txtshkh(0).tag = 0 Then
+                ErrMsg er_SHKhachHang
+                RFocus txtshkh(0)
+                GoTo LoiBC
+            End If
+            If txtShTk(7).tag = 0 Then
+                taikhoan.InitTaikhoanMaSo SelectSQL("SELECT MaTaiKhoan AS F1 FROM SoDuKhachHang WHERE MaKhachHang=" + CStr(txtshkh(0).tag))
+                If taikhoan.MaSo > 0 Then
+                    txtShTk(7).tag = taikhoan.MaSo
+                    txtShTk(7).Text = taikhoan.sohieu
+                    LbTenTk(7).Caption = taikhoan.Ten
+                Else
+                    ErrMsg er_KoPS1
+                    RFocus txtShTk(7)
+                    GoTo LoiBC
+                End If
+            Else
+                taikhoan.InitTaikhoanMaSo txtShTk(7).tag
+            End If
+            If Not InSoChitietCN(taikhoan, txtshkh(0).tag, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)) Then GoTo LoiBC
+        Case 62:
+            If Index = 0 Then GoTo KhongIn
+            If txtShTk(7).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(7)
+                GoTo LoiBC
+            Else
+                taikhoan.InitTaikhoanMaSo txtShTk(7).tag
+            End If
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten FROM (SoDuKhachHang INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo) INNER JOIN KhachHang ON SoDuKhachHang.MaKhachHang=KhachHang.MaSo WHERE HethongTK.SoHieu LIKE '" + taikhoan.sohieu + "*' GROUP BY KhachHang.SoHieu,KhachHang.Ten,KhachHang.MaSo", dbOpenSnapshot)
+            StopPrint = False
+            GauGe.Max = 50
+            frmMain.Rpt.Destination = 1
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                If InSoChitietCN(taikhoan, rs_tk!MaSo, tdau, tcuoi, ngay(1), ngay(2)) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    For i = 1 To Pdelay * 100
+                        DoEvents
+                    Next
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
+            GoTo LoiBC
+        Case 70:
+            If Index = 0 Then GoTo KhongIn
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten FROM (SoDuKhachHang INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo) INNER JOIN KhachHang ON SoDuKhachHang.MaKhachHang=KhachHang.MaSo WHERE HethongTK.SoHieu LIKE '" + txtShTk(7).Text + "*' GROUP BY KhachHang.MaSo,KhachHang.SoHieu,KhachHang.Ten", dbOpenSnapshot)
+            StopPrint = False
+            If rs_tk.recordCount > 0 Then
+                rs_tk.MoveLast
+                GauGe.Max = rs_tk.recordCount
+                GauGe.Value = 0
+                rs_tk.MoveFirst
+            End If
+            frmMain.Rpt.Destination = 1
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                If THPSNhomCN2(txtshkh(0).tag, tdau, tcuoi) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    For i = 1 To Pdelay * 100
+                        DoEvents
+                    Next
+                End If
+                GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
+            Set rs_tk = Nothing
+            GoTo LoiBC
+        Case 63:
+            If Index = 0 Then GoTo KhongIn
+            taikhoan.InitTaikhoanMaSo txtShTk(7).tag
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT DISTINCTROW KhachHang.MaSo,SoHieu,Ten FROM SoDuKhachHang INNER JOIN KhachHang ON SoDuKhachHang.MaKhachHang=KhachHang.MaSo GROUP BY SoHieu,Ten,KhachHang.MaSo", dbOpenSnapshot)
+            StopPrint = False
+            GauGe.Max = 100
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                If DoiChieuCN(IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), rs_tk!MaSo, taikhoan, 1) Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    AppIdle Pdelay * 100
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+            Loop
+            rs_tk.Close
+            GoTo LoiBC
+        Case 57:
+            If txtshkh(0).tag = 0 Then
+                ErrMsg er_SHKhachHang
+                RFocus txtshkh(0)
+                GoTo LoiBC
+            End If
+            If Not THPSNhomCN2(txtshkh(0).tag, tdau, tcuoi) Then GoTo LoiBC
+        Case 49, 82:
+            If txtshkh(1).tag = 0 Then
+                ErrMsg er_SHKhachHang
+                RFocus txtshkh(1)
+                GoTo LoiBC
+            End If
+            taikhoan.InitTaikhoanMaSo txtShTk(7).tag
+            If Not DoiChieuCN(IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(1).tag, taikhoan, IIf(baocao = 49, 1, 0)) Then GoTo LoiBC
+        Case 37:
+            THDoanhThuGiaVon IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), IIf(ChkDu(9).Value = 1, CboKho(1).ItemData(CboKho(1).ListIndex), 0), IIf(ChkDu(12).Value = 1, txtShTk(9).Text, ""), ChkDu(13).Value
+        Case 38:
+            If txtShVT(1).tag = 0 Then
+                ErrMsg er_SHVattu
+                RFocus txtShVT(1)
+                GoTo LoiBC
+            End If
+            CTDoanhThuGiaVon IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtShVT(1).tag
+        Case 39:
+            If CboKH.ListIndex < 0 Then Exit Sub
+            InCTDoanhThu IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(0).tag, txtShVT(1).tag, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
+        Case 53:
+            If CboKH.ListIndex < 0 Then Exit Sub
+            InCTDoanhThu4 IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtshkh(0).tag, txtShVT(1).tag, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
+        Case 66:
+            If txtShVT(1).tag = 0 Then
+                ErrMsg er_SHVattu
+                RFocus txtShVT(1)
+                GoTo LoiBC
+            End If
+            InCTDoanhThu2 IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), txtShVT(1).tag
+        Case 40:
+            KeHopDongV tdau, tcuoi, txtshkh(0).tag, CboHD.ItemData(CboHD.ListIndex)
+        Case 41:
+            KeHopDongR tdau, tcuoi, txtshkh(0).tag, CboHD.ItemData(CboHD.ListIndex)
+        Case 42:
+            If txtShTk(8).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(8)
+                GoTo LoiBC
+            End If
+            If Not BKChiTiet(xlapp, xlsheet, txtShTk(8).Text, IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2)) Then GoTo LoiBC
+        Case 44:
+            If txtShTk(11).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(11)
+                GoTo LoiBC
+            End If
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            InTHXuatKho IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), mkho, mtk, mloai, txtShTk(11).Text
+        Case 60, 77:
+            If TxtCT(1).tag = 0 Then
+                ErrMsg er_SHThanhPham
+                RFocus TxtCT(1)
+                GoTo LoiBC
+            End If
+            mkho = IIf(OptKho(0).Value, CboKho(0).ItemData(CboKho(0).ListIndex), 0)
+            mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            InTHXuatKhoDT IIf(OptTG(0).Value, tdau, 0), IIf(OptTG(0).Value, tcuoi, 0), ngay(1), ngay(2), mkho, mtk, mloai, TxtCT(1).tag, IIf(baocao = 60, 0, 1)
+        Case 55:
+            mtk = IIf(ChkDu(2).Value = 0, 0, txtShTk(4).tag)
+            mloai = IIf(ChkDu(3).Value = 1, CboLoai(0).ItemData(CboLoai(0).ListIndex), 0)
+            InBangKeTon IIf(OptTG(0).Value, tcuoi, 0), ngay(2), mtk, mloai
+            GoTo LoiBC
+        Case 56:
+            taikhoan.InitTaikhoanMaSo txtShTk(8).tag
+            If taikhoan.MaSo = 0 Or (taikhoan.tk_id <> TKCNKH_ID And taikhoan.tk_id <> TKCNPT_ID) Then
+                THPSNhomTK txtShTk(8).Text, tdau, tcuoi
+            Else
+                THPSNhomCN taikhoan, tdau, tcuoi
+            End If
+        Case 58:
+            If CboKH.ListIndex < 0 Then GoTo LoiBC
+            BangCDCno tdau, tcuoi, IIf(Opt(2).Value, CboKH.ItemData(CboKH.ListIndex), 0)
+
+        End Select
+        frmMain.Rpt.Destination = Index
+        If Len(NLB) > 0 And NLB <> "..." Then frmMain.Rpt.Formulas(52) = "NLB='" + NLB + "'"
+        If Len(KTT) > 0 And KTT <> "..." Then frmMain.Rpt.Formulas(53) = "KTT='" + KTT + "'"
+        If Len(GD) > 0 And GD <> "..." Then frmMain.Rpt.Formulas(54) = "GD='" + GD + "'"
+a:
+        If Not RptOK(frmMain.Rpt.ReportFileName, nn) Then
+            MsgBox "M…u b∏o c∏o Æ∑ bﬁ thay ÆÊi!", vbCritical, App.ProductName
+            GoTo LoiBC
+        End If
+        frmMain.Rpt.WindowTitle = OptBC(baocao).Caption
+        On Error GoTo Bad
+        frmMain.Rpt.Action = 1
+        On Error GoTo 0
+        GoTo LoiBC
+    Case 2:
+        Unload Me
     End Select
     GoTo LoiBC
 KhongIn:

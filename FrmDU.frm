@@ -41,15 +41,6 @@ Begin VB.Form FrmDU
       _ExtentY        =   6588
       _StockProps     =   77
       BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "VK Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
       Rows            =   20
       Cols            =   3
       FixedRows       =   0
@@ -276,7 +267,8 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub GrdNt_click()
-    SendKeys "{Home}", True
+'SendKeys "{Home}", True
+    txtNhap(1).SelStart = 1
     SetGridIndex GrdNT, GrdNT.Row
     With GrdNT
         .col = 0
@@ -318,7 +310,7 @@ Private Sub LietKeNgte()
         GrdNT.AddItem rs_ngte!sohieu + Chr(9) + rs_ngte!shtk + Chr(9) + rs_ngte!Ten, 0
         rs_ngte.MoveNext
     Loop
-    GrdNT.Rows = IIf(rs_ngte.RecordCount > GrdNT.tag, rs_ngte.RecordCount, GrdNT.tag)
+    GrdNT.Rows = IIf(rs_ngte.recordCount > GrdNT.tag, rs_ngte.recordCount, GrdNT.tag)
     GrdNT.Row = 0
     GrdNT.col = 0
     rs_ngte.Close

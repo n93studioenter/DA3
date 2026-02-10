@@ -359,10 +359,10 @@ Begin VB.Form FrmVattu
    End
    Begin VB.PictureBox Panel 
       BackColor       =   &H00FFFFFF&
-      Height          =   7335
+      Height          =   7455
       Index           =   0
       Left            =   6720
-      ScaleHeight     =   7275
+      ScaleHeight     =   7395
       ScaleWidth      =   5595
       TabIndex        =   25
       Tag             =   "0"
@@ -2350,7 +2350,7 @@ Private Sub Command3_Click()
         'MsgBox "Vui lòng nh?p tên khách hàng d? tìm ki?m.", vbExclamation
         Dim s As String
         s = ChrW(86) & ChrW(117) & ChrW(105) & ChrW(32) & ChrW(108) & ChrW(242) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(116) & ChrW(236) & ChrW(109) & ChrW(32) & ChrW(107) & ChrW(105) & ChrW(7871) & ChrW(109)
-        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
 
         Exit Sub
     End If
@@ -2695,7 +2695,7 @@ Private Function KiemTraSoLieu() As Boolean
         'MsgBox "ThiÕu ®¬n vÞ tÝnh vËt t­!", vbExclamation, App.ProductName
         Dim s As String
         s = ChrW(84) & ChrW(104) & ChrW(105) & ChrW(7871) & ChrW(117) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(118) & ChrW(7883) & ChrW(32) & ChrW(116) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(118) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(432) & ChrW(33)
-        MessageBoxW Me.hWnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
 
         RFocus txtVT(2)
         Exit Function

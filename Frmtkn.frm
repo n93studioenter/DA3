@@ -2,6 +2,7 @@ VERSION 5.00
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Object = "{BE4F3AC8-AEC9-101A-947B-00DD010F7B46}#1.0#0"; "MSOUTL32.OCX"
 Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
+Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FrmTaikhoan 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
@@ -29,6 +30,16 @@ Begin VB.Form FrmTaikhoan
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.TextBox txt 
+      Height          =   285
+      Index           =   3
+      Left            =   360
+      MaxLength       =   60
+      TabIndex        =   5
+      Top             =   2280
+      Visible         =   0   'False
+      Width           =   3735
+   End
    Begin VB.PictureBox picFakeTitle 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
@@ -421,17 +432,6 @@ Begin VB.Form FrmTaikhoan
       Top             =   2400
       Width           =   1095
    End
-   Begin VB.TextBox txt 
-      BorderStyle     =   0  'None
-      Height          =   285
-      Index           =   3
-      Left            =   5760
-      MaxLength       =   60
-      TabIndex        =   5
-      Top             =   1080
-      Visible         =   0   'False
-      Width           =   3735
-   End
    Begin VB.ComboBox CboNT 
       Appearance      =   0  'Flat
       Height          =   315
@@ -491,6 +491,7 @@ Begin VB.Form FrmTaikhoan
       MaxLength       =   60
       TabIndex        =   4
       Top             =   1920
+      Visible         =   0   'False
       Width           =   3735
    End
    Begin VB.OptionButton OptNo 
@@ -786,6 +787,35 @@ Begin VB.Form FrmTaikhoan
       ScrollBars      =   2
       HighLight       =   0   'False
    End
+   Begin MSForms.TextBox txtDienGiai 
+      Height          =   340
+      Left            =   5760
+      TabIndex        =   71
+      Top             =   1115
+      Visible         =   0   'False
+      Width           =   3735
+      VariousPropertyBits=   679495699
+      Size            =   "6588;600"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   340
+      Left            =   5760
+      TabIndex        =   70
+      Top             =   710
+      Width           =   3735
+      VariousPropertyBits=   679495707
+      Size            =   "6588;600"
+      SpecialEffect   =   0
+      FontName        =   "Tahoma"
+      FontHeight      =   180
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
+   End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
       Caption         =   "CP luü kÕ ®Õn ®Çu n¨m"
@@ -838,8 +868,8 @@ Begin VB.Form FrmTaikhoan
       Visible         =   0   'False
       X1              =   5760
       X2              =   9480
-      Y1              =   1365
-      Y2              =   1365
+      Y1              =   1450
+      Y2              =   1450
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -885,8 +915,8 @@ Begin VB.Form FrmTaikhoan
       Index           =   1
       X1              =   5760
       X2              =   9480
-      Y1              =   1005
-      Y2              =   1005
+      Y1              =   1055
+      Y2              =   1055
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFFF&
@@ -1388,13 +1418,21 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
     If KeyCode = vbKeyEscape Then Hide
 End Sub
+
 '====================================================================================================
 ' Khëi t¹o cöa sæ
 '====================================================================================================
 Private Sub lblClose_Click()
     Unload Me
 End Sub
+Private Sub txtName_Change()
+    txt(1).Text = UnicodeToVni(txtName.Text)
+End Sub
+Private Sub txtDienGiai_Change()
+    txt(3).Text = UnicodeToVni(txtDiengiai.Text)
+End Sub
 Private Sub Form_Load()
+
     lblTitle(11).AutoSize = True
     Me.Height = Me.Height + 350 + 10
     picFakeTitle.Width = Me.ScaleWidth
@@ -1437,7 +1475,8 @@ Private Sub Form_Load()
     Caption = "HÖ thèng tµi kho¶n" + " - " + CStr(pNamTC)
 
     Label(8).Visible = pSongNgu
-    txt(3).Visible = pSongNgu
+    'txt(3).Visible = pSongNgu
+    txtDiengiai.Visible = pSongNgu
     Line1(5).Visible = pSongNgu
     lblTitle(11).Caption = Caption
     AnControl Me
@@ -1541,8 +1580,13 @@ With TkNhap
     ' Show thong tin ve tai khoan  duoc chon
     txt(0).Text = .sohieu
     txt(1).Text = .Ten
+    txtName.Text = VniToUnicode(.Ten)
     txt(2).Text = .GhiChu
-    If pSongNgu Then txt(3).Text = .TenE
+   
+    If pSongNgu Then
+     txt(3).Text = .TenE
+     txtDiengiai.Text = VniToUnicode(.TenE)
+    End If
     Select Case .kieu
         Case -1
             OptNo.Value = True

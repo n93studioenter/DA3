@@ -2510,394 +2510,412 @@ End Sub
 ' Xem, In ho∆c k’t thÛc
 '====================================================================================================
 Public Sub Command_Click(Index As Integer)
-If OptTG(0).Value = False Then
-  If IsDate(MedNgay(1).Text) And IsDate(MedNgay(0).Text) Then
+    If OptTG(0).Value = False Then
+        If IsDate(MedNgay(1).Text) And IsDate(MedNgay(0).Text) Then
+            If CDate(MedNgay(1).Text) < CDate(MedNgay(0).Text) Then
+                MedNgay(1).Text = MedNgay(0).Text
+
+            End If
+        End If
+    Else
+        If IsDate(CboThang(0).Text) And IsDate(CboThang(1).Text) Then
+            If CDate(CboThang(1).Text) < CDate(CboThang(0).Text) Then
+                CboThang(1).Text = CboThang(0).Text
+
+            End If
+        End If
+    End If
+    If IsDate(MedNgay(1).Text) And IsDate(MedNgay(0).Text) Then
         If CDate(MedNgay(1).Text) < CDate(MedNgay(0).Text) Then
             MedNgay(1).Text = MedNgay(0).Text
-          
+            ' MsgBox "Thong bao"
+            '     Exit Sub
         End If
-  End If
-  Else
-   If IsDate(CboThang(0).Text) And IsDate(CboThang(1).Text) Then
-        If CDate(CboThang(1).Text) < CDate(CboThang(0).Text) Then
-            CboThang(1).Text = CboThang(0).Text
-          
-        End If
-  End If
-  End If
-   If IsDate(MedNgay(1).Text) And IsDate(MedNgay(0).Text) Then
-        If CDate(MedNgay(1).Text) < CDate(MedNgay(0).Text) Then
-            MedNgay(1).Text = MedNgay(0).Text
-           ' MsgBox "Thong bao"
-       '     Exit Sub
-        End If
-  End If
-  'ket thuc kiem tra ngay
-    
+    End If
+    'ket thuc kiem tra ngay
+
     Dim taikhoan As New ClsTaikhoan
     Dim doiung As New ClsTaikhoan, n As Date
     Dim i As Integer, tdau As Integer, tcuoi As Integer, kq1 As Boolean
     Dim mdt1 As Long, mdt2 As Long, mdt3 As Long
-    
+
     Select Case Index
-        Case 0, 1:
-            If pRpt = 1 And (Not ChoXemBC(baocao, "T")) Then
-                ErrMsg er_KoSD
-                Exit Sub
+    Case 0, 1:
+        If pRpt = 1 And (Not ChoXemBC(baocao, "T")) Then
+            ErrMsg er_KoSD
+            Exit Sub
+        End If
+        Me.MousePointer = 11
+        GauGe.Value = 0
+        If CboThang(1).ListIndex < CboThang(0).ListIndex Then CboThang(1).ListIndex = CboThang(0).ListIndex
+        tdau = CboThang(0).ItemData(CboThang(0).ListIndex)
+        tcuoi = CboThang(1).ItemData(CboThang(1).ListIndex)
+
+        If pSoVV > 0 And ChkTT(0).Value = 1 And CboTT(0).ListIndex >= 0 Then mdt1 = CboTT(0).ItemData(CboTT(0).ListIndex) Else mdt1 = 0
+        If pSoVV > 1 And ChkTT(1).Value = 1 And CboTT(1).ListIndex >= 0 Then mdt2 = CboTT(1).ItemData(CboTT(1).ListIndex) Else mdt2 = 0
+        If pSoVV > 2 And ChkTT(2).Value = 1 And CboTT(2).ListIndex >= 0 Then mdt3 = CboTT(2).ItemData(CboTT(2).ListIndex) Else mdt3 = 0
+
+        SetRptInfo
+        Select Case baocao
+        Case 20:
+            If txtShTk(0).tag = 0 Then
+                RFocus txtShTk(0)
+                GoTo KhongInBC
             End If
-            Me.MousePointer = 11
-            GauGe.Value = 0
-            If CboThang(1).ListIndex < CboThang(0).ListIndex Then CboThang(1).ListIndex = CboThang(0).ListIndex
-            tdau = CboThang(0).ItemData(CboThang(0).ListIndex)
-            tcuoi = CboThang(1).ItemData(CboThang(1).ListIndex)
-            
-            If pSoVV > 0 And ChkTT(0).Value = 1 And CboTT(0).ListIndex >= 0 Then mdt1 = CboTT(0).ItemData(CboTT(0).ListIndex) Else mdt1 = 0
-            If pSoVV > 1 And ChkTT(1).Value = 1 And CboTT(1).ListIndex >= 0 Then mdt2 = CboTT(1).ItemData(CboTT(1).ListIndex) Else mdt2 = 0
-            If pSoVV > 2 And ChkTT(2).Value = 1 And CboTT(2).ListIndex >= 0 Then mdt3 = CboTT(2).ItemData(CboTT(2).ListIndex) Else mdt3 = 0
-            
-            SetRptInfo
-            Select Case baocao
-                Case 20:
-                    If txtShTk(0).tag = 0 Then
-                        RFocus txtShTk(0)
-                        GoTo KhongInBC
-                    End If
-                    taikhoan.InitTaikhoanMaSo txtShTk(0).tag
-                    If OptTG(0).Value And tdau = tcuoi Then
-                        ngay(0) = NgayDauThang(pNamTC, tdau)
-                        OptTG(1).Value = True
-                        For i = 1 To 5
-                            ngay(1) = ngay(0) + 6
-                            If month(ngay(1)) <> tcuoi Then ngay(1) = NgayCuoiThang(pNamTC, tcuoi)
-                            
-                            'Command_Click Index
-                            If taikhoan.loai < 5 Or taikhoan.kieu < 0 Then
-                                If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, ngay(0), ngay(1), -1) Then
-                                    InBaoCaoRPT nn
-                                    SetRptInfo
-                                End If
-                            End If
-                            If taikhoan.loai < 5 Or taikhoan.kieu > 0 Then
-                                If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, ngay(0), ngay(1), 1) Then
-                                    InBaoCaoRPT nn
-                                    SetRptInfo
-                                End If
-                            End If
-                            If month(ngay(0) + 7) = tdau Then
-                                ngay(0) = ngay(0) + 7
-                            Else
-                                Exit For
-                            End If
-                        Next
-                        MedNgay(0).Text = Format(ngay(0), Mask_D)
-                        MedNgay(1).Text = Format(ngay(1), Mask_D)
-                        GoTo KhongInBC
-                    Else
-                        If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, IIf(OptTG(0).Value, NgayDauThang(pNamTC, tdau), ngay(0)), IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(1)), -1) Then
+            taikhoan.InitTaikhoanMaSo txtShTk(0).tag
+            If OptTG(0).Value And tdau = tcuoi Then
+                ngay(0) = NgayDauThang(pNamTC, tdau)
+                OptTG(1).Value = True
+                For i = 1 To 5
+                    ngay(1) = ngay(0) + 6
+                    If month(ngay(1)) <> tcuoi Then ngay(1) = NgayCuoiThang(pNamTC, tcuoi)
+
+                    'Command_Click Index
+                    If taikhoan.loai < 5 Or taikhoan.kieu < 0 Then
+                        If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, ngay(0), ngay(1), -1) Then
                             InBaoCaoRPT nn
                             SetRptInfo
                         End If
-                        If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, IIf(OptTG(0).Value, NgayDauThang(pNamTC, tdau), ngay(0)), IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(1)), 1) Then InBaoCaoRPT nn
-                        GoTo KhongInBC
                     End If
-                Case 18:
-                    SoDangKyCT tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1)
-                Case 0:
-                    If Not InNhatKy(tdau, tcuoi, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1), nn, , mdt1, mdt2, mdt3) Then GoTo KhongInBC
-                Case 1, 15:
-                    If txtShTk(0).tag = 0 Then
-                        RFocus txtShTk(0)
-                        GoTo KhongInBC
+                    If taikhoan.loai < 5 Or taikhoan.kieu > 0 Then
+                        If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, ngay(0), ngay(1), 1) Then
+                            InBaoCaoRPT nn
+                            SetRptInfo
+                        End If
                     End If
-                    taikhoan.InitTaikhoanMaSo txtShTk(0).tag
-                    If ChkDu(0).Value = 1 And txtShTk(1).tag = 0 Then
-                        RFocus txtShTk(1)
-                        GoTo KhongInBC
-                    End If
-                    If ChkDu(0).Value = 1 Then
-                        doiung.InitTaikhoanMaSo txtShTk(1).tag
+                    If month(ngay(0) + 7) = tdau Then
+                        ngay(0) = ngay(0) + 7
                     Else
-                        doiung.InitTaikhoanMaSo 0
+                        Exit For
                     End If
-                    If (taikhoan.MaTC <> taikhoan.MaSo) And (taikhoan.MaTC > 0) Then
-                        If OptTG(0).Value Then
-                            If Not InSoChitiet(taikhoan, tdau, tcuoi, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn) Then GoTo KhongInBC
-                        Else
-                            If Not InSoChitiet(taikhoan, 0, 0, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn) Then GoTo KhongInBC
-                        End If
-                    Else
-                        If baocao = 1 Then
-                            If OptTG(0).Value Then
-                                If Not InSocaiTk(taikhoan, tdau, tcuoi, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn, mdt1, mdt2, mdt3) Then GoTo KhongInBC
-                            Else
-                                If Not InSocaiTk(taikhoan, tdau, tcuoi, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn, mdt1, mdt2, mdt3) Then GoTo KhongInBC
-                            End If
-                        Else
-                            If Not InSocaiTk2(taikhoan, tdau, tcuoi, True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), nn) Then GoTo KhongInBC
-                        End If
-                    End If
-                Case 2:
-                    Dim rs_tk As Recordset
-                    If Index = 0 Then
-                        ErrMsg er_KoXem
-                        GoTo KhongInBC
-                    End If
-                    Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten FROM HethongTK WHERE MaTC = MaSo AND Loai > 0 ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
-                    StopPrint = False
-                    frmMain.Rpt.Destination = 1
-                    GauGe.Max = 200
-                    
-                    Dim nunmberloop As Integer
-                    Select Case baocao
-                     Case 2, 19:
-                      nunmberloop = 1
-                    End Select
-                    Do While Not rs_tk.EOF And (Not StopPrint)
-                        taikhoan.InitTaikhoanMaSo rs_tk!MaSo
-                        SetRptInfo
-                        If (pSoKT Mod 10 >= 1) Or (pSoKT Mod 1000 >= 100) Then
-                            kq1 = InSocaiTk(taikhoan, tdau, tcuoi, ngay(0), ngay(1), False, "", 0, ChkDu(3).Value, nn)
-                        Else
-                            kq1 = InSocaiTk2(taikhoan, tdau, tcuoi, False, "", 0, nn)
-                        End If
-                        If kq1 Then
-                            HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
-                            InBaoCaoRPT
-                            AppIdle Pdelay * 100
-                        End If
-                        If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
-                        rs_tk.MoveNext
-                        If nunmberloop = 1 Then Exit Do
-                    
-                    Loop
-                    rs_tk.Close
-                    Set rs_tk = Nothing
-                    GoTo KhongInBC
-                Case 3:
-                frmMain.Rpt.Formulas(30) = "diachi='" + frmMain.LbCty(2).Caption + ", " + frmMain.LbCty(10).Caption + ", " + frmMain.LbCty(11).Caption + "'"
-                    If OptKqkd(0).Value Then InKqkd tdau, tcuoi, IIf(ChkDu(5).Value = 1, CboNK(2).ListIndex + 2, 0), nn
-                    If OptKqkd(1).Value Then InThue tdau, tcuoi
-                    If OptKqkd(2).Value Then InVAT tdau, tcuoi
-                    If OptKqkd(4).Value Then
-                        If Not InTongHopHD(tdau, tcuoi) Then GoTo KhongInBC
-                    End If
-                    If OptKqkd(3).Value Or OptKqkd(5).Value Then
-                        If txtShTk(2).tag = 0 Then
-                            RFocus txtShTk(2)
-                            GoTo KhongInBC
-                        End If
-                    End If
-                    If OptKqkd(3).Value Then InCTChiphi tdau, tcuoi, txtShTk(2).Text, LbTenTk(2).Caption
-                    If OptKqkd(5).Value Then
-                        If Not InTongHopPhi(txtShTk(2).Text, tdau, tcuoi) Then GoTo KhongInBC
-                    End If
-                    If OptKqkd(6).Value Then
-                        If Len(txtShTk(2).Text) = 0 Then
-                            RFocus txtShTk(2)
-                            GoTo KhongInBC
-                        End If
-                        If Not BKChiTietRPT(txtShTk(2).Text, NgayDauThang(pNamTC, tdau), NgayCuoiThang(pNamTC, tcuoi)) Then GoTo KhongInBC
-                    End If
-                    If OptKqkd(7).Value Then ChiTietDoanhThu tdau, tcuoi
-                    If OptKqkd(8).Value Then InCTKQKD pThangDauKy, ThangCuoiNamTC
-                    If OptKqkd(9).Value Then
-                        PTDTCP tdau, tcuoi
-                        GoTo KhongInBC
-                    End If
-                Case 4:
-                frmMain.Rpt.Formulas(30) = "diachi='" + frmMain.LbCty(2).Caption + ", " + frmMain.LbCty(10).Caption + ", " + frmMain.LbCty(11).Caption + "'"
-                    ' them tai khoan 244
-                If SelectSQL("SELECT count(maso) AS F1 from HethongTK where SoHieu LIKE '621*'") <= 0 Then
-                 
-                
-                ' If SelectSQL("SELECT count(maso) as f1 from cdts2005 where maso = 320") > 0 Or SelectSQL("SELECT count(maso) as f1 from cdts2005") <= 0 Then
-                    ExecuteSQL5 "drop table cdts2005 "
-                    ExecuteSQL5 "SELECT * INTO cdts2005 FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].cdts2005"
-                     ExecuteSQL5 "UPDATE CDTS2005 SET shtk1 = '244' WHERE MaSo= 241"
-               ' End If
+                Next
+                MedNgay(0).Text = Format(ngay(0), Mask_D)
+                MedNgay(1).Text = Format(ngay(1), Mask_D)
+                GoTo KhongInBC
+            Else
+                If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, IIf(OptTG(0).Value, NgayDauThang(pNamTC, tdau), ngay(0)), IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(1)), -1) Then
+                    InBaoCaoRPT nn
+                    SetRptInfo
                 End If
-                    If OptCD(0).Value Then
-                        If pVersion <> 3 Then
-                            InCdts tdau, tcuoi, Chk(2).Value, nn
-                        Else
-                            InCdts_HCSN tdau, tcuoi, CboNK(1).ListIndex + 1
-                        End If
-                    Else
-                        InTsNb tcuoi
-                    End If
-                Case 5:
-                    If ChkDu(4).Value = 1 And Len(txtShTk(4).Text) > 0 Then
-                        taikhoan.InitTaikhoanSohieu txtShTk(4).Text
-                    Else
-                        taikhoan.InitTaikhoanMaSo 0
-                    End If
-                    If OptVAT(0).Value Then
-                        If Not InVATHoanLai(tdau, tcuoi) Then GoTo KhongInBC
-                    End If
-                    If OptVAT(1).Value Then
-                        If Not InVATMienGiam(tdau, tcuoi) Then GoTo KhongInBC
-                    End If
-                    
-                    'In bang ke
-                    If OptVAT(3).Value And Chk(1).Value = 0 Then ' bang ke ra
-                     '   If Not InVATDauRa(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
-                      ' If Not InVATDauRa_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
-                      ' MsgBox " thanh cong"
-                    If MsgBox("bπn c„ mËn chuy”n ra excel Æ” cÀp nhÀt vµo m∑ vπch?", vbYesNo + vbQuestion, App.ProductName) = vbYes Then
-                       If Not InVATDauRa_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
-                      Else
-                        If Not InVATDauRa(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
-                     End If
-                    End If
-                    'In bang ke
-                    If OptVAT(3).Value And Chk(1).Value = 1 Then
-                        InVATDauRaMV tcuoi, CInt5(CboTL.ItemData(CboTL.ListIndex)), taikhoan
-                        GoTo KhongInBC
-                    End If
-                    If OptVAT(4).Value And Chk(1).Value = 0 Then
-                      '  If Not InVATDauVao2(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
-                      'bang ke vao ///////////////////////////////////////////////////////
-                       If MsgBox("bπn c„ mËn chuy”n ra excel Æ” cÀp nhÀt vµo m∑ vπch?", vbYesNo + vbQuestion, App.ProductName) = vbYes Then
-                       If Not InVATDauvao_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
-                      Else
-                        If Not InVATDauVao2(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
-                    End If
-                    End If
-                    If OptVAT(4).Value And Chk(1).Value = 1 Then
-                        InVATDauVaoMV tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan
-                        GoTo KhongInBC
-                    End If
-                    If OptVAT(2).Value And Chk(1).Value = 0 Then
-                        If Not InVATDauVao2(tdau, tcuoi, -1, 0, taikhoan) Then GoTo KhongInBC
-                    End If
-                    If OptVAT(2).Value And Chk(1).Value = 1 Then
-                        InVATDauVaoMV tcuoi, -1, 0, taikhoan
-                        GoTo KhongInBC
-                    End If
-                    If OptVAT(5).Value And Chk(1).Value = 0 Then
-                        ToKhaiVAT tdau, tcuoi, taikhoan
-                    End If
-                    If OptVAT(5).Value And Chk(1).Value = 1 Then
-                        ToKhaiVAT2 tcuoi, taikhoan
-                        GoTo KhongInBC
-                    End If
-                    If OptVAT(6).Value Then InThueTTDB tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan
-                    If OptVAT(7).Value Then BangKeBanRa tdau, tcuoi, taikhoan
-                    If OptVAT(8).Value Then ToKhaiTTDB tdau, tcuoi, taikhoan
-                    If OptVAT(9).Value Or OptVAT(10).Value Then
-                        InBKTheoTK IIf(OptVAT(9).Value, -1, 1), tdau, tcuoi, txtShTk(5).Text, IIf(Chk(0).Value = 1, txtShTk(6).Text, "")
-                    End If
-                Case 11:
-                    InLCTT2 tdau, tcuoi
-                Case 7:
-                    InTMTC tdau, tcuoi
-                    GoTo KhongInBC
-                Case 6:
-                    If txtShTk(3).tag = 0 Then
-                        RFocus txtShTk(3)
-                        GoTo KhongInBC
-                    End If
-                   BK1 tdau, tcuoi, txtShTk(3).Text, ChkDu(2).Value, CboNK(1).ListIndex + 1
-                    GoTo KhongInBC
-                Case 9:
-                    If txtShTk(3).tag = 0 Then
-                        RFocus txtShTk(3)
-                        GoTo KhongInBC
-                    End If
-                     NK1 tdau, tcuoi, txtShTk(3).Text, ChkDu(2).Value, CboNK(1).ListIndex + 1
-                    GoTo KhongInBC
-                Case 10:
-                    InCDBanCo tdau, tcuoi
-                    GoTo KhongInBC
-                Case 8:
-                    If txtShTk(3).tag = 0 Then
-                        ErrMsg er_SHTaiKhoan
-                        RFocus txtShTk(3)
-                        GoTo KhongInBC
-                    End If
-                    taikhoan.InitTaikhoanMaSo txtShTk(3).tag
-                    InSoDuTK taikhoan, tcuoi
-                Case 12:
-                    If CboNK(0).ListIndex = 3 Or CboNK(0).ListIndex = 9 Then
-                        If txtShTk(3).tag = 0 Then
-                            ErrMsg er_SHTaiKhoan
-                            RFocus txtShTk(3)
-                            GoTo KhongInBC
-                        End If
-                    End If
-                    Select Case CboNK(0).ListIndex
-                        Case 0:   NK1 tdau, tcuoi, "111", 1, CboNK(1).ListIndex + 1, 1
-                        Case 1:   NK1 tdau, tcuoi, "112", 0, CboNK(1).ListIndex + 1, 2
-                        Case 2:   NK1 tdau, tcuoi, "113", 0, CboNK(1).ListIndex + 1, 3
-                        Case 3:   NK4 tdau, tcuoi, txtShTk(3).Text, CboNK(1).ListIndex + 1
-                        Case 4:   NK5 tdau, tcuoi, "331", CboNK(1).ListIndex + 1
-                        Case 5:   NK6 tdau, tcuoi, "151", CboNK(1).ListIndex + 1
-                        Case 6:   NK7 tdau, tcuoi
-                        Case 7:   NK8 tdau, tcuoi
-                        Case 8:   NK9 tdau, tcuoi, CboNK(1).ListIndex + 1
-                        Case 9:   NK10 tdau, tcuoi, txtShTk(3).Text, 0, CboNK(1).ListIndex + 1
-                    End Select
-                    GoTo KhongInBC
-                Case 13:
-                    If CboNK(0).ListIndex = 5 Then
-                        If txtShTk(3).tag = 0 Then
-                            ErrMsg er_SHTaiKhoan
-                            RFocus txtShTk(3)
-                            GoTo KhongInBC
-                        End If
-                    End If
-                    Select Case CboNK(0).ListIndex
-                        Case 0:   BK1 tdau, tcuoi, "111", 1, CboNK(1).ListIndex + 1, 1
-                        Case 1:   BK1 tdau, tcuoi, "112", 0, CboNK(1).ListIndex + 1, 2
-                        Case 2:   GiaNhapKho tdau, tcuoi
-                                          GoTo InBC
-                        Case 3:   BK4 tdau, tcuoi, "SoHieu LIKE '154*' OR SoHieu LIKE '621*' OR SoHieu LIKE '622*' OR SoHieu LIKE '623*' OR SoHieu LIKE '627*'", 4
-                        Case 4:   BK4 tdau, tcuoi, "SoHieu LIKE '241*' OR SoHieu LIKE '641*' OR SoHieu LIKE '642*'", 5
-                        Case 5:   NK10 tdau, tcuoi, txtShTk(3).Text, 1, CboNK(1).ListIndex + 1
-                        Case 10: BK11 tdau, tcuoi, pSHPT, CboNK(1).ListIndex + 1
-                    End Select
-                    GoTo KhongInBC
-                Case 14:
-                    CTGhiSo CTGS.ItemData(CTGS.ListIndex), tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1), IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0)
-                Case 21:
-                    CTGhiSo2 CTGS.ItemData(CTGS.ListIndex), tdau, tcuoi
-                Case 19:
-                    For i = 0 To CTGS.ListCount - 1
-                        CTGhiSo CTGS.ItemData(i), tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1), 0
-                    Next
-                Case 16:
-                    taikhoan.InitTaikhoanMaSo txtShTk(0).tag
-                    CTGhiSoTH taikhoan, tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1)
-                Case 17:
-                    If OptQT(0).Value Then InQTThue tdau, tcuoi
-                    If OptQT(1).Value Then InQTVAT tdau, tcuoi
-                    If OptQT(2).Value Then
-                        InQTTTN tdau, tcuoi
-                        GoTo KhongInBC
-                    End If
-                    If OptQT(3).Value Then BKNopThue tdau, tcuoi
-                    If OptQT(4).Value Then QTDauVao tdau, tcuoi
-                    If OptQT(5).Value Then QTDauRa
-                    If OptQT(6).Value Then GTGTCT
-            End Select
-InBC:
-            frmMain.Rpt.Destination = Index
-            If Len(NLB) > 0 And NLB <> "..." Then frmMain.Rpt.Formulas(52) = "NLB='" + NLB + "'"
-            If Len(KTT) > 0 And KTT <> "..." Then frmMain.Rpt.Formulas(53) = "KTT='" + KTT + "'"
-            If Len(GD) > 0 And GD <> "..." Then frmMain.Rpt.Formulas(54) = "GD='" + GD + "'"
-a:
-            If Not RptOK(frmMain.Rpt.ReportFileName, nn) Then
-                MsgBox "M…u b∏o c∏o Æ∑ bﬁ thay ÆÊi!", vbCritical, App.ProductName
+                If BangTHCTuGoc(CTGS.ItemData(CTGS.ListIndex), taikhoan.sohieu, IIf(OptTG(0).Value, NgayDauThang(pNamTC, tdau), ngay(0)), IIf(OptTG(0).Value, NgayCuoiThang(pNamTC, tcuoi), ngay(1)), 1) Then InBaoCaoRPT nn
                 GoTo KhongInBC
             End If
-            frmMain.Rpt.WindowTitle = OptBC(baocao).Caption
-         '   frmMain.Rpt.WindowTitle = OptBC(104).Caption
-           On Error GoTo LoiIn
-            frmMain.Rpt.Action = 1
-            On Error GoTo 0
-            GoTo KhongInBC
+        Case 18:
+            SoDangKyCT tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1)
+        Case 0:
+            If Not InNhatKy(tdau, tcuoi, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1), nn, , mdt1, mdt2, mdt3) Then GoTo KhongInBC
+        Case 1, 15:
+            If txtShTk(0).tag = 0 Then
+                RFocus txtShTk(0)
+                GoTo KhongInBC
+            End If
+            taikhoan.InitTaikhoanMaSo txtShTk(0).tag
+            If ChkDu(0).Value = 1 And txtShTk(1).tag = 0 Then
+                RFocus txtShTk(1)
+                GoTo KhongInBC
+            End If
+            If ChkDu(0).Value = 1 Then
+                doiung.InitTaikhoanMaSo txtShTk(1).tag
+            Else
+                doiung.InitTaikhoanMaSo 0
+            End If
+            If (taikhoan.MaTC <> taikhoan.MaSo) And (taikhoan.MaTC > 0) Then
+                If OptTG(0).Value Then
+                    If Not InSoChitiet(taikhoan, tdau, tcuoi, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn) Then GoTo KhongInBC
+                Else
+                    If Not InSoChitiet(taikhoan, 0, 0, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn) Then GoTo KhongInBC
+                End If
+            Else
+                If baocao = 1 Then
+                    If OptTG(0).Value Then
+                        If Not InSocaiTk(taikhoan, tdau, tcuoi, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn, mdt1, mdt2, mdt3) Then GoTo KhongInBC
+                    Else
+                        If Not InSocaiTk(taikhoan, tdau, tcuoi, ngay(0), ngay(1), True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), ChkDu(3).Value, nn, mdt1, mdt2, mdt3) Then GoTo KhongInBC
+                    End If
+                Else
+                    If Not InSocaiTk2(taikhoan, tdau, tcuoi, True, doiung.sohieu, IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0), nn) Then GoTo KhongInBC
+                End If
+            End If
         Case 2:
-            Unload Me
+            Dim rs_tk As Recordset
+            If Index = 0 Then
+                ErrMsg er_KoXem
+                GoTo KhongInBC
+            End If
+            Set rs_tk = DBKetoan.OpenRecordset("SELECT MaSo, SoHieu, Ten FROM HethongTK WHERE MaTC = MaSo AND Loai > 0 ORDER BY SoHieu", dbOpenSnapshot, dbForwardOnly)
+            StopPrint = False
+            frmMain.Rpt.Destination = 1
+            GauGe.Max = 200
+
+            Dim nunmberloop As Integer
+            Select Case baocao
+            Case 2, 19:
+                nunmberloop = 1
+            End Select
+            Do While Not rs_tk.EOF And (Not StopPrint)
+                taikhoan.InitTaikhoanMaSo rs_tk!MaSo
+                SetRptInfo
+                If (pSoKT Mod 10 >= 1) Or (pSoKT Mod 1000 >= 100) Then
+                    kq1 = InSocaiTk(taikhoan, tdau, tcuoi, ngay(0), ngay(1), False, "", 0, ChkDu(3).Value, nn)
+                Else
+                    kq1 = InSocaiTk2(taikhoan, tdau, tcuoi, False, "", 0, nn)
+                End If
+                If kq1 Then
+                    HienThongBao VString(rs_tk!sohieu + " - " + rs_tk!Ten), 1
+                    InBaoCaoRPT
+                    AppIdle Pdelay * 100
+                End If
+                If GauGe.Value < GauGe.Max Then GauGe.Value = GauGe.Value + 1
+                rs_tk.MoveNext
+                If nunmberloop = 1 Then Exit Do
+
+            Loop
+            rs_tk.Close
+            Set rs_tk = Nothing
+            GoTo KhongInBC
+        Case 3:
+            frmMain.Rpt.Formulas(30) = "diachi='" + frmMain.LbCty(2).Caption + ", " + frmMain.LbCty(10).Caption + ", " + frmMain.LbCty(11).Caption + "'"
+            If OptKqkd(0).Value Then InKqkd tdau, tcuoi, IIf(ChkDu(5).Value = 1, CboNK(2).ListIndex + 2, 0), nn
+            If OptKqkd(1).Value Then InThue tdau, tcuoi
+            If OptKqkd(2).Value Then InVAT tdau, tcuoi
+            If OptKqkd(4).Value Then
+                If Not InTongHopHD(tdau, tcuoi) Then GoTo KhongInBC
+            End If
+            If OptKqkd(3).Value Or OptKqkd(5).Value Then
+                If txtShTk(2).tag = 0 Then
+                    RFocus txtShTk(2)
+                    GoTo KhongInBC
+                End If
+            End If
+            If OptKqkd(3).Value Then InCTChiphi tdau, tcuoi, txtShTk(2).Text, LbTenTk(2).Caption
+            If OptKqkd(5).Value Then
+                If Not InTongHopPhi(txtShTk(2).Text, tdau, tcuoi) Then GoTo KhongInBC
+            End If
+            If OptKqkd(6).Value Then
+                If Len(txtShTk(2).Text) = 0 Then
+                    RFocus txtShTk(2)
+                    GoTo KhongInBC
+                End If
+                If Not BKChiTietRPT(txtShTk(2).Text, NgayDauThang(pNamTC, tdau), NgayCuoiThang(pNamTC, tcuoi)) Then GoTo KhongInBC
+            End If
+            If OptKqkd(7).Value Then ChiTietDoanhThu tdau, tcuoi
+            If OptKqkd(8).Value Then InCTKQKD pThangDauKy, ThangCuoiNamTC
+            If OptKqkd(9).Value Then
+                PTDTCP tdau, tcuoi
+                GoTo KhongInBC
+            End If
+        Case 4:
+            frmMain.Rpt.Formulas(30) = "diachi='" + frmMain.LbCty(2).Caption + ", " + frmMain.LbCty(10).Caption + ", " + frmMain.LbCty(11).Caption + "'"
+            ' them tai khoan 244
+            If SelectSQL("SELECT count(maso) AS F1 from HethongTK where SoHieu LIKE '621*'") <= 0 Then
+
+
+                ' If SelectSQL("SELECT count(maso) as f1 from cdts2005 where maso = 320") > 0 Or SelectSQL("SELECT count(maso) as f1 from cdts2005") <= 0 Then
+                ExecuteSQL5 "drop table cdts2005 "
+                ExecuteSQL5 "SELECT * INTO cdts2005 FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].cdts2005"
+                ExecuteSQL5 "UPDATE CDTS2005 SET shtk1 = '244' WHERE MaSo= 241"
+                ' End If
+            End If
+            If OptCD(0).Value Then
+                If pVersion <> 3 Then
+                    InCdts tdau, tcuoi, Chk(2).Value, nn
+                Else
+                    InCdts_HCSN tdau, tcuoi, CboNK(1).ListIndex + 1
+                End If
+            Else
+                InTsNb tcuoi
+            End If
+        Case 5:
+            If ChkDu(4).Value = 1 And Len(txtShTk(4).Text) > 0 Then
+                taikhoan.InitTaikhoanSohieu txtShTk(4).Text
+            Else
+                taikhoan.InitTaikhoanMaSo 0
+            End If
+            If OptVAT(0).Value Then
+                If Not InVATHoanLai(tdau, tcuoi) Then GoTo KhongInBC
+            End If
+            If OptVAT(1).Value Then
+                If Not InVATMienGiam(tdau, tcuoi) Then GoTo KhongInBC
+            End If
+
+            'In bang ke
+            If OptVAT(3).Value And Chk(1).Value = 0 Then    ' bang ke ra
+                '   If Not InVATDauRa(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
+                ' If Not InVATDauRa_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
+                ' MsgBox " thanh cong"
+                Dim s As String
+                s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(109) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(114) & ChrW(97) & ChrW(32) & ChrW(101) & ChrW(120) & ChrW(99) & ChrW(101) & ChrW(108) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(118) & ChrW(224) & ChrW(111) & ChrW(32) & ChrW(109) & ChrW(227) & ChrW(32) & ChrW(118) & ChrW(7841) & ChrW(99) & ChrW(104) & ChrW(63)
+                Dim xn As String
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                    If Not InVATDauRa_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
+                Else
+                    If Not InVATDauRa(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
+                End If
+
+                'If MsgBox("bπn c„ mËn chuy”n ra excel Æ” cÀp nhÀt vµo m∑ vπch?", vbYesNo + vbQuestion, App.ProductName) = vbYes Then
+                ' If Not InVATDauRa_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
+                ' Else
+                'If Not InVATDauRa(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan) Then GoTo KhongInBC
+                'End If
+            End If
+            'In bang ke
+            If OptVAT(3).Value And Chk(1).Value = 1 Then
+                InVATDauRaMV tcuoi, CInt5(CboTL.ItemData(CboTL.ListIndex)), taikhoan
+                GoTo KhongInBC
+            End If
+            If OptVAT(4).Value And Chk(1).Value = 0 Then
+                '  If Not InVATDauVao2(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
+                'bang ke vao ///////////////////////////////////////////////////////
+                s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(109) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(114) & ChrW(97) & ChrW(32) & ChrW(101) & ChrW(120) & ChrW(99) & ChrW(101) & ChrW(108) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(118) & ChrW(224) & ChrW(111) & ChrW(32) & ChrW(109) & ChrW(227) & ChrW(32) & ChrW(118) & ChrW(7841) & ChrW(99) & ChrW(104) & ChrW(63)
+                
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                    If Not InVATDauvao_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
+                Else
+                    If Not InVATDauVao2(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
+                End If
+                'If MsgBox("bπn c„ mËn chuy”n ra excel Æ” cÀp nhÀt vµo m∑ vπch?", vbYesNo + vbQuestion, App.ProductName) = vbYes Then
+                'If Not InVATDauvao_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
+                ' Else
+                'If Not InVATDauVao2(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
+                'End If
+            End If
+            If OptVAT(4).Value And Chk(1).Value = 1 Then
+                InVATDauVaoMV tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan
+                GoTo KhongInBC
+            End If
+            If OptVAT(2).Value And Chk(1).Value = 0 Then
+                If Not InVATDauVao2(tdau, tcuoi, -1, 0, taikhoan) Then GoTo KhongInBC
+            End If
+            If OptVAT(2).Value And Chk(1).Value = 1 Then
+                InVATDauVaoMV tcuoi, -1, 0, taikhoan
+                GoTo KhongInBC
+            End If
+            If OptVAT(5).Value And Chk(1).Value = 0 Then
+                ToKhaiVAT tdau, tcuoi, taikhoan
+            End If
+            If OptVAT(5).Value And Chk(1).Value = 1 Then
+                ToKhaiVAT2 tcuoi, taikhoan
+                GoTo KhongInBC
+            End If
+            If OptVAT(6).Value Then InThueTTDB tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), taikhoan
+            If OptVAT(7).Value Then BangKeBanRa tdau, tcuoi, taikhoan
+            If OptVAT(8).Value Then ToKhaiTTDB tdau, tcuoi, taikhoan
+            If OptVAT(9).Value Or OptVAT(10).Value Then
+                InBKTheoTK IIf(OptVAT(9).Value, -1, 1), tdau, tcuoi, txtShTk(5).Text, IIf(Chk(0).Value = 1, txtShTk(6).Text, "")
+            End If
+        Case 11:
+            InLCTT2 tdau, tcuoi
+        Case 7:
+            InTMTC tdau, tcuoi
+            GoTo KhongInBC
+        Case 6:
+            If txtShTk(3).tag = 0 Then
+                RFocus txtShTk(3)
+                GoTo KhongInBC
+            End If
+            BK1 tdau, tcuoi, txtShTk(3).Text, ChkDu(2).Value, CboNK(1).ListIndex + 1
+            GoTo KhongInBC
+        Case 9:
+            If txtShTk(3).tag = 0 Then
+                RFocus txtShTk(3)
+                GoTo KhongInBC
+            End If
+            NK1 tdau, tcuoi, txtShTk(3).Text, ChkDu(2).Value, CboNK(1).ListIndex + 1
+            GoTo KhongInBC
+        Case 10:
+            InCDBanCo tdau, tcuoi
+            GoTo KhongInBC
+        Case 8:
+            If txtShTk(3).tag = 0 Then
+                ErrMsg er_SHTaiKhoan
+                RFocus txtShTk(3)
+                GoTo KhongInBC
+            End If
+            taikhoan.InitTaikhoanMaSo txtShTk(3).tag
+            InSoDuTK taikhoan, tcuoi
+        Case 12:
+            If CboNK(0).ListIndex = 3 Or CboNK(0).ListIndex = 9 Then
+                If txtShTk(3).tag = 0 Then
+                    ErrMsg er_SHTaiKhoan
+                    RFocus txtShTk(3)
+                    GoTo KhongInBC
+                End If
+            End If
+            Select Case CboNK(0).ListIndex
+            Case 0: NK1 tdau, tcuoi, "111", 1, CboNK(1).ListIndex + 1, 1
+            Case 1: NK1 tdau, tcuoi, "112", 0, CboNK(1).ListIndex + 1, 2
+            Case 2: NK1 tdau, tcuoi, "113", 0, CboNK(1).ListIndex + 1, 3
+            Case 3: NK4 tdau, tcuoi, txtShTk(3).Text, CboNK(1).ListIndex + 1
+            Case 4: NK5 tdau, tcuoi, "331", CboNK(1).ListIndex + 1
+            Case 5: NK6 tdau, tcuoi, "151", CboNK(1).ListIndex + 1
+            Case 6: NK7 tdau, tcuoi
+            Case 7: NK8 tdau, tcuoi
+            Case 8: NK9 tdau, tcuoi, CboNK(1).ListIndex + 1
+            Case 9: NK10 tdau, tcuoi, txtShTk(3).Text, 0, CboNK(1).ListIndex + 1
+            End Select
+            GoTo KhongInBC
+        Case 13:
+            If CboNK(0).ListIndex = 5 Then
+                If txtShTk(3).tag = 0 Then
+                    ErrMsg er_SHTaiKhoan
+                    RFocus txtShTk(3)
+                    GoTo KhongInBC
+                End If
+            End If
+            Select Case CboNK(0).ListIndex
+            Case 0: BK1 tdau, tcuoi, "111", 1, CboNK(1).ListIndex + 1, 1
+            Case 1: BK1 tdau, tcuoi, "112", 0, CboNK(1).ListIndex + 1, 2
+            Case 2: GiaNhapKho tdau, tcuoi
+                GoTo InBC
+            Case 3: BK4 tdau, tcuoi, "SoHieu LIKE '154*' OR SoHieu LIKE '621*' OR SoHieu LIKE '622*' OR SoHieu LIKE '623*' OR SoHieu LIKE '627*'", 4
+            Case 4: BK4 tdau, tcuoi, "SoHieu LIKE '241*' OR SoHieu LIKE '641*' OR SoHieu LIKE '642*'", 5
+            Case 5: NK10 tdau, tcuoi, txtShTk(3).Text, 1, CboNK(1).ListIndex + 1
+            Case 10: BK11 tdau, tcuoi, pSHPT, CboNK(1).ListIndex + 1
+            End Select
+            GoTo KhongInBC
+        Case 14:
+            CTGhiSo CTGS.ItemData(CTGS.ListIndex), tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1), IIf(ChkDu(1).Value, CboVV.ItemData(CboVV.ListIndex), 0)
+        Case 21:
+            CTGhiSo2 CTGS.ItemData(CTGS.ListIndex), tdau, tcuoi
+        Case 19:
+            For i = 0 To CTGS.ListCount - 1
+                CTGhiSo CTGS.ItemData(i), tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1), 0
+            Next
+        Case 16:
+            taikhoan.InitTaikhoanMaSo txtShTk(0).tag
+            CTGhiSoTH taikhoan, tdau, tcuoi, IIf(OptTG(1).Value, 1, 0), ngay(0), ngay(1)
+        Case 17:
+            If OptQT(0).Value Then InQTThue tdau, tcuoi
+            If OptQT(1).Value Then InQTVAT tdau, tcuoi
+            If OptQT(2).Value Then
+                InQTTTN tdau, tcuoi
+                GoTo KhongInBC
+            End If
+            If OptQT(3).Value Then BKNopThue tdau, tcuoi
+            If OptQT(4).Value Then QTDauVao tdau, tcuoi
+            If OptQT(5).Value Then QTDauRa
+            If OptQT(6).Value Then GTGTCT
+        End Select
+InBC:
+        frmMain.Rpt.Destination = Index
+        If Len(NLB) > 0 And NLB <> "..." Then frmMain.Rpt.Formulas(52) = "NLB='" + NLB + "'"
+        If Len(KTT) > 0 And KTT <> "..." Then frmMain.Rpt.Formulas(53) = "KTT='" + KTT + "'"
+        If Len(GD) > 0 And GD <> "..." Then frmMain.Rpt.Formulas(54) = "GD='" + GD + "'"
+a:
+        If Not RptOK(frmMain.Rpt.ReportFileName, nn) Then
+            MsgBox "M…u b∏o c∏o Æ∑ bﬁ thay ÆÊi!", vbCritical, App.ProductName
+            GoTo KhongInBC
+        End If
+        frmMain.Rpt.WindowTitle = OptBC(baocao).Caption
+        '   frmMain.Rpt.WindowTitle = OptBC(104).Caption
+        On Error GoTo LoiIn
+        frmMain.Rpt.Action = 1
+        On Error GoTo 0
+        GoTo KhongInBC
+    Case 2:
+        Unload Me
     End Select
     GoTo KhongInBC
 LoiIn:
@@ -3231,7 +3249,7 @@ Private Sub OptBc_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     If pRpt = 1 And Button = 2 And User_Right = 0 Then
         FU1.QuyenBCTongHop Index, OptBC(Index).Caption
     End If
@@ -3240,7 +3258,7 @@ Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Intege
       
 End Sub
 
-Private Sub OptBC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, x As Single, y As Single)
+Private Sub OptBC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     Dim i
 
         OptBC(5).BackColor = &H80FF80 '&HC0FFC0    '&H80000003
@@ -3302,37 +3320,37 @@ End Sub
 '======================================================================================
 Private Sub InVAT(tdau As Integer, tcuoi As Integer)
     Dim sql As String, kn As Double, lk As Double, CK As Double, cklk As Double, TK As New ClsTaikhoan
-    Dim dk As Double, duno As Double, lk1 As Double, duco As Double, x As Double, y As Double, lk2 As Double
+    Dim dk As Double, duno As Double, lk1 As Double, duco As Double, X As Double, Y As Double, lk2 As Double
     
     GauGe.Max = 10
     
     ExecuteSQL5 "UPDATE VAT SET KyNay = 0,LuyKe=0"
     
     TK.InitTaikhoanSohieu pVATV
-    TK.SoDuTK ThangTruoc(tdau), duno, duco, x
+    TK.SoDuTK ThangTruoc(tdau), duno, duco, X
     kn = duno - duco
-    TK.SoDuTK 0, duno, duco, x
+    TK.SoDuTK 0, duno, duco, X
     lk = duno - duco
     TK.InitTaikhoanSohieu vatr
-    TK.SoDuTK ThangTruoc(tdau), duno, duco, x
+    TK.SoDuTK ThangTruoc(tdau), duno, duco, X
     kn = kn + duno - duco
-    TK.SoDuTK 0, duno, duco, x
+    TK.SoDuTK 0, duno, duco, X
     lk = lk + duno - duco
     lk2 = -kn
     
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(IIf(kn > 0, kn, 0)) + ",LuyKe = " + DoiDau(IIf(lk > 0, lk, 0)) + " WHERE MaSo = '10'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(IIf(kn < 0, -kn, 0)) + ",LuyKe = " + DoiDau(IIf(lk < 0, -lk, 0)) + " WHERE MaSo = '40'"
     
-    VATHoanLai tdau, tcuoi, dk, duno, lk1, duco, x
+    VATHoanLai tdau, tcuoi, dk, duno, lk1, duco, X
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk) + " WHERE MaSo = '20'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duno) + ", LuyKe = " + DoiDau(lk1) + " WHERE MaSo = '21'"
-    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(x) + " WHERE MaSo = '22'"
+    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(X) + " WHERE MaSo = '22'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk + duno - duco) + " WHERE MaSo = '23'"
     
-    VATMienGiam tdau, tcuoi, dk, duno, lk1, duco, x
+    VATMienGiam tdau, tcuoi, dk, duno, lk1, duco, X
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk) + " WHERE MaSo = '30'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duno) + ", LuyKe = " + DoiDau(lk1) + " WHERE MaSo = '31'"
-    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(x) + " WHERE MaSo = '32'"
+    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(duco) + ", LuyKe = " + DoiDau(X) + " WHERE MaSo = '32'"
     ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(dk + duno - duco) + " WHERE MaSo = '33'"
     
     GauGe.Value = 1
@@ -3347,17 +3365,17 @@ Private Sub InVAT(tdau As Integer, tcuoi As Integer)
     If TK.tk_id = GTGTKT_ID Then
         sql = "SELECT SUM(IIF(" + WThang("ThangCT", tdau, 0) + ",SoPS,0)) AS F1,SUM(SoPS) AS F2 FROM (" + ChungTu2TKNC(0) + ") LEFT JOIN MienTru ON ChungTu.MaCT=MienTru.MaCT " _
             & " WHERE IsNull(MienTru.MaCT) AND (HethongTK.SoHieu LIKE '33312*') AND " + WThang("ThangCT", 0, tcuoi) + " AND (TK.SoHieu LIKE '11*' OR TK.SoHieu LIKE '136*')"
-        x = SelectSQL(sql, y) - PSDu(pVATV, "33312", tdau, tcuoi)
-        y = y - PSDu(pVATV, "33312", pThangDauKy, tcuoi)
+        X = SelectSQL(sql, Y) - PSDu(pVATV, "33312", tdau, tcuoi)
+        Y = Y - PSDu(pVATV, "33312", pThangDauKy, tcuoi)
     Else
-        x = 0
-        y = 0
+        X = 0
+        Y = 0
     End If
     
     sql = "SELECT SUM(IIF(" + WThang("ThangCT", tdau, 0) + ",SoPS,0)) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKHD(0) + " WHERE HoaDon.Loai=-1 AND " + WThang("ThangCT", 0, tcuoi)
     kn = SelectSQL(sql, lk)
-    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(kn - x) + ",LuyKe = " + DoiDau(lk - y) + " WHERE MaSo = '11'"
-    lk2 = lk2 - (kn - x)
+    ExecuteSQL5 "UPDATE VAT SET KyNay = " + DoiDau(kn - X) + ",LuyKe = " + DoiDau(lk - Y) + " WHERE MaSo = '11'"
+    lk2 = lk2 - (kn - X)
     
     sql = "SELECT SUM(IIF(" + WThang("ThangCT", tdau, 0) + ",SoPS,0)) AS F1,SUM(SoPS) AS F2 FROM " + ChungTu2TKNC(0) _
         & " WHERE (HethongTK.SoHieu LIKE '142*' OR HethongTK.SoHieu LIKE '242*' OR HethongTK.SoHieu LIKE '6*' OR HethongTK.SoHieu LIKE '421*') AND (TK.SoHieu LIKE '" + pVATV + "*') AND " + WThang("ThangCT", 0, tcuoi)
@@ -6423,7 +6441,7 @@ Private Sub ToKhaiVAT2(thang As Integer, taikhoan As ClsTaikhoan)
     If prg = 0 Then Exit Sub
     AppActivate prg
     AppIdle w1
-b:
+B:
     SendKeys "{F9}"
     AppIdle w1
     ' chon thang
@@ -6452,7 +6470,7 @@ b:
     SendKeys Chr(32)
     AppIdle w1
     f1 = 1
-    GoTo b
+    GoTo B
     
 a:
     SendKeys "{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}{TAB}"
@@ -7223,7 +7241,7 @@ Private Function KiemTraMaVach(loai As Integer, dd As String) As String
 End Function
 
 Private Function DKToKhai(thang As Integer, shct As String)
-    Dim TK As ClsTaikhoan, duno As Double, duco As Double, dunt As Double, sql As String, x As Double
+    Dim TK As ClsTaikhoan, duno As Double, duco As Double, dunt As Double, sql As String, X As Double
     Dim tdau As Integer
     
     If thang = pThangDauKy Then
@@ -7234,8 +7252,8 @@ Private Function DKToKhai(thang As Integer, shct As String)
         duno = duno - duco
         
         TK.InitTaikhoanSohieu vatr, shct
-        TK.SoDuTK 0, x, duco, dunt
-        duno = duno + x - duco
+        TK.SoDuTK 0, X, duco, dunt
+        duno = duno + X - duco
         
         Set TK = Nothing
     Else
@@ -7254,8 +7272,8 @@ Private Function DKToKhai(thang As Integer, shct As String)
         Else
             sql = "SELECT SUM(SoPS) AS F1 FROM " + ChungTu2TKHD(0) + " WHERE HoaDon.Loai=1 AND " + WThang("ThangCT", tdau, tdau)
         End If
-        x = SelectSQL(sql)
-        If x < 0 Then duno = duno + Abs(x)
+        X = SelectSQL(sql)
+        If X < 0 Then duno = duno + Abs(X)
         
         sql = "SELECT SUM(SoPS) AS F1 FROM " + ChungTu2TKNC(0) _
                 & " WHERE (HethongTK.SoHieu LIKE '142*' OR HethongTK.SoHieu LIKE '242*' OR HethongTK.SoHieu LIKE '6*') AND (TK.SoHieu LIKE '" + pVATV + "*') AND RIGHT(TK.SoHieu," + CStr(Len(shct)) + ")='" + shct + "' AND " + WThang("ThangCT", tdau, tdau)
@@ -7348,7 +7366,7 @@ KT:
 End Sub
 
 Private Sub PTDTCP(tdau As Integer, tcuoi As Integer)
-    Dim r As Integer, x As Integer, j As Integer, ps As Double, f As Integer, v As Double, pslk As Double, vlk As Double
+    Dim r As Integer, X As Integer, j As Integer, ps As Double, f As Integer, v As Double, pslk As Double, vlk As Double
     Dim TK As New ClsTaikhoan
 
     Recycle pCurDir + "DTCP.XLS"
@@ -7358,8 +7376,8 @@ Private Sub PTDTCP(tdau As Integer, tcuoi As Integer)
     xlapp.Workbooks.Open pCurDir + "DTCP.XLS"
     On Error GoTo 0
     
-    For x = 1 To 3
-        Set xlsheet = xlapp.Worksheets(x)
+    For X = 1 To 3
+        Set xlsheet = xlapp.Worksheets(X)
         
         xlsheet.Cells(1, 1) = pTenCty
         xlsheet.Cells(2, 1) = pTenCn
@@ -7371,7 +7389,7 @@ Private Sub PTDTCP(tdau As Integer, tcuoi As Integer)
             f = 0
             j = 12
             
-            If x > 1 Then
+            If X > 1 Then
                 Do While Len(xlsheet.Cells(r, j)) > 0
                     TK.InitTaikhoanSohieu xlsheet.Cells(r, j)
                     If TK.MaSo > 0 Then
