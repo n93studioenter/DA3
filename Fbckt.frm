@@ -393,10 +393,10 @@ Begin VB.Form FBcKt
    End
    Begin TabDlg.SSTab SSTab 
       Height          =   6855
-      Left            =   2040
+      Left            =   2160
       TabIndex        =   0
       Tag             =   "&Common#&Product and Cost#&Liabilities#&Fixed Assets"
-      Top             =   0
+      Top             =   120
       Width           =   8175
       _ExtentX        =   14420
       _ExtentY        =   12091
@@ -2924,7 +2924,7 @@ Begin VB.Form FBcKt
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   5
-         Left            =   5940
+         Left            =   6000
          TabIndex        =   21
          Tag             =   "1"
          Top             =   1140
@@ -2982,7 +2982,7 @@ Begin VB.Form FBcKt
          Left            =   7500
          TabIndex        =   29
          Tag             =   "1"
-         Top             =   1620
+         Top             =   1560
          Width           =   495
       End
       Begin VB.Label LbTenTk 

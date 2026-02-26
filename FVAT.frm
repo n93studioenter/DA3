@@ -4,11 +4,10 @@ Object = "{0D452EE1-E08F-101A-852E-02608C4D0BB4}#2.0#0"; "FM20.DLL"
 Begin VB.Form FVAT 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00E0E0E0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "Th«ng tin ho¸ ®¬n"
+   BorderStyle     =   0  'None
    ClientHeight    =   6960
-   ClientLeft      =   4680
-   ClientTop       =   3165
+   ClientLeft      =   4635
+   ClientTop       =   2835
    ClientWidth     =   6180
    ClipControls    =   0   'False
    ControlBox      =   0   'False
@@ -21,12 +20,82 @@ Begin VB.Form FVAT
    ScaleWidth      =   6180
    ShowInTaskbar   =   0   'False
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   45
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   5760
+         TabIndex        =   47
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   46
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FVAT.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FVAT.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
    Begin VB.TextBox Text1 
       Height          =   285
       Left            =   4800
       TabIndex        =   44
       Text            =   "Text1"
       Top             =   1200
+      Visible         =   0   'False
       Width           =   735
    End
    Begin VB.CheckBox ChkV 
@@ -277,7 +346,7 @@ Begin VB.Form FVAT
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   11
-      Text            =   "FVAT.frx":57E2
+      Text            =   "FVAT.frx":115BC
       Top             =   3360
       Width           =   1335
    End
@@ -289,17 +358,17 @@ Begin VB.Form FVAT
       MaxLength       =   20
       MultiLine       =   -1  'True
       TabIndex        =   10
-      Text            =   "FVAT.frx":57E4
+      Text            =   "FVAT.frx":115BE
       Top             =   3000
       Width           =   1335
    End
    Begin VB.TextBox T 
       Height          =   285
       Index           =   3
-      Left            =   1800
+      Left            =   1320
       MaxLength       =   500
       TabIndex        =   9
-      Top             =   2640
+      Top             =   6240
       Width           =   4095
    End
    Begin VB.TextBox T 
@@ -332,7 +401,7 @@ Begin VB.Form FVAT
    Begin VB.CommandButton Command 
       Height          =   375
       Left            =   4800
-      Picture         =   "FVAT.frx":57E6
+      Picture         =   "FVAT.frx":115C0
       Style           =   1  'Graphical
       TabIndex        =   20
       Tag             =   "&Save"
@@ -362,6 +431,19 @@ Begin VB.Form FVAT
       EndProperty
       Mask            =   "99/99/99"
       PromptChar      =   "_"
+   End
+   Begin MSForms.TextBox txtName 
+      Height          =   350
+      Left            =   1800
+      TabIndex        =   48
+      Top             =   2640
+      Width           =   4215
+      VariousPropertyBits=   679495707
+      Size            =   "7435;617"
+      FontName        =   "Times New Roman"
+      FontHeight      =   195
+      FontCharSet     =   0
+      FontPitchAndFamily=   2
    End
    Begin MSForms.OptionButton OptChon 
       Height          =   375
@@ -905,8 +987,31 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     End If
     If KeyCode = vbKeyEscape Then Unload Me
 End Sub
-
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Private Sub txtName_Change()
+    T(3).Text = UnicodeToVni(txtName.Text)
+End Sub
 Private Sub Form_Load()
+    Caption = "Th«ng tin ho¸ ®¬n"
+    lblTitle(11).Caption = Caption
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
     Dim i As Integer
     If Not KHDetail Then
         T(0).Enabled = False
@@ -915,7 +1020,7 @@ Private Sub Form_Load()
             T(i).TabStop = True
         Next
     End If
-    
+
     SetFont Me
 End Sub
 
@@ -1046,6 +1151,7 @@ Public Sub GetPhieu(ttdb As Boolean)
     T(2).Text = h.sohd
     If h.ThanhTien <> 0 Then T(5).Text = Format(h.ThanhTien, Mask_0)
     T(3).Text = h.MatHang
+    txtName.Text = VniToUnicode(h.MatHang)
     T(4).Text = Format(h.SoLuong, Mask_2)
     T(6).Text = CStr(Abs(h.TyLe))
     T(11).Text = h.HTTT

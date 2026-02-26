@@ -3885,6 +3885,7 @@ Private Const MFT_STRING = &H0
 
 Private Declare Sub Sleep Lib "Kernel32" (ByVal dwMilliseconds As Long)
 
+Dim isclicktt As Integer
 Const TM = "111"
 Const NH = "112"
 Dim rs_ktchild154 As Recordset
@@ -3938,6 +3939,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
+Attribute DiachiTC.VB_VarUserMemId = 1073938533
+Attribute ctgoc.VB_VarUserMemId = 1073938533
+Attribute TenNX.VB_VarUserMemId = 1073938533
+Attribute DiaChiNX.VB_VarUserMemId = 1073938533
+Attribute TenBH.VB_VarUserMemId = 1073938533
+Attribute DiaChiBH.VB_VarUserMemId = 1073938533
+Attribute MSTBH.VB_VarUserMemId = 1073938533
+Attribute unc1.VB_VarUserMemId = 1073938533
+Attribute unc2.VB_VarUserMemId = 1073938533
+Attribute unc3.VB_VarUserMemId = 1073938533
+Attribute MaKHBH.VB_VarUserMemId = 1073938533
+Attribute HanTT.VB_VarUserMemId = 1073938533
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -10756,9 +10769,10 @@ End Function
 Private Sub txtNoidung_Change()
     txt(1).Text = UnicodeToVni(txtNoidung.Text)
 End Sub
- 
- 
+
+
 Private Sub Form_Load()
+    isclicktt = 0
     hPopup = CreateUnicodePopup()
     lblTitle(11).AutoSize = True
 
@@ -11195,6 +11209,7 @@ Private Sub Grid2_KeyDown(KeyCode As Integer, Shift As Integer)
     End Select
 End Sub
 Private Sub Grid2_Click()
+    isclicktt = 1
     Dim clickedRow As Integer
 
     Dim MaCTChon
@@ -13615,6 +13630,7 @@ End Sub
 ' Thñ tôc hiÓn thÞ néi dung phiÕu trªn mµn h×nh
 '====================================================================================================
 Public Function HienPhieuTrenManHinh(p As Integer) As Integer
+
     Dim rs_chungtu, thongtinkhachhang As Recordset
     Dim sh As String, i As Integer, sodong As Integer, ps As Double, ThemDong As Boolean, mct As Long, mts As Long, uID As Long
     Dim ma As Long, diengiai As String, ms As Long, tl As Integer, mvt As Long, mk As Long, mtp As Long, psnt As Double, dgia As Double, luong As Double, st As String
@@ -14102,6 +14118,8 @@ KT2:
 KetThuc:
     rs_chungtu.Close
     Set rs_chungtu = Nothing
+     
+
 End Function
 '====================================================================================================
 ' NhËp dßng ph¸t sinh míi
@@ -15720,11 +15738,13 @@ Sub hien_thong_tin_mau_HD()
     'End If
 End Sub
 Private Sub Enable_thong_tin()
-    txtVT(9).Enabled = True
-    txtTenKH.Enabled = True
-    txtDiaChi.Enabled = True
-   ' txtVT(8).Enabled = True
-   ' txtVT(7).Enabled = True
+    If isclicktt = 0 Then
+        txtVT(9).Enabled = True
+        txtTenKH.Enabled = True
+        txtDiaChi.Enabled = True
+    End If
+    ' txtVT(8).Enabled = True
+    ' txtVT(7).Enabled = True
     'txtVT(0).Enabled = True
 
 End Sub
