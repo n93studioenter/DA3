@@ -809,9 +809,35 @@ Private Sub Command_Click(Index As Integer)
 
 End Sub
 
+Private Sub AddDataLCTT()
+    Dim countrow As Integer
 
+    ' Ki?m tra dã t?n t?i theo TKNo & TKCo
+    countrow = SelectSQL("SELECT COUNT(*) AS f1 FROM LCTT WHERE TKNo='1331' AND TKCo='11'")
+
+    If countrow = 0 Then
+
+        ExecuteSQL5 "INSERT INTO LCTT (" & _
+                    "Ma, MaSo, Ten, TKNo, TKCo, DauNam, KyTruoc, KyNay, TongHop, MaSoCha, Dau, TenE" & _
+                    ") VALUES (" & _
+                    "36, " & _
+                    "2, " & _
+                    "'Thu? GTGT du?c kh?u tr?', " & _
+                    "'1331', " & _
+                    "'11', " & _
+                    "0, " & _
+                    "0, " & _
+                    "0, " & _
+                    "0, " & _
+                    "20, " & _
+                    "-1, " & _
+                    "'1. Cash from sale'" & _
+                    ")"
+
+    End If
+End Sub
 Private Sub Form_Activate()
-
+    AddDataLCTT
     Left = frmMain.ScaleWidth * 30 / 100
     Top = frmMain.ScaleHeight * 40 / 100
     CheckAndCreateTable
@@ -885,7 +911,7 @@ Private Sub Form_Activate()
 
         End If
     End If
- 
+
 End Sub
 '====================================================================================================
 ' Thu tuc kiem tra mat khau

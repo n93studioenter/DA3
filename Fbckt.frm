@@ -3076,7 +3076,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
-Dim baocao As Integer                 ' Chÿ sË b∏o c∏o Æ≠Óc ch‰n
+Public baocao As Integer                 ' Chÿ sË b∏o c∏o Æ≠Óc ch‰n
 Dim StopPrint As Boolean              ' = True n’u ngıng in c∏c danh s∏ch b∏o c∏o
 
 Dim Pdelay As Integer
@@ -4058,11 +4058,12 @@ Public Sub AnControl(frm As Form)
     For Each ctl In frm.Controls
         Select Case TypeName(ctl)
         Case "Label", "TextBox", "ComboBox", "PictureBox", _
-             "CommandButton", "Frame", "CheckBox", _
+             "CommandButton", "CheckBox", _
              "OptionButton", "ListBox", "Grid", _
              "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
 
             If ctl.Name <> "picFakeTitle" _
+               And ctl.Name <> "lblTitle" _
                And ctl.Name <> "lblTitle" _
                And ctl.Name <> "lblClose" Then
 
@@ -4078,6 +4079,7 @@ Public Sub AnControl(frm As Form)
     Next
 End Sub
 Private Sub Form_Load()
+
     lblTitle(11).AutoSize = True
     Me.Height = Me.Height + 300 + 10
     picFakeTitle.Width = Me.ScaleWidth
@@ -4177,7 +4179,6 @@ Private Sub Form_Load()
     ngaytt = "01/01/" + Mid(str(pNamTC), 4, 5)
     MedNgay(1).Text = ngaytt
     MedNgay(2).Text = ngaytt
-
 End Sub
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)

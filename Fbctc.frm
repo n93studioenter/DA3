@@ -22,6 +22,14 @@ Begin VB.Form FBcTC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Tag             =   "Financial Report"
+   Begin VB.CommandButton Command1 
+      Caption         =   "Command1"
+      Height          =   315
+      Left            =   240
+      TabIndex        =   137
+      Top             =   5160
+      Width           =   975
+   End
    Begin VB.PictureBox picFakeTitle 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
@@ -2510,6 +2518,7 @@ End Sub
 ' Xem, In ho∆c k’t thÛc
 '====================================================================================================
 Public Sub Command_Click(Index As Integer)
+
     If OptTG(0).Value = False Then
         If IsDate(MedNgay(1).Text) And IsDate(MedNgay(0).Text) Then
             If CDate(MedNgay(1).Text) < CDate(MedNgay(0).Text) Then
@@ -2768,7 +2777,7 @@ Public Sub Command_Click(Index As Integer)
                 '  If Not InVATDauVao2(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
                 'bang ke vao ///////////////////////////////////////////////////////
                 s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(109) & ChrW(7889) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(114) & ChrW(97) & ChrW(32) & ChrW(101) & ChrW(120) & ChrW(99) & ChrW(101) & ChrW(108) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(99) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(118) & ChrW(224) & ChrW(111) & ChrW(32) & ChrW(109) & ChrW(227) & ChrW(32) & ChrW(118) & ChrW(7841) & ChrW(99) & ChrW(104) & ChrW(63)
-                
+
                 xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
                 If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                     If Not InVATDauvao_exel(tdau, tcuoi, CInt(CboTL.ItemData(CboTL.ListIndex)), 1, taikhoan) Then GoTo KhongInBC
@@ -2932,6 +2941,24 @@ KhongInBC:
     GauGe.Value = GauGe.Max
     HienThongBao Me.Caption, 1
     Me.MousePointer = 0
+
+    If baocao = 4 Then
+        baocao = 3
+        Command_Click 0
+
+        OptBC(11).Value = True
+        Command_Click 0
+        FBcKt.OptBC(32).Value = True
+        FBcKt.baocao = 32
+        FBcKt.MedNgay(1).Text = "01/01/24"
+        FBcKt.MedNgay(2).Text = "01/12/24"
+        FBcKt.Command_Click 0
+    End If
+End Sub
+
+Private Sub Command1_Click()
+baocao = 3
+Command_Click 0
 End Sub
 
 Private Sub Form_DblClick()
