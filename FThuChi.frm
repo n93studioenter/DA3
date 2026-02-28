@@ -32,6 +32,75 @@ Begin VB.Form FThuChi
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   24
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   7320
+         TabIndex        =   26
+         Top             =   120
+         Width           =   480
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "FThuChi.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "FThuChi.frx":112FF
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   25
+         Top             =   0
+         Width           =   4455
+      End
+   End
    Begin VB.CheckBox Checkinbangkevahoadon 
       BackColor       =   &H00FFFFFF&
       Caption         =   "In hãa ®¬n kÌm b¶ng kª"
@@ -132,7 +201,7 @@ Begin VB.Form FThuChi
    Begin VB.CommandButton cmdkh 
       Height          =   375
       Left            =   3360
-      Picture         =   "FThuChi.frx":57E2
+      Picture         =   "FThuChi.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   6
       Top             =   1680
@@ -182,7 +251,7 @@ Begin VB.Form FThuChi
       BackColor       =   &H80000013&
       Height          =   375
       Left            =   6480
-      Picture         =   "FThuChi.frx":5C5C
+      Picture         =   "FThuChi.frx":11A36
       Style           =   1  'Graphical
       TabIndex        =   7
       Tag             =   "&Save"
@@ -441,7 +510,8 @@ Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Int
     picFakeTitle_MouseDown Button, Shift, X, Y
 End Sub
 Private Sub Form_Load()
- lblTitle(11).AutoSize = True
+  
+    lblTitle(11).AutoSize = True
     Me.Height = Me.Height + 350 + 10
     picFakeTitle.Width = Me.ScaleWidth
     picFakeTitle.Height = 325
@@ -451,12 +521,12 @@ Private Sub Form_Load()
     lblClose.Top = 55
     AnControl Me
     Dim i As Integer
-    
+
     For i = 0 To 3
         s(i) = "..."
     Next
     ngay = CVDate("01/01/1900")
-    
+
     SetFont Me
 End Sub
 

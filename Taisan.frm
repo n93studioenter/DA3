@@ -1149,7 +1149,7 @@ Private Sub lblClose_Click()
 End Sub
 Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     ReleaseCapture
-    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
 End Sub
 Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     picFakeTitle_MouseDown Button, Shift, X, Y
@@ -1161,7 +1161,7 @@ Private Sub txtNangLuc_Change()
     Text(2).Text = UnicodeToVni(txtNangLuc.Text)
 End Sub
 Private Sub txtGhichu_Change()
-    Text(5).Text = UnicodeToVni(txtGhichu.Text)
+    Text(5).Text = UnicodeToVni(txtGhiChu.Text)
 End Sub
 
 Private Sub Form_Load()
@@ -1292,7 +1292,7 @@ Private Sub Command_Click(Index As Integer)
                     s = ChrW(84) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(115) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(99) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(100) & ChrW(7909) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(99) & ChrW(7909) & ChrW(44) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(7909) & ChrW(32) & ChrW(116) & ChrW(249) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(232) & ChrW(109) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(63)
                     Dim xn As String
                     xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
-                    If MessageBoxW(Me.hWnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
+                    If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                         frmDCPTung.Show 1
                         frmTaiSan.Refresh
                     Else
@@ -1833,7 +1833,7 @@ Private Function KiemTraSoLieuDauKy() As Integer
         ChrW(108) & ChrW(7841) & ChrW(105) & ChrW(32) & ChrW(58) & ChrW(32) & _
         Format(rs_dauky!TCL, Mask_0)
 
-    MessageBoxW Me.hWnd, StrPtr(s), StrPtr(App.ProductName), vbInformation
+    MessageBoxW Me.hwnd, StrPtr(s), StrPtr(App.ProductName), vbInformation
 
     KiemTraSoLieuDauKy = 0
     SoDuTKTS

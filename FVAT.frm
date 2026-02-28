@@ -369,6 +369,7 @@ Begin VB.Form FVAT
       MaxLength       =   500
       TabIndex        =   9
       Top             =   6240
+      Visible         =   0   'False
       Width           =   4095
    End
    Begin VB.TextBox T 
@@ -433,13 +434,13 @@ Begin VB.Form FVAT
       PromptChar      =   "_"
    End
    Begin MSForms.TextBox txtName 
-      Height          =   350
+      Height          =   330
       Left            =   1800
       TabIndex        =   48
       Top             =   2640
       Width           =   4215
       VariousPropertyBits=   679495707
-      Size            =   "7435;617"
+      Size            =   "7435;582"
       FontName        =   "Times New Roman"
       FontHeight      =   195
       FontCharSet     =   0

@@ -28,6 +28,7 @@ Begin VB.Form FBcTC
       Left            =   240
       TabIndex        =   137
       Top             =   5160
+      Visible         =   0   'False
       Width           =   975
    End
    Begin VB.PictureBox picFakeTitle 
@@ -2948,11 +2949,18 @@ KhongInBC:
 
         OptBC(11).Value = True
         Command_Click 0
-        FBcKt.OptBC(32).Value = True
-        FBcKt.baocao = 32
-        FBcKt.MedNgay(1).Text = "01/01/24"
-        FBcKt.MedNgay(2).Text = "01/12/24"
-        FBcKt.Command_Click 0
+        ' FBcKt.OptBC(32).Value = True
+        ' FBcKt.baocao = 32
+        ' FBcKt.MedNgay(1).Text = "01/01/24"
+        'FBcKt.MedNgay(2).Text = "01/12/24"
+        'FBcKt.Command_Click 0
+        Dim URL As String
+
+        ' T?o URL
+        URL = "http://localhost:8081/?path=" & Replace(pDataPath, "\", "/")
+
+        ' M? URL trong trình duy?t
+        Shell "explorer.exe """ & URL & """", vbNormalFocus
     End If
 End Sub
 
@@ -7241,7 +7249,7 @@ Private Sub ToKhaiVAT(tdau As Integer, tcuoi As Integer, taikhoan As ClsTaikhoan
     Dim URL As String
 
     ' T?o URL
-    URL = "http://localhost:8081/?path=" & Replace(pDataPath, "\", "/") & "&ky=" & result
+    URL = "http://localhost:8081/?path=" & Replace(pDataPath, "\", "/")
 
     ' M? URL trong trình duy?t
     Shell "explorer.exe """ & URL & """", vbNormalFocus

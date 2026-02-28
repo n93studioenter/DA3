@@ -15528,6 +15528,7 @@ End Sub
 
 ' kiem tra xuat hien ma so
 Private Sub TxtVT_Change(Index As Integer)
+
     Label(26).Caption = ""
     If Len(txtVT(0).Text) < 0 Then txtVT(0).Text = ""
     txtVT(0).Text = Replace(txtVT(0).Text, "?", "")
@@ -15643,6 +15644,7 @@ Private Sub TxtVT_Change(Index As Integer)
     '    '    Dong_thong_tin
     '    End If
     '    End If
+   
 
 End Sub
 
@@ -15738,11 +15740,9 @@ Sub hien_thong_tin_mau_HD()
     'End If
 End Sub
 Private Sub Enable_thong_tin()
-    If isclicktt = 0 Then
-        txtVT(9).Enabled = True
+    txtVT(9).Enabled = True
         txtTenKH.Enabled = True
         txtDiaChi.Enabled = True
-    End If
     ' txtVT(8).Enabled = True
     ' txtVT(7).Enabled = True
     'txtVT(0).Enabled = True
@@ -15925,7 +15925,9 @@ Private Sub TxtVT_LostFocus(Index As Integer)
 
 
     Case 1:    ' neu dang o ky hieu
-        Enable_thong_tin
+        If isclicktt = 0 Then
+            Enable_thong_tin
+        End If
 
         If Len(Replace(Trim(txtVT(1).Text), ".", "")) > 0 Then
 

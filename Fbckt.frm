@@ -7,7 +7,7 @@ Begin VB.Form FBcKt
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   0  'None
-   ClientHeight    =   6720
+   ClientHeight    =   6615
    ClientLeft      =   3045
    ClientTop       =   3525
    ClientWidth     =   10185
@@ -27,7 +27,7 @@ Begin VB.Form FBcKt
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   ScaleHeight     =   6720
+   ScaleHeight     =   6615
    ScaleWidth      =   10185
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
@@ -95,7 +95,7 @@ Begin VB.Form FBcKt
          EndProperty
          Height          =   405
          Index           =   11
-         Left            =   600
+         Left            =   480
          TabIndex        =   244
          Top             =   0
          Width           =   4455
@@ -103,7 +103,7 @@ Begin VB.Form FBcKt
    End
    Begin VB.Frame Frame1 
       Caption         =   "Frame1"
-      Height          =   1935
+      Height          =   2055
       Left            =   0
       TabIndex        =   238
       Top             =   0
@@ -220,7 +220,7 @@ Begin VB.Form FBcKt
          Index           =   1
          Left            =   120
          TabIndex        =   209
-         Top             =   480
+         Top             =   600
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   556
@@ -233,7 +233,7 @@ Begin VB.Form FBcKt
          Index           =   2
          Left            =   120
          TabIndex        =   211
-         Top             =   1200
+         Top             =   1440
          Width           =   855
          _ExtentX        =   1508
          _ExtentY        =   556
@@ -249,7 +249,7 @@ Begin VB.Form FBcKt
          Left            =   120
          TabIndex        =   210
          Tag             =   "to"
-         Top             =   960
+         Top             =   1080
          Width           =   735
       End
       Begin VB.Label Label 
@@ -260,7 +260,7 @@ Begin VB.Form FBcKt
          Left            =   120
          TabIndex        =   208
          Tag             =   "From"
-         Top             =   120
+         Top             =   240
          Width           =   855
       End
    End
@@ -273,7 +273,7 @@ Begin VB.Form FBcKt
       MaskColor       =   &H00000000&
       TabIndex        =   201
       Tag             =   "By date"
-      Top             =   2520
+      Top             =   2760
       Width           =   1215
    End
    Begin VB.OptionButton OptTG 
@@ -284,7 +284,7 @@ Begin VB.Form FBcKt
       Left            =   120
       TabIndex        =   200
       Tag             =   "By month"
-      Top             =   2160
+      Top             =   2400
       Value           =   -1  'True
       Width           =   1215
    End
@@ -363,7 +363,7 @@ Begin VB.Form FBcKt
       Style           =   1  'Graphical
       TabIndex        =   217
       Tag             =   "&Return"
-      Top             =   6360
+      Top             =   6410
       Width           =   975
    End
    Begin VB.CommandButton Command 
@@ -388,17 +388,17 @@ Begin VB.Form FBcKt
       Style           =   1  'Graphical
       TabIndex        =   215
       Tag             =   "&View"
-      Top             =   6360
+      Top             =   6420
       Width           =   975
    End
    Begin TabDlg.SSTab SSTab 
       Height          =   6855
-      Left            =   2160
+      Left            =   2040
       TabIndex        =   0
       Tag             =   "&Common#&Product and Cost#&Liabilities#&Fixed Assets"
-      Top             =   120
-      Width           =   8175
-      _ExtentX        =   14420
+      Top             =   0
+      Width           =   8295
+      _ExtentX        =   14631
       _ExtentY        =   12091
       _Version        =   393216
       Tabs            =   4
@@ -543,124 +543,195 @@ Begin VB.Form FBcKt
       TabCaption(1)   =   "VËt t­, thµnh phÈm"
       TabPicture(1)   =   "Fbckt.frx":14FD6
       Tab(1).ControlEnabled=   0   'False
-      Tab(1).Control(0)=   "CboHD"
-      Tab(1).Control(1)=   "txtCT(0)"
-      Tab(1).Control(2)=   "txtCT(1)"
-      Tab(1).Control(3)=   "cmdCT(1)"
-      Tab(1).Control(4)=   "OptBC(77)"
-      Tab(1).Control(5)=   "OptBC(74)"
-      Tab(1).Control(6)=   "OptBC(43)"
-      Tab(1).Control(7)=   "txtShTk(10)"
-      Tab(1).Control(8)=   "Frame(5)"
-      Tab(1).Control(9)=   "OptBC(54)"
-      Tab(1).Control(10)=   "cmdvt(0)"
-      Tab(1).Control(11)=   "OptBC(65)"
-      Tab(1).Control(12)=   "OptBC(64)"
-      Tab(1).Control(13)=   "txtShVT(0)"
-      Tab(1).Control(14)=   "OptBC(60)"
-      Tab(1).Control(15)=   "cmdCT(0)"
-      Tab(1).Control(16)=   "OptBC(59)"
-      Tab(1).Control(17)=   "OptBC(52)"
-      Tab(1).Control(18)=   "OptBC(51)"
-      Tab(1).Control(19)=   "OptBC(50)"
-      Tab(1).Control(20)=   "OptBC(46)"
-      Tab(1).Control(21)=   "txtShTk(11)"
-      Tab(1).Control(22)=   "cmdtk(11)"
-      Tab(1).Control(23)=   "OptBC(44)"
-      Tab(1).Control(24)=   "ChkDu(7)"
-      Tab(1).Control(25)=   "cmdtk(10)"
-      Tab(1).Control(26)=   "CboLoai(1)"
-      Tab(1).Control(27)=   "ChkDu(4)"
-      Tab(1).Control(28)=   "CboVV(0)"
-      Tab(1).Control(29)=   "OptBC(33)"
-      Tab(1).Control(30)=   "cmdtk(4)"
-      Tab(1).Control(31)=   "OptBC(16)"
-      Tab(1).Control(32)=   "OptBC(15)"
-      Tab(1).Control(33)=   "OptBC(14)"
-      Tab(1).Control(34)=   "OptBC(13)"
-      Tab(1).Control(35)=   "OptBC(12)"
-      Tab(1).Control(36)=   "OptBC(11)"
-      Tab(1).Control(37)=   "OptBC(10)"
-      Tab(1).Control(38)=   "ChkDu(2)"
-      Tab(1).Control(39)=   "CboLoai(0)"
-      Tab(1).Control(40)=   "ChkDu(3)"
-      Tab(1).Control(41)=   "txtShTk(4)"
-      Tab(1).Control(42)=   "Line(6)"
-      Tab(1).Control(43)=   "Line(4)"
-      Tab(1).Control(44)=   "LbCT(1)"
-      Tab(1).Control(45)=   "LbCT(0)"
-      Tab(1).Control(46)=   "LbTenTk(11)"
-      Tab(1).Control(47)=   "LbTenTk(10)"
-      Tab(1).Control(48)=   "LbTenTk(4)"
-      Tab(1).Control(49)=   "LbTenVT(0)"
+      Tab(1).Control(0)=   "LbTenVT(0)"
+      Tab(1).Control(0).Enabled=   0   'False
+      Tab(1).Control(1)=   "LbTenTk(4)"
+      Tab(1).Control(1).Enabled=   0   'False
+      Tab(1).Control(2)=   "LbTenTk(10)"
+      Tab(1).Control(2).Enabled=   0   'False
+      Tab(1).Control(3)=   "LbTenTk(11)"
+      Tab(1).Control(3).Enabled=   0   'False
+      Tab(1).Control(4)=   "LbCT(0)"
+      Tab(1).Control(4).Enabled=   0   'False
+      Tab(1).Control(5)=   "LbCT(1)"
+      Tab(1).Control(5).Enabled=   0   'False
+      Tab(1).Control(6)=   "Line(4)"
+      Tab(1).Control(6).Enabled=   0   'False
+      Tab(1).Control(7)=   "Line(6)"
+      Tab(1).Control(7).Enabled=   0   'False
+      Tab(1).Control(8)=   "txtShTk(4)"
+      Tab(1).Control(8).Enabled=   0   'False
+      Tab(1).Control(9)=   "ChkDu(3)"
+      Tab(1).Control(9).Enabled=   0   'False
+      Tab(1).Control(10)=   "CboLoai(0)"
+      Tab(1).Control(10).Enabled=   0   'False
+      Tab(1).Control(11)=   "ChkDu(2)"
+      Tab(1).Control(11).Enabled=   0   'False
+      Tab(1).Control(12)=   "OptBC(10)"
+      Tab(1).Control(12).Enabled=   0   'False
+      Tab(1).Control(13)=   "OptBC(11)"
+      Tab(1).Control(13).Enabled=   0   'False
+      Tab(1).Control(14)=   "OptBC(12)"
+      Tab(1).Control(14).Enabled=   0   'False
+      Tab(1).Control(15)=   "OptBC(13)"
+      Tab(1).Control(15).Enabled=   0   'False
+      Tab(1).Control(16)=   "OptBC(14)"
+      Tab(1).Control(16).Enabled=   0   'False
+      Tab(1).Control(17)=   "OptBC(15)"
+      Tab(1).Control(17).Enabled=   0   'False
+      Tab(1).Control(18)=   "OptBC(16)"
+      Tab(1).Control(18).Enabled=   0   'False
+      Tab(1).Control(19)=   "cmdtk(4)"
+      Tab(1).Control(19).Enabled=   0   'False
+      Tab(1).Control(20)=   "OptBC(33)"
+      Tab(1).Control(20).Enabled=   0   'False
+      Tab(1).Control(21)=   "CboVV(0)"
+      Tab(1).Control(21).Enabled=   0   'False
+      Tab(1).Control(22)=   "ChkDu(4)"
+      Tab(1).Control(22).Enabled=   0   'False
+      Tab(1).Control(23)=   "CboLoai(1)"
+      Tab(1).Control(23).Enabled=   0   'False
+      Tab(1).Control(24)=   "cmdtk(10)"
+      Tab(1).Control(24).Enabled=   0   'False
+      Tab(1).Control(25)=   "ChkDu(7)"
+      Tab(1).Control(25).Enabled=   0   'False
+      Tab(1).Control(26)=   "OptBC(44)"
+      Tab(1).Control(26).Enabled=   0   'False
+      Tab(1).Control(27)=   "cmdtk(11)"
+      Tab(1).Control(27).Enabled=   0   'False
+      Tab(1).Control(28)=   "txtShTk(11)"
+      Tab(1).Control(28).Enabled=   0   'False
+      Tab(1).Control(29)=   "OptBC(46)"
+      Tab(1).Control(29).Enabled=   0   'False
+      Tab(1).Control(30)=   "OptBC(50)"
+      Tab(1).Control(30).Enabled=   0   'False
+      Tab(1).Control(31)=   "OptBC(51)"
+      Tab(1).Control(31).Enabled=   0   'False
+      Tab(1).Control(32)=   "OptBC(52)"
+      Tab(1).Control(32).Enabled=   0   'False
+      Tab(1).Control(33)=   "OptBC(59)"
+      Tab(1).Control(33).Enabled=   0   'False
+      Tab(1).Control(34)=   "cmdCT(0)"
+      Tab(1).Control(34).Enabled=   0   'False
+      Tab(1).Control(35)=   "OptBC(60)"
+      Tab(1).Control(35).Enabled=   0   'False
+      Tab(1).Control(36)=   "txtShVT(0)"
+      Tab(1).Control(36).Enabled=   0   'False
+      Tab(1).Control(37)=   "OptBC(64)"
+      Tab(1).Control(37).Enabled=   0   'False
+      Tab(1).Control(38)=   "OptBC(65)"
+      Tab(1).Control(38).Enabled=   0   'False
+      Tab(1).Control(39)=   "cmdvt(0)"
+      Tab(1).Control(39).Enabled=   0   'False
+      Tab(1).Control(40)=   "OptBC(54)"
+      Tab(1).Control(40).Enabled=   0   'False
+      Tab(1).Control(41)=   "Frame(5)"
+      Tab(1).Control(41).Enabled=   0   'False
+      Tab(1).Control(42)=   "txtShTk(10)"
+      Tab(1).Control(42).Enabled=   0   'False
+      Tab(1).Control(43)=   "OptBC(43)"
+      Tab(1).Control(43).Enabled=   0   'False
+      Tab(1).Control(44)=   "OptBC(74)"
+      Tab(1).Control(44).Enabled=   0   'False
+      Tab(1).Control(45)=   "OptBC(77)"
+      Tab(1).Control(45).Enabled=   0   'False
+      Tab(1).Control(46)=   "cmdCT(1)"
+      Tab(1).Control(46).Enabled=   0   'False
+      Tab(1).Control(47)=   "txtCT(1)"
+      Tab(1).Control(47).Enabled=   0   'False
+      Tab(1).Control(48)=   "txtCT(0)"
+      Tab(1).Control(48).Enabled=   0   'False
+      Tab(1).Control(49)=   "CboHD"
+      Tab(1).Control(49).Enabled=   0   'False
       Tab(1).ControlCount=   50
       TabCaption(2)   =   "Doanh thu - C«ng nî"
       TabPicture(2)   =   "Fbckt.frx":14FF2
       Tab(2).ControlEnabled=   0   'False
-      Tab(2).Control(0)=   "Frame(4)"
-      Tab(2).Control(1)=   "cmdkh(0)"
-      Tab(2).Control(2)=   "txtshkh(1)"
-      Tab(2).Control(3)=   "txtshkh(0)"
-      Tab(2).Control(4)=   "cmdkh(1)"
-      Tab(2).Control(5)=   "ChkDu(14)"
-      Tab(2).Control(6)=   "OptBC(84)"
-      Tab(2).Control(7)=   "OptBC(82)"
-      Tab(2).Control(8)=   "OptBC(81)"
-      Tab(2).Control(9)=   "OptBC(80)"
-      Tab(2).Control(10)=   "OptBC(78)"
-      Tab(2).Control(11)=   "MedNgay(0)"
-      Tab(2).Control(12)=   "OptBC(70)"
-      Tab(2).Control(13)=   "OptBC(53)"
-      Tab(2).Control(14)=   "OptBC(67)"
-      Tab(2).Control(15)=   "OptBC(66)"
-      Tab(2).Control(16)=   "OptBC(63)"
-      Tab(2).Control(17)=   "OptBC(62)"
-      Tab(2).Control(18)=   "OptBC(58)"
+      Tab(2).Control(0)=   "Label(3)"
+      Tab(2).Control(1)=   "LbTenVT(1)"
+      Tab(2).Control(2)=   "lbkh(1)"
+      Tab(2).Control(3)=   "lbkh(0)"
+      Tab(2).Control(4)=   "Line(1)"
+      Tab(2).Control(5)=   "Line(9)"
+      Tab(2).Control(6)=   "Line(10)"
+      Tab(2).Control(7)=   "txtHan"
+      Tab(2).Control(8)=   "OptBC(17)"
+      Tab(2).Control(9)=   "OptBC(34)"
+      Tab(2).Control(10)=   "OptBC(35)"
+      Tab(2).Control(11)=   "Frame(3)"
+      Tab(2).Control(12)=   "OptBC(36)"
+      Tab(2).Control(13)=   "OptBC(37)"
+      Tab(2).Control(14)=   "OptBC(38)"
+      Tab(2).Control(15)=   "cmdvt(1)"
+      Tab(2).Control(16)=   "txtShVT(1)"
+      Tab(2).Control(17)=   "OptBC(120)"
+      Tab(2).Control(18)=   "OptBC(49)"
       Tab(2).Control(19)=   "OptBC(57)"
-      Tab(2).Control(20)=   "OptBC(49)"
-      Tab(2).Control(21)=   "OptBC(120)"
-      Tab(2).Control(22)=   "txtShVT(1)"
-      Tab(2).Control(23)=   "cmdvt(1)"
-      Tab(2).Control(24)=   "OptBC(38)"
-      Tab(2).Control(25)=   "OptBC(37)"
-      Tab(2).Control(26)=   "OptBC(36)"
-      Tab(2).Control(27)=   "Frame(3)"
-      Tab(2).Control(28)=   "OptBC(35)"
-      Tab(2).Control(29)=   "OptBC(34)"
-      Tab(2).Control(30)=   "OptBC(17)"
-      Tab(2).Control(31)=   "txtHan"
-      Tab(2).Control(32)=   "Line(10)"
-      Tab(2).Control(33)=   "Line(9)"
-      Tab(2).Control(34)=   "Line(1)"
-      Tab(2).Control(35)=   "lbkh(0)"
-      Tab(2).Control(36)=   "lbkh(1)"
-      Tab(2).Control(37)=   "LbTenVT(1)"
-      Tab(2).Control(38)=   "Label(3)"
+      Tab(2).Control(20)=   "OptBC(58)"
+      Tab(2).Control(21)=   "OptBC(62)"
+      Tab(2).Control(22)=   "OptBC(63)"
+      Tab(2).Control(23)=   "OptBC(66)"
+      Tab(2).Control(24)=   "OptBC(67)"
+      Tab(2).Control(25)=   "OptBC(53)"
+      Tab(2).Control(26)=   "OptBC(70)"
+      Tab(2).Control(27)=   "MedNgay(0)"
+      Tab(2).Control(28)=   "OptBC(78)"
+      Tab(2).Control(29)=   "OptBC(80)"
+      Tab(2).Control(30)=   "OptBC(81)"
+      Tab(2).Control(31)=   "OptBC(82)"
+      Tab(2).Control(32)=   "OptBC(84)"
+      Tab(2).Control(33)=   "ChkDu(14)"
+      Tab(2).Control(34)=   "cmdkh(1)"
+      Tab(2).Control(35)=   "txtshkh(0)"
+      Tab(2).Control(36)=   "txtshkh(1)"
+      Tab(2).Control(37)=   "cmdkh(0)"
+      Tab(2).Control(38)=   "Frame(4)"
       Tab(2).ControlCount=   39
       TabCaption(3)   =   "Tµi s¶n cè ®Þnh"
       TabPicture(3)   =   "Fbckt.frx":1500E
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Line(11)"
+      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "OptBC(18)"
+      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "OptBC(19)"
+      Tab(3).Control(2).Enabled=   0   'False
       Tab(3).Control(3)=   "OptBC(20)"
+      Tab(3).Control(3).Enabled=   0   'False
       Tab(3).Control(4)=   "OptBC(21)"
+      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).Control(5)=   "OptBC(22)"
+      Tab(3).Control(5).Enabled=   0   'False
       Tab(3).Control(6)=   "OptBC(23)"
+      Tab(3).Control(6).Enabled=   0   'False
       Tab(3).Control(7)=   "OptBC(24)"
+      Tab(3).Control(7).Enabled=   0   'False
       Tab(3).Control(8)=   "OptBC(25)"
+      Tab(3).Control(8).Enabled=   0   'False
       Tab(3).Control(9)=   "OptBC(26)"
+      Tab(3).Control(9).Enabled=   0   'False
       Tab(3).Control(10)=   "OptBC(27)"
+      Tab(3).Control(10).Enabled=   0   'False
       Tab(3).Control(11)=   "OptBC(28)"
+      Tab(3).Control(11).Enabled=   0   'False
       Tab(3).Control(12)=   "OptBC(29)"
+      Tab(3).Control(12).Enabled=   0   'False
       Tab(3).Control(13)=   "OptBC(30)"
+      Tab(3).Control(13).Enabled=   0   'False
       Tab(3).Control(14)=   "OptBC(31)"
+      Tab(3).Control(14).Enabled=   0   'False
       Tab(3).Control(15)=   "Frame(2)"
+      Tab(3).Control(15).Enabled=   0   'False
       Tab(3).Control(16)=   "OptBC(45)"
+      Tab(3).Control(16).Enabled=   0   'False
       Tab(3).Control(17)=   "OptBC(61)"
+      Tab(3).Control(17).Enabled=   0   'False
       Tab(3).Control(18)=   "OptBC(68)"
+      Tab(3).Control(18).Enabled=   0   'False
       Tab(3).Control(19)=   "OptBC(71)"
+      Tab(3).Control(19).Enabled=   0   'False
       Tab(3).Control(20)=   "OptBC(79)"
+      Tab(3).Control(20).Enabled=   0   'False
       Tab(3).ControlCount=   21
       Begin VB.PictureBox Picture1 
          Height          =   15
@@ -1215,7 +1286,7 @@ Begin VB.Form FBcKt
          Caption         =   "B¶ng tæng hîp sè d­ chi tiÕt"
          Height          =   255
          Index           =   3
-         Left            =   5400
+         Left            =   5640
          TabIndex        =   41
          Tag             =   "Detail Account Balance Report"
          Top             =   60
@@ -1715,10 +1786,10 @@ Begin VB.Form FBcKt
          Caption         =   "Tæng hîp ph¸t sinh theo nhãm"
          Height          =   255
          Index           =   56
-         Left            =   4500
+         Left            =   4440
          TabIndex        =   93
          Tag             =   "Detail Report of Sub-Account"
-         Top             =   4260
+         Top             =   4200
          Visible         =   0   'False
          Width           =   2775
       End
@@ -1995,7 +2066,7 @@ Begin VB.Form FBcKt
             MaxLength       =   12
             TabIndex        =   15
             Tag             =   "0"
-            Top             =   150
+            Top             =   0
             Width           =   1095
          End
          Begin VB.CommandButton cmdtk 
@@ -2005,7 +2076,7 @@ Begin VB.Form FBcKt
             Picture         =   "Fbckt.frx":18F02
             Style           =   1  'Graphical
             TabIndex        =   18
-            Top             =   120
+            Top             =   0
             Width           =   375
          End
          Begin VB.OptionButton Opt 
@@ -2095,12 +2166,12 @@ Begin VB.Form FBcKt
          Width           =   1095
       End
       Begin VB.Frame Frame 
-         Height          =   855
+         Height          =   960
          Index           =   2
          Left            =   -71520
          TabIndex        =   1
-         Top             =   3720
-         Width           =   3735
+         Top             =   3740
+         Width           =   3855
          Begin VB.ComboBox Cbo 
             BeginProperty Font 
                Name            =   ".VnArial"
@@ -2115,7 +2186,7 @@ Begin VB.Form FBcKt
             Left            =   1560
             Style           =   2  'Dropdown List
             TabIndex        =   4
-            Top             =   435
+            Top             =   355
             Width           =   1935
          End
          Begin VB.TextBox txtShTS 
@@ -2125,7 +2196,7 @@ Begin VB.Form FBcKt
             MaxLength       =   12
             TabIndex        =   3
             Tag             =   "0"
-            Top             =   120
+            Top             =   0
             Width           =   1935
          End
          Begin VB.OptionButton Opt 
@@ -2135,7 +2206,7 @@ Begin VB.Form FBcKt
             Left            =   120
             TabIndex        =   5
             Tag             =   "Managed by"
-            Top             =   480
+            Top             =   370
             Width           =   1455
          End
          Begin VB.OptionButton Opt 
@@ -2145,7 +2216,7 @@ Begin VB.Form FBcKt
             Left            =   120
             TabIndex        =   2
             Tag             =   "Sort by Code"
-            Top             =   165
+            Top             =   0
             Value           =   -1  'True
             Width           =   855
          End
@@ -2894,7 +2965,7 @@ Begin VB.Form FBcKt
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   2
-         Left            =   5880
+         Left            =   6000
          TabIndex        =   115
          Tag             =   "1"
          Top             =   3780
@@ -2979,17 +3050,17 @@ Begin VB.Form FBcKt
          ForeColor       =   &H00FF0000&
          Height          =   495
          Index           =   1
-         Left            =   7500
+         Left            =   7320
          TabIndex        =   29
          Tag             =   "1"
-         Top             =   1560
+         Top             =   1440
          Width           =   495
       End
       Begin VB.Label LbTenTk 
          ForeColor       =   &H00FF0000&
          Height          =   255
          Index           =   3
-         Left            =   4560
+         Left            =   4680
          TabIndex        =   116
          Tag             =   "1"
          Top             =   4140
@@ -4060,7 +4131,7 @@ Public Sub AnControl(frm As Form)
         Case "Label", "TextBox", "ComboBox", "PictureBox", _
              "CommandButton", "CheckBox", _
              "OptionButton", "ListBox", "Grid", _
-             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
+             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox", "Frame"
 
             If ctl.Name <> "picFakeTitle" _
                And ctl.Name <> "lblTitle" _

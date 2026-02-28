@@ -413,30 +413,30 @@ Begin VB.Form FrmKhachHang
       FontPitchAndFamily=   2
    End
    Begin MSForms.TextBox txtDiaChi 
-      Height          =   320
+      Height          =   300
       Left            =   6960
       TabIndex        =   5
       Top             =   1440
       Width           =   3615
       VariousPropertyBits=   679495707
-      Size            =   "6376;564"
+      Size            =   "6376;529"
       SpecialEffect   =   0
-      FontName        =   "Tahoma"
-      FontHeight      =   180
+      FontName        =   "Times New Roman"
+      FontHeight      =   195
       FontCharSet     =   0
       FontPitchAndFamily=   2
    End
    Begin MSForms.TextBox txtName 
-      Height          =   320
+      Height          =   300
       Left            =   6960
       TabIndex        =   3
       Top             =   960
       Width           =   3615
       VariousPropertyBits=   679495707
-      Size            =   "6376;564"
+      Size            =   "6376;529"
       SpecialEffect   =   0
-      FontName        =   "Tahoma"
-      FontHeight      =   180
+      FontName        =   "Times New Roman"
+      FontHeight      =   195
       FontCharSet     =   0
       FontPitchAndFamily=   2
    End
