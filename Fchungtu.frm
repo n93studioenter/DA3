@@ -10788,7 +10788,7 @@ Private Sub Form_Load()
     'lblClose.Left = picFakeTitle.ScaleWidth \ 2
 
     AnControl
-
+  
     stt = 1
     ListReset
     ColumnSetUp Grid2, 0, 1300, 2

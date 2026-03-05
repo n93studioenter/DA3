@@ -3393,19 +3393,19 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
     Dim rs_cdts As Recordset, rs As Recordset, sql As String, st As String, st1 As String, i As Integer
     Dim SoDK As Double, sodu As Double
     Dim TK As ClsTaikhoan, dau As Integer, dn1 As Double, dc1 As Double, nt As Double, dn2 As Double, dc2 As Double
-    
+
     SoDuTKCN2 ThangTruoc(tdau)
     SoDuTKCN2 tcuoi
     KiemTraKetChuyen tcuoi
-    
+
     st1 = CStr(CThangDB(ThangTruoc(tdau)))
     st = CStr(CThangDB(tcuoi))
-    
+
     If loai > 0 Then
         XoaBang "CDTS"
         CopyTable2 "CDTS2005", "CDTS", 1
-    ExecuteSQL5 ("delete from CDTS")
-     ExecuteSQL5 ("insert into CDTS select * from CDTS2005 order by maso")
+        ExecuteSQL5 ("delete from CDTS")
+        ExecuteSQL5 ("insert into CDTS select * from CDTS2005 order by maso")
         Set TK = New ClsTaikhoan
         Set rs_cdts = DBKetoan.OpenRecordset("SELECT * FROM Cdts WHERE Len(ShTK1)>0", dbOpenSnapshot)
         Do While Not rs_cdts.EOF
@@ -3417,7 +3417,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
                     If TK.MaSo > 0 Then
                         TK.SoDuTK ThangTruoc(tdau), dn1, dc1, nt
                         TK.SoDuTK tcuoi, dn2, dc2, nt
-                        
+
                         If Left(TK.sohieu, 3) = "131" Or Left(TK.sohieu, 3) = "136" Or Left(TK.sohieu, 3) = "138" Or Left(TK.sohieu, 3) = "331" Or Left(TK.sohieu, 3) = "336" Or Left(TK.sohieu, 3) = "338" Or Left(TK.sohieu, 3) = "333" Then
                             If rs_cdts!TaiSan < 0 Then
                                 SoDK = SoDK + dn1
@@ -3445,7 +3445,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
         Loop
         rs_cdts.Close
         Set TK = Nothing
-        
+
         'sodu = SelectSQL("SELECT DauNam AS F1 FROM Cdts WHERE MaSo=152")
         'If sodu > 0 Then
         '    sodu = SoDuTKSH("3331", ThangTruoc(tdau))
@@ -3453,7 +3453,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
         'Else
         '    ExecuteSQL5 "UPDATE Cdts SET DauNam=0 WHERE MaSo=152"
         'End If
-        
+
         'sodu = SelectSQL("SELECT CuoiKy AS F1 FROM Cdts WHERE MaSo=152")
         'If sodu > 0 Then
         '    sodu = SoDuTKSH("3331", tcuoi)
@@ -3464,11 +3464,11 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
     Else
         XoaBang "CDTS"
         CopyTable2 "CDTS2004", "CDTS", 1
-        
+
         sql = "SELECT DISTINCTROW CdTs.MaSo, CdTs.MaTk1, CdTs.MaTk2, CdTs.MaTk3, CdTs.TaiSan, HeThongTK.DuNo_" + st1 + " As DNo1, HeThongTK.DuCo_" + st1 + " As DCo1, HeThongTK_1.DuNo_" + st1 + " As DNo2, HeThongTK_1.DuCo_" + st1 + " As DCo2, HeThongTK_2.DuNo_" + st1 + " As DNo3, HeThongTK_2.DuCo_" + st1 + " As DCo3, " _
             & " HeThongTK.DuNo_" + st + " As CNo1, HeThongTK.DuCo_" + st + " As CCo1, HeThongTK_1.DuNo_" + st + " As CNo2, HeThongTK_1.DuCo_" + st + " As CCo2, HeThongTK_2.DuNo_" + st + " As CNo3, HeThongTK_2.DuCo_" + st + " As CCo3" _
             & " FROM ((CdTs LEFT JOIN HeThongTK ON CdTs.MaTk1 = HeThongTK.MaSo) LEFT JOIN HeThongTK AS HeThongTK_1 ON CdTs.MaTk2 = HeThongTK_1.MaSo) LEFT JOIN HeThongTK AS HeThongTK_2 ON CdTs.MaTk3 = HeThongTK_2.MaSo WHERE CdTs.CoChitiet = 0 And CdTs.MaTk1 > 0"
-                      
+
         ' Tinh so cuoi ky
         Set rs_cdts = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
         If rs_cdts.recordCount > 0 Then
@@ -3519,12 +3519,12 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
             'If GauGe.Value < GauGe.Max - 1 Then GauGe.Value = GauGe.Value + 1
             rs_cdts.MovePrevious
         Loop
-        
+
         If SelectSQL("SELECT Top 1 MaSo AS F1 FROM HethongTK WHERE SoHieu LIKE '621*'") = 0 Then
             sodu = SelectSQL("SELECT SUM(DuNo_" + st + "-DuCo_" + st + ") AS F1, SUM(DuNo_0-DuCo_0) AS F2 FROM HethongTK WHERE MaSo=37 OR MaSo=38 OR MaSo=39 OR MaSo=42", SoDK)
             ExecuteSQL5 "UPDATE Cdts SET DauNam=DauNam+" + DoiDau(SoDK) + ",CuoiKy=CuoiKy+" + DoiDau(sodu) + " WHERE MaSo=118"
         End If
-        
+
         SoDK = SelectSQL("SELECT DISTINCTROW DauNam AS F1, CuoiKy AS F2 FROM Cdts WHERE MaSo=318", sodu)
         If SoDK < 0 Then
             ExecuteSQL5 "UPDATE Cdts SET DauNam=DauNam+" + DoiDau(-SoDK) + " WHERE MaSo=138"
@@ -3539,6 +3539,7 @@ Public Sub InCdts(tdau As Integer, tcuoi As Integer, loai As Integer, Optional n
     Set rs_cdts = DBKetoan.OpenRecordset("SELECT MaSo FROM CdTs WHERE CoChiTiet=1 ORDER BY MaSo DESC", dbOpenSnapshot, dbForwardOnly)
     Do While Not rs_cdts.EOF
         Set rs = DBKetoan.OpenRecordset("SELECT SUM(DauNam) as dn,SUM(CuoiKy) as ck FROM CdTs WHERE NhomCha=" + CStr(rs_cdts!MaSo), dbOpenSnapshot)
+
         ExecuteSQL5 "UPDATE Cdts SET DauNam=" + DoiDau(rs!dn) + ",CuoiKy=" + DoiDau(rs!CK) + " WHERE MaSo=" + CStr(rs_cdts!MaSo)
         rs.Close
         'If GauGe.Value < GauGe.Max - 1 Then GauGe.Value = GauGe.Value + 1

@@ -22,6 +22,26 @@ Begin VB.Form FBcTC
    ShowInTaskbar   =   0   'False
    StartUpPosition =   1  'CenterOwner
    Tag             =   "Financial Report"
+   Begin VB.CommandButton Command2 
+      BackColor       =   &H0080FF80&
+      Caption         =   "XuÊt  BCTC XML"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Left            =   240
+      MaskColor       =   &H0000FF00&
+      Style           =   1  'Graphical
+      TabIndex        =   138
+      Top             =   2160
+      Width           =   2295
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "Command1"
       Height          =   315
@@ -2943,30 +2963,39 @@ KhongInBC:
     HienThongBao Me.Caption, 1
     Me.MousePointer = 0
 
-    If baocao = 4 Then
-        baocao = 3
-        Command_Click 0
-
-        OptBC(11).Value = True
-        Command_Click 0
-        ' FBcKt.OptBC(32).Value = True
-        ' FBcKt.baocao = 32
-        ' FBcKt.MedNgay(1).Text = "01/01/24"
-        'FBcKt.MedNgay(2).Text = "01/12/24"
-        'FBcKt.Command_Click 0
-        Dim URL As String
-
-        ' T?o URL
-        URL = "http://localhost:8081/?path=" & Replace(pDataPath, "\", "/")
-
-        ' M? URL trong trình duy?t
-        Shell "explorer.exe """ & URL & """", vbNormalFocus
-    End If
+    
 End Sub
 
 Private Sub Command1_Click()
 baocao = 3
 Command_Click 0
+End Sub
+
+Private Sub Command2_Click()
+    CboThang(0).ListIndex = 0
+    CboThang(1).ListIndex = 11
+    FBcKt.OptBC(32).Value = True
+    FBcKt.baocao = 32
+    FBcKt.autoBaocao = 1
+    FBcKt.Command_Click 0
+
+
+    OptBC(4).Value = True
+    Command_Click 0
+
+    baocao = 3
+    Command_Click 0
+
+    OptBC(11).Value = True
+    Command_Click 0
+
+    Dim URL As String
+
+    ' T?o URL
+    URL = "http://localhost:8081/?path=" & Replace(pDataPath, "\", "/")
+
+    ' M? URL trong trình duy?t
+    Shell "explorer.exe """ & URL & """", vbNormalFocus
 End Sub
 
 Private Sub Form_DblClick()
@@ -3013,7 +3042,6 @@ Public Sub Form_Load()
     lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
     lblClose.Top = 80
     AnControl Me
-
 
     Dim chi_so As Integer
 
@@ -3118,7 +3146,9 @@ Public Sub Form_Load()
         ExecuteSQL5 "SELECT * INTO KQKD FROM [MS Access;PWD=1234;DATABASE=" + pCurDir + "\REPORTS\bc.rpt].KQKD"
         ' End If
     End If
-
+    'OptBc_Click 4
+    OptCD(0).Value = True
+  '  OptBC(4).BackColor = &H80FF80    '&HC0FFC0    '&H80000003
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -4248,8 +4278,8 @@ End Sub
 
 Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim sql As String, KT As Double, kn As Double
-    Dim rs_lailo  As Recordset
-    
+    Dim rs_lailo As Recordset
+
     GauGe.Max = 4
     ExecuteSQL5 "UPDATE LCTT SET KyTruoc = 0, KyNay = 0"
     Set rs_lailo = DBKetoan.OpenRecordset("SELECT DISTINCTROW * FROM LCTT WHERE TKNo<>'0' AND TKCo<>'0' ORDER BY MaSo", dbOpenSnapshot)
@@ -4257,6 +4287,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
         sql = "SELECT DISTINCTROW Sum(IIF(" + WThang2("ThangCT", 0, tdau) + ",ChungTu.SoPS,0)) AS F1, Sum(IIF(" + WThang("ThangCT", tdau, 0) + ",ChungTu.SoPS,0)) AS F2 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
             & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", 0, tcuoi)
+
         KT = SelectSQL(sql, kn)
 
         If rs_lailo!dau > 0 Then
@@ -4266,20 +4297,92 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
         End If
         rs_lailo.MoveNext
     Loop
-    
+
+    'Xu ly chi tieu 01
+
+    sql = ""
+    sql = sql & "SELECT DISTINCTROW ChungTu.MaCT, ChungTu.ThangCT, ChungTu.SoHieu AS SoChungTu, "
+    sql = sql & "ChungTu.NgayCT, ChungTu.NgayGS, ChungTu.DienGiai, ChungTu.SoPS, "
+    sql = sql & "ChungTu.GhiChu, HeThongTK.SoHieu AS SoHieuNo, HeThongTK_1.SoHieu AS SoHieuCo, "
+    sql = sql & "ChungTu.MaTKTCNo, ChungTu.MaTKTCCo, "
+    sql = sql & "IIF(HethongTK.SoHieu LIKE '1111*','0','1') + "
+    sql = sql & "CStr(10 + ChungTu.ThangCT) + ChungTu.SoHieu AS SH1 "
+    sql = sql & "FROM HeThongTK AS HeThongTK_3 RIGHT JOIN "
+    sql = sql & "(HeThongTK AS HeThongTK_2 RIGHT JOIN "
+    sql = sql & "(HeThongTK AS HeThongTK_1 RIGHT JOIN "
+    sql = sql & "(HeThongTK RIGHT JOIN ChungTu "
+    sql = sql & "ON HeThongTK.MaSo = ChungTu.MaTKTCNo) "
+    sql = sql & "ON HeThongTK_1.MaSo = ChungTu.MaTKTCCo) "
+    sql = sql & "ON HeThongTK_2.MaSo = ChungTu.MaTKNo) "
+    sql = sql & "ON HeThongTK_3.MaSo = ChungTu.MaTKCo "
+    sql = sql & "WHERE SoPS<>0 "
+    sql = sql & "AND ((HethongTK.SoHieu LIKE '11*') "
+    sql = sql & "OR (HethongTK_1.SoHieu LIKE '11*')) "
+    sql = sql & "AND (ThangCT>=1 AND ThangCT<=12) "
+    sql = sql & "AND (ChungTu.MaLoai<>4 "
+    sql = sql & "OR (ChungTu.MaLoai=4 "
+    sql = sql & "AND ChungTu.MaTKNo<>ChungTu.MaTkco)) "
+    sql = sql & "ORDER BY ThangCT, ChungTu.NgayGS, "
+    sql = sql & "IIF(HethongTK.SoHieu LIKE '1111*','0','1') + "
+    sql = sql & "CStr(10 + ChungTu.ThangCT) + ChungTu.SoHieu"
+
+    Dim rs_import As Recordset
+    Set rs_import = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+    Dim sum511 As Double
+    Dim sum3331 As Double
+    Dim sum131 As Double
+    Dim sum156 As Double
+
+    If Not rs_import.EOF Then
+        Do While Not rs_import.EOF
+            If rs_import!SoHieuCo Like "131*" Then
+                sum131 = sum131 + rs_import!sops
+            End If
+            If rs_import!GhiChu Like "131,*" Then
+                sum131 = sum131 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "3331*" Then
+                sum3331 = sum3331 + rs_import!sops
+            End If
+            If InStr("," & rs_import!GhiChu, ",5111,") > 0 Then
+                sum511 = sum511 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuCo Like "511*" Then
+                sum511 = sum511 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "156*" Then
+                sum156 = sum156 + rs_import!sops
+            End If
+             If InStr("," & rs_import!GhiChu, ",156,") > 0 Then
+                sum156 = sum156 + rs_import!sops
+            End If
+            rs_import.MoveNext
+        Loop
+    End If
+    'cap nhat lai cho tieu 01
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum511 & " WHERE MaSo=1 AND TKCo='511'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum3331 & " WHERE MaSo=1 AND TKCo='3331'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum131 & " WHERE MaSo=1 AND TKCo='131'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & -sum156 & " WHERE MaSo=2 AND TKNo='156'"
+    '----------
+
     GauGe.Value = 2
     KT = SoPSTK("111", pThangDauKy, ThangTruoc(tdau), -1) + SoPSTK("112", pThangDauKy, ThangTruoc(tdau), -1) - SoPSTK("113", pThangDauKy, ThangTruoc(tdau), 1) - PSDu("111", "3364", pThangDauKy, ThangTruoc(tdau)) _
-        - SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")
+       - SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")
+
     kn = SoPSTK("111", tdau, tcuoi, -1) + SoPSTK("112", tdau, tcuoi, -1) - SoPSTK("113", tdau, tcuoi, 1) - PSDu("111", "3364", tdau, tcuoi) _
-        - SelectSQL("SELECT Sum(KyNay) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")
-    ExecuteSQL5 "UPDATE LCTT SET KyTruoc=" + DoiDau(KT) + ", KyNay = " + DoiDau(kn) + " WHERE MaSo=6"
-    
+       - SelectSQL("SELECT Sum(KyNay) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")
+
+    'ExecuteSQL5 "UPDATE LCTT SET KyTruoc=" + DoiDau(KT) + ", KyNay = " + DoiDau(kn) + " WHERE MaSo=6"
+
     KT = SoPSTK("111", pThangDauKy, ThangTruoc(tdau), 1) + SoPSTK("112", pThangDauKy, ThangTruoc(tdau), 1) - SoPSTK("113", pThangDauKy, ThangTruoc(tdau), -1) - PSDu("111", "3364", pThangDauKy, ThangTruoc(tdau)) _
-        + SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=2 OR MaSo=3 OR MaSo=4 OR MaSo=5 OR MaSo=21 OR MaSo=23 OR MaSo=25 OR MaSo=32 OR MaSo=34 OR MaSo=35 OR MaSo=36")
+       + SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=2 OR MaSo=3 OR MaSo=4 OR MaSo=5 OR MaSo=21 OR MaSo=23 OR MaSo=25 OR MaSo=32 OR MaSo=34 OR MaSo=35 OR MaSo=36")
     kn = SoPSTK("111", tdau, tcuoi, 1) + SoPSTK("112", tdau, tcuoi, 1) - SoPSTK("113", tdau, tcuoi, -1) - PSDu("111", "3364", tdau, tcuoi) _
-        + SelectSQL("SELECT Sum(KyNay) AS F1 FROM LCTT WHERE MaSo=2 OR MaSo=3 OR MaSo=4 OR MaSo=5 OR MaSo=21 OR MaSo=23 OR MaSo=25 OR MaSo=32 OR MaSo=34 OR MaSo=35 OR MaSo=36")
-    ExecuteSQL5 "UPDATE LCTT SET KyTruoc=" + DoiDau(-KT) + ", KyNay = " + DoiDau(-kn) + " WHERE MaSo=7"
-    
+       + SelectSQL("SELECT Sum(KyNay) AS F1 FROM LCTT WHERE MaSo=2 OR MaSo=3 OR MaSo=4 OR MaSo=5 OR MaSo=21 OR MaSo=23 OR MaSo=25 OR MaSo=32 OR MaSo=34 OR MaSo=35 OR MaSo=36")
+    'ExecuteSQL5 "UPDATE LCTT SET KyTruoc=" + DoiDau(-KT) + ", KyNay = " + DoiDau(-kn) + " WHERE MaSo=7"
+
     sql = "SELECT SUM(DuNo_" + CStr(CThangDB(ThangTruoc(tdau))) + "-DuCo_" + CStr(CThangDB(ThangTruoc(tdau))) + ") AS F1,SUM(DuNo_0-DuCo_0) AS F2 FROM HethongTK WHERE SoHieu='111' OR SoHieu='112'"
     kn = SelectSQL(sql, KT)
     ExecuteSQL5 "UPDATE LCTT SET KyTruoc = " + DoiDau(IIf(tdau > pThangDauKy, KT, 0)) + ", KyNay = " + DoiDau(kn) + " WHERE MaSo=60"
@@ -4287,18 +4390,19 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     'kn = SelectSQL(sql, KT)
     'ExecuteSQL5 "UPDATE LCTT SET KyTruoc = " + CStr(IIf(tdau > pThangDauKy, KT, 0)) + ", KyNay = " + CStr(kn) + " WHERE MaSo=70"
     GauGe.Value = 1
-    
+
     ' Cong don
     Set rs_lailo = DBKetoan.OpenRecordset("SELECT KyTruoc,KyNay,MaSoCha FROM LCTT WHERE TongHop=0 And MaSoCha<>0 ORDER BY MaSo", dbOpenSnapshot, dbForwardOnly)
     Do While Not rs_lailo.EOF
-         If rs_lailo!MaSoCha > 0 Then
-                 ExecuteSQL5 "UPDATE LCTT SET KyTruoc=KyTruoc+" + DoiDau(rs_lailo!KyTruoc) + ",KyNay=KyNay+" + DoiDau(rs_lailo!KyNay) + " WHERE MaSo=" + CStr(rs_lailo!MaSoCha)
+        If rs_lailo!MaSoCha > 0 Then
+            ExecuteSQL5 "UPDATE LCTT SET KyTruoc=KyTruoc+" + DoiDau(rs_lailo!KyTruoc) + ",KyNay=KyNay+" + DoiDau(rs_lailo!KyNay) + " WHERE MaSo=" + CStr(rs_lailo!MaSoCha)
         Else
-                 ExecuteSQL5 "UPDATE LCTT SET KyTruoc=KyTruoc-" + DoiDau(rs_lailo!KyTruoc) + ",KyNay=KyNay-" + DoiDau(rs_lailo!KyNay) + " WHERE MaSo=" + CStr(-rs_lailo!MaSoCha)
+            ExecuteSQL5 "UPDATE LCTT SET KyTruoc=KyTruoc-" + DoiDau(rs_lailo!KyTruoc) + ",KyNay=KyNay-" + DoiDau(rs_lailo!KyNay) + " WHERE MaSo=" + CStr(-rs_lailo!MaSoCha)
         End If
         rs_lailo.MoveNext
     Loop
-    
+
+
     Set rs_lailo = DBKetoan.OpenRecordset("SELECT KyTruoc,KyNay,MaSoCha FROM LCTT WHERE TongHop>0 And MaSoCha<>0 ORDER BY MaSo", dbOpenDynaset, dbForwardOnly)
     Do While Not rs_lailo.EOF
         If rs_lailo!MaSoCha > 0 Then
@@ -4311,7 +4415,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     rs_lailo.Close
     Set rs_lailo = Nothing
     GauGe.Value = 4
-    
+
     RptSetDate NgayCuoiThang(pNamTC, tcuoi), nn
     frmMain.Rpt.ReportFileName = "LCTT.RPT"
     frmMain.Rpt.Formulas(3) = "ThoiGian='" + ThoiGian(tdau, tcuoi, nn) + "'"

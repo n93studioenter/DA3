@@ -544,105 +544,55 @@ Begin VB.Form FBcKt
       TabPicture(1)   =   "Fbckt.frx":14FD6
       Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "LbTenVT(0)"
-      Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "LbTenTk(4)"
-      Tab(1).Control(1).Enabled=   0   'False
       Tab(1).Control(2)=   "LbTenTk(10)"
-      Tab(1).Control(2).Enabled=   0   'False
       Tab(1).Control(3)=   "LbTenTk(11)"
-      Tab(1).Control(3).Enabled=   0   'False
       Tab(1).Control(4)=   "LbCT(0)"
-      Tab(1).Control(4).Enabled=   0   'False
       Tab(1).Control(5)=   "LbCT(1)"
-      Tab(1).Control(5).Enabled=   0   'False
       Tab(1).Control(6)=   "Line(4)"
-      Tab(1).Control(6).Enabled=   0   'False
       Tab(1).Control(7)=   "Line(6)"
-      Tab(1).Control(7).Enabled=   0   'False
       Tab(1).Control(8)=   "txtShTk(4)"
-      Tab(1).Control(8).Enabled=   0   'False
       Tab(1).Control(9)=   "ChkDu(3)"
-      Tab(1).Control(9).Enabled=   0   'False
       Tab(1).Control(10)=   "CboLoai(0)"
-      Tab(1).Control(10).Enabled=   0   'False
       Tab(1).Control(11)=   "ChkDu(2)"
-      Tab(1).Control(11).Enabled=   0   'False
       Tab(1).Control(12)=   "OptBC(10)"
-      Tab(1).Control(12).Enabled=   0   'False
       Tab(1).Control(13)=   "OptBC(11)"
-      Tab(1).Control(13).Enabled=   0   'False
       Tab(1).Control(14)=   "OptBC(12)"
-      Tab(1).Control(14).Enabled=   0   'False
       Tab(1).Control(15)=   "OptBC(13)"
-      Tab(1).Control(15).Enabled=   0   'False
       Tab(1).Control(16)=   "OptBC(14)"
-      Tab(1).Control(16).Enabled=   0   'False
       Tab(1).Control(17)=   "OptBC(15)"
-      Tab(1).Control(17).Enabled=   0   'False
       Tab(1).Control(18)=   "OptBC(16)"
-      Tab(1).Control(18).Enabled=   0   'False
       Tab(1).Control(19)=   "cmdtk(4)"
-      Tab(1).Control(19).Enabled=   0   'False
       Tab(1).Control(20)=   "OptBC(33)"
-      Tab(1).Control(20).Enabled=   0   'False
       Tab(1).Control(21)=   "CboVV(0)"
-      Tab(1).Control(21).Enabled=   0   'False
       Tab(1).Control(22)=   "ChkDu(4)"
-      Tab(1).Control(22).Enabled=   0   'False
       Tab(1).Control(23)=   "CboLoai(1)"
-      Tab(1).Control(23).Enabled=   0   'False
       Tab(1).Control(24)=   "cmdtk(10)"
-      Tab(1).Control(24).Enabled=   0   'False
       Tab(1).Control(25)=   "ChkDu(7)"
-      Tab(1).Control(25).Enabled=   0   'False
       Tab(1).Control(26)=   "OptBC(44)"
-      Tab(1).Control(26).Enabled=   0   'False
       Tab(1).Control(27)=   "cmdtk(11)"
-      Tab(1).Control(27).Enabled=   0   'False
       Tab(1).Control(28)=   "txtShTk(11)"
-      Tab(1).Control(28).Enabled=   0   'False
       Tab(1).Control(29)=   "OptBC(46)"
-      Tab(1).Control(29).Enabled=   0   'False
       Tab(1).Control(30)=   "OptBC(50)"
-      Tab(1).Control(30).Enabled=   0   'False
       Tab(1).Control(31)=   "OptBC(51)"
-      Tab(1).Control(31).Enabled=   0   'False
       Tab(1).Control(32)=   "OptBC(52)"
-      Tab(1).Control(32).Enabled=   0   'False
       Tab(1).Control(33)=   "OptBC(59)"
-      Tab(1).Control(33).Enabled=   0   'False
       Tab(1).Control(34)=   "cmdCT(0)"
-      Tab(1).Control(34).Enabled=   0   'False
       Tab(1).Control(35)=   "OptBC(60)"
-      Tab(1).Control(35).Enabled=   0   'False
       Tab(1).Control(36)=   "txtShVT(0)"
-      Tab(1).Control(36).Enabled=   0   'False
       Tab(1).Control(37)=   "OptBC(64)"
-      Tab(1).Control(37).Enabled=   0   'False
       Tab(1).Control(38)=   "OptBC(65)"
-      Tab(1).Control(38).Enabled=   0   'False
       Tab(1).Control(39)=   "cmdvt(0)"
-      Tab(1).Control(39).Enabled=   0   'False
       Tab(1).Control(40)=   "OptBC(54)"
-      Tab(1).Control(40).Enabled=   0   'False
       Tab(1).Control(41)=   "Frame(5)"
-      Tab(1).Control(41).Enabled=   0   'False
       Tab(1).Control(42)=   "txtShTk(10)"
-      Tab(1).Control(42).Enabled=   0   'False
       Tab(1).Control(43)=   "OptBC(43)"
-      Tab(1).Control(43).Enabled=   0   'False
       Tab(1).Control(44)=   "OptBC(74)"
-      Tab(1).Control(44).Enabled=   0   'False
       Tab(1).Control(45)=   "OptBC(77)"
-      Tab(1).Control(45).Enabled=   0   'False
       Tab(1).Control(46)=   "cmdCT(1)"
-      Tab(1).Control(46).Enabled=   0   'False
       Tab(1).Control(47)=   "txtCT(1)"
-      Tab(1).Control(47).Enabled=   0   'False
       Tab(1).Control(48)=   "txtCT(0)"
-      Tab(1).Control(48).Enabled=   0   'False
       Tab(1).Control(49)=   "CboHD"
-      Tab(1).Control(49).Enabled=   0   'False
       Tab(1).ControlCount=   50
       TabCaption(2)   =   "Doanh thu - C«ng nî"
       TabPicture(2)   =   "Fbckt.frx":14FF2
@@ -691,47 +641,26 @@ Begin VB.Form FBcKt
       TabPicture(3)   =   "Fbckt.frx":1500E
       Tab(3).ControlEnabled=   0   'False
       Tab(3).Control(0)=   "Line(11)"
-      Tab(3).Control(0).Enabled=   0   'False
       Tab(3).Control(1)=   "OptBC(18)"
-      Tab(3).Control(1).Enabled=   0   'False
       Tab(3).Control(2)=   "OptBC(19)"
-      Tab(3).Control(2).Enabled=   0   'False
       Tab(3).Control(3)=   "OptBC(20)"
-      Tab(3).Control(3).Enabled=   0   'False
       Tab(3).Control(4)=   "OptBC(21)"
-      Tab(3).Control(4).Enabled=   0   'False
       Tab(3).Control(5)=   "OptBC(22)"
-      Tab(3).Control(5).Enabled=   0   'False
       Tab(3).Control(6)=   "OptBC(23)"
-      Tab(3).Control(6).Enabled=   0   'False
       Tab(3).Control(7)=   "OptBC(24)"
-      Tab(3).Control(7).Enabled=   0   'False
       Tab(3).Control(8)=   "OptBC(25)"
-      Tab(3).Control(8).Enabled=   0   'False
       Tab(3).Control(9)=   "OptBC(26)"
-      Tab(3).Control(9).Enabled=   0   'False
       Tab(3).Control(10)=   "OptBC(27)"
-      Tab(3).Control(10).Enabled=   0   'False
       Tab(3).Control(11)=   "OptBC(28)"
-      Tab(3).Control(11).Enabled=   0   'False
       Tab(3).Control(12)=   "OptBC(29)"
-      Tab(3).Control(12).Enabled=   0   'False
       Tab(3).Control(13)=   "OptBC(30)"
-      Tab(3).Control(13).Enabled=   0   'False
       Tab(3).Control(14)=   "OptBC(31)"
-      Tab(3).Control(14).Enabled=   0   'False
       Tab(3).Control(15)=   "Frame(2)"
-      Tab(3).Control(15).Enabled=   0   'False
       Tab(3).Control(16)=   "OptBC(45)"
-      Tab(3).Control(16).Enabled=   0   'False
       Tab(3).Control(17)=   "OptBC(61)"
-      Tab(3).Control(17).Enabled=   0   'False
       Tab(3).Control(18)=   "OptBC(68)"
-      Tab(3).Control(18).Enabled=   0   'False
       Tab(3).Control(19)=   "OptBC(71)"
-      Tab(3).Control(19).Enabled=   0   'False
       Tab(3).Control(20)=   "OptBC(79)"
-      Tab(3).Control(20).Enabled=   0   'False
       Tab(3).ControlCount=   21
       Begin VB.PictureBox Picture1 
          Height          =   15
@@ -3147,6 +3076,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 
+Public autoBaocao As Integer
 Public baocao As Integer                 ' ChØ sè b¸o c¸o ®­îc chän
 Dim StopPrint As Boolean              ' = True nÕu ngõng in c¸c danh s¸ch b¸o c¸o
 
@@ -3165,9 +3095,14 @@ Dim TenBaoCao As String
 Dim SoLieu(1 To 12) As Boolean
 
 Dim xlapp As Excel.Application, xlsheet As Worksheet
+Attribute xlsheet.VB_VarUserMemId = 1073938442
 
 Dim NLB As String, KTT As String, GD As String
+Attribute NLB.VB_VarUserMemId = 1073938444
+Attribute KTT.VB_VarUserMemId = 1073938444
+Attribute GD.VB_VarUserMemId = 1073938444
 Dim nn As Integer
+Attribute nn.VB_VarUserMemId = 1073938447
 
 
 Private Sub cmd_Click(Index As Integer)
@@ -3298,6 +3233,10 @@ Public Sub Command_Click(Index As Integer)
         End If
         tdau = CboThang(0).ItemData(CboThang(0).ListIndex)
         tcuoi = CboThang(1).ItemData(CboThang(1).ListIndex)
+        If autoBaocao = 1 Then
+            tdau = 1
+            tcuoi = 12
+        End If
         If OptDT(3).Value And CboVV(1).ListIndex >= 0 Then mdt = CboVV(1).ItemData(CboVV(1).ListIndex) Else mdt = 0
         If pSoVV > 0 And ChkTT(0).Value = 1 And CboTT(0).ListIndex >= 0 And mdt > 0 Then mdt1 = CboTT(0).ItemData(CboTT(0).ListIndex) Else mdt1 = 0
         If pSoVV > 1 And ChkTT(1).Value = 1 And CboTT(1).ListIndex >= 0 And mdt > 0 Then mdt2 = CboTT(1).ItemData(CboTT(1).ListIndex) Else mdt2 = 0
@@ -3347,7 +3286,7 @@ Public Sub Command_Click(Index As Integer)
             If txtShTk(8).tag = 0 Then
                 ' MsgBox "H·y nhËp sè hiÖu chi tiÕt !", vbExclamation, App.ProductName
                 s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(33)
-                 
+
                 xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
                 If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                 End If
@@ -3376,7 +3315,7 @@ Public Sub Command_Click(Index As Integer)
             If txtshkh(0).tag = 0 Then
                 'MsgBox "H·y nhËp sè hiÖu chi tiÕt c«ng nî!", vbExclamation, App.ProductName
                 s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(7907) & ChrW(33)
-               
+
                 xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
                 If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                 End If
@@ -3420,9 +3359,9 @@ Public Sub Command_Click(Index As Integer)
         Case 59:
             If TxtCT(0).tag = 0 Then
                 'MsgBox "H·y nhËp sè hiÖu Hîp ®ång hoÆc chi tiÕt Hîp ®ång !", vbExclamation, App.ProductName
-               
+
                 s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(72) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(7891) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(72) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(273) & ChrW(7891) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(33)
-              
+
                 xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
                 If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                 End If
@@ -3488,9 +3427,9 @@ Public Sub Command_Click(Index As Integer)
             taikhoan.InitTaikhoanMaSo txtShTk(1).tag
             If taikhoan.tkcon = 0 Or taikhoan.MaTC <> taikhoan.MaSo Then
                 ' MsgBox "H·y chän tµi kho¶n Bé Tµi chÝnh ban hµnh ®­îc më chi tiÕt !", vbExclamation, App.ProductName
-                
+
                 s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(66) & ChrW(7897) & ChrW(32) & ChrW(84) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(237) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(98) & ChrW(97) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(273) & ChrW(432) & ChrW(7907) & ChrW(99) & ChrW(32) & ChrW(109) & ChrW(7903) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(33)
-                
+
                 xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
                 If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                 End If
@@ -3558,9 +3497,9 @@ Public Sub Command_Click(Index As Integer)
             End If
             If CboNT.ListIndex < 0 Then
                 'MsgBox "H·y chän chi tiÕt thanh to¸n theo nguyªn tÖ !", vbExclamation, App.ProductName
-            
+
                 s = ChrW(72) & ChrW(227) & ChrW(121) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7885) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(97) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(116) & ChrW(111) & ChrW(225) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(110) & ChrW(103) & ChrW(117) & ChrW(121) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(7879) & ChrW(32) & ChrW(33)
-                 
+
                 xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
                 If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                 End If
@@ -4308,7 +4247,7 @@ Dim thg_cuoi As Boolean
     baocao = Index
     ChkDu(0).Visible = (Index = 0)
     txtShTk(5).Visible = (Index = 0)
-    CmdTK(5).Visible = (Index = 0)
+    cmdtk(5).Visible = (Index = 0)
     LbTenTk(5).Visible = (Index = 0)
     
     If Index = 8 Or Index = 9 Then ChkDu(6).Value = 0
@@ -4421,7 +4360,7 @@ Dim thg_cuoi As Boolean
     If Index = 0 Then
      ChkDu(0).Visible = False
      txtShTk(5).Visible = False
-     CmdTK(5).Visible = False
+     cmdtk(5).Visible = False
     End If
     
 End Sub

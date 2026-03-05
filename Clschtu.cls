@@ -279,26 +279,26 @@ Public Function GhiChungtu(Optional p As Integer = 0, Optional r As Integer = 0)
             
             GhiChungtu
         Else
-            Dim i As Integer, luong() As Double, tien() As Double, ID() As Long, c As Integer, tien2() As Double
+            Dim i As Integer, luong() As Double, tien() As Double, id() As Long, c As Integer, tien2() As Double
             Select Case OutCost
                 Case 1:
-                    c = GiaXuatKhoDD(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, ID, tien2)
+                    c = GiaXuatKhoDD(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, id, tien2)
                 Case 2:
-                    c = GiaXuatKhoFIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, ID, tien2)
+                    c = GiaXuatKhoFIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, id, tien2)
                 Case 3:
-                    c = GiaXuatKhoLIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, ID, tien2)
+                    c = GiaXuatKhoLIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, id, tien2)
             End Select
             For i = 1 To c
                 SoPS2Co = luong(i)
                 sops = tien(i)
                 If pGiaUSD > 0 Then PSUSD = tien2(i)
-                CT_ID = ID(i)
+                CT_ID = id(i)
                 GhiChungtu
             Next
             Erase luong
             Erase tien
             Erase tien2
-            Erase ID
+            Erase id
         End If
     End If
     
@@ -419,26 +419,26 @@ Public Function XuLyCT() As Integer
             
             GhiChungtu
         Else
-            Dim i As Integer, luong() As Double, tien() As Double, ID() As Long, c As Integer, tien2() As Double
+            Dim i As Integer, luong() As Double, tien() As Double, id() As Long, c As Integer, tien2() As Double
             Select Case OutCost
                 Case 1:
-                    c = GiaXuatKhoDD(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, ID, tien2)
+                    c = GiaXuatKhoDD(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, id, tien2)
                 Case 2:
-                    c = GiaXuatKhoFIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, ID, tien2)
+                    c = GiaXuatKhoFIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, id, tien2)
                 Case 3:
-                    c = GiaXuatKhoLIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, ID, tien2)
+                    c = GiaXuatKhoLIFO(MaKho, TkCo.MaSo, MaVattu, SoPS2Co, luong, tien, id, tien2)
             End Select
             For i = 1 To c
                 SoPS2Co = luong(i)
                 sops = tien(i)
                 If pGiaUSD > 0 Then PSUSD = tien2(i)
-                CT_ID = ID(i)
+                CT_ID = id(i)
                 GhiChungtu
             Next
             Erase luong
             Erase tien
             Erase tien2
-            Erase ID
+            Erase id
         End If
     End If
     If MaTP > 0 And (Left(tkno.sohieu, 3) = "621" Or Left(TkCo.sohieu, 3) = "621") And (CT_ID < 610000000) Then

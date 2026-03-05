@@ -810,31 +810,72 @@ Private Sub Command_Click(Index As Integer)
 End Sub
 
 Private Sub AddDataLCTT()
-    Dim countrow As Integer
 
-    ' Ki?m tra dã t?n t?i theo TKNo & TKCo
-    countrow = SelectSQL("SELECT COUNT(*) AS f1 FROM LCTT WHERE TKNo='1331' AND TKCo='11'")
+'Chinh sua so tk cac cot
+'ExecuteSQL5 "Update LCTT set TKCo= '7113' where MaSo=22"
+'Xoa  Luu chuy?n ti?n t? ho?t d?ng d?u tu xong add lai
+    ExecuteSQL5 "Delete from LCTT where MaSoCha=30"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (11,21,'1. TiÒn chi ®Ó mua s¾m, x©y dùng TSC§, B§S§T vµ c¸c tµi s¶n dµi h¹n kh¸c','211','11',0,0,0,0,30,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (12,22,'2. TiÒn thu tõ thanh lý, nh­îng b¸n TSC§, B§S§T vµ c¸c tµi s¶n dµi h¹n kh¸c','11','7113',0,0,0,0,30,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (13,23,'3. TiÒn chi cho vay, ®Çu t­ gãp vèn vµo ®¬n vÞ kh¸c','128','11',0,0,0,0,30,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (14,24,'4. TiÒn thu håi cho vay, ®Çu t­ gãp vèn vµo ®¬n vÞ kh¸c','11','128',0,0,0,0,30,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (15,25,'5. TiÒn thu l·i cho vay, cæ tøc vµ lîi nhuËn ®­îc chia','11','515',0,0,0,0,30,1,'new')"
 
-    If countrow = 0 Then
+    '07
+    ExecuteSQL5 "Delete from LCTT where MaSo=6"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (7,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','711',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "Delete from LCTT where MaSo=7"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (37,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','811','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (38,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','138','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (39,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3331','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (40,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3332','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (41,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3333','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (42,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3335','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (43,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3336','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (44,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3337','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (45,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3338','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (46,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','3339','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (47,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','338','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (48,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','352','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (49,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','353','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (50,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','356','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (51,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','131','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (52,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','515','11',0,0,0,0,20,-1,'new')"
+    '06
 
-        ExecuteSQL5 "INSERT INTO LCTT (" & _
-                    "Ma, MaSo, Ten, TKNo, TKCo, DauNam, KyTruoc, KyNay, TongHop, MaSoCha, Dau, TenE" & _
-                    ") VALUES (" & _
-                    "36, " & _
-                    "2, " & _
-                    "'Thu? GTGT du?c kh?u tr?', " & _
-                    "'1331', " & _
-                    "'11', " & _
-                    "0, " & _
-                    "0, " & _
-                    "0, " & _
-                    "0, " & _
-                    "20, " & _
-                    "-1, " & _
-                    "'1. Cash from sale'" & _
-                    ")"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (53,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','133',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (54,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','141',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (55,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','138',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (56,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','338',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (57,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','331',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (58,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','152',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (59,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','153',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (60,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','156',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (61,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','642',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (62,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','334',0,0,0,0,20,1,'new')"
+    '02
+    ExecuteSQL5 "Delete from LCTT where MaSo=2"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (63,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','331','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (64,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','152','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (65,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','153','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (66,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','154','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (67,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','156','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (68,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','642','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (69,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','242','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (70,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','1331','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (71,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','632','11',0,0,0,0,20,-1,'new')"
 
-    End If
+    'Chi tieu 40
+    ExecuteSQL5 "Delete from LCTT where MaSoCha=40"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (72,31,'1. TiÒn thu tõ ph¸t hµnh cæ phiÕu, nhËn vèn gãp cña CSH','11','411',0,0,0,0,40,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (73,32,'2. TiÒn tr¶ l¹i vèn gãp cho c¸c chñ së h÷u, mua l¹i cæ phiÕu cña doanh nghiÖp ®· ph¸t hµnh','411','11',0,0,0,0,40,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (74,33,'3. TiÒn thu tõ ®i vay','11','341',0,0,0,0,40,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (75,34,'4. TiÒn tr¶ nî gèc vay vµ nî thuª tµi chÝnh','341','11',0,0,0,0,40,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (76,35,'5. Cæ tøc, lîi nhuËn ®· tr¶ cho chñ së h÷u','421','11',0,0,0,0,40,-1,'new')"
+
+
+    ExecuteSQL5 "Update LCTT set Ten='TiÒn vµ t­¬ng ®­¬ng tiÒn cuèi kú (70 = 50+60+61)' where MaSo=70 "
+    ExecuteSQL5 "Update LCTT set Ten='L­u chuyÓn tiÒn thuÇn trong kú (50 = 20+30+40)' where MaSo=50 "
 End Sub
 Private Sub Form_Activate()
     AddDataLCTT
