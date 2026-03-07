@@ -4338,7 +4338,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuCo Like "131*" Then
                 sum131 = sum131 + rs_import!sops
             End If
-            If rs_import!GhiChu Like "131,*" Then
+            If rs_import!GhiChu Like "131," Or rs_import!GhiChu Like "1311," Then
                 sum131 = sum131 + rs_import!sops
             End If
             If rs_import!SoHieuCo Like "3331*" Then

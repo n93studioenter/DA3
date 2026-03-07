@@ -1023,9 +1023,10 @@ End Function
 '====================================================================================================
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 ' Ki?m tra xem Alt du?c nh?n cùng v?i phím S
-     If Shift = 4 And KeyCode = 18 Then
+   
+    If Shift = 4 And KeyCode = 18 Then
         SaveSetting IniPath, "Environment", "Path", ""
-         
+
     End If
     If (Shift And vbAltMask) > 0 Then
         Select Case KeyCode
@@ -1077,8 +1078,9 @@ End Sub
 Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     picTitle_MouseDown Button, Shift, X, Y
 End Sub
+
 Private Sub Form_Load()
- 
+    
     Counter = -1
     Int_RecsetToCbo "SELECT MaSo As F2, TenNSD As F1 FROM Users ORDER BY TenNSD", CboUser
     SetFont Me

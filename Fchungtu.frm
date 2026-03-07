@@ -6548,9 +6548,11 @@ Private Sub timerNext_Timer()
             Dim myDate As Date
             If bakNgayimp <> "" Then
                 myDate = CDate(bakNgayimp)
+                MedNgay(0).Text = Format(myDate, "dd/mm/yy")
+                MedNgay(1).Text = Format(myDate, "dd/mm/yy")
             End If
-            MedNgay(0).Text = Format(myDate, "dd/mm/yy")
-            MedNgay(1).Text = Format(myDate, "dd/mm/yy")
+            'MedNgay(0).Text = Format(myDate, "dd/mm/yy")
+            'MedNgay(1).Text = Format(myDate, "dd/mm/yy")
             hasError = False
             btnReset_Click
 
@@ -13775,7 +13777,9 @@ Public Function HienPhieuTrenManHinh(p As Integer) As Integer
                         .loai = rs_chungtu!LoaiHD
                         .KyHieu = rs_chungtu!KyHieu
                         .sohd = rs_chungtu!shd
-                        .NgayPH = rs_chungtu!NgayPH
+                        If Not IsNull(rs_chungtu!NgayPH) Then
+                            .NgayPH = rs_chungtu!NgayPH
+                        End If
                         .MatHang = rs_chungtu!MatHang
                         .SoLuong = rs_chungtu!SoLuong
                         .ThanhTien = rs_chungtu!ThanhTien
@@ -15721,9 +15725,9 @@ Private Sub Dong_thong_tin()
     'txtVT(1).Text = ""
     txtVT(7).Text = "..."
     txtVT(8).Text = "..."
-    If txtVT(9).Text <> "..." Then
-        txtVT(9).Text = "..."
-    End If
+   ' If txtVT(9).Text <> "..." Then
+       ' txtVT(9).Text = "..."
+   ' End If
     ' txtVT(2).Text = "01GTKT3/001"
     hien_thong_tin_mau_HD
     txtVT(3).Text = "01GTKT"

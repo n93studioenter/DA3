@@ -1463,7 +1463,7 @@ Begin VB.Form FrmOptions
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   4695
+      Height          =   4815
       Index           =   0
       Left            =   0
       TabIndex        =   56
@@ -2676,7 +2676,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" ( _
-                                     ByVal hWnd As Long, _
+                                     ByVal hwnd As Long, _
                                      ByVal wMsg As Long, _
                                      ByVal wParam As Long, _
                                      ByVal lParam As Long) As Long
@@ -2709,7 +2709,7 @@ Dim kb As Integer
 Dim typeRegistry As Integer
 Private Sub SetLeftPadding(txt As Object, widthInPixels As Long)
     ' lParam luu giá tr? margin (LOWORD là Left, HIWORD là Right)
-    SendMessage txt.hWnd, EM_SETMARGINS, EC_LEFTMARGIN, widthInPixels
+    SendMessage txt.hwnd, EM_SETMARGINS, EC_LEFTMARGIN, widthInPixels
 End Sub
 
 Public Function BrowseForFolder(ByVal sTitle As String) As String
@@ -2827,6 +2827,13 @@ ErrorHandler:
     On Error Resume Next
     Close #fileNumber
 End Function
+Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+
+    If Shift And vbShiftMask Then
+        MsgBox "B?n dang nh?n phím SHIFT"
+    End If
+
+End Sub
 Private Sub Form_Activate()
 'Load thong tin folder server path
     Dim originPath As String
@@ -2983,7 +2990,7 @@ Private Sub Form_Load()
 
     SetFont Me
     Set Combo(3).Font = Me.Font
-    mst = frmMain.lbCty(8).Caption
+    mst = frmMain.LbCty(8).Caption
     If IsNumeric(mst) Then
         vis = (Cdbl5(mst) = 0)
     Else
@@ -3243,7 +3250,7 @@ Private Sub Command_Click(Index As Integer)
 
         If Combo(2).ListIndex >= 0 Then T = Combo(2).ItemData(Combo(2).ListIndex) Else T = pTien
         If CInt5(Left(Text(Index).Text, 2)) <> 0 Then Check(55).Value = 0
-        If ((((pTenCty = Text(0).Text And (pTenCn = Text(1).Text Or suatencn = 1) And (Check(19).Value = suatencn) And pMaVach = Check(9).Value And pDinhmuc = Check(13).Value And pSongNgu = (Check(14).Value = 1) And pRpt = Check(15).Value And pTygia = Check(18).Value And T = pTien And mk = 0) Or (DEMO = 1 And CLng5(Left(Text(7).Text, 2)) > 0)) And (mst = Text(7).Text Or (suatencn = 1 And Left(mst, 10) = Left(Text(7).Text, 10)))) Or Combo(3).ListIndex = 4 Or (Cdbl5(Left(Text(7).Text, 10)) = 0 And Cdbl5(Left(frmMain.lbCty(8).Caption, 10)) = 0)) And (pNoiBo = Check(55).Value) And (CInt5(Combo(0).Text) = pNamTC) Then GoTo a
+        If ((((pTenCty = Text(0).Text And (pTenCn = Text(1).Text Or suatencn = 1) And (Check(19).Value = suatencn) And pMaVach = Check(9).Value And pDinhmuc = Check(13).Value And pSongNgu = (Check(14).Value = 1) And pRpt = Check(15).Value And pTygia = Check(18).Value And T = pTien And mk = 0) Or (DEMO = 1 And CLng5(Left(Text(7).Text, 2)) > 0)) And (mst = Text(7).Text Or (suatencn = 1 And Left(mst, 10) = Left(Text(7).Text, 10)))) Or Combo(3).ListIndex = 4 Or (Cdbl5(Left(Text(7).Text, 10)) = 0 And Cdbl5(Left(frmMain.LbCty(8).Caption, 10)) = 0)) And (pNoiBo = Check(55).Value) And (CInt5(Combo(0).Text) = pNamTC) Then GoTo a
         If (Len(pMST) > 0 And Left(Text(7).Text, Len(pMST)) = pMST) Then GoTo a
         If boolean_kiemtra() = False Then GoTo a    ' kiem tra da active thi bat khung nhap ma so le
         If FrmGetStr.GetMK(Text(7).Text) Then
