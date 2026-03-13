@@ -4332,6 +4332,8 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim sum3331 As Double
     Dim sum131 As Double
     Dim sum156 As Double
+    Dim sum331 As Double
+    Dim sum338 As Double
 
     If Not rs_import.EOF Then
         Do While Not rs_import.EOF
@@ -4355,17 +4357,280 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuNo Like "156*" Then
                 sum156 = sum156 + rs_import!sops
             End If
-             If InStr("," & rs_import!GhiChu, ",156,") > 0 Then
+            If InStr("," & rs_import!GhiChu, ",156,") > 0 Then
                 sum156 = sum156 + rs_import!sops
+            End If
+
+            If rs_import!GhiChu Like "331," Then
+                sum331 = sum331 + rs_import!sops
+            End If
+
+            If InStr("," & rs_import!GhiChu, ",338") > 0 Then
+                sum338 = sum338 + rs_import!sops
+            End If
+
+            rs_import.MoveNext
+        Loop
+    End If
+    'cap nhat lai cac chi tieu
+    Dim ct01_511 As Double
+    Dim ct01_3331 As Double
+    Dim ct01_131 As Double
+    Dim ct02_331 As Double
+    Dim ct02_152 As Double
+    Dim ct02_153 As Double
+    Dim ct02_154 As Double
+    Dim ct02_156 As Double
+    Dim ct02_642 As Double
+    Dim ct02_242 As Double
+    Dim ct02_1331 As Double
+    Dim ct02_632 As Double
+    Dim ct03 As Double
+    Dim ct04_635 As Double
+    Dim ct04_335 As Double
+    Dim ct05 As Double
+    Dim ct06_711 As Double
+    Dim ct06_133 As Double
+    Dim ct06_141 As Double
+    Dim ct06_138 As Double
+    Dim ct06_338 As Double
+    Dim ct06_331 As Double
+    Dim ct06_152 As Double
+    Dim ct06_153 As Double
+    Dim ct06_156 As Double
+    Dim ct06_642 As Double
+    Dim ct06_334 As Double
+    Dim ct07_811 As Double
+    Dim ct07_138 As Double
+    Dim ct07_3331 As Double
+    Dim ct07_3332 As Double
+    Dim ct07_3333 As Double
+    Dim ct07_3335 As Double
+    Dim ct07_3336 As Double
+    Dim ct07_3337 As Double
+    Dim ct07_3338 As Double
+    Dim ct07_3339 As Double
+    Dim ct07_338 As Double
+    Dim ct07_352 As Double
+    Dim ct07_353 As Double
+    Dim ct07_356 As Double
+    Dim ct07_131 As Double
+    Dim ct07_515 As Double
+    Set rs_import = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+    If Not rs_import.EOF Then
+        Do While Not rs_import.EOF
+            'Chi tieu 01
+            If rs_import!SoHieuCo Like "511*" Or (InStr("," & rs_import!GhiChu, ",511") > 0 And rs_import!SoHieuNo <> "") Then
+                ct01_511 = ct01_511 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "3331*" Or (Left(Trim(rs_import!GhiChu), 4) = "3331" And rs_import!SoHieuNo <> "") Then
+                ct01_3331 = ct01_3331 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "131*" Or (Left(Trim(rs_import!GhiChu), 3) = "131" And rs_import!SoHieuNo <> "") Then
+                ct01_131 = ct01_131 + rs_import!sops
+            End If
+            'Chi tieu 02
+            If rs_import!SoHieuNo Like "331*" Or (Left(Trim(rs_import!GhiChu), 3) = "331" And IsNull(rs_import!SoHieuNo)) Then
+                ct02_331 = ct02_331 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "152*" Or (Left(Trim(rs_import!GhiChu), 3) = "152" And IsNull(rs_import!SoHieuNo)) Then
+                ct02_152 = ct02_152 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "153*" Or (Left(Trim(rs_import!GhiChu), 3) = "153" And IsNull(rs_import!SoHieuNo)) Then
+                ct02_153 = ct02_153 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "154*" Or (Left(Trim(rs_import!GhiChu), 3) = "154" And IsNull(rs_import!SoHieuNo)) Then
+                ct02_154 = ct02_154 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "156*" Or (Left(Trim(rs_import!GhiChu), 3) = "156" And IsNull(rs_import!SoHieuNo)) Then
+                ct02_156 = ct02_156 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "642*" Or (InStr("," & rs_import!GhiChu & ",", ",642") > 0 And IsNull(rs_import!SoHieuNo)) Then
+                ct02_642 = ct02_642 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "242*" Or (Left(Trim(rs_import!GhiChu), 3) = "242" And IsNull(rs_import!SoHieuNo)) Then
+                ct02_242 = ct02_242 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "1331*" Or (Left(Trim(rs_import!GhiChu), 4) = "1331" > 0 And IsNull(rs_import!SoHieuNo)) Then
+                ct02_1331 = ct02_1331 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "632*" Or (InStr("," & rs_import!GhiChu & ",", ",632") > 0 And IsNull(rs_import!SoHieuNo)) Then
+                ct02_632 = ct02_632 + rs_import!sops
+            End If
+
+            'Chi tieu 03
+            If rs_import!SoHieuNo Like "334*" Or InStr("," & rs_import!GhiChu, ",334") > 0 Then
+                ct03 = ct03 + rs_import!sops
+            End If
+            'Chi tieu 04
+            If rs_import!SoHieuNo Like "635*" Or InStr("," & rs_import!GhiChu, ",635") > 0 Then
+                ct04_635 = ct04_635 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "335*" Or InStr("," & rs_import!GhiChu, ",335") > 0 Then
+                ct04_335 = ct04_335 + rs_import!sops
+            End If
+            'Chi tieu 05
+            If rs_import!SoHieuNo Like "3334*" Or InStr("," & rs_import!GhiChu, ",3334") > 0 Then
+                ct05 = ct05 + rs_import!sops
+            End If
+            'Chi tieu 06
+            If rs_import!SoHieuCo Like "711*" Or (InStr("," & rs_import!GhiChu, ",711") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_711 = ct06_711 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "133*" Or (Left(Trim(rs_import!GhiChu), 3) = "133" And rs_import!SoHieuNo <> "") Then
+                ct06_133 = ct06_133 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "141*" Or (InStr("," & rs_import!GhiChu, ",141") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_141 = ct06_141 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "138*" Or (InStr("," & rs_import!GhiChu, ",138") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_138 = ct06_138 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "338*" Or (InStr("," & rs_import!GhiChu, ",338") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_338 = ct06_338 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "331*" Or (Left(Trim(rs_import!GhiChu), 3) = "331" And rs_import!SoHieuNo <> "") Then
+                ct06_331 = ct06_331 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "152*" Or (InStr("," & rs_import!GhiChu, ",152") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_152 = ct06_152 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "153*" Or (InStr("," & rs_import!GhiChu, ",153") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_153 = ct06_153 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "156*" Or (InStr("," & rs_import!GhiChu, ",156") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_156 = ct06_156 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "642*" Or (InStr("," & rs_import!GhiChu, ",642") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_642 = ct06_642 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "334*" Or (InStr("," & rs_import!GhiChu, ",334") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_334 = ct06_334 + rs_import!sops
+            End If
+            '07
+            If rs_import!SoHieuNo Like "811*" Or Left(Trim(rs_import!GhiChu), 3) = "811" Then
+                ct07_811 = ct07_811 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "138*" Or Left(Trim(rs_import!GhiChu), 3) = "138" Then
+                ct07_138 = ct07_138 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3331*" Or InStr("," & rs_import!GhiChu, ",3331*") > 0 Then
+                ct07_3331 = ct07_3331 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3332*" Or InStr("," & rs_import!GhiChu, ",3332") > 0 Then
+                ct07_3332 = ct07_3332 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3333*" Or InStr("," & rs_import!GhiChu, ",3333") > 0 Then
+                ct07_3333 = ct07_3333 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3335*" Or InStr("," & rs_import!GhiChu, ",3335") > 0 Then
+                ct07_3335 = ct07_3335 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3336*" Or InStr("," & rs_import!GhiChu, ",3336") > 0 Then
+                ct07_3336 = ct07_3336 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3337*" Or InStr("," & rs_import!GhiChu, ",3337") > 0 Then
+                ct07_3337 = ct07_3337 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3338*" Or InStr("," & rs_import!GhiChu, ",3338") > 0 Then
+                ct07_3338 = ct07_3338 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "3339*" Or InStr("," & rs_import!GhiChu, ",3339") > 0 Then
+                ct07_3339 = ct07_3339 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "338*" Or InStr("," & rs_import!GhiChu, ",338") > 0 Then
+                ct07_338 = ct07_338 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "352*" Or InStr("," & rs_import!GhiChu, ",352") > 0 Then
+                ct07_352 = ct07_352 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "353*" Or InStr("," & rs_import!GhiChu, ",353") > 0 Then
+                ct07_353 = ct07_353 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "356*" Or InStr("," & rs_import!GhiChu, ",356") > 0 Then
+                ct07_356 = ct07_356 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "131*" Then
+                ct07_131 = ct07_131 + rs_import!sops
+            End If
+
+            If rs_import!SoHieuNo Like "515*" Or InStr("," & rs_import!GhiChu, ",515") > 0 Then
+                ct07_515 = ct07_515 + rs_import!sops
             End If
             rs_import.MoveNext
         Loop
     End If
-    'cap nhat lai cho tieu 01
-    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum511 & " WHERE MaSo=1 AND TKCo='511'"
-    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum3331 & " WHERE MaSo=1 AND TKCo='3331'"
-    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum131 & " WHERE MaSo=1 AND TKCo='131'"
-    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & -sum156 & " WHERE MaSo=2 AND TKNo='156'"
+
+    'update cho ct01
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct01_511 & " WHERE MaSo=1 AND TKCo='511'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct01_3331 & " WHERE MaSo=1 AND TKCo='3331'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct01_131 & " WHERE MaSo=1 AND TKCo='131'"
+
+    'update cho ct02
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_331 & " WHERE MaSo=2 AND TKNo='331'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_152 & " WHERE MaSo=2 AND TKNo='152'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_153 & " WHERE MaSo=2 AND TKNo='153'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_154 & " WHERE MaSo=2 AND TKNo='154'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_156 & " WHERE MaSo=2 AND TKNo='156'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_642 & " WHERE MaSo=2 AND TKNo='642'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_242 & " WHERE MaSo=2 AND TKNo='242'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_1331 & " WHERE MaSo=2 AND TKNo='1331'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct02_632 & " WHERE MaSo=2 AND TKNo='632'"
+    'update cho ct03
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct03 & " WHERE MaSo=3 AND TKNo='334'"
+    'update cho ct04
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct04_635 & " WHERE MaSo=4 AND TKNo='635'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct04_335 & " WHERE MaSo=4 AND TKNo='3334'"
+    'update cho ct05
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct05 & " WHERE MaSo=5 AND TKNo='635'"
+    'update ct06
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_711 & " WHERE MaSo=6 AND TKCo='711'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_133 & " WHERE MaSo=6 AND TKCo='133'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_141 & " WHERE MaSo=6 AND TKCo='141'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_138 & " WHERE MaSo=6 AND TKCo='138'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_338 & " WHERE MaSo=6 AND TKCo='338'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_331 & " WHERE MaSo=6 AND TKCo='331'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_152 & " WHERE MaSo=6 AND TKCo='152'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_153 & " WHERE MaSo=6 AND TKCo='153'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_156 & " WHERE MaSo=6 AND TKCo='156'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_642 & " WHERE MaSo=6 AND TKCo='642'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_334 & " WHERE MaSo=6 AND TKCo='334'"
+    'update ct07
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_811 & " WHERE MaSo=7 AND TKNo='811'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_138 & " WHERE MaSo=7 AND TKNo='138'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3331 & " WHERE MaSo=7 AND TKNo='3331'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3332 & " WHERE MaSo=7 AND TKNo='3332'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3333 & " WHERE MaSo=7 AND TKNo='3333'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3335 & " WHERE MaSo=7 AND TKNo='3335'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3336 & " WHERE MaSo=7 AND TKNo='3336'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3337 & " WHERE MaSo=7 AND TKNo='3337'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3338 & " WHERE MaSo=7 AND TKNo='3338'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_3339 & " WHERE MaSo=7 AND TKNo='3339'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_338 & " WHERE MaSo=7 AND TKNo='338'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_352 & " WHERE MaSo=7 AND TKNo='352'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_353 & " WHERE MaSo=7 AND TKNo='353'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_356 & " WHERE MaSo=7 AND TKNo='356'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_131 & " WHERE MaSo=7 AND TKNo='131'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_515 & " WHERE MaSo=7 AND TKNo='515'"
+    'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum511 & " WHERE MaSo=1 AND TKCo='511'"
+    'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum3331 & " WHERE MaSo=1 AND TKCo='3331'"
+    'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum131 & " WHERE MaSo=1 AND TKCo='131'"
+    'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & -sum156 & " WHERE MaSo=2 AND TKNo='156'"
+    'ExecuteSQL5 "UPDATE LCTT SET KyNay = KyNay - " & sum331 & " WHERE MaSo=2 AND TKNo='331'"
+    'ExecuteSQL5 "UPDATE LCTT SET KyNay = KyNay + " & -sum338 & " WHERE MaSo=7 AND TKNo='338'"
     '----------
 
     GauGe.Value = 2

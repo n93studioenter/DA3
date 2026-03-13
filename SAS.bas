@@ -2312,7 +2312,7 @@ c:
         ExecuteSQL5 "UPDATE HethongTK SET MaTC=0 WHERE Cap=1 AND SoHieu LIKE '413*'"
     End If
 d:
-    If frmMain.Lb(0).tag < 3 Then
+    If frmMain.lb(0).tag < 3 Then
         TK.InitTaikhoanSohieu "1385"
         If TK.MaSo > 0 Then GoTo E
         If MsgBox("Bæ sung c¸c tµi kho¶n 1385, 3385, 417, 419 ?", vbYesNo + vbExclamation, App.ProductName) <> vbYes Then GoTo E
@@ -3311,7 +3311,7 @@ Private Function QueryDaCo2(qname As String, qname2 As String) As Boolean
 End Function
 
 Public Function ChoNhapTiep() As Boolean
-    If DEMO = 1 Or frmMain.Lb(0).tag = 5 Or (CInt5(Left(frmMain.LbCty(8).Caption, 2)) = 0 And pNoiBo = 0 And pVersion <> 3) Or pVersion = 2 Then
+    If DEMO = 1 Or frmMain.lb(0).tag = 5 Or (CInt5(Left(frmMain.LbCty(8).Caption, 2)) = 0 And pNoiBo = 0 And pVersion <> 3) Or pVersion = 2 Then
         SetSQL "MienTru", "SELECT MaCT FROM ChungTu WHERE MaCT>0 GROUP BY MaCT"
         ChoNhapTiep = SelectSQL("SELECT Count(MaCT) AS F1 FROM MienTru") < 200
     Else

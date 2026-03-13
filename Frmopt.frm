@@ -1469,6 +1469,15 @@ Begin VB.Form FrmOptions
       TabIndex        =   56
       Top             =   0
       Width           =   9075
+      Begin VB.TextBox Text4 
+         Height          =   360
+         Left            =   1800
+         TabIndex        =   143
+         Text            =   "Text4"
+         Top             =   4200
+         Visible         =   0   'False
+         Width           =   7095
+      End
       Begin VB.CommandButton Command1 
          Height          =   375
          Left            =   7920
@@ -2827,13 +2836,7 @@ ErrorHandler:
     On Error Resume Next
     Close #fileNumber
 End Function
-Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
-    If Shift And vbShiftMask Then
-        MsgBox "B?n dang nh?n phím SHIFT"
-    End If
-
-End Sub
 Private Sub Form_Activate()
 'Load thong tin folder server path
     Dim originPath As String
@@ -2923,23 +2926,34 @@ Private Sub ActiveInfo()
 End Sub
 
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
+    If Shift And vbShiftMask Then
+        If Text4.Visible = False Then
+            Text4.Visible = True
+            Text3.Visible = False
+        Else
+            Text3.Visible = True
+            Text4.Visible = False
+        End If
+    End If
+
+
     If (Shift And vbAltMask) > 0 Then
         Select Case KeyCode
-            Case vbKeyG:
-                RFocus Command(0)
-                Command_Click 0
-          
-            Case vbKeyV:
-                RFocus Command(1)
-                Command_Click 1
+        Case vbKeyG:
+            RFocus Command(0)
+            Command_Click 0
+
+        Case vbKeyV:
+            RFocus Command(1)
+            Command_Click 1
         End Select
     End If
-    
+
     If (Shift And vbAltMask) > 0 And (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyN Then
         kb = 1
         HienNoiBo
     End If
-    
+
     If KeyCode = vbKeyEscape Then Unload Me
 End Sub
 Private Sub lblClose_Click()
