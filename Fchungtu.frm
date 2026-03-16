@@ -6069,7 +6069,11 @@ End Sub
 Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     isGhi = True
     'Xu ly tkNo
-    bakTongtien = rs_import!TgTCThue
+    If rs_import!Khautruthue <> 1 Then
+        bakTongtien = rs_import!TgTCThue
+    Else
+        bakTongtien = 0
+    End If
     txtchungtu(0).Text = rs_import!tkno
 
     txtChungtu_LostFocus (0)
@@ -6102,17 +6106,17 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
             txtchungtu(5).Text = rs_import!TgTThue
         End If
     End If
-
-    If rs_import!TgTCThue <> 0 Then
-        If rs_import!VAT2 <> 0 Then
-            bakTongtien = rs_import!TgTCThue1
+    If rs_import!Khautruthue <> 1 Then
+        If rs_import!TgTCThue <> 0 Then
+            If rs_import!VAT2 <> 0 Then
+                bakTongtien = rs_import!TgTCThue1
+            Else
+                bakTongtien = rs_import!TgTCThue
+            End If
         Else
-            bakTongtien = rs_import!TgTCThue
+            bakTongtien = rs_import!TongTien
         End If
-    Else
-        bakTongtien = rs_import!TongTien
     End If
-
     txtChungtu_LostFocus (5)
     RFocus txtchungtu(6)
     txtChungtu_KeyPress 6, 13

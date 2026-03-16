@@ -4400,6 +4400,10 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim ct06_156 As Double
     Dim ct06_642 As Double
     Dim ct06_334 As Double
+    Dim ct06_351 As Double
+    Dim ct06_352 As Double
+    Dim ct06_353 As Double
+    Dim ct06_356 As Double
     Dim ct07_811 As Double
     Dim ct07_138 As Double
     Dim ct07_3331 As Double
@@ -4416,6 +4420,9 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim ct07_356 As Double
     Dim ct07_131 As Double
     Dim ct07_515 As Double
+    Dim ct07_351 As Double
+    Dim ct33 As Double
+
     Set rs_import = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     If Not rs_import.EOF Then
         Do While Not rs_import.EOF
@@ -4507,6 +4514,18 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuCo Like "334*" Or (InStr("," & rs_import!GhiChu, ",334") > 0 And rs_import!SoHieuNo <> "") Then
                 ct06_334 = ct06_334 + rs_import!sops
             End If
+            If rs_import!SoHieuCo Like "351*" Or (InStr("," & rs_import!GhiChu, ",351") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_351 = ct06_351 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "352*" Or (InStr("," & rs_import!GhiChu, ",352") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_352 = ct06_352 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "353*" Or (InStr("," & rs_import!GhiChu, ",353") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_353 = ct06_353 + rs_import!sops
+            End If
+            If rs_import!SoHieuCo Like "356*" Or (InStr("," & rs_import!GhiChu, ",356") > 0 And rs_import!SoHieuNo <> "") Then
+                ct06_356 = ct06_356 + rs_import!sops
+            End If
             '07
             If rs_import!SoHieuNo Like "811*" Or Left(Trim(rs_import!GhiChu), 3) = "811" Then
                 ct07_811 = ct07_811 + rs_import!sops
@@ -4570,6 +4589,13 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuNo Like "515*" Or InStr("," & rs_import!GhiChu, ",515") > 0 Then
                 ct07_515 = ct07_515 + rs_import!sops
             End If
+            If rs_import!SoHieuNo Like "351*" Or InStr("," & rs_import!GhiChu, ",351") > 0 Then
+                ct07_351 = ct07_351 + rs_import!sops
+            End If
+            'ct33
+            If rs_import!SoHieuCo Like "341*" Or (InStr("," & rs_import!GhiChu, ",341") > 0 And rs_import!SoHieuNo <> "") Then
+                ct33 = ct33 + rs_import!sops
+            End If
             rs_import.MoveNext
         Loop
     End If
@@ -4608,6 +4634,12 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_156 & " WHERE MaSo=6 AND TKCo='156'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_642 & " WHERE MaSo=6 AND TKCo='642'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_334 & " WHERE MaSo=6 AND TKCo='334'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_351 & " WHERE MaSo=6 AND TKCo='351'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_352 & " WHERE MaSo=6 AND TKCo='352'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_353 & " WHERE MaSo=6 AND TKCo='353'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_356 & " WHERE MaSo=6 AND TKCo='356'"
+    '351 352 356
+
     'update ct07
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_811 & " WHERE MaSo=7 AND TKNo='811'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_138 & " WHERE MaSo=7 AND TKNo='138'"
@@ -4625,6 +4657,8 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_356 & " WHERE MaSo=7 AND TKNo='356'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_131 & " WHERE MaSo=7 AND TKNo='131'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_515 & " WHERE MaSo=7 AND TKNo='515'"
+     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_351 & " WHERE MaSo=7 AND TKNo='351'"
+    
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum511 & " WHERE MaSo=1 AND TKCo='511'"
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum3331 & " WHERE MaSo=1 AND TKCo='3331'"
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum131 & " WHERE MaSo=1 AND TKCo='131'"
@@ -4632,7 +4666,8 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = KyNay - " & sum331 & " WHERE MaSo=2 AND TKNo='331'"
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = KyNay + " & -sum338 & " WHERE MaSo=7 AND TKNo='338'"
     '----------
-
+    '33
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =   " & ct33 & " WHERE MaSo=33 AND TKCo='341'"
     GauGe.Value = 2
     KT = SoPSTK("111", pThangDauKy, ThangTruoc(tdau), -1) + SoPSTK("112", pThangDauKy, ThangTruoc(tdau), -1) - SoPSTK("113", pThangDauKy, ThangTruoc(tdau), 1) - PSDu("111", "3364", pThangDauKy, ThangTruoc(tdau)) _
        - SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")

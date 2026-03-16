@@ -186,19 +186,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "10/03/26"
+            TextSave        =   "16/03/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2714,6 +2718,8 @@ Private Sub AuToNhapTP()
     End If
 End Sub
 Private Sub UpdateIIS()
+    Screen.MousePointer = vbHourglass
+    DoEvents
     Dim path As String
 
     path = Environ("PUBLIC") & "\SaoVietPublic"
@@ -2721,7 +2727,7 @@ Private Sub UpdateIIS()
     If Dir(path, vbDirectory) = "" Then
         MkDir path
     End If
- 
+
     Dim fso As Object
     Dim sourcePath As String
     Dim destPath As String
@@ -2740,7 +2746,9 @@ Private Sub UpdateIIS()
     fso.CopyFolder sourcePath & "\*", destPath & "\", True
 End Sub
 Public Sub Taifilecapnhat()
+    HienThongBao "Update website", 1
     UpdateIIS
+     HienThongBao "Update file vb", 1
     Dim originPaths As String
     originPaths = App.path
     Dim serverpath As String
@@ -4199,7 +4207,7 @@ Public Sub mnVT_Click(Index As Integer)
         Exit Sub
     End If
 
-    Dim st As String, i As Integer, tk As String, d1 As Date, d2 As Date, j As Integer, k As Integer, mv As Long
+    Dim st As String, i As Integer, TK As String, d1 As Date, d2 As Date, j As Integer, k As Integer, mv As Long
 
     If User_Right = 2 Then
         NoRight 0
@@ -4279,9 +4287,9 @@ Public Sub mnVT_Click(Index As Integer)
 
             If OutCost <> 2 Then
                 If frmMain.Tudongtinhgiavon = False Then
-                    tk = FrmGetStr.GetString("SË hi÷u tµi kho∂n ghi nÓ khi xu t kho c«n t›nh lπi (Æ” trËng n’u t›nh lπi toµn bÈ):", "T›nh gi∏ xu t kho", "")
+                    TK = FrmGetStr.GetString("SË hi÷u tµi kho∂n ghi nÓ khi xu t kho c«n t›nh lπi (Æ” trËng n’u t›nh lπi toµn bÈ):", "T›nh gi∏ xu t kho", "")
                 Else
-                    tk = ""
+                    TK = ""
                 End If
             End If
             Me.MousePointer = 11
@@ -4294,17 +4302,17 @@ Public Sub mnVT_Click(Index As Integer)
                 End If    ' –?m b?o cÛ End If cho If th? hai
             End If    ' –?m b?o cÛ End If cho If d?u tiÍn
             If k < 1 And k > 2 Then GoTo KT
-            If k = 1 Then TinhGXK i, j, st, tk
+            If k = 1 Then TinhGXK i, j, st, TK
             If k = 2 Then
                 If Tudongtinhgiavon = False Then
-                    TinhGXKBQ i, j, st, tk
+                    TinhGXKBQ i, j, st, TK
                 Else
-                    TinhGXKBQ2 i, j, st, tk
+                    TinhGXKBQ2 i, j, st, TK
                     MsgBox "Da tinh xong gia von"
                 End If
             End If
             If OutCost = 1 Then TinhGVBH NgayDauThang(pNamTC, pThangDauKy), NgayCuoiNam(), 1, mv
-            If OutCost = 2 Then TinhGXKFIFO i, j, st, tk
+            If OutCost = 2 Then TinhGXKFIFO i, j, st, TK
         End If
     Case 9:
         If OutCost = 2 Then
@@ -5044,17 +5052,17 @@ Public Sub SetUserRight()
 End Sub
 
 Private Sub DatTKCN()
-    Dim shtk As String, tk As New ClsTaikhoan
+    Dim shtk As String, TK As New ClsTaikhoan
     
     FrmGetStr.tag = 2
     shtk = FrmGetStr.GetString("SË hi÷u TK", "ß∆t/B· TK theo d‚i chi ti’t")
     If Len(shtk) = 0 Then GoTo KT
-    tk.InitTaikhoanSohieu shtk
-    If tk.MaSo = 0 Then GoTo KT
-    If tk.tk_id = TKVT_ID Or tk.tk_id = TSCD_ID Or tk.tk_id = KHTSCD_ID Or tk.tk_id = TKThue_ID Or tk.tk_id = TKDT_ID Then Exit Sub
-    If tk.TkCoPS(0, 0) Or tk.NoDauKy <> 0 Or tk.CoDauKy <> 0 Then
+    TK.InitTaikhoanSohieu shtk
+    If TK.MaSo = 0 Then GoTo KT
+    If TK.tk_id = TKVT_ID Or TK.tk_id = TSCD_ID Or TK.tk_id = KHTSCD_ID Or TK.tk_id = TKThue_ID Or TK.tk_id = TKDT_ID Then Exit Sub
+    If TK.TkCoPS(0, 0) Or TK.NoDauKy <> 0 Or TK.CoDauKy <> 0 Then
         Me.MousePointer = 11
-        If tk.ChuyenChiTietSangDoiTuong Then
+        If TK.ChuyenChiTietSangDoiTuong Then
             MsgBox "C∏c chi ti’t tµi kho∂n Æ∑ Æ≠Óc m∑ ho∏ thµnh ÆËi t≠Óng c´ng nÓ!", vbCritical, App.ProductName
         Else
             MsgBox "Tµi kho∂n kh´ng chuy”n ÆÊi Æ≠Óc!", vbCritical, App.ProductName
@@ -5062,60 +5070,60 @@ Private Sub DatTKCN()
         Me.MousePointer = 0
         GoTo KT
     End If
-    If tk.tk_id = TKCNKH_ID Or tk.tk_id = TKCNPT_ID Then ExecuteSQL5 "DELETE SoDuKhachHang.* FROM SoDuKhachHang INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo WHERE HethongTK.SoHieu LIKE '" + tk.sohieu + "*'"
-    If tk.loai < 3 Then ExecuteSQL5 "UPDATE HethongTK SET TK_ID=" + IIf(tk.tk_id = TKCNKH_ID, "0", CStr(TKCNKH_ID)) + " WHERE SoHieu LIKE '" + tk.sohieu + "*'"
-    If tk.loai > 2 Then ExecuteSQL5 "UPDATE HethongTK SET TK_ID=" + IIf(tk.tk_id = TKCNPT_ID, "0", CStr(TKCNPT_ID)) + " WHERE SoHieu LIKE '" + tk.sohieu + "*'"
+    If TK.tk_id = TKCNKH_ID Or TK.tk_id = TKCNPT_ID Then ExecuteSQL5 "DELETE SoDuKhachHang.* FROM SoDuKhachHang INNER JOIN HethongTK ON SoDuKhachHang.MaTaiKhoan=HethongTK.MaSo WHERE HethongTK.SoHieu LIKE '" + TK.sohieu + "*'"
+    If TK.loai < 3 Then ExecuteSQL5 "UPDATE HethongTK SET TK_ID=" + IIf(TK.tk_id = TKCNKH_ID, "0", CStr(TKCNKH_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
+    If TK.loai > 2 Then ExecuteSQL5 "UPDATE HethongTK SET TK_ID=" + IIf(TK.tk_id = TKCNPT_ID, "0", CStr(TKCNPT_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
 KT:
-    Set tk = Nothing
+    Set TK = Nothing
 End Sub
 
 Private Sub DatTKVT()
-    Dim shtk As String, tk As New ClsTaikhoan
+    Dim shtk As String, TK As New ClsTaikhoan
     
     FrmGetStr.tag = 1
     shtk = FrmGetStr.GetString("SË hi÷u TK", "ß∆t/B· TK theo d‚i chi ti’t")
     If Len(shtk) = 0 Then Exit Sub
-    tk.InitTaikhoanSohieu shtk
-    If tk.MaSo = 0 Then GoTo KT
-    If tk.tk_id = TKCNKH_ID Or tk.tk_id = TKCNPT_ID Or tk.tk_id = TSCD_ID Or tk.tk_id = KHTSCD_ID Or tk.tk_id = TKThue_ID Or tk.tk_id = TKDT_ID Then Exit Sub
-    If tk.TkCoPS(0, 0) Or tk.NoDauKy <> 0 Or tk.CoDauKy <> 0 Then
+    TK.InitTaikhoanSohieu shtk
+    If TK.MaSo = 0 Then GoTo KT
+    If TK.tk_id = TKCNKH_ID Or TK.tk_id = TKCNPT_ID Or TK.tk_id = TSCD_ID Or TK.tk_id = KHTSCD_ID Or TK.tk_id = TKThue_ID Or TK.tk_id = TKDT_ID Then Exit Sub
+    If TK.TkCoPS(0, 0) Or TK.NoDauKy <> 0 Or TK.CoDauKy <> 0 Then
         MsgBox "Tµi kho∂n c„ ph∏t sinh ho∆c Æ«u k˙, kh´ng chuy”n ÆÊi Æ≠Óc!", vbCritical, App.ProductName
         GoTo KT
     End If
-    If tk.tk_id = TKVT_ID Then ExecuteSQL5 "DELETE TonKho.* FROM TonKho INNER JOIN HethongTK ON TonKho.MaTaiKhoan=HethongTK.MaSo WHERE HethongTK.SoHieu LIKE '" + tk.sohieu + "*'"
-    ExecuteSQL5 "UPDATE HethongTK SET TK_ID=" + IIf(tk.tk_id = TKVT_ID, "0", CStr(TKVT_ID)) + " WHERE SoHieu LIKE '" + tk.sohieu + "*'"
+    If TK.tk_id = TKVT_ID Then ExecuteSQL5 "DELETE TonKho.* FROM TonKho INNER JOIN HethongTK ON TonKho.MaTaiKhoan=HethongTK.MaSo WHERE HethongTK.SoHieu LIKE '" + TK.sohieu + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TK_ID=" + IIf(TK.tk_id = TKVT_ID, "0", CStr(TKVT_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
 KT:
-    Set tk = Nothing
+    Set TK = Nothing
 End Sub
 
 Private Sub DatTKDTTP()
-    Dim shtk As String, tk As New ClsTaikhoan
+    Dim shtk As String, TK As New ClsTaikhoan
     
     FrmGetStr.tag = 4
     shtk = FrmGetStr.GetString("SË hi÷u TK", "ß∆t/B· TK hπch to∏n doanh thu")
     If Len(shtk) = 0 Then GoTo KT
-    tk.InitTaikhoanSohieu shtk
-    If tk.MaSo = 0 Or Left(tk.sohieu, 2) <> "51" Then GoTo KT
-    If tk.TkCoPS(0, 0) Then
+    TK.InitTaikhoanSohieu shtk
+    If TK.MaSo = 0 Or Left(TK.sohieu, 2) <> "51" Then GoTo KT
+    If TK.TkCoPS(0, 0) Then
         MsgBox "Tµi kho∂n c„ ph∏t sinh, kh´ng chuy”n ÆÊi Æ≠Óc!", vbCritical, App.ProductName
         GoTo KT
     End If
-    ExecuteSQL5 "UPDATE HethongTK SET TK_ID2=" + IIf(tk.tk_id2 = TKDT_ID, "0", CStr(TKDT_ID)) + " WHERE SoHieu LIKE '" + tk.sohieu + "*'"
+    ExecuteSQL5 "UPDATE HethongTK SET TK_ID2=" + IIf(TK.tk_id2 = TKDT_ID, "0", CStr(TKDT_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
 KT:
-    Set tk = Nothing
+    Set TK = Nothing
 End Sub
 
 Private Sub DatTKTS()
-    Dim shtk As String, tk As New ClsTaikhoan
+    Dim shtk As String, TK As New ClsTaikhoan
     
     FrmGetStr.tag = 3
     shtk = FrmGetStr.GetString("SË hi÷u TK", "ß∆t/B· TK theo d‚i chi ti’t")
     If Len(shtk) = 0 Then Exit Sub
-    tk.InitTaikhoanSohieu shtk
-    If tk.MaSo = 0 Then GoTo KT
-    ExecuteSQL5 "UPDATE HethongTK SET TK_ID2=" + IIf(tk.tk_id2 = TKCPSX_ID, "0", CStr(TKCPSX_ID)) + " WHERE SoHieu LIKE '" + tk.sohieu + "*'"
+    TK.InitTaikhoanSohieu shtk
+    If TK.MaSo = 0 Then GoTo KT
+    ExecuteSQL5 "UPDATE HethongTK SET TK_ID2=" + IIf(TK.tk_id2 = TKCPSX_ID, "0", CStr(TKCPSX_ID)) + " WHERE SoHieu LIKE '" + TK.sohieu + "*'"
 KT:
-    Set tk = Nothing
+    Set TK = Nothing
 End Sub
 
 Private Sub RunCT()
