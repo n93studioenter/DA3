@@ -2412,7 +2412,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Const w1 = 100
-
+Public TITLE_HEIGHT As Long     ' twips
 Dim baocao As Integer
 Dim StopPrint As Boolean
 Dim Pdelay As Integer
@@ -2423,6 +2423,7 @@ Dim sodcthue As Double
 Dim NLB As String, KTT As String, GD As String
 Dim ngay(0 To 1) As Date
 Dim nn As Integer
+Dim daTangHeight As Boolean
 
 Private Sub CboTT_Click(Index As Integer)
     If Index = 0 Then CboVVClick CboTT(0), CboTT(1)
@@ -2941,6 +2942,7 @@ a:
         frmMain.Rpt.WindowTitle = OptBC(baocao).Caption
         '   frmMain.Rpt.WindowTitle = OptBC(104).Caption
         On Error GoTo LoiIn
+        DoEvents
         frmMain.Rpt.Action = 1
         On Error GoTo 0
         GoTo KhongInBC
@@ -3032,9 +3034,39 @@ End Sub
 Private Sub lblClose_Click()
     Unload Me
 End Sub
+Public Sub AnControl(frm As Form)
+    Dim ctl As Control
+
+    For Each ctl In frm.Controls
+        Select Case TypeName(ctl)
+        Case "Label", "TextBox", "ComboBox", "PictureBox", _
+             "CommandButton", "Frame", "CheckBox", _
+             "OptionButton", "ListBox", "Grid", _
+             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
+
+            If ctl.Name <> "picFakeTitle" _
+               And ctl.Name <> "lblTitle" _
+               And ctl.Name <> "lblClose" Then
+
+                If TypeName(ctl) = "Line" Then
+                    ctl.y1 = ctl.y1 + TITLE_HEIGHT
+                    ctl.y2 = ctl.y2 + TITLE_HEIGHT
+                Else
+                    ctl.Top = ctl.Top + TITLE_HEIGHT
+                End If
+
+            End If
+        End Select
+    Next
+End Sub
 Public Sub Form_Load()
+    TITLE_HEIGHT = 250
     lblTitle(11).AutoSize = True
-    Me.Height = Me.Height + 300 + 10
+    If Not daTangHeight Then
+        Me.Height = Me.Height + 310
+        'daTangHeight = True
+    End If
+
     picFakeTitle.Width = Me.ScaleWidth
     picFakeTitle.Height = 300
     picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
@@ -3148,7 +3180,7 @@ Public Sub Form_Load()
     End If
     'OptBc_Click 4
     OptCD(0).Value = True
-  '  OptBC(4).BackColor = &H80FF80    '&HC0FFC0    '&H80000003
+    '  OptBC(4).BackColor = &H80FF80    '&HC0FFC0    '&H80000003
 End Sub
 
 Private Sub Form_Unload(Cancel As Integer)
@@ -3750,6 +3782,7 @@ Private Function InVATDauVao2(tdau As Integer, tcuoi As Integer, tl As Integer, 
                 frmMain.Rpt.ReportFileName = "BANGKEV6.RPT"
             Else
                 frmMain.Rpt.ReportFileName = "bangkev2.RPT"
+                DoEvents
             End If
         End If
     End If

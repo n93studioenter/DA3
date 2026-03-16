@@ -6069,7 +6069,7 @@ End Sub
 Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
     isGhi = True
     'Xu ly tkNo
-    If rs_import!Khautruthue <> 1 Then
+    If IsNull(rs_import!Khautruthue) Or rs_import!Khautruthue <> 1 Then
         bakTongtien = rs_import!TgTCThue
     Else
         bakTongtien = 0
@@ -6106,7 +6106,8 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
             txtchungtu(5).Text = rs_import!TgTThue
         End If
     End If
-    If rs_import!Khautruthue <> 1 Then
+    If IsNull(rs_import!Khautruthue) Or rs_import!Khautruthue <> 1 Then
+
         If rs_import!TgTCThue <> 0 Then
             If rs_import!VAT2 <> 0 Then
                 bakTongtien = rs_import!TgTCThue1
