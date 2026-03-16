@@ -646,6 +646,16 @@ Begin VB.Form frmMain
       WindowState     =   2
       PrintFileLinesPerPage=   60
    End
+   Begin VB.Label Label4 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Label4"
+      Height          =   255
+      Left            =   13320
+      TabIndex        =   77
+      Top             =   1560
+      Visible         =   0   'False
+      Width           =   2055
+   End
    Begin VB.Label Label2 
       Caption         =   "Version 9.9"
       BeginProperty Font 
@@ -1115,7 +1125,7 @@ Begin VB.Form frmMain
       Index           =   0
       Left            =   3960
       TabIndex        =   46
-      Top             =   2040
+      Top             =   1920
       Width           =   10695
    End
    Begin VB.Label lbCty 
@@ -2744,11 +2754,13 @@ Private Sub UpdateIIS()
 
     'copy folder
     fso.CopyFolder sourcePath & "\*", destPath & "\", True
+
+    Label4.Caption = "Update vb"
+    DoEvents
 End Sub
 Public Sub Taifilecapnhat()
-    HienThongBao "Update website", 1
     UpdateIIS
-     HienThongBao "Update file vb", 1
+  
     Dim originPaths As String
     originPaths = App.path
     Dim serverpath As String
@@ -2883,7 +2895,7 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 
     If (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyD Then
         ChDir pCurDir + "DATA"
-        Recycle "K*" + "_" + CStr(LbCty(0).tag) + ".SAS"
+        Recycle "K*" + "_" + CStr(lbCty(0).tag) + ".SAS"
     End If
 
     If (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyF Then
@@ -3397,7 +3409,7 @@ Private Sub Form_Load()
     ExecuteSQL_them_query "DanhSachVatTu", sqqq
 
 
-    LbCty(4).Visible = False
+    lbCty(4).Visible = False
     'If Year(DateTime.Date) < 2018 Then
     'Label3(12).Caption = "§¬n vÞ triÓn khai: Lª V¨n L¸y"
     'Label3(13).Caption = "Sè ®iÖn tho¹i: 093 3415 959"
@@ -3512,10 +3524,14 @@ End Sub
 
 
 Private Sub Image2_Click()
+    Label4.Visible = True
+    Label4.Caption = "Update..."
+    DoEvents
     Taifilecapnhat
+    Label4.Visible = False
 End Sub
 
- 
+
 
 Public Sub mnCn_Click(Index As Integer)
     If Index = 12 Then
@@ -3704,9 +3720,9 @@ Private Sub mnDL_Click(Index As Integer)
                 If rs_ktra!Type = 2 Then
                     Dim resultArray() As String
                     resultArray = Split(rs_ktra!Year, "|")
-                    Dim Chk As Integer
-                    Chk = (CInt(resultArray(0)) - 1) + CInt(resultArray(1)) - pNamTC
-                    If Chk <= 0 Then
+                    Dim chk As Integer
+                    chk = (CInt(resultArray(0)) - 1) + CInt(resultArray(1)) - pNamTC
+                    If chk <= 0 Then
                         'MsgBox "Gãi d÷ liÖu theo n¨m ®· hÕt, vui lßng liªn hÖ ®Ó ®­îc chuyÓn sang n¨m míi"
                         Dim s As String
                         s = ChrW(71) & ChrW(243) & ChrW(105) & ChrW(32) & ChrW(100) & ChrW(7919) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(101) & ChrW(111) & ChrW(32) & ChrW(110) & ChrW(259) & ChrW(109) & ChrW(32) & ChrW(273) & ChrW(227) & ChrW(32) & ChrW(104) & ChrW(7871) & ChrW(116) & ChrW(44) & ChrW(32) & ChrW(118) & ChrW(117) & ChrW(105) & ChrW(32) & ChrW(108) & ChrW(242) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(108) & ChrW(105) & ChrW(234) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(7879) & ChrW(32) & ChrW(273) & ChrW(7875) & ChrW(32) & ChrW(273) & ChrW(432) & ChrW(7907) & ChrW(99) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(117) & ChrW(121) & ChrW(7875) & ChrW(110) & ChrW(32) & ChrW(115) & ChrW(97) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(110) & ChrW(259) & ChrW(109) & ChrW(32) & ChrW(109) & ChrW(7899) & ChrW(105)
@@ -3773,7 +3789,7 @@ Private Sub mnDL_Click(Index As Integer)
 
             HienThongBao "ChuyÓn sè d­ cuèi kú ...  Xin vui lßng chê !", 1
             ChuyenNamMoi
-            LbCty(7).Caption = CStr(pNamTC)
+            lbCty(7).Caption = CStr(pNamTC)
             LietKeNam
         End If
         '            Else
@@ -3797,7 +3813,7 @@ Private Sub mnDL_Click(Index As Integer)
     Case 19: If KtraMKAdmin Then FrmE.Show 1
     Case 21:
         If KtraMKAdmin Then
-            sql = FrmDB.ChonTepLuu(frmMain.LbCty(8).Caption, pNamTC)
+            sql = FrmDB.ChonTepLuu(frmMain.lbCty(8).Caption, pNamTC)
             If Len(sql) > 0 Then
                 CloseUp 1
                 OpenDB sql
@@ -3931,12 +3947,12 @@ X1:
         ChonTenTep "", 0, "", 3
     Case 9:    ' Dat may in
         ChonTenTep "", cdlCFBoth, "", 4
-        If Len(dlgCommonDialog.FontName) > 1 And (LoaiFont(dlgCommonDialog.FontName) = FontFlag Or KiemTraMaSoThue(LbCty(8).Caption, "03")) Then
+        If Len(dlgCommonDialog.FontName) > 1 And (LoaiFont(dlgCommonDialog.FontName) = FontFlag Or KiemTraMaSoThue(lbCty(8).Caption, "03")) Then
             pFontName = dlgCommonDialog.FontName
             pFontSize = dlgCommonDialog.FontSize
             ExecuteSQL5 "UPDATE License SET FontName='" + pFontName + "', FontSize=" + CStr(pFontSize)
-            LbCty(0).FontName = pFontName
-            LbCty(1).FontName = pFontName
+            lbCty(0).FontName = pFontName
+            lbCty(1).FontName = pFontName
             mnHT(10).Caption = IIf(FontFlag <> 2, "ChuyÓn ®æi CSDL sang font ABC", "ChuyÓn ®æi CSDL sang font VNI")
             SetFont Me
         End If
@@ -3963,10 +3979,10 @@ X1:
         FrmMatkhau.tag = 1
         FrmMatkhau.Show 1
     Case 16:
-        If (Not IsNumeric(Left(LbCty(8).Caption, 2))) Then GoTo KT
-        If CInt(Left(LbCty(8).Caption, 3)) = 0 Then GoTo KT
-        If (Len(pMST) > 0 And Left(LbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
-        If FrmGetStr.GetMK(LbCty(8).Caption) Then
+        If (Not IsNumeric(Left(lbCty(8).Caption, 2))) Then GoTo KT
+        If CInt(Left(lbCty(8).Caption, 3)) = 0 Then GoTo KT
+        If (Len(pMST) > 0 And Left(lbCty(8).Caption, Len(pMST)) = pMST) Then GoTo B
+        If FrmGetStr.GetMK(lbCty(8).Caption) Then
 B:
             UpDateDB
             GetLicense
@@ -4020,7 +4036,7 @@ Private Sub mnNam_Click(Index As Integer)
     Next
     pNamTC = CInt5(mnNam(Index).Caption)
     
-    LbCty(7).Caption = CStr(pNamTC)
+    lbCty(7).Caption = CStr(pNamTC)
     Me.MousePointer = 0
 End Sub
 
@@ -4768,53 +4784,53 @@ Private Sub GetLicense()
     pTenCty = rs_license!TenCty
     pTenCn = rs_license!tencn
 
-    LbCty(2).Caption = rs_license!DiaChi
-    LbCty(3).Caption = rs_license!Tel
-    LbCty(4).Caption = rs_license!Fax
-    LbCty(5).Caption = rs_license!TaiKhoanVN
-    LbCty(6).Caption = rs_license!TaiKhoanNT
+    lbCty(2).Caption = rs_license!DiaChi
+    lbCty(3).Caption = rs_license!Tel
+    lbCty(4).Caption = rs_license!Fax
+    lbCty(5).Caption = rs_license!TaiKhoanVN
+    lbCty(6).Caption = rs_license!TaiKhoanNT
     pNamTC = rs_license!NamTC
     pThangDauKy = rs_license!thang
-    LbCty(7).Caption = CStr(pNamTC)
-    LbCty(8).Caption = rs_license!masothue
-    LbCty(13).Caption = rs_license!email
-    LbCty(14).Caption = rs_license!sofax
+    lbCty(7).Caption = CStr(pNamTC)
+    lbCty(8).Caption = rs_license!masothue
+    lbCty(13).Caption = rs_license!email
+    lbCty(14).Caption = rs_license!sofax
     pBaoGia = (rs_license!Flag1 Mod 1000) \ 100
     pNVBH = (rs_license!Flag1 Mod 10000) \ 1000
 
     For i = 5 To 7
         mnCN(i).Visible = (pNVBH > 0)
     Next
-    lb(0).tag = "Model"
+    Lb(0).tag = "Model"
     SetFont Me
     i = (rs_license!Flag1 Mod 1000000000) \ 100000000
-    lb(0).tag = i
+    Lb(0).tag = i
     If (i < 3 Or i = 5) And pVersion = 0 Then ExecuteSQL5 "UPDATE License SET Flag1=400000000+Flag1 Mod 100000000", False
     Select Case i
-    Case 1: lb(1).Caption = "Doanh nghiÖp Nhµ n­íc"
-        lb(0).Caption = "10.1."
-    Case 2: lb(1).Caption = "Cæ phÇn - Liªn doanh"
-        lb(0).Caption = "10.1."
-    Case 3: lb(1).Caption = "C«ng ty TNHH"
-        lb(0).Caption = "10.1"
-    Case 4: lb(1).Caption = "Doanh nghiÖp t­ nh©n"
-        lb(0).Caption = "10.1"
-    Case 5: lb(1).Caption = "C¬ së ®µo t¹o"
-        lb(0).Caption = "10.1"
+    Case 1: Lb(1).Caption = "Doanh nghiÖp Nhµ n­íc"
+        Lb(0).Caption = "10.1."
+    Case 2: Lb(1).Caption = "Cæ phÇn - Liªn doanh"
+        Lb(0).Caption = "10.1."
+    Case 3: Lb(1).Caption = "C«ng ty TNHH"
+        Lb(0).Caption = "10.1"
+    Case 4: Lb(1).Caption = "Doanh nghiÖp t­ nh©n"
+        Lb(0).Caption = "10.1"
+    Case 5: Lb(1).Caption = "C¬ së ®µo t¹o"
+        Lb(0).Caption = "10.1"
     Case 6:
-        lb(1).Caption = "Hµnh chÝnh sù nghiÖp"
-        lb(0).Caption = "10.1"
+        Lb(1).Caption = "Hµnh chÝnh sù nghiÖp"
+        Lb(0).Caption = "10.1"
         Label(24).Visible = False
         Label(25).Visible = False
         Frame(1).Visible = False
     Case Else
-        lb(0).Caption = "10.1"
+        Lb(0).Caption = "10.1"
     End Select
-    If pVersion <> 3 Then lb(0).Caption = lb(0).Caption    ' + IIf((rs_license!Flag1 Mod 100000000) \ 10000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 10000000) \ 1000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 1000000) \ 100000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 100000) \ 10000 > 0, "1", "0")
-    Chk(0).Value = (rs_license!Flag1 Mod 100000000) \ 10000000
-    Chk(1).Value = (rs_license!Flag1 Mod 10000000) \ 1000000
-    Chk(2).Value = (rs_license!Flag1 Mod 1000000) \ 100000
-    Chk(3).Value = (rs_license!Flag1 Mod 100000) \ 10000
+    If pVersion <> 3 Then Lb(0).Caption = Lb(0).Caption    ' + IIf((rs_license!Flag1 Mod 100000000) \ 10000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 10000000) \ 1000000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 1000000) \ 100000 > 0, "1", "0") + IIf((rs_license!Flag1 Mod 100000) \ 10000 > 0, "1", "0")
+    chk(0).Value = (rs_license!Flag1 Mod 100000000) \ 10000000
+    chk(1).Value = (rs_license!Flag1 Mod 10000000) \ 1000000
+    chk(2).Value = (rs_license!Flag1 Mod 1000000) \ 100000
+    chk(3).Value = (rs_license!Flag1 Mod 100000) \ 10000
 
     Command(6).Visible = ((rs_license!Flag1 Mod 1000000) \ 100000 > 0)
 
@@ -4861,11 +4877,11 @@ Private Sub GetLicense()
     CTGS_GV = rs_license!CTGS_GV
     pFontName = rs_license!FontName
     pFontSize = rs_license!FontSize
-    LbCty(0).FontName = pFontName
-    LbCty(1).FontName = pFontName
-    LbCty(10).Caption = rs_license!Quan
-    LbCty(11).Caption = rs_license!ThanhPho
-    frmMain.LbCty(9).Caption = rs_license!email
+    lbCty(0).FontName = pFontName
+    lbCty(1).FontName = pFontName
+    lbCty(10).Caption = rs_license!Quan
+    lbCty(11).Caption = rs_license!ThanhPho
+    frmMain.lbCty(9).Caption = rs_license!email
     pSoKT = rs_license!SoKT
     mnDL(13).Visible = (pSoKT Mod 100 >= 10)
     '    mnDL(14).Visible = (pSoKT Mod 100 >= 10)
@@ -4955,9 +4971,9 @@ Private Sub GetLicense()
         pSHPT = "131"
     End If
 
-    LbCty(0).tag = rs_license!TenCty_ID
-    LbCty(0).Caption = pTenCty
-    LbCty(1).Caption = pTenCn
+    lbCty(0).tag = rs_license!TenCty_ID
+    lbCty(0).Caption = pTenCty
+    lbCty(1).Caption = pTenCn
     Frame(0).Visible = pSongNgu
 
     mnXoa(0).tag = 0
@@ -5191,9 +5207,9 @@ Private Function StationList() As Integer
         End If
     Next
     If miLoop > 1 Then
-        LbCty(12).Caption = "C¸c m¸y tr¹m: " + sql
+        lbCty(12).Caption = "C¸c m¸y tr¹m: " + sql
     Else
-        LbCty(12).Caption = ""
+        lbCty(12).Caption = ""
     End If
     
     StationList = miLoop
