@@ -1,7 +1,7 @@
 Attribute VB_Name = "modUtilities"
 Option Explicit
 Private Declare Function SendMessageW Lib "user32" ( _
-                                      ByVal hWnd As Long, _
+                                      ByVal hwnd As Long, _
                                       ByVal msg As Long, _
                                       ByVal wParam As Long, _
                                       lParam As Any) As Long
@@ -31,11 +31,11 @@ Public Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As L
 Public Declare Function RegSetValueEx Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, lpData As Any, ByVal cbData As Long) As Long
 Private Const REG_SZ = 1    ' Unicode null terminated string
 Private Const VER_PLATFORM_WIN32_NT = 2
-Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
+Private Declare Function PostMessage Lib "user32" Alias "PostMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, ByVal lParam As Long) As Long
 
 Private Declare Function GetDiskFreeSpace Lib "Kernel32" Alias "GetDiskFreeSpaceA" (ByVal lpRootPathName As String, lpSectorsPerCluster As Long, lpBytesPerSector As Long, lpNumberOfFreeClusters As Long, lpTtoalNumberOfClusters As Long) As Long
 Private Declare Function GetComputerName Lib "Kernel32" Alias "GetComputerNameA" (ByVal lpBuffer As String, nSize As Long) As Long
-Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+Public Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 
 Public Const er_SoHieu = 1
 Public Const er_PhanLoai = 2
@@ -129,10 +129,10 @@ Private Declare Function WaitForSingleObject Lib "Kernel32" (ByVal hHandle As Lo
 Private Declare Function CloseHandle Lib "Kernel32" (ByVal hObject As Long) As Long
 Private Declare Sub ExitThread Lib "Kernel32" (ByVal xc As Long)
 
-Private Declare Function GetWindowText Lib "user32.dll" Alias "GetWindowTextA" (ByVal hWnd As Long, ByVal lpString As String, ByVal nMaxCount As Long) As Long
+Private Declare Function GetWindowText Lib "user32.dll" Alias "GetWindowTextA" (ByVal hwnd As Long, ByVal lpString As String, ByVal nMaxCount As Long) As Long
 Private Declare Function FindWindow Lib "user32.dll" Alias "FindWindowA" (ByVal lpClassName As Any, ByVal lpWindowName As Any) As Long
-Private Declare Function GetParent Lib "user32.dll" (ByVal hWnd As Long) As Long
-Private Declare Function GetWindow Lib "user32.dll" (ByVal hWnd As Long, ByVal wCmd As Long) As Long
+Private Declare Function GetParent Lib "user32.dll" (ByVal hwnd As Long) As Long
+Private Declare Function GetWindow Lib "user32.dll" (ByVal hwnd As Long, ByVal wCmd As Long) As Long
 Private Const gw_hwndnext = 2
 Private Const fwp_startswith = 0
 Private Const fwp_contains = 1
@@ -468,9 +468,9 @@ Public Sub SetRptInfo()
         
     frmMain.Rpt.Formulas(0) = "TenCty='" + pTenCty + "'"
     If Len(Trim(pTenCn)) = 0 Or Left(pTenCn, 1) = "." Then
-        frmMain.Rpt.Formulas(1) = "TenCn='MST: " + frmMain.lbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(1) = "TenCn='MST: " + frmMain.LbCty(8).Caption + "'"
     Else
-        frmMain.Rpt.Formulas(1) = "TenCn='" + pTenCn + " - MST: " + frmMain.lbCty(8).Caption + "'"
+        frmMain.Rpt.Formulas(1) = "TenCn='" + pTenCn + " - MST: " + frmMain.LbCty(8).Caption + "'"
     End If
     frmMain.Rpt.Formulas(2) = "Nam=" + CStr(pNamTC)
     For i = 3 To 128
@@ -659,7 +659,7 @@ Public Sub HienThongBao(thong_bao As String, tabid As Integer)
     panelIndex = tabid - 1  ' Panel b?t d?u t? 0
 
     ' G?i text Unicode cho panel
-    SendMessageW frmMain.sbStatusBar.hWnd, SB_SETTEXTW, panelIndex, ByVal StrPtr(thong_bao)
+    SendMessageW frmMain.sbStatusBar.hwnd, SB_SETTEXTW, panelIndex, ByVal StrPtr(thong_bao)
      frmMain.sbStatusBar.Panels(tabid).Text = thong_bao
     frmMain.sbStatusBar.Refresh
 End Sub
@@ -915,12 +915,12 @@ Public Sub SetFont(frm As Form, Optional c As Integer = 0)
         End If
         For i = 0 To .Controls.count - 1
             If ((TypeOf .Controls(i) Is Grid Or TypeOf .Controls(i) Is Outline) And FontFlag > 0) Or TypeOf .Controls(i) Is TextBox Or TypeOf .Controls(i) Is ComboBox Or TypeOf .Controls(i) Is ListBox Then
-                .Controls(i).fontName = pFontName
+                .Controls(i).FontName = pFontName
                 .Controls(i).FontSize = pFontSize
             End If
             If IsNumeric(.Controls(i).tag) Then
                 If TypeOf .Controls(i) Is Label And .Controls(i).tag = 1 Then
-                    .Controls(i).fontName = pFontName
+                    .Controls(i).FontName = pFontName
                     .Controls(i).FontSize = pFontSize
                 End If
             End If

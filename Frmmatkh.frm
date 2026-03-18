@@ -633,6 +633,44 @@ Public Sub CheckAndCreateToKhaiThueTable()
         'MsgBox "B?ng ToKhaiThue dã t?n t?i!"
     End If
 End Sub
+Public Sub CheckAndCreateTBLogin()
+    Dim tdf As DAO.TableDef
+    Dim fld As DAO.Field
+    Dim tableExists As Boolean
+    Dim tableName As String
+
+    tableName = "tbLogin"
+    tableExists = False
+
+
+    ' Ki?m tra t?n t?i b?ng
+    For Each tdf In DBKetoan.TableDefs
+        If tdf.Name = tableName Then
+            tableExists = True
+            Exit For
+        End If
+    Next tdf
+
+    If Not tableExists Then
+        ' T?o b?ng n?u chua t?n t?i
+        Set tdf = DBKetoan.CreateTableDef(tableName)
+
+        ' Username
+        Set fld = tdf.CreateField("Username", dbText, 255)
+        fld.Required = False
+        fld.AllowZeroLength = True
+        tdf.Fields.Append fld
+
+        ' Password
+        Set fld = tdf.CreateField("Password", dbText, 255)
+        fld.Required = False
+        fld.AllowZeroLength = True   ' ?? QUAN TR?NG (fix l?i c?a b?n)
+        tdf.Fields.Append fld
+
+        ' Thêm b?ng vào CSDL
+        DBKetoan.TableDefs.Append tdf
+    End If
+End Sub
 Public Sub CheckAndCreateTable()
     Dim tdf As DAO.TableDef
     Dim fld As DAO.Field
@@ -728,40 +766,114 @@ Private Sub Command_Click(Index As Integer)
     End If
 
     'Lay dia chi mac
-
-
-
-
-
     Select Case FrmMatkhau.tag
     Case 0:
-        If KiemTraMatKhau(txtPsw.Text) Then
-            HienThongBao VString(CboUser.Text), 3
-            ok = True
-            ExecuteSQL5 "UPDATE Users SET WS='" + GetComputerName1 + "' WHERE MaSo=" + CStr(UserID), False
+        'Kiem tra tblogin da co1 data chua
+        Dim mac As String
+        mac = GetMacAddress()
+        Dim rs_countlogin As Recordset
+        Dim rsCount As DAO.Recordset
 
-            Dim mac As String
-            mac = GetMacAddress()
-            Dim sql As String
+        Set rsCount = DBKetoan.OpenRecordset( _
+                      "SELECT COUNT(*) AS Tong FROM tbLogin ", dbOpenSnapshot)
+        If rsCount!tong = 0 Then
+            'Neu chua thi kiem tra bt
+            If KiemTraMatKhau(txtPsw.Text) Then
+                HienThongBao VString(CboUser.Text), 3
+                ok = True
+                ExecuteSQL5 "UPDATE Users SET WS='" + GetComputerName1 + "' WHERE MaSo=" + CStr(UserID), False
 
-            sql = "update tbRegister SET Name= ('" & mac & "');"
-            DBKetoan.Execute sql
 
-            Unload Me
-        Else
+                Dim sql As String
 
-            'MsgBox "Sai mËt khÈu !", vbExclamation, App.ProductName
-            Dim s As String
-            s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
-            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+                sql = "update tbRegister SET Name= ('" & mac & "');"
+                DBKetoan.Execute sql
+                'Tao user moi tu user cu
+                Dim pass As String
+                pass = 64 + pNamTC + Day(Date)
+                If Trim(txtPsw.Text) = pass Then
+                    ExecuteSQL5 "INSERT INTO tbLogin(Username, Password) VALUES('" & _
+                                Replace(mac, "'", "''") & "','" & "" & "')"
+                Else
+                    ExecuteSQL5 "INSERT INTO tbLogin(Username, Password) VALUES('" & _
+                                Replace(mac, "'", "''") & "','" & Replace(txtPsw.Text, "'", "''") & "')"
+                End If
 
-            Counter = Counter + 1
-            If Counter > 3 Then
                 Unload Me
             Else
-                RFocus txtPsw
+
+                'MsgBox "Sai mËt khÈu !", vbExclamation, App.ProductName
+                Dim s As String
+                s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+                Counter = Counter + 1
+                If Counter > 3 Then
+                    Unload Me
+                Else
+                    RFocus txtPsw
+                End If
             End If
+        Else
+            'Truong hop da co tk login
+            'Kiem tra user dang nhap
+            Dim rs As Recordset
+
+            sql = "SELECT * FROM tbLogin WHERE Username='" & Replace(mac, "'", "''") & _
+                  "' AND Password='" & Replace(Trim(txtPsw.Text), "'", "''") & "'"
+            Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+            If Not rs.EOF Then
+                HienThongBao VString(CboUser.Text), 3
+                ok = True
+                Unload Me
+            Else
+                'Neu dang nhap   that bai , kiem tra tiep co dang dung mat khau 64 khong
+                
+                pass = 64 + pNamTC + Day(Date)
+                If Trim(txtPsw.Text) = pass Then
+                    HienThongBao VString(CboUser.Text), 3
+                    ok = True
+
+                    'Kiem tra xem user nay moi hay cu
+                    'Neu moi tao moi
+                    Dim rskt As DAO.Recordset
+
+                    sql = "SELECT * FROM tbLogin WHERE Username='" & Replace(mac, "'", "''") & "'"
+                    Set rskt = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+
+                    'Neu chua co tao moi user
+                    If rskt.EOF Then
+                        'neu count user trc do =2 thi xoa user dau tien
+                        If rsCount!tong = 2 Then
+                            ExecuteSQL5 "DELETE FROM tbLogin WHERE Username = (SELECT TOP 1 Username FROM tbLogin ORDER BY Username)"
+                        End If
+                        ExecuteSQL5 "INSERT INTO tbLogin(Username, Password) VALUES('" & _
+                                    Replace(mac, "'", "''") & "','" & "" & "')"
+                    Else
+                        'neu co toi thi cap nhat lai mk=''
+                        ExecuteSQL5 "UPDATE tbLogin SET Password='' WHERE Username='" & Replace(mac, "'", "''") & "'"
+                    End If
+                    'Neu cu thi set mk=''
+                    Unload Me
+                Else
+                    s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+                    MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+                    Counter = Counter + 1
+                    If Counter > 3 Then
+                        Unload Me
+                    Else
+                        RFocus txtPsw
+                    End If
+                End If
+
+
+            End If
+            rs.Close
+            Set rs = Nothing
         End If
+
+
     Case 1:
         Select Case pass
         Case 0:
@@ -873,6 +985,13 @@ Private Sub AddDataLCTT()
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (75,34,'4. TiÒn tr¶ nî gèc vay vµ nî thuª tµi chÝnh','341','11',0,0,0,0,40,-1,'new')"
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (76,35,'5. Cæ tøc, lîi nhuËn ®· tr¶ cho chñ së h÷u','421','11',0,0,0,0,40,-1,'new')"
 
+    'bo sung chi tieu 6
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (77,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','351',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (78,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','352',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (79,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','353',0,0,0,0,20,1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (80,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','356',0,0,0,0,20,1,'new')"
+    'bo sung chi tieu 7
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (81,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','351','11',0,0,0,0,20,-1,'new')"
 
     ExecuteSQL5 "Update LCTT set Ten='TiÒn vµ t­¬ng ®­¬ng tiÒn cuèi kú (70 = 50+60+61)' where MaSo=70 "
     ExecuteSQL5 "Update LCTT set Ten='L­u chuyÓn tiÒn thuÇn trong kú (50 = 20+30+40)' where MaSo=50 "
@@ -881,6 +1000,7 @@ Private Sub Form_Activate()
     AddDataLCTT
     Left = frmMain.ScaleWidth * 30 / 100
     Top = frmMain.ScaleHeight * 40 / 100
+    CheckAndCreateTBLogin
     CheckAndCreateTable
     CheckAndCreateToKhaiThueTable
     CreateLicense
@@ -981,6 +1101,26 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
         KiemTraMatKhau = False
         On Error GoTo SaiMK
         KiemTraMatKhau = (CInt5(pstr_psw) = Day(Date) + month(Date) + pNamTC)
+        'Thu voi tbloign
+        Dim mac As String
+        mac = GetMacAddress()
+        Dim rs As DAO.Recordset
+        Dim sql As String
+
+        sql = "SELECT * FROM tbLogin WHERE Username='" & Replace(mac, "'", "''") & _
+              "' AND (Password='" & Replace(Trim(txtPsw.Text), "'", "''") & _
+              "' OR Password IS NULL OR Password='')"
+
+        Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+
+        If Not rs.EOF Then
+            KiemTraMatKhau = True
+        Else
+            KiemTraMatKhau = False
+        End If
+
+        rs.Close
+        Set rs = Nothing
         On Error GoTo 0
     End If
 

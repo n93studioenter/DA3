@@ -4563,7 +4563,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuNo Like "811*" Or Left(Trim(rs_import!GhiChu), 3) = "811" Then
                 ct07_811 = ct07_811 + rs_import!sops
             End If
-            If rs_import!SoHieuNo Like "138*" Or Left(Trim(rs_import!GhiChu), 3) = "138" Then
+            If rs_import!SoHieuNo Like "138*" Or (InStr("," & rs_import!GhiChu, ",138") > 0 And IsNull(rs_import!SoHieuNo)) Then
                 ct07_138 = ct07_138 + rs_import!sops
             End If
 

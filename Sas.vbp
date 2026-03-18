@@ -126,6 +126,7 @@ Form=frmSubMenu.frm
 Object={EAFDAFBF-1D88-41DD-B117-60ECBC4B8441}#1.0#0; vkUserControlsXP.ocx
 Object={3D800911-77E3-43DE-82EA-7FC87C713180}#1.1#0; cPopMenu6.ocx
 ResFile32="custom.RES"
+Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0; mscomctl.ocx
 IconForm="frmMain"
 Startup="Sub Main"
 HelpFile="SAS.HLP"

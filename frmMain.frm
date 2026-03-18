@@ -2,6 +2,7 @@ VERSION 5.00
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
 Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.5#0"; "comctl32.Ocx"
 Object = "{00025600-0000-0000-C000-000000000046}#5.2#0"; "Crystl32.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "mscomctl.ocx"
 Begin VB.Form frmMain 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFC0C0&
@@ -112,6 +113,18 @@ Begin VB.Form frmMain
          EndProperty
       EndProperty
    End
+   Begin MSComctlLib.ProgressBar ProgressBar1 
+      Height          =   375
+      Left            =   13080
+      TabIndex        =   78
+      Top             =   1440
+      Visible         =   0   'False
+      Width           =   2535
+      _ExtentX        =   4471
+      _ExtentY        =   661
+      _Version        =   393216
+      Appearance      =   1
+   End
    Begin VB.PictureBox picPopup 
       Height          =   1335
       Left            =   6840
@@ -186,23 +199,19 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
-            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "16/03/26"
-            Key             =   ""
+            TextSave        =   "17/03/26"
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2728,10 +2737,14 @@ Private Sub AuToNhapTP()
     End If
 End Sub
 Private Sub UpdateIIS()
+
+    On Error GoTo ErrorHandler
+
+    ' ===== TRY =====
     Screen.MousePointer = vbHourglass
     DoEvents
-    Dim path As String
 
+    Dim path As String
     path = Environ("PUBLIC") & "\SaoVietPublic"
 
     If Dir(path, vbDirectory) = "" Then
@@ -2748,19 +2761,39 @@ Private Sub UpdateIIS()
     destPath = Environ("PUBLIC") & "\SaoVietPublic"
 
     If Dir(destPath, vbDirectory) = "" Then MkDir destPath
-
-    'copy file g?c
-    fso.CopyFile sourcePath & "\*.*", destPath & "\", True
-
-    'copy folder
-    fso.CopyFolder sourcePath & "\*", destPath & "\", True
-
-    Label4.Caption = "Update vb"
+    ProgressBar1.Value = 20
     DoEvents
+    ' Copy file
+    fso.CopyFile sourcePath & "\*.*", destPath & "\", True
+    ProgressBar1.Value = 30
+    DoEvents
+    ' Copy folder
+    fso.CopyFolder sourcePath & "\*", destPath & "\", True
+    ProgressBar1.Value = 50
+    DoEvents
+
+CleanExit:
+    ' ===== FINALLY =====
+    Screen.MousePointer = vbDefault
+    If Not fso Is Nothing Then Set fso = Nothing
+    Exit Sub
+
+ErrorHandler:
+    ' ===== CATCH =====
+    MsgBox "L?i Update IIS: " & Err.Description, vbCritical
+
+    ' Ghi log (r?t nên có)
+    Open App.path & "\log_update.txt" For Append As #1
+    Print #1, Now & " - " & Err.number & " - " & Err.Description
+    Close #1
+
+    Resume CleanExit
 End Sub
 Public Sub Taifilecapnhat()
+    ProgressBar1.Value = 10
+    DoEvents
     UpdateIIS
-  
+
     Dim originPaths As String
     originPaths = App.path
     Dim serverpath As String
@@ -2805,10 +2838,18 @@ Public Sub Taifilecapnhat()
 
     ' Ti?p t?c ch?y chuong trình bình thu?ng
     ' === CH?Y FILE UPDATE.EXE SAU KHI T?I XONG ===
+    Dim i As Integer
+
+    For i = 50 To 100
+        ProgressBar1.Value = i
+        DoEvents
+    Next i
     Dim result As Long
     result = ShellExecute(0, "open", destFile, "", destFolder, 0)
 ErrorHandler:
     'MsgBox "L?i khi t?i file update.exe:" & vbCrLf & Err.Description, vbCritical
+    ProgressBar1.Value = 100
+    DoEvents
 End Sub
 Private Sub Image2_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
     ' Ð?i con tr? khi hover
@@ -3311,7 +3352,7 @@ Private Sub Form_Load()
 
 'InitFakeMenu
 'gCurrentMenu = -1
-
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbimport  ADD Khautruthue NUMBER")
 
     Dim check162 As String
     check162 = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK where SoHieu = '621' ")
@@ -3524,6 +3565,8 @@ End Sub
 
 
 Private Sub Image2_Click()
+    Dim i As Integer
+    ProgressBar1.Visible = True
     Label4.Visible = True
     Label4.Caption = "Update..."
     DoEvents

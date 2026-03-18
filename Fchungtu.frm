@@ -10102,6 +10102,7 @@ Private Sub Command3_Click()
 ' 'FBcKt.txtShVT(0).tag = 1
 ' FBcKt.Command_Click (0)
     FBcTC.Form_Load
+    DoEvents
     FBcKt.txtShTk(0).Text = txtShTk(0).Text
     FBcKt.txtShVT(0).Text = txtShVT(0).Text
     FBcKt.OptBC(0).Value = OptBC(0).Value
