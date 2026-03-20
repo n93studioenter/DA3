@@ -10796,7 +10796,7 @@ Private Sub Form_Load()
     'lblClose.Left = picFakeTitle.ScaleWidth \ 2
 
     AnControl
-  
+
     stt = 1
     ListReset
     ColumnSetUp Grid2, 0, 1300, 2
@@ -10883,6 +10883,7 @@ a:
     KhongNhapTS = True
 
     KiemTraUser
+
     pVAT1 = GetSetting(IniPath, "Invoice", "VAT1", 0)
     pVAT2 = GetSetting(IniPath, "Invoice", "VATCheck", 0)
 
@@ -14113,8 +14114,9 @@ KT2:
         If Not xddu Then xddu = SetDoiUng(1)
     End If
     GrdChungtu.Row = 0
-    Command(1).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And ChoNhapTiep And (User_Right = 0 Or (UserID = uID))
-    Command(2).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And (User_Right = 0 Or (UserID = uID))
+    'Command(1).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And ChoNhapTiep And (User_Right = 0 Or (UserID = uID))
+    'Command(2).Enabled = (frmMain.tag Mod 10000000 >= 1000000) And (User_Right = 0 Or (UserID = uID))
+     
     If User_Right <> 0 Then
         If SelectSQL("SELECT Lock" + CStr(CboThang.ItemData(CboThang.ListIndex)) + " Mod 10 AS F1 FROM License") > 0 Then
             Command(1).Enabled = False

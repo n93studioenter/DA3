@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "ComDlg32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{6B7E6392-850A-101B-AFC0-4210102A8DA7}#1.5#0"; "comctl32.Ocx"
 Object = "{C932BA88-4374-101B-A56C-00AA003668DC}#1.1#0"; "msmask32.ocx"
 Begin VB.Form FBcTC 
@@ -4454,6 +4454,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim ct07_131 As Double
     Dim ct07_515 As Double
     Dim ct07_351 As Double
+    Dim ct07_141 As Double
     Dim ct33 As Double
 
     Set rs_import = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
@@ -4485,7 +4486,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuNo Like "156*" Or (Left(Trim(rs_import!GhiChu), 3) = "156" And IsNull(rs_import!SoHieuNo)) Then
                 ct02_156 = ct02_156 + rs_import!sops
             End If
-            If rs_import!SoHieuNo Like "642*" Or (InStr("," & rs_import!GhiChu & ",", ",642") > 0 And IsNull(rs_import!SoHieuNo)) Then
+            If rs_import!SoHieuNo Like "642*" Or (Left(Trim(rs_import!GhiChu), 3) = "642" And IsNull(rs_import!SoHieuNo)) Then
                 ct02_642 = ct02_642 + rs_import!sops
             End If
             If rs_import!SoHieuNo Like "242*" Or (Left(Trim(rs_import!GhiChu), 3) = "242" And IsNull(rs_import!SoHieuNo)) Then
@@ -4499,18 +4500,18 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             End If
 
             'Chi tieu 03
-            If rs_import!SoHieuNo Like "334*" Or InStr("," & rs_import!GhiChu, ",334") > 0 Then
+            If rs_import!SoHieuNo Like "334*" Or (Left(Trim(rs_import!GhiChu), 3) = "334" And IsNull(rs_import!SoHieuNo)) Then
                 ct03 = ct03 + rs_import!sops
             End If
             'Chi tieu 04
-            If rs_import!SoHieuNo Like "635*" Or InStr("," & rs_import!GhiChu, ",635") > 0 Then
+            If rs_import!SoHieuNo Like "635*" Or (InStr("," & rs_import!GhiChu, ",635") > 0 And IsNull(rs_import!SoHieuNo)) Then
                 ct04_635 = ct04_635 + rs_import!sops
             End If
-            If rs_import!SoHieuNo Like "335*" Or InStr("," & rs_import!GhiChu, ",335") > 0 Then
+            If rs_import!SoHieuNo Like "335*" Or (InStr("," & rs_import!GhiChu, ",335") > 0 And IsNull(rs_import!SoHieuNo)) Then
                 ct04_335 = ct04_335 + rs_import!sops
             End If
             'Chi tieu 05
-            If rs_import!SoHieuNo Like "3334*" Or InStr("," & rs_import!GhiChu, ",3334") > 0 Then
+            If rs_import!SoHieuNo Like "3334*" Or (InStr("," & rs_import!GhiChu, ",3334") > 0 And IsNull(rs_import!SoHieuNo)) Then
                 ct05 = ct05 + rs_import!sops
             End If
             'Chi tieu 06
@@ -4560,7 +4561,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
                 ct06_356 = ct06_356 + rs_import!sops
             End If
             '07
-            If rs_import!SoHieuNo Like "811*" Or Left(Trim(rs_import!GhiChu), 3) = "811" Then
+            If rs_import!SoHieuNo Like "811*" Or (Left(Trim(rs_import!GhiChu), 3) = "811" And IsNull(rs_import!SoHieuNo)) Then
                 ct07_811 = ct07_811 + rs_import!sops
             End If
             If rs_import!SoHieuNo Like "138*" Or (InStr("," & rs_import!GhiChu, ",138") > 0 And IsNull(rs_import!SoHieuNo)) Then
@@ -4599,7 +4600,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
                 ct07_3339 = ct07_3339 + rs_import!sops
             End If
 
-            If rs_import!SoHieuNo Like "338*" Or InStr("," & rs_import!GhiChu, ",338") > 0 Then
+            If rs_import!SoHieuNo Like "338*" Or (Left(Trim(rs_import!GhiChu), 3) = "338" And IsNull(rs_import!SoHieuNo)) Then
                 ct07_338 = ct07_338 + rs_import!sops
             End If
 
@@ -4619,11 +4620,14 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
                 ct07_131 = ct07_131 + rs_import!sops
             End If
 
-            If rs_import!SoHieuNo Like "515*" Or InStr("," & rs_import!GhiChu, ",515") > 0 Then
+            If rs_import!SoHieuNo Like "515*" Or (InStr("," & rs_import!GhiChu, ",515") > 0 And IsNull(rs_import!SoHieuNo)) Then
                 ct07_515 = ct07_515 + rs_import!sops
             End If
-            If rs_import!SoHieuNo Like "351*" Or InStr("," & rs_import!GhiChu, ",351") > 0 Then
+            If rs_import!SoHieuNo Like "351*" Or (InStr("," & rs_import!GhiChu, ",351") > 0 And IsNull(rs_import!SoHieuNo)) Then
                 ct07_351 = ct07_351 + rs_import!sops
+            End If
+            If rs_import!SoHieuNo Like "141*" Or (Left(Trim(rs_import!GhiChu), 3) = "141" And IsNull(rs_import!SoHieuNo)) Then
+                ct07_141 = ct07_141 + rs_import!sops
             End If
             'ct33
             If rs_import!SoHieuCo Like "341*" Or (InStr("," & rs_import!GhiChu, ",341") > 0 And rs_import!SoHieuNo <> "") Then
@@ -4632,7 +4636,8 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             rs_import.MoveNext
         Loop
     End If
-
+    rs_import.Close
+    Set rs_import = Nothing
     'update cho ct01
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct01_511 & " WHERE MaSo=1 AND TKCo='511'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct01_3331 & " WHERE MaSo=1 AND TKCo='3331'"
@@ -4690,8 +4695,9 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_356 & " WHERE MaSo=7 AND TKNo='356'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_131 & " WHERE MaSo=7 AND TKNo='131'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_515 & " WHERE MaSo=7 AND TKNo='515'"
-     ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_351 & " WHERE MaSo=7 AND TKNo='351'"
-    
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_351 & " WHERE MaSo=7 AND TKNo='351'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =  - " & ct07_141 & " WHERE MaSo=7 AND TKNo='141'"
+
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum511 & " WHERE MaSo=1 AND TKCo='511'"
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum3331 & " WHERE MaSo=1 AND TKCo='3331'"
     'ExecuteSQL5 "UPDATE LCTT SET KyNay = " & sum131 & " WHERE MaSo=1 AND TKCo='131'"
