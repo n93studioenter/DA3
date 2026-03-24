@@ -1023,6 +1023,9 @@ Private Sub AddDataLCTT()
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (81,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','351','11',0,0,0,0,20,-1,'new')"
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (82,7,'7. TiÒn chi kh¸c cho ho¹t ®éng kinh doanh','141','11',0,0,0,0,20,-1,'new')"
 
+    'bo sung hoan tien tk loai 333
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (83,6,'6. TiÒn thu kh¸c tõ ho¹t ®éng kinh doanh','11','3330',0,0,0,0,20,1,'new')"
+
     ExecuteSQL5 "Update LCTT set Ten='TiÒn vµ t­¬ng ®­¬ng tiÒn cuèi kú (70 = 50+60+61)' where MaSo=70 "
     ExecuteSQL5 "Update LCTT set Ten='L­u chuyÓn tiÒn thuÇn trong kú (50 = 20+30+40)' where MaSo=50 "
 End Sub

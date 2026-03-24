@@ -390,7 +390,7 @@ Dim s(0 To 3) As String
 Dim kh As New ClsKhachHang
 Dim ngay As Date
 Dim f1 As Integer
-Public Sub Test()
+Public Sub test()
  
     Unload Me
 End Sub
@@ -424,80 +424,83 @@ Public Sub Command_Click()
     If FThuChiForm = 2 Then
         FrmChungtu.timerNext.Enabled = True
     End If
+
 End Sub
 
 Private Sub Form_Activate()
-
+    If FThuChi.FThuChiForm = 5 Then
+        Unload Me
+    End If
 
     If Me.tag > 0 Then
         f1 = Me.tag
         Select Case f1
-            Case 1:
-                Label1(0).Caption = "Tªn ng­êi nhËn tiÒn:"
-                Label1(1).Caption = "§Þa chØ ng­êi nhËn tiÒn:"
-                T(2).Text = FrmChungtu.txt(0).Text
-            Case 2:
-                Me.Caption = "GiÊy Uû nhiÖm chi"
-                Label1(0).Caption = "Tªn ®¬n vÞ nhËn tiÒn:"
-                Label1(1).Caption = "Sè tµi kho¶n:"
-                Label1(2).Caption = "T¹i Ng©n hµng:"
-                T(0).MaxLength = 50
-                T(2).MaxLength = 50
-            Case 3:
-                Me.Caption = "Ho¸ ®¬n b¸n hµng"
-                Label1(0).Caption = "Tªn ng­êi mua hµng:"
-                Label1(1).Caption = "§Þa chØ:"
-                Label1(2).Caption = "H¹n thanh to¸n:"
-                Label1(3).Caption = "Sè phiÕu ®Æt hµng:"
-                T(2).Visible = False
-                T(3).Visible = True
-                txtshkh.Visible = False
-                cmdkh.Visible = False
-                lbkh.Visible = False
-                MedNgay.Visible = True
-            Case 10:
-                Me.Caption = "Th«ng tin b¸o c¸o"
-                Label1(0).Caption = "Ng­êi lËp biÓu:"
-                Label1(1).Caption = "KÕ to¸n tr­ëng:"
-                Label1(2).Caption = "Gi¸m ®èc:"
-                Label1(3).Visible = False
-                txtshkh.Visible = False
-                cmdkh.Visible = False
-                lbkh.Visible = False
-                MedNgay.Visible = False
+        Case 1:
+            Label1(0).Caption = "Tªn ng­êi nhËn tiÒn:"
+            Label1(1).Caption = "§Þa chØ ng­êi nhËn tiÒn:"
+            T(2).Text = FrmChungtu.txt(0).Text
+        Case 2:
+            Me.Caption = "GiÊy Uû nhiÖm chi"
+            Label1(0).Caption = "Tªn ®¬n vÞ nhËn tiÒn:"
+            Label1(1).Caption = "Sè tµi kho¶n:"
+            Label1(2).Caption = "T¹i Ng©n hµng:"
+            T(0).MaxLength = 50
+            T(2).MaxLength = 50
+        Case 3:
+            Me.Caption = "Ho¸ ®¬n b¸n hµng"
+            Label1(0).Caption = "Tªn ng­êi mua hµng:"
+            Label1(1).Caption = "§Þa chØ:"
+            Label1(2).Caption = "H¹n thanh to¸n:"
+            Label1(3).Caption = "Sè phiÕu ®Æt hµng:"
+            T(2).Visible = False
+            T(3).Visible = True
+            txtshkh.Visible = False
+            cmdkh.Visible = False
+            lbkh.Visible = False
+            MedNgay.Visible = True
+        Case 10:
+            Me.Caption = "Th«ng tin b¸o c¸o"
+            Label1(0).Caption = "Ng­êi lËp biÓu:"
+            Label1(1).Caption = "KÕ to¸n tr­ëng:"
+            Label1(2).Caption = "Gi¸m ®èc:"
+            Label1(3).Visible = False
+            txtshkh.Visible = False
+            cmdkh.Visible = False
+            lbkh.Visible = False
+            MedNgay.Visible = False
         End Select
         Me.tag = 0
     End If
     RFocus Command
-    
+
     ComboBox1.AddItem ("Tieàn maët")
     ComboBox1.AddItem ("Chuyeån khoaûn")
     ComboBox1.AddItem ("Coâng nôï")
     ComboBox1.AddItem ("TM/CK")
-  
-    
-        Dim sql As String
+
+
+    Dim sql As String
     Dim rs_chungtu As Recordset
     sql = "SELECT iif(Nguoimuahang is null ,'...',Nguoimuahang) as aa1,"
     sql = sql + "iif(hinhthucthanhtoan is null ,'...',hinhthucthanhtoan) as bb,"
     sql = sql + "iif(sophieudathang is null ,'...',sophieudathang) as cc,"
     sql = sql + "iif(chondiengiai is null ,'0',chondiengiai) as chon1  from chungtu where sohieu = '" + FrmChungtu.txt(0).Text + "'"
-        Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
-        If rs_chungtu.recordCount > 0 Then
-           T(4).Text = rs_chungtu!AA1
-           T(3).Text = rs_chungtu!cc
-           If rs_chungtu!chon1 = "2" Then
-           Check1.Value = 1
-           End If
-           
-           ComboBox1.Text = rs_chungtu!bb
+    Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
+    If rs_chungtu.recordCount > 0 Then
+        T(4).Text = rs_chungtu!AA1
+        T(3).Text = rs_chungtu!cc
+        If rs_chungtu!chon1 = "2" Then
+            Check1.Value = 1
         End If
-        If FThuChiForm = 1 Or FThuChiForm = 3 Then
+
+        ComboBox1.Text = rs_chungtu!bb
+    End If
+    If FThuChiForm = 1 Or FThuChiForm = 3 Then
         Command_Click
-        End If
-        If FThuChiForm = 2 Then
+    End If
+    If FThuChiForm = 2 Then
         Command_Click
-        End If
+    End If
 End Sub
 Private Sub lblClose_Click()
     Unload Me
@@ -510,7 +513,7 @@ Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Int
     picFakeTitle_MouseDown Button, Shift, X, Y
 End Sub
 Private Sub Form_Load()
-  
+
     lblTitle(11).AutoSize = True
     Me.Height = Me.Height + 350 + 10
     picFakeTitle.Width = Me.ScaleWidth
@@ -528,6 +531,7 @@ Private Sub Form_Load()
     ngay = CVDate("01/01/1900")
 
     SetFont Me
+  
 End Sub
 
 Private Sub T_GotFocus(Index As Integer)

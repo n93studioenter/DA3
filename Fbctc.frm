@@ -4319,7 +4319,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Do While Not rs_lailo.EOF
         sql = "SELECT DISTINCTROW Sum(IIF(" + WThang2("ThangCT", 0, tdau) + ",ChungTu.SoPS,0)) AS F1, Sum(IIF(" + WThang("ThangCT", tdau, 0) + ",ChungTu.SoPS,0)) AS F2 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
-            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", 0, tcuoi)
+            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", 0, tcuoi)
 
         KT = SelectSQL(sql, kn)
 
@@ -4437,6 +4437,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim ct06_352 As Double
     Dim ct06_353 As Double
     Dim ct06_356 As Double
+    Dim ct06bonus As Double
     Dim ct07_811 As Double
     Dim ct07_138 As Double
     Dim ct07_3331 As Double
@@ -4456,12 +4457,13 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim ct07_351 As Double
     Dim ct07_141 As Double
     Dim ct33 As Double
+    Dim ct34 As Double
 
     Set rs_import = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     If Not rs_import.EOF Then
         Do While Not rs_import.EOF
             'Chi tieu 01
-            If rs_import!SoHieuCo Like "511*" Or (InStr("," & rs_import!GhiChu, ",511") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "511*" Or (Left(Trim(rs_import!GhiChu), 4) = "5111" And rs_import!SoHieuNo <> "") Then
                 ct01_511 = ct01_511 + rs_import!sops
             End If
             If rs_import!SoHieuCo Like "3331*" Or (Left(Trim(rs_import!GhiChu), 4) = "3331" And rs_import!SoHieuNo <> "") Then
@@ -4515,7 +4517,17 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
                 ct05 = ct05 + rs_import!sops
             End If
             'Chi tieu 06
-            If rs_import!SoHieuCo Like "711*" Or (InStr("," & rs_import!GhiChu, ",711") > 0 And rs_import!SoHieuNo <> "") Then
+            'Tinh phan bonus
+            If Left(rs_import!SoHieuCo & "", 3) = "333" And Left(rs_import!SoHieuCo & "", 4) <> "3331" Then
+                'Lay ra tai khoan trong he thong tk
+                Dim Int_RecsetToCbo As Integer
+                Int_RecsetToCbo = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_import!MaTKTCCo & "", 0)
+                If rs_import!SoHieuCo = Int_RecsetToCbo Then
+                    ct06bonus = ct06bonus + rs_import!sops
+                End If
+
+            End If
+            If rs_import!SoHieuCo Like "711*" Or (Left(Trim(rs_import!GhiChu), 3) = "711" And rs_import!SoHieuNo <> "") Then
                 ct06_711 = ct06_711 + rs_import!sops
             End If
             If rs_import!SoHieuCo Like "133*" Or (Left(Trim(rs_import!GhiChu), 3) = "133" And rs_import!SoHieuNo <> "") Then
@@ -4633,6 +4645,10 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuCo Like "341*" Or (InStr("," & rs_import!GhiChu, ",341") > 0 And rs_import!SoHieuNo <> "") Then
                 ct33 = ct33 + rs_import!sops
             End If
+            'ct34
+            If rs_import!SoHieuNo Like "341*" Or (Left(Trim(rs_import!GhiChu), 3) = "341" And IsNull(rs_import!SoHieuNo)) Then
+                ct34 = ct34 + rs_import!sops
+            End If
             rs_import.MoveNext
         Loop
     End If
@@ -4676,6 +4692,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_352 & " WHERE MaSo=6 AND TKCo='352'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_353 & " WHERE MaSo=6 AND TKCo='353'"
     ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06_356 & " WHERE MaSo=6 AND TKCo='356'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay = " & ct06bonus & " WHERE MaSo=6 AND TKCo='3330'"
     '351 352 356
 
     'update ct07
@@ -4707,6 +4724,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     '----------
     '33
     ExecuteSQL5 "UPDATE LCTT SET KyNay =   " & ct33 & " WHERE MaSo=33 AND TKCo='341'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =   " & ct34 & " WHERE MaSo=34 AND TKNo='341'"
     GauGe.Value = 2
     KT = SoPSTK("111", pThangDauKy, ThangTruoc(tdau), -1) + SoPSTK("112", pThangDauKy, ThangTruoc(tdau), -1) - SoPSTK("113", pThangDauKy, ThangTruoc(tdau), 1) - PSDu("111", "3364", pThangDauKy, ThangTruoc(tdau)) _
        - SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")
@@ -7345,11 +7363,11 @@ Private Sub InCTKQKD(tdau As Integer, tcuoi As Integer)
     Do While Not rs_lailo.EOF
         sql = "SELECT DISTINCTROW Sum(ChungTu.SoPS) AS F1 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
-            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", tdau, tcuoi)
+            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", tdau, tcuoi)
         kn = SelectSQL(sql)
         sql = "SELECT DISTINCTROW Sum(ChungTu.SoPS) AS F1 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
-            & "WHERE HethongTK_1.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", tdau, tcuoi)
+            & "WHERE HethongTK_1.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", tdau, tcuoi)
         kn = kn - SelectSQL(sql)
         If rs_lailo!dau > 0 Then
             ExecuteSQL5 "UPDATE KQKDCT SET KyNay = " + DoiDau(kn) + " WHERE Ma=" + CStr(rs_lailo!ma)
@@ -7378,7 +7396,7 @@ Private Sub InCTKQKD(tdau As Integer, tcuoi As Integer)
     Do While Not rs_lailo.EOF
         sql = "SELECT DISTINCTROW Sum(ChungTu.SoPS) AS F1 " _
             & "FROM HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKCo " _
-            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", tdau, tcuoi)
+            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", tdau, tcuoi)
         kn = SelectSQL(sql)
 
         If rs_lailo!dau > 0 Then
