@@ -37,7 +37,7 @@ Begin VB.Form FrmChungtu
    WhatsThisHelp   =   -1  'True
    Begin VB.Timer tmAfterClick 
       Enabled         =   0   'False
-      Interval        =   500
+      Interval        =   100
       Left            =   11160
       Top             =   5400
    End
@@ -3821,6 +3821,7 @@ Private Declare Function WideCharToMultiByte Lib "Kernel32" ( _
                                              ByVal lpUsedDefaultChar As Long) As Long
 
 Private Const CP_UTF8 As Long = 65001
+Dim typePS As Integer
 Private hPopup As Long
 Public bodemafter As Integer
 Dim dshdloi As String
@@ -3970,18 +3971,18 @@ Dim SetLoaiEnable As Boolean
 Dim shct As String
 Dim xddu As Boolean
 Dim TenTC As String, DiachiTC As String, ctgoc As String, TenNX As String, DiaChiNX As String, TenBH As String, DiaChiBH As String, MSTBH As String, unc1 As String, unc2 As String, unc3 As String, MaKHBH As Long, HanTT As Date
-Attribute DiachiTC.VB_VarUserMemId = 1073938537
-Attribute ctgoc.VB_VarUserMemId = 1073938537
-Attribute TenNX.VB_VarUserMemId = 1073938537
-Attribute DiaChiNX.VB_VarUserMemId = 1073938537
-Attribute TenBH.VB_VarUserMemId = 1073938537
-Attribute DiaChiBH.VB_VarUserMemId = 1073938537
-Attribute MSTBH.VB_VarUserMemId = 1073938537
-Attribute unc1.VB_VarUserMemId = 1073938537
-Attribute unc2.VB_VarUserMemId = 1073938537
-Attribute unc3.VB_VarUserMemId = 1073938537
-Attribute MaKHBH.VB_VarUserMemId = 1073938537
-Attribute HanTT.VB_VarUserMemId = 1073938537
+Attribute DiachiTC.VB_VarUserMemId = 1073938538
+Attribute ctgoc.VB_VarUserMemId = 1073938538
+Attribute TenNX.VB_VarUserMemId = 1073938538
+Attribute DiaChiNX.VB_VarUserMemId = 1073938538
+Attribute TenBH.VB_VarUserMemId = 1073938538
+Attribute DiaChiBH.VB_VarUserMemId = 1073938538
+Attribute MSTBH.VB_VarUserMemId = 1073938538
+Attribute unc1.VB_VarUserMemId = 1073938538
+Attribute unc2.VB_VarUserMemId = 1073938538
+Attribute unc3.VB_VarUserMemId = 1073938538
+Attribute MaKHBH.VB_VarUserMemId = 1073938538
+Attribute HanTT.VB_VarUserMemId = 1073938538
 Dim HD() As tpHoaDon, hdcount As Integer
 Attribute HD.VB_VarUserMemId = 1073938518
 Attribute hdcount.VB_VarUserMemId = 1073938518
@@ -5028,6 +5029,7 @@ Private Sub Command14_Click()
     frmSCCT.Show vbModal
 End Sub
 Public Function NextCode(ByVal s As String) As String
+    Screen.MousePointer = vbHourglass
     Dim i As Long
     Dim prefix As String
     Dim numPart As String
@@ -5072,25 +5074,57 @@ Public Function NextMonthText(ByVal s As String) As String
     Dim startNum As Long
     Dim numPart As String
     Dim m As Integer
+    Dim keyword As String
+    Dim keywordLen As Integer
 
-    ' Tìm ch? "tháng"
+    ' Th? tìm t? khóa "tháng"
     pos = InStr(1, LCase$(s), "tháng")
-    If pos = 0 Then
-        NextMonthText = s
-        Exit Function
+    If pos > 0 Then
+        keyword = "tháng"
+        keywordLen = 5
+    Else
+        ' N?u không có "tháng" thì tìm "t" (vi?t t?t, không phân bi?t hoa th??ng)
+        ' L?u ý: ch? tìm "t" khi nó là m?t t? riêng (không n?m trong t? khác)
+        ' ? ây s? d?ng cách tìm " t" ho?c "T" ? d?u chu?i ?? h?n ch? trùng
+        Dim j As Long
+        pos = 0
+        ' Ki?m tra d?u chu?i
+        If LCase$(Left$(s, 1)) = "t" And (Len(s) = 1 Or Not Mid$(s, 2, 1) Like "[a-z]" And Not Mid$(s, 2, 1) Like "[A-Z]") Then
+            pos = 1
+        Else
+            ' Ki?m tra các v? trí có kho?ng tr?ng + t
+            For j = 2 To Len(s)
+                If Mid$(s, j, 1) = " " Then
+                    If j + 1 <= Len(s) And LCase$(Mid$(s, j + 1, 1)) = "t" Then
+                        If j + 2 > Len(s) Or Not (Mid$(s, j + 2, 1) Like "[a-z]" Or Mid$(s, j + 2, 1) Like "[A-Z]") Then
+                            pos = j + 1
+                            Exit For
+                        End If
+                    End If
+                End If
+            Next j
+        End If
+
+        If pos > 0 Then
+            keyword = "t"
+            keywordLen = 1
+        Else
+            NextMonthText = s
+            Exit Function
+        End If
     End If
 
-    ' B?t d?u sau ch? "tháng"
-    i = pos + 5
+    ' B?t d?u sau t? khóa
+    i = pos + keywordLen
 
-    ' B? kho?ng tr?ng
+    ' B? qua kho?ng tr?ng
     Do While i <= Len(s) And Mid$(s, i, 1) = " "
         i = i + 1
     Loop
 
     startNum = i
 
-    ' L?y s? tháng
+    ' L?y ph?n s? (có th? là 1 ho?c 2 ch? s?)
     Do While i <= Len(s) And Mid$(s, i, 1) Like "[0-9]"
         i = i + 1
     Loop
@@ -5104,23 +5138,23 @@ Public Function NextMonthText(ByVal s As String) As String
 
     m = CInt(numPart) + 1
 
-    ' N?u mu?n gi?i h?n 12 tháng (quay vòng)
+    ' Quay vòng sau tháng 12
     If m > 12 Then m = 1
 
-    ' Gi? format 2 s? n?u ban d?u có
+    ' Gi? nguyên ?? dài (1 s? ho?c 2 s?) theo format ban d?u
     If Len(numPart) = 2 Then
         numPart = Format$(m, "00")
     Else
         numPart = CStr(m)
     End If
 
-    ' Ghép l?i chu?i
+    ' Ghép chu?i: ph?n tr??c + s? m?i + ph?n sau
     NextMonthText = Left$(s, startNum - 1) & numPart & Mid$(s, i)
 End Function
 
 Public Sub Afterclick2()
     If Not rs_ktra164.EOF Then
-        If rs_ktra164!maloai = 0 Or rs_ktra164!maloai = 4 Then
+        If rs_ktra164!maloai = 0 Or rs_ktra164!maloai = 4 Or rs_ktra164!maloai = 3 Then
             Dim tkno As Integer
             Dim sopsno As Double
             tkno = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_ktra164!MaTkNo & "", 0)
@@ -5129,6 +5163,7 @@ Public Sub Afterclick2()
             txtChungtu_LostFocus (0)
             txtchungtu(5).Text = sopsno
             RFocus txtchungtu(6)
+            FThuChi.FThuChiForm = 5
             txtChungtu_KeyPress 6, 13
             rs_ktra164.MoveNext
             Afterclick2
@@ -5148,20 +5183,26 @@ Public Sub Afterclick()
     Set rs_ktra164 = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
     If Not rs_ktra164.EOF Then
         'Neu la tong hop
-        If rs_ktra164!maloai = 0 Or rs_ktra164!maloai = 4 Then
+        If rs_ktra164!maloai = 0 Or rs_ktra164!maloai = 4 Or rs_ktra164!maloai = 3 Then
             'MsgBox rs_ktra164!MaTkNo
             'MsgBox rs_ktra164!MaTkCo
             'Lay tk tu hethongtk
             Dim tkno As Integer
             Dim sopsno As Double
             tkno = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_ktra164!MaTkNo & "", 0)
-            sopsno = SelectSQL("SELECT SoPS AS F1 FROM ChungTu WHERE MaCT = " & frmSCCT.MaCT & " AND MaTkNo = " & rs_ktra164!MaTkNo, 0)
-
+            If tkno <> 0 Then
+                sopsno = SelectSQL("SELECT SoPS AS F1 FROM ChungTu WHERE MaCT = " & frmSCCT.MaCT & " AND MaTkNo = " & rs_ktra164!MaTkNo, 0)
+                typePS = 1
+            Else
+                tkno = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_ktra164!MaTkCo & "", 0)
+                sopsno = SelectSQL("SELECT SoPS AS F1 FROM ChungTu WHERE MaCT = " & frmSCCT.MaCT & " AND MaTkCo = " & rs_ktra164!MaTkCo, 0)
+                typePS = 2
+            End If
             'thuc hien mo tab va dien thong tin header
             If rs_ktra164!maloai = 0 Then
                 OptLoai(0).Value = True
             End If
-             If rs_ktra164!maloai = 4 Then
+            If rs_ktra164!maloai = 4 Then
                 OptLoai(4).Value = True
             End If
             OptLoai_LostFocus 0
@@ -5186,22 +5227,55 @@ Public Sub Afterclick()
             txt(1).Text = UnicodeToVni(bakNoidung)
             txtNoidung.Text = bakNoidung
             bakNoidung = NextMonthText(txtNoidung.Text)
+            Dim makh As Integer
+            makh = rs_ktra164!makh
 
             'Thuc hien phan middle
+
             txtchungtu(0).Text = tkno
             txtChungtu_LostFocus (0)
-            txtchungtu(5).Text = sopsno
+            If makh <> 0 Then
+                Dim sohieu As String
+                sohieu = SelectSQL("SELECT SoHieu AS F1 FROM KhachHang WHERE MaSo = " & makh & "", 0)
+                RFocus txtchungtu(2)
+                txtchungtu(2).Text = sohieu
+                txtChungtu_LostFocus (2)
+            End If
+            If typePS = 1 Then
+                txtchungtu(5).Text = sopsno
+            Else
+                txtchungtu(6).Text = sopsno
+            End If
             'RFocus txtchungtu(6)
             txtChungtu_KeyPress 6, 13
 
             'thuc hien phan co
             Dim TkCo As Integer
             Dim sopsco As Double
-            TkCo = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_ktra164!MaTkCo & "", 0)
+
+            If typePS = 1 Then
+                TkCo = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_ktra164!MaTkCo & "", 0)
+            Else
+                'th doi xung
+                TkCo = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK WHERE MaSo = " & rs_ktra164!MaTkCo & "", 0)
+            End If
             sopsco = SelectSQL("SELECT SUM(SoPS) AS F1 FROM ChungTu WHERE MaCT = " & frmSCCT.MaCT, 0)
             txtchungtu(0).Text = TkCo
             txtChungtu_LostFocus (0)
-            txtchungtu(6).Text = sopsco
+            If makh = 0 Then
+                makh = rs_ktra164!MaKHC
+                If makh <> 0 Then
+                    sohieu = SelectSQL("SELECT SoHieu AS F1 FROM KhachHang WHERE MaSo = " & makh & "", 0)
+                    RFocus txtchungtu(2)
+                    txtchungtu(2).Text = sohieu
+                    txtChungtu_LostFocus (2)
+                End If
+            End If
+            If typePS = 1 Then
+                txtchungtu(6).Text = sopsco
+            Else
+                txtchungtu(5).Text = sopsco
+            End If
             RFocus txtchungtu(6)
             FThuChi.FThuChiForm = 5
             txtChungtu_KeyPress 6, 13
@@ -6804,6 +6878,7 @@ Function RemoveLeadingZeros(ByVal str As String) As String
     RemoveLeadingZeros = Mid(str, i)
 End Function
 Private Sub btnImportXML_Click()
+    btnReset_Click
     dshdloi = ""
     'IsImport = True
     Label(29).Visible = True
@@ -7529,12 +7604,21 @@ Public Sub CmdChitiet_chon()
     If co > 0 And ((Left(taikhoan.sohieu, Len(TM)) = TM) Or (Left(taikhoan.sohieu, Len(NH)) = NH)) Then
         taikhoan.SoDuNgay ngay(0), n, c, X
         If n - c < co And IsImport = False Then
-            If FThuChi.FThuChiForm <> 1 And FThuChi.FThuChiForm <> 2 And FThuChi.FThuChiForm <> 3 Then
+            If FThuChi.FThuChiForm <> 1 And FThuChi.FThuChiForm <> 2 And FThuChi.FThuChiForm <> 3 And FThuChi.FThuChiForm <> 5 Then
 
-                If MsgBox("Chi v­ît sè d­! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+                'If MsgBox("Chi v­ît sè d­! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
+                'RFocus txtchungtu(6)
+                ' Exit Sub
+                'End If
+                s = ChrW(67) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(118) & ChrW(432) & ChrW(7907) & ChrW(116) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(100) & ChrW(432) & ChrW(33) & ChrW(32) & ChrW(84) & ChrW(105) & ChrW(7871) & ChrW(112) & ChrW(32) & ChrW(116) & ChrW(7909) & ChrW(99) & ChrW(32) & ChrW(63)
+                Dim xn As String
+                xn = ChrW(88) & ChrW(225) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(110)
+                If MessageBoxW(Me.hwnd, StrPtr(s), StrPtr(xn), vbYesNo + vbExclamation) = vbYes Then
                     RFocus txtchungtu(6)
                     Exit Sub
                 End If
+
+
             End If
         End If
     End If
@@ -11007,7 +11091,8 @@ Private Sub tmAfterClick_Timer()
         Dim s As String
         s = ChrW(272) & ChrW(227) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(7921) & ChrW(99) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(110) & ChrW(32) & ChrW(120) & ChrW(111) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(118) & ChrW(105) & ChrW(7879) & ChrW(99) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(226) & ChrW(110) & ChrW(32) & ChrW(98) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(225) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110)
         MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
-
+        Screen.MousePointer = vbDefault
+        btnReset_Click
     End If
 
 End Sub
@@ -11052,7 +11137,7 @@ Private Sub Form_Load()
 
     ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD phantramchietkhau text")
     ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD sotienchietkhau text")
-
+    
     ColumnSetUp GrdChungtu, 0, 340, 2  '340, 2
     ColumnSetUp GrdChungtu, 1, 1060 + 20 - 300, 2
     ColumnSetUp GrdChungtu, 2, 2260 + 600, 0

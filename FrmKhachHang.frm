@@ -1005,8 +1005,8 @@ Private Sub Form_Load()
     ThemMoi = 0
     doiloai = 0
     Caption = "Danh s¸ch kh¸ch hµng" + " - " + CStr(pNamTC)
-    Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0 AND LEFT(SoHieu,1)<>'#' ORDER BY SoHieu", CboLoai
-    'Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0  ORDER BY SoHieu", CboLoai
+    'Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0 AND LEFT(SoHieu,1)<>'#' ORDER BY SoHieu", CboLoai
+    Int_RecsetToCbo "SELECT DISTINCTROW MaSo As F2,SoHieu + ' - '  + TenPhanLoai As F1 FROM PhanLoaiKhachHang WHERE PLCon=0  ORDER BY SoHieu", CboLoai
     Int_RecsetToCbo "SELECT MaSo As F2,KyHieu As F1 FROM NguyenTe WHERE KyHieu<>'" + pTienStr + "' ORDER BY KyHieu", CboNT
     CboNT.AddItem pTienStr, 0
     CboNT.ItemData(0) = 0

@@ -201,7 +201,7 @@ Private Sub Command1_Click()
     Set rs_ktra164 = DBKetoan.OpenRecordset(Query64, dbOpenSnapshot)
     If Not rs_ktra164.EOF Then
         'Neu la tong hop
-        If rs_ktra164!maloai = 0 Or rs_ktra164!maloai = 4 Then
+        If rs_ktra164!maloai = 0 Or rs_ktra164!maloai = 4 Or rs_ktra164!maloai = 3 Then
             Dim lastDay As Date
             lastDay = DateSerial(Year(rs_ktra164!NgayCT), month(rs_ktra164!NgayCT) + 1, 0)
             Dim GetDate As Date
@@ -224,13 +224,16 @@ Private Sub Command1_Click()
                 getsh = FrmChungtu.NextCode(getsh)
                 Dim Test As String
                 Test = TextBox1.Text
-                getDG = FrmChungtu.NextMonthText(TextBox1.Text)
+                getDG = FrmChungtu.NextMonthText(getDG)
             Next i
             FrmChungtu.bakSoHieu = getsh
             FrmChungtu.bakNoidung = getDG
         End If
     End If
-
+    If Not getsh Like "*[0-9]*" Then
+        getsh = getsh & "_" & Tuthang
+        FrmChungtu.bakSoHieu = getsh
+    End If
 
     FrmChungtu.bodemafter = Tuthang
     FrmChungtu.Afterclick
