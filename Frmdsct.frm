@@ -4,12 +4,12 @@ Object = "{A8B3B723-0B5A-101B-B22E-00AA0037B2FC}#1.0#0"; "GRID32.OCX"
 Begin VB.Form FrmDsCT 
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
-   BorderStyle     =   3  'Fixed Dialog
-   Caption         =   "LiÖt kª chøng tõ"
-   ClientHeight    =   5205
-   ClientLeft      =   5310
-   ClientTop       =   1620
-   ClientWidth     =   9075
+   BorderStyle     =   0  'None
+   Caption         =   "T×m"
+   ClientHeight    =   5250
+   ClientLeft      =   5280
+   ClientTop       =   1290
+   ClientWidth     =   9060
    ClipControls    =   0   'False
    Icon            =   "Frmdsct.frx":0000
    KeyPreview      =   -1  'True
@@ -17,11 +17,137 @@ Begin VB.Form FrmDsCT
    MaxButton       =   0   'False
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
-   ScaleHeight     =   5205
-   ScaleWidth      =   9075
+   ScaleHeight     =   5250
+   ScaleWidth      =   9060
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Voucher List"
+   Begin VB.PictureBox picFakeTitle 
+      BackColor       =   &H00FFFFFF&
+      BorderStyle     =   0  'None
+      Height          =   255
+      Left            =   0
+      ScaleHeight     =   255
+      ScaleWidth      =   13575
+      TabIndex        =   82
+      Top             =   0
+      Width           =   13575
+      Begin VB.Label lblClose 
+         Alignment       =   2  'Center
+         BackColor       =   &H00FFFFFF&
+         BackStyle       =   0  'Transparent
+         Caption         =   "X"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Left            =   8640
+         TabIndex        =   84
+         Top             =   0
+         Width           =   480
+      End
+      Begin VB.Label lblTitle 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "§¨ng nhËp"
+         BeginProperty Font 
+            Name            =   "VK Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   405
+         Index           =   11
+         Left            =   600
+         TabIndex        =   83
+         Top             =   0
+         Width           =   4455
+      End
+      Begin VB.Image picIcon 
+         Appearance      =   0  'Flat
+         Height          =   255
+         Index           =   1
+         Left            =   120
+         Picture         =   "Frmdsct.frx":57E2
+         Stretch         =   -1  'True
+         Top             =   0
+         Width           =   255
+      End
+      Begin VB.Image Image1 
+         Height          =   8550
+         Index           =   0
+         Left            =   840
+         Picture         =   "Frmdsct.frx":5A9F
+         Stretch         =   -1  'True
+         Top             =   240
+         Width           =   7890
+      End
+   End
+   Begin VB.CommandButton Command3 
+      Caption         =   "*"
+      BeginProperty Font 
+         Name            =   ".VnArialH"
+         Size            =   11.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   -1  'True
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   300
+      Left            =   8680
+      TabIndex        =   81
+      Top             =   4280
+      Width           =   300
+   End
+   Begin VB.CheckBox ChkTaikhoan 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "T×m chÝnh x¸c"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   10
+      Left            =   5280
+      TabIndex        =   80
+      Tag             =   "V. Book"
+      Top             =   2280
+      Width           =   1935
+   End
+   Begin VB.CheckBox ChkTaikhoan 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "CT nh©n b¶n"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   9
+      Left            =   120
+      TabIndex        =   79
+      Tag             =   "V. Book"
+      Top             =   3960
+      Width           =   1575
+   End
    Begin VB.CommandButton CmdPhieu 
       BackColor       =   &H00E0E0E0&
       Caption         =   "&2 In PhiÕu NX"
@@ -106,7 +232,7 @@ Begin VB.Form FrmDsCT
       Height          =   375
       Index           =   6
       Left            =   5280
-      Picture         =   "Frmdsct.frx":57E2
+      Picture         =   "Frmdsct.frx":115BC
       Style           =   1  'Graphical
       TabIndex        =   66
       Top             =   1875
@@ -157,9 +283,9 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   7
-      Left            =   8760
+      Left            =   8160
       TabIndex        =   63
-      Top             =   4440
+      Top             =   5280
       Visible         =   0   'False
       Width           =   735
    End
@@ -177,13 +303,13 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   375
       Index           =   5
-      Left            =   9360
+      Left            =   3600
       Style           =   1  'Graphical
       TabIndex        =   59
       ToolTipText     =   "Xem b¸o c¸o"
-      Top             =   4920
+      Top             =   5280
       Visible         =   0   'False
-      Width           =   375
+      Width           =   735
    End
    Begin VB.CheckBox ChkLoai 
       BackColor       =   &H00FFFFC0&
@@ -209,9 +335,9 @@ Begin VB.Form FrmDsCT
    Begin VB.ComboBox CboN 
       Height          =   330
       Index           =   3
-      ItemData        =   "Frmdsct.frx":5C5C
+      ItemData        =   "Frmdsct.frx":11A36
       Left            =   9240
-      List            =   "Frmdsct.frx":5C84
+      List            =   "Frmdsct.frx":11A5E
       Style           =   2  'Dropdown List
       TabIndex        =   52
       Top             =   5280
@@ -256,49 +382,49 @@ Begin VB.Form FrmDsCT
       BackColor       =   &H80000013&
       Height          =   375
       Index           =   4
-      Left            =   7800
-      Picture         =   "Frmdsct.frx":5CAF
+      Left            =   6720
+      Picture         =   "Frmdsct.frx":11A89
       Style           =   1  'Graphical
       TabIndex        =   61
       Tag             =   "&Print"
-      Top             =   4320
+      Top             =   5280
       Visible         =   0   'False
-      Width           =   615
+      Width           =   1095
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H80000013&
       Height          =   375
       Index           =   3
-      Left            =   7680
-      Picture         =   "Frmdsct.frx":7111
+      Left            =   5760
+      Picture         =   "Frmdsct.frx":12EEB
       Style           =   1  'Graphical
       TabIndex        =   60
       Tag             =   "&View"
-      Top             =   4720
+      Top             =   5280
       Visible         =   0   'False
       Width           =   855
    End
    Begin VB.ComboBox CboN 
-      Height          =   330
+      Height          =   315
       Index           =   0
-      ItemData        =   "Frmdsct.frx":8283
+      ItemData        =   "Frmdsct.frx":1405D
       Left            =   3840
-      List            =   "Frmdsct.frx":82AB
+      List            =   "Frmdsct.frx":14085
       Style           =   2  'Dropdown List
       TabIndex        =   54
-      Top             =   2955
+      Top             =   3000
       Visible         =   0   'False
       Width           =   1815
    End
    Begin VB.ComboBox CboN 
-      Height          =   330
+      Height          =   315
       Index           =   1
-      ItemData        =   "Frmdsct.frx":82D6
+      ItemData        =   "Frmdsct.frx":140B0
       Left            =   3840
-      List            =   "Frmdsct.frx":82FE
+      List            =   "Frmdsct.frx":140D8
       Style           =   2  'Dropdown List
       TabIndex        =   53
-      Top             =   3315
+      Top             =   3240
       Visible         =   0   'False
       Width           =   1815
    End
@@ -334,14 +460,14 @@ Begin VB.Form FrmDsCT
       Width           =   1695
    End
    Begin VB.ComboBox CboN 
-      Height          =   330
+      Height          =   315
       Index           =   2
-      ItemData        =   "Frmdsct.frx":8329
-      Left            =   3840
-      List            =   "Frmdsct.frx":8351
+      ItemData        =   "Frmdsct.frx":14103
+      Left            =   7080
+      List            =   "Frmdsct.frx":1412B
       Style           =   2  'Dropdown List
       TabIndex        =   50
-      Top             =   3675
+      Top             =   1440
       Width           =   1815
    End
    Begin VB.CheckBox ChkTaikhoan 
@@ -358,10 +484,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   4
-      Left            =   2040
+      Left            =   6120
       TabIndex        =   49
       Tag             =   "V. Book"
-      Top             =   3675
+      Top             =   1440
       Width           =   1575
    End
    Begin VB.CheckBox ChkTaikhoan 
@@ -399,7 +525,7 @@ Begin VB.Form FrmDsCT
       Height          =   375
       Index           =   3
       Left            =   5280
-      Picture         =   "Frmdsct.frx":837C
+      Picture         =   "Frmdsct.frx":14156
       Style           =   1  'Graphical
       TabIndex        =   28
       Top             =   1470
@@ -412,7 +538,7 @@ Begin VB.Form FrmDsCT
       Height          =   975
       Left            =   7320
       TabIndex        =   43
-      Top             =   3120
+      Top             =   3000
       Width           =   1575
       Begin VB.OptionButton SSOpt 
          BackColor       =   &H00FFFFC0&
@@ -490,10 +616,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   375
       Index           =   1
-      Left            =   4680
+      Left            =   4320
       TabIndex        =   3
       Tag             =   "From"
-      Top             =   4800
+      Top             =   5160
       Width           =   975
    End
    Begin VB.OptionButton OptLK 
@@ -510,10 +636,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   375
       Index           =   0
-      Left            =   4680
+      Left            =   4320
       TabIndex        =   0
       Tag             =   "From"
-      Top             =   4320
+      Top             =   4680
       Value           =   -1  'True
       Width           =   975
    End
@@ -621,7 +747,7 @@ Begin VB.Form FrmDsCT
       Height          =   375
       Index           =   2
       Left            =   5280
-      Picture         =   "Frmdsct.frx":87F6
+      Picture         =   "Frmdsct.frx":145D0
       Style           =   1  'Graphical
       TabIndex        =   25
       Top             =   1110
@@ -662,24 +788,24 @@ Begin VB.Form FrmDsCT
       BackColor       =   &H80000013&
       Height          =   375
       Index           =   2
-      Left            =   2040
-      Picture         =   "Frmdsct.frx":8C70
+      Left            =   1560
+      Picture         =   "Frmdsct.frx":14A4A
       Style           =   1  'Graphical
       TabIndex        =   40
       Tag             =   "&Return"
-      Top             =   4605
+      Top             =   4560
       Width           =   1095
    End
    Begin VB.CommandButton Command 
       BackColor       =   &H80000013&
       Height          =   375
       Index           =   1
-      Left            =   8640
-      Picture         =   "Frmdsct.frx":A092
+      Left            =   4560
+      Picture         =   "Frmdsct.frx":15E6C
       Style           =   1  'Graphical
       TabIndex        =   39
       Tag             =   "&Select"
-      Top             =   4720
+      Top             =   5400
       Visible         =   0   'False
       Width           =   1095
    End
@@ -687,19 +813,19 @@ Begin VB.Form FrmDsCT
       BackColor       =   &H80000013&
       Height          =   375
       Index           =   0
-      Left            =   3360
-      Picture         =   "Frmdsct.frx":B4F4
+      Left            =   2880
+      Picture         =   "Frmdsct.frx":172CE
       Style           =   1  'Graphical
       TabIndex        =   38
       Tag             =   "&List"
-      Top             =   4605
+      Top             =   4560
       Width           =   1095
    End
    Begin VB.CommandButton CmdTK 
       Height          =   375
       Index           =   1
       Left            =   5280
-      Picture         =   "Frmdsct.frx":C8BE
+      Picture         =   "Frmdsct.frx":18698
       Style           =   1  'Graphical
       TabIndex        =   22
       Top             =   735
@@ -709,7 +835,7 @@ Begin VB.Form FrmDsCT
       Height          =   375
       Index           =   0
       Left            =   5280
-      Picture         =   "Frmdsct.frx":CD38
+      Picture         =   "Frmdsct.frx":18B12
       Style           =   1  'Graphical
       TabIndex        =   18
       Top             =   375
@@ -727,11 +853,11 @@ Begin VB.Form FrmDsCT
       Width           =   1335
    End
    Begin VB.ComboBox CboThang 
-      Height          =   330
+      Height          =   315
       Index           =   1
-      ItemData        =   "Frmdsct.frx":D1B2
-      Left            =   7800
-      List            =   "Frmdsct.frx":D1B4
+      ItemData        =   "Frmdsct.frx":18F8C
+      Left            =   7560
+      List            =   "Frmdsct.frx":18F8E
       Style           =   2  'Dropdown List
       TabIndex        =   2
       Top             =   4290
@@ -870,11 +996,11 @@ Begin VB.Form FrmDsCT
       Width           =   1815
    End
    Begin VB.ComboBox CboThang 
-      Height          =   330
+      Height          =   315
       Index           =   0
-      ItemData        =   "Frmdsct.frx":D1B6
-      Left            =   5760
-      List            =   "Frmdsct.frx":D1B8
+      ItemData        =   "Frmdsct.frx":18F90
+      Left            =   5520
+      List            =   "Frmdsct.frx":18F92
       Style           =   2  'Dropdown List
       TabIndex        =   1
       Top             =   4290
@@ -883,7 +1009,7 @@ Begin VB.Form FrmDsCT
    Begin MSMask.MaskEdBox MedNgay 
       Height          =   315
       Index           =   0
-      Left            =   5760
+      Left            =   5520
       TabIndex        =   4
       Top             =   4800
       Width           =   1095
@@ -896,7 +1022,7 @@ Begin VB.Form FrmDsCT
    Begin MSMask.MaskEdBox MedNgay 
       Height          =   315
       Index           =   1
-      Left            =   7800
+      Left            =   7560
       TabIndex        =   5
       Top             =   4800
       Width           =   1095
@@ -929,11 +1055,11 @@ Begin VB.Form FrmDsCT
       ForeColor       =   &H00FF0000&
       Height          =   255
       Index           =   0
-      Left            =   5640
+      Left            =   8760
       TabIndex        =   78
       Tag             =   "1"
       Top             =   480
-      Width           =   3135
+      Width           =   15
    End
    Begin VB.Label Label 
       Alignment       =   1  'Right Justify
@@ -950,10 +1076,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   12
-      Left            =   7440
+      Left            =   7320
       TabIndex        =   77
       Tag             =   "Sort by"
-      Top             =   2760
+      Top             =   2640
       Width           =   1215
    End
    Begin VB.Line Line1 
@@ -1014,11 +1140,11 @@ Begin VB.Form FrmDsCT
       ForeColor       =   &H00FF0000&
       Height          =   255
       Index           =   6
-      Left            =   5760
+      Left            =   7920
       TabIndex        =   67
       Tag             =   "1"
-      Top             =   1920
-      Width           =   3015
+      Top             =   1320
+      Width           =   2295
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFC0&
@@ -1053,10 +1179,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   13
-      Left            =   6360
+      Left            =   4920
       TabIndex        =   58
       Tag             =   "Number of Voucher"
-      Top             =   3360
+      Top             =   3480
       Width           =   1695
       WordWrap        =   -1  'True
    End
@@ -1075,8 +1201,8 @@ Begin VB.Form FrmDsCT
       Index           =   1
       X1              =   0
       X2              =   9000
-      Y1              =   4200
-      Y2              =   4200
+      Y1              =   4000
+      Y2              =   4000
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFC0&
@@ -1092,10 +1218,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   8
-      Left            =   2280
+      Left            =   2040
       TabIndex        =   56
       Tag             =   "Class"
-      Top             =   3315
+      Top             =   3360
       Visible         =   0   'False
       Width           =   735
    End
@@ -1113,7 +1239,7 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   9
-      Left            =   2280
+      Left            =   2040
       TabIndex        =   55
       Tag             =   "Store"
       Top             =   3000
@@ -1170,11 +1296,11 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   375
       Index           =   0
-      Left            =   6840
+      Left            =   6720
       TabIndex        =   42
       Tag             =   "to"
       Top             =   4800
-      Width           =   975
+      Width           =   735
    End
    Begin VB.Line Line1 
       Index           =   3
@@ -1217,11 +1343,11 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   375
       Index           =   6
-      Left            =   6840
+      Left            =   6720
       TabIndex        =   37
       Tag             =   "to"
       Top             =   4320
-      Width           =   975
+      Width           =   735
    End
    Begin VB.Label Label 
       Alignment       =   1  'Right Justify
@@ -1258,11 +1384,11 @@ Begin VB.Form FrmDsCT
       ForeColor       =   &H00FF0000&
       Height          =   735
       Index           =   1
-      Left            =   5760
+      Left            =   8760
       TabIndex        =   35
       Tag             =   "1"
       Top             =   720
-      Width           =   3135
+      Width           =   135
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -1404,6 +1530,12 @@ Private Sub ChkLoai_Click(Index As Integer)
     CboN(1).Visible = vs
     
     KiemTraUser
+End Sub
+
+Private Sub ChkTaikhoan_Click(Index As Integer)
+    If ChkTaikhoan(5).Value = 0 Then
+        ChkTaikhoan(10).Value = 0
+    End If
 End Sub
 
 Private Sub CmdPhieu_Click(Index As Integer)
@@ -1555,6 +1687,11 @@ End If
 FrmChungtu.mnDD_Click (101)
 End Sub
 
+Private Sub Command3_Click()
+    CboThang(0).Text = "1/" & pNamTC
+    CboThang(1).Text = "12/" & pNamTC
+End Sub
+
 Private Sub Form_Activate()
     If LietKe Then
         'Me.Refresh
@@ -1589,24 +1726,69 @@ End Sub
 '======================================================================================
 ' Khëi t¹o cöa sæ
 '======================================================================================
+Private Sub lblClose_Click()
+    Unload Me
+End Sub
+ 
+Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    ReleaseCapture
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+End Sub
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    picFakeTitle_MouseDown Button, Shift, X, Y
+End Sub
+Public Sub AnControl(frm As Form)
+    Dim ctl As Control
+
+    For Each ctl In frm.Controls
+        Select Case TypeName(ctl)
+        Case "Label", "TextBox", "ComboBox", "PictureBox", _
+             "CommandButton", "Frame", "CheckBox", _
+             "ListBox", "Grid", _
+             "MSHFlexGrid", "DataGrid", "Outline", "Line", "SSTab", "MaskEdBox"
+
+            If ctl.Name <> "picFakeTitle" _
+               And ctl.Name <> "lblTitle" _
+               And ctl.Name <> "lblClose" Then
+
+                If TypeName(ctl) = "Line" Then
+                    ctl.y1 = ctl.y1 + TITLE_HEIGHT
+                    ctl.y2 = ctl.y2 + TITLE_HEIGHT
+                Else
+                    ctl.Top = ctl.Top + TITLE_HEIGHT
+                End If
+
+            End If
+        End Select
+    Next
+End Sub
 Private Sub Form_Load()
     Dim chi_so As Integer
-    
+    lblTitle(11).AutoSize = True
+    Me.Height = Me.Height + 350 + 10
+    picFakeTitle.Width = Me.ScaleWidth
+    picFakeTitle.Height = 325
+    picIcon(1).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2
+    lblTitle(11).Left = picIcon(1).Left + picIcon(1).Width + 90
+    lblTitle(11).Top = (picFakeTitle.Height - picIcon(1).Height) \ 2 + 15
+    lblClose.Top = 55
+    AnControl Me
+    SetFont Me
     If pPhieu > 0 Then Me.Caption = "Danh s¸ch c¸c phiÕu ch­a vµo sæ"
     Command(5).Visible = (pPhieu > 0)
-    
+
     ChkLoai(7).Enabled = pBaoGia > 0 And ((frmMain.Command(4).Visible And pPhieu = 1) Or (Not frmMain.Command(4).Visible And pPhieu = 0))
-    
+
     ColumnSetUp GrdChungtu, 0, 1300, 2
     ColumnSetUp GrdChungtu, 1, 940, 2
     ColumnSetUp GrdChungtu, 2, 940, 2
     ColumnSetUp GrdChungtu, 3, 4780, 0
     ColumnSetUp GrdChungtu, 4, 1300, 1
     ColumnSetUp GrdChungtu, 5, 1, 0
-    
+
     AddMonthToCbo CboThang(0)
     AddMonthToCbo CboThang(1)
-    
+
     For chi_so = 0 To 1
         InitDateVars MedNgay(chi_so), ngay(chi_so)
     Next
@@ -1616,24 +1798,25 @@ Private Sub Form_Load()
     GrdChungtu.Row = 0
     GrdChungtu_Click
     LietKe = False
-
+    Caption = "LiÖt kª chøng tõ"
     Caption = Caption + " - " + CStr(pNamTC)
+    lblTitle(11).Caption = Caption
     ord = 0
-        
+
     Int_RecsetToCbo "SELECT MaSo As F2,SoHieu As F1 FROM CTGhiSo ORDER BY SoHieu", CboN(2)
     SetSQL "MienTru", "SELECT MaSo As F2,SoHieu + ' - ' + DienGiai As F1 FROM NguonNhapXuat ORDER BY SoHieu  UNION SELECT 0,'" + ABCtoVNI(" Toµn bé") + "' FROM License"
     Int_RecsetToCbo "SELECT * FROM MienTru ORDER BY F1", CboN(1)
     SetSQL "MienTru", "SELECT MaSo As F2,TenKho As F1 FROM KhoHang ORDER BY TenKho  UNION SELECT 0,'" + ABCtoVNI(" Toµn bé") + "' FROM License"
     Int_RecsetToCbo "SELECT * FROM MienTru ORDER BY F1", CboN(0)
     Int_RecsetToCbo "SELECT MaSo As F2, TenNSD As F1 FROM Users ORDER BY TenNSD", CboN(3)
-    
+
     ChkTaikhoan(4).Visible = (pSoKT Mod 100 >= 10)
     CboN(2).Visible = (pSoKT Mod 100 >= 10)
-    
+
     ChkTaikhoan(8).Enabled = (pDTTP <> 0)
     txtShTk(6).Enabled = (pDTTP <> 0)
     LbTenTk(6).Enabled = (pDTTP <> 0)
-    
+
     SetFont Me
 LoiNgay:
 End Sub
@@ -1773,31 +1956,45 @@ End Sub
 Public Sub LietKeChungtu(shtk As String, mvt As Long, mts As Long, mcn As Long, shd As String)
     Dim sql As String, loaict As String, i As Integer, mct As Long, uID As Long, mct1 As Long, mloai As Integer
     Dim rs_chungtu As Recordset, st As Double, ovr As Integer, sh As String
-    
+
     Me.MousePointer = 11
     st = Cdbl5(txtShTk(5).Text)
     sh = IIf(ChkLoai(7).Value = 1 Or pPhieu > 0, "P", "")
-   ' sql = "SELECT MaCT,Sum(IIF(MaTKCo>0,SoPS,0)) AS TPS FROM ChungTu" + sh + " WHERE "
+    ' sql = "SELECT MaCT,Sum(IIF(MaTKCo>0,SoPS,0)) AS TPS FROM ChungTu" + sh + " WHERE "
     sql = "SELECT MaCT,Sum(IIF(MaTKCo>0,SoPS,0)) AS TPS,sum(TLCK+val(iif(isnull(phantramchietkhau),0,phantramchietkhau))) as tylechietkhau,sum(CK+val(iif(isnull(sotienchietkhau) ,0,sotienchietkhau))) as chietkhau FROM ChungTu" + sh + " WHERE "
-    
+
     If OptLK(0).Value Then
         sql = sql + WThang("ThangCT", CboThang(0).ItemData(CboThang(0).ListIndex), CboThang(1).ItemData(CboThang(1).ListIndex)) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " GROUP BY MaCT"
     Else
         sql = sql + WNgay("NgayGS", ngay(0), ngay(1)) + IIf(pProcessMode = 1, " AND XuLy<2", "") + " GROUP BY MaCT"
     End If
     SetSQL "MienTru", sql
-    
+
     sql = "SELECT DISTINCTROW ChungTu" + sh + ".MaCT, ChungTu" + sh + ".SoHieu, NgayCT, NgayGS, ChungTu" + sh + ".DienGiai" + IIf(pNN = 1, "E", "") + " AS DG,TPS,tylechietkhau,chietkhau,User_ID,ChungTu" + sh + ".MaLoai FROM ((((ChungTu" + sh + " INNER JOIN MienTru ON ChungTu" + sh + ".MaCT=MienTru.MaCT) LEFT JOIN HoaDon" + sh + " ON ChungTu" + sh + ".MaSo=HoaDon" + sh + ".MaSo) LEFT JOIN CTTaiSan ON ChungTu" + sh + ".MaCT = CTTaiSan.MaCTKT) LEFT JOIN HeThongTK ON ChungTu" + sh + ".MaTKNo = HeThongTK.MaSo) LEFT JOIN HeThongTK AS HeThongTK_1 ON ChungTu" + sh + ".MaTKCo = HeThongTK_1.MaSo WHERE (TRUE)"
-    
-    If Len(shd) > 0 Then sql = sql + " AND (HoaDon" + sh + ".SoHD LIKE '" + shd + "*' OR ChungTu" + sh + ".SoHieu LIKE '" + shd + "*')"
+
+    If Len(shd) > 0 Then
+        If ChkTaikhoan(10).Value = 0 Then
+            'Truong hop tim gan dung
+            sql = sql + " AND (HoaDon" + sh + ".SoHD LIKE '" + shd + "*' OR ChungTu" + sh + ".SoHieu LIKE '" + shd + "*')"
+        Else
+            'Truong hop tim chinh xac
+            sql = sql + " AND (HoaDon" & sh & ".SoHD = '" & shd & "' OR ChungTu" & sh & ".SoHieu = '" & shd & "')"
+        End If
+    End If
     If mvt > 0 Then sql = sql + " AND (ChungTu" + sh + ".MaLoai = 1 OR ChungTu" + sh + ".MaLoai = 2 OR ChungTu" + sh + ".MaLoai = 8) AND (MaVattu = " + CStr(mvt) + ")"
     If mts > 0 Then sql = sql + " AND (CTTaiSan.MaTS = " + CStr(mts) + ")"
     If mcn > 0 Then sql = sql + " AND (MaKH = " + CStr(mcn) + " OR MaKhachHang = " + CStr(mcn) + " OR MaKHC=" + CStr(mcn) + ")"
     If Len(shtk) > 0 Then
         sql = sql + " AND (HethongTK.SoHieu LIKE '" + shtk + "*' OR HethongTK_1.SoHieu LIKE '" + shtk + "*')" + IIf(st <> 0, " AND SoPS=" + DoiDau(st), "")
+        'sql = sql + IIf(st <> 0, " AND SoPS=" + DoiDau(st), "")
         If ChkTaikhoan(7).Value = 1 Then sql = sql + " AND ((HethongTK.TK_ID=" + CStr(TKCNPT_ID) + " OR HethongTK_1.TK_ID=" + CStr(TKCNKH_ID) + ") AND CT_ID=0)"
     End If
-        
+    If st > 0 Then
+        sql = sql + " AND SoPS=" + DoiDau(st)
+    End If
+    If ChkTaikhoan(9).Value = 1 Then
+        sql = sql + " AND ChungTu" + sh + ".nhanban=1"
+    End If
     If ChkTaikhoan(4).Value = 1 And CboN(2).ListIndex >= 0 Then
         sql = sql + " AND ChungTu" + sh + ".CTGS=" + CStr(CboN(2).ItemData(CboN(2).ListIndex))
     End If
@@ -1805,7 +2002,7 @@ Public Sub LietKeChungtu(shtk As String, mvt As Long, mts As Long, mcn As Long, 
         sql = sql + " AND ChungTu" + sh + ".MaTP=" + CStr(txtShTk(6).tag)
     End If
     If ChkTaikhoan(6).Value = 1 Then sql = sql + " AND (ChungTu" + sh + ".User_ID=" + CStr(CboN(3).ItemData(CboN(3).ListIndex)) + ")"
-    
+
     loaict = ""
     For i = 0 To 12
         'If i < 4 Or i > 6 Then
@@ -1814,41 +2011,41 @@ Public Sub LietKeChungtu(shtk As String, mvt As Long, mts As Long, mcn As Long, 
             If ChkLoai(i).Value = 1 Then loaict = loaict + "ChungTu" + sh + ".MaLoai = " + CStr(i) + " OR "
         End If
     Next
-    
+
     If Len(loaict) = 0 Then GoTo KT
     If Len(loaict) > 0 Then sql = sql + " AND (" + Left(loaict, Len(loaict) - 4) + ")"
-        
+
     If (ChkLoai(1).Value = 1 Or ChkLoai(2).Value = 1 Or ChkLoai(8).Value = 1) And CboN(0).ListIndex > 0 Then sql = sql + " AND (ChungTu" + sh + ".MaKho=" + CStr(CboN(0).ItemData(CboN(0).ListIndex)) + ")"
     If (ChkLoai(1).Value = 1 Or ChkLoai(2).Value = 1 Or ChkLoai(8).Value = 1) And CboN(1).ListIndex > 0 Then sql = sql + " AND (ChungTu" + sh + ".MaNguon=" + CStr(CboN(1).ItemData(CboN(1).ListIndex)) + ")"
-    
+
     If pProcessMode = 1 Then sql = sql + " AND XuLy<2 "
-    
+
     sql = sql + " GROUP BY ChungTu" + sh + ".MaCT,User_ID,ChungTu" + sh + ".MaLoai,ChungTu" + sh + ".SoHieu, ChungTu" + sh + ".NgayCT, ChungTu" + sh + ".NgayGS, ChungTu" + sh + ".DienGiai" + IIf(pNN = 1, "E", "") + ",TPS,tylechietkhau,chietkhau "
-        
+
     Select Case ord
-        Case 0:
-            sql = sql + "ORDER BY NgayGS asc ,val( ChungTu" + sh + ".SoHieu) asc "
-        Case 1:
-            sql = sql + "ORDER BY NgayCT asc, val(ChungTu" + sh + ".SoHieu) asc "
-        Case 2:
-            sql = sql + "ORDER BY  NgayCT asc,val(ChungTu" + sh + ".SoHieu) asc"
+    Case 0:
+        sql = sql + "ORDER BY NgayGS asc ,val( ChungTu" + sh + ".SoHieu) asc "
+    Case 1:
+        sql = sql + "ORDER BY NgayCT asc, val(ChungTu" + sh + ".SoHieu) asc "
+    Case 2:
+        sql = sql + "ORDER BY  NgayCT asc,val(ChungTu" + sh + ".SoHieu) asc"
     End Select
-   
+
     ClearGrid GrdChungtu, GrdChungtu.tag
     ClearGrid FrmChungtu.Grid2, FrmChungtu.Grid2.tag
     Dim so
     so = GrdChungtu.Rows - 1
-If so > 0 Then
-     Do Until so = 1
+    If so > 0 Then
+        Do Until so = 1
             GrdChungtu.RemoveItem (so)
-           so = so - 1
-      Loop
-End If
+            so = so - 1
+        Loop
+    End If
 
-'lay dieu kien de loc du lieu
-Dim so_cong
-so_cong = 0
-chuoidieukien_intoanbo = sql
+    'lay dieu kien de loc du lieu
+    Dim so_cong
+    so_cong = 0
+    chuoidieukien_intoanbo = sql
 
     Set rs_chungtu = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
     Do While Not rs_chungtu.EOF
@@ -1864,45 +2061,45 @@ chuoidieukien_intoanbo = sql
                 mloai = rs_chungtu!maloai
             End If
         End If
-       If GrdChungtu.Rows < MaxGridRow Then
-    ' MsgBox rs_chungtu!SoHieu
+        If GrdChungtu.Rows < MaxGridRow Then
+            ' MsgBox rs_chungtu!SoHieu
             GrdChungtu.AddItem rs_chungtu!sohieu + Chr(9) + Format(rs_chungtu!NgayCT, Mask_D) + Chr(9) _
-                + Format(rs_chungtu!NgayGS, Mask_D) + Chr(9) + rs_chungtu!dg + Chr(9) + Format(rs_chungtu!tps, Mask_0) + Chr(9) + CStr(mct) ', 0
-                    FrmChungtu.Grid2.AddItem rs_chungtu!sohieu + Chr(9) + Format(rs_chungtu!NgayCT, Mask_D) + Chr(9) _
-                + Format(rs_chungtu!NgayGS, Mask_D) + Chr(9) + rs_chungtu!dg + Chr(9) + Format(rs_chungtu!tps, Mask_0) + Chr(9) + CStr(mct) + Chr(9) + Format(rs_chungtu!tylechietkhau, Mask_0) + Chr(9) + Format(rs_chungtu!chietkhau, Mask_0), 0
-   
-                so_cong = so_cong + 1
+                             + Format(rs_chungtu!NgayGS, Mask_D) + Chr(9) + rs_chungtu!dg + Chr(9) + Format(rs_chungtu!tps, Mask_0) + Chr(9) + CStr(mct)    ', 0
+            FrmChungtu.Grid2.AddItem rs_chungtu!sohieu + Chr(9) + Format(rs_chungtu!NgayCT, Mask_D) + Chr(9) _
+                                   + Format(rs_chungtu!NgayGS, Mask_D) + Chr(9) + rs_chungtu!dg + Chr(9) + Format(rs_chungtu!tps, Mask_0) + Chr(9) + CStr(mct) + Chr(9) + Format(rs_chungtu!tylechietkhau, Mask_0) + Chr(9) + Format(rs_chungtu!chietkhau, Mask_0), 0
+
+            so_cong = so_cong + 1
         Else
             ovr = 1
         End If
         rs_chungtu.MoveNext
     Loop
     FrmChungtu.Label(28).Caption = "Tæng sè chøng tõ: " + str(rs_chungtu.recordCount)
-        Dim kk
+    Dim kk
     kk = 0
     Do While kk <> 10
-            GrdChungtu.AddItem "" + Chr(9) + "" + Chr(9) _
-                + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + "" ', 0
-                kk = kk + 1
+        GrdChungtu.AddItem "" + Chr(9) + "" + Chr(9) _
+                         + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + ""    ', 0
+        kk = kk + 1
     Loop
-   If so_cong = 0 Then
+    If so_cong = 0 Then
         MsgBox "Kh«ng cã chøng tõ ph¸t sinh"
-   End If
+    End If
     Do While so_cong < 15
-                     FrmChungtu.Grid2.AddItem " " + Chr(9) + "" + Chr(9) _
-                + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + ""
-   
-               so_cong = so_cong + 1
+        FrmChungtu.Grid2.AddItem " " + Chr(9) + "" + Chr(9) _
+                               + "" + Chr(9) + "" + Chr(9) + "" + Chr(9) + ""
+
+        so_cong = so_cong + 1
     Loop
-    
-    
+
+
     If rs_chungtu.recordCount > 0 Then
         If Row >= rs_chungtu.recordCount Then Row = rs_chungtu.recordCount - 1
     Else
         Row = 0
     End If
-  
-'    GrdChungtu.Rows = IIf(rs_chungtu.RecordCount > GrdChungtu.tag, IIf(rs_chungtu.RecordCount > MaxGridRow, MaxGridRow, rs_chungtu.RecordCount), GrdChungtu.tag)' chuyen thanh maxrows
+
+    '    GrdChungtu.Rows = IIf(rs_chungtu.RecordCount > GrdChungtu.tag, IIf(rs_chungtu.RecordCount > MaxGridRow, MaxGridRow, rs_chungtu.RecordCount), GrdChungtu.tag)' chuyen thanh maxrows
     LbSoCT.Caption = CStr(rs_chungtu.recordCount)
     GrdChungtu.col = 0
     rs_chungtu.Close
@@ -1911,17 +2108,17 @@ chuoidieukien_intoanbo = sql
     GrdChungtu.Row = Row
     'GrdChungtu_Click
     ' them
-     SetGridIndex GrdChungtu, Row + 1
+    SetGridIndex GrdChungtu, Row + 1
     With GrdChungtu
         .col = 5
         If Len(.Text) = 0 Then MaCTChon = 0 Else MaCTChon = CLng5(.Text)
         .col = 0
     End With
-    
+
     If Not GrdChungtu.RowIsVisible(Row) Then GrdChungtu.TopRow = Row - 8
     On Error GoTo 0
     If ovr > 0 Then ErrMsg er_NhieuCT
-     If so_cong <> 0 Then Hide
+    If so_cong <> 0 Then Hide
 KT:
     Me.MousePointer = 0
 End Sub
