@@ -9,7 +9,7 @@ Begin VB.Form FrmDsCT
    ClientHeight    =   5250
    ClientLeft      =   5280
    ClientTop       =   1290
-   ClientWidth     =   9060
+   ClientWidth     =   9105
    ClipControls    =   0   'False
    Icon            =   "Frmdsct.frx":0000
    KeyPreview      =   -1  'True
@@ -18,7 +18,7 @@ Begin VB.Form FrmDsCT
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    ScaleHeight     =   5250
-   ScaleWidth      =   9060
+   ScaleWidth      =   9105
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Voucher List"
@@ -142,10 +142,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   375
       Index           =   9
-      Left            =   120
+      Left            =   2040
       TabIndex        =   79
       Tag             =   "V. Book"
-      Top             =   3960
+      Top             =   2810
       Width           =   1575
    End
    Begin VB.CommandButton CmdPhieu 
@@ -412,7 +412,7 @@ Begin VB.Form FrmDsCT
       List            =   "Frmdsct.frx":14085
       Style           =   2  'Dropdown List
       TabIndex        =   54
-      Top             =   3000
+      Top             =   3220
       Visible         =   0   'False
       Width           =   1815
    End
@@ -424,7 +424,7 @@ Begin VB.Form FrmDsCT
       List            =   "Frmdsct.frx":140D8
       Style           =   2  'Dropdown List
       TabIndex        =   53
-      Top             =   3240
+      Top             =   3500
       Visible         =   0   'False
       Width           =   1815
    End
@@ -463,11 +463,11 @@ Begin VB.Form FrmDsCT
       Height          =   315
       Index           =   2
       ItemData        =   "Frmdsct.frx":14103
-      Left            =   7080
+      Left            =   3840
       List            =   "Frmdsct.frx":1412B
       Style           =   2  'Dropdown List
       TabIndex        =   50
-      Top             =   1440
+      Top             =   3840
       Width           =   1815
    End
    Begin VB.CheckBox ChkTaikhoan 
@@ -484,10 +484,10 @@ Begin VB.Form FrmDsCT
       EndProperty
       Height          =   255
       Index           =   4
-      Left            =   6120
+      Left            =   2040
       TabIndex        =   49
       Tag             =   "V. Book"
-      Top             =   1440
+      Top             =   3960
       Width           =   1575
    End
    Begin VB.CheckBox ChkTaikhoan 
@@ -1140,10 +1140,11 @@ Begin VB.Form FrmDsCT
       ForeColor       =   &H00FF0000&
       Height          =   255
       Index           =   6
-      Left            =   7920
+      Left            =   7560
       TabIndex        =   67
       Tag             =   "1"
-      Top             =   1320
+      Top             =   840
+      Visible         =   0   'False
       Width           =   2295
    End
    Begin VB.Label Label 
@@ -1221,7 +1222,7 @@ Begin VB.Form FrmDsCT
       Left            =   2040
       TabIndex        =   56
       Tag             =   "Class"
-      Top             =   3360
+      Top             =   3600
       Visible         =   0   'False
       Width           =   735
    End
@@ -1242,7 +1243,7 @@ Begin VB.Form FrmDsCT
       Left            =   2040
       TabIndex        =   55
       Tag             =   "Store"
-      Top             =   3000
+      Top             =   3240
       Visible         =   0   'False
       Width           =   735
    End
@@ -1275,11 +1276,12 @@ Begin VB.Form FrmDsCT
       ForeColor       =   &H00FF0000&
       Height          =   255
       Index           =   3
-      Left            =   5760
+      Left            =   7680
       TabIndex        =   47
       Tag             =   "1"
       Top             =   1515
-      Width           =   3135
+      Visible         =   0   'False
+      Width           =   1215
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -1322,11 +1324,12 @@ Begin VB.Form FrmDsCT
       ForeColor       =   &H00FF0000&
       Height          =   255
       Index           =   2
-      Left            =   5760
+      Left            =   5880
       TabIndex        =   41
       Tag             =   "1"
-      Top             =   1155
-      Width           =   3135
+      Top             =   1680
+      Visible         =   0   'False
+      Width           =   1695
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -1382,13 +1385,14 @@ Begin VB.Form FrmDsCT
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FF0000&
-      Height          =   735
+      Height          =   375
       Index           =   1
-      Left            =   8760
+      Left            =   6000
       TabIndex        =   35
       Tag             =   "1"
-      Top             =   720
-      Width           =   135
+      Top             =   960
+      Visible         =   0   'False
+      Width           =   495
    End
    Begin VB.Label Label 
       Alignment       =   2  'Center
@@ -1501,7 +1505,7 @@ Dim ord As Integer
 Dim ngay(0 To 1) As Date
 Dim chuoidieukien_intoanbo As String
 
-Private Sub ChkLoai_Click(Index As Integer)
+Private Sub ChkLoai_Click(index As Integer)
     Dim vs As Boolean, i As Integer
     
     If ChkLoai(7).Value = 1 Then
@@ -1532,20 +1536,20 @@ Private Sub ChkLoai_Click(Index As Integer)
     KiemTraUser
 End Sub
 
-Private Sub ChkTaikhoan_Click(Index As Integer)
+Private Sub ChkTaikhoan_Click(index As Integer)
     If ChkTaikhoan(5).Value = 0 Then
         ChkTaikhoan(10).Value = 0
     End If
 End Sub
 
-Private Sub CmdPhieu_Click(Index As Integer)
-FrmChungtu.CmdPhieu_Click (Index)
+Private Sub CmdPhieu_Click(index As Integer)
+FrmChungtu.CmdPhieu_Click (index)
 End Sub
 
 '======================================================================================
 ' LiÖt kª, Chän chøng tõ
 '======================================================================================
-Public Sub Command_Click(Index As Integer)
+Public Sub Command_Click(index As Integer)
 
 If OptLK(0).Value = False Then
   If IsDate(MedNgay(0).Text) And IsDate(MedNgay(1).Text) Then
@@ -1563,7 +1567,7 @@ If OptLK(0).Value = False Then
   End If
     
     
-    Select Case Index
+    Select Case index
         Case 0:
             If ChkTaikhoan(0).Value = 1 And txtShTk(0).tag = 0 Then
                 ErrMsg er_SHTaiKhoan1
@@ -1608,7 +1612,7 @@ If OptLK(0).Value = False Then
             MaCTChon = 0
             Hide
             LietKe = True
-        Case 3, 4:            DSCTu Index - 3
+        Case 3, 4:            DSCTu index - 3
         Case 5:
             Dim f As Form, ms As Long, i As Integer
             Set f = New FrmChungtu
@@ -1635,9 +1639,9 @@ End Sub
 '======================================================================================
 ' HiÖn cöa sæ chän tµi kho¶n
 '======================================================================================
-Private Sub cmdtk_Click(Index As Integer)
+Private Sub cmdtk_Click(index As Integer)
     Me.MousePointer = 11
-    Select Case Index
+    Select Case index
         Case 0:
             txtShTk(0).Text = FrmTaikhoan.ChonTk(txtShTk(0).Text)
         Case 1:
@@ -1650,7 +1654,7 @@ Private Sub cmdtk_Click(Index As Integer)
             txtShTk(6).Text = FrmTP.ChonTP(txtShTk(6).Text)
     End Select
     Me.MousePointer = 0
-    RFocus txtShTk(Index)
+    RFocus txtShTk(index)
 End Sub
 
 Private Sub Command1_Click()
@@ -1734,7 +1738,7 @@ Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Sin
     ReleaseCapture
     SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
 End Sub
-Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblTitle_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     picFakeTitle_MouseDown Button, Shift, X, Y
 End Sub
 Public Sub AnControl(frm As Form)
@@ -1895,7 +1899,7 @@ Private Sub GrdChungtu_MouseDown(Button As Integer, Shift As Integer, X As Singl
     End If
 End Sub
 
-Private Sub MedNgay_Change(Index As Integer)
+Private Sub MedNgay_Change(index As Integer)
  
   If IsDate(CboThang(0).Text) And IsDate(CboThang(1).Text) Then
         If CDate(CboThang(1).Text) < CDate(CboThang(0).Text) Then
@@ -1905,32 +1909,63 @@ Private Sub MedNgay_Change(Index As Integer)
   End If
 End Sub
 
-Private Sub OptLK_Click(Index As Integer)
+Private Sub OptLK_Click(index As Integer)
 Dim ngay As Date
 ngay = "01/01/" + Mid(str(pNamTC), 4, 5)
  MedNgay(0).Text = ngay
  MedNgay(1).Text = ngay
  End Sub
 
-Private Sub SSOpt_Click(Index As Integer)
-    ord = Index
+Private Sub SSOpt_Click(index As Integer)
+    ord = index
+End Sub
+Private Sub txtShTk_Change(index As Integer)
+    If txtShTk(0).Text <> "" Then
+        ChkTaikhoan(0).Value = 1
+    Else
+        ChkTaikhoan(0).Value = 0
+    End If
+    If txtShTk(1).Text <> "" Then
+        ChkTaikhoan(1).Value = 1
+    Else
+        ChkTaikhoan(1).Value = 0
+    End If
+    If txtShTk(2).Text <> "" Then
+        ChkTaikhoan(2).Value = 1
+    Else
+        ChkTaikhoan(2).Value = 0
+    End If
+    If txtShTk(3).Text <> "" Then
+        ChkTaikhoan(3).Value = 1
+    Else
+        ChkTaikhoan(3).Value = 0
+    End If
+    If txtShTk(6).Text <> "" Then
+        ChkTaikhoan(8).Value = 1
+    Else
+        ChkTaikhoan(8).Value = 0
+    End If
+    If txtShTk(4).Text <> "" Then
+        ChkTaikhoan(5).Value = 1
+    Else
+        ChkTaikhoan(5).Value = 0
+    End If
+End Sub
+Private Sub txtShTk_GotFocus(index As Integer)
+    AutoSelect txtShTk(index)
 End Sub
 
-Private Sub txtShTk_GotFocus(Index As Integer)
-    AutoSelect txtShTk(Index)
-End Sub
-
-Private Sub txtShTk_KeyPress(Index As Integer, KeyAscii As Integer)
-    If Index = 5 Then KeyProcess txtShTk(Index), KeyAscii
+Private Sub txtShTk_KeyPress(index As Integer, KeyAscii As Integer)
+    If index = 5 Then KeyProcess txtShTk(index), KeyAscii
 End Sub
 '======================================================================================
 ' KiÓm tra sè hiÖu tµi kho¶n
 '======================================================================================
-Private Sub txtShTk_LostFocus(Index As Integer)
+Private Sub txtShTk_LostFocus(index As Integer)
     Dim mtk As Long, st As String, id As Long
     
     mtk = 0
-    Select Case Index
+    Select Case index
         Case 0:
              LbTenTk(0).Caption = tentk(txtShTk(0).Text, mtk)
             id = GetTK_ID("", mtk)
@@ -1945,7 +1980,7 @@ Private Sub txtShTk_LostFocus(Index As Integer)
         Case 6:
             LbTenTk(6).Caption = TenTP(txtShTk(6).Text, mtk)
     End Select
-    txtShTk(Index).tag = mtk
+    txtShTk(index).tag = mtk
 End Sub
 '======================================================================================
 ' LiÖt kª chøng tõ
@@ -2083,7 +2118,11 @@ Public Sub LietKeChungtu(shtk As String, mvt As Long, mts As Long, mcn As Long, 
         kk = kk + 1
     Loop
     If so_cong = 0 Then
-        MsgBox "Kh«ng cã chøng tõ ph¸t sinh"
+        'MsgBox "Kh«ng cã chøng tõ ph¸t sinh"
+        Dim s As String
+        s = ChrW(75) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(99) & ChrW(243) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7913) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(7915) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(225) & ChrW(116) & ChrW(32) & ChrW(115) & ChrW(105) & ChrW(110) & ChrW(104)
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
     End If
     Do While so_cong < 15
         FrmChungtu.Grid2.AddItem " " + Chr(9) + "" + Chr(9) _
@@ -2374,18 +2413,18 @@ Private Sub KiemTraUser()
     End If
 End Sub
 
-Private Sub MedNgay_GotFocus(Index As Integer)
-    AutoSelect MedNgay(Index)
+Private Sub MedNgay_GotFocus(index As Integer)
+    AutoSelect MedNgay(index)
 End Sub
 
-Private Sub MedNgay_LostFocus(Index As Integer)
-    If IsDate(MedNgay(Index).Text) Then
-        ngay(Index) = CDate(MedNgay(Index).Text)
+Private Sub MedNgay_LostFocus(index As Integer)
+    If IsDate(MedNgay(index).Text) Then
+        ngay(index) = CDate(MedNgay(index).Text)
     Else
-        RFocus MedNgay(Index)
+        RFocus MedNgay(index)
     End If
     Dim n As Date
-    If Index = 0 Then
+    If index = 0 Then
     n = MedNgay(0).Text
      MedNgay(1).Text = n
      End If

@@ -43,7 +43,7 @@ Begin VB.Form FrmOptions
       Width           =   13575
       Begin VB.Label lblTitle 
          BackColor       =   &H00FFFFFF&
-         Caption         =   "§¨ng nhËp"
+         Caption         =   "Th«ng sè hÖ thèng"
          BeginProperty Font 
             Name            =   "VK Sans Serif"
             Size            =   8.25
@@ -2763,10 +2763,10 @@ Private Sub active_Click()
     Unload Me
 End Sub
 
-Private Sub Check_Click(Index As Integer)
-    Select Case Index
+Private Sub Check_Click(index As Integer)
+    Select Case index
         Case 17:
-            If Check(Index).Value = 0 Then Text(8).Text = "..."
+            If Check(index).Value = 0 Then Text(8).Text = "..."
         Case 18:
             If Check(18).Value = 0 Then
                 Check(33).Enabled = False
@@ -2779,8 +2779,8 @@ Private Sub Check_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub ChkVT_Click(Index As Integer)
-    If Index = 4 And ChkVT(4).Value = 1 Then
+Private Sub ChkVT_Click(index As Integer)
+    If index = 4 And ChkVT(4).Value = 1 Then
         If Len(Dir(pCurDir + "DOWNLOAD.EXE")) = 0 Then
             MsgBox "Ch­a cµi ®Æt ch­¬ng tr×nh ®äc m· v¹ch!", vbCritical, App.ProductName
             ChkVT(4).Value = 0
@@ -2788,8 +2788,8 @@ Private Sub ChkVT_Click(Index As Integer)
     End If
 End Sub
 
-Private Sub Combo_Click(Index As Integer)
-    If Index = 3 Then PhanChucNang Combo(Index).ListIndex + 1, Check(25).Value, Check(26).Value, Check(27).Value, Check(28).Value
+Private Sub Combo_Click(index As Integer)
+    If index = 3 Then PhanChucNang Combo(index).ListIndex + 1, Check(25).Value, Check(26).Value, Check(27).Value, Check(28).Value
 End Sub
 
 Private Sub Command1_Click()
@@ -2985,6 +2985,7 @@ TITLE_HEIGHT = 160
         End Select
     Next
 End Sub
+
 Private Sub Form_Load()
     lblTitle(11).AutoSize = True
     Me.Height = Me.Height + 350 + 10
@@ -3033,22 +3034,22 @@ End Sub
 
 
 
-Private Sub Label2_Click(Index As Integer)
-    If Index = 0 Then
+Private Sub Label2_Click(index As Integer)
+    If index = 0 Then
         If CheckBox1(0).Value <> 0 Then
             CheckBox1(0).Value = 0
         Else
             CheckBox1(0).Value = 1
         End If
     End If
-    If Index = 2 Then
+    If index = 2 Then
         If CheckBox1(2).Value <> 0 Then
             CheckBox1(2).Value = 0
         Else
             CheckBox1(2).Value = 1
         End If
     End If
-    If Index = 3 Then
+    If index = 3 Then
         If CheckBox1(3).Value <> 0 Then
             CheckBox1(3).Value = 0
         Else
@@ -3065,8 +3066,8 @@ Private Sub Option2_Click()
     typeRegistry = 2
 End Sub
 
-Private Sub OptVT_Click(Index As Integer)
-    ttVT = Index
+Private Sub OptVT_Click(index As Integer)
+    ttVT = index
 End Sub
 ' T?o file version.txt v?i n?i dung
 Public Function CreateVersionFile(FilePath As String, content As String) As Boolean
@@ -3114,7 +3115,7 @@ Private Sub Dongbotxt()
     Text(0).Text = UnicodeToVni(txtTenCty.Text)
     Text(2).Text = UnicodeToVni(txtDiaChi.Text)
 End Sub
-Private Sub Command_Click(Index As Integer)
+Private Sub Command_Click(index As Integer)
     Dongbotxt
     Dim originPath As String
     Dim content As String
@@ -3207,7 +3208,7 @@ Private Sub Command_Click(Index As Integer)
     Else
         ExecuteSQL5 "Update License set col711ra=0"
     End If
-    If Index = 0 Then
+    If index = 0 Then
         ExecuteSQL5 "UPDATE license SET CCCD = '" + txtCCCD.Text + "'"
     End If
 
@@ -3232,7 +3233,7 @@ Private Sub Command_Click(Index As Integer)
     ' them moi sau
 
 
-    If Index = 0 Then    ' neu la nut ghi, nguoc lai thoat
+    If index = 0 Then    ' neu la nut ghi, nguoc lai thoat
         'neu test dung thi bo
         If (CInt(SelectSQL("SELECT nam as f1 from license ")) <= 0) Then ExecuteSQL5 "UPDATE license SET nam = " + str(pNamTC)
 
@@ -3263,7 +3264,7 @@ Private Sub Command_Click(Index As Integer)
         '  MsgBox FrmGetStr.GetMK(Text(7).Text)
 
         If Combo(2).ListIndex >= 0 Then T = Combo(2).ItemData(Combo(2).ListIndex) Else T = pTien
-        If CInt5(Left(Text(Index).Text, 2)) <> 0 Then Check(55).Value = 0
+        If CInt5(Left(Text(index).Text, 2)) <> 0 Then Check(55).Value = 0
         If ((((pTenCty = Text(0).Text And (pTenCn = Text(1).Text Or suatencn = 1) And (Check(19).Value = suatencn) And pMaVach = Check(9).Value And pDinhmuc = Check(13).Value And pSongNgu = (Check(14).Value = 1) And pRpt = Check(15).Value And pTygia = Check(18).Value And T = pTien And mk = 0) Or (DEMO = 1 And CLng5(Left(Text(7).Text, 2)) > 0)) And (mst = Text(7).Text Or (suatencn = 1 And Left(mst, 10) = Left(Text(7).Text, 10)))) Or Combo(3).ListIndex = 4 Or (Cdbl5(Left(Text(7).Text, 10)) = 0 And Cdbl5(Left(frmMain.LbCty(8).Caption, 10)) = 0)) And (pNoiBo = Check(55).Value) And (CInt5(Combo(0).Text) = pNamTC) Then GoTo a
         If (Len(pMST) > 0 And Left(Text(7).Text, Len(pMST)) = pMST) Then GoTo a
         If boolean_kiemtra() = False Then GoTo a    ' kiem tra da active thi bat khung nhap ma so le
@@ -3352,26 +3353,26 @@ KT:
     HienThongBao "", 1
 End Sub
 
-Private Sub Text_GotFocus(Index As Integer)
-    AutoSelect Text(Index)
+Private Sub Text_GotFocus(index As Integer)
+    AutoSelect Text(index)
 End Sub
 
-Private Sub Text_KeyPress(Index As Integer, KeyAscii As Integer)
-    Select Case Index
+Private Sub Text_KeyPress(index As Integer, KeyAscii As Integer)
+    Select Case index
         Case 7, 11 To 14, 18, 21, 24, 25:
-            KeyProcess Text(Index), KeyAscii, True
+            KeyProcess Text(index), KeyAscii, True
         Case 22:
             If DEMO = 1 Then KeyAscii = 0
     End Select
 End Sub
 
-Private Sub Text_LostFocus(Index As Integer)
-    Select Case Index
+Private Sub Text_LostFocus(index As Integer)
+    Select Case index
         Case 1 To 6, 8, 9, 10, 15 To 17, 19, 20, 22, 23:
-            If Len(Text(Index).Text) = 0 Then Text(Index).Text = "..."
+            If Len(Text(index).Text) = 0 Then Text(index).Text = "..."
         Case 7:
-            Text(Index).Text = SetNumericStr(Text(Index).Text)
-            If Len(Text(Index).Text) = 0 Then Text(Index) = "00"
+            Text(index).Text = SetNumericStr(Text(index).Text)
+            If Len(Text(index).Text) = 0 Then Text(index) = "00"
             HienNoiBo
         Case 8:
             If Len(Dir(Text(8).Text)) = 0 Then Text(8).Text = "..."

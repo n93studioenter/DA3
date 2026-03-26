@@ -4830,7 +4830,7 @@ Private Sub GetLicense()
     LbCty(2).Caption = rs_license!DiaChi
     LbCty(3).Caption = rs_license!Tel
     LbCty(4).Caption = rs_license!Fax
-    LbCty(5).Caption = rs_license!TaiKhoanVN
+    LbCty(5).Caption = VniToUnicode(rs_license!TaiKhoanVN)
     LbCty(6).Caption = rs_license!TaiKhoanNT
     pNamTC = rs_license!NamTC
     pThangDauKy = rs_license!thang
@@ -5037,7 +5037,7 @@ Private Sub GetLicense()
     LietKeNam
     mnVT(15).Visible = True
     'mnCongno.Visible = False
-    
+
     On Error GoTo 0
 End Sub
 

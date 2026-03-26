@@ -2425,8 +2425,8 @@ Dim ngay(0 To 1) As Date
 Dim nn As Integer
 Dim daTangHeight As Boolean
 
-Private Sub CboTT_Click(Index As Integer)
-    If Index = 0 Then CboVVClick CboTT(0), CboTT(1)
+Private Sub CboTT_Click(index As Integer)
+    If index = 0 Then CboVVClick CboTT(0), CboTT(1)
 End Sub
 Sub PopulateListBoxFromFile(ByVal AListBox, ByVal AFileName As String, ByVal HasFolder As Boolean)
 ' Display a text file in a listbox
@@ -2530,16 +2530,16 @@ End Sub
 '====================================================================================================
 ' Chän sè hiÖu tµi kho¶n
 '====================================================================================================
-Private Sub cmdtk_Click(Index As Integer)
+Private Sub cmdtk_Click(index As Integer)
     Me.MousePointer = 11
-    txtShTk(Index).Text = FrmTaikhoan.ChonTk(txtShTk(Index).Text)
+    txtShTk(index).Text = FrmTaikhoan.ChonTk(txtShTk(index).Text)
     Me.MousePointer = 0
-    RFocus txtShTk(Index)
+    RFocus txtShTk(index)
 End Sub
 '====================================================================================================
 ' Xem, In hoÆc kÕt thóc
 '====================================================================================================
-Public Sub Command_Click(Index As Integer)
+Public Sub Command_Click(index As Integer)
 
     If OptTG(0).Value = False Then
         If IsDate(MedNgay(1).Text) And IsDate(MedNgay(0).Text) Then
@@ -2570,7 +2570,7 @@ Public Sub Command_Click(Index As Integer)
     Dim i As Integer, tdau As Integer, tcuoi As Integer, kq1 As Boolean
     Dim mdt1 As Long, mdt2 As Long, mdt3 As Long
 
-    Select Case Index
+    Select Case index
     Case 0, 1:
         If pRpt = 1 And (Not ChoXemBC(baocao, "T")) Then
             ErrMsg er_KoSD
@@ -2669,7 +2669,7 @@ Public Sub Command_Click(Index As Integer)
             End If
         Case 2:
             Dim rs_tk As Recordset
-            If Index = 0 Then
+            If index = 0 Then
                 ErrMsg er_KoXem
                 GoTo KhongInBC
             End If
@@ -2930,7 +2930,7 @@ Public Sub Command_Click(Index As Integer)
             If OptQT(6).Value Then GTGTCT
         End Select
 InBC:
-        frmMain.Rpt.Destination = Index
+        frmMain.Rpt.Destination = index
         If Len(NLB) > 0 And NLB <> "..." Then frmMain.Rpt.Formulas(52) = "NLB='" + NLB + "'"
         If Len(KTT) > 0 And KTT <> "..." Then frmMain.Rpt.Formulas(53) = "KTT='" + KTT + "'"
         If Len(GD) > 0 And GD <> "..." Then frmMain.Rpt.Formulas(54) = "GD='" + GD + "'"
@@ -3325,14 +3325,14 @@ End Sub
 '====================================================================================================
 ' Thñ tôc in nhËt ký chung
 '====================================================================================================
-Private Sub OptBc_Click(Index As Integer)
-    baocao = Index
-    Frame(0).Visible = (Index = 3 And pVersion <> 3)
-    Frame(1).Visible = ((Index = 4 Or Index = 7 Or Index = 11) And pVersion <> 3)
-    Frame(2).Visible = (Index = 5)
-    Frame(3).Visible = (Index = 17)
-    Frame(6).Visible = ((Index = 0 Or Index = 1) And pSoVV > 0)
-    Frame(7).Visible = (Index = 11 And pVersion = 3)
+Private Sub OptBc_Click(index As Integer)
+    baocao = index
+    Frame(0).Visible = (index = 3 And pVersion <> 3)
+    Frame(1).Visible = ((index = 4 Or index = 7 Or index = 11) And pVersion <> 3)
+    Frame(2).Visible = (index = 5)
+    Frame(3).Visible = (index = 17)
+    Frame(6).Visible = ((index = 0 Or index = 1) And pSoVV > 0)
+    Frame(7).Visible = (index = 11 And pVersion = 3)
     Select Case baocao
         Case 0, 1, 14, 16, 18, 20:
             OptTG(1).Enabled = True
@@ -3346,16 +3346,16 @@ Private Sub OptBc_Click(Index As Integer)
     End Select
 End Sub
 
-Private Sub OptBC_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub OptBC_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     If pRpt = 1 And Button = 2 And User_Right = 0 Then
-        FU1.QuyenBCTongHop Index, OptBC(Index).Caption
+        FU1.QuyenBCTongHop index, OptBC(index).Caption
     End If
     
 
       
 End Sub
 
-Private Sub OptBC_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub OptBC_MouseMove(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     Dim i
 
         OptBC(5).BackColor = &H80FF80 '&HC0FFC0    '&H80000003
@@ -3363,36 +3363,36 @@ Private Sub OptBC_MouseMove(Index As Integer, Button As Integer, Shift As Intege
         OptBC(4).BackColor = &H80FF80 '&HC0FFC0    '&H80000003
         OptBC(17).BackColor = &H80FF80 '&HC0FFC0    '&H80000003
 
-If (Index = 5 Or Index = 3 Or Index = 4 Or Index = 17) Then
- OptBC(Index).BackColor = 8438015
+If (index = 5 Or index = 3 Or index = 4 Or index = 17) Then
+ OptBC(index).BackColor = 8438015
  End If
 End Sub
 
-Private Sub OptNN_Click(Index As Integer)
-    nn = Index
+Private Sub OptNN_Click(index As Integer)
+    nn = index
     If CboTL.ListIndex < 0 Then Exit Sub
     SetFont Me, 1
 End Sub
 
-Public Sub txtShTk_GotFocus(Index As Integer)
-    AutoSelect txtShTk(Index)
+Public Sub txtShTk_GotFocus(index As Integer)
+    AutoSelect txtShTk(index)
 End Sub
 
-Private Sub txtShTk_KeyPress(Index As Integer, KeyAscii As Integer)
-    If KeyAscii = 13 Then cmdtk_Click Index
+Private Sub txtShTk_KeyPress(index As Integer, KeyAscii As Integer)
+    If KeyAscii = 13 Then cmdtk_Click index
 End Sub
 
-Public Sub txtShTk_LostFocus(Index As Integer)
+Public Sub txtShTk_LostFocus(index As Integer)
     Dim mtk As Long
     
-    txtShTk(Index).Text = UCase(txtShTk(Index).Text)
-    If Len(txtShTk(Index).Text) > 0 Then
+    txtShTk(index).Text = UCase(txtShTk(index).Text)
+    If Len(txtShTk(index).Text) > 0 Then
         mtk = 0
-        LbTenTk(Index).Caption = tentk(txtShTk(Index).Text, mtk)
-        txtShTk(Index).tag = mtk
+        LbTenTk(index).Caption = tentk(txtShTk(index).Text, mtk)
+        txtShTk(index).tag = mtk
     Else
-        LbTenTk(Index).Caption = ""
-        txtShTk(Index).tag = 0
+        LbTenTk(index).Caption = ""
+        txtShTk(index).tag = 0
     End If
     HienThongBao Me.Caption, 1
 End Sub
@@ -4319,7 +4319,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Do While Not rs_lailo.EOF
         sql = "SELECT DISTINCTROW Sum(IIF(" + WThang2("ThangCT", 0, tdau) + ",ChungTu.SoPS,0)) AS F1, Sum(IIF(" + WThang("ThangCT", tdau, 0) + ",ChungTu.SoPS,0)) AS F2 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
-            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", 0, tcuoi)
+            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", 0, tcuoi)
 
         KT = SelectSQL(sql, kn)
 
@@ -4438,6 +4438,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     Dim ct06_353 As Double
     Dim ct06_356 As Double
     Dim ct06bonus As Double
+    Dim ct06_335 As Double
     Dim ct07_811 As Double
     Dim ct07_138 As Double
     Dim ct07_3331 As Double
@@ -4533,13 +4534,13 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuCo Like "133*" Or (Left(Trim(rs_import!GhiChu), 3) = "133" And rs_import!SoHieuNo <> "") Then
                 ct06_133 = ct06_133 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "141*" Or (InStr("," & rs_import!GhiChu, ",141") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "141*" Or (Left(Trim(rs_import!GhiChu), 3) = "141" And rs_import!SoHieuNo <> "") Then
                 ct06_141 = ct06_141 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "138*" Or (InStr("," & rs_import!GhiChu, ",138") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "138*" Or (Left(Trim(rs_import!GhiChu), 3) = "138" And rs_import!SoHieuNo <> "") Then
                 ct06_138 = ct06_138 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "338*" Or (InStr("," & rs_import!GhiChu, ",338") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "338*" Or (Left(Trim(rs_import!GhiChu), 3) = "338" And rs_import!SoHieuNo <> "") Then
                 ct06_338 = ct06_338 + rs_import!sops
             End If
             If rs_import!SoHieuCo Like "331*" Or (Left(Trim(rs_import!GhiChu), 3) = "331" And rs_import!SoHieuNo <> "") Then
@@ -4557,26 +4558,26 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
             If rs_import!SoHieuCo Like "642*" Or (InStr("," & rs_import!GhiChu, ",642") > 0 And rs_import!SoHieuNo <> "") Then
                 ct06_642 = ct06_642 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "334*" Or (InStr("," & rs_import!GhiChu, ",334") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "334*" Or (Left(Trim(rs_import!GhiChu), 3) = "334" And rs_import!SoHieuNo <> "") Then
                 ct06_334 = ct06_334 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "351*" Or (InStr("," & rs_import!GhiChu, ",351") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "351*" Or (Left(Trim(rs_import!GhiChu), 3) = "351" And rs_import!SoHieuNo <> "") Then
                 ct06_351 = ct06_351 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "352*" Or (InStr("," & rs_import!GhiChu, ",352") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "352*" Or (Left(Trim(rs_import!GhiChu), 3) = "352" And rs_import!SoHieuNo <> "") Then
                 ct06_352 = ct06_352 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "353*" Or (InStr("," & rs_import!GhiChu, ",353") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "353*" Or (Left(Trim(rs_import!GhiChu), 3) = "353" And rs_import!SoHieuNo <> "") Then
                 ct06_353 = ct06_353 + rs_import!sops
             End If
-            If rs_import!SoHieuCo Like "356*" Or (InStr("," & rs_import!GhiChu, ",356") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "356*" Or (Left(Trim(rs_import!GhiChu), 3) = "356" And rs_import!SoHieuNo <> "") Then
                 ct06_356 = ct06_356 + rs_import!sops
             End If
             '07
             If rs_import!SoHieuNo Like "811*" Or (Left(Trim(rs_import!GhiChu), 3) = "811" And IsNull(rs_import!SoHieuNo)) Then
                 ct07_811 = ct07_811 + rs_import!sops
             End If
-            If rs_import!SoHieuNo Like "138*" Or (InStr("," & rs_import!GhiChu, ",138") > 0 And IsNull(rs_import!SoHieuNo)) Then
+            If rs_import!SoHieuNo Like "138*" Or (Left(Trim(rs_import!GhiChu), 3) = "138" And IsNull(rs_import!SoHieuNo)) Then
                 ct07_138 = ct07_138 + rs_import!sops
             End If
 
@@ -4632,7 +4633,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
                 ct07_131 = ct07_131 + rs_import!sops
             End If
 
-            If rs_import!SoHieuNo Like "515*" Or (InStr("," & rs_import!GhiChu, ",515") > 0 And IsNull(rs_import!SoHieuNo)) Then
+            If rs_import!SoHieuNo Like "515*" Or (Left(Trim(rs_import!GhiChu), 3) = "515" And IsNull(rs_import!SoHieuNo)) Then
                 ct07_515 = ct07_515 + rs_import!sops
             End If
             If rs_import!SoHieuNo Like "351*" Or (InStr("," & rs_import!GhiChu, ",351") > 0 And IsNull(rs_import!SoHieuNo)) Then
@@ -4642,7 +4643,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
                 ct07_141 = ct07_141 + rs_import!sops
             End If
             'ct33
-            If rs_import!SoHieuCo Like "341*" Or (InStr("," & rs_import!GhiChu, ",341") > 0 And rs_import!SoHieuNo <> "") Then
+            If rs_import!SoHieuCo Like "341*" Or (Left(Trim(rs_import!GhiChu), 3) = "341" And rs_import!SoHieuNo <> "") Then
                 ct33 = ct33 + rs_import!sops
             End If
             'ct34
@@ -7337,18 +7338,18 @@ KetThuc:
     Set tk2 = Nothing
 End Sub
 
-Private Sub MedNgay_GotFocus(Index As Integer)
+Private Sub MedNgay_GotFocus(index As Integer)
 '    AutoSelect MedNgay(Index)
 End Sub
 
-Private Sub MedNgay_LostFocus(Index As Integer)
-    If IsDate(MedNgay(Index).Text) Then
-        ngay(Index) = CDate(MedNgay(Index).Text)
+Private Sub MedNgay_LostFocus(index As Integer)
+    If IsDate(MedNgay(index).Text) Then
+        ngay(index) = CDate(MedNgay(index).Text)
     Else
-        RFocus MedNgay(Index)
+        RFocus MedNgay(index)
     End If
     
-     If Index = 0 Then
+     If index = 0 Then
        MedNgay(1).Text = MedNgay(0).Text
     End If
 End Sub
@@ -7363,11 +7364,11 @@ Private Sub InCTKQKD(tdau As Integer, tcuoi As Integer)
     Do While Not rs_lailo.EOF
         sql = "SELECT DISTINCTROW Sum(ChungTu.SoPS) AS F1 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
-            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", tdau, tcuoi)
+            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK_1.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", tdau, tcuoi)
         kn = SelectSQL(sql)
         sql = "SELECT DISTINCTROW Sum(ChungTu.SoPS) AS F1 " _
             & "FROM (HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKNo) INNER JOIN HeThongTK AS HeThongTK_1 ON ChungTu.MaTKCo = HeThongTK_1.MaSo " _
-            & "WHERE HethongTK_1.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", tdau, tcuoi)
+            & "WHERE HethongTK_1.SoHieu LIKE '" + rs_lailo!tkno + "*' AND HethongTK.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", tdau, tcuoi)
         kn = kn - SelectSQL(sql)
         If rs_lailo!dau > 0 Then
             ExecuteSQL5 "UPDATE KQKDCT SET KyNay = " + DoiDau(kn) + " WHERE Ma=" + CStr(rs_lailo!ma)
@@ -7396,7 +7397,7 @@ Private Sub InCTKQKD(tdau As Integer, tcuoi As Integer)
     Do While Not rs_lailo.EOF
         sql = "SELECT DISTINCTROW Sum(ChungTu.SoPS) AS F1 " _
             & "FROM HeThongTK INNER JOIN ChungTu ON HeThongTK.MaSo = ChungTu.MaTKCo " _
-            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!tkco + "*' AND " + WThang("ThangCT", tdau, tcuoi)
+            & "WHERE HethongTK.SoHieu LIKE '" + rs_lailo!TkCo + "*' AND " + WThang("ThangCT", tdau, tcuoi)
         kn = SelectSQL(sql)
 
         If rs_lailo!dau > 0 Then
