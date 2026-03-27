@@ -759,8 +759,8 @@ Private Sub importRegister()
     Set rs = Nothing
 End Sub
 
-Private Sub Command_Click(index As Integer)
-    If index = 1 Then
+Private Sub Command_Click(Index As Integer)
+    If Index = 1 Then
         Unload Me
         Exit Sub
     End If
@@ -1025,13 +1025,15 @@ Private Sub AddDataLCTT()
 
     'bo sung hoan tien tk loai 333
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (83,6,'6. Ti“n thu kh∏c tı hoπt ÆÈng kinh doanh','11','3330',0,0,0,0,20,1,'new')"
-    
+
     'Chi tieu 4
     ExecuteSQL5 "Delete from LCTT where MaSo=4"
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (84,4,'4. Ti“n chi tr∂ l∑i vay','635','11',0,0,0,0,20,-1,'new')"
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (85,4,'4. Ti“n chi tr∂ l∑i vay','335','11',0,0,0,0,20,-1,'new')"
-    
-    
+
+    'bo sung 2
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (86,2,'2. Ti“n chi tr∂ cho ng≠Íi cung c p hµng ho∏ vµ dﬁch vÙ','62','11',0,0,0,0,20,-1,'new')"
+    ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (86,2,'2. Ti“n chi tr∂ cho ng≠Íi cung c p hµng ho∏ vµ dﬁch vÙ','641','11',0,0,0,0,20,-1,'new')"
     ExecuteSQL5 "Update LCTT set Ten='Ti“n vµ t≠¨ng Æ≠¨ng ti“n cuËi k˙ (70 = 50+60+61)' where MaSo=70 "
     ExecuteSQL5 "Update LCTT set Ten='L≠u chuy”n ti“n thu«n trong k˙ (50 = 20+30+40)' where MaSo=50 "
 End Sub

@@ -134,9 +134,9 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton Command10 
       Caption         =   "KiÓm tra hãa ®¬n"
       Height          =   375
-      Left            =   10800
+      Left            =   11880
       TabIndex        =   190
-      Top             =   8280
+      Top             =   8350
       Width           =   1575
    End
    Begin VB.CommandButton Command15 
@@ -373,10 +373,11 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   12480
+      Left            =   13920
       Picture         =   "Fchungtu.frx":14F32
       TabIndex        =   179
       Top             =   8280
+      Visible         =   0   'False
       Width           =   855
    End
    Begin VB.CommandButton Command6 
@@ -3759,9 +3760,17 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Declare Function SetCursor Lib "user32" (ByVal hCursor As Long) As Long
+Private Declare Function LoadCursor Lib "user32" Alias "LoadCursorA" (ByVal hInstance As Long, ByVal lpCursorName As Long) As Long
+
+Private Const IDC_HAND = 32649&
+Private Const IDC_ARROW = 32512&
+Private Const IDC_APPSTARTING = 32650&
+Private Const IDC_Drag = 32646&
+
 Private Const MIM_STYLE As Long = &H10
 Private Const MIM_APPLYTOSUBMENUS As Long = &H80000000
-
+Const vbHand = 99
 Private Const MFT_SEPARATOR As Long = &H800&
 
 Private Const MIIM_ID As Long = &H2&
@@ -4300,7 +4309,16 @@ Private Sub DoNganhang()
 
 End Sub
 
-Private Sub btnDelete_Click(index As Integer)
+Private Sub btnDelete_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_HAND)
+
+End Sub
+Private Sub CmdDanhSach_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_HAND)
+
+End Sub
+Private Sub btnDelete_Click(Index As Integer)
+   
     msgXoa = 1
     countDete = 1
     With Grid2
@@ -4964,15 +4982,20 @@ ErrorHandler:
     MsgBox "Lçi ngµy th¸ng kh«ng hîp lÖ"
 End Sub
 
-Private Sub timer331_Timer(index As Integer)
+Private Sub timer331_Timer(Index As Integer)
 
 End Sub
 
-Private Sub btnReset_Click()
+Public Sub btnReset_Click()
     FThuChi.FThuChiForm = 0
     hasError = False
 End Sub
-
+Private Sub Command10_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_HAND)
+End Sub
+Private Sub Command_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_HAND)
+End Sub
 
 
 Private Sub Command10_Click()
@@ -5007,19 +5030,19 @@ Private Sub Dohoadon()
 
 End Sub
 
-Private Sub Command11_Click(index As Integer)
+Private Sub Command11_Click(Index As Integer)
     CboThang1(1).ListIndex = 0
     CboThang1(2).ListIndex = 2
     Command3_Click
 End Sub
 
-Private Sub Command12_Click(index As Integer)
+Private Sub Command12_Click(Index As Integer)
     CboThang1(1).ListIndex = 3
     CboThang1(2).ListIndex = 5
     Command3_Click
 End Sub
 
-Private Sub Command13_Click(index As Integer)
+Private Sub Command13_Click(Index As Integer)
     CboThang1(1).ListIndex = 6
     CboThang1(2).ListIndex = 8
     Command3_Click
@@ -5369,7 +5392,7 @@ Public Sub Afterclick()
     End If
 End Sub
 
-Private Sub Command15_Click(index As Integer)
+Private Sub Command15_Click(Index As Integer)
     CboThang1(1).ListIndex = 9
     CboThang1(2).ListIndex = 11
     Command3_Click
@@ -5400,8 +5423,11 @@ Private Sub Command7_MouseMove(Button As Integer, Shift As Integer, X As Single,
 
 
 End Sub
+
 Private Sub btnImportXML_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 ' Ð?i màu n?n khi di chu?t
+    SetCursor LoadCursor(0, IDC_HAND)
+
     btnImportXML.BackColor = 8438015
     Command7.BackColor = &H80FF80
     Command6.BackColor = &H80FF80
@@ -5416,6 +5442,7 @@ Private Sub btnImportXML_MouseMove(Button As Integer, Shift As Integer, X As Sin
 End Sub
 Private Sub Command6_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 ' Ð?i màu n?n khi di chu?t
+    SetCursor LoadCursor(0, IDC_HAND)
     Command6.BackColor = 8438015
     Command7.BackColor = &H80FF80
     btnImportXML.BackColor = &H80FF80
@@ -6960,6 +6987,7 @@ Function RemoveLeadingZeros(ByVal str As String) As String
     Wend
     RemoveLeadingZeros = Mid(str, i)
 End Function
+
 Private Sub btnImportXML_Click()
     btnReset_Click
     dshdloi = ""
@@ -7172,10 +7200,10 @@ Private Sub CboLoai_LostFocus()
     'RFocus txtVT(7)
 End Sub
 
-Private Sub CboNT_Click(index As Integer)
+Private Sub CboNT_Click(Index As Integer)
     Dim gia As Double, hsqd As Double, luong As Double, tien As Double, tien2 As Double
 
-    Select Case index
+    Select Case Index
     Case 0:
         If CboNT(0).ItemData(CboNT(0).ListIndex) = 0 Then
             txtchungtu(2).tag = 0
@@ -7260,8 +7288,8 @@ Private Sub CboNT_Click(index As Integer)
     End Select
 End Sub
 
-Private Sub CboNguon_Click(index As Integer)
-    Select Case index:
+Private Sub CboNguon_Click(Index As Integer)
+    Select Case Index:
     Case 1:
         If loaict = 2 Then
             MaSoCT = 0
@@ -7271,8 +7299,8 @@ Private Sub CboNguon_Click(index As Integer)
     End Select
 End Sub
 
-Private Sub CboNT_KeyPress(index As Integer, KeyAscii As Integer)
-    If index = 3 Then
+Private Sub CboNT_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index = 3 Then
         Select Case KeyAscii
         Case 13:
             CboNT_LostFocus 3
@@ -7283,10 +7311,10 @@ Private Sub CboNT_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub CboNT_LostFocus(index As Integer)
+Private Sub CboNT_LostFocus(Index As Integer)
     Dim sh As String
 
-    Select Case index
+    Select Case Index
     Case 1:
         txtchungtu(4).Text = CboNT(1).Text
         txtChungtu_LostFocus 4
@@ -7310,7 +7338,7 @@ Private Sub CboNT_LostFocus(index As Integer)
     End Select
 End Sub
 
-Private Sub CboNguon_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub CboNguon_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
         If txt(3).Visible = True Then
             RFocus txt(3)
@@ -7387,8 +7415,8 @@ Private Sub CboThang_LostFocus()
 
 End Sub
 
-Private Sub CboVV_Click(index As Integer)
-    If index = 0 Then CboVVClick CboVV(0), CboVV(1)
+Private Sub CboVV_Click(Index As Integer)
+    If Index = 0 Then CboVVClick CboVV(0), CboVV(1)
 End Sub
 
 Private Sub Chk_Click()
@@ -7401,8 +7429,8 @@ Private Sub ChkXT_Click()
     Frame.Visible = (chkXT.Value = 1)
 End Sub
 
-Private Sub cmd_Click(index As Integer)
-    Select Case index
+Private Sub cmd_Click(Index As Integer)
+    Select Case Index
     Case 0:
         txtsh(0).Text = FrmTaikhoan.ChonTk(txtsh(0).Text)
         RFocus txtsh(0)
@@ -8193,7 +8221,7 @@ Public Sub CmdChitiet_Click()
     txttinh_gia_ban.Caption = "0"
 
 End Sub
-Sub in_hoa_don_tong_hop(index As Integer, in_hd As Integer)
+Sub in_hoa_don_tong_hop(Index As Integer, in_hd As Integer)
     frmMain.Rpt.Reset
     frmMain.Rpt.WindowState = crptMaximized
     Dim sotien As String, i As Integer, k As Integer, xxx As String, sodu As Integer, v As Double, lp As Integer, ms As Long, mv As String
@@ -8204,15 +8232,15 @@ Sub in_hoa_don_tong_hop(index As Integer, in_hd As Integer)
     chophep_in = 0
     SetRptInfo
 
-    Select Case index
+    Select Case Index
     Case 0, 3:
-        shtk = IIf(index = 0, TM, NH)
+        shtk = IIf(Index = 0, TM, NH)
         lp = LoaiPhieuThuChi(shtk)
         tiennt = 0
 
         If lp < 0 Then
 
-            frmMain.Rpt.ReportFileName = IIf(index = 0, "PHIEUTHU.RPT", "THUNH.RPT")
+            frmMain.Rpt.ReportFileName = IIf(Index = 0, "PHIEUTHU.RPT", "THUNH.RPT")
 
             With GrdChungtu
                 For i = 0 To .Rows - 1
@@ -8267,7 +8295,7 @@ A1:
             End With
         Else
 C1:
-            frmMain.Rpt.ReportFileName = IIf(index = 0, "PHIEUCHI.RPT", "CHINH.RPT")
+            frmMain.Rpt.ReportFileName = IIf(Index = 0, "PHIEUCHI.RPT", "CHINH.RPT")
             ttien = 0
             With GrdChungtu
                 For i = 0 To .Rows - 1
@@ -8641,7 +8669,7 @@ B:
         frmMain.Rpt.WindowTitle = frmMain.Rpt.ReportFileName
         InBaoCaoRPT pNN
     End If
-    If (index = 0 Or index = 3) And lanin = 0 Then
+    If (Index = 0 Or Index = 3) And lanin = 0 Then
         lanin = lanin + 1
         lp = IIf(lp < 0, 1, -1)
         If CoPSTK(shtk, lp, X) Then
@@ -8659,14 +8687,14 @@ End Sub
 
 
 
-Private Sub cmdkh_Click(index As Integer)
+Private Sub cmdkh_Click(Index As Integer)
     Me.MousePointer = 11
-    txtshkh(index).Text = FrmKhachHang.ChonKhachHang(txtshkh(index).Text)
+    txtshkh(Index).Text = FrmKhachHang.ChonKhachHang(txtshkh(Index).Text)
     Me.MousePointer = 0
-    RFocus txtshkh(index)
+    RFocus txtshkh(Index)
 End Sub
 
-Public Sub CmdPhieu_Click(index As Integer)
+Public Sub CmdPhieu_Click(Index As Integer)
     ngay(0) = CVDate(MedNgay(0).Text)
     ngay(1) = CVDate(MedNgay(1).Text)
     '    If Checkinbangkevahoadon.Value = 1 Then
@@ -8675,7 +8703,7 @@ Public Sub CmdPhieu_Click(index As Integer)
     '    ElseIf checkinbangke = 1 Then
     '        in_hoa_don_tong_hop Index, 1
     '    Else
-    in_hoa_don_tong_hop index, 0
+    in_hoa_don_tong_hop Index, 0
     '   End If
 End Sub
 Sub In_hoa_don2(sotien As String, i As Integer, k As Integer, xxx As String, sodu As Integer, v As Double, lp As Integer, ms As Long, mv As String, tien As Double, ttien As Double, luong As Double, tkno As String, TkCo As String, TK As ClsTaikhoan, tiennt As Double, ts As clsTaiSan, HTTT As String, tl As Integer, thue As Double, v338 As Double, v521 As Double, X As Double, shtk As String, vt As ClsVattu, dn As Double, DC As Double, dnt As Double, CK As Double, somh As Integer, tp As Cls154, lanin As Integer, stt As Integer, loaitien As String)
@@ -9332,20 +9360,20 @@ Private Sub Combo2_Change()
 
 End Sub
 
-Private Sub cmdtk_Click(index As Integer)
+Private Sub cmdtk_Click(Index As Integer)
     Me.MousePointer = 11
     ' txtShTk(Index).Text = FrmTaikhoan.ChonTk(txtShTk(Index).Text)
-    FBcKt.txtShTk(index).Text = FrmTaikhoan.ChonTk(txtShTk(index).Text)
-    txtShTk(index).Text = FBcKt.txtShTk(index).Text
-    RFocus txtShTk(index)
+    FBcKt.txtShTk(Index).Text = FrmTaikhoan.ChonTk(txtShTk(Index).Text)
+    txtShTk(Index).Text = FBcKt.txtShTk(Index).Text
+    RFocus txtShTk(Index)
     Me.MousePointer = 0
 End Sub
 
-Private Sub cmdvt_Click(index As Integer)
+Private Sub cmdvt_Click(Index As Integer)
     Me.MousePointer = 11
-    txtShVT(index).Text = FrmVattu.ChonVattu(txtShVT(index).Text)
+    txtShVT(Index).Text = FrmVattu.ChonVattu(txtShVT(Index).Text)
     Me.MousePointer = 0
-    RFocus txtShVT(index)
+    RFocus txtShVT(Index)
 End Sub
 Function kiem_tra_333_133() As Integer
     Dim so_333
@@ -9663,8 +9691,8 @@ Public Sub TuDongNhapKho()
 
     ExecuteSQL5 "UPDATE License SET Lock12=10+ Lock12 Mod 10 + Lock12 \100"
 End Sub
-Public Sub Command_Click(index As Integer)
-    If index = 0 Then
+Public Sub Command_Click(Index As Integer)
+    If Index = 0 Then
         txtNoidung.Text = ""
     End If
 
@@ -9749,7 +9777,7 @@ Public Sub Command_Click(index As Integer)
     End With
 
 
-    Select Case index
+    Select Case Index
     Case 0:
         kiem_tra_so_dong
         MaSoCT = 0
@@ -9779,7 +9807,11 @@ Public Sub Command_Click(index As Integer)
         End If
         If Not KiemTraChungtu Then
             If FThuChi.FThuChiForm = 0 Then
-                MsgBox "Cã tµi kho¶n chi tiÕt"
+                'MsgBox "Cã tµi kho¶n chi tiÕt"
+
+                s = ChrW(67) & ChrW(243) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116)
+                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
             End If
             GoTo XongCT
         End If
@@ -10004,7 +10036,7 @@ Public Sub Command_Click(index As Integer)
                         End If
                     End If
                     If FThuChi.FThuChiForm = 5 Then
-                     ExecuteSQL5 "UPDATE ChungTu SET nhanban=1 WHERE MaSo=" + CStr(chungtu.MaSo)
+                        ExecuteSQL5 "UPDATE ChungTu SET nhanban=1 WHERE MaSo=" + CStr(chungtu.MaSo)
                     End If
                     .col = 18
                     If Len(.Text) > 0 Then
@@ -10371,14 +10403,14 @@ End Sub
 '====================================================================================================
 ' HiÓn thÞ cöa sæ danh s¸ch chøng tõ vµ hiÓn thÞ chøng tõ ®­îc chän
 '====================================================================================================
-Public Sub CmdDanhsach_Click(index As Integer)
+Public Sub CmdDanhsach_Click(Index As Integer)
     Command_Click (0)
     Label(26).Caption = ""
     cho_hien_thongbao = True
 
     Dim p As Integer
 ChonCT:
-    If index = 0 Then
+    If Index = 0 Then
         MaSoCT = FrmDsCT.ChonCT(p)
     Else
         p = pPhieu
@@ -10946,6 +10978,9 @@ End Sub
 Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
 ' Ki?m tra n?u phím Shift dang du?c gi?
 'Me.Caption = "asd"
+    If (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyR Then
+        btnReset_Click
+    End If
     If GetAsyncKeyState(vbKeyControl) <> 0 Then
         isshift = 1
     Else
@@ -11006,8 +11041,13 @@ Private Sub AnControl()
 
 End Sub
 Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_Drag)
     ReleaseCapture
     SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+
+End Sub
+Private Sub lblClose_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, 32649)    ' HAND
 End Sub
 Private Sub lblClose_Click()
     Unload Me
@@ -11659,14 +11699,14 @@ Private Sub Grid2_Click()
     txtNoidung.Text = VniToUnicode(txt(1).Text)
 End Sub
 
-Private Sub MedNgay_GotFocus(index As Integer)
-    AutoSelect MedNgay(index)
+Private Sub MedNgay_GotFocus(Index As Integer)
+    AutoSelect MedNgay(Index)
 End Sub
 
 
-Private Sub MedNgay_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub MedNgay_KeyPress(Index As Integer, KeyAscii As Integer)
     If KeyAscii = 13 Then
-        Select Case index
+        Select Case Index
         Case 0:
             RFocus MedNgay(1)
         Case 1:
@@ -11677,12 +11717,12 @@ Private Sub MedNgay_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub MedNgay_LostFocus(index As Integer)
+Private Sub MedNgay_LostFocus(Index As Integer)
 
     Dim ngay As Date
     Dim Ngaykt As Date
     Dim st As String
-    If index = 0 Then
+    If Index = 0 Then
         st = Day(MedNgay(0).Text)
         If Day(MedNgay(0).Text) < 10 Then
             st = "0" + Day(MedNgay(0).Text)
@@ -11740,8 +11780,8 @@ Private Sub MedNgay_LostFocus(index As Integer)
     '/////////////////
     Dim ngayx As Date
     Label(26).Caption = ""
-    If IsDate(MedNgay(index).Text) Then
-        ngayx = CDate(MedNgay(index).Text)
+    If IsDate(MedNgay(Index).Text) Then
+        ngayx = CDate(MedNgay(Index).Text)
         If Year(ngayx) <> pNamTC Then
             Label(26).Caption = "Ngµy chøng tõ kh¸c n¨m tµi chÝnh !"
             Ngaykt = "01/" + CboThang.Text
@@ -11749,7 +11789,7 @@ Private Sub MedNgay_LostFocus(index As Integer)
             'MsgBox "Ngµy chøng tõ kh¸c n¨m tµi chÝnh !", vbExclamation, App.ProductName
             '            If Index = 1 Then RFocus txtVT(1)
         Else
-            If (month(MedNgay(index).Text) <> month(Ngaykt)) Then
+            If (month(MedNgay(Index).Text) <> month(Ngaykt)) Then
                 Label(26).Caption = "Ngµy chøng tõ kh¸c ngµy ghi sæ !"
                 Ngaykt = "01/" + CboThang.Text
                 MedNgay(1).Text = Ngaykt
@@ -11771,7 +11811,7 @@ Private Sub MedNgay_LostFocus(index As Integer)
 
 
     '//////////////////////////////
-    If index = 1 Then
+    If Index = 1 Then
         If Len(Replace(Trim(txt(0).Text), ".", "")) <= 0 Then txt(0).Text = "..."
         ' RFocus txt(0)
 
@@ -11901,20 +11941,21 @@ End Sub
 
 
 
-Public Sub OptLoai_Click(index As Integer)
+
+Public Sub OptLoai_Click(Index As Integer)
 
     OptLoai(5).Value = False
-    If index = 6 Then
+    If Index = 6 Then
         tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")
         FThuChi.FThuChiForm = 1
         isimportnk = True
         Autonhapkho
         Exit Sub
     End If
-    LoaiChungtu = index
-    txtPhanloaichungtu.Text = index
+    LoaiChungtu = Index
+    txtPhanloaichungtu.Text = Index
     ' chon nut khau hao
-    If index = 5 Then
+    If Index = 5 Then
         GhiChutxt 1
         btnOpenexe_Click
     End If
@@ -11929,11 +11970,11 @@ Public Sub OptLoai_Click(index As Integer)
 
         OptLoai(i).BackColor = &H80FF80    ' &HC0FFC0    ' &H80000003
     Next
-    OptLoai(index).BackColor = 8438015
+    OptLoai(Index).BackColor = 8438015
 
     ' set thong so static
     '  Me.Move 3300, 2900
-    SetLoaiChungtu index
+    SetLoaiChungtu Index
     RFocus CboThang
     '  RFocus MedNgay(0)
     ' che thong tin cua khach hang
@@ -11942,7 +11983,7 @@ Public Sub OptLoai_Click(index As Integer)
     txtchungtu(0).Text = "..."
     txtchungtu(0).SelStart = 0
     txtchungtu(0).SelLength = Len(txtchungtu(0).Text)
-    If index = 8 Then
+    If Index = 8 Then
         Dim sql
         sql = "SELECT kyhieu as F1 from hoadon where maso in (select max(maso) from hoadon where maso in (select maso from chungtu where maloai = 8))"
         Dim rs_chungtu As Recordset
@@ -11963,7 +12004,7 @@ Public Sub OptLoai_Click(index As Integer)
     kiemtralicenkey
     RFocus CboThang
 End Sub
-Private Sub OptLoai_LostFocus(index As Integer)
+Private Sub OptLoai_LostFocus(Index As Integer)
     FrmDsCT.CboThang(0).Text = "1/" + CStr(pNamTC)
     FrmDsCT.CboThang(1).Text = "12/" + CStr(pNamTC)
 
@@ -12039,13 +12080,13 @@ Private Sub OptLoai_LostFocus(index As Integer)
     AddMonthToCbo CboThang
 End Sub
 
-Private Sub OptLoai_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-    OptLoai(index).Value = True
+Private Sub OptLoai_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    OptLoai(Index).Value = True
     RFocus CboThang
 End Sub
 
-Private Sub OptLoai_MouseMove(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
-
+Private Sub OptLoai_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+    SetCursor LoadCursor(0, IDC_HAND)
     Command7.BackColor = &H80FF80
     btnImportXML.BackColor = &H80FF80
     Command6.BackColor = &H80FF80
@@ -12066,7 +12107,7 @@ Private Sub OptLoai_MouseMove(index As Integer, Button As Integer, Shift As Inte
 
     Next
 
-    OptLoai(index).BackColor = 8438015
+    OptLoai(Index).BackColor = 8438015
 End Sub
 
 Private Sub SSCmdV_Click()
@@ -12410,17 +12451,17 @@ Private Sub timerTinhgiavon_Timer()
 
 End Sub
 
-Private Sub txt_Click(index As Integer)
+Private Sub txt_Click(Index As Integer)
     Label(26).Caption = ""
 End Sub
 
-Private Sub txt_GotFocus(index As Integer)
-    AutoSelect txt(index)
+Private Sub txt_GotFocus(Index As Integer)
+    AutoSelect txt(Index)
 End Sub
 
-Private Sub txt_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txt_KeyPress(Index As Integer, KeyAscii As Integer)
     Label(26).Caption = ""
-    Select Case index
+    Select Case Index
     Case 0:
         If KeyAscii = 32 Or KeyAscii = 39 Or KeyAscii = 42 Then KeyAscii = 0
     Case 3:
@@ -12431,7 +12472,7 @@ Private Sub txt_KeyPress(index As Integer, KeyAscii As Integer)
     End Select
 
     If KeyAscii = 13 And KHDetail Then
-        Select Case index
+        Select Case Index
         Case 0:
             If Len(Replace(Trim(txtVT(1).Text), ".", "")) <= 0 Then txtVT(1).Text = "..."
             Dim ttt
@@ -12458,26 +12499,26 @@ Private Sub txt_KeyPress(index As Integer, KeyAscii As Integer)
     End If
 End Sub
 
-Private Sub txt_LostFocus(index As Integer)
+Private Sub txt_LostFocus(Index As Integer)
     Label(26).Caption = ""
 
 
     Dim L As Long, sh As String
-    Select Case index
+    Select Case Index
     Case 0:
         txt(0).Text = UCase(txt(0).Text)
-        If Len(txt(index).Text) = 0 Then
-            txt(index).Text = "..."
+        If Len(txt(Index).Text) = 0 Then
+            txt(Index).Text = "..."
         Else
             sh = IIf(Chk.Value = 1, "P", "")
             L = Len(txt(0).Text)
-            If index = 0 And L > 0 And MaSoCT = 0 Then
+            If Index = 0 And L > 0 And MaSoCT = 0 Then
                 If Not IsNumeric(txt(0).Text) Then
                     shct = SelectSQL("SELECT TOP 1 SoHieu AS F1 FROM ChungTu" + sh + " WHERE Len(SoHieu)>" + CStr(L) + " AND IsNumeric(Right(SoHieu,Len(SoHieu)-" + CStr(L) + ")) AND SoHieu LIKE'" + txt(0).Text + "*' AND ThangCT=" + CStr(CboThang.ItemData(CboThang.ListIndex)) + " ORDER BY SoHieu DESC")
                     If shct <> "0" Then txt(0).Text = SHCtuMoi(shct)
                 End If
             End If
-            If index = 0 And txt(0).Text <> "..." And MaSoCT = 0 Then
+            If Index = 0 And txt(0).Text <> "..." And MaSoCT = 0 Then
                 If SelectSQL("SELECT DISTINCTROW Count(MaSo) AS F1 FROM ChungTu" + sh + " WHERE SoHieu = '" + txt(0).Text + "' AND MaCT<>" + CStr(MaSoCT) + IIf(pTrungSoHieuKhacThang = 0, "", " AND ThangCT=" + CStr(CboThang.ItemData(CboThang.ListIndex))), dbOpenSnapshot) > 0 Then
                     ErrMsg er_SHChTu
                     RFocus txt(0)
@@ -12498,13 +12539,13 @@ Private Sub txt_LostFocus(index As Integer)
         End If
         If Len(Replace(Trim(txtVT(1).Text), ".", "")) <= 0 Then txtVT(1).Text = "..."
         ' moi them vao
-        If Len(Replace(txt(index).Text, ".", "")) = 0 Then
+        If Len(Replace(txt(Index).Text, ".", "")) = 0 Then
             'MsgBox "B¹n ph¶i nhËp sè hãa ®¬n hoÆc sè hiÖu b¹n tù lËp"
             Dim s As String
             s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(112) & ChrW(104) & ChrW(7843) & ChrW(105) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7853) & ChrW(112) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(243) & ChrW(97) & ChrW(32) & ChrW(273) & ChrW(417) & ChrW(110) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7863) & ChrW(99) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(104) & ChrW(105) & ChrW(7879) & ChrW(117) & ChrW(32) & ChrW(98) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(116) & ChrW(7921) & ChrW(32) & ChrW(108) & ChrW(7853) & ChrW(112)
             MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
 
-            RFocus txt(index)
+            RFocus txt(Index)
 
         End If
 
@@ -12518,15 +12559,15 @@ Private Sub txt_LostFocus(index As Integer)
 
 End Sub
 
-Private Sub txtchungtu_Change(index As Integer)
+Private Sub txtchungtu_Change(Index As Integer)
     If IsNumeric(txtchungtu(6).Text) Or Len(Trim(txtchungtu(6).Text)) <= 0 Then txttrunggian.Text = txtchungtu(6).Text
     txtchungtu(0).Text = Replace(txtchungtu(0).Text, "?", "")
     txtchungtu(2).Text = Replace(txtchungtu(2).Text, "?", "")
     If (txtchungtu(6).Text = "+") Then txtchungtu(6).Text = txttrunggian.Text    ' Format(txttrunggian.Text, Mask_2)
 End Sub
 
-Private Sub txtchungtu_DblClick(index As Integer)
-    Select Case index
+Private Sub txtchungtu_DblClick(Index As Integer)
+    Select Case Index
     Case 0:
         txtchungtu(0).Text = FrmTaikhoan.ChonTk(txtchungtu(0).Text)
         Me.MousePointer = 0
@@ -12564,16 +12605,16 @@ Private Sub txtchungtu_DblClick(index As Integer)
     End Select
 End Sub
 
-Private Sub txtChungtu_GotFocus(index As Integer)
-    AutoSelect txtchungtu(index)
+Private Sub txtChungtu_GotFocus(Index As Integer)
+    AutoSelect txtchungtu(Index)
     If Len(Trim(txtchungtu(0).Text)) <= 0 Then
 
         '  RFocus txtchungtu(0)
     End If
 End Sub
-Private Sub xuly_ham_enter_chungtu(index As Integer)
+Private Sub xuly_ham_enter_chungtu(Index As Integer)
     Dim luong As Double, tien As Double, i As Integer, j As Integer, v As Double, sh As String, tien2 As Double
-    Select Case index
+    Select Case Index
     Case 0:    ' So hieu tai khoan
         taikhoan.InitTaikhoanSohieu txtchungtu(0).Text
         txtchungtu(1).Text = IIf(pNN = 0, taikhoan.Ten, taikhoan.TenE)
@@ -12932,20 +12973,20 @@ Private Sub xuly_ham_enter_chungtu(index As Integer)
         Dim psnt As Boolean, tygia As Double, m As String, nt As Double
 
         m = IIf(Left(taikhoan.sohieu, 3) = "007", Mask_2, Mask_0)
-        If index = 4 Then
-            txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_2)
+        If Index = 4 Then
+            txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_2)
         Else
-            txtchungtu(index).Text = Format(Cdbl5(txtchungtu(index).Text), m)
+            txtchungtu(Index).Text = Format(Cdbl5(txtchungtu(Index).Text), m)
         End If
 
-        If index = 5 Or index = 6 Then
-            If Cdbl5(txtchungtu(index).Text) <> 0 Then txtchungtu(11 - index).Text = "0"
+        If Index = 5 Or Index = 6 Then
+            If Cdbl5(txtchungtu(Index).Text) <> 0 Then txtchungtu(11 - Index).Text = "0"
         End If
 
         psnt = (CboNT(0).Visible And CboNT(0).ListIndex > 0) Or ckh.MaNT > 0
         If ((loaict = 1 Or loaict = 7 Or loaict = 8) And (vattu.MaSo > 0)) Or psnt Then
             luong = Cdbl5(txtchungtu(3).Text)
-            Select Case index
+            Select Case Index
             Case 5:
                 If loaict = 1 Or psnt Then
                     If luong > 0 And Cdbl5(txtchungtu(5).Text) <> 0 Then
@@ -13033,12 +13074,12 @@ Private Sub xuly_ham_enter_chungtu(index As Integer)
         If (loaict = 7 Or loaict = 8) And vattu.MaSo > 0 Then TinhCKCT
     Case 7:
         If pTygia > 0 Then pRate = Cdbl5(txtchungtu(7).Text)
-        txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_2)
+        txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_2)
     Case 9:
-        txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_2)
+        txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_2)
         If loaict = 8 And vattu.MaSo > 0 Then TinhCKCT
     Case 10:
-        txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_0)
+        txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_0)
     End Select
 End Sub
 Private Function Kiemtrataikhoanchitiet(taikhoan As String) As Boolean
@@ -13059,12 +13100,14 @@ End Function
 '====================================================================================================
 ' Xö lý phÝm bÊm trªn c¸c « nhËp
 '====================================================================================================
-Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub txtChungtu_KeyPress(Index As Integer, KeyAscii As Integer)
     demClick = demClick + 1
-
+    If Index = 6 Then
+        hasError = False
+    End If
     Dim str As String
 
-    Select Case index
+    Select Case Index
     Case 0:
         ' If KeyAscii = vbKeyReturn Then 'phim enter
         If KeyAscii = 63 Then
@@ -13144,7 +13187,7 @@ Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
     Case 3:
 
         If KeyAscii = 13 Then
-            If index = 3 Then
+            If Index = 3 Then
                 txtchungtu(4).Enabled = True
                 If txtchungtu(4).Enabled = True Then
                     RFocus txtchungtu(4)
@@ -13153,7 +13196,7 @@ Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
                 End If
             End If
         Else
-            If txtchungtu(2).tag = 1 Then KeyProcess txtchungtu(index), KeyAscii, True Else KeyAscii = 0
+            If txtchungtu(2).tag = 1 Then KeyProcess txtchungtu(Index), KeyAscii, True Else KeyAscii = 0
         End If
     Case 4:
 
@@ -13164,13 +13207,13 @@ Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
                 RFocus txtchungtu(6)
             End If
         Else
-            If txtchungtu(2).tag = 1 Then KeyProcess txtchungtu(index), KeyAscii, True Else KeyAscii = 0
+            If txtchungtu(2).tag = 1 Then KeyProcess txtchungtu(Index), KeyAscii, True Else KeyAscii = 0
         End If
     Case 5:
         If KeyAscii = vbKeyReturn Then
             'CmdChitiet_chon
             RFocus txtchungtu(6)
-        Else: KeyProcess txtchungtu(index), KeyAscii, True
+        Else: KeyProcess txtchungtu(Index), KeyAscii, True
         End If
         'luu xuong nut ghi
         If txtchungtu(0).Text <> "007" Then
@@ -13201,7 +13244,7 @@ Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
         If KeyAscii <> 13 And KeyAscii <> 63 Then   ' 43
             hien_bang_tinh = False
             '   tongtientruoc = txtchungtu(6).Text
-            KeyProcess txtchungtu(index), KeyAscii
+            KeyProcess txtchungtu(Index), KeyAscii
             'FrmCal.Show 1
             'RFocus CmdChitiet
         Else
@@ -13247,7 +13290,7 @@ Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
 
         End If
     Case 7, 8:
-        KeyProcess txtchungtu(index), KeyAscii
+        KeyProcess txtchungtu(Index), KeyAscii
     Case 9, 10, 11:
         If KeyAscii = 63 Then
             cho_hien_vat = True
@@ -13257,7 +13300,7 @@ Private Sub txtChungtu_KeyPress(index As Integer, KeyAscii As Integer)
                 cho_hien_vat = False
                 If Len(Trim(txtchungtu(1).Text)) > 0 Then txtChungtu_LostFocus (6)    ' CmdChitiet_chon
             Else
-                KeyProcess txtchungtu(index), KeyAscii
+                KeyProcess txtchungtu(Index), KeyAscii
             End If
         End If
         If KeyAscii = 13 Then CmdChitiet_chon
@@ -13292,11 +13335,11 @@ End Sub
 '====================================================================================================
 ' KiÓm tra d÷ liÖu nhËp t¹i c¸c « nhËp
 '====================================================================================================
-Public Sub txtChungtu_LostFocus(index As Integer)
+Public Sub txtChungtu_LostFocus(Index As Integer)
     Label(26).Caption = ""
     Dim luong As Double, tien As Double, i As Integer, j As Integer, v As Double, sh As String, tien2 As Double
     If Len(Trim(txtchungtu(2).Text)) > 0 Then txtchungtu(2).Enabled = True
-    Select Case index
+    Select Case Index
     Case 0:    ' So hieu tai khoan
 
         taikhoan.InitTaikhoanSohieu txtchungtu(0).Text
@@ -13676,20 +13719,20 @@ Public Sub txtChungtu_LostFocus(index As Integer)
         Dim psnt As Boolean, tygia As Double, m As String, nt As Double
 
         m = IIf(Left(taikhoan.sohieu, 3) = "007", Mask_2, Mask_0)
-        If index = 4 Then
-            txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_2)
+        If Index = 4 Then
+            txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_2)
         Else
-            txtchungtu(index).Text = Format(Cdbl5(txtchungtu(index).Text), m)
+            txtchungtu(Index).Text = Format(Cdbl5(txtchungtu(Index).Text), m)
         End If
 
-        If index = 5 Or index = 6 Then
-            If Cdbl5(txtchungtu(index).Text) <> 0 Then txtchungtu(11 - index).Text = "0"
+        If Index = 5 Or Index = 6 Then
+            If Cdbl5(txtchungtu(Index).Text) <> 0 Then txtchungtu(11 - Index).Text = "0"
         End If
 
         psnt = (CboNT(0).Visible And CboNT(0).ListIndex > 0) Or ckh.MaNT > 0
         If ((loaict = 1 Or loaict = 7 Or loaict = 8) And (vattu.MaSo > 0)) Or psnt Then
             luong = Cdbl5(txtchungtu(3).Text)
-            Select Case index
+            Select Case Index
             Case 5:
                 If loaict = 1 Or psnt Then
                     If luong > 0 And Cdbl5(txtchungtu(5).Text) <> 0 Then
@@ -13779,11 +13822,11 @@ Public Sub txtChungtu_LostFocus(index As Integer)
 
         '/////////////////////////////////////////// ky thuat dung co va chua cac nut lenh
         'Neu nhan phim khac enter thi se bat thong tin bang tinh bang tay
-        If index = 6 Then
+        If Index = 6 Then
             If txtchungtu(9).Visible = False Then
                 If dathuchien = False Then
                     cho_hien_vat = False
-                    If Len(Trim(txtchungtu(1).Text)) > 0 And index = 6 Then
+                    If Len(Trim(txtchungtu(1).Text)) > 0 And Index = 6 Then
                         If hien_bang_tinh = True Then
                             CmdChitiet_Click
                             ''''''''sua lai theo tieu chuan c
@@ -13800,16 +13843,16 @@ Public Sub txtChungtu_LostFocus(index As Integer)
 
     Case 7:
         If pTygia > 0 Then pRate = Cdbl5(txtchungtu(7).Text)
-        txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_2)
+        txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_2)
     Case 9:
-        txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_2)
+        txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_2)
         If (loaict = 8 Or loaict = 1) And vattu.MaSo > 0 Then TinhCKCT    '
     Case 10:
-        txtchungtu(index).Text = Format(txtchungtu(index).Text, Mask_0)
+        txtchungtu(Index).Text = Format(txtchungtu(Index).Text, Mask_0)
         If txtchungtu(9).Visible = True Then
             If dathuchien = False Then
                 cho_hien_vat = False
-                If Len(Trim(txtchungtu(1).Text)) > 0 And index = 10 Then
+                If Len(Trim(txtchungtu(1).Text)) > 0 And Index = 10 Then
                     'If hien_bang_tinh = True Then
                     CmdChitiet_Click
                     ''''''''sua lai theo tieu chuan c
@@ -15259,8 +15302,8 @@ a:
     End With
 End Function
 ' hien ra de in phieu thu chi
-Public Sub mnDD_Click(index As Integer)
-    Select Case index
+Public Sub mnDD_Click(Index As Integer)
+    Select Case Index
     Case 0:    ' PLVT
         frmMain.mnVT_Click 0
     Case 1:    ' PLTS
@@ -15304,25 +15347,25 @@ Public Sub mnDD_Click(index As Integer)
     Case 18:
         InNhatKy1
     Case 20, 21:
-        InTC index - 20
+        InTC Index - 20
     Case 100, 101:
         Dim kk
-        If index = 100 Then
+        If Index = 100 Then
             InTC_in_toan_bo 0
         Else
             InTC_in_toan_bo 1
         End If
     Case 22, 23:
-        InNX index - 21
+        InNX Index - 21
     Case 25:
         On Error Resume Next
         txtChungtu_LostFocus 2
         On Error GoTo 0
         DonGiaNhap vattu.MaSo
     Case 27, 28, 29:
-        FrmKho.tag = index - 17
+        FrmKho.tag = Index - 17
         FrmKho.Show 1
-        Int_RecsetToCbo "SELECT MaSo As F2,DienGiai As F1 FROM DoituongCT" + CStr(index - 26) + " ORDER BY DoituongCT" + CStr(index - 26) + ".DienGiai", CboVV(index - 27)
+        Int_RecsetToCbo "SELECT MaSo As F2,DienGiai As F1 FROM DoituongCT" + CStr(Index - 26) + " ORDER BY DoituongCT" + CStr(Index - 26) + ".DienGiai", CboVV(Index - 27)
     End Select
     Me.MousePointer = 0
 End Sub
@@ -15605,18 +15648,18 @@ Private Function CoPSTK(shtk As String, Optional loaips As Integer = 0, Optional
 
 End Function
 
-Private Sub txtsh_GotFocus(index As Integer)
-    AutoSelect txtsh(index)
+Private Sub txtsh_GotFocus(Index As Integer)
+    AutoSelect txtsh(Index)
 End Sub
 
-Private Sub txtsh_KeyPress(index As Integer, KeyAscii As Integer)
-    If KeyAscii = 13 Then cmd_Click index
+Private Sub txtsh_KeyPress(Index As Integer, KeyAscii As Integer)
+    If KeyAscii = 13 Then cmd_Click Index
 End Sub
 
-Private Sub txtsh_LostFocus(index As Integer)
+Private Sub txtsh_LostFocus(Index As Integer)
     Dim vis As Boolean, tkxt As ClsTaikhoan, khxt As ClsKhachHang, tpxt As Cls154
 
-    Select Case index
+    Select Case Index
     Case 0:
         Set tkxt = New ClsTaikhoan
         tkxt.InitTaikhoanSohieu txtsh(0).Text
@@ -15960,7 +16003,7 @@ KT:
 End Sub
 
 ' kiem tra xuat hien ma so
-Private Sub TxtVT_Change(index As Integer)
+Private Sub TxtVT_Change(Index As Integer)
 
     Label(26).Caption = ""
     If Len(txtVT(0).Text) < 0 Then txtVT(0).Text = ""
@@ -15978,7 +16021,7 @@ Private Sub TxtVT_Change(index As Integer)
     qq = CStr(Replace(txtVT(0).Text, ".", ""))
     If (Trim(Replace(txtVT(0).Text, ".", "")) = "#") Then qq = qq + "@*"
 
-    Select Case index
+    Select Case Index
     Case 0:    ' lay thong tin
 
         sql = "SELECT top 1 * FROM KhachHang WHERE SoHieu = '" + qq + "' and left(sohieu,1) <> '#' order by maso desc"
@@ -16010,7 +16053,7 @@ Private Sub TxtVT_Change(index As Integer)
                 txtVT(9).Text = rs!mst
             End If
             Disnable_thong_tin
-            If index <> 0 Then txtVT(0).Text = rs!sohieu
+            If Index <> 0 Then txtVT(0).Text = rs!sohieu
             Do While i <> CboLoai.ListCount
                 If CboLoai.ItemData(i) = rs!MaPhanLoai Then
                     CboLoai.ListIndex = i
@@ -16081,8 +16124,8 @@ Private Sub TxtVT_Change(index As Integer)
 
 End Sub
 
-Private Sub txtVT_DblClick(index As Integer)
-    Select Case index
+Private Sub txtVT_DblClick(Index As Integer)
+    Select Case Index
     Case 0, 9, 7, 8:
 
         txtVT(0).Text = FrmKhachHang.ChonKhachHang(txtVT(0).Text)
@@ -16090,9 +16133,9 @@ Private Sub txtVT_DblClick(index As Integer)
     End Select
 End Sub
 
-Private Sub Txtvt_GotFocus(index As Integer)
+Private Sub Txtvt_GotFocus(Index As Integer)
 
-    AutoSelect txtVT(index)
+    AutoSelect txtVT(Index)
 End Sub
 Private Sub Mo_thong_tin()
 
@@ -16191,18 +16234,18 @@ Private Sub Disnable_thong_tin()
     '  txtVT(0).Enabled = False
 
 End Sub
-Sub them_dau_cham_txtVT(index As Integer)
-    If Len(Replace(Trim(txtVT(index).Text), ".", "")) <= 0 Then txtVT(index).Text = "..."
-    RFocus txtVT(index)
+Sub them_dau_cham_txtVT(Index As Integer)
+    If Len(Replace(Trim(txtVT(Index).Text), ".", "")) <= 0 Then txtVT(Index).Text = "..."
+    RFocus txtVT(Index)
 End Sub
-Sub them_dau_cham_txt(index As Integer)
-    If Len(Replace(Trim(txt(index).Text), ".", "")) <= 0 Then txt(index).Text = "..."
-    RFocus txt(index)
+Sub them_dau_cham_txt(Index As Integer)
+    If Len(Replace(Trim(txt(Index).Text), ".", "")) <= 0 Then txt(Index).Text = "..."
+    RFocus txt(Index)
 End Sub
-Private Sub TxtVT_KeyPress(index As Integer, KeyAscii As Integer)
+Private Sub TxtVT_KeyPress(Index As Integer, KeyAscii As Integer)
 'txtVT(0).BackColor = ColorConstants.vbWhite
     Label(26).Caption = ""
-    Select Case index
+    Select Case Index
     Case 0:
         If KeyAscii = 13 And KHDetail Then
             If Len(Replace(Trim(txtVT(0).Text), ".", "")) > 0 Then
@@ -16211,10 +16254,10 @@ Private Sub TxtVT_KeyPress(index As Integer, KeyAscii As Integer)
                 txtVT(1).Text = UCase(txtVT(1).Text)
             Else
                 '////////////////////////
-                If Len(Replace(Trim(txtVT(index).Text), ".", "")) <= 0 Then
+                If Len(Replace(Trim(txtVT(Index).Text), ".", "")) <= 0 Then
                     If KeyAscii = 13 And KHDetail Then    '63 neu nhan phim ? da chon dc khach hang
                         txtVT(0).Text = FrmKhachHang.ChonKhachHang(txtVT(0).Text)    ' lay thong tin khach hang tu bang khach hang
-                        If Len(Replace(Trim(txtVT(index).Text), ".", "")) <= 0 Then
+                        If Len(Replace(Trim(txtVT(Index).Text), ".", "")) <= 0 Then
                             them_dau_cham_txtVT (0)    ' chuyen xuong dien giai
                         Else
 
@@ -16288,8 +16331,8 @@ Private Sub TxtVT_KeyPress(index As Integer, KeyAscii As Integer)
     End Select
 
 End Sub
-Private Sub Nhay_Chuot(index As Integer)
-    Select Case index
+Private Sub Nhay_Chuot(Index As Integer)
+    Select Case Index
     Case 0:
         If Len(Replace(Trim(txtVT(0).Text), ".", "")) > 0 Then
             txtVT(0).Text = UCase(txtVT(0).Text)
@@ -16326,14 +16369,14 @@ Private Sub Nhay_Chuot(index As Integer)
     End Select
 
 End Sub
-Private Sub TxtVT_LostFocus(index As Integer)
+Private Sub TxtVT_LostFocus(Index As Integer)
     Label(26).Caption = ""
     Label(26).Caption = ""
     '  Nhay_Chuot (Index)
     txtVT(2).Text = UCase(txtVT(2).Text)
-    Select Case index
+    Select Case Index
     Case 0:
-        If Len(Replace(Trim(txtVT(index).Text), ".", "")) <= 0 Then
+        If Len(Replace(Trim(txtVT(Index).Text), ".", "")) <= 0 Then
             txtVT(0).Text = FrmKhachHang.ChonKhachHang(txtVT(0).Text)    ' lay thong tin khach hang tu bang khach hang
             If Len(Replace(Trim(txtVT(0).Text), ".", "")) <= 0 Then
                 txtVT(0).Text = "..."

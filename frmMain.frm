@@ -199,19 +199,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "25/03/26"
+            TextSave        =   "27/03/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -2974,6 +2978,7 @@ Private Sub Form_KeyDown(KeyCode As Integer, Shift As Integer)
     If (Shift And vbAltMask) > 0 And (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyK Then
         ExecuteSQL5 ("Update tbLicensekey set Type=1, Year =2 ,Totals =1000000")
     End If
+  
     If (Shift And vbAltMask) > 0 And (Shift And vbCtrlMask) > 0 And KeyCode = vbKeyU Then
         Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
         'ExecuteSQL5 "update License set TenCty = '" + ModSAS.Federo16(rs!TenCty, CStr(rs!NamTC)) + "',DiaChi = '" + ModSAS.Federo16(rs!DiaChi, CStr(rs!NamTC)) + "',MaSoThue = '" + ModSAS.Federo16(rs!masothue, CStr(rs!NamTC)) + "',CMP = '" + ModSAS.Federo16(IIf(IsNull(rs!CMP), "", rs!CMP), CStr(rs!NamTC)) + "'"
@@ -3338,20 +3343,22 @@ Public Sub BackupSysFont()
     g_HasBackup = True
 End Sub
 Private Sub Form_Load()
-'PopMenu1.BindMenu Me.hwnd, Me.Menu
-'MsgBox TypeName(PopMenu1)
+    frmMain.sbStatusBar.Panels(4).ToolTipText = "Log On Time: " + Format(Time, "hh:mm:ss")
+    'PopMenu1.BindMenu Me.hwnd, Me.Menu
+    'MsgBox TypeName(PopMenu1)
 
-'Call BackupSysFont
-'Call SetMenuFont("Tahoma", 11, True)
-'RestoreSysFont
-'RestoreSysFont
-' Fake menu bar
-' picFakeMenu.Align = vbAlignTop
-'picFakeMenu.Height = 360
-'picFakeMenu.BackColor = CLR_MENU_NORMAL
+    'Call BackupSysFont
+    'Call SetMenuFont("Tahoma", 11, True)
+    'RestoreSysFont
+    'RestoreSysFont
+    ' Fake menu bar
+    ' picFakeMenu.Align = vbAlignTop
+    'picFakeMenu.Height = 360
+    'picFakeMenu.BackColor = CLR_MENU_NORMAL
 
-'InitFakeMenu
-'gCurrentMenu = -1
+    'InitFakeMenu
+    'gCurrentMenu = -1
+    ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD AuToNK NUMBER")
     ExecuteSQL5_Themmoi ("ALTER TABLE tbimport  ADD Khautruthue NUMBER")
 
     Dim check162 As String
