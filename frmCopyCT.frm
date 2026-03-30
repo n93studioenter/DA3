@@ -184,7 +184,7 @@ Attribute VB_Exposed = False
 Option Explicit
 Dim rs_ktra164 As Recordset
 Public thangbd As Integer
-Public MaCT As Integer
+Public MaCT As Long
 Public Tuthang As Integer
 Public denthang As Integer
 Public tt As Integer
@@ -350,7 +350,7 @@ Public Function ThayThang(ByVal sChuoi As String, ByVal iThangMoi As Integer) As
     ThayThang = sChuoi
     
 End Function
-Public Function ReplaceMonthNumber(ByVal inputString As String, ByVal newMonth As Integer) As String
+Public Function ReplaceMonthNumber(ByVal InputString As String, ByVal newMonth As Integer) As String
     Dim result As String
     Dim i As Integer
     Dim tempNumber As String
@@ -358,7 +358,7 @@ Public Function ReplaceMonthNumber(ByVal inputString As String, ByVal newMonth A
     Dim j As Integer
     Dim found As Boolean
 
-    result = inputString
+    result = InputString
     found = False
 
     i = 1
@@ -505,7 +505,7 @@ Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Sin
     ReleaseCapture
     SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
 End Sub
-Private Sub lblTitle_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     picFakeTitle_MouseDown Button, Shift, X, Y
 End Sub
 Public Sub AnControl(frm As Form)

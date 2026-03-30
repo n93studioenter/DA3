@@ -35,6 +35,16 @@ Begin VB.Form FrmChungtu
    Tag             =   "0"
    WhatsThisButton =   -1  'True
    WhatsThisHelp   =   -1  'True
+   Begin VB.CommandButton Command10 
+      Caption         =   "KiÓm tra ng©n hµng"
+      Height          =   375
+      Index           =   1
+      Left            =   11880
+      TabIndex        =   196
+      Top             =   8350
+      Visible         =   0   'False
+      Width           =   1575
+   End
    Begin VB.Timer tmAfterClick 
       Enabled         =   0   'False
       Interval        =   100
@@ -134,6 +144,7 @@ Begin VB.Form FrmChungtu
    Begin VB.CommandButton Command10 
       Caption         =   "KiÓm tra hãa ®¬n"
       Height          =   375
+      Index           =   0
       Left            =   11880
       TabIndex        =   190
       Top             =   8350
@@ -4990,7 +5001,7 @@ Public Sub btnReset_Click()
     FThuChi.FThuChiForm = 0
     hasError = False
 End Sub
-Private Sub Command10_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Command10_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     SetCursor LoadCursor(0, IDC_HAND)
 End Sub
 Private Sub Command_MouseMove(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -4998,32 +5009,34 @@ Private Sub Command_MouseMove(Index As Integer, Button As Integer, Shift As Inte
 End Sub
 
 
-Private Sub Command10_Click()
-    GhiChutxt 2
-    Dim exePath As String
-    exePath = App.path & "\\Tools\\Debug\\SaovietTax.exe"
+Private Sub Command10_Click(Index As Integer)
+    If Index = 0 Then
+        GhiChutxt 2
+        Dim exePath As String
+        exePath = App.path & "\\Tools\\Debug\\SaovietTax.exe"
 
-    ' Shell d? m? ?ng d?ng
-    Shell exePath, vbNormalFocus
+        ' Shell d? m? ?ng d?ng
+        Shell exePath, vbNormalFocus
 
-    Exit Sub
-    DoEvents  ' Ð? d?m b?o ?ng d?ng có th?i gian kh?i d?ng
+        Exit Sub
+        DoEvents  ' Ð? d?m b?o ?ng d?ng có th?i gian kh?i d?ng
 
-    ' L?y handle c?a c?a s? ?ng d?ng
-    hWndApp = 0  ' Kh?i t?o bi?n hWndApp
+        ' L?y handle c?a c?a s? ?ng d?ng
+        hWndApp = 0  ' Kh?i t?o bi?n hWndApp
 
-    While hWndApp = 0
-        hWndApp = FindWindow(vbNullString, "frmMain")  ' Thay d?i tiêu d? c?a ?ng d?ng
-        DoEvents  ' Cho phép x? lý s? ki?n khác
-    Wend
+        While hWndApp = 0
+            hWndApp = FindWindow(vbNullString, "frmMain")  ' Thay d?i tiêu d? c?a ?ng d?ng
+            DoEvents  ' Cho phép x? lý s? ki?n khác
+        Wend
 
-    ' Ki?m tra handle có h?p l? hay không
-    If hWndApp = 0 Then
-        MsgBox "Không tìm th?y ?ng d?ng."
-    Else
-        ' Ð?i m?t chút tru?c khi ki?m tra l?i
-        Sleep 1000
-        CheckWindow
+        ' Ki?m tra handle có h?p l? hay không
+        If hWndApp = 0 Then
+            MsgBox "Không tìm th?y ?ng d?ng."
+        Else
+            ' Ð?i m?t chút tru?c khi ki?m tra l?i
+            Sleep 1000
+            CheckWindow
+        End If
     End If
 End Sub
 Private Sub Dohoadon()
@@ -6211,6 +6224,10 @@ Private Sub Xuly15Child()
                 txtchungtu(5).Text = rs_import!TVat
             End If
         End If
+
+        If rs_import!Khautruthue = 1 Then
+            bakTongtien = rs_import!TongTien
+        End If
         txtChungtu_LostFocus (5)
         txtChungtu_KeyPress 6, 13
         'Xu ly lan 2 neu co
@@ -6520,6 +6537,8 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
         Else
             bakTongtien = rs_import!TongTien
         End If
+    Else
+        bakTongtien = rs_import!TongTien
     End If
     txtChungtu_LostFocus (5)
     RFocus txtchungtu(6)
@@ -9808,9 +9827,9 @@ Public Sub Command_Click(Index As Integer)
         If Not KiemTraChungtu Then
             If FThuChi.FThuChiForm = 0 Then
                 'MsgBox "Cã tµi kho¶n chi tiÕt"
-
-                s = ChrW(67) & ChrW(243) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116)
-                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+                Dim ss As String
+                ss = ChrW(67) & ChrW(243) & ChrW(32) & ChrW(116) & ChrW(224) & ChrW(105) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(111) & ChrW(7843) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(105) & ChrW(32) & ChrW(116) & ChrW(105) & ChrW(7871) & ChrW(116)
+                MessageBoxW Me.hwnd, StrPtr(ss), StrPtr("Thông báo"), vbOKOnly
 
             End If
             GoTo XongCT
@@ -11667,7 +11686,7 @@ Private Sub Grid2_KeyDown(KeyCode As Integer, Shift As Integer)
     End Select
 End Sub
 Private Sub CheckTkThue(MaSo As Long)
-    Dim checkexst As Integer
+    Dim checkexst As Long
     checkexst = SelectSQL("SELECT MaSo AS F1 FROM ChungTu WHERE MaCT = " & MaSo & " AND (MaTKNo = 5108 OR MaTKCo = 5108 OR MaTKNo=14038  OR MaTKCo = 14038)", 0)
     If checkexst = 0 Then
         Command14.Visible = True
@@ -11943,7 +11962,13 @@ End Sub
 
 
 Public Sub OptLoai_Click(Index As Integer)
-
+    If Index = 4 Then
+        Command10(1).Visible = True
+        Command10(0).Visible = False
+    Else
+        Command10(1).Visible = False
+        Command10(0).Visible = True
+    End If
     OptLoai(5).Value = False
     If Index = 6 Then
         tk154 = SelectSQL("SELECT tk154 AS F1 FROM tbRegister")

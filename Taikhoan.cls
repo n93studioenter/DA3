@@ -653,15 +653,15 @@ End Sub
 '======================================================================================
 Public Sub SoDuTK(thang As Integer, ckn As Double, ckc As Double, cknt As Double, Optional vnd As Integer = 0)
     Dim th As String, rs_taikhoan As Recordset
-    
+
     ckn = 0
     ckc = 0
     cknt = 0
-    
+
     th = CThangDB(thang)
-        ' Tinh tong so du dau nam cua cac tai khoan chi tiet
+    ' Tinh tong so du dau nam cua cac tai khoan chi tiet
     Set rs_taikhoan = DBKetoan.OpenRecordset("SELECT DuNo_" + th + " As Dn, DuCo_" + th + " As Dc, DuNT_" + th + " As Dnt FROM HethongTk " _
-        & "WHERE " + IIf(tkcon > 0 Or (MaNT <= 0 And vnd = 0), "(SoHieu LIKE '" + sohieu + "*' AND TKCon = 0)", "MaSo = " + CStr(MaSo)), dbOpenSnapshot)
+                                           & "WHERE " + IIf(tkcon > 0 Or (MaNT <= 0 And vnd = 0), "(SoHieu LIKE '" + sohieu + "*' AND TKCon = 0)", "MaSo = " + CStr(MaSo)), dbOpenSnapshot)
     Do While Not rs_taikhoan.EOF
         ckn = ckn + rs_taikhoan!dn
         ckc = ckc + rs_taikhoan!DC

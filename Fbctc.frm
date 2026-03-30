@@ -4734,7 +4734,7 @@ Private Sub InLCTT2(tdau As Integer, tcuoi As Integer)
     '----------
     '33
     ExecuteSQL5 "UPDATE LCTT SET KyNay =   " & ct33 & " WHERE MaSo=33 AND TKCo='341'"
-    ExecuteSQL5 "UPDATE LCTT SET KyNay =   " & ct34 & " WHERE MaSo=34 AND TKNo='341'"
+    ExecuteSQL5 "UPDATE LCTT SET KyNay =   " & -ct34 & " WHERE MaSo=34 AND TKNo='341'"
     GauGe.Value = 2
     KT = SoPSTK("111", pThangDauKy, ThangTruoc(tdau), -1) + SoPSTK("112", pThangDauKy, ThangTruoc(tdau), -1) - SoPSTK("113", pThangDauKy, ThangTruoc(tdau), 1) - PSDu("111", "3364", pThangDauKy, ThangTruoc(tdau)) _
        - SelectSQL("SELECT Sum(KyTruoc) AS F1 FROM LCTT WHERE MaSo=1 OR MaSo=22 OR MaSo=24 OR MaSo=26 OR MaSo=27 OR MaSo=31 OR MaSo=33")
