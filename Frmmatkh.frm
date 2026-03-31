@@ -768,6 +768,87 @@ Private Sub Command_Click(Index As Integer)
     'Lay dia chi mac
     Select Case FrmMatkhau.tag
     Case 0:
+        If KiemTraMatKhau(txtPsw.Text) Then
+            HienThongBao VString(CboUser.Text), 3
+            ok = True
+            ExecuteSQL5 "UPDATE Users SET WS='" + GetComputerName1 + "' WHERE MaSo=" + CStr(UserID), False
+            'Luu dia chi mac
+            Dim mac As String
+            mac = GetMacAddress()
+            Dim sql As String
+ 
+            sql = "update tbRegister SET Name= ('" & mac & "');"
+            DBKetoan.Execute sql
+            Unload Me
+        Else
+
+            'MsgBox "Sai mËt khÈu !", vbExclamation, App.ProductName
+            Dim s As String
+            s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+            Counter = Counter + 1
+            If Counter > 3 Then
+                Unload Me
+            Else
+                RFocus txtPsw
+            End If
+        End If
+    Case 1:
+        Select Case pass
+        Case 0:
+            If KiemTraMatKhau(txtPsw.Text) Then
+                pass = 1
+                Label(0).Caption = "MËt khÈu míi"
+                txtPsw.Text = ""
+                RFocus txtPsw
+            Else
+                'MsgBox "Sai mËt khÈu !", vbExclamation, App.ProductName
+                s = ChrW(83) & ChrW(97) & ChrW(105) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+                Unload FrmMatkhau
+            End If
+        Case 1:
+            psw = txtPsw.Text
+            pass = 2
+            txtPsw.Text = ""
+            RFocus txtPsw
+        Case 2:
+            If txtPsw.Text = psw Then
+                ExecuteSQL5 "UPDATE Users SET Psw = " + CStr(Int_StrToCode(psw) + pNamTC) + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+                Unload FrmMatkhau
+            Else
+                MsgBox "B¹n ch­a nhí ®óng mËt khÈu !", vbExclamation, App.ProductName
+                RFocus txtPsw
+            End If
+        End Select
+    End Select
+
+    'On Error Resume Next
+    'Unload frmToast          ' Gi?i phóng instance cu n?u có
+    'On Error GoTo 0
+    'Dim Duration As Double
+    'Duration = 200
+    'Load frmToast
+
+
+    ' C?u hình Duration n?u du?c ch? d?nh
+
+
+    'frmToast.Show vbModeless   ' Hi?n th? không block form chính
+    'frmToast.Refresh
+    'frmToast.ShowToast "Thành công!", "Ðã d?ng b? hóa don d?u vào thành công.", 6000
+
+End Sub
+Private Sub Command_Click2(Index As Integer)
+    If Index = 1 Then
+        Unload Me
+        Exit Sub
+    End If
+
+    'Lay dia chi mac
+    Select Case FrmMatkhau.tag
+    Case 0:
         'Kiem tra tblogin da co1 data chua
         Dim mac As String
         mac = GetMacAddress()
@@ -1036,6 +1117,7 @@ Private Sub AddDataLCTT()
     ExecuteSQL5 "INSERT INTO LCTT (Ma,MaSo,Ten,TKNo,TKCo,DauNam,KyTruoc,KyNay,TongHop,MaSoCha,Dau,TenE) VALUES (87,2,'2. TiÒn chi tr¶ cho ng­êi cung cÊp hµng ho¸ vµ dÞch vô','641','11',0,0,0,0,20,-1,'new')"
     ExecuteSQL5 "Update LCTT set Ten='TiÒn vµ t­¬ng ®­¬ng tiÒn cuèi kú (70 = 50+60+61)' where MaSo=70 "
     ExecuteSQL5 "Update LCTT set Ten='L­u chuyÓn tiÒn thuÇn trong kú (50 = 20+30+40)' where MaSo=50 "
+    ExecuteSQL5 "Update LCTT set  TKNo=413, TKCo=11,Dau=-1 where MaSo=61 "
 End Sub
 Private Sub Form_Activate()
     AddDataLCTT
@@ -1118,22 +1200,71 @@ End Sub
 '====================================================================================================
 ' Thu tuc kiem tra mat khau
 '====================================================================================================
+Private Sub UpdateMacuser(tong As Integer, mac As String)
+    Dim rsCount As DAO.Recordset
+
+    Set rsCount = DBKetoan.OpenRecordset( _
+                  "SELECT MacAddress FROM Users ", dbOpenSnapshot)
+    If IsNull(rsCount!MacAddress) And tong = 1 Then
+        ExecuteSQL5 "UPDATE Users SET MacAddress='" & Replace(mac, "'", "''") & "'"
+    End If
+
+End Sub
 Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
 
+'Dau tien lay ra dia chi mac cua may
+    Dim rsCount As DAO.Recordset
+
+    Set rsCount = DBKetoan.OpenRecordset( _
+                  "SELECT COUNT(*) AS Tong FROM Users ", dbOpenSnapshot)
+    Dim chinhchu As Boolean
+    Dim mac As String
+    mac = GetMacAddress()
+    'Kiem tra danh sach user co dia chi nay khong
+    Dim rs_checkus As Recordset
+
+    Set rs_checkus = DBKetoan.OpenRecordset( _
+                     "SELECT * FROM Users WHERE MacAddress='" & Replace(mac, "'", "''") & "'", _
+                     dbOpenSnapshot, dbForwardOnly)
+    If Not rs_checkus.EOF Then
+        chinhchu = True
+    Else
+        If rsCount!tong > 1 Then
+            chinhchu = False
+        Else
+            chinhchu = True
+        End If
+    End If
     Dim newpsw As Integer
     newpsw = 64 + Day(Date) + pNamTC
     If pstr_psw <> "" Then
+        'Kiem tra neu nhap dung mk dac biet thi cho qua luon
         If pstr_psw = newpsw Then
             scecretpws = Int_StrToCode(CStr(newpsw))
-            ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+            Dim secretnumber As Double
+            secretnumber = CStr(CboUser.ItemData(CboUser.ListIndex))
+
+            'Cap nhat dia chi mac neu la user dau
+            UpdateMacuser rsCount!tong, mac
+            'Kiem tra neu chinh chu
+            If chinhchu = True Then
+                'ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+                ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MacAddress = '" & Replace(mac, "'", "''") & "'"
+            Else
+                'Neu khong chinh chu thi phai tao 1 user
+                ExecuteSQL5 "INSERT INTO Users (TenNSD,Psw,UserRight,VT,TS,HDV,WS,MacAddress) VALUES ('Administrator2','" & scecretpws & "',0,1111111111,1,1,'...','" & mac & "')"
+            End If
         End If
     End If
 
     Dim rs_mk As Recordset
 
+    ' Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MacAddress = '" & Replace(mac, "'", "''") & "'", dbOpenSnapshot, dbForwardOnly)
     Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex)), dbOpenSnapshot, dbForwardOnly)
     If (Int_StrToCode(pstr_psw) = rs_mk!psw - pNamTC Or Int_StrToCode(pstr_psw) = rs_mk!psw) Then
         KiemTraMatKhau = True
+        'Cap nhat dia chi mac neu la user dau
+        UpdateMacuser rsCount!tong, mac
         If Int_StrToCode(pstr_psw) = rs_mk!psw Then
             ExecuteSQL5 "UPDATE Users SET Psw =  '" & pNamTC & "' WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
         End If
@@ -1142,29 +1273,8 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
         KiemTraMatKhau = False
         On Error GoTo SaiMK
         KiemTraMatKhau = (CInt5(pstr_psw) = Day(Date) + month(Date) + pNamTC)
-        'Thu voi tbloign
-        Dim mac As String
-        mac = GetMacAddress()
-        Dim rs As DAO.Recordset
-        Dim sql As String
-
-        sql = "SELECT * FROM tbLogin WHERE Username='" & Replace(mac, "'", "''") & _
-              "' AND (Password='" & Replace(Trim(txtPsw.Text), "'", "''") & _
-              "' OR Password IS NULL OR Password='')"
-
-        Set rs = DBKetoan.OpenRecordset(sql, dbOpenSnapshot)
-
-        If Not rs.EOF Then
-            KiemTraMatKhau = True
-        Else
-            KiemTraMatKhau = False
-        End If
-
-        rs.Close
-        Set rs = Nothing
         On Error GoTo 0
     End If
-
     User_Right = rs_mk!UserRight
     UserID = rs_mk!MaSo
     UserName = rs_mk!TenNSD
@@ -1177,7 +1287,7 @@ SaiMK:
 End Function
 Private Function KiemTraMatKhau2(pstr_psw As String) As Boolean
     Dim rs_mk As Recordset
-    
+
     Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex)), dbOpenSnapshot, dbForwardOnly)
     If (Int_StrToCode(pstr_psw) = rs_mk!psw) Then
         KiemTraMatKhau2 = True
@@ -1187,7 +1297,7 @@ Private Function KiemTraMatKhau2(pstr_psw As String) As Boolean
         KiemTraMatKhau2 = (CInt5(pstr_psw) = Day(Date) + month(Date) + pNamTC)
         On Error GoTo 0
     End If
-  
+
     User_Right = rs_mk!UserRight
     UserID = rs_mk!MaSo
     UserName = rs_mk!TenNSD
@@ -1261,7 +1371,7 @@ Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y
 End Sub
 
 Private Sub Form_Load()
-    
+    ExecuteSQL5_Themmoi ("ALTER TABLE Users  ADD MacAddress text")
     Counter = -1
     Int_RecsetToCbo "SELECT MaSo As F2, TenNSD As F1 FROM Users ORDER BY TenNSD", CboUser
     SetFont Me

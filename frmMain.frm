@@ -214,7 +214,7 @@ Begin VB.Form frmMain
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "27/03/26"
+            TextSave        =   "31/03/26"
             Key             =   ""
             Object.Tag             =   ""
          EndProperty
@@ -3360,7 +3360,9 @@ Private Sub Form_Load()
     'gCurrentMenu = -1
     ExecuteSQL5_Themmoi ("ALTER TABLE license  ADD AuToNK NUMBER")
     ExecuteSQL5_Themmoi ("ALTER TABLE tbimport  ADD Khautruthue NUMBER")
-
+    ExecuteSQL5_Themmoi ("ALTER TABLE ChungTu  ADD SoPSGoc NUMBER")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbimportdetail  ADD SoPSGoc NUMBER")
+    ExecuteSQL5_Themmoi ("ALTER TABLE tbimportdetail  ADD VAT NUMBER")
     Dim check162 As String
     check162 = SelectSQL("SELECT SoHieu AS F1 FROM HeThongTK where SoHieu = '621' ")
     If check162 = 0 Then

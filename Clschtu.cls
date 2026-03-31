@@ -655,13 +655,13 @@ End Sub
 
 Public Function GhiChungtuTH(Optional p As Integer = 0, Optional r As Integer = 0) As Integer
     Dim sql As String, sh As String
-    
+
     If User_ID = 0 Then User_ID = UserID
-    
+
     If tkno.tk_id <> TKVT_ID And tkno.tk_id <> TKGT_ID And TkCo.tk_id <> TKVT_ID And TkCo.tk_id <> TKDT_ID And tkno.tk_id <> TKCNKH_ID And TkCo.tk_id <> TKCNKH_ID And tkno.tk_id <> TKCNPT_ID And TkCo.tk_id <> TKCNPT_ID Then MaVattu = 0
     If tkno.tk_id <> TKCNKH_ID And tkno.tk_id <> TKCNPT_ID Then makh = 0
     If TkCo.tk_id <> TKCNKH_ID And TkCo.tk_id <> TKCNPT_ID Then MaKHC = 0
-    
+
     If MaVattu > 0 And sops = 0 Then
         If maloai = 1 And SoPS2No = 0 Then
             SoPS2No = SoPS2Co
@@ -682,34 +682,41 @@ Public Function GhiChungtuTH(Optional p As Integer = 0, Optional r As Integer = 
     End If
     If Not IsDate(handung) Then handung = Format(NgayCT, Mask_DB)
     sh = IIf(p > 0 Or maloai = 7, "P", "")
-        'MAUSO,LOAIHD,MauSo + "," + LoaiHD + ","
-'    sql = "INSERT INTO Chungtu" + sh + " (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, " + IIf(pSongNgu, "DienGiaiE,", "") _
-'            & "MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3,MaKH,CTGS,MaKHC,MaTP,DVT,User_ID,MaNV,HanTT,SH1,T1,TLCK,CK" + IIf(pTygia > 0, ",TyGia", "") + IIf(pGiaUSD > 0, ",PSUSD", "") + IIf(pProcessMode = 1 And r = 0, ",XuLy", "") + ",MAUSOHD,LOAIHoaDon,SoLo,HanDung) VALUES (" _
-'            + CStr(MaCT) + "," + CStr(maloai) + ",'" + sohieu + "'," + CStr(ThangCT) + ",#" + Format(NgayCT, Mask_DB) _
-'            + "#,#" + Format(NgayGS, Mask_DB) + "#," + CStr(MaNguon) + "," + CStr(MaKho) + ",'" + diengiai + "'," + IIf(pSongNgu, "'" + DienGiaiE + "',", "") _
-'            + CStr(tkno.MaSo) + "," + CStr(TkCo.MaSo) + "," + DoiDau(sops) + "," + DoiDau(SoPS2No) + "," + DoiDau(SoPS2Co) + "," _
-'            + CStr(tkno.MaTC) + "," + CStr(TkCo.MaTC) + "," + CStr(MaVattu) + ",'" + GhiChu + "'," + CStr(CT_ID) + "," + CStr(MaDT) + "," + CStr(MaDT1) + "," + CStr(MaDT2) + "," + CStr(MaDT3) + "," _
-'            + CStr(makh) + "," + CStr(CTGS) + "," + CStr(MaKHC) + "," + CStr(MaTP) + "," + CStr(dvt) + "," + CStr(User_ID) + "," + CStr(MaNV) + "," + CStr(HanTT) + ",'" + sh1 + "'," + CStr(T1) + "," + DoiDau(TLCK) + "," + DoiDau(CK) + IIf(pTygia > 0, "," + DoiDau(tygia), "") + IIf(pGiaUSD > 0, "," + DoiDau(PSUSD), "") + IIf(pProcessMode = 1 And r = 0, ",1", "") + ",'" + MauSo + "','" + LoaiHD + "','" + solo + "','" + handung + "')"
-            sql = "INSERT INTO Chungtu" + sh + " (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, " + IIf(pSongNgu, "DienGiaiE,", "") _
-            & "MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3,MaKH,CTGS,MaKHC,MaTP,DVT,User_ID,MaNV,HanTT,SH1,T1,TLCK,CK" + IIf(pTygia > 0, ",TyGia", "") + IIf(pGiaUSD > 0, ",PSUSD", "") + IIf(pProcessMode = 1 And r = 0, ",XuLy", "") + ",MAUSOHD,LOAIHoaDon,SoLo,HanDung,phantramchietkhau,sotienchietkhau) VALUES (" _
-            + CStr(MaCT) + "," + CStr(maloai) + ",'" + sohieu + "'," + CStr(ThangCT) + ",#" + Format(NgayCT, Mask_DB) _
-            + "#,#" + Format(NgayGS, Mask_DB) + "#," + CStr(MaNguon) + "," + CStr(MaKho) + ",'" + diengiai + "'," + IIf(pSongNgu, "'" + DienGiaiE + "',", "") _
-            + CStr(tkno.MaSo) + "," + CStr(TkCo.MaSo) + "," + DoiDau(sops) + "," + DoiDau(SoPS2No) + "," + DoiDau(SoPS2Co) + "," _
-            + CStr(tkno.MaTC) + "," + CStr(TkCo.MaTC) + "," + CStr(MaVattu) + ",'" + GhiChu + "'," + CStr(CT_ID) + "," + CStr(MaDT) + "," + CStr(MaDT1) + "," + CStr(MaDT2) + "," + CStr(MaDT3) + "," _
-            + CStr(makh) + "," + CStr(CTGS) + "," + CStr(MaKHC) + "," + CStr(MaTP) + "," + CStr(dvt) + "," + CStr(User_ID) + "," + CStr(MaNV) + "," + CStr(HanTT) + ",'" + sh1 + "'," + CStr(T1) + "," + DoiDau(TLCK) + "," + DoiDau(CK) + IIf(pTygia > 0, "," + DoiDau(tygia), "") + IIf(pGiaUSD > 0, "," + DoiDau(PSUSD), "") + IIf(pProcessMode = 1 And r = 0, ",1", "") + ",'" + MauSo + "','" + LoaiHD + "','" + solo + "','" + handung + "','" + phantramchietkhau + "','" + sotienchietkhau + "')"
+    'MAUSO,LOAIHD,MauSo + "," + LoaiHD + ","
+    '    sql = "INSERT INTO Chungtu" + sh + " (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, " + IIf(pSongNgu, "DienGiaiE,", "") _
+         '            & "MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3,MaKH,CTGS,MaKHC,MaTP,DVT,User_ID,MaNV,HanTT,SH1,T1,TLCK,CK" + IIf(pTygia > 0, ",TyGia", "") + IIf(pGiaUSD > 0, ",PSUSD", "") + IIf(pProcessMode = 1 And r = 0, ",XuLy", "") + ",MAUSOHD,LOAIHoaDon,SoLo,HanDung) VALUES (" _
+         '            + CStr(MaCT) + "," + CStr(maloai) + ",'" + sohieu + "'," + CStr(ThangCT) + ",#" + Format(NgayCT, Mask_DB) _
+         '            + "#,#" + Format(NgayGS, Mask_DB) + "#," + CStr(MaNguon) + "," + CStr(MaKho) + ",'" + diengiai + "'," + IIf(pSongNgu, "'" + DienGiaiE + "',", "") _
+         '            + CStr(tkno.MaSo) + "," + CStr(TkCo.MaSo) + "," + DoiDau(sops) + "," + DoiDau(SoPS2No) + "," + DoiDau(SoPS2Co) + "," _
+         '            + CStr(tkno.MaTC) + "," + CStr(TkCo.MaTC) + "," + CStr(MaVattu) + ",'" + GhiChu + "'," + CStr(CT_ID) + "," + CStr(MaDT) + "," + CStr(MaDT1) + "," + CStr(MaDT2) + "," + CStr(MaDT3) + "," _
+         '            + CStr(makh) + "," + CStr(CTGS) + "," + CStr(MaKHC) + "," + CStr(MaTP) + "," + CStr(dvt) + "," + CStr(User_ID) + "," + CStr(MaNV) + "," + CStr(HanTT) + ",'" + sh1 + "'," + CStr(T1) + "," + DoiDau(TLCK) + "," + DoiDau(CK) + IIf(pTygia > 0, "," + DoiDau(tygia), "") + IIf(pGiaUSD > 0, "," + DoiDau(PSUSD), "") + IIf(pProcessMode = 1 And r = 0, ",1", "") + ",'" + MauSo + "','" + LoaiHD + "','" + solo + "','" + handung + "')"
+    Dim Ngayimport As Date
+    If FThuChi.FThuChiForm <> 0 Then
+        Ngayimport = Now
+    Else
+        Ngayimport = ""
+    End If
+
+    sql = "INSERT INTO Chungtu" + sh + " (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, " + IIf(pSongNgu, "DienGiaiE,", "") _
+        & "MaTkNo, MaTkCo, SoPS, SoPS2No, SoPS2Co, MaTkTCNo, MaTkTCCo, MaVattu, GhiChu, CT_ID, MaDT, MaDT1, MaDT2, MaDT3,MaKH,CTGS,MaKHC,MaTP,DVT,User_ID,MaNV,HanTT,SH1,T1,TLCK,CK" + IIf(pTygia > 0, ",TyGia", "") + IIf(pGiaUSD > 0, ",PSUSD", "") + IIf(pProcessMode = 1 And r = 0, ",XuLy", "") + ",MAUSOHD,LOAIHoaDon,SoLo,HanDung,phantramchietkhau,sotienchietkhau,Ngayimport) VALUES (" _
+        + CStr(MaCT) + "," + CStr(maloai) + ",'" + sohieu + "'," + CStr(ThangCT) + ",#" + Format(NgayCT, Mask_DB) _
+        + "#,#" + Format(NgayGS, Mask_DB) + "#," + CStr(MaNguon) + "," + CStr(MaKho) + ",'" + diengiai + "'," + IIf(pSongNgu, "'" + DienGiaiE + "',", "") _
+        + CStr(tkno.MaSo) + "," + CStr(TkCo.MaSo) + "," + DoiDau(sops) + "," + DoiDau(SoPS2No) + "," + DoiDau(SoPS2Co) + "," _
+        + CStr(tkno.MaTC) + "," + CStr(TkCo.MaTC) + "," + CStr(MaVattu) + ",'" + GhiChu + "'," + CStr(CT_ID) + "," + CStr(MaDT) + "," + CStr(MaDT1) + "," + CStr(MaDT2) + "," + CStr(MaDT3) + "," _
+        + CStr(makh) + "," + CStr(CTGS) + "," + CStr(MaKHC) + "," + CStr(MaTP) + "," + CStr(dvt) + "," + CStr(User_ID) + "," + CStr(MaNV) + "," + CStr(HanTT) + ",'" + sh1 + "'," + CStr(T1) + "," + DoiDau(TLCK) + "," + DoiDau(CK) + IIf(pTygia > 0, "," + DoiDau(tygia), "") + IIf(pGiaUSD > 0, "," + DoiDau(PSUSD), "") + IIf(pProcessMode = 1 And r = 0, ",1", "") + ",'" + MauSo + "','" + LoaiHD + "','" + solo + "','" + handung + "','" + phantramchietkhau + "','" + sotienchietkhau + "',#" & Format(Ngayimport, "yyyy/mm/dd HH:mm:ss") & "#)"
 
     ExecuteSQL5 sql
-    
-'    MaSo = Lng_MaxValue("MaSo", "ChungTu" + sh)
-    
+
+    '    MaSo = Lng_MaxValue("MaSo", "ChungTu" + sh)
+
     If r > 0 Then
-         If MaVattu > 0 Then
+        If MaVattu > 0 Then
             If (maloai = 2 Or maloai = 4) And CT_ID < 0 And OutCost <> 0 Then
                 If -CT_ID < 2000000000 Then
                     ExecuteSQL5 "UPDATE ChungTu SET SoXuat = SoXuat + " + DoiDau(IIf(SoPS2Co = 0, 1, SoPS2Co)) + " WHERE MaSo = " + CStr(-CT_ID)
                 Else
                     ExecuteSQL5 "UPDATE VTDauNam SET SoXuat = SoXuat + " + DoiDau(IIf(SoPS2Co = 0, 1, SoPS2Co)) _
-                        + " WHERE MaSoKho = " + CStr(MaKho) + " AND MaVattu = " + CStr(MaVattu) + " AND MaSo=" + CStr(-CT_ID - 2000000000)
+                              + " WHERE MaSoKho = " + CStr(MaKho) + " AND MaVattu = " + CStr(MaVattu) + " AND MaSo=" + CStr(-CT_ID - 2000000000)
                 End If
             End If
         End If

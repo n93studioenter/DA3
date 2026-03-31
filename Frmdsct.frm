@@ -22,6 +22,26 @@ Begin VB.Form FrmDsCT
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "Voucher List"
+   Begin VB.CheckBox ChkTaikhoan 
+      BackColor       =   &H00FFFFC0&
+      Caption         =   "CT Import"
+      BeginProperty Font 
+         Name            =   "VK Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   375
+      Index           =   11
+      Left            =   3840
+      TabIndex        =   85
+      Tag             =   "V. Book"
+      Top             =   2880
+      Width           =   1215
+   End
    Begin VB.PictureBox picFakeTitle 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
@@ -145,7 +165,7 @@ Begin VB.Form FrmDsCT
       Left            =   2040
       TabIndex        =   79
       Tag             =   "V. Book"
-      Top             =   2810
+      Top             =   2880
       Width           =   1575
    End
    Begin VB.CommandButton CmdPhieu 
@@ -1505,7 +1525,7 @@ Dim ord As Integer
 Dim ngay(0 To 1) As Date
 Dim chuoidieukien_intoanbo As String
 
-Private Sub ChkLoai_Click(index As Integer)
+Private Sub ChkLoai_Click(Index As Integer)
     Dim vs As Boolean, i As Integer
     
     If ChkLoai(7).Value = 1 Then
@@ -1536,20 +1556,20 @@ Private Sub ChkLoai_Click(index As Integer)
     KiemTraUser
 End Sub
 
-Private Sub ChkTaikhoan_Click(index As Integer)
+Private Sub ChkTaikhoan_Click(Index As Integer)
     If ChkTaikhoan(5).Value = 0 Then
         ChkTaikhoan(10).Value = 0
     End If
 End Sub
 
-Private Sub CmdPhieu_Click(index As Integer)
-FrmChungtu.CmdPhieu_Click (index)
+Private Sub CmdPhieu_Click(Index As Integer)
+FrmChungtu.CmdPhieu_Click (Index)
 End Sub
 
 '======================================================================================
 ' LiÖt kª, Chän chøng tõ
 '======================================================================================
-Public Sub Command_Click(index As Integer)
+Public Sub Command_Click(Index As Integer)
 
 If OptLK(0).Value = False Then
   If IsDate(MedNgay(0).Text) And IsDate(MedNgay(1).Text) Then
@@ -1567,7 +1587,7 @@ If OptLK(0).Value = False Then
   End If
     
     
-    Select Case index
+    Select Case Index
         Case 0:
             If ChkTaikhoan(0).Value = 1 And txtShTk(0).tag = 0 Then
                 ErrMsg er_SHTaiKhoan1
@@ -1612,7 +1632,7 @@ If OptLK(0).Value = False Then
             MaCTChon = 0
             Hide
             LietKe = True
-        Case 3, 4:            DSCTu index - 3
+        Case 3, 4:            DSCTu Index - 3
         Case 5:
             Dim f As Form, ms As Long, i As Integer
             Set f = New FrmChungtu
@@ -1639,9 +1659,9 @@ End Sub
 '======================================================================================
 ' HiÖn cöa sæ chän tµi kho¶n
 '======================================================================================
-Private Sub cmdtk_Click(index As Integer)
+Private Sub cmdtk_Click(Index As Integer)
     Me.MousePointer = 11
-    Select Case index
+    Select Case Index
         Case 0:
             txtShTk(0).Text = FrmTaikhoan.ChonTk(txtShTk(0).Text)
         Case 1:
@@ -1654,7 +1674,7 @@ Private Sub cmdtk_Click(index As Integer)
             txtShTk(6).Text = FrmTP.ChonTP(txtShTk(6).Text)
     End Select
     Me.MousePointer = 0
-    RFocus txtShTk(index)
+    RFocus txtShTk(Index)
 End Sub
 
 Private Sub Command1_Click()
@@ -1738,7 +1758,7 @@ Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Sin
     ReleaseCapture
     SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
 End Sub
-Private Sub lblTitle_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     picFakeTitle_MouseDown Button, Shift, X, Y
 End Sub
 Public Sub AnControl(frm As Form)
@@ -1899,7 +1919,7 @@ Private Sub GrdChungtu_MouseDown(Button As Integer, Shift As Integer, X As Singl
     End If
 End Sub
 
-Private Sub MedNgay_Change(index As Integer)
+Private Sub MedNgay_Change(Index As Integer)
  
   If IsDate(CboThang(0).Text) And IsDate(CboThang(1).Text) Then
         If CDate(CboThang(1).Text) < CDate(CboThang(0).Text) Then
@@ -1909,17 +1929,17 @@ Private Sub MedNgay_Change(index As Integer)
   End If
 End Sub
 
-Private Sub OptLK_Click(index As Integer)
+Private Sub OptLK_Click(Index As Integer)
 Dim ngay As Date
 ngay = "01/01/" + Mid(str(pNamTC), 4, 5)
  MedNgay(0).Text = ngay
  MedNgay(1).Text = ngay
  End Sub
 
-Private Sub SSOpt_Click(index As Integer)
-    ord = index
+Private Sub SSOpt_Click(Index As Integer)
+    ord = Index
 End Sub
-Private Sub txtShTk_Change(index As Integer)
+Private Sub txtShTk_Change(Index As Integer)
     If txtShTk(0).Text <> "" Then
         ChkTaikhoan(0).Value = 1
     Else
@@ -1951,21 +1971,21 @@ Private Sub txtShTk_Change(index As Integer)
         ChkTaikhoan(5).Value = 0
     End If
 End Sub
-Private Sub txtShTk_GotFocus(index As Integer)
-    AutoSelect txtShTk(index)
+Private Sub txtShTk_GotFocus(Index As Integer)
+    AutoSelect txtShTk(Index)
 End Sub
 
-Private Sub txtShTk_KeyPress(index As Integer, KeyAscii As Integer)
-    If index = 5 Then KeyProcess txtShTk(index), KeyAscii
+Private Sub txtShTk_KeyPress(Index As Integer, KeyAscii As Integer)
+    If Index = 5 Then KeyProcess txtShTk(Index), KeyAscii
 End Sub
 '======================================================================================
 ' KiÓm tra sè hiÖu tµi kho¶n
 '======================================================================================
-Private Sub txtShTk_LostFocus(index As Integer)
+Private Sub txtShTk_LostFocus(Index As Integer)
     Dim mtk As Long, st As String, id As Long
     
     mtk = 0
-    Select Case index
+    Select Case Index
         Case 0:
              LbTenTk(0).Caption = tentk(txtShTk(0).Text, mtk)
             id = GetTK_ID("", mtk)
@@ -1980,7 +2000,7 @@ Private Sub txtShTk_LostFocus(index As Integer)
         Case 6:
             LbTenTk(6).Caption = TenTP(txtShTk(6).Text, mtk)
     End Select
-    txtShTk(index).tag = mtk
+    txtShTk(Index).tag = mtk
 End Sub
 '======================================================================================
 ' LiÖt kª chøng tõ
@@ -2029,6 +2049,9 @@ Public Sub LietKeChungtu(shtk As String, mvt As Long, mts As Long, mcn As Long, 
     End If
     If ChkTaikhoan(9).Value = 1 Then
         sql = sql + " AND ChungTu" + sh + ".nhanban=1"
+    End If
+    If ChkTaikhoan(11).Value = 1 Then
+        sql = sql & " AND ChungTu" & sh & ".NgayImport >= DateAdd('n', -5, Now())"
     End If
     If ChkTaikhoan(4).Value = 1 And CboN(2).ListIndex >= 0 Then
         sql = sql + " AND ChungTu" + sh + ".CTGS=" + CStr(CboN(2).ItemData(CboN(2).ListIndex))
@@ -2413,18 +2436,18 @@ Private Sub KiemTraUser()
     End If
 End Sub
 
-Private Sub MedNgay_GotFocus(index As Integer)
-    AutoSelect MedNgay(index)
+Private Sub MedNgay_GotFocus(Index As Integer)
+    AutoSelect MedNgay(Index)
 End Sub
 
-Private Sub MedNgay_LostFocus(index As Integer)
-    If IsDate(MedNgay(index).Text) Then
-        ngay(index) = CDate(MedNgay(index).Text)
+Private Sub MedNgay_LostFocus(Index As Integer)
+    If IsDate(MedNgay(Index).Text) Then
+        ngay(Index) = CDate(MedNgay(Index).Text)
     Else
-        RFocus MedNgay(index)
+        RFocus MedNgay(Index)
     End If
     Dim n As Date
-    If index = 0 Then
+    If Index = 0 Then
     n = MedNgay(0).Text
      MedNgay(1).Text = n
      End If

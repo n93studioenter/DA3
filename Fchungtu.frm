@@ -3943,7 +3943,7 @@ Dim rs_exportNL As Recordset
 Dim rs_importNK As Recordset
 Dim rs_importNKDetail As Recordset
 Dim sttnganhang As Integer
-Dim IsImport As Boolean
+Dim isimport As Boolean
 Dim rs_ktraNH As Recordset
 Dim countbanhang As Integer
 Dim continute As Boolean
@@ -4362,7 +4362,7 @@ Private Sub btnImport_Click()
 'DoNganhang
 ' Exit Sub
     Set fileImportList = New Collection
-    IsImport = True
+    isimport = True
     ' Duyet du lieu tu tb_import
     Dim rs_ktra As Recordset
     Dim Query As String
@@ -6226,7 +6226,7 @@ Private Sub Xuly15Child()
         End If
 
         If rs_import!Khautruthue = 1 Then
-            bakTongtien = rs_import!TongTien
+            bakTongtien = rs_import!TgTCThue1 + rs_import!TgTCThue2 + rs_import!TgTCThue3
         End If
         txtChungtu_LostFocus (5)
         txtChungtu_KeyPress 6, 13
@@ -6538,7 +6538,7 @@ Private Sub XulyTongtopChild(ByRef rs_import As Recordset)
             bakTongtien = rs_import!TongTien
         End If
     Else
-        bakTongtien = rs_import!TongTien
+        bakTongtien = rs_import!TgTCThue1
     End If
     txtChungtu_LostFocus (5)
     RFocus txtchungtu(6)
@@ -6809,6 +6809,10 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
         txtChungtu_LostFocus (2)
         txtchungtu(5).Text = "0"
     End If
+    If rs_import!Khautruthue = 1 Then
+        bakTongtien = rs_import!TgTCThue1
+    End If
+
     txtChungtu_LostFocus (5)
     txtChungtu_KeyPress 6, 13
     'Xu ly lan 2 neu co
@@ -6833,7 +6837,6 @@ Private Sub Xuly154Child(ByRef rs_import As Recordset)
         txtChungtu_LostFocus (5)
         txtChungtu_KeyPress 6, 13
     End If
-
 
 
 
@@ -7631,7 +7634,7 @@ Public Sub CmdChitiet_chon()
     If FThuChi.FThuChiForm = 0 And (loaict = 2 Or loaict = 8) And (vattu.MaSo > 0) And (co >= 0) And (nt > txtchungtu(3).tag) And STDetail And Left(taikhoan.sohieu, 4) <> "5113" And Chk.Value = 0 And Me.Visible Then
         'MsgBox "§· xuÊt qu¸ l­îng tån!", vbCritical, App.ProductName
         'Exit Sub
-        If IsImport = False Then
+        If isimport = False Then
             If MsgBox("§· xuÊt qu¸ l­îng tån! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
                 RFocus txtchungtu(3)
                 hasError = True
@@ -7733,7 +7736,7 @@ Public Sub CmdChitiet_chon()
     taikhoan.KtraPhatsinh thang, IIf(no > 0, no, co), IIf(no > 0, -1, 1)
     If co > 0 And ((Left(taikhoan.sohieu, Len(TM)) = TM) Or (Left(taikhoan.sohieu, Len(NH)) = NH)) Then
         taikhoan.SoDuNgay ngay(0), n, c, X
-        If n - c < co And IsImport = False Then
+        If n - c < co And isimport = False Then
             If FThuChi.FThuChiForm <> 1 And FThuChi.FThuChiForm <> 2 And FThuChi.FThuChiForm <> 3 And FThuChi.FThuChiForm <> 5 Then
 
                 'If MsgBox("Chi v­ît sè d­! TiÕp tôc ?", vbYesNo + vbCritical, App.ProductName) <> vbYes Then
@@ -13447,7 +13450,7 @@ Public Sub txtChungtu_LostFocus(Index As Integer)
                     'bo/////////////////////////////////////
                     'If Len(Trim(txtchungtu(2).Text)) <= 0 Then RFocus txtchungtu(2)
                     If txtchungtu(2).Enabled = True Then
-                        If IsImport = False Then RFocus txtchungtu(2)
+                        If isimport = False Then RFocus txtchungtu(2)
                     End If
                 End If
             Else
@@ -13526,7 +13529,7 @@ Public Sub txtChungtu_LostFocus(Index As Integer)
                     End If
                     If IsMissing(LO_XXXX) Then LO_XXXX = ""
                     If Len(LO_XXXX) > 0 Then luong = SL_XXXX
-                    If IsImport = False Then
+                    If isimport = False Then
                         txtchungtu(3).Text = Format(luong, Mask_2)
                     End If
                     If loaict = 1 Then
@@ -13564,7 +13567,7 @@ Public Sub txtChungtu_LostFocus(Index As Integer)
 
                 txtchungtu(1).Text = vattu.TenVattu
                 txtchungtu(2).tag = 1
-                If IsImport = False Then
+                If isimport = False Then
                     RFocus txtchungtu(3)
                 End If
 
