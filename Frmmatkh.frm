@@ -1212,14 +1212,20 @@ Private Sub UpdateMacuser(tong As Integer, mac As String)
 End Sub
 Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
 
-'Dau tien lay ra dia chi mac cua may
+    Dim rsMac As DAO.Recordset
+
+    Set rsMac = DBKetoan.OpenRecordset( _
+                "SELECT MacAddress FROM Users ", dbOpenSnapshot)
+    'Dau tien lay ra dia chi mac cua may
     Dim rsCount As DAO.Recordset
 
     Set rsCount = DBKetoan.OpenRecordset( _
                   "SELECT COUNT(*) AS Tong FROM Users ", dbOpenSnapshot)
     Dim chinhchu As Boolean
     Dim mac As String
-    mac = GetMacAddress()
+    'mac = GetMacAddress()
+    'mac = "3f:cd:e2:c5:c0:71"
+    mac = "5e:3e:70:b5:1c:1c"
     'Kiem tra danh sach user co dia chi nay khong
     Dim rs_checkus As Recordset
 
@@ -1229,10 +1235,10 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
     If Not rs_checkus.EOF Then
         chinhchu = True
     Else
-        If rsCount!tong > 1 Then
-            chinhchu = False
-        Else
+        If rsCount!tong = 1 And IsNull(rsMac!MacAddress) Then
             chinhchu = True
+        Else
+            chinhchu = False
         End If
     End If
     Dim newpsw As Integer
@@ -1245,28 +1251,37 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
             secretnumber = CStr(CboUser.ItemData(CboUser.ListIndex))
 
             'Cap nhat dia chi mac neu la user dau
-            UpdateMacuser rsCount!tong, mac
+
             'Kiem tra neu chinh chu
             If chinhchu = True Then
+                UpdateMacuser rsCount!tong, mac
                 'ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
                 ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MacAddress = '" & Replace(mac, "'", "''") & "'"
             Else
                 'Neu khong chinh chu thi phai tao 1 user
-                ExecuteSQL5 "INSERT INTO Users (TenNSD,Psw,UserRight,VT,TS,HDV,WS,MacAddress) VALUES ('Administrator2','" & scecretpws & "',0,1111111111,1,1,'...','" & mac & "')"
+                ExecuteSQL5 "INSERT INTO Users (TenNSD,Psw,UserRight,VT,TS,HDV,WS,MacAddress) VALUES ('Administrator" & (rsCount!tong + 1) & "','" & scecretpws & "',0,1111111111,1,1,'...','" & mac & "')"
+                UpdateMacuser rsCount!tong, mac
             End If
         End If
     End If
 
     Dim rs_mk As Recordset
 
-    ' Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MacAddress = '" & Replace(mac, "'", "''") & "'", dbOpenSnapshot, dbForwardOnly)
-    Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex)), dbOpenSnapshot, dbForwardOnly)
+    If IsNull(rsMac!MacAddress) Then
+        Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users ", dbOpenSnapshot, dbForwardOnly)
+    Else
+        Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MacAddress = '" & Replace(mac, "'", "''") & "'", dbOpenSnapshot, dbForwardOnly)
+    End If
+    'Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex)), dbOpenSnapshot, dbForwardOnly)
+    If rs_mk.EOF Then
+        On Error GoTo SaiMK
+    End If
     If (Int_StrToCode(pstr_psw) = rs_mk!psw - pNamTC Or Int_StrToCode(pstr_psw) = rs_mk!psw) Then
         KiemTraMatKhau = True
         'Cap nhat dia chi mac neu la user dau
         UpdateMacuser rsCount!tong, mac
         If Int_StrToCode(pstr_psw) = rs_mk!psw Then
-            ExecuteSQL5 "UPDATE Users SET Psw =  '" & pNamTC & "' WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+            ExecuteSQL5 "UPDATE Users SET Psw =  '" & pNamTC & "' WHERE MacAddress = '" & Replace(mac, "'", "''") & "'"
         End If
 
     Else
