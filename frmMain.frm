@@ -199,19 +199,23 @@ Begin VB.Form frmMain
          BeginProperty Panel1 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   8819
             MinWidth        =   8819
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel2 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Object.Width           =   12347
             MinWidth        =   12347
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel3 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
          BeginProperty Panel4 {0713E89F-850A-101B-AFC0-4210102A8DA7} 
             Style           =   6
-            TextSave        =   "31/03/26"
+            TextSave        =   "02/04/26"
+            Key             =   ""
             Object.Tag             =   ""
          EndProperty
       EndProperty
@@ -4543,7 +4547,7 @@ Private Sub XKTheoNgay()
                     'Loc ra neu la thanh pham
                     If IsThanhPham(rs_chungtu!MaVattu, getSHVT) = True Then
                         'MsgBox getTenVT
-                        dongia = (Val(rs_chungtu!sops) / Val(rs_chungtu!SoPS2Co)) * 0.8
+                        dongia = (val(rs_chungtu!sops) / val(rs_chungtu!SoPS2Co)) * 0.8
 
                         'Thuc hien luu tbNhapkhotpChitiet
 
@@ -4593,7 +4597,7 @@ Private Sub XKTheoNgay()
                                     If rs_check!SoHieuNguyenLieu = "RAU.03" Then
                                         MsgBox rs_ct!sohieu
                                     End If
-                                    dg = Val(rs_ct!sops) / Val(rs_ct!SoPS2No)
+                                    dg = val(rs_ct!sops) / val(rs_ct!SoPS2No)
                                     SoLuong = Round(TongTien / dg, 1)
                                 End If
 

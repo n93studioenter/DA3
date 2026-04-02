@@ -1514,6 +1514,7 @@ Begin VB.Form FrmOptions
             Height          =   360
             Left            =   480
             TabIndex        =   118
+            Text            =   "0"
             Top             =   720
             Width           =   1695
          End
@@ -2684,6 +2685,19 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
+Private Const SECRET_KEY_MST As Long = &H7B4D8E2F
+
+Private Const RANDOM_MIN As Long = 10
+Private Const RANDOM_MAX As Long = 99
+
+Private Const SECRET_KEYMac As Long = &H5A3C9F2E
+
+Private Const SECRET_KEY2 As Long = 13579
+Private Const BASE36 As String = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+Private Const MAGIC_NUMBER As Long = 7919
+Private Const CHARSET As String = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" ( _
                                      ByVal hwnd As Long, _
                                      ByVal wMsg As Long, _
@@ -2691,6 +2705,7 @@ Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" ( _
                                      ByVal lParam As Long) As Long
 Private Const EM_SETMARGINS = &HD3
 Private Const EC_LEFTMARGIN = &H1
+Private Const SECRET_KEY As Byte = &H5A    ' Khóa bí m?t
 
 Private Type BROWSEINFO
     hOwner As Long
@@ -2739,9 +2754,686 @@ Public Function BrowseForFolder(ByVal sTitle As String) As String
         End If
     End If
 End Function
+'Mã hóa cho so chung tu
+Public Function EncodeLicense6(ByVal num As Long, ByRef randomNum As Long) As String
+    'Dim randomNum As Long
+    Dim combined As Variant   ' <--- Dùng Variant
+    Dim encrypted As Variant  ' <--- Dùng Variant
+    Dim result As String
+
+    On Error GoTo ErrorHandler
+
+    ' Gi?i h?n s? d?u vào du?i 2 tri?u
+    If num > 1999999 Then
+        EncodeLicense6 = "ERROR"
+        Exit Function
+    End If
+
+    ' T?o s? random 3 ch? s?
+    'Randomize
+    'randomNum = Int((RANDOM_MAX - RANDOM_MIN + 1) * Rnd + RANDOM_MIN)
+
+    ' K?t h?p: random (3 ch? s?) + num (t?i da 1,999,999)
+    combined = randomNum * 2000000
+    combined = combined + num
+
+    ' Mã hóa
+    encrypted = combined Xor SECRET_KEY
+    encrypted = encrypted + 12345
+
+    ' Gi?i h?n trong 36^6 = 2,176,782,336
+    encrypted = encrypted - Int(encrypted / 2176782336#) * 2176782336#
+
+    ' Chuy?n sang base36 (6 ký t?)
+    result = ""
+    Do While encrypted > 0
+        result = Mid(CHARSET, (encrypted Mod 36) + 1, 1) & result
+        encrypted = Int(encrypted / 36)
+    Loop
+
+    EncodeLicense6 = Right(String(6, "0") & result, 6)
+    Exit Function
+
+ErrorHandler:
+    EncodeLicense6 = "ERROR"
+End Function
+
+' ==============================================
+' DECODE: Mã 6 ký t? -> s? g?c và random
+' ==============================================
+Public Function DecodeLicense6(ByVal txt As String, ByRef randomNum As Long) As Long
+    Dim i As Integer
+    Dim result As Variant   ' <--- Dùng Variant
+    Dim combined As Variant
+    
+    On Error GoTo ErrorHandler
+    
+    ' Gi?i mã base36
+    result = 0
+    For i = 1 To Len(txt)
+        result = result * 36 + (InStr(CHARSET, Mid(txt, i, 1)) - 1)
+    Next
+    
+    ' Gi?i mã
+    result = result - 12345
+    combined = result Xor SECRET_KEY
+    
+    ' Tách random và s? g?c
+    randomNum = Int(combined / 2000000)
+    DecodeLicense6 = combined - (randomNum * 2000000)
+    Exit Function
+    
+ErrorHandler:
+    DecodeLicense6 = -1
+End Function
+
+' ==============================================
+' ENCODE: Có th? truy?n random vào (dùng cho test)
+' ==============================================
+
+' ==============================================
+' ENCODE: Có th? truy?n random vào (dùng cho test)
+' ==============================================
+Public Function EncodeLicense6Ex(ByVal num As Long, ByVal randomNum As Long) As String
+    Dim combined As Currency   ' <--- Ð?i thành Currency
+    Dim encrypted As Long
+    Dim result As String
+    
+    On Error GoTo ErrorHandler
+    
+    If num > 1999999 Or randomNum < 100 Or randomNum > 999 Then
+        EncodeLicense6Ex = "ERROR"
+        Exit Function
+    End If
+    
+    ' Dùng Currency d? tránh tràn
+    combined = CDec(randomNum) * 2000000 + num
+    
+    encrypted = (CLng(combined) Xor SECRET_KEY) + 12345
+    encrypted = encrypted Mod 2176782336#
+    
+    result = ""
+    Do While encrypted > 0
+        result = Mid(CHARSET, (encrypted Mod 36) + 1, 1) & result
+        encrypted = encrypted \ 36
+    Loop
+    
+    EncodeLicense6Ex = Right(String(6, "0") & result, 6)
+    Exit Function
+    
+ErrorHandler:
+    EncodeLicense6Ex = "ERROR"
+End Function
+
+' ==============================================
+' GI? L?I HÀM CU (4 ký t?) d? tuong thích
+' ==============================================
+Public Function EncodeLicense4(ByVal num As Long) As String
+    Dim encrypted As Long
+    Dim result As String
+    
+    If num > 999999 Then
+        EncodeLicense4 = "ERROR"
+        Exit Function
+    End If
+    
+    encrypted = ((num Xor SECRET_KEY) + 12345) Mod 1679616
+    
+    result = ""
+    Do While encrypted > 0
+        result = Mid(CHARSET, (encrypted Mod 36) + 1, 1) & result
+        encrypted = encrypted \ 36
+    Loop
+    
+    EncodeLicense4 = Right("0000" & result, 4)
+End Function
+
+Public Function DecodeLicense4(ByVal txt As String) As Long
+    Dim i As Integer
+    Dim result As Long
+    
+    result = 0
+    For i = 1 To Len(txt)
+        result = result * 36 + (InStr(CHARSET, Mid(txt, i, 1)) - 1)
+    Next
+    
+    result = result - 12345
+    result = result Xor SECRET_KEY
+    
+    DecodeLicense4 = result
+End Function
+
+Public Function EncodeLicense2(ByVal num As Long) As String
+    Dim encrypted As Long
+    Dim result As String
+    
+    encrypted = (num Xor SECRET_KEY) + 12345
+    
+    result = ""
+    Do While encrypted > 0
+        result = Mid(CHARSET, (encrypted Mod 36) + 1, 1) & result
+        encrypted = encrypted \ 36
+    Loop
+    
+    EncodeLicense2 = result
+End Function
+
+Public Function DecodeLicense2(ByVal txt As String) As Long
+    Dim i As Integer
+    Dim result As Long
+    
+    result = 0
+    For i = 1 To Len(txt)
+        result = result * 36 + (InStr(CHARSET, Mid(txt, i, 1)) - 1)
+    Next
+    
+    result = result - 12345
+    result = result Xor SECRET_KEY
+    
+    DecodeLicense2 = result
+End Function
+
+'Cho mac
+ Public Function EncodeMAC12(ByVal macAddress As String) As String
+    Dim cleanMAC As String
+    Dim p1 As Long, p2 As Long
+    Dim code1 As String, code2 As String
+    
+    ' Xóa d?u :
+    cleanMAC = UCase(Replace(macAddress, ":", ""))
+    
+    If Len(cleanMAC) <> 12 Then
+        EncodeMAC12 = "ERROR"
+        Exit Function
+    End If
+    
+    ' Tách 12 hex thành 2 ph?n, m?i ph?n 6 hex (3 byte)
+    p1 = CLng("&H" & Mid(cleanMAC, 1, 6))   ' 6 hex d?u
+    p2 = CLng("&H" & Mid(cleanMAC, 7, 6))   ' 6 hex cu?i
+    
+    ' Encode m?i ph?n thành 6 ký t?
+    code1 = Encode6(p1)
+    code2 = Encode6(p2)
+    
+    ' N?i l?i v?i d?u -
+    EncodeMAC12 = code1 & "-" & code2
+End Function
+
+' ==============================================
+' DECODE MAC t? 12 ký t? (2 block x 6 ký t?)
+' ==============================================
+Public Function DecodeMAC12(ByVal code As String) As String
+    Dim parts() As String
+    Dim p1 As Long, p2 As Long
+    Dim hexMAC As String
+    
+    ' Tách 2 ph?n
+    parts = Split(code, "-")
+    
+    If UBound(parts) <> 1 Then
+        DecodeMAC12 = "ERROR"
+        Exit Function
+    End If
+    
+    ' Gi?i mã t?ng ph?n
+    p1 = Decode6(parts(0))
+    p2 = Decode6(parts(1))
+    
+    ' Ghép l?i thành MAC 12 hex
+    hexMAC = Right("000000" & Hex(p1), 6) & _
+             Right("000000" & Hex(p2), 6)
+    
+    DecodeMAC12 = UCase(hexMAC)
+End Function
+
+' ==============================================
+' ENCODE: 6 hex (3 byte) -> 6 ký t? base36 (có random)
+' ==============================================
+Public Function Encode6(ByVal num As Long) As String
+    Dim randomNum As Long
+    Dim combined As Variant
+    Dim encrypted As Variant
+    Dim result As String
+    
+    On Error GoTo ErrorHandler
+    
+    ' Gi?i h?n num trong 0-16,777,215 (6 hex = 24 bit)
+    num = num And &HFFFFFF
+    
+    ' T?o random 3 ch? s?
+    Randomize
+    randomNum = Int((RANDOM_MAX - RANDOM_MIN + 1) * Rnd + RANDOM_MIN)
+    
+    ' K?t h?p: random (3 ch? s?) * 16,777,216 + num
+    ' 16,777,216 = 2^24
+    combined = CDec(randomNum) * 16777216
+    combined = combined + num
+    
+    ' Mã hóa
+    encrypted = combined Xor SECRET_KEY2
+    encrypted = encrypted + 12345
+    
+    ' Gi?i h?n trong 36^6 = 2,176,782,336
+    encrypted = encrypted - Int(encrypted / 2176782336#) * 2176782336#
+    
+    ' Chuy?n sang base36 (6 ký t?)
+    result = ""
+    Do While encrypted > 0
+        result = Mid(CHARSET, (encrypted Mod 36) + 1, 1) & result
+        encrypted = Int(encrypted / 36)
+    Loop
+    
+    Encode6 = Right(String(6, "0") & result, 6)
+    Exit Function
+    
+ErrorHandler:
+    Encode6 = "ERROR"
+End Function
+
+' ==============================================
+' DECODE: 6 ký t? base36 -> 6 hex (3 byte)
+' ==============================================
+Public Function Decode6(ByVal txt As String) As Long
+    Dim i As Integer
+    Dim result As Variant
+    Dim combined As Variant
+    
+    On Error GoTo ErrorHandler
+    
+    ' Gi?i mã base36
+    result = 0
+    For i = 1 To Len(txt)
+        result = result * 36 + (InStr(CHARSET, Mid(txt, i, 1)) - 1)
+    Next
+    
+    ' Gi?i mã
+    result = result - 12345
+    combined = result Xor SECRET_KEY2
+    
+    ' L?y num (b? random)
+    Decode6 = combined Mod 16777216
+    Exit Function
+    
+ErrorHandler:
+    Decode6 = -1
+End Function
+
+' ==============================================
+' Ð?NH D?NG MAC CÓ D?U ":"
+' ==============================================
+Public Function FormatMAC(ByVal mac As String) As String
+    Dim result As String
+    Dim i As Integer
+    
+    If Len(mac) <> 12 Then
+        FormatMAC = mac
+        Exit Function
+    End If
+    
+    result = ""
+    For i = 1 To Len(mac) Step 2
+        If result <> "" Then result = result & ":"
+        result = result & Mid(mac, i, 2)
+    Next i
+    
+    FormatMAC = result
+End Function
+ 
+
+'random 6 cho 1_2
+Public Function EncodeWithRandom6(ByVal strValue As String) As String
+    Dim parts() As String
+    Dim num1 As Long   ' <--- S?A: num1, không ph?i numl
+    Dim num2 As Long
+    Dim randomNum As Long
+    Dim combined As Long
+    
+    On Error GoTo ErrorHandler
+    
+    ' Tách chu?i d?ng "1_2"
+    parts = Split(strValue, "_")
+    
+    If UBound(parts) <> 1 Then
+        EncodeWithRandom6 = "ERROR"
+        Exit Function
+    End If
+    
+    num1 = CLng(parts(0))
+    num2 = CLng(parts(1))
+    
+    ' Gi?i h?n m?i s? trong 0-999
+    If num1 > 999 Or num2 > 999 Then   ' <--- S?A: num1
+        EncodeWithRandom6 = "ERROR"
+        Exit Function
+    End If
+    
+    ' T?o s? random 4 ch? s?
+    Randomize
+    randomNum = Int((RANDOM_MAX - RANDOM_MIN + 1) * Rnd + RANDOM_MIN)
+    
+    ' K?t h?p: randomNum (4 ch? s?) + num1 (3 ch? s?) + num2 (3 ch? s?)
+    combined = randomNum * 1000000 + num1 * 1000 + num2   ' <--- S?A: num1
+    
+    ' Mã hóa thành 6 ký t?
+    EncodeWithRandom6 = ToBase36_6(combined)
+    Exit Function
+    
+ErrorHandler:
+    EncodeWithRandom6 = "ERROR"
+End Function
+
+' ==============================================
+' DECODE: 6 ký t? -> chu?i "x_y" và random
+' ==============================================
+Public Function DecodeWithRandom6(ByVal code As String, ByRef randomNum As Long) As String
+    Dim combined As Long
+    Dim num1 As Long
+    Dim num2 As Long
+    
+    On Error GoTo ErrorHandler
+    
+    ' Gi?i mã base36
+    combined = FromBase36_6(code)
+    
+    ' Tách thành random, num1, num2
+    randomNum = combined \ 1000000
+    num1 = (combined Mod 1000000) \ 1000
+    num2 = combined Mod 1000
+    
+    DecodeWithRandom6 = num1 & "_" & num2
+    Exit Function
+    
+ErrorHandler:
+    DecodeWithRandom6 = "ERROR"
+End Function
+
+' ==============================================
+' ENCODE: Có th? truy?n random vào (dùng cho test)
+' ==============================================
+Public Function EncodeWithRandom6Ex(ByVal strValue As String, ByVal randomNum As Long) As String
+    Dim parts() As String
+    Dim num1 As Long
+    Dim num2 As Long
+    Dim combined As Long
+    
+    On Error GoTo ErrorHandler
+    
+    ' Tách chu?i d?ng "1_2"
+    parts = Split(strValue, "_")
+    
+    If UBound(parts) <> 1 Then
+        EncodeWithRandom6Ex = "ERROR"
+        Exit Function
+    End If
+    
+    num1 = CLng(parts(0))
+    num2 = CLng(parts(1))
+    
+    ' Gi?i h?n
+    If num1 > 999 Or num2 > 999 Or randomNum < 1000 Or randomNum > 9999 Then
+        EncodeWithRandom6Ex = "ERROR"
+        Exit Function
+    End If
+    
+    ' K?t h?p: randomNum (4 ch? s?) + num1 (3 ch? s?) + num2 (3 ch? s?)
+    combined = randomNum * 1000000 + num1 * 1000 + num2
+    
+    ' Mã hóa thành 6 ký t?
+    EncodeWithRandom6Ex = ToBase36_6(combined)
+    Exit Function
+    
+ErrorHandler:
+    EncodeWithRandom6Ex = "ERROR"
+End Function
+
+' ==============================================
+' HÀM H? TR?: Chuy?n s? sang base36 (6 ký t?)
+' ==============================================
+Private Function ToBase36_6(ByVal num As Long) As String
+    Dim result As String
+    
+    If num = 0 Then
+        ToBase36_6 = "000000"
+        Exit Function
+    End If
+    
+    result = ""
+    Do While num > 0
+        result = Mid(CHARSET, (num Mod 36) + 1, 1) & result
+        num = num \ 36
+    Loop
+    
+    ToBase36_6 = Right(String(6, "0") & result, 6)
+End Function
+
+' ==============================================
+' HÀM H? TR?: Gi?i mã base36
+' ==============================================
+Private Function FromBase36_6(ByVal txt As String) As Long
+    Dim i As Integer
+
+    FromBase36_6 = 0
+    For i = 1 To Len(txt)
+        FromBase36_6 = FromBase36_6 * 36 + (InStr(CHARSET, Mid(txt, i, 1)) - 1)
+    Next i
+End Function
+'cho mst
+ ' ==============================================
+' ENCODE: MST -> 10 ký t? (2 ký t? d? dài + 8 ký t? d? li?u)
+' ==============================================
+Public Function EncodeMST8(ByVal mst As String) As String
+    Dim cleanMST As String
+    Dim totalLen As Integer
+    Dim p1 As String, p2 As String
+    Dim len1 As Integer, len2 As Integer
+    
+    On Error GoTo ErrorHandler
+    
+    ' Xóa d?u -
+    cleanMST = Replace(mst, "-", "")
+    
+    ' Ki?m tra ch? có s?
+    If Not IsNumeric(cleanMST) Then
+        EncodeMST8 = "ERROR"
+        Exit Function
+    End If
+    
+    totalLen = Len(cleanMST)
+    
+    ' Phân chia theo d? dài
+    Select Case totalLen
+        Case 10
+            len1 = 5: len2 = 5
+            p1 = Left(cleanMST, len1)
+            p2 = Right(cleanMST, len2)
+            
+        Case 12
+            len1 = 6: len2 = 6
+            p1 = Left(cleanMST, len1)
+            p2 = Right(cleanMST, len2)
+            
+        Case 13
+            len1 = 6: len2 = 7
+            p1 = Left(cleanMST, len1)
+            p2 = Right(cleanMST, len2)
+            
+        Case Else
+            EncodeMST8 = "ERROR"
+            Exit Function
+    End Select
+    
+    ' Mã: 2 ký t? d? dài + 4 ký t? ph?n 1 + 4 ký t? ph?n 2
+    EncodeMST8 = ToBase36_1(len1) & ToBase36_1(len2) & _
+                 EncodeString(p1) & EncodeString(p2)
+    Exit Function
+    
+ErrorHandler:
+    EncodeMST8 = "ERROR"
+End Function
+
+' ==============================================
+' DECODE: 10 ký t? -> MST
+' ==============================================
+Public Function DecodeMST8(ByVal code As String) As String
+    Dim len1 As Integer, len2 As Integer
+    Dim p1 As String, p2 As String
+    Dim lenCode1 As String, lenCode2 As String
+    Dim dataCode1 As String, dataCode2 As String
+    
+    On Error GoTo ErrorHandler
+    
+    ' Ki?m tra d? dài
+    If Len(code) <> 10 Then
+        DecodeMST8 = "ERROR"
+        Exit Function
+    End If
+    
+    ' L?y 2 ký t? d? dài
+    lenCode1 = Mid(code, 1, 1)
+    lenCode2 = Mid(code, 2, 1)
+    len1 = FromBase36_1(lenCode1)
+    len2 = FromBase36_1(lenCode2)
+    
+    ' L?y 8 ký t? d? li?u
+    dataCode1 = Mid(code, 3, 4)
+    dataCode2 = Mid(code, 7, 4)
+    
+    ' Gi?i mã d? li?u
+    p1 = DecodeString(dataCode1)
+    p2 = DecodeString(dataCode2)
+    
+    ' Ghép l?i v?i dúng d? dài (gi? s? 0 d?u)
+    DecodeMST8 = Right(String(len1, "0") & p1, len1) & Right(String(len2, "0") & p2, len2)
+    Exit Function
+    
+ErrorHandler:
+    DecodeMST8 = "ERROR"
+End Function
+
+' ==============================================
+' HÀM H? TR?: Encode 1 ký t? (0-35)
+' ==============================================
+Private Function ToBase36_1(ByVal num As Integer) As String
+    If num < 0 Or num > 35 Then
+        ToBase36_1 = "0"
+    Else
+        ToBase36_1 = Mid(CHARSET, num + 1, 1)
+    End If
+End Function
+
+' ==============================================
+' HÀM H? TR?: Decode 1 ký t? (0-35)
+' ==============================================
+Private Function FromBase36_1(ByVal c As String) As Integer
+    Dim pos As Integer
+    pos = InStr(CHARSET, c)
+    If pos > 0 Then
+        FromBase36_1 = pos - 1
+    Else
+        FromBase36_1 = 0
+    End If
+End Function
+
+' ==============================================
+' HÀM H? TR?: Encode chu?i s? thành 4 ký t? base36
+' ==============================================
+Private Function EncodeString(ByVal s As String) As String
+    Dim num As Variant
+    Dim result As String
+    Dim i As Integer
+    
+    ' Chuy?n chu?i thành s?
+    num = CDec(0)
+    For i = 1 To Len(s)
+        num = num * 10 + CLng(Mid(s, i, 1))
+    Next i
+    
+    ' Chuy?n sang base36 (4 ký t?)
+    If num = 0 Then
+        EncodeString = "0000"
+        Exit Function
+    End If
+    
+    result = ""
+    Do While num > 0
+        result = Mid(CHARSET, (num Mod 36) + 1, 1) & result
+        num = Int(num / 36)
+    Loop
+    
+    EncodeString = Right(String(4, "0") & result, 4)
+End Function
+
+' ==============================================
+' HÀM H? TR?: Decode 4 ký t? base36 thành chu?i s?
+' ==============================================
+Private Function DecodeString(ByVal code As String) As String
+    Dim i As Integer
+    Dim num As Variant
+
+    ' Gi?i mã base36
+    num = CDec(0)
+    For i = 1 To Len(code)
+        num = num * 36 + (InStr(CHARSET, Mid(code, i, 1)) - 1)
+    Next i
+
+    ' Chuy?n s? thành chu?i
+    DecodeString = CStr(num)
+End Function
 
 Private Sub active_Click()
+    Dim mst10 As String
+    Dim mst13 As String
+    Dim encoded10 As String
+    Dim encoded13 As String
+    Dim decoded10 As String
+    Dim decoded13 As String
 
+    Debug.Print "=== ENCODE MST THÀNH 8 KÝ T? ==="
+    Debug.Print ""
+
+    ' Test MST 10 s?
+    mst10 = "036981020797"
+    encoded10 = EncodeMST8(mst10)      ' <--- G?i dúng hàm
+    decoded10 = DecodeMST8(encoded10)  ' <--- G?i dúng hàm
+
+    '---------------------
+
+    Dim strValue As String
+    Dim code As String
+    Dim decoded As String
+    Dim randomNum As Long
+    Dim randomNum2 As Long
+
+    Debug.Print "=== ENCODE/DECODE V?I S? RANDOM 4 CH? S? ==="
+    Debug.Print ""
+
+    ' Test 1: T? d?ng random
+    strValue = "1_2"
+    code = EncodeWithRandom6(strValue)
+    decoded = DecodeWithRandom6(code, randomNum)
+
+    'mac
+    Dim mac As String
+    Dim encoded As String
+    Dim formatted As String
+
+    Debug.Print "=== ENCODE MAC THÀNH 12 KÝ T? (2 BLOCK) ==="
+    Debug.Print ""
+
+    ' Test MAC 1
+    mac = "C8:A3:E8:B0:32:21"
+    encoded = EncodeMAC12(mac)
+    decoded = DecodeMAC12(encoded)
+    formatted = FormatMAC(decoded)
+    'So chung tu phai nho hon 1 tr 6
+    Dim license As String
+    license = EncodeLicense6(350000, randomNum)
+    Debug.Print "1 -> " & license
+    Debug.Print DecodeLicense6(license, randomNum)    ' 1
+
+    FrmGetStr2.Text1.Text = randomNum
+    FrmGetStr2.Show vbModal
+    Exit Sub
     Dim st As String
     Dim rs As Recordset
     Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
@@ -2763,10 +3455,10 @@ Private Sub active_Click()
     Unload Me
 End Sub
 
-Private Sub Check_Click(index As Integer)
-    Select Case index
+Private Sub Check_Click(Index As Integer)
+    Select Case Index
         Case 17:
-            If Check(index).Value = 0 Then Text(8).Text = "..."
+            If Check(Index).Value = 0 Then Text(8).Text = "..."
         Case 18:
             If Check(18).Value = 0 Then
                 Check(33).Enabled = False
@@ -2779,8 +3471,8 @@ Private Sub Check_Click(index As Integer)
     End Select
 End Sub
 
-Private Sub ChkVT_Click(index As Integer)
-    If index = 4 And ChkVT(4).Value = 1 Then
+Private Sub ChkVT_Click(Index As Integer)
+    If Index = 4 And ChkVT(4).Value = 1 Then
         If Len(Dir(pCurDir + "DOWNLOAD.EXE")) = 0 Then
             MsgBox "Ch­a cµi ®Æt ch­¬ng tr×nh ®äc m· v¹ch!", vbCritical, App.ProductName
             ChkVT(4).Value = 0
@@ -2788,8 +3480,8 @@ Private Sub ChkVT_Click(index As Integer)
     End If
 End Sub
 
-Private Sub Combo_Click(index As Integer)
-    If index = 3 Then PhanChucNang Combo(index).ListIndex + 1, Check(25).Value, Check(26).Value, Check(27).Value, Check(28).Value
+Private Sub Combo_Click(Index As Integer)
+    If Index = 3 Then PhanChucNang Combo(Index).ListIndex + 1, Check(25).Value, Check(26).Value, Check(27).Value, Check(28).Value
 End Sub
 
 Private Sub Command1_Click()
@@ -3034,22 +3726,22 @@ End Sub
 
 
 
-Private Sub Label2_Click(index As Integer)
-    If index = 0 Then
+Private Sub Label2_Click(Index As Integer)
+    If Index = 0 Then
         If CheckBox1(0).Value <> 0 Then
             CheckBox1(0).Value = 0
         Else
             CheckBox1(0).Value = 1
         End If
     End If
-    If index = 2 Then
+    If Index = 2 Then
         If CheckBox1(2).Value <> 0 Then
             CheckBox1(2).Value = 0
         Else
             CheckBox1(2).Value = 1
         End If
     End If
-    If index = 3 Then
+    If Index = 3 Then
         If CheckBox1(3).Value <> 0 Then
             CheckBox1(3).Value = 0
         Else
@@ -3066,8 +3758,8 @@ Private Sub Option2_Click()
     typeRegistry = 2
 End Sub
 
-Private Sub OptVT_Click(index As Integer)
-    ttVT = index
+Private Sub OptVT_Click(Index As Integer)
+    ttVT = Index
 End Sub
 ' T?o file version.txt v?i n?i dung
 Public Function CreateVersionFile(FilePath As String, content As String) As Boolean
@@ -3113,9 +3805,9 @@ ErrorHandler:
 End Function
 Private Sub Dongbotxt()
     Text(0).Text = UnicodeToVni(txtTenCty.Text)
-    Text(2).Text = UnicodeToVni(txtDiaChi.Text)
+    Text(2).Text = UnicodeToVni(txtDiachi.Text)
 End Sub
-Private Sub Command_Click(index As Integer)
+Private Sub Command_Click(Index As Integer)
     Dongbotxt
     Dim originPath As String
     Dim content As String
@@ -3208,7 +3900,7 @@ Private Sub Command_Click(index As Integer)
     Else
         ExecuteSQL5 "Update License set col711ra=0"
     End If
-    If index = 0 Then
+    If Index = 0 Then
         ExecuteSQL5 "UPDATE license SET CCCD = '" + txtCCCD.Text + "'"
     End If
 
@@ -3233,7 +3925,7 @@ Private Sub Command_Click(index As Integer)
     ' them moi sau
 
 
-    If index = 0 Then    ' neu la nut ghi, nguoc lai thoat
+    If Index = 0 Then    ' neu la nut ghi, nguoc lai thoat
         'neu test dung thi bo
         If (CInt(SelectSQL("SELECT nam as f1 from license ")) <= 0) Then ExecuteSQL5 "UPDATE license SET nam = " + str(pNamTC)
 
@@ -3264,7 +3956,7 @@ Private Sub Command_Click(index As Integer)
         '  MsgBox FrmGetStr.GetMK(Text(7).Text)
 
         If Combo(2).ListIndex >= 0 Then T = Combo(2).ItemData(Combo(2).ListIndex) Else T = pTien
-        If CInt5(Left(Text(index).Text, 2)) <> 0 Then Check(55).Value = 0
+        If CInt5(Left(Text(Index).Text, 2)) <> 0 Then Check(55).Value = 0
         If ((((pTenCty = Text(0).Text And (pTenCn = Text(1).Text Or suatencn = 1) And (Check(19).Value = suatencn) And pMaVach = Check(9).Value And pDinhmuc = Check(13).Value And pSongNgu = (Check(14).Value = 1) And pRpt = Check(15).Value And pTygia = Check(18).Value And T = pTien And mk = 0) Or (DEMO = 1 And CLng5(Left(Text(7).Text, 2)) > 0)) And (mst = Text(7).Text Or (suatencn = 1 And Left(mst, 10) = Left(Text(7).Text, 10)))) Or Combo(3).ListIndex = 4 Or (Cdbl5(Left(Text(7).Text, 10)) = 0 And Cdbl5(Left(frmMain.LbCty(8).Caption, 10)) = 0)) And (pNoiBo = Check(55).Value) And (CInt5(Combo(0).Text) = pNamTC) Then GoTo a
         If (Len(pMST) > 0 And Left(Text(7).Text, Len(pMST)) = pMST) Then GoTo a
         If boolean_kiemtra() = False Then GoTo a    ' kiem tra da active thi bat khung nhap ma so le
@@ -3353,26 +4045,26 @@ KT:
     HienThongBao "", 1
 End Sub
 
-Private Sub Text_GotFocus(index As Integer)
-    AutoSelect Text(index)
+Private Sub Text_GotFocus(Index As Integer)
+    AutoSelect Text(Index)
 End Sub
 
-Private Sub Text_KeyPress(index As Integer, KeyAscii As Integer)
-    Select Case index
+Private Sub Text_KeyPress(Index As Integer, KeyAscii As Integer)
+    Select Case Index
         Case 7, 11 To 14, 18, 21, 24, 25:
-            KeyProcess Text(index), KeyAscii, True
+            KeyProcess Text(Index), KeyAscii, True
         Case 22:
             If DEMO = 1 Then KeyAscii = 0
     End Select
 End Sub
 
-Private Sub Text_LostFocus(index As Integer)
-    Select Case index
+Private Sub Text_LostFocus(Index As Integer)
+    Select Case Index
         Case 1 To 6, 8, 9, 10, 15 To 17, 19, 20, 22, 23:
-            If Len(Text(index).Text) = 0 Then Text(index).Text = "..."
+            If Len(Text(Index).Text) = 0 Then Text(Index).Text = "..."
         Case 7:
-            Text(index).Text = SetNumericStr(Text(index).Text)
-            If Len(Text(index).Text) = 0 Then Text(index) = "00"
+            Text(Index).Text = SetNumericStr(Text(Index).Text)
+            If Len(Text(Index).Text) = 0 Then Text(Index) = "00"
             HienNoiBo
         Case 8:
             If Len(Dir(Text(8).Text)) = 0 Then Text(8).Text = "..."
@@ -3452,7 +4144,7 @@ Private Sub LoadInfo()
     txtTenCty.Text = VniToUnicode(pTenCty)
     Text(1).Text = pTenCn
     Text(2).Text = rs!DiaChi
-    txtDiaChi.Text = VniToUnicode(rs!DiaChi)
+    txtDiachi.Text = VniToUnicode(rs!DiaChi)
     Text(3).Text = rs!Tel
     Text(4).Text = rs!Fax
     Text(5).Text = rs!TaiKhoanVN

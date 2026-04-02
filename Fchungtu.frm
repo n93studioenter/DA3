@@ -64,7 +64,7 @@ Begin VB.Form FrmChungtu
          Strikethrough   =   0   'False
       EndProperty
       Height          =   375
-      Left            =   9000
+      Left            =   10800
       MaskColor       =   &H00FFFFFF&
       Picture         =   "Fchungtu.frx":68AC
       TabIndex        =   195
@@ -2737,33 +2737,6 @@ Begin VB.Form FrmChungtu
       Mask            =   "99/99/99"
       PromptChar      =   "_"
    End
-   Begin MSGrid.Grid Grid2 
-      Height          =   3015
-      Left            =   2400
-      TabIndex        =   138
-      Tag             =   "1"
-      Top             =   5200
-      Width           =   9915
-      _Version        =   65536
-      _ExtentX        =   17489
-      _ExtentY        =   5318
-      _StockProps     =   77
-      BackColor       =   16777215
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Arial"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      BorderStyle     =   0
-      Rows            =   30
-      Cols            =   8
-      FixedRows       =   0
-      FixedCols       =   0
-   End
    Begin VB.CommandButton Command4 
       Caption         =   "Import"
       BeginProperty Font 
@@ -2863,6 +2836,50 @@ Begin VB.Form FrmChungtu
       FixedRows       =   0
       HighLight       =   0   'False
       MousePointer    =   1
+   End
+   Begin MSGrid.Grid Grid2 
+      Height          =   3015
+      Left            =   2400
+      TabIndex        =   138
+      Tag             =   "1"
+      Top             =   5200
+      Width           =   9915
+      _Version        =   65536
+      _ExtentX        =   17489
+      _ExtentY        =   5318
+      _StockProps     =   77
+      BackColor       =   16777215
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      BorderStyle     =   0
+      Rows            =   30
+      Cols            =   8
+      FixedRows       =   0
+      FixedCols       =   0
+   End
+   Begin VB.Label lblTongCT 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Tæng sè chøng tõ"
+      Height          =   255
+      Left            =   10920
+      TabIndex        =   198
+      Top             =   120
+      Width           =   2175
+   End
+   Begin VB.Label Label5 
+      Caption         =   "Label5"
+      Height          =   255
+      Left            =   10680
+      TabIndex        =   197
+      Top             =   6840
+      Width           =   735
    End
    Begin MSForms.TextBox txtDiaChi 
       Height          =   330
@@ -10920,10 +10937,17 @@ Function kiemtralicenkey() As Boolean
     Dim KT As Boolean
     KT = True
     Dim rss As Recordset
+    Dim tongsoct As Long
 
+    tongsoct = val(SelectSQL( _
+                   "SELECT Count(*) as f1 FROM (SELECT DISTINCT MacT FROM ChungTu WHERE SoHieu NOT LIKE '*GV*') AS T" _
+                   ))
+    lblTongCT.Caption = "Tæng sè chøng tõ :" & tongsoct
     'N?u dang ky vinh vien
     If types = 1 And sochungtu > 0 Then
-        If (SelectSQL("SELECT count(*) as F1 FROM HoaDon ") >= sochungtu) Then
+        'If (SelectSQL("SELECT count(*) as F1 FROM HoaDon ") >= sochungtu) Then
+
+        If (tongsoct >= sochungtu) Then
             Command(0).Enabled = False
             Command(1).Enabled = False
             KT = False
@@ -10934,7 +10958,8 @@ Function kiemtralicenkey() As Boolean
 
     End If
     If types = 2 And sochungtu <> 0 Then
-        If (SelectSQL("SELECT count(*) as F1 FROM HoaDon ") >= sochungtu) Then
+        'If (SelectSQL("SELECT count(*) as F1 FROM HoaDon ") >= sochungtu) Then
+        If (tongsoct >= sochungtu) Then
             Command(0).Enabled = False
             Command(1).Enabled = False
             KT = False
@@ -10944,9 +10969,14 @@ Function kiemtralicenkey() As Boolean
         End If
     End If
     If types = -1 Then
-        Command(0).Enabled = False
-        Command(1).Enabled = False
-        KT = False
+        If (SelectSQL("SELECT count(*) as F1 FROM HoaDon ") >= 200) Then
+            Command(0).Enabled = False
+            Command(1).Enabled = False
+            KT = False
+        Else
+            Command(0).Enabled = True
+            Command(1).Enabled = True
+        End If
     End If
 
     ' Ðóng Recordset
@@ -11285,7 +11315,7 @@ Private Sub Form_Load()
 
     ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD phantramchietkhau text")
     ExecuteSQL5_Themmoi ("ALTER TABLE chungtu  ADD sotienchietkhau text")
-    
+
     ColumnSetUp GrdChungtu, 0, 340, 2  '340, 2
     ColumnSetUp GrdChungtu, 1, 1060 + 20 - 300, 2
     ColumnSetUp GrdChungtu, 2, 2260 + 600, 0

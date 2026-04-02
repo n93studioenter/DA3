@@ -3,10 +3,10 @@ Begin VB.Form FrmGetStr
    AutoRedraw      =   -1  'True
    BackColor       =   &H00FFFFC0&
    BorderStyle     =   0  'None
-   ClientHeight    =   3975
+   ClientHeight    =   1455
    ClientLeft      =   2385
    ClientTop       =   3825
-   ClientWidth     =   6795
+   ClientWidth     =   6840
    ClipControls    =   0   'False
    ControlBox      =   0   'False
    BeginProperty Font 
@@ -23,8 +23,8 @@ Begin VB.Form FrmGetStr
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
    MinButton       =   0   'False
-   ScaleHeight     =   3975
-   ScaleWidth      =   6795
+   ScaleHeight     =   1455
+   ScaleWidth      =   6840
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
@@ -238,7 +238,7 @@ Private Sub lblClose_Click()
 End Sub
 Private Sub picFakeTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     ReleaseCapture
-    SendMessage Me.hWnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
+    SendMessage Me.hwnd, WM_NCLBUTTONDOWN, HTCAPTION, 0
 End Sub
 Private Sub lblTitle_MouseDown(Index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
     picFakeTitle_MouseDown Button, Shift, X, Y

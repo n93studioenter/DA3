@@ -1205,7 +1205,7 @@ Private Sub UpdateMacuser(tong As Integer, mac As String)
 
     Set rsCount = DBKetoan.OpenRecordset( _
                   "SELECT MacAddress FROM Users ", dbOpenSnapshot)
-    If IsNull(rsCount!MacAddress) And tong = 1 Then
+    If IsNull(rsCount!macAddress) And tong = 1 Then
         ExecuteSQL5 "UPDATE Users SET MacAddress='" & Replace(mac, "'", "''") & "'"
     End If
 
@@ -1223,9 +1223,9 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
                   "SELECT COUNT(*) AS Tong FROM Users ", dbOpenSnapshot)
     Dim chinhchu As Boolean
     Dim mac As String
-    'mac = GetMacAddress()
+    mac = GetMacAddress()
     'mac = "3f:cd:e2:c5:c0:71"
-    mac = "5e:3e:70:b5:1c:1c"
+    'mac = "5e:3e:70:b5:1c:1c"
     'Kiem tra danh sach user co dia chi nay khong
     Dim rs_checkus As Recordset
 
@@ -1235,7 +1235,7 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
     If Not rs_checkus.EOF Then
         chinhchu = True
     Else
-        If rsCount!tong = 1 And IsNull(rsMac!MacAddress) Then
+        If rsCount!tong = 1 And IsNull(rsMac!macAddress) Then
             chinhchu = True
         Else
             chinhchu = False
@@ -1267,7 +1267,7 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
 
     Dim rs_mk As Recordset
 
-    If IsNull(rsMac!MacAddress) Then
+    If IsNull(rsMac!macAddress) Then
         Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users ", dbOpenSnapshot, dbForwardOnly)
     Else
         Set rs_mk = DBKetoan.OpenRecordset("SELECT Users.* FROM Users WHERE MacAddress = '" & Replace(mac, "'", "''") & "'", dbOpenSnapshot, dbForwardOnly)
