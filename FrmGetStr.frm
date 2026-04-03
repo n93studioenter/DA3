@@ -205,7 +205,7 @@ Public Function GetString(des As String, Title As String, Optional ans As String
 End Function
 
 Private Sub Command1_Click()
- Clipboard.Clear
+     Clipboard.Clear
   Clipboard.SetText Trim(Label1.Caption)
 End Sub
 
