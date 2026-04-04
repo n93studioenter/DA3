@@ -693,8 +693,7 @@ Public Function GhiChungtuTH(Optional p As Integer = 0, Optional r As Integer = 
     Dim Ngayimport As Date
     If FThuChi.FThuChiForm <> 0 Then
         Ngayimport = Now
-    Else
-        Ngayimport = ""
+   
     End If
 
     sql = "INSERT INTO Chungtu" + sh + " (MaCT, MaLoai, SoHieu, ThangCT, NgayCT, NgayGS, MaNguon, MaKho, DienGiai, " + IIf(pSongNgu, "DienGiaiE,", "") _

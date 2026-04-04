@@ -13,7 +13,8 @@ Option Explicit
 
 
 
-
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
+Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Public Const CLR_MENU_NORMAL As Long = &HE0E0E0
 Public Const CLR_MENU_HOVER As Long = &HC0C0FF
@@ -144,6 +145,24 @@ Public Function VniToUnicode2(ByVal sVNI As String) As String
     Next i
 
     VniToUnicode2 = result
+End Function
+Public Function GetMacAddress() As String
+    Const OFFSET_LENGTH As Long = 400
+    Dim lSize As Long
+    Dim baBuffer() As Byte
+    Dim lIdx As Long
+    Dim sRetVal As String
+
+    Call GetAdaptersInfo(ByVal 0, lSize)
+    If lSize <> 0 Then
+        ReDim baBuffer(0 To lSize - 1) As Byte
+        Call GetAdaptersInfo(baBuffer(0), lSize)
+        Call CopyMemory(lSize, baBuffer(OFFSET_LENGTH), 4)
+        For lIdx = OFFSET_LENGTH + 4 To OFFSET_LENGTH + 4 + lSize - 1
+            sRetVal = IIf(LenB(sRetVal) <> 0, sRetVal & ":", vbNullString) & Right$("0" & Hex$(baBuffer(lIdx)), 2)
+        Next
+    End If
+    GetMacAddress = sRetVal
 End Function
 Public Sub AnControl(frm As Form)
     Dim ctl As Control

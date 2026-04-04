@@ -2,12 +2,12 @@ VERSION 5.00
 Begin VB.Form FrmGetStr2 
    BackColor       =   &H00FFFFC0&
    Caption         =   """NhËp m· sè cµi ®Æt"""
-   ClientHeight    =   1200
+   ClientHeight    =   1275
    ClientLeft      =   60
    ClientTop       =   345
    ClientWidth     =   7320
    LinkTopic       =   "Form4"
-   ScaleHeight     =   1200
+   ScaleHeight     =   1275
    ScaleWidth      =   7320
    StartUpPosition =   2  'CenterScreen
    Begin VB.TextBox Text 
@@ -125,13 +125,34 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+Option Explicit
+Dim bakStr As String
+Public Status As Integer
+
 Private Sub Command1_Click()
     Clipboard.Clear
     Clipboard.SetText Trim(Text1.Text)
 End Sub
+Public Function CheckLicense() As Boolean
+    FrmOptions.active_Click
+    
+    If FrmOptions.KiemTraKey(bakStr) = True Then
+        CheckLicense = True
+    Else
+        Dim s As String
+        s = ChrW(75) & ChrW(101) & ChrW(121) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(108) & ChrW(7879)
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+        CheckLicense = False
+    End If
+
+End Function
+
 
 Private Sub Text_Change(Index As Integer)
     Dim a() As String
+    If bakStr = "" Then
+        bakStr = Text(0).Text
+    End If
     On Error GoTo Error_Handler
     If (Len(Text(0).Text) > 13) Then
         a = Split(Text(0).Text, "*")
@@ -139,10 +160,10 @@ Private Sub Text_Change(Index As Integer)
         Text(1).Text = a(1)
         Text(2).Text = a(2)
         Text(3).Text = a(3)
-        Dim a2() As String
-        a2 = Split(a(4), "-")
-        Text(4).Text = a2(0)
-        Text(5).Text = a2(1)
+        Dim A2() As String
+        A2 = Split(a(4), "-")
+        Text(4).Text = A2(0)
+        Text(5).Text = A2(1)
     End If
 Error_Handler:
 End Sub
@@ -151,8 +172,24 @@ Private Sub Form_Load()
 End Sub
 Private Sub Form_KeyPress(KeyAscii As Integer)
     Select Case KeyAscii
-    Case 13: Me.Hide
-
+    Case 13:
+        Me.Hide
+        'reset number
+        Text(0).Text = ""
+        Text(1).Text = ""
+        Text(2).Text = ""
+        Text(3).Text = ""
+        Text(4).Text = ""
+        Text(5).Text = ""
+        
+        If FrmOptions.KiemTraKey(bakStr) = True Then
+            FrmOptions.UpdateLicnes
+            ' Unload Me
+        Else
+            Dim s As String
+            s = ChrW(272) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(7845) & ChrW(116) & ChrW(32) & ChrW(98) & ChrW(7841) & ChrW(105)
+            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+        End If
     Case 27: Text(0).Text = ""
         Me.Hide
     End Select
