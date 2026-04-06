@@ -126,7 +126,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
-Dim bakStr As String
+Public bakStr As String
 Public Status As Integer
 
 Private Sub Command1_Click()
@@ -138,6 +138,7 @@ Public Function CheckLicense() As Boolean
     
     If FrmOptions.KiemTraKey(bakStr) = True Then
         CheckLicense = True
+        bakStr = ""
     Else
         Dim s As String
         s = ChrW(75) & ChrW(101) & ChrW(121) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(108) & ChrW(7879)
@@ -181,9 +182,10 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
         Text(3).Text = ""
         Text(4).Text = ""
         Text(5).Text = ""
-        
+
         If FrmOptions.KiemTraKey(bakStr) = True Then
             FrmOptions.UpdateLicnes
+
             ' Unload Me
         Else
             Dim s As String

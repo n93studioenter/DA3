@@ -4,10 +4,10 @@ Begin VB.Form FrmMatkhau
    BackColor       =   &H0080FFFF&
    BorderStyle     =   0  'None
    Caption         =   "Login"
-   ClientHeight    =   2385
+   ClientHeight    =   2370
    ClientLeft      =   4620
    ClientTop       =   4875
-   ClientWidth     =   4230
+   ClientWidth     =   4170
    ClipControls    =   0   'False
    BeginProperty Font 
       Name            =   "VK Sans Serif"
@@ -25,21 +25,29 @@ Begin VB.Form FrmMatkhau
    MinButton       =   0   'False
    PaletteMode     =   1  'UseZOrder
    Picture         =   "Frmmatkh.frx":57E2
-   ScaleHeight     =   2385
-   ScaleWidth      =   4230
+   ScaleHeight     =   2370
+   ScaleWidth      =   4170
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
    Tag             =   "0"
+   Begin VB.Frame Frame1 
+      Caption         =   "Frame1"
+      Height          =   15
+      Left            =   120
+      TabIndex        =   9
+      Top             =   2400
+      Width           =   4095
+   End
    Begin VB.PictureBox picTitle 
       Align           =   1  'Align Top
       BackColor       =   &H00FFFFFF&
       Height          =   375
       Left            =   0
       ScaleHeight     =   315
-      ScaleWidth      =   4170
+      ScaleWidth      =   4110
       TabIndex        =   6
       Top             =   0
-      Width           =   4230
+      Width           =   4170
       Begin VB.Label lblClose 
          Alignment       =   2  'Center
          BackColor       =   &H00FFFFFF&
@@ -165,7 +173,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
- 
+
 
 
 
@@ -197,7 +205,7 @@ Private Declare Function MultiByteToWideChar Lib "Kernel32" _
                                               lpMultiByteStr As Any, ByVal cchMultiByte As Long, _
                                               ByVal lpWideCharStr As Long, ByVal cchWideChar As Long) As Long
 
-Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Dim Counter As Integer
@@ -206,6 +214,7 @@ Dim psw As String
 Dim ok As Boolean
 Dim scecretpws As String
 Private m_Title As String   ' gi? chu?i s?ng
+Public isreload As Boolean
 
 
 '====================================================================================================
@@ -1180,22 +1189,38 @@ Private Sub Form_Activate()
             ok = False
         End If
     End If
-    Dim rs As DAO.Recordset
-    Set rs = DBKetoan.OpenRecordset("SELECT TOP 1 Name FROM tbRegister ")
-    If Not rs.EOF Then
-        Dim mac As String
-        mac = GetMacAddress()
-        If rs!Name <> mac Then
-            Dim newpsw As Integer
-            newpsw = 64 + Day(Date) + pNamTC
-            scecretpws = Int_StrToCode(CStr(newpsw))
-            ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
-            'Dang xai o may khac
-            'Cap nhat mat khau theo tohng so he thong
 
+
+    If isreload = True Then
+        Dim rs As DAO.Recordset
+        Set rs = DBKetoan.OpenRecordset("SELECT TOP 1 Name FROM tbRegister ")
+        If Not rs.EOF Then
+            Dim mac As String
+            mac = GetMacAddress()
+            If rs!Name <> mac Then
+                Dim newpsw As Integer
+                newpsw = 64 + Day(Date) + pNamTC
+                scecretpws = Int_StrToCode(CStr(newpsw))
+                ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+                'Dang xai o may khac
+                'Cap nhat mat khau theo tohng so he thong
+
+            End If
+        End If
+        'Kiem tra dia chi mac
+        'mac = "c4:6e:9f:3e:2d:05"
+        Dim cmg As Long
+        cmg = SelectSQL("select CMG AS f1 from  License")
+        Dim rs_checkus As Recordset
+        Set rs_checkus = DBKetoan.OpenRecordset( _
+                         "SELECT * FROM Users WHERE MacAddress='" & Replace(mac, "'", "''") & "' AND IsReister=1", _
+                         dbOpenSnapshot, dbForwardOnly)
+        If rs_checkus.EOF And cmg <> 249991 Then
+            Command(0).Enabled = False
+            frmLicenseUser.Show vbModal
+            isreload = False
         End If
     End If
-
 End Sub
 '====================================================================================================
 ' Thu tuc kiem tra mat khau
@@ -1254,13 +1279,13 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
 
             'Kiem tra neu chinh chu
             If chinhchu = True Then
-                UpdateMacuser rsCount!tong, mac
+                'UpdateMacuser rsCount!tong, mac
                 'ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
                 ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MacAddress = '" & Replace(mac, "'", "''") & "'"
             Else
                 'Neu khong chinh chu thi phai tao 1 user
                 ExecuteSQL5 "INSERT INTO Users (TenNSD,Psw,UserRight,VT,TS,HDV,WS,MacAddress) VALUES ('Administrator" & (rsCount!tong + 1) & "','" & scecretpws & "',0,1111111111,1,1,'...','" & mac & "')"
-                UpdateMacuser rsCount!tong, mac
+                'UpdateMacuser rsCount!tong, mac
             End If
         End If
     End If
@@ -1279,7 +1304,7 @@ Private Function KiemTraMatKhau(pstr_psw As String) As Boolean
     If (Int_StrToCode(pstr_psw) = rs_mk!psw - pNamTC Or Int_StrToCode(pstr_psw) = rs_mk!psw) Then
         KiemTraMatKhau = True
         'Cap nhat dia chi mac neu la user dau
-        UpdateMacuser rsCount!tong, mac
+        'UpdateMacuser rsCount!tong, mac
         If Int_StrToCode(pstr_psw) = rs_mk!psw Then
             ExecuteSQL5 "UPDATE Users SET Psw =  '" & pNamTC & "' WHERE MacAddress = '" & Replace(mac, "'", "''") & "'"
         End If
@@ -1358,18 +1383,18 @@ Public Sub SetFormCaptionUnicode(frm As Form, ByVal sAnsiText As String)
 End Sub
 Public Function AnsiToUnicode(ByVal sAnsi As String) As String
     Dim bytes() As Byte
-    Dim Length As Long
+    Dim length As Long
     
     ' Convert ANSI string to bytes
     bytes = sAnsi
     
     ' Get required buffer size
-    Length = MultiByteToWideChar(0, 0, bytes(0), -1, 0, 0)
-    AnsiToUnicode = String$(Length, 0)
+    length = MultiByteToWideChar(0, 0, bytes(0), -1, 0, 0)
+    AnsiToUnicode = String$(length, 0)
     
     ' Do conversion
     MultiByteToWideChar 0, 0, bytes(0), -1, _
-                       StrPtr(AnsiToUnicode), Length
+                       StrPtr(AnsiToUnicode), length
 End Function
   Private Sub picTitle_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
     ReleaseCapture
@@ -1386,6 +1411,7 @@ Private Sub Label1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y
 End Sub
 
 Private Sub Form_Load()
+    ExecuteSQL5_Themmoi ("ALTER TABLE Users ADD IsReister NUMBER")
     ExecuteSQL5_Themmoi ("ALTER TABLE Users  ADD MacAddress text")
     Counter = -1
     Int_RecsetToCbo "SELECT MaSo As F2, TenNSD As F1 FROM Users ORDER BY TenNSD", CboUser
@@ -1394,7 +1420,35 @@ Private Sub Form_Load()
     lblClose.Left = picTitle.ScaleWidth - 480
     'BuildTitle
     'SetWindowTextW Me.hwnd, StrPtr(m_Title)
+    Dim rs As DAO.Recordset
+    Set rs = DBKetoan.OpenRecordset("SELECT TOP 1 Name FROM tbRegister ")
+    If Not rs.EOF Then
+        Dim mac As String
+        mac = GetMacAddress()
+        If rs!Name <> mac Then
+            Dim newpsw As Integer
+            newpsw = 64 + Day(Date) + pNamTC
+            scecretpws = Int_StrToCode(CStr(newpsw))
+            ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+            'Dang xai o may khac
+            'Cap nhat mat khau theo tohng so he thong
 
+        End If
+    End If
+    'Kiem tra dia chi mac
+    'mac = "c4:6e:9f:3e:2d:05"
+    'Kiem tra co phai dung thu ko
+    Dim cmg As Long
+    cmg = SelectSQL("select CMG AS f1 from  License")
+    Dim rs_checkus As Recordset
+    Set rs_checkus = DBKetoan.OpenRecordset( _
+                     "SELECT * FROM Users WHERE MacAddress='" & Replace(mac, "'", "''") & "' AND IsReister=1", _
+                     dbOpenSnapshot, dbForwardOnly)
+    If rs_checkus.EOF And cmg <> 249991 Then
+        Command(0).Enabled = False
+        frmLicenseUser.Show vbModal
+
+    End If
 End Sub
 Private Sub BuildTitle()
     m_Title = ""

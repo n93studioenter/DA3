@@ -377,17 +377,17 @@ End Function
 ' Function Int_StrToCode : H¡m tr¢ vÌ m£ sä cía måt chuãi
 '======================================================================================
 Public Function Int_StrToCode(str As String) As Long
-    Dim i As Long, Length As Integer, k As Long, kq As Long
+    Dim i As Long, length As Integer, k As Long, kq As Long
     
-    Length = Len(str)
-    If Length > 0 Then
-        If Length > 12 Then
-            For i = Length To 1 Step -1
+    length = Len(str)
+    If length > 0 Then
+        If length > 12 Then
+            For i = length To 1 Step -1
                 k = Asc(Right(str, i))
                 kq = kq + 2 * i * (k ^ 2)
             Next
         Else
-            For i = Length To 1 Step -1
+            For i = length To 1 Step -1
                 k = Asc(Right(str, i))
                 kq = kq + 8 * i * (k ^ 3)
             Next
@@ -397,12 +397,12 @@ Public Function Int_StrToCode(str As String) As Long
 End Function
 
 Public Function Int_StrToCodes(str As String) As Long
-    Dim i As Long, Length As Integer, k As Long, kq As Long
+    Dim i As Long, length As Integer, k As Long, kq As Long
     
-    Length = Len(str)
-    If Length > 0 Then
-        If Length > 12 Then
-            For i = Length To 1 Step -1
+    length = Len(str)
+    If length > 0 Then
+        If length > 12 Then
+            For i = length To 1 Step -1
                 k = Asc(Right(str, i))
                 If (k Mod 2 = 0) Then
                     kq = kq + 4 * i * (k ^ 2)
@@ -411,7 +411,7 @@ Public Function Int_StrToCodes(str As String) As Long
                 End If
             Next
         Else
-            For i = Length To 1 Step -1
+            For i = length To 1 Step -1
                 k = Asc(Right(str, i))
                 If (k Mod 2 = 0) Then
                     kq = kq + 8 * i * (k ^ 3)
@@ -435,7 +435,7 @@ Public Function boolean_kiemtra() As Boolean
     Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
     st = rs!CMP
    ' If (Int_StrToCodes(st) = rs!CMG) And (Int_StrToCodes(str(rs!nam)) = rs!namCode) Then KT = True
-    If (Int_StrToCodes(st) = rs!CMG) Then
+    If (Int_StrToCodes(st) = rs!cmg) Then
                     KT = True
              
     End If
@@ -557,7 +557,7 @@ End Sub
 ' Hµm ®æi chuçi sè cã 2 sè thËp ph©n thµnh chuçi cã dÊu thËp ph©n lµ '.'
 '======================================================================================
 Public Function DoiDau(so As Double)
-    Dim Length As Integer, pos As Integer, st As String
+    Dim length As Integer, pos As Integer, st As String
     so = Fix(IIf(so >= 0, 0.5, -0.5) + so * 100) / 100
     st = CStr(so)
     pos = IIf(sDecimal = ",", InStr(st, "."), InStr(st, ","))
@@ -567,8 +567,8 @@ Public Function DoiDau(so As Double)
     Loop
     pos = InStr(st, sDecimal)
     If pos > 0 Then
-        Length = Len(st)
-        DoiDau = Left(st, pos - 1) + "." + Right(st, Length - pos)
+        length = Len(st)
+        DoiDau = Left(st, pos - 1) + "." + Right(st, length - pos)
     Else
         DoiDau = st
     End If
@@ -985,10 +985,10 @@ Public Sub SetFont(frm As Form, Optional c As Integer = 0)
 End Sub
 
 Public Function CurrentDrive() As String
-    Dim retValue As Long, Buffer As String * 255
+    Dim retValue As Long, buffer As String * 255
     
-    retValue = GetWindowsDirectory(Buffer, 255)
-    CurrentDrive = Left(Buffer, 2)
+    retValue = GetWindowsDirectory(buffer, 255)
+    CurrentDrive = Left(buffer, 2)
 End Function
 
 Public Function ABCtoVNI(st As String) As String
@@ -2230,9 +2230,9 @@ End Function
 
 Public Function GetWinDir() As String
     ' returns Windows directory
-    Dim Buffer As String * 254, r As Long, sDir As String
-    r = GetWindowsDirectory(Buffer, 254)
-    sDir = Left(Buffer, r)
+    Dim buffer As String * 254, r As Long, sDir As String
+    r = GetWindowsDirectory(buffer, 254)
+    sDir = Left(buffer, r)
     If Right(sDir, 1) = "\" Then sDir = Left(sDir, Len(sDir) - 1)
     GetWinDir = sDir
 End Function

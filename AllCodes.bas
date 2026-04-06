@@ -9,11 +9,19 @@ Attribute VB_Name = "AllCodes"
 'To add more Barcode types, just continue to build functions that make the appropriate sBar String
 Option Explicit
 
+Private Type IP_ADAPTER_INFO
+    Next As Long
+    ComboIndex As Long
+    AdapterName As String * 260
+    Description As String * 132
+    AddressLength As Long
+    Address(0 To 7) As Byte
+    ' b? qua ph?n còn l?i n?u không dùng
+End Type
 
 
 
-
-Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal Length As Long)
+Private Declare Sub CopyMemory Lib "Kernel32" Alias "RtlMoveMemory" (Destination As Any, source As Any, ByVal length As Long)
 Private Declare Function GetAdaptersInfo Lib "iphlpapi" (lpAdapterInfo As Any, lpSize As Long) As Long
 
 Public Const CLR_MENU_NORMAL As Long = &HE0E0E0
@@ -103,6 +111,15 @@ Public SL_XXXX As Double
 Dim sBar As String, i0 As Integer, i1 As Integer
 Attribute i0.VB_VarUserMemId = 1073741826
 Attribute i1.VB_VarUserMemId = 1073741826
+Public Function IsValidMST_Format(ByVal mst As String) As Boolean
+    Dim s As String
+    s = Replace(Trim(mst), "-", "")
+    
+    ' Ch? ch?p nh?n 10 ho?c 13 s?
+    If (Len(s) = 10 Or Len(s) = 13 Or Len(s) = 12) And IsNumeric(s) Then
+        IsValidMST_Format = True
+    End If
+End Function
 Public Function VniToUnicode2(ByVal sVNI As String) As String
     Dim VNI As String, UNI As String
     Dim arrVNI() As String, arrUNI() As String
@@ -146,7 +163,7 @@ Public Function VniToUnicode2(ByVal sVNI As String) As String
 
     VniToUnicode2 = result
 End Function
-Public Function GetMacAddress() As String
+Public Function GetMacAddress2() As String
     Const OFFSET_LENGTH As Long = 400
     Dim lSize As Long
     Dim baBuffer() As Byte
@@ -162,7 +179,37 @@ Public Function GetMacAddress() As String
             sRetVal = IIf(LenB(sRetVal) <> 0, sRetVal & ":", vbNullString) & Right$("0" & Hex$(baBuffer(lIdx)), 2)
         Next
     End If
-    GetMacAddress = sRetVal
+    GetMacAddress2 = sRetVal
+End Function
+
+Public Function GetMacAddress() As String
+    Dim ai As IP_ADAPTER_INFO
+    Dim lSize As Long
+    Dim ret As Long
+    Dim i As Integer
+    Dim sMac As String
+
+    ' L?y size c?n thi?t
+    ret = GetAdaptersInfo(ByVal 0&, lSize)
+
+    If lSize > 0 Then
+        Dim buffer() As Byte
+        ReDim buffer(0 To lSize - 1)
+
+        ret = GetAdaptersInfo(buffer(0), lSize)
+
+        If ret = 0 Then
+            ' copy struct d?u tiên
+            CopyMemory ai, buffer(0), Len(ai)
+
+            For i = 0 To ai.AddressLength - 1
+                sMac = sMac & Right$("0" & Hex$(ai.Address(i)), 2)
+                If i < ai.AddressLength - 1 Then sMac = sMac & ":"
+            Next
+
+            GetMacAddress = sMac
+        End If
+    End If
 End Function
 Public Sub AnControl(frm As Form)
     Dim ctl As Control

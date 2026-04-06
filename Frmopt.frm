@@ -3416,12 +3416,23 @@ Private Function DecodeString(ByVal code As String) As String
 
     DecodeString = CStr(num)
 End Function
+
 Public Sub active_Click()
+
+   
+    If IsValidMST_Format(Text(7).Text) = False Then
+        'MsgBox "MST khong hop le"
+        Dim s As String
+        s = ChrW(77) & ChrW(227) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(117) & ChrW(7871) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(108) & ChrW(7879)
+        MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
+        Exit Sub
+    End If
+
     Dim checkactive As Boolean
     checkactive = active.Visible
     Dim strValue As String
     If Option2.Value = True Then
-        Dim s As String
         ' MsgBox "Vui long nhap so nam"
         If Text1.Text = "0" Then
 
@@ -3466,8 +3477,8 @@ Public Sub active_Click()
     Dim decoded1 As String, decoded2 As String
     Dim random1 As Integer, random2 As Integer
 
-    encoded1 = EncodeMST8(mst10, randomNum)
-    decoded1 = DecodeMST8(encoded1, randomNum)
+    encoded1 = EncodeMST14(mst10, randomNum)
+    decoded1 = DecodeMST14(encoded1, randomNum)
     If decoded1 <> mst10 Then
         MsgBox "Chua can"
         encoded1 = EncodeMST8(mst10, randomNum)
@@ -3505,7 +3516,7 @@ Public Sub active_Click()
     formatted = FormatMAC(decoded)
     'So chung tu phai nho hon 1 tr 6
     Dim license As String
-    license = EncodeLicense6(350000, randomNum)
+    license = EncodeLicense6(CLng(Text2.Text), randomNum)
     Debug.Print "1 -> " & license
     Debug.Print DecodeLicense6(license, randomNum)    ' 1
 
@@ -3525,10 +3536,12 @@ Public Sub active_Click()
         If Option1.Value = True Then
             MsgBox "Dang ky vinh vien thanh cong"
             ExecuteSQL5 "Update tbLicensekey set Type=1,Year=0,Totals=0"
+
         Else
             MsgBox "Dang ky " & Text1.Text & " nam thanh cong"
             ExecuteSQL5 "UPDATE tbLicensekey SET Type = 2, Year = '" & Text1.Text & "|" & pNamTC & "', Totals = '" & Text2.Text & "'"
         End If
+        Unload FrmGetStr2
         isNewActive = True
         Command_Click 0
 
@@ -3538,6 +3551,9 @@ Public Sub active_Click()
     End If
 End Sub
 Public Function KiemTraKey(strkey As String) As Boolean
+    If strkey = "" Then
+        Exit Function    ' ? thoát ngay t?i dây
+    End If
     Dim ktbtnlc As Boolean
     ktbtnlc = active.Visible
     'Lay thong tin key ra truoc
@@ -3545,7 +3561,7 @@ Public Function KiemTraKey(strkey As String) As Boolean
     a = Split(strkey, "*")
     'Lay ra mst truoc
     Dim mst As String
-    mst = DecodeMST8(a(1), CLng(a(0)))
+    mst = DecodeMST14(a(1), CLng(a(0)))
 
     'Kiem tra MST cong ty
     If mst <> Text(7).Text Then
@@ -3553,6 +3569,7 @@ Public Function KiemTraKey(strkey As String) As Boolean
         s = ChrW(77) & ChrW(227) & ChrW(32) & ChrW(115) & ChrW(7889) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(117) & ChrW(7871) & ChrW(32) & ChrW(273) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(273) & ChrW(250) & ChrW(110) & ChrW(103)
         MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
         KiemTraKey = False
+        Exit Function
     End If
 
     'Kiem tra dia chi mac
@@ -3564,11 +3581,12 @@ Public Function KiemTraKey(strkey As String) As Boolean
         s = ChrW(272) & ChrW(7883) & ChrW(97) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(7881) & ChrW(32) & ChrW(77) & ChrW(97) & ChrW(99) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(104) & ChrW(7907) & ChrW(112) & ChrW(32) & ChrW(108) & ChrW(7879)
         MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
         KiemTraKey = False
+        Exit Function
     End If
     KiemTraKey = True
     'Neu dia chi Mac hop le thi cap nhat data
     isNewActive = True
-    
+
 End Function
 Public Sub UpdateLicnes()
 
@@ -3602,9 +3620,16 @@ Public Sub UpdateLicnes()
             MsgBox "Dang ky " & bakSonam & " nam thanh cong"
             ExecuteSQL5 "UPDATE tbLicensekey SET Type = 2, Year = '" & bakSonam & "|" & pNamTC & "', Totals = '" & bakTotal & "'"
         End If
-
+        Unload FrmGetStr2
         st = rs!CMP
         ExecuteSQL5 "UPDATE license SET CMG = " + str(Int_StrToCodes(st)) + ",namcode = " + str(Int_StrToCodes(str(rs!nam)))
+
+        'Update cho user
+        Dim mac As String
+        mac = GetMacAddress()
+        'ExecuteSQL5 "UPDATE Users SET MacAddress='" & Replace(mac, "'", "''") & "'"
+        ExecuteSQL5 "UPDATE Users SET IsReister=1, Psw='" & pNamTC & "', MacAddress='" & mac & "'"
+        frmMain.Label5.Visible = False
         Unload Me
     End If
 
@@ -3684,7 +3709,8 @@ ErrorHandler:
 End Function
 
 Private Sub Form_Activate()
-'Load thong tin folder server path
+    LoadInfo
+    'Load thong tin folder server path
     Dim originPath As String
     Dim content As String
     originPath = App.path
@@ -4425,4 +4451,124 @@ Private Sub HienNoiBo()
         Check(55).Value = 0
     End If
 End Sub
+
+'end code mst moi
+Public Function EncodeMST14(ByVal mst As String, ByRef randomNum As Long) As String
+    Dim cleanMST As String
+    Dim totalLen As Integer
+    Dim p1 As String, p2 As String
+    Dim len1 As Integer, len2 As Integer
+    
+    On Error GoTo ErrorHandler
+    
+    cleanMST = Replace(mst, "-", "")
+    
+    If Not IsNumeric(cleanMST) Then GoTo ErrorHandler
+    
+    totalLen = Len(cleanMST)
+    
+    Select Case totalLen
+        Case 10
+            len1 = 5: len2 = 5
+        Case 12
+            len1 = 6: len2 = 6
+        Case 13
+            len1 = 6: len2 = 7
+        Case Else
+            GoTo ErrorHandler
+    End Select
+    
+    p1 = Left(cleanMST, len1)
+    p2 = Right(cleanMST, len2)
+    
+    Randomize
+    randomNum = Int((RANDOM_MAX - RANDOM_MIN + 1) * Rnd + RANDOM_MIN)
+    
+    p1 = MixString(p1, randomNum)
+    p2 = MixString(p2, randomNum)
+    
+    EncodeMST14 = ToBase36_2(randomNum) & _
+                  ToBase36_1(len1) & ToBase36_1(len2) & _
+                  ToBase36_N(CLng(p1), 5) & _
+                  ToBase36_N(CLng(p2), 5)
+    Exit Function
+
+ErrorHandler:
+    EncodeMST14 = "ERROR"
+End Function
+
+' ==============================================
+' DECODE
+' ==============================================
+Public Function DecodeMST14(ByVal code As String, ByRef randomNum As Long) As String
+    Dim len1 As Integer, len2 As Integer
+    Dim rdn As Long
+    Dim p1 As String, p2 As String
+    Dim result As String
+
+    On Error GoTo ErrorHandler
+
+    If Len(code) <> 14 Then GoTo ErrorHandler
+
+    rdn = FromBase36_2(Left(code, 2))
+    randomNum = rdn
+
+    len1 = FromBase36_1(Mid(code, 3, 1))
+    len2 = FromBase36_1(Mid(code, 4, 1))
+
+    p1 = FromBase36_N(Mid(code, 5, 5))
+    p2 = FromBase36_N(Mid(code, 10, 5))
+
+    p1 = Right(String(len1, "0") & p1, len1)
+    p2 = Right(String(len2, "0") & p2, len2)
+
+    p1 = UnmixString(p1, rdn)
+    p2 = UnmixString(p2, rdn)
+
+    result = p1 & p2
+
+    ' auto format MST
+    If Len(result) = 13 Then
+        DecodeMST14 = Left(result, 10) & "-" & Right(result, 3)
+    Else
+        DecodeMST14 = result
+    End If
+
+    Exit Function
+
+ErrorHandler:
+    DecodeMST14 = "ERROR"
+End Function
+ Private Function ToBase36_2(ByVal num As Long) As String
+    ToBase36_2 = Mid(CHARSET, num \ 36 + 1, 1) & _
+                 Mid(CHARSET, num Mod 36 + 1, 1)
+End Function
+
+Private Function FromBase36_2(ByVal code As String) As Long
+    FromBase36_2 = (InStr(CHARSET, Mid(code, 1, 1)) - 1) * 36 + _
+                   (InStr(CHARSET, Mid(code, 2, 1)) - 1)
+End Function
+Private Function ToBase36_N(ByVal num As Long, ByVal length As Integer) As String
+    Dim result As String
+    
+    Do While num > 0
+        result = Mid(CHARSET, (num Mod 36) + 1, 1) & result
+        num = num \ 36
+    Loop
+    
+    ToBase36_N = Right(String(length, "0") & result, length)
+End Function
+
+Private Function FromBase36_N(ByVal code As String) As String
+    Dim i As Integer
+    Dim num As Double
+    
+    num = 0
+    
+    For i = 1 To Len(code)
+        num = num * 36 + (InStr(CHARSET, Mid(code, i, 1)) - 1)
+    Next i
+    
+    FromBase36_N = Format$(num, "0")
+End Function
 
