@@ -785,7 +785,7 @@ Private Sub Command_Click(Index As Integer)
             Dim mac As String
             mac = GetMacAddress()
             Dim sql As String
- 
+
             sql = "update tbRegister SET Name= ('" & mac & "');"
             DBKetoan.Execute sql
             Unload Me
@@ -827,7 +827,11 @@ Private Sub Command_Click(Index As Integer)
                 ExecuteSQL5 "UPDATE Users SET Psw = " + CStr(Int_StrToCode(psw) + pNamTC) + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
                 Unload FrmMatkhau
             Else
-                MsgBox "B¹n ch­a nhí ®óng mËt khÈu !", vbExclamation, App.ProductName
+                'MsgBox "B¹n ch­a nhí ®óng mËt khÈu !", vbExclamation, App.ProductName
+                
+                s = ChrW(66) & ChrW(7841) & ChrW(110) & ChrW(32) & ChrW(99) & ChrW(104) & ChrW(432) & ChrW(97) & ChrW(32) & ChrW(110) & ChrW(104) & ChrW(7899) & ChrW(32) & ChrW(273) & ChrW(250) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(109) & ChrW(7853) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(7849) & ChrW(117)
+                MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
                 RFocus txtPsw
             End If
         End Select
@@ -1129,6 +1133,8 @@ Private Sub AddDataLCTT()
     ExecuteSQL5 "Update LCTT set  TKNo=413, TKCo=11,Dau=-1 where MaSo=61 "
 End Sub
 Private Sub Form_Activate()
+    ExecuteSQL5_Themmoi ("ALTER TABLE Users ADD IsReister NUMBER")
+    ExecuteSQL5_Themmoi ("ALTER TABLE Users  ADD MacAddress text")
     AddDataLCTT
     Left = frmMain.ScaleWidth * 30 / 100
     Top = frmMain.ScaleHeight * 40 / 100
@@ -1201,10 +1207,9 @@ Private Sub Form_Activate()
                 Dim newpsw As Integer
                 newpsw = 64 + Day(Date) + pNamTC
                 scecretpws = Int_StrToCode(CStr(newpsw))
-                ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
-                'Dang xai o may khac
-                'Cap nhat mat khau theo tohng so he thong
-
+                MsgBox scecretpws
+                'ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+                
             End If
         End If
         'Kiem tra dia chi mac
@@ -1217,8 +1222,15 @@ Private Sub Form_Activate()
                          dbOpenSnapshot, dbForwardOnly)
         If rs_checkus.EOF And cmg <> 249991 Then
             Command(0).Enabled = False
-            frmLicenseUser.Show vbModal
+            'Kich hoat lai ma
+            frmLicenseUser.GenerateCode
             isreload = False
+            frmLicenseUser.Show vbModal
+        Else
+            If isreload = True Then
+                Command(0).Enabled = True
+            End If
+
         End If
     End If
 End Sub
@@ -1429,15 +1441,13 @@ Private Sub Form_Load()
             Dim newpsw As Integer
             newpsw = 64 + Day(Date) + pNamTC
             scecretpws = Int_StrToCode(CStr(newpsw))
-            ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
+            'ExecuteSQL5 "UPDATE Users SET Psw = " + scecretpws + " WHERE MaSo = " + CStr(CboUser.ItemData(CboUser.ListIndex))
             'Dang xai o may khac
             'Cap nhat mat khau theo tohng so he thong
 
         End If
     End If
-    'Kiem tra dia chi mac
-    'mac = "c4:6e:9f:3e:2d:05"
-    'Kiem tra co phai dung thu ko
+
     Dim cmg As Long
     cmg = SelectSQL("select CMG AS f1 from  License")
     Dim rs_checkus As Recordset

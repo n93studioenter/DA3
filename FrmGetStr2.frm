@@ -2,14 +2,22 @@ VERSION 5.00
 Begin VB.Form FrmGetStr2 
    BackColor       =   &H00FFFFC0&
    Caption         =   """NhËp m· sè cµi ®Æt"""
-   ClientHeight    =   1275
+   ClientHeight    =   1215
    ClientLeft      =   60
    ClientTop       =   345
-   ClientWidth     =   7320
+   ClientWidth     =   6885
    LinkTopic       =   "Form4"
-   ScaleHeight     =   1275
-   ScaleWidth      =   7320
+   ScaleHeight     =   1215
+   ScaleWidth      =   6885
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CommandButton Command2 
+      Caption         =   "Paste"
+      Height          =   375
+      Left            =   6000
+      TabIndex        =   10
+      Top             =   720
+      Width           =   735
+   End
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   5
@@ -53,33 +61,33 @@ Begin VB.Form FrmGetStr2
       MaxLength       =   13
       TabIndex        =   3
       Top             =   360
-      Width           =   1455
+      Width           =   1815
    End
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   2
-      Left            =   2520
+      Left            =   2760
       MaxLength       =   6
       TabIndex        =   2
       Top             =   360
-      Width           =   1000
+      Width           =   1005
    End
    Begin VB.TextBox Text 
       Height          =   285
       Index           =   3
-      Left            =   3600
+      Left            =   3840
       MaxLength       =   6
       TabIndex        =   1
       Top             =   360
-      Width           =   1000
+      Width           =   765
    End
    Begin VB.CommandButton Command1 
-      Caption         =   "C"
-      Height          =   255
-      Left            =   6840
+      Caption         =   "Copy"
+      Height          =   375
+      Left            =   5160
       TabIndex        =   0
-      Top             =   360
-      Width           =   375
+      Top             =   720
+      Width           =   735
    End
    Begin VB.Label Label 
       BackColor       =   &H00FFFFC0&
@@ -149,6 +157,16 @@ Public Function CheckLicense() As Boolean
 End Function
 
 
+Private Sub Command2_Click()
+    Text(0).SetFocus
+
+    ' 2. Dán n?i dung t? Clipboard vào TextBox1
+    Clipboard.GetText
+    Text(0).SelText = Clipboard.GetText()
+    Form_KeyPress 13
+
+End Sub
+
 Private Sub Text_Change(Index As Integer)
     Dim a() As String
     If bakStr = "" Then
@@ -165,6 +183,8 @@ Private Sub Text_Change(Index As Integer)
         A2 = Split(a(4), "-")
         Text(4).Text = A2(0)
         Text(5).Text = A2(1)
+        Form_KeyPress 13
+
     End If
 Error_Handler:
 End Sub
@@ -174,7 +194,7 @@ End Sub
 Private Sub Form_KeyPress(KeyAscii As Integer)
     Select Case KeyAscii
     Case 13:
-        Me.Hide
+
         'reset number
         Text(0).Text = ""
         Text(1).Text = ""
@@ -186,12 +206,15 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
         If FrmOptions.KiemTraKey(bakStr) = True Then
             FrmOptions.UpdateLicnes
 
-            ' Unload Me
+             Unload Me
         Else
             Dim s As String
             s = ChrW(272) & ChrW(259) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(107) & ChrW(253) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(7845) & ChrW(116) & ChrW(32) & ChrW(98) & ChrW(7841) & ChrW(105)
+
             MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+
         End If
+        'Me.Hide
     Case 27: Text(0).Text = ""
         Me.Hide
     End Select

@@ -1,4 +1,5 @@
 VERSION 5.00
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmLicenseUser 
    BorderStyle     =   0  'None
    ClientHeight    =   2550
@@ -20,6 +21,13 @@ Begin VB.Form frmLicenseUser
    ScaleWidth      =   7770
    ShowInTaskbar   =   0   'False
    StartUpPosition =   2  'CenterScreen
+   Begin MSComDlg.CommonDialog dlgCommonDialog 
+      Left            =   7080
+      Top             =   360
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
    Begin VB.PictureBox picFakeTitle 
       BackColor       =   &H00FFFFFF&
       BorderStyle     =   0  'None
@@ -925,13 +933,48 @@ End Function
 
 Private Sub Command2_Click()
 'Quen data
-    FrmMatkhau.Command(0).Enabled = True
-    FrmMatkhau.Refresh
-    Unload Me
+' FrmMatkhau.Command(0).Enabled = True
+'FrmMatkhau.Refresh
+'Unload Me
+'FrmMatkhau.isreload = True
     FrmMatkhau.isreload = True
-    frmMain.mnHT_Click 0
-
+    frmMain.mnHT_Click (0)
 End Sub
+Public Function ChonTenTep(Title As String, f As Long, mask As String, act As Integer) As String
+    With dlgCommonDialog
+        .InitDir = pCurDir + "data\"
+        .DialogTitle = Title
+        .Flags = f
+        .fileName = mask
+        .DefaultExt = mask
+        .Filter = "TÖp d÷ liÖu (" + mask + ")|" + mask + "|TÊt c¶ (*.*)|*.*"
+        On Error GoTo Xong
+        Select Case act
+        Case 1: .ShowOpen
+        Case 2: .ShowSave
+        Case 3: .ShowPrinter
+        Case 4: .ShowFont
+        End Select
+        On Error GoTo 0
+        If Len(.fileName) = 0 Or Left(.fileName, 1) = "*" Then GoTo Xong
+
+        If act = 2 Then
+            If Len(Dir(.fileName)) > 0 Then
+                If .fileName = pDataPath Then
+                    MsgBox "TÖp d÷ liÖu ®ang më !", vbCritical, App.ProductName
+                    GoTo Xong
+                End If
+                If MsgBox("TÖp " + .fileName + " ®· tån t¹i, tiÕp tôc ? !", vbQuestion + vbYesNo, App.ProductName) = vbNo Then GoTo Xong
+                If Recycle(.fileName) <> 0 Then
+                    MsgBox "Kh«ng xo¸ ®­îc tÖp " + dlgCommonDialog.fileName + " !", vbExclamation, App.ProductName
+                    GoTo Xong
+                End If
+            End If
+        End If
+        ChonTenTep = .fileName
+    End With
+Xong:
+End Function
 
 Private Sub Form_KeyPress(KeyAscii As Integer)
     Select Case KeyAscii
@@ -939,12 +982,13 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
         Command1_Click 1
     End Select
 End Sub
-Private Sub Command1_Click(Index As Integer)
-    Clipboard.Clear
-    Select Case Index
-    Case 0
-        Clipboard.SetText Trim(Label1(1).Caption)
-    Case 1
+Private Sub Kichhoatma()
+If Trim(Label1(1).Caption) = bakStr Then
+            Dim s As String
+            s = ChrW(75) & ChrW(237) & ChrW(99) & ChrW(104) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7841) & ChrW(116) & ChrW(32) & ChrW(107) & ChrW(104) & ChrW(244) & ChrW(110) & ChrW(103) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103)
+            MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
+            Exit Sub
+        End If
         If FrmOptions.KiemTraKey(bakStr) = True Then
             Dim mac As String
             mac = GetMacAddress()
@@ -969,7 +1013,6 @@ Private Sub Command1_Click(Index As Integer)
 
             End If
             'MsgBox "Kich hoat thanh cong"
-            Dim s As String
             s = ChrW(75) & ChrW(237) & ChrW(99) & ChrW(104) & ChrW(32) & ChrW(104) & ChrW(111) & ChrW(7841) & ChrW(116) & ChrW(32) & ChrW(116) & ChrW(104) & ChrW(224) & ChrW(110) & ChrW(104) & ChrW(32) & ChrW(99) & ChrW(244) & ChrW(110) & ChrW(103)
             MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
 
@@ -981,6 +1024,19 @@ Private Sub Command1_Click(Index As Integer)
             MessageBoxW Me.hwnd, StrPtr(s), StrPtr("Thông báo"), vbOKOnly
 
         End If
+End Sub
+
+Private Sub Command1_Click(Index As Integer)
+
+    Select Case Index
+    Case 0
+        Clipboard.Clear
+        Clipboard.SetText Trim(Label1(1).Caption)
+    Case 1
+        'Kichhoatma
+        Clipboard.GetText
+        Text(0).SelText = Clipboard.GetText()
+        Kichhoatma
     Case Else
     End Select
 End Sub
@@ -1008,11 +1064,13 @@ Private Sub Form_Load()
 
      lblTitle(11).Caption = "License"
     Me.KeyPreview = True
-    Dim strValue As String
+     
+    GenerateCode
+    
+End Sub
+Public Sub GenerateCode()
     Dim rs As Recordset
     Set rs = DBKetoan.OpenRecordset("SELECT DISTINCTROW License.* FROM License", dbOpenSnapshot)
-    Dim rls As Recordset
-    Set rls = DBKetoan.OpenRecordset("SELECT DISTINCTROW tbLicensekey.* FROM tbLicensekey", dbOpenSnapshot)
 
     Dim mst10 As String
     Dim mst13 As String
@@ -1038,7 +1096,9 @@ Private Sub Form_Load()
         decoded1 = DecodeMST8(encoded1, randomNum)
     End If
     '---------------------
-
+    Dim strValue As String
+    Dim rls As Recordset
+    Set rls = DBKetoan.OpenRecordset("SELECT DISTINCTROW tbLicensekey.* FROM tbLicensekey", dbOpenSnapshot)
 
     Dim code As String
     Dim decoded As String
@@ -1083,7 +1143,7 @@ Private Sub Form_Load()
 End Sub
 
 Private Sub Text_Change(Index As Integer)
- Dim a() As String
+    Dim a() As String
     If bakStr = "" Then
         bakStr = Text(0).Text
     End If
@@ -1098,6 +1158,7 @@ Private Sub Text_Change(Index As Integer)
         A2 = Split(a(4), "-")
         Text(4).Text = A2(0)
         Text(5).Text = A2(1)
+        'Command1_Click 1
     End If
 Error_Handler:
 End Sub

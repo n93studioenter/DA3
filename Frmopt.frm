@@ -3551,6 +3551,10 @@ Public Sub active_Click()
     End If
 End Sub
 Public Function KiemTraKey(strkey As String) As Boolean
+    If strkey = FrmGetStr2.Text1.Text Then
+        KiemTraKey = False
+        Exit Function
+    End If
     If strkey = "" Then
         Exit Function    ' ? thoát ngay t?i dây
     End If

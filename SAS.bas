@@ -179,12 +179,12 @@ ErrorHandler:
     Select Case Err.number
     Case 364
         ' Form dã m?
-        MsgBox "Màn hình nh?p m?t kh?u dang m?!", vbExclamation
-        FrmMatkhau.SetFocus
+        'MsgBox "Màn hình nh?p m?t kh?u dang m?!", vbExclamation
+        'FrmMatkhau.SetFocus
         Resume Next
     Case Else
         ' L?i khác
-        MsgBox "L?i không xác d?nh: " & Err.Description, vbCritical
+        'MsgBox "L?i không xác d?nh: " & Err.Description, vbCritical
         Resume Next
     End Select
 
@@ -2383,7 +2383,7 @@ k:
     Set rel = Nothing
     
     pSongNgu = s
-    ExecuteSQL5 "UPDATE License SET MV=(MV MOD 10000)+10000,MKUP=" + CStr(pRev) + ",TenCty_ID = " + CStr(Int_StrToCode(pTenCty)) + ",TenCn_ID = " + CStr(Int_StrToCode(pTenCn)) + ",MST_ID = " + CStr(Int_StrToCode(frmMain.lbCty(8).Caption))
+    ExecuteSQL5 "UPDATE License SET MV=(MV MOD 10000)+10000,MKUP=" + CStr(pRev) + ",TenCty_ID = " + CStr(Int_StrToCode(pTenCty)) + ",TenCn_ID = " + CStr(Int_StrToCode(pTenCn)) + ",MST_ID = " + CStr(Int_StrToCode(frmMain.LbCty(8).Caption))
     frmXuly.Gau.Max = 21
     frmXuly.Hide
       MsgBox "CËp nhËt kÕt thóc!", vbInformation, App.ProductName
@@ -3336,7 +3336,7 @@ Private Function QueryDaCo2(qname As String, qname2 As String) As Boolean
 End Function
 
 Public Function ChoNhapTiep() As Boolean
-    If DEMO = 1 Or frmMain.lb(0).tag = 5 Or (CInt5(Left(frmMain.lbCty(8).Caption, 2)) = 0 And pNoiBo = 0 And pVersion <> 3) Or pVersion = 2 Then
+    If DEMO = 1 Or frmMain.lb(0).tag = 5 Or (CInt5(Left(frmMain.LbCty(8).Caption, 2)) = 0 And pNoiBo = 0 And pVersion <> 3) Or pVersion = 2 Then
         SetSQL "MienTru", "SELECT MaCT FROM ChungTu WHERE MaCT>0 GROUP BY MaCT"
         ChoNhapTiep = SelectSQL("SELECT Count(MaCT) AS F1 FROM MienTru") < 200
     Else
@@ -3869,7 +3869,7 @@ Public Sub LaySoDauNam(fn As String)
         GoTo KT
     End If
     
-    If sql <> frmMain.lbCty(0).Caption Or st <> frmMain.lbCty(1).Caption Then
+    If sql <> frmMain.LbCty(0).Caption Or st <> frmMain.LbCty(1).Caption Then
         If MsgBox("Tªp d÷ liÖu kh¸c tªn c«ng ty hoÆc tªn chi nh¸nh, tiÕp tôc ?", vbCritical + vbYesNo, App.ProductName) = vbNo Then GoTo KT
     End If
     
